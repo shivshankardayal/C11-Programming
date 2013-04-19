@@ -1,0 +1,121 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-size: 14px;
+  margin-top: 20px;
+  font-family: "lucida grande","arial","helvetica",sans-serif;
+  text-align: center;
+}
+a:visited {
+  text-decoration: none;
+  color: #dd7700;
+}
+div#content a, div#extra a, div#sidebar a {
+  color: #dd7700;
+  background-color: #ffffff;
+}
+div#content a:hover, a:hover {
+  color: #dd7700;
+  background-color: #ffffff;
+}
+div#header {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 5px;
+}
+div#header h1 {
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 25px;
+  font-weight: normal;
+  color: #ee8833;
+  letter-spacing: -1px;
+}
+div#header h2 {
+  margin: -15px 0 0;
+  padding: 0 0 0 20px;
+  font-size: 13px;
+  font-weight: normal;
+  color: #999999;
+}
+#navigation {
+  font-family: "Lucida Grande",Tahoma,Arial,Helvetica,sans-serif;
+  float: right;
+}
+#navigation li {
+  display: inline;
+  padding-right: 20px;
+  font-size: 13px;
+}
+#navigation li a {
+  padding: 4px;
+  color: #444444;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: normal;
+}
+#navigation li a:hover {
+  text-decoration: underline;
+}
+div#container {
+  text-align: left;
+}
+div#content p {
+  font-family: "lucida bright",tahoma,arial,helvetica,sans-serif;
+  font-size: 13px;
+  color: #444444;
+  line-height: 1.8em;
+}
+div#content h1 {
+  border-right: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 3px 6px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #dd7700;
+  font-weight: normal;
+  background-color: #f9f9f9;
+}
+div#content h2 {
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Grande",Tahoma,Arial,Helvetica,sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #444444;
+}
+div#footer p {
+  margin: 0;
+  padding: 5px 10px;
+}
+div#container {
+  margin: 0 auto;
+  width: 700px;
+}
+div#footer {
+  padding: 5px;
+  margin-top: 10px;
+  background-color: #333333;
+  color: #ffffff;
+  font-size: 11px;
+  font-family: Tahoma,Arial,Helvetica,sans-serif;
+  clear: both;
+  width: 100%;
+}
+div#footer a, div#footer a:hover {
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  margin-top: 10px;
+  background-color: #333333;
+  font-size: 11px;
+  font-family: Tahoma,Arial,Helvetica,sans-serif;
+  clear: both;
+  width: 100%;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+}
+#design-by {
+  float: right;
+  display: inline;
+}

@@ -1,0 +1,423 @@
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 6. Console I/O</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../basics/index.html" rel="prev" title="Chapter 5. Basics of C"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 6. Console I/O</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../basics/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 6. Console I/O"><div class="titlepage"><div><div><h2 class="title"><a name="idp2859488"></a>Chapter 6. Console I/O</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp2864848">6.1. C's Memory Model</a></span></dt><dt><span class="sect1"><a href="index.html#idp2877584">6.2. printf</a></span></dt><dt><span class="sect1"><a href="index.html#idp3034688">6.3. scanf</a></span></dt></dl></div><p>What is I/O? I know you may be wondering what rubbish question? It is input/output.
+      Well, yes you are right. However, i/o can be further categorized in several categories. First
+      of them is console i/o, which is what we are concerned with. In console i/o your keyboard is
+      input device or <code class="code">stdin</code> file stream and display device or monitor is output
+      device or <code class="code">stdout</code> file stream. There is also also something called
+        <code class="code">stderr</code> which is standard error file stream. For historical reasons these
+      are known as <code class="code">FILE</code>, which, happens to be the data type for handling these
+      streams. Then there are more different kind of i/o. In everyday usage you use mouse to handle
+      GUI. Standard C99 does not have anything for mouse. For your hard disk i/o that is real files
+      like our source code files and executable file same FILE stream is used. Network i/o is also
+      there. There is an opengroup which specifies functions for network related functions. Some
+      operating system like GNU/Linux are POSIX compatible which defines how network i/o will be
+      used. Even a printer is a special output device, a camera input, speakers output, microphone
+      input and so on. However, before we go on with i/o I would like to present C’s memory model
+      which will be needed by our discussion of i/o related functions. However, if things do not
+      make sense even then please go through it and come later to understand more.</p><div class="sect1" title="6.1. C's Memory Model"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2864848"></a>6.1. C's Memory Model</h2></div></div></div><p>C programs use <span class="hardware">RAM</span> as primary memory except when you use
+        register keyword to request compiler to store variables in cpu register. C’s memory model is
+        split into three area at a higher level. Data, Stack and Code Segment. Date is further split
+        in three parts; initialized data segment, uninitialized data segment or BSS which is name
+        after an ancient assembler Block Started by Symbol and heap. Initialized data segment
+        contains initialized global variables and static variables. Here both global and local
+        static variables are counted. For uninitialized data segment it is same as above just that
+        the variables are not initialized explicitly but implicitly to zero. Next is heap. Heap is
+        the largest area of memory used for dynamic memory allocation. As you will see later that
+        you can manage heap using <code class="code">malloc(), calloc(), realloc(),</code> and
+          <code class="code">free()</code>. Note that compiler does not manage memory allocated for you. You,
+        the programmer, are responsible for allocating and freeing up memory in area. If heap gets
+        full os will use virtual memory or swap space on hard disk. Objects allocated on heap
+        persist across function calls. However, there are some very nasty problems, which, come in
+        picture when you use heap. There are several of them. You may forget to allocate memory and
+        want to dereference unallocated pointer. You may have initialized it to
+          <code class="code">NULL</code> and try to dereference that. You may allocate and free twice. You
+        forgot to set pointer to <code class="code">NULL</code> after freeing it. And last but not the least
+        you loose all pointers to the memory area before you can free. The nature with this
+        particular problem is that if your program is going to run for long time then it is going to
+        consume more and more memory. Because of its nature it is known as memory leak. It is very
+        difficult to detect such problems in code which does not run for long periods of time. Our
+        friend valgrind will come to help up with this problem. When a memory leak happens it eats
+        up <span class="hardware">RAM</span> slowly and then operating system has to use virtual memory
+        as explained above. In a nutshell, I will say that heap means you have to handle
+        it.</p><p>Stack is relatively simple. All non-static and non-register variables go on stack.
+        Stack variables do not retain there value across function calls unless they are passed as
+        pointers. Also, when they go out of scope, that is the scope in which they were declared
+        ends, they will be kind of lost. The way in which stack frame moves the same area will be
+        used for new variables. However, stack is very limited (compared to heap) and in deeply
+        nested function calls or recursion (you will see these in Functions chapter) stack may get
+        full and program may crash. The reason for crashing is that operating system will not use
+        virtual memory but will do a segmentation fault in its place. GNU/Linux allow its users to
+        modify the stack size by ulimit command. Note that stack and heap are adjacent in memory and
+        grow in opposite direction.</p><p>Code segment or text segment is an area where the executable instructions of program
+        reside. It is typically constant and read-only area unless your system allows self-modifying
+        code. Following diagram shows the memory layout.</p><div class="figure"><a name="idp2873904"></a><p class="title"><b>Figure 6.1. C's Memory Model</b></p><div class="figure-contents"><div class="mediaobject"><img alt="C's Memory Model" src="images/memmod.png"/></div></div></div><br class="figure-break"/><p>In this chapter we will look at only those functions, which, allow us to do console
+        i/o. We will begin with our familiar friends. Can you guess who are they? Yes! They are
+          <code class="code">printf</code> and <code class="code">scanf</code>.</p></div><div class="sect1" title="6.2. printf"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2877584"></a>6.2. printf</h2></div></div></div><p><code class="code">printf</code> is a string based output function that is It writes character
+        strings to <code class="code">stdout</code>. The data which has to be written is formatted by format
+        string as shown previously. After the format specifier it expects as many arguments as
+        specified in format string. The characters which are not like, say <code class="code">%d</code> for
+        example, arecalled ordinary characters. These are simply copied to output stream, which, is
+          <code class="code">stdout</code> for <code class="code">printf</code>. The <code class="code">%d</code> like
+        conversion charcaters are known as conversion specification or format specifiers. Each
+        conversion specification should be augmented with one one argument. The results are
+        undefined if there are insufficient arguments for the format. If extra arguments are given
+        the excess arguments will be evaluated but are otherwise ignored. However, there is a big
+        problem here! There is no type-safety.:-( In general compiler will warn you about it and
+        you, the programmer, are responsible for giving correct format string, correct no. of
+        correct type of arguments. Consider the following program for
+        example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">// printf demo</span>
+<span class="c1">// Author: Shiv Shankar Dayal</span>
+<span class="c1">// Description: printf demo</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+
+  <span class="c1">//do not mess it. undefined behavior</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+  <span class="c1">//extra arguments ignored</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s">&quot;hello&quot;</span><span class="p">);</span>
+
+  <span class="c1">//legal because char is integer type</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="sc">&#39;s&#39;</span><span class="p">);</span>
+
+  <span class="c1">//wrap around of integer as char</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%c</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">836</span><span class="p">);</span>
+
+  <span class="c1">//do not mess with type-safety</span>
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;hello&quot;</span><span class="p">);</span>
+  <span class="n">prinf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre><p>
+        now that if you give the command like <code class="code">clang printf.c</code> then you will be shown
+        following warnings:
+        </p><pre class="screen">printf.c:12:14: warning: more '%' conversions than data arguments [-Wformat]
+        printf("%d %d\n", 5);
+                 ~^
+printf.c:15:26: warning: data argument not used by format string [-Wformat-extra-args]
+        printf("%d %d\n", 3, 5, "hello");
+             ~~~~~~~~~        ^
+printf.c:24:19: warning: conversion specifies type 'int' but the argument has type
+'char *' [-Wformat]
+      int i = printf("%d\n", "hello");
+                      ~^     ~~~~~~~
+                      %s
+3 warnings generated.</pre><p>
+        Clearly this is not a good sign for any program. A program should compile cleanly. In our
+        case compiler is generating binary even though there are warnings. You can make compiler
+        generate more warnings by issuing a <code class="code">-Wall</code> flag. You can also treat all
+        warnings as errors by passing <code class="code">-Werror</code> to compiler. These two options will
+        ensure that your code has no warnings. Now let us move to output and try to understand it.
+        The output on my system is as given below. It may differ on your system:
+        </p><pre class="screen">3 8
+5 8
+3 5
+115
+D
+134514119
+10</pre><p> First
+          <code class="code">printf</code> is correct as expected. The second line causes undefined behavior.
+        You may think it is the previous 8 but rest assured it is not guaranteed that it will always
+        the case. Ii is <span class="bold"><strong>UNDEFINED</strong></span>. Third printf is also fine in
+        the sense that extra argument is ignored. Fourth and fifth are normal. Sixth is again a big
+        problem. You are trying to print a decimal integer while argument is a character string.
+        There is no way for compiler to determine that what should be printed which will fit on
+        standards. Now we will have to take a look at all possible format specifier and their
+        meanings. You have seen most of them so this is more for a reference. I have taken following
+        from <a class="link" href="http://www3.opengroup.org" target="_top">http://www3.opengroup.org</a> and
+        modified to suit the book. In particular, I have omitted facts related to XSI specification. </p><p>Each conversion specification starts with '<code class="code">%</code>' character. After this
+        following appear in sequence:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Zero or more flags, in any order, which modify
+            the meaning of the conversion specification.</p></li><li class="listitem"><p>An optional minimum field width. If the
+            converted value from argument has fewer characters (bytes) than the field width, it will
+            be padded with spaces by default on left; it will be padded on right if the
+            left-adjustment flag (‘-‘) is given to the field width. The field width takes the form
+            of an asterisk or a decimal integer.</p></li><li class="listitem"><p>An optional precision that gives the minimum
+            number of digits to appear for the <code class="code">d, i, o, u, x</code> and <code class="code">X</code>
+            conversion specifiers; the number of digits to appear for radix character for the
+              <code class="code">a, A, e, E, f</code> and <code class="code">F</code> conversion specifiers; the maximum
+            number of significant digits for the <code class="code">g</code> and <code class="code">G</code> conversion
+            specifiers; or the maximum number of bytes to be printed from a string in the s
+            conversion specifiers. The precision takes form of a period (‘.’) followed either by an
+            asterisk (‘*’), described below, or an optional decimal digit string, where a null digit
+            string is treated as zero. If a precision appears with any other conversion specifier,
+            the behavior is undefined.</p></li><li class="listitem"><p>An optional length modifier that specifies the
+            size of the argument.</p></li><li class="listitem"><p>A conversion specifier character that
+            indicates the type of conversion to be applied.</p></li></ul></div><p>A field width, or precision, or both, may be indicated by an asterisk(‘*’). In this
+        case an argument of type int supplies the field width or precision. You, the programmer,
+        will have to ensure that arguments specifying field, width or precision, or both appear in
+        that order before the argument, if any to be converted. A negative field width is taken as a
+        ‘-‘ flag followed a positive field width. A negative precision is taken as if the precision
+        were omitted.</p><p>The flag characters and their meanings are:</p><p><span class="bold"><strong>-</strong></span> The result of
+        the conversion will be left-justified within the field. The conversion is right-justified if
+        the flag is not specified.</p><p><span class="bold"><strong>+</strong></span> The result of
+        a signed conversion will always begin with a sign (‘+’ or ‘-‘). The conversion will begin
+        with a sign only when a negative value is converted if this value is not specified.</p><p>If the first character of a signed conversion is not a sign or if a signed conversion
+        results in no characters, a will be prefixed to the result. This means that if the and ‘+’
+        flags both appear, the flag will be ignored.</p><p><span class="bold"><strong>#</strong></span> Specifies
+        that the value is to be converted to an alternative form. For o conversion, it increases the
+        precision (if necessary) to force the first digit of the result to be zero. For
+          <code class="code">x</code> or <code class="code">X</code> conversion specifiers, a non-zero result will
+        have <code class="code">0x (0X)</code> prefixed to it. For <code class="code">a, A, e, E, f, F, g</code> and
+          <code class="code">G</code> conversion specifiers, the result will always contain a radix
+        character, even if no digits follow the radix character. Without this flag, a radix
+        character appears in the result of these conversions only if a digit follows it.</p><p>For 0 and <code class="code">G</code> conversion specifiers, trailing zeros will not be removed
+        from the result as they normally are. For other conversion specifiers the, the behavior is
+          <span class="bold"><strong>UNDEFINED</strong></span>.</p><p><span class="bold"><strong>0</strong></span> For
+          <code class="code">d, i, o, x, X, a, A, e, E, f, F, g</code> and <code class="code">G</code> conversion
+        specifiers, leading zeros (following any indication of sign or base) are used to pad to the
+        field width; no space padding is performed. If the ‘0’ and ‘-‘ flags both appear, the ‘0’
+        flag is ignored. For <code class="code">d, i, o, u, x</code> and <code class="code">X</code> conversion
+        specifiers, if a precision is specified, the ‘0’ flag is ignored.</p><p>The length and their meanings are:</p><p><span class="bold"><strong>hh</strong></span> Specifies
+        that a following <code class="code">d, i, o, u, x</code> and <code class="code">X</code> conversion specifiers
+        applies to a <code class="code">signed char</code> or <code class="code">unsigned char</code> argument (the
+        argument will have been promoted according to integer promotions, but its value will be
+        converted to <code class="code">signed char</code> or <code class="code">unsigned char</code> before printing;
+        or that a following n conversion specifier applies to a pointer to a <code class="code">signed
+          char</code> argument.</p><p><span class="bold"><strong>h</strong></span> Specifies
+        that a following <code class="code">d, i, o, u, x</code> and <code class="code">X</code> conversion specifier
+        applies to a <code class="code">short</code> or <code class="code">unsigned short</code> argument (the
+        argument will have been promoted according to the integer promotions, but its value will be
+        converted to <code class="code">short</code> or <code class="code">unsigned short</code> before printing); or
+        that a following <code class="code">n</code> conversion specifier applies to a pointer to a
+          <code class="code">short</code> argument.</p><p><span class="bold"><strong>l</strong></span> Specifies
+        that a following <code class="code">d, i, o, u, x</code> and <code class="code">X</code> conversion specifier
+        applies to a <code class="code">long</code> or <code class="code">unsigned long</code> argument; that a
+        following <code class="code">n</code> conversion specifier applies to a pointer to a
+          <code class="code">long</code> argument; that a following <code class="code">c</code> conversion specifier
+        applies to a <code class="code">win_t</code> argument; that a following <code class="code">s</code> conversion
+        specifier applies to a <code class="code">wchar_t</code> argument; or has not effect on a following
+          <code class="code">a, A, e, R, f, F, g</code> or <code class="code">G</code> conversion specifier.</p><p><span class="bold"><strong>ll</strong></span> Specifies
+        that a following <code class="code">d, i, o, u, x</code> and <code class="code">X</code> conversion specifier
+        applies to a <code class="code">long long</code> or <code class="code">unsigned long long</code> argument;
+        that a following <code class="code">n</code> conversion specifier applies to a pointer to a
+          <code class="code">long long</code> argument.</p><p><span class="bold"><strong>j</strong></span> Specifies
+        that a following <code class="code">d, i, o, u, x</code> and <code class="code">X</code> conversion specifier
+        applies to an <code class="code">intmax_t</code> or <code class="code">uintmax_t</code> argument; or that a
+        following <code class="code">n</code> conversion specifier applies to an <code class="code">intmax_t</code>
+        argument.</p><p><span class="bold"><strong>z</strong></span> Specifies
+        that a following <code class="code">d, i, o, u, x</code> and <code class="code">X</code> conversion specifier
+        applies to a <code class="code">size_t</code> or the corresponding signed integer type argument; or
+        that a following <code class="code">n</code> conversion specifier applies to a signed integer type
+        corresponding to a <code class="code">size_t</code> argument.</p><p><code class="code">t</code> Specifies that a following <code class="code">d, i, o, u, x</code> and
+          <code class="code">X</code> conversion specifier applies to a <code class="code">ptrdiff_t</code> or the
+        corresponding <code class="code">unsigned int</code> type argument; or that a following
+          <code class="code">n</code> conversion specifier applies to a unsigned integer type corresponding
+        to a <code class="code">ptrdiff_t</code> argument.</p><p><code class="code">L</code> Specifies that a following <code class="code">a, A, e, E, f, F, g</code> and
+          <code class="code">G</code> conversion specifier applies to a <code class="code">long double</code>
+        argument.</p><p>If a length modifier appears with any conversion specfier other than as specified
+        above, the behavior is <span class="bold"><strong>UNDEFINED</strong></span>. You may have noted data types like <code class="code">intmax_t,
+          size_t</code> and <code class="code">ptrdiff_t</code>, which you may not know and I have not told
+        you about them. But do not worry in due course of time we will see them.</p><p>The conversion specifiers and their meaning are:</p><p><span class="bold"><strong>d, i</strong></span> The
+          <code class="code">int</code> argument will be converted to a signed decimal in the style
+          “[-]<span class="italic">dddd</span>”. The
+        precision specifies the minimum number of digits to appear; if the value being converted can
+        be converted in fewer digits, it will be expanded with leading zeros. The default precision
+        is 1. The result of converting zero with an explicit precision of zero will be no
+        characters.</p><p><span class="bold"><strong>o</strong></span> The
+          <code class="code">unsigned</code> argument will be converted to unsigned octal format in the style
+          “<span class="italic">dddd</span>”. The
+        precision specifies the minimum number of digits to appear; if the value being converted can
+        be represented in fewer digits, it will be expanded with leading zeros. The default
+        precision is 1. The result of converting zero with an explicit precision of zero will be no
+        characters.</p><p><span class="bold"><strong>u</strong></span> The
+          <code class="code">unsigned</code> argument will be converted to unsigned decimal format in the
+        style “<span class="italic">dddd</span>”. The
+        precision specifies the minimum number of digits to appear; if the value being converted can
+        be represented in fewer digits, it will be expanded with leading zeros. The default
+        precision is 1. The result of converting zero with an explicit precision of zero will be no
+        characters.</p><p><span class="bold"><strong>x</strong></span> The
+          <code class="code">unsigned</code> argument will be converted to unsigned decimal format in the
+        style “<span class="italic">dddd</span>”; the
+        letters “abcdef” are used. The precision specifiers specifies the minimum number of digits
+        to appear; if the value being converted can be represented in fewer digits, it will be
+        expanded with leading zeros. The default precision is 1. The result of converting zero with
+        an explicit precision of zero will be no characters.</p><p><span class="bold"><strong>X</strong></span> Equivalent to
+        the x conversion specifier, except that letters "<code class="code">ABCDEF</code>" are used instead
+        of "<code class="code">abcdef</code>".</p><p><span class="bold"><strong>f, F</strong></span> The
+          <code class="code">double</code> argument will be converted to decimal notation in the style
+          “[-]<span class="italic">ddd.ddd</span>”,
+        where the number of digits after the radix character is equal to the precision
+        specification. If the precision is missing, it will be taken as 6; if the precision is
+        explicitly zero and no ‘#’ flag is present, no radix character will appear. If a radix
+        character appears, at least one digit appears before it. The low-order digit will be rounded
+        in an implementation-defined manner.</p><p>A <code class="code">double</code> argument representing an infinity will be converted in one
+        of the styles “[-]<code class="code">inf</code>” or “[-]<code class="code">infinity</code>” ; which style is
+        implementation-defined. A double argument representing a NaN will be converted in one of the
+        styles “[-]<code class="code">nan</code>(<span class="italic">n-char-sequence</span>)” or “[-]<code class="code">nan</code>”; which style, and
+        the meaning of any n-char-sequence, is implementation-defined. The F conversion specifier
+        produces "<code class="code">INF</code>", "<code class="code">INFINITY</code>" or "<code class="code">NAN</code>"
+        instead of "<code class="code">inf</code>", "<code class="code">infinity</code>" or "<code class="code">nan</code>",
+        respectively.</p><p><span class="bold"><strong>e, E</strong></span> The
+          <code class="code">double</code> argument will be converted in the style “[-]<span class="italic">d.ddde</span>[<math xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<mo>±</mo>
+</math>]<span class="italic">dd</span>”, where there is one digit before the radix character (which is non-zero if
+        the argument is non-zero) and the number of digits after it is equal to the precision; if
+        the precision is missing, it will be taken as 6; if the precision is zero and no ‘#’ flag is
+        present, no radix character will appear. The low-order digit will be rounded in an
+        implementation-defined manner. The E conversion specifier will produce a number with ‘E’
+        instead of ‘e’ introducing the exponent. The exponent will always contain at least two
+        digits. If the value is zero, the exponent will be zero.</p><p>A double argument representing an infinity or NaN will be converted in the style of an
+          <code class="code">f</code> or <code class="code">F</code> conversion specifier.</p><p><span class="bold"><strong>g, G</strong></span> The double
+        argument will be converted in the style <code class="code">f</code> or <code class="code">e</code> (or in the
+        style <code class="code">F</code> or <code class="code">E</code> in the case of a <code class="code">G</code>
+        conversion specifier), with the precision specifying the number of significant digits. If an
+        explicit precision is zero, it will be taken as 1. The style used depends on the value
+        converted; style <code class="code">e</code> (or <code class="code">E</code> ) will be used only if the
+        exponent resulting from such a conversion is less than -4 or greater than or equal to the
+        precision. Trailing zeros will be removed from the fractional portion of the result; a radix
+        character will appear only if it is followed by a digit or a ‘<code class="code">#</code>’ flag is
+        present.</p><p>A <code class="code">double</code> argument representing an infinity or NaN will be converted
+        in the style of an <code class="code">f</code> or <code class="code">F</code> conversion specifier.</p><p><code class="code">a, A</code> A <code class="code">double</code> argument representing a floating-point
+        number will be converted in the style “[-]<span class="italic">0xh.hhhhp</span>(<math xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<mo>±</mo>
+</math>)<span class="italic">d</span>”, where there is one hexadecimal digit (which will be non-zero if the
+        argument is a normalized floating-point number and is otherwise unspecified) before the
+        decimal-point character and the number of hexadecimal digits after it is equal to the
+        precision; if the precision is missing and <code class="code">FLT_RADIX</code> is a power of 2, then
+        the precision will be sufficient for an exact representation of the value; if the precision
+        is missing and <code class="code">FLT_RADIX</code> is not a power of 2, then the precision will be
+        sufficient to distinguish values of type <code class="code">double</code>, except that trailing zeros
+        may be omitted; if the precision is zero and the ‘<code class="code">#</code>’ flag is not specified,
+        no decimal-point character will appear. The letters "<code class="code">abcdef</code>" will be used
+        for a conversion and the letters "<code class="code">ABCDEF</code>" for A conversion. The
+          <code class="code">A</code> conversion specifier produces a number with ‘<code class="code">X</code>’ and
+          ‘<code class="code">P</code>’ instead of ‘<code class="code">x</code>’ and ‘<code class="code">p</code>’. The
+        exponent will always contain at least one digit, and only as many more digits as necessary
+        to represent the decimal exponent of 2. If the value is zero, the exponent will be
+        zero.</p><p>A <code class="code">double</code> argument representing an infinity or NaN will be converted
+        in the style of an <code class="code">f</code> or <code class="code">F</code> conversion specifier.</p><p><span class="bold"><strong>c</strong></span> The <span class="bold"><strong>int</strong></span> argument will be
+        converted to an <code class="code">unsigned char</code>, and the resulting byte will be written. If
+        an <code class="code">l</code> qualifier is present, the <code class="code">wint_t</code> argument will be
+        converted as if by an <code class="code">ls</code> conversion specification with no precision and an
+        argument that points to a two-element array of type <code class="code">wchar_t</code>, the first
+        element of which contains the <code class="code">wint_t</code> argument to the <code class="code">ls</code>
+        conversion specification and the second element contains a null wide character.</p><p><span class="bold"><strong>s</strong></span> The argument
+        will be a pointer to an array of <span class="bold"><strong>char</strong></span>. Bytes from the array will be written up to (but not including) any
+        terminating null byte. If the precision is specified, no more than that many bytes will be
+        written. If the precision is not specified or is greater than the size of the array, the
+        programmer will ensure that the array contains a null byte. Note that it is a big problem
+        which causes <span class="bold"><strong>strcpy</strong></span>
+        to be insecure. What is the char array does not have this null terminating character? We
+        will see a safe implementation of <code class="code">strcpy</code> later. Also,
+          <code class="code">strlen</code> suffers from this problem. Any function relying on null character
+        will suffer from this. If an <code class="code">l</code> qualifier is present, the argument will be a
+        pointer to an array of type <code class="code">wchar_t</code>. Wide characters from the array will be
+        converted to characters (each as if by a call to the <code class="code">wcrtomb()</code> function,
+        with the conversion state described by an <code class="code">mbstate_t</code> object initialized to
+        zero before the first wide character is converted) up to and including a terminating null
+        wide character. The resulting characters will be written up to (but not including) the
+        terminating null character (byte). If no precision is specified, the programmer will ensure
+        that the array contains a null wide character. If a precision is specified, no more than
+        that many characters (bytes) will be written (including shift sequences, if any), and the
+        array will contain a null wide character if, to equal the character sequence length given by
+        the precision, the function would need to access a wide character one past the end of the
+        array. In no case will a partial character be written.</p><p><span class="bold"><strong>p</strong></span> The argument
+        will be a pointer to <code class="code">void</code>. The value of the pointer is converted to a
+        sequence of printable characters, in an implementation-defined manner.</p><p><span class="bold"><strong>n</strong></span> The argument
+        will be a pointer to an <code class="code">int</code> into which is written the number of bytes
+        written to the output so far by this call to one of the fprintf() functions. No argument is
+        converted.</p><p><span class="bold"><strong>%</strong></span> Print a
+          ‘<code class="code">%</code>’ character; no argument is converted. The complete conversion
+        specification will be <code class="code">%%</code>.</p><p>If a conversion specification does not match one of the above forms, the behavior is
+          <span class="bold"><strong>UNDEFINED</strong></span>. If any
+        argument is not the correct type for the corresponding conversion specification, the
+        behavior is undefined. This is what happened to out string in <code class="code">printf.c</code>
+        shown above. In no case will a nonexistent or small field width cause truncation of a field;
+        if the result of a conversion is wider than the field width, the field will be expanded to
+        contain the conversion result. Characters generated by <code class="code">fprintf()</code> and
+          <code class="code">printf()</code> are printed as if <code class="code">fputc()</code> had been
+        called.</p><p>For the <code class="code">a</code> and <code class="code">A</code> conversion specifiers, if
+          <code class="code">FLT_RADIX</code> is a power of 2, the value will be correctly rounded to a
+        hexadecimal floating number with the given precision. For <code class="code">a</code> and
+          <code class="code">A</code> conversions, if <code class="code">FLT_RADIX</code> is not a power of 2 and the
+        result is not exactly representable in the given precision, the result should be one of the
+        two adjacent numbers in hexadecimal floating style with the given precision, with the extra
+        stipulation that the error should have a correct sign for the current rounding
+        direction.</p><p>For the <code class="code">e, E, f, F, g</code> and <code class="code">G</code> conversion specifiers,
+        if the number of significant decimal digits is at most <code class="code">DECIMAL_DIG</code>, then
+        the result should be correctly rounded. If the number of significant decimal digits is more
+        than <code class="code">DECIMAL_DIG</code> but the source value is exactly representable with
+          <code class="code">DECIMAL_DIG</code> digits, then the result should be an exact representation
+        with trailing zeros. Otherwise, the source value is bounded by two adjacent decimal strings
+          <code class="code">L < U</code>, both having <code class="code">DECIMAL_DIG</code> significant digits;
+        the value of the resultant decimal string <code class="code">D</code> should satisfy <code class="code">L <=
+          D <= U</code>, with the extra stipulation that the error should have a correct sign
+        for the current rounding direction.</p><p>Some of the capitalized words like <code class="code">DECIMAL_DIG, FLT_RADIX</code> etc are
+        macros defined in <code class="code">float.h</code>. You should have a look at it. Now we will have
+        one example and I will show you output but not explain it. Understanding the output is left
+        as an exercise to you, the reader.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Format Specifiers</span>
+<span class="c1">// Author: Shiv S. Dayal</span>
+<span class="o">/</span><span class="n">Desciption</span><span class="o">:</span> <span class="n">It</span> <span class="n">is</span> <span class="n">a</span> <span class="n">demo</span> <span class="n">of</span> <span class="n">several</span> <span class="n">format</span> <span class="n">specifiers</span>
+
+<span class="cp">#include&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span>   <span class="o">=</span> <span class="mi">343456</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+  <span class="kt">long</span> <span class="kt">double</span> <span class="n">ld</span> <span class="o">=</span> <span class="mf">78939.9347</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;% d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%+d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%#o</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%#f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%-08i</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%08i</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%8i</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%hhi</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%hi</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%li</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lli</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%ji</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%zi</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%ti</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%8.8f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%8.8Lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ld</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre><p>and the output is:</p><pre class="screen"> 343456
++343456
+01236640
+123.000000
+343456
+00343456
+  343456
+-96
+15776
+343456
+4638355772471066016
+4638355772471066016
+343456
+343456
+123.00000000
+78939.93470000</pre><p>I suggest you to read the desciption of conversion specifiers
+and experiment with various parameters to get different kind of
+output.</p></div><div class="sect1" title="6.3. scanf"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3034688"></a>6.3. scanf</h2></div></div></div><p><code class="code">scanf()</code> is sister of
+    <code class="code">printf()</code>. They work in tandem. As its
+    name says scan function it scans <code class="code">stdin</code> or
+    keyboard for input. Its signature is same as that of printf(). It
+    raeds bytes from keyboard input, interprets them according to
+    format string. It also expects a set of pointer arguments as
+    opposed to values for <code class="code">printf()</code>. The 
+    pointers indicate where the interpreted data from the input will
+    be stored. The result is <span class="bold"><strong>UNDEFINED</strong></span>
+    if there are less number of pointer arguments than the number of
+    conversion specifers in format string. Excess arguments will be
+    evaluated but ignored. The format string can have only white-space
+    characters or an ordinary character (neither ‘<code class="code">%</code>’
+    nor a white-space character) or a conversion specification. Each
+    conversion specification is introduced by ‘<code class="code">%</code>’,
+    after which the following appear in sequence.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>An optoinal assignment suppressing character
+	‘<code class="code">*</code>’.</p></li><li class="listitem"><p>An optional non-zero decimal integer that specifies
+	the maximum field width</p></li><li class="listitem"><p>An option length modifier that specifies the size of
+	the receiving object.</p></li><li class="listitem"><p>A conversion specifier character that specifies the
+	type of conversion to be applied. The valid conversion
+	specifiers are described below.</p></li></ul></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../basics/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 5. Basics of C </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+   GNU FDL license is applicable where not stated.</p></body></html>

@@ -1,0 +1,388 @@
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 2. Following Specification</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../introduction/index.html" rel="prev" title="Chapter 1.  Introduction"/><link href="../env/index.html" rel="next" title="Chapter 3. Environment"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 2. Following Specification</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../introduction/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../env/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 2. Following Specification"><div class="titlepage"><div><div><h2 class="title"><a name="idp210528"></a>Chapter 2. Following Specification</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp214288">2.1. Terms, Definitions and Symbols</a></span></dt></dl></div><p>At this point of time I would like to look back and refer to C99 specification n1124.pdf
+      located at <a class="link" href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1124.pdf" target="_top">http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1124.pdf</a>, which, is the C99
+      specification with me. Since my thoughts are random in nature I will try to follow the
+      organization of content given in the specification. This treatment of C99 is very tightly
+      coupled with compiler(clang) and specification. If someone says that a book can be written by
+      ignoring any of these two then I will be the last person to believe that.:P However, note that
+      I will not include all the contents of specification and will exclude some of very obvious and
+      trivial sections/subsections. The following terms, definitions and symbols have come from
+      specification, however, some are omitted for the sake of conciseness. When I will repeat the
+      specification at times I will do a verbatim copy just for quick reference and then add an
+      explanation to that. Believe me you can learn most of the language just by studying the
+      specification itself. Chapter no. 2, 3 and 4 will have material which may have redundant
+      material discussed elsewhere in the book. Note that specification is directed more at compiler
+      writers rather than at developers. However, it still covers a lot of ground and is also
+      helpful to understand the nature of different compilers as where they can go in different
+      directions.</p><div class="sect1" title="2.1. Terms, Definitions and Symbols"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp214288"></a>2.1. Terms, Definitions and Symbols</h2></div></div></div><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p><span class="bold"><strong>access:</strong></span> <execution-time action> to read
+            or modify the value of an object.</p><p>NOTE 1: Where only one of these two actions is meant, “read” or “modify” is
+            used.</p><p>NOTE 2: “Modify” includes the case where the new value being stored is the same as
+            the previous value.</p><p>NOTE 3: Expressions that are not evaluated do not access objects.</p><p>There are two parts of any program. Data and instruction. Programs are stored in
+            file on some non-volatile storage for example, hard disk drive, CD, DVD, tape drive.
+            When they are executed from non-volatile storage they are transferred to some volatile
+            storage typically RAM (Random Access Memory) of the computer. When a program is executed
+            it becomes a living entity capable of doing something and sometimes also referred as
+            process. So when the contents of RAM (henceforth referred as memory) is either read or
+            written (it does not matter whether the value is same or new) to then it is defined as
+            access. Here point to be noted is that the expressions which will not be evaluated do
+            not access objects.</p><p>There are certain issues wit the term read and modify. One can ask it it the case
+            that multiplication or division of a number with 1 modifies it or addition or
+            subtraction of a number with 0 modifies it. The answer is yes on all these accounts.
+            Similarly, you can ask if a bit-field is accessed then is it the case that the
+            bit-fields sharing the storage in memory are also accessed. My answer would be yes. The
+            reason is there is no way to get address of an individual bit and we get at least
+            32-bits in one fetch cycle on a 32-bit processor.</p><p>There can be various reasons why an expression is not evaluated. For
+            example:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>being part of a statement which is not executed probably because of
+                conditional compilation,</p></li><li class="listitem"><p>being part of a sub-expression whose evaluation is conditional on other
+                sub-expressions within a full expression; this means the above point, and</p></li><li class="listitem"><p>being an operand of the sizeof operator. sizeof operator never evaluates its
+                operand or try to access them. It just computes their sizes and pass it
+                along.</p></li></ul></div><p>Also, consider the following
+            program:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span>
+
+  <span class="n">a</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
+  <span class="n">b</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre><p>In this code it is not necessary that data for c and d will be accessed for second
+            addition.</p><p>Also consider the following
+            program:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="k">volatile</span> <span class="kt">int</span> <span class="n">x1</span><span class="o">:</span><span class="mi">3</span><span class="p">;</span>
+  <span class="k">volatile</span> <span class="kt">int</span> <span class="n">x2</span><span class="o">:</span><span class="mi">3</span><span class="p">;</span>
+  <span class="k">volatile</span> <span class="kt">int</span> <span class="n">x3</span><span class="o">:</span><span class="mi">4</span><span class="p">;</span>
+  <span class="k">volatile</span> <span class="kt">int</span> <span class="n">x4</span><span class="o">:</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">S</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+  <span class="n">S</span> <span class="n">s</span><span class="p">;</span>
+
+  <span class="n">i</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">x2</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre><p>Now depending on whether system is little-endian or big-endian the storage of x2
+            and x3 will be in different bytes. Also, this will change the way bytes are accessed
+            when x2 is referred in memory. Many combinations are possible depending on processor
+            architecture.</p></li><li class="listitem"><p><span class="bold"><strong>alignment:</strong></span> requirement that objects of a
+            particular type be located on storage boundaries with addresses that are particular
+            multiples of a byte address.</p><p>Say your program requires x bytes of memory then it will not be always given x
+            bytes but something more. Say an object requires y bytes then it will be always greater
+            or equal to y bytes. This is required so that objects are always located on storage
+            boundaries that are particular multiples of byte address. The reason for this alignment
+            lies in the efficiency of the operating system as a whole. As we know that on 32-bit
+            systems data bus is 32 bits similarly on 64-bit systems it is 64 bits. This means in one
+            fetch cycle (read up on this on some microprocessor or computer architecture book) only
+            32-bits can be fetched. 32-bits means 4 bytes. Oops! I did not tell you about bits and
+            bytes conversion. Not even nibble. However, since 4 bytes can be fetched in one cycle
+            compiler tries to optimize the data in group of 4 bytes. Given below are some
+            examples.</p><pre class="CLexer"><div class="highlight"><pre><span class="cm">/* Description: Demonstration of structure padding and memory alignment.*/</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="n">a</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span><span class="n">A</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="n">a</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">d</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">e</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">f</span><span class="p">;</span>
+<span class="p">}</span><span class="n">B</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="n">x</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">y</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">z</span><span class="p">;</span>
+<span class="p">}</span><span class="n">C</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="n">x</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">z</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">}</span><span class="n">D</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">A</span> <span class="n">a</span><span class="p">;</span>
+  <span class="n">B</span> <span class="n">b</span><span class="p">;</span>
+  <span class="n">C</span> <span class="n">c</span><span class="p">;</span>
+  <span class="n">D</span> <span class="n">d</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of structure %c is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="sc">&#39;A&#39;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of structure %c is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="sc">&#39;B&#39;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of structure %c is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="sc">&#39;C&#39;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of structure %c is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="sc">&#39;D&#39;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">d</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre><p>the output is:</p><pre class="screen">Size of structure A is 8
+Size of structure B is 16
+Size of structure C is 8
+Size of structure D is 12</pre><p>Now let me ask you a question that how come size of C is 8 while size of D is 12
+            while both structures contain same no. of similar elements. The answer lies in the order
+            of elements. Further let us consider the following
+            program:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+<span class="p">}</span><span class="n">t</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">t</span> <span class="n">s1</span><span class="p">;</span>
+
+  <span class="n">s1</span><span class="p">.</span><span class="n">j</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="n">s1</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%p %p&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">s1</span><span class="p">.</span><span class="n">j</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">s1</span><span class="p">.</span><span class="n">c</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre><p>and the output
+            is:</p><pre class="screen">0xbfc98f7c 0xbfc98f78</pre><p>Now if you notice <code class="code">0xbfc98f7c % 4</code> is 0 which is our alignment
+            requirement. So, now you can see why structure C and D have different sizes.</p><p>Another point worth noting is that certain processors allocate arrays on word
+            boundaries which are power of 2. For example, a character array requiring x bytes will
+            actually n bytes where x is not power of 2 and n is next power of 2 which is greater
+            than x. Such optimizations are quite common in computers and you need to be aware of it
+            to write efficient programs because you cannot make any assumptions about behavior of
+            processor.</p></li><li class="listitem"><p><span class="bold"><strong> argument:</strong></span>
+</p><p>actual argument</p><p>actual parameter (deprecated)</p><p>expression in the comma-separated list bounded
+            by the parentheses in a function call expression, or a sequence of preprocessing tokens
+            in the comma-separated list bounded by the parentheses in a function-like macro
+            invocation.</p><p>Sometimes they are also called actual
+            parameters(in function definition) but as you can see in specification ISO/IEC 9899:TC2
+            Section 3.3 this term is being deprecated. A function can have zero or more actual
+            arguments and if they are more than one then each of them will be separated by a comma.
+            These also apply to macros that is preprocessor directives when invoked like a function.
+          </p></li><li class="listitem"><p><span class="bold"><strong> behavior:</strong></span>
+            external appearance or action</p><p>By this term behavior the specification tries
+            to categorize certain behavior which do not fall in other categories. For example, there
+            are four more types of behaviors namely implementation-defined behavior, locale-specific
+            behavior, undefined behavior and unspecified behavior. The term behavior categorizes
+            external and those behaviors which do not fall under these four categories. External
+            behavior includes mouse, keyboard and such.</p></li><li class="listitem"><p><span class="bold"><strong>implementation-defined
+              behavior:</strong></span> unspecified behavior where each implementation documents how the
+            choice is made.</p><p>EXAMPLE An example of implementation-defined
+            behavior is the propagation of the high-order bit when a signed integer is shifted
+            right.</p><p>When specification does not specify how a
+            particular element of language should be implemented then programs use their logic to
+            implement these things and sometimes it depends on hardware as well. Behavior of such
+            elements is called implementation-defined-behavior. A full list of such behaviors is
+            typically provided by the compiler.</p><p>Consider the following example:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre><p>and the output is:</p><pre class="programlisting">-1 -1</pre></li><li class="listitem"><p><span class="bold"><strong> locale-specific
+              behavior:</strong></span> behavior that depends on local conventions of nationality,
+            culture, and language that each implementation documents</p><p>EXAMPLE An example of locale-specific behavior
+            is whether the islower function returns true for characters other than the 26 lowercase
+            Latin letters.</p><p>Any behavior which changes when locale of the
+            program changes will come under this category. The character e-acute is a lowercase
+            letter in a Latin-1 locale, but not in the “C” locale. A full list of such behaviors is
+            typically provided by the compiler.</p></li><li class="listitem"><p><span class="bold"><strong> undefined
+              behavior:</strong></span> behavior, upon use of a non-portable or erroneous program
+            construct or of erroneous data, for which International Standard imposes no
+            requirements.</p><p>NOTE: Possible undefined behavior ranges from
+            ignoring the situation completely with unpredictable results, to behaving during
+            translation or program execution in a documented manner characteristic of the
+            environment (with or without the issuance of a diagnostic message), to terminating a
+            translation or execution (with the issuance of a diagnostic message).</p><p>EXAMPLE An example of undefined behavior is
+            the behavior on integer overflow.</p><p>We will see more examples of these undefined
+            behaviors as we go through the specification.</p><p>It is very easy to say undefined behavior for
+            specification but when a compiler programmer writes a compiler he cannot really say that
+            our program is causing undefined behavior. Sometimes it will emit a warning but
+            sometimes it will silently compile the program. However, then output of two compilers
+            may not match. Even output of two different version of compilers may not match.</p></li><li class="listitem"><p><span class="bold"><strong> unspecified
+              behavior:</strong></span> use of an unspecified value, or other behavior where this
+            International Standard provides two or more possibilities and imposes no further
+            requirements on which is chosen in any instance.</p><p>EXAMPLE An example of unspecified behavior is
+            the order in which the arguments to a function are evaluated.</p><p>We will more of these as we progress and list
+            of all such behaviors is given in the appendix.</p><p>It is different than undefined behavior but
+            compiler writers are still free to to implement as they see fit. </p></li><li class="listitem"><p>
+<span class="bold"><strong>bit:</strong></span> unit of data storage in the execution environment
+            large enough to hold an object that may have one of two values.</p><p>NOTE It need not be possible to express the
+            address of each individual bit of an object.</p><p>The term bit was first coined by John Wilder
+            Tukey who also coined the term software, best known for his work on fast Fourier
+            transform(FFT). Note that base-2 is not the most efficient way to store the numbers but
+            it is base-e. You can read about more on it in. [Hayes] Those who are from electronics
+            background know that transistors operate in cut-off(very low voltage, high current) and
+            saturation(high voltage, low current). These two states consume very less power. The
+            other two states are active and reverse-active. However, power consumption is more.
+            Therefore, just to save power there is a trade-off between compactness and power
+            consumption. Usually, popular compilers like gcc or clang do not provide mechanism to
+            sequence of bits. However, there is a compiler which allows bit-level addressing in
+            registers if not memory. [Wegner] There are processors where data is not byte-aligned
+            and some bit-level addressing is available as shown in [Nie] . </p></li><li class="listitem"><p>
+<span class="bold"><strong>byte:</strong></span> addressable unit of data storage large enough to
+            hold any member of the basic character set of the execution environment.</p><p>NOTE 1: It is possible to express the address
+            of each individual byte of an object uniquely.</p><p>NOTE 2: A byte is composed of a contiguous
+            sequence of bits, the number of which is implementation-defined. The least significant
+            bit is called the low-order bit; the most significant bit is called the high-order
+            bit.</p><p>As most of programmers will know that a byte
+            is 8 bits. However, the term for 8 bits is octet as the term for 4 bits is nibble. This
+            term is now so common for 8 bits that they are used interchangeably. Note that byte and
+            char are different. byte is used to denote the storage while char is used to denote the
+            type. We can say a 32-bit integer occupies 4 bytes but we cannot say the same in terms
+            of char. [POSIX] defines a byte as an octet.</p><p>Considering an integer which is a multi-byte
+            type can have its bytes individually addressed. Even though it says that numbers of bits
+            is implementation-defined on most systems this number is governed by CHAR_BIT macro
+            which has a value of 8. </p></li><li class="listitem"><p><span class="bold"><strong>character:</strong></span>
+            Member of a set of elements used for the organization, control, or representation of
+            data.</p><p>There are many character sets each capable of
+            representing one language in this world. Sometimes they fit in a single byte while
+            sometimes they do not and then we need more bytes to represent that kind of
+            language.</p><div class="orderedlist"><ol class="orderedlist" type="I"><li class="listitem"><p>single-byte character: Bit representation
+                that fits in a byte.</p></li><li class="listitem"><p>multi-byte character: Sequence of one or
+                more bytes representing a member of the extended character set of either the source
+                or the execution environment.</p></li><li class="listitem"><p>wide Character: Bit representation that
+                fits in an object of type wchar_t, capable of representing any character in the
+                current locale.</p></li></ol></div><p>A character is one the most primitive types of C programming language. On most
+            machines its size is 1 byte. Even though void has also a size of 1 byte it is known as
+            incomplete type and cannot be used to create an object.</p></li><li class="listitem"><p><span class="bold"><strong> constraint:</strong></span>
+            Restriction, either syntactic or semantic, by which the exposition of language elements
+            is to be interpreted.</p><p>There are certain restrictions imposed by the
+            language through the standard which programmers must adhere to. Violation of these
+            restrictions may lead to diagnostic messages being issued from the compiler. We will see
+            such constraints throughout the standard. </p></li><li class="listitem"><p><span class="bold"><strong>correctly rounded
+              result:</strong></span> Representation in the result format that is nearest in value,
+            subject to the effective rounding mode, to what the result would be given unlimited
+            range and precision.</p><p>This is something which is very much related
+            to floating-point numbers. Consider two representable numbers a and b. Now there can be
+            infinite numbers between these two. However, there will be exactly one number which will
+            lie in between them. If this number is not representable as per floating-point
+            specification then the rounding of this number will depend on the current rounding mode
+            in effect. IEEE specifies four rounding modes for rounding floating-point numbers. They
+            are: <code class="code">rd_near</code> (for rounding to the nearest), <code class="code">rd_zero</code> (for
+            rounding to zero), <code class="code">rd_minf</code> (for rounding to minus infinity) and
+              <code class="code">rd_pinf</code> (for rounding to plus infinity). Consider the following program
+            which shows all four rounding modes in action.</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;fenv.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">;</span>
+
+  <span class="n">x</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="mf">1.0e-20</span><span class="p">;</span>
+
+  <span class="n">fesetround</span><span class="p">(</span><span class="n">FE_TONEAREST</span><span class="p">);</span>
+  <span class="n">z1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">;</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">z1</span> <span class="o">-</span> <span class="n">x</span><span class="p">;</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">z2</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;near, z1 = %17.10e, z2 = %17.10e </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">);</span>
+
+  <span class="n">fesetround</span><span class="p">(</span><span class="n">FE_UPWARD</span><span class="p">);</span>
+  <span class="n">z1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">;</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">z1</span> <span class="o">-</span> <span class="n">x</span><span class="p">;</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">z2</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;minf, z1 = %17.10e, z2 = %17.10e </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">);</span>
+
+  <span class="n">fesetround</span><span class="p">(</span><span class="n">FE_DOWNWARD</span><span class="p">);</span>
+  <span class="n">z1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">;</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">z1</span> <span class="o">-</span> <span class="n">x</span><span class="p">;</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">z2</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;pinf, z1 = %17.10e, z2 = %17.10e </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">);</span>
+
+  <span class="n">fesetround</span><span class="p">(</span><span class="n">FE_TOWARDZERO</span><span class="p">);</span>
+  <span class="n">z1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">;</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">z1</span> <span class="o">-</span> <span class="n">x</span><span class="p">;</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">z2</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;zero, z1 = %17.10e, z2 = %17.10e </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">);</span>
+
+
+<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre><p>and the output is:</p><pre class="screen">near, z1 =  0.0000000000e+00, z2 =  0.0000000000e+00
+minf, z1 =  0.0000000000e+00, z2 =  5.9604644775e-08
+pinf, z1 = -5.9604644775e-08, z2 = -0.0000000000e+00
+zero, z1 = -5.9604644775e-08, z2 =  5.9604644775e-08</pre><p>Note that you need to link with <code class="code">-lm</code> for compilation of the
+            program, just in case.</p></li><li class="listitem"><p><span class="bold"><strong> diagnostic
+              message:</strong></span> message belonging to an implementation-defined subset of the
+            implementation’s message output.</p><p>These refer to compilation-time warning or
+            error messages produced by the compiler. Since the specification does not direct any
+            particular way in which these diagnostic messages should be generated all compiler
+            writers are free to do whatever suits their whim. For example, earlier gcc used to print
+            only line numbers but now they also show column numbers where errors have occurred.
+            clang goes one step further and produces colored output. </p></li><li class="listitem"><p><span class="bold"><strong>forward
+              reference:</strong></span> Reference to a later subclause of International Standard that
+            contains additional information relevant to this subclause.</p></li><li class="listitem"><p><span class="bold"><strong>implementation:</strong></span> Particular set of software, running in a particular
+            translation environment under particular control options, that performs translation of
+            programs for, and supports execution of functions in, a particular execution
+            environment.</p><p>Here implementation means what we typically know as compiler. Note that it does
+            not even say compiler. Even a C interpreter can be taken as an implementation. However,
+            historically C has been a compiled language so we will mean implementation as compiler
+            henceforth. Note that when you change compiler or even compiler options then you are
+            changing the translation of code which means implementation has changed.</p></li><li class="listitem"><p><span class="bold"><strong> implementation
+              limit:</strong></span> Restriction imposed upon programs by the implementation.</p><p>In C all types have a range or limits
+            partially for efficiency reasons. The specification also says that a strictly conforming
+            program will remain below the lowest limits. Now what these limits do is that increase
+            the portability of program just like being the lowest common denominator.</p></li><li class="listitem"><p><span class="bold"><strong>object:</strong></span>
+            region of data storage in the execution environment, the contents of which can represent
+            values.When referenced, an object may be interpreted as having a particular type.</p><p>These are what we know as variables in common
+            developer language. The region of data storage occupied by an object will be contiguous
+            number of bytes. Note that the term object used in ISO standard of C has nothing to do
+            with object in object-oriented programming paradigm.</p></li><li class="listitem"><p><span class="bold"><strong>parameter:</strong></span>
+            Also known as formal parameter or formal argument (deprecated). Object declared as part
+            of a function declaration or definition that acquires a value on entry to the function,
+            or an identifier from the comma-separated list bounded by the parentheses immediately
+            following the macro name in a function-like macro definition.</p><p>For example:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#define FUNC(X, Y) </span><span class="c1">//two parameters</span>
+
+<span class="kt">int</span> <span class="nf">f</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">);</span>  <span class="c1">//one parameter</span>
+<span class="kt">void</span> <span class="nf">y</span><span class="p">(</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">z</span><span class="p">);</span> <span class="c1">//two parameters</span>
+</pre></div>
+</pre></li><li class="listitem"><p><span class="bold"><strong> recommended
+              practice:</strong></span> Specification that is strongly recommended as being in keeping
+            with the intent of the standard, but that may be impractical for some
+            implementations.</p></li><li class="listitem"><p><span class="bold"><strong>value:</strong></span>
+            Precise meaning of the contents of an object when interpreted as having a specific
+            type.</p><p>This at times will depend on the type of
+            machine. For example, a union containing an integer and two characters will have
+            different values for characters on big-endian and little-endian machines. But on the
+            same machine the meaning must be accurate for contents of an object.</p></li><li class="listitem"><p><span class="bold"><strong>implementation-defined
+              value:</strong></span> Unspecified value where each implementation documents how the choice
+            is made.</p><p>There are certain values defined by the
+            implementation. For example, in the table for defining numerical limits in chapter 3
+            specification defines <code class="code">INT_MAX</code> in a fashion as if integers are 16-bit. But
+            all modern 32-bit compilers do not follow this limit and they treat integer as 32-bit
+            entity. indeterminate value: Either an unspecified value or a trap
+            representation.</p><p>Consider a variable declaration int i;. What
+            value does this integer i contain? We do not know. The value contained is unspecified as
+            per specification nomenclature. Developers also know this as garbage value. Behavior
+            caused by usage of such variables will be known as unspecified behavior. However,
+            behavior caused by a trap representation will be undefined behavior.</p></li><li class="listitem"><p><span class="bold"><strong>unspecified
+              value:</strong></span> Valid value of the relevant type where International Standard
+            imposes no requirements on which value is chosen in any instance. NOTE: An unspecified
+            value cannot be a trap representation. As we have seen in last example the value of the
+            variable will be unspecified value. </p></li><li class="listitem"><p><math xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<mrow>
+<mo>⌈</mo>
+<mtext> x</mtext>
+<mo>⌉</mo>
+</mrow>
+</math> : ceiling of x: the least integer greater than or equal to x.</p></li><li class="listitem"><p><math xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<mrow>
+<mo>⌊</mo>
+<mtext> x </mtext>
+<mo>⌋</mo>
+</mrow>
+</math> : floor of x: the greatest integer less than or equal to x.</p></li></ol></div><p>You can also read the conformance part of this chapter which is chapter 3 in
+        specification.</p></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../introduction/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../env/index.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 1.  Introduction  </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Chapter 3. Environment</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+   GNU FDL license is applicable where not stated.</p></body></html>
