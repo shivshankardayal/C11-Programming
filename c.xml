@@ -182,7 +182,7 @@
           <title>Development flowchart of a computer program.</title>
           <mediaobject>
             <imageobject>
-              <imagedata fileref="images/flowchart.png" valign="middle" scale="90" align="center"/>
+              <imagedata fileref="images/flowchart.png" valign="middle" scale="70" align="center"/>
             </imageobject>
           </mediaobject>
         </figure>
@@ -1722,8 +1722,14 @@ sum = sum * 10 - '0' + (*p++ = getchar());</d:programlisting>
             </d:footnote>) are replaced with the corresponding single character.<table
               xmlns="http://docbook.org/ns/docbook" frame="border" border="1" class="centered">
               <caption>Trigraph Sequence</caption>
+	      <colgroup width="0*" />
+	      <colgroup width="0*" />
+	      <colgroup width="0*" />
+	      <colgroup width="0*" />
+	      <colgroup width="0*" />
+	      <colgroup width="0*" />
               <thead>
-                <tr>
+                <tr bgcolor="#aaa">
                   <th>Trigraph</th>
                   <th>Equivalent</th>
                   <th>Trigraph</th>
@@ -2292,8 +2298,10 @@ sum = sum * 10 - '0' + (*p++ = getchar());</d:programlisting>
                   floating-point characteristic and does not require the floating-point arithmetic
                   of the implementation to be identical.</d:para>
               </d:footnote> The following parameters are used to define the model for each
-              floating-point type<informaltable xmlns="http://docbook.org/ns/docbook" frame="void"
+              floating-point type<table xmlns="http://docbook.org/ns/docbook" frame="void"
                 class="leftcenter">
+	      <colgroup width="0*"/>
+	      <colgroup width="0*"/>
                 <tbody>
                   <tr>
                     <td><inlineequation>
@@ -2339,7 +2347,7 @@ sum = sum * 10 - '0' + (*p++ = getchar());</d:programlisting>
                     <td>nonnegative integers less than b (the significand digits)</td>
                   </tr>
                 </tbody>
-              </informaltable></d:para>
+              </table></d:para>
             <d:para>A <emphasis xmlns="http://docbook.org/ns/docbook" role="italic">floating-point
                 number (x)</emphasis> is defined by the following model:<d:equation>
                 <mml:math mathvariant="italic">
@@ -2484,7 +2492,9 @@ sum = sum * 10 - '0' + (*p++ = getchar());</d:programlisting>
                   execution-time change of rounding mode through the function fesetround in
                     <d:code>&lt;fenv.h></d:code>.</d:para>
               </d:footnote></d:para>
-            <informaltable xmlns="http://docbook.org/ns/docbook" frame="void" class="leftcenter">
+            <table xmlns="http://docbook.org/ns/docbook" frame="void" class="leftcenter">
+	      <colgroup width="0*"/>
+	      <colgroup width="0*"/>
               <tbody>
                 <tr>
                   <td>-1</td>
@@ -2507,7 +2517,7 @@ sum = sum * 10 - '0' + (*p++ = getchar());</d:programlisting>
                   <td>toward negative infinity</td>
                 </tr>
               </tbody>
-            </informaltable>
+            </table>
             <d:para>All other values for <d:code>FLT_ROUNDS</d:code> characterize
               implementation-defined rounding behavior. The four rounding methods were also
               described in Terms, Definitions and Symbols. The values of operations with floating
@@ -2521,13 +2531,15 @@ sum = sum * 10 - '0' + (*p++ = getchar());</d:programlisting>
                     _Complex</d:code> operands is represented in the <d:code>double
                     _Complex</d:code> format, and its parts are evaluated to
                   <d:code>double</d:code>.</d:para>
-              </d:footnote><informaltable xmlns="http://docbook.org/ns/docbook" frame="void"
-                class="leftcenter">
-                <tbody>
-                  <tr>
-                    <td>-1</td>
-                    <td>indeterminate</td>
-                  </tr>
+              </d:footnote><table xmlns="http://docbook.org/ns/docbook" frame="void"
+	      class="leftcenter">
+	      <colgroup width="0*" />
+	      <colgroup width="0*" />
+	      <tbody>
+		<tr>
+		  <td>-1</td>
+		  <td>indeterminate</td>
+		</tr>
                   <tr>
                     <td>0</td>
                     <td>evaluate all operations and constants just to the range and precision of the
@@ -2546,7 +2558,7 @@ sum = sum * 10 - '0' + (*p++ = getchar());</d:programlisting>
                         <code>long double</code> type.</td>
                   </tr>
                 </tbody>
-              </informaltable></d:para>
+              </table></d:para>
             <d:para>All other negative values for <d:code>FLT_EVAL_METHOD</d:code> characterize
               implementation-defined behavior.</d:para>
             <d:para>The values given in the following list shall be replaced by constant expressions
@@ -4885,10 +4897,13 @@ void myfunc(void)
             base 8; that of a hexadecimal constant, base 16. The lexically first digit is the most
             significant.</d:para>
           <d:para>The type of an integer constant is the first of the corresponding list in which
-            its value can be represented.<informaltable xmlns="http://docbook.org/ns/docbook"
+            its value can be represented.<table xmlns="http://docbook.org/ns/docbook"
               frame="void" class="dynamic" border="1">
+	    <colgroup width="0*" />
+	    <colgroup width="0*" />
+	    <colgroup width="0*" />
               <thead>
-                <tr>
+                <tr bgcolor="#aaa">
                   <th>Suffix</th>
                   <th>Decimal Constant</th>
                   <th>Octal or Hexadecimal Constant</th>
@@ -4969,7 +4984,7 @@ void myfunc(void)
                   <td><code>unsigned long long int</code></td>
                 </tr>
               </tbody>
-            </informaltable></d:para>
+            </table></d:para>
           <d:para>If an integer constant cannot be represented by any type in its list, it may have
             an extended integer type, if the extended integer type can represent its value. If all
             of the types in the list for the constant are signed, the extended integer type shall be
@@ -8663,6 +8678,10 @@ extern int i5;     // refers to pre vious, whose linkage is internal</d:programl
         allows to use other than what they are meant for:<table
           xmlns="http://docbook.org/ns/docbook" frame="void" class="dynamic" border="1">
           <caption>Keywords of C</caption>
+	  <colgroup width="0*"/>
+	  <colgroup width="0*"/>
+	  <colgroup width="0*"/>
+	  <colgroup width="0*"/>
           <tbody>
             <tr>
               <td>auto</td>
@@ -9628,9 +9647,12 @@ int main()
       <d:para>All escape sequences start with a leading <d:code>\</d:code> . Following table shows
           them:<table xmlns="http://docbook.org/ns/docbook" frame="border" class="centered"
           border="1">
+	  <colgroup width="0*"/>
+	  <colgroup width="0*"/>
+	  <colgroup width="0*"/>
           <caption>Escape Sequences</caption>
           <thead>
-            <tr>
+            <tr bgcolor="#aaa">
               <th>Character</th>
               <th>Escape Sequences</th>
               <th>ASCII Value</th>
@@ -10221,7 +10243,7 @@ D
         as an exercise to you, the reader.</d:para>
       <d:programlisting role="CLexer">// Format Specifiers
 // Author: Shiv S. Dayal
-/Desciption: It is a demo of several format specifiers
+//Desciption: It is a demo of several format specifiers
 
 #include&lt;stdio.h>
 
@@ -10308,7 +10330,139 @@ output.</d:para>
 	specifiers are described below.</d:para>
       </d:listitem>
     </d:itemizedlist>
-    </d:sect1>
+    <d:para>A directive composed of one or more white-space characters
+    will be executed by reading input until no more valid input can be
+    read, or up to the first byte which is not a white-space character,
+    which remains unread.</d:para>
+    <d:para>A directive that is an ordinary character will be executed
+    as follows: the next byte will be read from the input and compared
+    with the byte that comprises the directive; if the comparison
+    shows that they are not equivalent, the directive will fail, and
+    the differing and subsequent bytes will remain unread. Similarly,
+    if end-of-file, an encoding error, or a read error prevents a
+    character from being read, the directive will fail.</d:para>
+    <d:para>A directive that is a conversion specification defines a set
+    of matching input sequences, as described below for each conversion
+    character. A conversion specification will be executed in the
+    following steps.</d:para>
+    <d:para>Input white-space characters (as specified by
+    <d:code>isspace()</d:code>) will be skipped, unless the conversion
+    specification includes a <d:code>[, c, C</d:code> or
+    <d:code>n</d:code> conversion specifier.</d:para>
+    <d:para>An item will be read from the input, unless the conversion
+    specification includes an n conversion specifier. An input item
+    will be defined as the longest sequence of input bytes (up to any
+    specified maximum field width, which may be measured in characters
+    or bytes dependent on the conversion specifier) which is an
+    initial subsequence of a matching sequence. The first byte, if
+    any, after the input item will remain unread. If the length of the
+    input item is 0, the execution of the conversion specification
+    will fail; this condition is a matching failure, unless
+    end-of-file, an encoding error, or a read error prevented input
+    from the stream, in which case it is an input failure.</d:para>
+    <d:para>Except in the case of a <d:code>%n</d:code> conversion
+    specifier, the input item (or, in the case of a
+    <d:code>%n</d:code> conversion specification, the count 
+    of input bytes) will be converted to a type appropriate to the
+    conversion character. If the input item is not a matching
+    sequence, the execution of the conversion specification fails;
+    this condition is a matching failure. Unless assignment
+    suppression was indicated by a '<d:code>*</d:code>', the result of
+    the conversion will be placed in the object pointed to by the
+    first argument following the format argument that has not already
+    received a conversion result if the conversion specification is
+    introduced by <d:code>%</d:code>. If this object does not have an
+    appropriate type, or if the result of the conversion cannot be
+    represented in the space provided, the behavior is
+    undefined.</d:para>
+    <d:para>The length modifiers and their meanings are:</d:para>
+    <d:para><d:emphasis role="bold">hh</d:emphasis> Specifies that a
+    following <d:code>d, i, o, u, x, X</d:code> or <d:code>n</d:code>
+    conversion specifier applies to an argument with type pointer to
+    <d:code>signed char</d:code> or <d:code>unsigned
+    char</d:code>.</d:para>
+    <d:para><d:emphasis role="bold">h</d:emphasis> Specifies that a
+    following <d:code>d, i, o, u, x, X</d:code> or <d:code>n</d:code>
+    conversion specifier applies to an argument with type pointer to
+    <d:code>short</d:code> or <d:code>unsigned
+    short</d:code>.</d:para>
+    <d:para><d:emphasis role="bold">l</d:emphasis> Specifies that a
+    following <d:code>d, i, o, u, x, X</d:code> or <d:code>n</d:code>
+    conversion specifier applies to an argument with type pointer to
+    <d:code>long</d:code> or <d:code>unsigned long</d:code>; that a
+    following <d:code>a, A, e, E, f, F, g</d:code> or
+    <d:code>G</d:code> conversion specifier applies to an argument
+    with type pointer to <d:code>double</d:code>; or that a following
+    <d:code>c, s</d:code> or <d:code>[ conversion</d:code> specifier
+    applies to an argument with type pointer to
+    <d:code>wchar_t</d:code>.</d:para>
+    <d:para><d:emphasis role="bold">j</d:emphasis> Specifies that a
+    following <d:code>d, i, o, u, x, X</d:code> or <d:code>n</d:code>
+    conversion specifier applies to an argument with type pointer to
+    <d:code>intmax_t</d:code> or <d:code>uintmax_t</d:code>.</d:para>
+    <d:para><d:emphasis role="bold">z</d:emphasis> Specifies that a following
+    <d:code>d, i, o, u, x, X</d:code> or <d:code>n</d:code> conversion
+    specifier applies to an argument with type pointer to
+    <d:code>size_t</d:code> or the corresponding <d:code>signed int</d:code>
+    type.</d:para>
+    <d:para><d:emphasis role="bold">t</d:emphasis> Specifies that a following
+    <d:code>d, i, o, u, x, X</d:code> or <d:code>n</d:code> conversion
+    specifier applies to an argument with type pointer to
+    <d:code>ptrdiff_t</d:code> or the corresponding <d:code>unsigned
+    type</d:code>.</d:para>
+    <d:para><d:emphasis role="bold">L</d:emphasis> Specifies that a following
+    <d:code>d, i, o, u, x, X</d:code> or <d:code>n</d:code> conversion
+    specifier applies to an argument with type pointer to <d:code>long
+    double</d:code>.</d:para>
+    <d:para>If a length modifier appears with any conversion specifier other
+    than as specified above, the bahavior is undefined. The following
+    conversion specifiers are valid:</d:para>
+    <d:para><d:emphasis role="bold">d</d:emphasis> Matches an optionally signed
+    decimal integer, whose format is the same as expected for the subject
+    sequence of <d:code>strtol() with</d:code> the value 10 for the base
+    argument. In the absence of a size modifier, the programmer will ensure
+    that the corresponding argument is a pointer to
+    <d:code>int</d:code>.</d:para>
+    <d:para><d:emphasis role="bold">i</d:emphasis> Matches an optionally signed
+    integer, whose format is the same as expected for the subject sequence of
+    <d:code>strtol() with</d:code> 0 for the base argument. In the absence of a
+    size modifier, the programmer will ensure that the corresponding argument
+    is a pointer to <d:code>int</d:code>.</d:para>
+    <d:para><d:emphasis role="bold">code</d:emphasis> Matches an optionally
+    signed octal integer, whose format is the same as expected for the subject
+    sequence of <d:code>strtol() with</d:code> the value 8 for the base
+    argument. In the absence of a size modifier, the programmer will ensure
+    that the corresponding argument is a pointer to unsigned.</d:para>
+    <d:para><d:emphasis role="bold">u</d:emphasis> Matches an optionally signed
+    decimal integer, whose format is the same as expected for the subject
+    sequence of <d:code>strtol() with</d:code> the value 10 for the base
+    argument. In the absence of a size modifier, the programmer will ensure
+    that the corresponding argument is a pointer to
+    <d:code>int</d:code>.</d:para>
+    <d:para><d:emphasis role="bold">x</d:emphasis> Matches an optionally signed
+    decimal integer, whose format is the same as expected for the subject
+    sequence of <d:code>strtol() with</d:code> the value 16 for the base
+    argument. In the absence of a size modifier, the programmer will ensure
+    that the corresponding argument is a pointer to
+    <d:code>int</d:code>.</d:para>
+    <d:para><d:emphasis role="bold">a, e, f, g</d:emphasis> Matches an
+    optionally signed floating-point number, infinity, or NaN, whose format is
+    the same as expected for the subject sequence of
+    <d:code>strtod(). In</d:code> the absence of a size modifier, the
+    programmer will ensure that the corresponding argument is a pointer to
+    float.</d:para>
+    <d:para>If the <d:code>printf() family</d:code> of functions generates
+    character string representations for infinity and NaN (a symbolic entity
+    encoded in floating-point format) to support IEEE Std 754-1985, the
+    <d:code>scanf() family</d:code> of functions will recognize them as
+    input.</d:para>
+    <d:para><d:emphasis role="bold">s</d:emphasis> Matches a sequence of bytes
+    that are not white-space characters. The programmer will ensure that the
+    corresponding argument is a pointer to the initial byte of an array (will
+    see them later) of <d:code>char, signed char</d:code> or <d:code>unsigned
+    char</d:code> large enough to accept the sequence and a terminating null
+    character code, which will be added automatically.</d:para>
+  </d:sect1>
     </d:chapter>  <d:index>
     <d:title>Index</d:title>
   </d:index>

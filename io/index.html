@@ -1,4 +1,4 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 6. Console I/O</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../basics/index.html" rel="prev" title="Chapter 5. Basics of C"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 6. Console I/O</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../basics/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 6. Console I/O"><div class="titlepage"><div><div><h2 class="title"><a name="idp2859488"></a>Chapter 6. Console I/O</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp2864848">6.1. C's Memory Model</a></span></dt><dt><span class="sect1"><a href="index.html#idp2877584">6.2. printf</a></span></dt><dt><span class="sect1"><a href="index.html#idp3034688">6.3. scanf</a></span></dt></dl></div><p>What is I/O? I know you may be wondering what rubbish question? It is input/output.
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 6. Console I/O</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../basics/index.html" rel="prev" title="Chapter 5. Basics of C"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 6. Console I/O</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../basics/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 6. Console I/O"><div class="titlepage"><div><div><h2 class="title"><a name="idp2866368"></a>Chapter 6. Console I/O</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp2871728">6.1. C's Memory Model</a></span></dt><dt><span class="sect1"><a href="index.html#idp2884464">6.2. printf</a></span></dt><dt><span class="sect1"><a href="index.html#idp3042304">6.3. scanf</a></span></dt></dl></div><p>What is I/O? I know you may be wondering what rubbish question? It is input/output.
       Well, yes you are right. However, i/o can be further categorized in several categories. First
       of them is console i/o, which is what we are concerned with. In console i/o your keyboard is
       input device or <code class="code">stdin</code> file stream and display device or monitor is output
@@ -13,7 +13,7 @@
       used. Even a printer is a special output device, a camera input, speakers output, microphone
       input and so on. However, before we go on with i/o I would like to present C’s memory model
       which will be needed by our discussion of i/o related functions. However, if things do not
-      make sense even then please go through it and come later to understand more.</p><div class="sect1" title="6.1. C's Memory Model"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2864848"></a>6.1. C's Memory Model</h2></div></div></div><p>C programs use <span class="hardware">RAM</span> as primary memory except when you use
+      make sense even then please go through it and come later to understand more.</p><div class="sect1" title="6.1. C's Memory Model"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2871728"></a>6.1. C's Memory Model</h2></div></div></div><p>C programs use <span class="hardware">RAM</span> as primary memory except when you use
         register keyword to request compiler to store variables in cpu register. C’s memory model is
         split into three area at a higher level. Data, Stack and Code Segment. Date is further split
         in three parts; initialized data segment, uninitialized data segment or BSS which is name
@@ -49,9 +49,9 @@
         modify the stack size by ulimit command. Note that stack and heap are adjacent in memory and
         grow in opposite direction.</p><p>Code segment or text segment is an area where the executable instructions of program
         reside. It is typically constant and read-only area unless your system allows self-modifying
-        code. Following diagram shows the memory layout.</p><div class="figure"><a name="idp2873904"></a><p class="title"><b>Figure 6.1. C's Memory Model</b></p><div class="figure-contents"><div class="mediaobject"><img alt="C's Memory Model" src="images/memmod.png"/></div></div></div><br class="figure-break"/><p>In this chapter we will look at only those functions, which, allow us to do console
+        code. Following diagram shows the memory layout.</p><div class="figure"><a name="idp2880784"></a><p class="title"><b>Figure 6.1. C's Memory Model</b></p><div class="figure-contents"><div class="mediaobject"><img alt="C's Memory Model" src="images/memmod.png"/></div></div></div><br class="figure-break"/><p>In this chapter we will look at only those functions, which, allow us to do console
         i/o. We will begin with our familiar friends. Can you guess who are they? Yes! They are
-          <code class="code">printf</code> and <code class="code">scanf</code>.</p></div><div class="sect1" title="6.2. printf"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2877584"></a>6.2. printf</h2></div></div></div><p><code class="code">printf</code> is a string based output function that is It writes character
+          <code class="code">printf</code> and <code class="code">scanf</code>.</p></div><div class="sect1" title="6.2. printf"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2884464"></a>6.2. printf</h2></div></div></div><p><code class="code">printf</code> is a string based output function that is It writes character
         strings to <code class="code">stdout</code>. The data which has to be written is formatted by format
         string as shown previously. After the format specifier it expects as many arguments as
         specified in format string. The characters which are not like, say <code class="code">%d</code> for
@@ -352,11 +352,11 @@ D
         one example and I will show you output but not explain it. Understanding the output is left
         as an exercise to you, the reader.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Format Specifiers</span>
 <span class="c1">// Author: Shiv S. Dayal</span>
-<span class="o">/</span><span class="n">Desciption</span><span class="o">:</span> <span class="n">It</span> <span class="n">is</span> <span class="n">a</span> <span class="n">demo</span> <span class="n">of</span> <span class="n">several</span> <span class="n">format</span> <span class="n">specifiers</span>
+<span class="c1">//Desciption: It is a demo of several format specifiers</span>
 
 <span class="cp">#include&lt;stdio.h&gt;</span>
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">int</span> <span class="n">i</span>   <span class="o">=</span> <span class="mi">343456</span><span class="p">;</span>
   <span class="kt">float</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
@@ -399,7 +399,7 @@ D
 123.00000000
 78939.93470000</pre><p>I suggest you to read the desciption of conversion specifiers
 and experiment with various parameters to get different kind of
-output.</p></div><div class="sect1" title="6.3. scanf"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3034688"></a>6.3. scanf</h2></div></div></div><p><code class="code">scanf()</code> is sister of
+output.</p></div><div class="sect1" title="6.3. scanf"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3042304"></a>6.3. scanf</h2></div></div></div><p><code class="code">scanf()</code> is sister of
     <code class="code">printf()</code>. They work in tandem. As its
     name says scan function it scans <code class="code">stdin</code> or
     keyboard for input. Its signature is same as that of printf(). It
@@ -419,5 +419,114 @@ output.</p></div><div class="sect1" title="6.3. scanf"><div class="titlepage"><
 	the maximum field width</p></li><li class="listitem"><p>An option length modifier that specifies the size of
 	the receiving object.</p></li><li class="listitem"><p>A conversion specifier character that specifies the
 	type of conversion to be applied. The valid conversion
-	specifiers are described below.</p></li></ul></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../basics/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 5. Basics of C </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+	specifiers are described below.</p></li></ul></div><p>A directive composed of one or more white-space characters
+    will be executed by reading input until no more valid input can be
+    read, or up to the first byte which is not a white-space character,
+    which remains unread.</p><p>A directive that is an ordinary character will be executed
+    as follows: the next byte will be read from the input and compared
+    with the byte that comprises the directive; if the comparison
+    shows that they are not equivalent, the directive will fail, and
+    the differing and subsequent bytes will remain unread. Similarly,
+    if end-of-file, an encoding error, or a read error prevents a
+    character from being read, the directive will fail.</p><p>A directive that is a conversion specification defines a set
+    of matching input sequences, as described below for each conversion
+    character. A conversion specification will be executed in the
+    following steps.</p><p>Input white-space characters (as specified by
+    <code class="code">isspace()</code>) will be skipped, unless the conversion
+    specification includes a <code class="code">[, c, C</code> or
+    <code class="code">n</code> conversion specifier.</p><p>An item will be read from the input, unless the conversion
+    specification includes an n conversion specifier. An input item
+    will be defined as the longest sequence of input bytes (up to any
+    specified maximum field width, which may be measured in characters
+    or bytes dependent on the conversion specifier) which is an
+    initial subsequence of a matching sequence. The first byte, if
+    any, after the input item will remain unread. If the length of the
+    input item is 0, the execution of the conversion specification
+    will fail; this condition is a matching failure, unless
+    end-of-file, an encoding error, or a read error prevented input
+    from the stream, in which case it is an input failure.</p><p>Except in the case of a <code class="code">%n</code> conversion
+    specifier, the input item (or, in the case of a
+    <code class="code">%n</code> conversion specification, the count 
+    of input bytes) will be converted to a type appropriate to the
+    conversion character. If the input item is not a matching
+    sequence, the execution of the conversion specification fails;
+    this condition is a matching failure. Unless assignment
+    suppression was indicated by a '<code class="code">*</code>', the result of
+    the conversion will be placed in the object pointed to by the
+    first argument following the format argument that has not already
+    received a conversion result if the conversion specification is
+    introduced by <code class="code">%</code>. If this object does not have an
+    appropriate type, or if the result of the conversion cannot be
+    represented in the space provided, the behavior is
+    undefined.</p><p>The length modifiers and their meanings are:</p><p><span class="bold"><strong>hh</strong></span> Specifies that a
+    following <code class="code">d, i, o, u, x, X</code> or <code class="code">n</code>
+    conversion specifier applies to an argument with type pointer to
+    <code class="code">signed char</code> or <code class="code">unsigned
+    char</code>.</p><p><span class="bold"><strong>h</strong></span> Specifies that a
+    following <code class="code">d, i, o, u, x, X</code> or <code class="code">n</code>
+    conversion specifier applies to an argument with type pointer to
+    <code class="code">short</code> or <code class="code">unsigned
+    short</code>.</p><p><span class="bold"><strong>l</strong></span> Specifies that a
+    following <code class="code">d, i, o, u, x, X</code> or <code class="code">n</code>
+    conversion specifier applies to an argument with type pointer to
+    <code class="code">long</code> or <code class="code">unsigned long</code>; that a
+    following <code class="code">a, A, e, E, f, F, g</code> or
+    <code class="code">G</code> conversion specifier applies to an argument
+    with type pointer to <code class="code">double</code>; or that a following
+    <code class="code">c, s</code> or <code class="code">[ conversion</code> specifier
+    applies to an argument with type pointer to
+    <code class="code">wchar_t</code>.</p><p><span class="bold"><strong>j</strong></span> Specifies that a
+    following <code class="code">d, i, o, u, x, X</code> or <code class="code">n</code>
+    conversion specifier applies to an argument with type pointer to
+    <code class="code">intmax_t</code> or <code class="code">uintmax_t</code>.</p><p><span class="bold"><strong>z</strong></span> Specifies that a following
+    <code class="code">d, i, o, u, x, X</code> or <code class="code">n</code> conversion
+    specifier applies to an argument with type pointer to
+    <code class="code">size_t</code> or the corresponding <code class="code">signed int</code>
+    type.</p><p><span class="bold"><strong>t</strong></span> Specifies that a following
+    <code class="code">d, i, o, u, x, X</code> or <code class="code">n</code> conversion
+    specifier applies to an argument with type pointer to
+    <code class="code">ptrdiff_t</code> or the corresponding <code class="code">unsigned
+    type</code>.</p><p><span class="bold"><strong>L</strong></span> Specifies that a following
+    <code class="code">d, i, o, u, x, X</code> or <code class="code">n</code> conversion
+    specifier applies to an argument with type pointer to <code class="code">long
+    double</code>.</p><p>If a length modifier appears with any conversion specifier other
+    than as specified above, the bahavior is undefined. The following
+    conversion specifiers are valid:</p><p><span class="bold"><strong>d</strong></span> Matches an optionally signed
+    decimal integer, whose format is the same as expected for the subject
+    sequence of <code class="code">strtol() with</code> the value 10 for the base
+    argument. In the absence of a size modifier, the programmer will ensure
+    that the corresponding argument is a pointer to
+    <code class="code">int</code>.</p><p><span class="bold"><strong>i</strong></span> Matches an optionally signed
+    integer, whose format is the same as expected for the subject sequence of
+    <code class="code">strtol() with</code> 0 for the base argument. In the absence of a
+    size modifier, the programmer will ensure that the corresponding argument
+    is a pointer to <code class="code">int</code>.</p><p><span class="bold"><strong>code</strong></span> Matches an optionally
+    signed octal integer, whose format is the same as expected for the subject
+    sequence of <code class="code">strtol() with</code> the value 8 for the base
+    argument. In the absence of a size modifier, the programmer will ensure
+    that the corresponding argument is a pointer to unsigned.</p><p><span class="bold"><strong>u</strong></span> Matches an optionally signed
+    decimal integer, whose format is the same as expected for the subject
+    sequence of <code class="code">strtol() with</code> the value 10 for the base
+    argument. In the absence of a size modifier, the programmer will ensure
+    that the corresponding argument is a pointer to
+    <code class="code">int</code>.</p><p><span class="bold"><strong>x</strong></span> Matches an optionally signed
+    decimal integer, whose format is the same as expected for the subject
+    sequence of <code class="code">strtol() with</code> the value 16 for the base
+    argument. In the absence of a size modifier, the programmer will ensure
+    that the corresponding argument is a pointer to
+    <code class="code">int</code>.</p><p><span class="bold"><strong>a, e, f, g</strong></span> Matches an
+    optionally signed floating-point number, infinity, or NaN, whose format is
+    the same as expected for the subject sequence of
+    <code class="code">strtod(). In</code> the absence of a size modifier, the
+    programmer will ensure that the corresponding argument is a pointer to
+    float.</p><p>If the <code class="code">printf() family</code> of functions generates
+    character string representations for infinity and NaN (a symbolic entity
+    encoded in floating-point format) to support IEEE Std 754-1985, the
+    <code class="code">scanf() family</code> of functions will recognize them as
+    input.</p><p><span class="bold"><strong>s</strong></span> Matches a sequence of bytes
+    that are not white-space characters. The programmer will ensure that the
+    corresponding argument is a pointer to the initial byte of an array (will
+    see them later) of <code class="code">char, signed char</code> or <code class="code">unsigned
+    char</code> large enough to accept the sequence and a terminating null
+    character code, which will be added automatically.</p></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../basics/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 5. Basics of C </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
    GNU FDL license is applicable where not stated.</p></body></html>
