@@ -10689,6 +10689,50 @@ int main()
         to discuss are <d:code>gets(), fgets(), puts()</d:code> and
         <d:code>fputs()</d:code>.</d:para> 
   </d:sect1>
+  <d:sect1>
+    <d:title>Character String I/O Functions</d:title>
+    <d:para>These functions are very simple compared to
+    <d:code>printf()</d:code> and <d:code>scanf()</d:code>. They take a pointer
+    to a character array or a character pointer and fill it with input or print
+    it to monitor. Note that <d:code>gets()</d:code> and
+    <d:code>puts()</d:code> work only with stdin and stdout respectively while
+    <d:code>fgets()</d:code> and <d:code>fputs()</d:code> work with
+    <d:code>FILE</d:code> streams. They can read and write to file streams that
+    is. Here is a sample program:</d:para>
+<d:programlisting role="CLexer">// Author: Shiv S. Dayal
+// Description : Demo of string i/o
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+
+int main()
+{
+  char cStack[1024] = "";
+  char *cHeap = (char*)malloc(sizeof(1024));
+
+  gets(cStack);
+  puts(cStack);
+
+  cHeap = fgets(cHeap, 1024, stdin);
+  fputs(cHeap, stdout);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>Hi!
+Hi!
+Hello!
+Hello!</d:screen>
+<d:para>First <d:code>"Hi!"</d:code> and <d:code>"Hello!"</d:code> are keyboard
+inputs. Do not worry about array and pointer syntax at the moment. Just see the
+difference between function calls. Their is a problem with
+<d:code>gets()</d:code> that it can cause buffer overflow. If input is bigger
+than 1024 bytes including the null terminator then buffer overflow will
+happen. Note how you can prevent it with fgets() by specifying the number of
+characters you want to read. Rest of input will be ignored by
+<d:code>fgets()</d:code>. This is a security hole and therefore you should
+never ever use <d:code>gets()</d:code>.</d:para>
+<d:para>Time for single character input/output.</d:para>
+  </d:sect1>
     </d:chapter>  <d:index>
     <d:title>Index</d:title>
   </d:index>
