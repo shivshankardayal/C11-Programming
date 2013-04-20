@@ -266,7 +266,7 @@
         the beginning I will show you how to compile on command line. Let us begin with Emacs
         configuration file <d:code>.emacs</d:code>:</d:para>
       <d:para>
-        <d:programlisting role="CommonLispLexer">(custom-set-variables
+        <d:programlisting role="CommonLispLexer" language="lisp">(custom-set-variables
 ;; custom-set-variables was added by Custom.
 ;; If you edit it by hand, you could mess it up, so be careful.
 ;; Your init file should contain only one such instance.
@@ -10900,6 +10900,182 @@ int main()
   printf("%d\n", result);
 
   result = i >= j;
+  printf("%d\n", result);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>1
+0
+1
+0</d:screen>
+<d:para>Note that you should not apply these to floating-point data types as
+they may not be represented correctly and two different entities have the same
+internal representation.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Equality Operators</d:title>
+	<d:para>There are two equlity operators == and !=. </d:para>
+	<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of equality operator
+
+#include &lt;stdio.h>
+#include &lt;stdbool.h>
+int main()
+{
+  int i = 4, j = 5;
+  _Bool result = 0;
+
+  result = i == j;
+  printf("%d\n", result);
+
+  result = i != j;
+  printf("%d\n", result);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>0
+1</d:screen>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Increment and Decrement Operators</d:title>
+	<d:para>There is one increment and one decrement operator. ++ and
+	--. Both come in two forms prefix and postfix. First we will see prefix
+	versions then postfix ones. There is only one constraint on prefix
+	operators of these and that is the operand of the prefix increment or
+	decrement operator will have qualified or unqualified real or pointer
+	type and will be a modifiable lvalue.</d:para>
+	<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of increment decrement operators
+
+#include &lt;stdio.h>
+
+int main()
+{
+  float f = 7.123;
+
+  printf("%f\n", ++f);
+  printf("%f\n", --f);
+  printf("%f\n", f++);
+  printf("%f\n", f--);
+  printf("%f\n", f);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>8.123000
+7.123000
+7.123000
+8.123000
+7.123000</d:screen>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Logical Operators</d:title>
+	<d:para>There are two such operators. &amp;&amp; logical AND and ||
+	locical OR. Both the operators have the same constraints and it is that
+	both the operands will have scalar type.</d:para>
+	<d:para>The &amp;&amp; operator gives 1 if both the operands are
+	non-zero else 0. The result type is int. It is different from bitwise
+	&amp; operator in the sense that it guarantess left-to-right
+	evaluation; if the second operand is evaluated, there is a sequence
+	point between the evaluations of the first and second operands. If the
+	first operand is 0 then the second operand is not evaluated. This is
+	known as “short-circuit evaluation”.</d:para>
+	<d:para>The || operator gives 1 if any of operands are non-zero else it
+	gives 0. Same as logical AND operator and unlike bitwise | operator it
+	guarantees left-to-right evaluation and same goes for sequence
+	points. If first operand is non-zero, the second is not
+	evaluated.</d:para>
+<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of logical AND &amp; OR operators
+
+#include &lt;stdio.h>
+#include &lt;stdbool.h>
+
+int main()
+{
+  int i = 4, j = 5, k = 0;
+  bool result;
+
+  result = i&amp;&amp;j;
+  printf("%d\n", result);
+
+  result = i||j;
+  printf("%d\n", result);
+
+  result = k&amp;&amp;j;
+  printf("%d\n", result);
+
+  result = k||j;
+  printf("%d\n", result);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>1
+1
+0
+1</d:screen>
+<d:para>note the use of <d:code>bool</d:code> here instead of
+<d:code>_Bool</d:code>.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Bitwise Operators</d:title>
+	<d:para>There are three bitwise operators. &amp;, |, and ^. AND, OR and
+	EX-OR respectively. OR is also called inclusive OR. These have the same
+	contsraints and it is that operands should be integer types. The usual
+	arithmetic conversions are performed on the operands.</d:para>
+<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of bitwise operators
+
+#include &amp;stdio.h>
+#include &amp;stdbool.h>
+
+int main()
+{
+  int i = 4, j = 5;
+  int result;
+
+  result = i&amp;j;
+  printf("%d\n", result);
+
+  result = i|j;
+  printf("%d\n", result);
+
+  result = i^j;
+  printf("%d\n", result);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>4
+5
+1</d:screen>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Bitwise Shift Operators</d:title>
+	<d:para>The constraint is same as other bitwise operators that operands
+	should be integers. The integer promotions are performed on each of the
+	operands. The type of the result if that of the promoted left
+	operand. If the value of the right operand is negative or is greater
+	than or equal to the width of the promoted left operand, the behavior
+	is undefined.</d:para>
+<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of shift operators
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i  = 4;
+  char c ='A';
+  int result;
+
+  result = c&lt;&lt;i;
+  printf("%d\n", result);
+
+  result = c>>i;
   printf("%d\n", result);
 
   return 0;
