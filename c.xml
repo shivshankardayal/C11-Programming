@@ -10799,6 +10799,112 @@ the next chapter with operators and expressions.:-)</d:para>
       set of mixed data then to perform opration data is converted from one
       type to another. This is known as “Usual Arithmetic Conversion”, which I
       am going to tell you next.</d:para>
+      <d:sect1>
+	<d:title>Basic Operators</d:title>
+	<d:para>There are five here. +, -, *, / and %. Please refer to chapter
+	4 for their behavior. Let us see a simple example:</d:para>
+	<d:programlisting role="CLexer">// Arithmetic operators
+// Author: Shiv S. Dayal
+// Description: Demo of arithmetic operators
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i = 10;
+  float f= 6.45;
+  char c = 'A';
+  int iResult = 0;
+  float fResult = 0.0;
+  char cResult = '\0';
+
+  cResult = c + i;
+  printf("cResult = %c\n", cResult);
+  cResult = cResult - 5;
+  printf("cResult = %c\n", cResult);
+
+  iResult = i - 10;
+  printf("iResult = %d\n", iResult);
+  iResult = i * c;
+  printf("iResult = %d\n", iResult);
+  iResult = (i + c)/3;
+  printf("Result = %d\n", iResult);
+  iResult = (i + c)%2;
+  printf("iesult = %d\n", iResult);
+
+  fResult = f * 2.12;
+  printf("fesult = %f\n", fResult);
+  fResult = f - i;
+  printf("fesult = %f\n", fResult);
+  fResult = f / 1.12;
+  printf("fesult = %f\n", fResult);
+  fResult = 1 % 3;
+  printf("fesult = %f\n", fResult);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>cResult = K
+cResult = F
+iResult = 0
+iResult = 650
+Result = 25
+iesult = 1
+fesult = 13.674000
+fesult = -3.550000
+fesult = 5.758928
+fesult = 1.000000</d:screen>
+<d:para>First <d:code>cResult</d:code> is sum of <d:code>'A' + i</d:code> which
+is <d:code>'K'</d:code> as <d:code>'K'</d:code> comes ten positions after A in
+ASCII table. Then we subtract five and go back to F.</d:para>
+<d:para>First <d:code>iReasult</d:code> is 10 - <d:code>i</d:code> where value
+of <d:code>i</d:code> is 10 hence result is 0. Next we multiply it with
+<d:code>i</d:code> which contains <d:code>'A'</d:code> who has got ASCII value
+of 65 and result becomes 650. Then We take sum of <d:code>'A'</d:code> and
+<d:code>i</d:code> and divide by 3 so the result is 25 as it is a division of
+75 by 3. Next we use modulus operator and remainder is 1. Note that in case of
+/ and % if denominator is zero the behavior is undefined.</d:para>
+<d:para>Same way you can udnerstand floating-point operations. Note that you
+cannot use modulus operator if either of the operands are floating-point
+numbers as it will make no sense because of data type promotion rules. Here
+data type promotion rule says smaller data types will be converted to bigger
+data types. Also, if there is a data type on left side of assignment the result
+of applying the operator to operands will be converted to the type of
+that. chars are promoted to ints, ints are promoted to floats anf floats to
+double. The point is that conversion will try to keep as much data as
+possible.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Relational Operators</d:title>
+	<d:para>There are four relational operators: &lt;, >, &lt;= and
+	>=. Once again these are described in chapter 4. Let us see an
+	example:</d:para>
+<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of relational operator
+
+#include &lt;stdio.h>
+#include &lt;stdbool.h>
+
+int main()
+{
+  int i = 4, j = 5;
+  _Bool result = 0;
+
+  result = i &lt; j;
+  printf("%d\n", result);
+
+  result = i > j;
+  printf("%d\n", result);
+
+  result = i &lt;= j;
+  printf("%d\n", result);
+
+  result = i >= j;
+  printf("%d\n", result);
+
+  return 0;
+}</d:programlisting>
+      </d:sect1>
     </d:chapter>
     <d:index>
     <d:title>Index</d:title>
