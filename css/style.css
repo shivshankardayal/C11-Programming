@@ -67,7 +67,7 @@ pre.screen {
     border-radius: 5px;
 }
 
-table.centered, table.centered#th, table.centered#td
+table.centered, table.centered th, table.centered td
 {
     border-collapse:collapse;
     font-size: 13px;
@@ -78,22 +78,24 @@ table.centered, table.centered#th, table.centered#td
     border: 1px solid black;
 }
 
-table.leftcenter, table.leftcenter#th, table.leftcenter#td
+table.leftcenter, table.leftcenter th, table.leftcenter td
 {
     border-collapse:collapse;
     font-size: 13px;
     padding: 3px;
+    margin-left: auto;
+    margin-right:auto;
     text-align: left;
     width:600px;
 }
 
-table.dynamic, table.dynamic#th, table.dynamic#td {
+table.dynamic, table.dynamic th, table.dynamic td {
     border-collapse: collapse;
     font-size: 13px;
     margin-left: auto;
     margin-right: auto;
     border: 1px solid black;
-    padding: 5px;
+    padding: 10px;
 }
 
 table th {
