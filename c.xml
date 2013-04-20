@@ -10462,6 +10462,232 @@ output.</d:para>
     see them later) of <d:code>char, signed char</d:code> or <d:code>unsigned
     char</d:code> large enough to accept the sequence and a terminating null
     character code, which will be added automatically.</d:para>
+    <d:para>If an <d:code>l</d:code> qualifier is present, the input is a
+    sequence of characters that begins in the initial shift state. Each
+    character will be converted to a wide character as if by a call to the
+    <d:code>mbrtowc() function</d:code>, with the conversion state described by
+    an <d:code>mbstate_t</d:code> object initialized to zero 
+    before the first character is converted. The programmer will ensure that
+    the corresponding argument is a pointer to an array of
+    <d:code>wchar_t</d:code> large enough to accept the sequence and the
+    terminating null wide character, which will be added
+    automatically.</d:para>
+    <d:para><d:emphasis role="bold">c</d:emphasis> Matches a sequence of bytes
+    of the number specified by the field width (1 if no field width is present
+    in the conversion specification). The programmer will ensure that the
+    corresponding argument is a pointer to the initial byte of an array of
+    <d:code>char, signed char</d:code> or <d:code>unsigned char</d:code> large
+    enough to accept the sequence. No null byte is added. The normal skip over
+    white-space characters will be suppressed in this case.</d:para>
+    <d:para>If an <d:code>l</d:code> qualifier is present, the input is a
+    sequence of characters that begins in the initial shift state. Each
+    character will be converted to a wide character as if by a call to the
+    <d:code>mbrtowc() function</d:code>, with the conversion state described by
+    an <d:code>mbstate_t</d:code> object initialized to zero 
+    before the first character is converted. The programmer will ensure that
+    the corresponding argument is a pointer to an array of
+    <d:code>wchar_t</d:code> large enough to accept the resulting sequence of
+    wide characters. No null wide character is added.</d:para>
+    <d:para><d:emphasis role="bold">p</d:emphasis> Matches an
+    implementation-defined set of sequences, which shall be the same as the set
+    of sequences that is produced by the %p conversion specification of the
+    corresponding <d:code>printf() functions</d:code>. The application shall
+    ensure that the corresponding argument is a pointer to a pointer to
+    void. The interpretation of the input item is implementation-defined. If
+    the input item is a value converted earlier during the same program
+    execution, the pointer that results will compare equal to that value;
+    otherwise, the behavior of the <d:code>%p</d:code> conversion specification
+    is undefined.</d:para>
+    <d:para><d:emphasis role="bold">[ </d:emphasis>Matches a non-empty sequence
+    of bytes from a set of expected bytes (the scanset). The normal skip over
+    white-space characters shall be suppressed in this case. The programmer
+    will ensure that the corresponding argument is a pointer to the initial
+    byte of an array of <d:code>char, signed char</d:code> or <d:code>unsigned
+    char</d:code> large enough to accept the sequence and a terminating null
+    byte, which shall be added automatically.</d:para>
+    <d:para>If an <d:code>l</d:code> qualifier is present, the input is a
+    sequence of characters that begins in the initial shift state. Each
+    character in the sequence will be converted to a wide character as if by a
+    call to the <d:code>mbrtowc() function</d:code>, 
+    with the conversion state described by an <d:code>mbstate_t</d:code> object
+    initialized to zero before the first character is converted. The programmer
+    will ensure that the corresponding argument is a pointer to an array of
+    <d:code>wchar_t</d:code> large enough to accept the sequence and the
+    terminating null wide character, which will be added
+    automatically.</d:para>
+    <d:para>The conversion specification includes all subsequent bytes in the format string up to
+        and including the matching right square bracket ( '<d:code>]</d:code>' ). The bytes between
+        the square brackets (the scanlist) comprise the scanset, unless the byte after the left
+        square bracket is a circumflex ( '<d:code>^</d:code>^ ), in which case the scanset contains
+        all bytes that do not appear in the scanlist between the circumflex and the right square
+        bracket. If the conversion specification begins with "<d:code>[]</d:code>" or
+          <d:code>"[^]"</d:code>, the right square bracket is included in the scanlist and the next
+        right square bracket is the matching right square bracket that ends the conversion
+        specification; otherwise, the first right square bracket is the one that ends the conversion
+        specification. If a '-' is in the scanlist and is not the first character, nor the second
+        where the first character is a '<d:code>^</d:code>', nor the last character, the behavior is
+        implementation-defined.</d:para>
+      <d:para>The conversion specifiers <d:code>A, E, F, G</d:code> and <d:code>X</d:code> are also
+        valid and shall be equivalent to <d:code>a, e, f, g</d:code> and <d:code>x</d:code>
+        respectively.</d:para>
+      <d:para>If end-of-file is encountered during input, conversion shall be terminated. If
+        end-of-file occurs before any bytes matching the current conversion specification (except
+        for <d:code>%n</d:code>) have been read (other than leading white-space characters, where
+        permitted), execution of the current conversion specification will terminate with an input
+        failure. Otherwise, unless execution of the current conversion specification is terminated
+        with a matching failure, execution of the following conversion specification (if any) will
+        be terminated with an input failure.</d:para>
+      <d:para>Reaching the end of the string in <d:code>sscanf()</d:code> shall be equivalent to
+        encountering end-of-file for <d:code>scanf()</d:code>. If conversion terminates on a
+        conflicting input, the offending input is left unread in the input. Any trailing white space
+        (including newlines) shall be left unread unless matched by a conversion specification. The
+        success of literal matches and suppressed assignments is only directly determinable via the
+          <d:code>%n</d:code> conversion specification.</d:para>
+      <d:para>Time for some code. You have already seen many examples of <d:code>scanf</d:code> so I
+        will just explain some concepts here. Consider the following program:</d:para>
+      <d:programlisting role="CLexer">// Author: Shiv S. Dayal
+// Description: Demo of string input
+
+#include &lt;stdio.h>
+
+int main()
+{
+  char str[128] = {0};
+
+  scanf("%s", str);
+  printf("You entered:\n%s\n", str);
+
+  return 0;
+}</d:programlisting>
+      <d:para>and the output is:</d:para>
+      <d:screen>Hi! My name is Shiv.
+You entered:
+Hi!</d:screen>
+      <d:para>It is certainly not the corect output. We had expected to see like: “Hi! My name is
+        Shiv.”. What happend to input string after “Hi!”. Well, in a form given above for
+          <d:code>scanf()</d:code> it will stop taking input after white-space for character
+        strings. For numerics it does not matter as it does not match the format. For characters it
+        is character-by-character so no confusion either. So what if you want to have the entire
+        string including white-spaces. Use <d:code>[^n]</d:code> as given below:</d:para>
+      <d:programlisting role="CLexer">// Author: Shiv S. Dayal
+// Description: Corrected demo of string input
+
+#include &lt;stdio.h>
+
+int main()
+{
+  char str[128] = {0};
+
+  scanf("%[^\n]s", str);
+  printf("You entered:\n%s\n", str);
+
+  return 0;
+}</d:programlisting>
+      <d:para>and the output is:</d:para>
+      <d:screen>Hi! My name is Shiv.
+You entered:
+Hi! My name is Shiv.</d:screen>
+      <d:para>What if you want to filter a string based on certain patterns. For example, a
+        charcater string does not contain more that a single space, English alphabets, period and
+        digits. To scan such a string you can define a pttern as program given below shows:</d:para>
+      <d:programlisting role="CLexer">// Author: Shiv. S Dayal
+// Description: Demo of []
+
+#include &lt;stdio.h>
+
+int main()
+{
+  char c[100]={0};
+
+  scanf("%[ A-Za-z0-9!.]", c);
+  printf("%s\n", c);
+
+  return 0;
+}</d:programlisting>
+      <d:para>and the output is:</d:para>
+      <d:screen>Hi! My name is Shiv! My phone no. is 1234. %^$&amp;*
+Hi! My name is Shiv! My phone no. is 1234.</d:screen>
+      <d:para>There is also a major problem associated with input and that comes when you have
+        characters involved. Consider the following program:</d:para>
+      <d:programlisting role="CLexer">// Author: Shiv S. Dayal
+// Description: Demo of scanf() function
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int   i = 0;
+  float f = 0.0;
+  char  c1 = '\0';
+  char  c2 = '\0';
+  char  c3 = '\0';
+
+  printf("Enter an integer, a float and three character one by one:\n");
+
+  scanf("%d", &amp;i);
+  scanf("%f", &amp;f);
+  scanf("%c", &amp;c1);
+  scanf("%c", &amp;c2);
+  scanf("%c", &amp;c3);
+
+  printf("You entered\n");
+  printf("%d\n", i);
+  printf("%f\n", f);
+  printf("%c\n", c1);
+  printf("%c\n", c2);
+  printf("%c\n", c3);
+
+  return 0;
+}</d:programlisting>
+      <d:para>and the output is:</d:para>
+      <d:screen>2
+3.4
+s
+You entered
+2
+3.400000
+
+
+s</d:screen>
+      <d:para>What is happening here is that newline entered by our <d:code>RET</d:code> key is
+        getting assigned to <d:code>c1</d:code> and <d:code>c3</d:code>. That is why the program
+        accepted only second character. The enter after <d:code>float f;</d:code> was assigned to
+          <d:code>c1</d:code> and the character entered to <d:code>c2</d:code> and then the RET
+        newline to <d:code>c3</d:code>. There is a very simple way to recover from this:</d:para>
+      <d:programlisting role="CLexer">// Author: Shiv S. Dayal
+// Description: Demo of scanf() function
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int   i = 0;
+  float f = 0.0;
+  char  c1 = '\0';
+  char  c2 = '\0';
+  char  c3 = '\0';
+
+  printf("Enter an integer, a float and three character one by one:\n");
+  scanf("%d", &amp;i);
+  scanf("%f", &amp;f);
+  scanf(" %c", &amp;c1);
+  scanf(" %c", &amp;c2);
+  scanf(" %c", &amp;c3);
+
+  printf("%d\n", i);
+  printf("%f\n", f);
+  printf("%c\n", c1);
+  printf("%c\n", c2);
+  printf("%c\n", c3);
+
+  return 0;
+}</d:programlisting>
+      <d:para>The whitespace character shown will eat up all the white-space given after the
+        previous input. This concludes our discussion on <d:code>printf()</d:code> and
+          <d:code>scanf()</d:code>. Now we will move to another set of i/o functions which take
+        character string without filtering and print it to screen without filtering. What I am going
+        to discuss are <d:code>gets(), fgets(), puts()</d:code> and
+        <d:code>fputs()</d:code>.</d:para> 
   </d:sect1>
     </d:chapter>  <d:index>
     <d:title>Index</d:title>
