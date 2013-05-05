@@ -1,0 +1,39 @@
+<d:preface version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+    <?dbhtml filename="preface/index.html" ?>
+      <d:title>Preface</d:title>
+    <d:para> Welcome to this book on C programming using a particular specification version C99. As
+      of now C99 is the latest specification fully implemented by C compilers. C11 is latest but it
+      is yet to be implemented by compiler authors. I have been writing this book for a long time
+      but it has yet to reach completion. Very soon a C11 version will be written as compilers start
+      supporting C11 specification. These days I have noticed a tendency that people think Java, PHP
+      or Python are more used and they have a tendency to overlook the merits of C as a programming
+      language. The benefits of learning C is described further in Chapter 1 "Introduction". </d:para>
+    <d:para> C is one of the language which is closest to system and very useful for system
+      programming though not limited to it. It is also very fundamental to many languages as you
+      will discover along your programming endeavours. I highly recommend that all programmers must
+      learn C programmer in order to become a better programmer. You do not have many choices in the
+      category of compiled languages anyway. </d:para>
+    <d:section>
+      <d:title>Acknowledgements</d:title>
+      <d:para>I do not have much to write in preface as I have covered most of it in Chapter 1.
+        Therefore, I will skip directly to acknowledgements section. First, I would like to thank my
+        parents, wife and son for taking out their fair share of time and the support which they
+        have extended to me during my bad times. After that I would like to pay my most sincere
+        gratitude to my teachers particularly H. N. Singh, Yogendra Yadav, Satyanand Satyarthi,
+        Kumar Shailesh and Prof. T. K. Basu. Now is the turn of people from software community. I
+        must thank the entire free software community for all the resources they have developed to
+        make computing better. However, few names I know and here they go. Richard Stallman is the
+        first, Donald Knuth, Dennis Ritchie, Ken Thompson, Bjarne Stroustrup after that. I possibly
+        cannot write all the names because then possibly an entire chapter will be full of those
+        names. :-) I am using Docbook to write this book therefore obviously Normal Walsh deserves
+        praise for his work on it. </d:para>
+      <d:para>I am not a native English speaker and this book has just gone through one pair of eyes
+        therefore chances are high that it will have lots of errors. At the same time it may contain
+        lots of technical errors. Please feel free to drop me an email at
+          <d:email>shivshankar.dayal@gmail.com</d:email>. I will try to fix all errors and
+        incorporate your valuable suggestions. </d:para>
+    </d:section>
+  </d:preface>

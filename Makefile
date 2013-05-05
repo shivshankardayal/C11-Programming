@@ -1,3 +1,3 @@
 all:
-	xsltproc html.xsl c.xml
+	xsltproc --xinclude html.xsl c.xml
 	./domp.py
