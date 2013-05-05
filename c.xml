@@ -11511,6 +11511,229 @@ and the output is:
 <d:screen>Value of i is 'A'.
 Value of i is 'B'.
 Value of i is A.</d:screen>
+<d:para>This is also known as fall through of a <d:code>switch</d:code>
+statement. Notice, the use of default that how it is analogous to
+<d:code>else</d:code> statement. <d:code>switch</d:code> statements can also be
+nested inside each other. However, node that lots of nesting is not good. At
+most 2-3 levels are more than enough else you should look at alternative ways
+of writing code.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>while Loop</d:title>
+	<d:para>Of three loops I am first going to cover <d:code>while</d:code>
+	loop. It is simplest of three. I will just give an example for you to
+	understand.</d:para>
+	<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of while statement.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i = 0;
+
+  while(i &lt;= 10)
+  {
+    printf("%d * %2d = %4d\n", 2, i, 2*i);
+    i++;
+  }
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>2 *  0 =    0
+2 *  1 =    2
+2 *  2 =    4
+2 *  3 =    6
+2 *  4 =    8
+2 *  5 =   10
+2 *  6 =   12
+2 *  7 =   14
+2 *  8 =   16
+2 *  9 =   18
+2 * 10 =   20</d:screen>
+<d:para><d:code>while</d:code> loop just has one expression which is its
+terminating condition. We have written <d:code>i&lt;=10</d:code> which is
+terminating condition for our loop. The moment i will become greater than that
+the loop will terminated. We are initializing our loop index to 0 and
+incrementing within while loop. Note that you must use curly braces for body of
+block of loop. If you have only one statement as body of loop then braces are
+optional.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>do-while Loop</d:title>
+	<d:para>It is very much similar to <d:code>while</d:code> loop but with
+	a very subtle difference. Consider the following code:</d:para>
+	<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of do while statement.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i = 0;
+
+  do {
+    printf("I am Shiv.\n");
+    i++;
+  }while(i&lt;5);
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>I am Shiv.
+I am Shiv.
+I am Shiv.
+I am Shiv.
+I am Shiv.</d:screen>
+<d:para>Notice the semicolon at the end of while. Now time for that subtle
+difference:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of do while statement.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i = 10;
+
+  do {
+    printf("2 * 10 = 20\n");
+    i++;
+  }while(i&lt;5);
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>2 * 10 = 20</d:screen>
+<d:para>Notice how <d:code>do while</d:code> loop executes once even if the loop index is more than the terminating condition in the while part.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>for Loop</d:title>
+	<d:para><d:code>for</d:code> loop is the last of loops and most
+	versatile. It has three parts: initialization of loop counters,
+	terminating condition, and loop index modification. If you declare a
+	variable in the initialization part then that variable has just loop
+	scope while for <d:code>while</d:code> and <d:code>do while</d:code>
+	loop indices have at least outer block scope. This makes
+	<d:code>for</d:code> loop better. Consider the following example for
+	computing squares of numbers:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of for statement.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  for(int i=1, j=1; (i&lt;=10)||(j&lt;=10); i++, j++)
+    printf("%2d * %2d = %4d\n", i, j, i*j);
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>1 *  1 =    1
+2 *  2 =    4
+3 *  3 =    9
+4 *  4 =   16
+5 *  5 =   25
+6 *  6 =   36
+7 *  7 =   49
+8 *  8 =   64
+9 *  9 =   81
+10 * 10 =  100</d:screen>
+<d:para>Notice how various things are coming in picture here: initialization,
+terminating conditions loop counter incrementation and output formatting. Here
+is how you can write an infinite for loop <d:code>for(;;)</d:code>. You can
+write an infinite loop anywhere if your loop index counters are not getting
+incremented/decremented properly or your termination condition is
+incorrect. Also, always make sure that loop indices are initialized. As an
+exercise you can try to implement this program using <d:code>while</d:code> and
+<d:code>do while</d:code> loop. Last line of the above output is not having
+first space properly.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>break and continue Statements</d:title>
+	<d:para><d:code>break</d:code> statement breaks out of innermost
+	<d:code>for, do, while</d:code> and <d:code>switch</d:code>
+	statements. It terminates that loop. Consider for example:</d:para>
+	<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of break statement.
+
+#include &lt;stdio.h>
+
+int main()
+{
+
+  for(int i = 0;;i +=10)
+  {
+    if(i>100)
+      break;
+    printf("%d\n", i);
+  }
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+100</d:screen>
+<d:para>Notice how the <d:code>for</d:code> loop is terminated once
+<d:code>i</d:code> goes beyond 100 even though there is no terminating
+condition. Try the same in <d:code>while</d:code> and <d:code>do-while</d:code>
+loop and produce the same result.</d:para>
+<d:para><d:code>continue</d:code> statement is slightly different than
+<d:code>break</d:code> in the sense that it does not stop the execution of that
+loop but simply does not execute remaining instructions of that block. Consider
+for example:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of continue statement.
+
+#include &lt;stdio.h>
+
+int main()
+{
+
+  for(int i = 0;i&lt;=100;i +=10)
+  {
+    if(i==50)
+      continue;
+    printf("%d\n", i);
+  }
+
+  return 0;
+}</d:programlisting>
+and the output is:<d:screen>0
+10
+20
+30
+40
+60
+70
+80
+90
+100</d:screen>
+<d:para>Notice how 50 is missing from output.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>typedef and return Statements</d:title>
+	<d:para><d:code>typedef</d:code> statement is used to define new types
+	from existing types. For example:</d:para>
+<d:programlisting role="CLexer">typedef char s8;
+typedef unsigned char s8;
+typedef short int s16;
+typedef unsigned short int u16;</d:programlisting>
+<d:para>You will be seeing its usage in function pointers, structures and
+unions heavily.</d:para>
+<d:para><d:code>return</d:code> statement is used to return from
+function. Optionally you can return a value.</d:para>
       </d:sect1>
     </d:chapter>
     <d:index>
