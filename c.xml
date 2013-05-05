@@ -18,7 +18,7 @@
   </d:info>
   <d:preface>
     <?dbhtml filename="preface/index.html" ?>
-    <d:title>Preface</d:title>
+      <d:title>Preface</d:title>
     <d:para> Welcome to this book on C programming using a particular specification version C99. As
       of now C99 is the latest specification fully implemented by C compilers. C11 is latest but it
       is yet to be implemented by compiler authors. I have been writing this book for a long time
@@ -11176,6 +11176,341 @@ int main()
 	then about grouping parenthes. Given below is the table for operator
 	precedence and associativity, however, you may not be familiar with few
 	of them but later you will be:</d:para>
+	<d:table frame="border" class="leftcenter"
+          border="1">
+	  <d:colgroup width="0*"/>
+	  <d:colgroup width="0*"/>
+          <d:caption>Priority and assiciativity table</d:caption>
+          <d:thead>
+            <d:tr bgcolor="#aaa">
+              <d:th>Operators</d:th>
+              <d:th>Associativity</d:th>
+            </d:tr>
+          </d:thead>
+	  <d:tr>
+	    <d:td>() [] . -> ++ – (postfix)</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>++ – + - (unary) ! ~ (types) * &amp; sizeof</d:td>
+	    <d:td>right-to-left</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>* / %</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>+ - (Addition/Subtraction)</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>&lt;&lt; >></d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>&lt; > &lt;= >=</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>== !=</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>&amp;</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>^</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>|</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>&amp;&amp;</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>||</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>Assignemnt operators</d:td>
+	    <d:td>right-to-left</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>,</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	</d:table>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Grouping parentheses</d:title>
+	<d:para>Grouping parentheses are used to override operator precedence
+	and group expressions. NEVER EVER try to memorize and rely on
+	precedence of operators. Always use grouping parentheses. Till now I
+	have shown very simple examples of operators; here are some complex
+	ones:</d:para>
+	<d:programlisting role="CLexer">// Author: Shiv Shankar Dayal
+// Description: Demo of grouping parentheses
+
+#include &lt;stdio.h>
+
+int main()
+{
+  printf("%f\n", 5.2*(3.7+2.3));
+  printf("%d\n", ((4&lt;5)||(7^5)));
+
+  return 0;
+}</d:programlisting>
+<d:para>This small program shows you what can go wrong if you rely on
+memory. It allows you do addition first and then multiplcation. Inner
+parentheses are evaluated first then inner ones. This concludes our chapter on
+operators and expressions. Next we focus on control statements and flow
+statements.</d:para> 
+      </d:sect1>
+    </d:chapter>
+    <d:chapter><?dbhtml filename="cf/index.html" ?>
+      <d:title>Control Flow</d:title>
+      <d:para>There are three things you will learn in this chapter. Switching
+      the path of execution in program depending upon program variables or
+      states using control statements. Repeating a set of instructions using
+      loops. Bypassing certain set of instructions in a loop and jump
+      around. Collectively, these elements of C allow or enable you to take
+      driver’s seat over the control over a C program. You will spend much of
+      your programming time even in future using these basic elements. Let us
+      begin with if-else without spending much time over boring stuff. Before
+      we proceed I would like to tell you about storage classes of array and
+      their scope. I could have covered it in second chapter but I did not want
+      to scare you with too many things in itself.</d:para>
+      <d:sect1>
+	<d:title>Storage Classes</d:title>
+	<d:para>In C99 variables can be declared at any point in class without
+	breaking an expression. This was not possible in older C and you could
+	only declare at start of function. There is <d:code>auto, register,
+	static</d:code> and <d:code>extern</d:code>.</d:para>
+	<d:para><d:code>auto</d:code> is the default storage class for local
+	variables. Local variables are those that are inside any function or
+	any control-flow statement block. You will perhaps never use auto
+	explicitly. For examle, <d:code>auto int i; register</d:code> is the
+	storage class which tell the compiler that this variable will be stored
+	in a CPU register instead of RAM. It is mostly used for loop counters
+	and to store small 32-bit or 64-bit variables in CPU register. For
+	example, <d:code>register int i;</d:code></d:para>
+	<d:para><d:code>static</d:code> is the default storage class for global
+	variables though local variables can also be made static. local static
+	variables persist across function calls that is their values do not
+	change.</d:para>
+	<d:para><d:code>extern</d:code> keyword allows global variables to
+	become visible in other modules than itself.</d:para>
+	<d:para>There are two more modifiers: <d:code>const</d:code> and
+	<d:code>volatile</d:code>. As their names specify const makes a
+	variable constant. That is you cannot change value of a variable
+	declared as <d:code>const</d:code>. <d:code>volatile</d:code> is kind
+	of opposite but not really opposite. What it does is that the programs
+	other than the program itself where it has been declared are allowed to
+	change it. This means that a variable can be a <d:code>const</d:code>
+	as well as <d:code>volatile</d:code> at the same time.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>if else Statement</d:title>
+	<d:para>An if-else statement may consist of only <d:code>if</d:code> or
+	both <d:code>if</d:code> and <d:code>else</d:code> or
+	<d:code>if</d:code> and <d:code>else if</d:code> or <d:code>if, else
+	if</d:code> and <d:code>else</d:code>. An if-else statement must have
+	<d:code>if</d:code> at the beginning, zeor or more <d:code>else
+	if</d:code> may come after <d:code>if</d:code> or before
+	<d:code>else</d:code> and <d:code>else</d:code> must come at
+	end. <d:code>else if</d:code> and <d:code>else</d:code> are optional
+	and may not come. Consider the following program:</d:para>
+	<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of if-else statements.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i = 0, j= 0;
+
+  printf("Please enter two integers i and j:\n");
+  scanf("%d%d", &amp;i , &amp;j);
+
+  if(i==4)
+    printf("you entered 4 for i.\n");
+
+  if(i==7)
+  {
+    printf("you entered 7 for i.\n");
+    printf("I am happy for you.\n");
+  }
+  else
+  {
+    printf("You did not enter 7 for i.\n");
+  }
+  if(i==7)
+  {
+    printf("you entered 7 for i.\n");
+    printf("I am happy for you.\n");
+  }
+  else if(j==8)
+    printf("You entered 8 for i.\n");
+
+  if(i==7)
+    printf("you entered my lucky number.\n");
+  else if((i==7) &amp;&amp;(j==8))
+    printf("May god bless you!\n");
+  else
+    printf("You entered bad number.\n");
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Please enter two integers i and j:
+4
+6
+you entered 4 for i.
+You did not enter 7 for i.
+You entered bad number.</d:screen>
+<d:para>As you can see from first if sttatement that if you enter the value of
+i as 4 then the printf will be executed and you will be able to see it. Note
+that if there are multiple lines below if which you want to execute then you
+must put them in a block using curly braces. If you just want to execute one
+line then these curly braces are optional. Note that how you must use curly
+braces if you have more than one line and you want to execute them. Also, see
+the syntax for missing else and missing else if. One if-else can be nested
+inside another for example see the following code:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of if-else statements.
+
+#include &lt;stdio.h>
+#include &lt;string.h>
+
+int main()
+{
+  char fName[128]={0}, lName[128]={0};
+
+  printf("Enter your first name and last name in that order:\n");
+  gets(fName);
+  gets(lName);
+
+  if(strcmp(fName, "Shiv") == 0)
+  {
+    if(strcmp(lName, "Dayal") == 0)
+      printf("Your name is Shiv Dayal.\n");
+  }
+  else
+  {
+    printf("Your name is %s %s.\n", fName, lName);
+  }
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Enter your first name and last name in that order:
+Shiv
+Dayal
+Your name is Shiv Dayal.</d:screen>
+<d:para>another run:</d:para>
+<d:screen>Enter your first name and last name in that order:
+Richard
+Stallman
+Your name is Richard Stallman.</d:screen>
+<d:para>when first if matches but else does not:</d:para>
+<d:screen>Enter your first name and last name in that order:
+Shiv
+Stallman</d:screen>
+<d:para>Note the usage of nested if-else. Also, note how
+<d:code>strcmp</d:code> has been used to compare two strings and
+<d:code>gets</d:code> to read the input. <d:code>gets</d:code> is dangerous but
+it is simple that is why has been used here. You can read about it at the link
+of opengroup. We will see this in more detail towards the end when we deal with
+chapter named C Standard Library.</d:para>
+<d:warning>
+  <d:title>Assignment in if/else-if</d:title>
+  <d:para>Always remember the expression inside if evaluates to a boolean so
+  you should never do an ASSIGNMENT inside if and else if as it will always
+  evaluate to what is assigned. It can render all your logic meaningless. C is
+  not Python, where assignment inside if is not allowed. However, if you assign
+  0 to some variable it will evaluate to <d:code>false</d:code>.</d:para>
+</d:warning>
+<d:sect2>
+  <d:title>Dangling else Problem</d:title>
+  <d:para>The <d:code>else</d:code> part has a property that it will cling to
+  closest if. So the following piece of code may give you surprise:</d:para>
+<d:programlisting role="CLexer">if(x==1)
+  if(y>2)
+    printf("foo\n");
+else
+  printf("bar\n");</d:programlisting>
+<d:para>Now consider <d:code>x!=1</d:code> then you may think that bar will be
+printed. However, that will not be the case. The else part clings to inner
+if. This can be fixed by using curly braces.</d:para>
+</d:sect2>
+      </d:sect1>
+      <d:sect1>
+	<d:title>switch Statement</d:title>
+	<d:para><d:code>switch</d:code> statement is kind of if-else
+	replacement to simplify it. Usage of switch statement is to compare one
+	expression with others, and then execute a series of sub-statements
+	inside case and default based on the result of the comparisons. Note
+	that switch statement takes only integers or integreal type as its
+	argument and same is valid for its cases. Consider the following
+	example:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of if-else statements.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i  = 65;
+
+  switch(i)
+  {
+    case 'A':
+      printf("Value of i is 'A'.\n");
+      break;
+    case 'B':
+      printf("Value of i is 'B'.\n");
+      break;
+    default:
+      break;
+  }
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Value of i is 'A'.</d:screen>
+<d:para>Notice the usage of <d:code>break</d:code>. It is used to terminate
+execution once a match has been found for a particular case else what will
+happen is shown below:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of switch statement.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i  = 65;
+
+  switch(i)
+  {
+    case 'A':
+      printf("Value of i is 'A'.\n");
+    case 'B':
+      printf("Value of i is 'B'.\n");
+    default:
+      printf("Value of i is %c.\n", i);
+      break;
+    }
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Value of i is 'A'.
+Value of i is 'B'.
+Value of i is A.</d:screen>
       </d:sect1>
     </d:chapter>
     <d:index>
