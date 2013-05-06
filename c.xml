@@ -11509,6 +11509,95 @@ to do all these easily. As shown for array a it is not really a single array
 but an array of array. How we can read this is array a has two arrays each of
 which have two integers.</d:para>
       </d:sect1>
+      <d:sect1>
+	<d:title>Pointers</d:title>
+	<d:para>A pointer can store an address. A pointer of some type can
+	store address of that type and a pointer to void can store address of
+	any type.</d:para>
+	<d:para>These are very interesting; considered to be one of the most
+	powerful in the hands of capable programmer and most dangerous tool in
+	the hands of an ignorant programmer. There are four standard library
+	functions associated with them. All these are declared in <d:emphasis
+	role="bold">stdlib.h</d:emphasis> which is part of standard c
+	library. The functions are: <d:code>malloc(), calloc(),
+	realloc()</d:code> and <d:code>free()</d:code>. Following is the
+	contents of man pages verbatim,later in the program you can go to
+	opengroup links as well. First signatures:</d:para>
+<d:programlisting role="CLexer">void *calloc(size_t nmemb, size_t size);
+void *malloc(size_t size);
+void free(void *ptr);
+void *realloc(void *ptr, size_t size);</d:programlisting>
+<d:para>here <d:code>size_t</d:code> is the unsigned integer type of the result
+of the sizeof operator. It is defined in <d:code>stddef.h</d:code>. And now
+descriptions:</d:para>
+<d:para><d:code>calloc()</d:code> allocates memory for an array of
+<d:code>nmemb</d:code> elements of <d:code>size</d:code> bytes each and returns
+a pointer to the allocated memory. The memory is set to zero. If
+<d:code>nmemb</d:code> or size is 0, then <d:code>calloc()</d:code> returns
+either <d:code>NULL</d:code>, or a unique pointer value that can later be
+successfully passed to <d:code>free()</d:code>.</d:para>
+<d:para><d:code>malloc()</d:code> allocates <d:code>size</d:code> bytes and
+returns a pointer to the allocated memory. The memory is not cleared. If size
+is 0, then <d:code>malloc()</d:code> returns either <d:code>NULL</d:code>, or a
+unique pointer value that can later be successfully passed to
+<d:code>free()</d:code>.</d:para>
+<d:para><d:code>free()</d:code> frees the memory space pointed to by
+<d:code>ptr</d:code>, which must have been returned by a previous call to
+<d:code>malloc(), calloc()</d:code> or <d:code>realloc()</d:code>. Otherwise,
+or if <d:code>free(ptr)</d:code> has already been called before, undefined
+behavior occurs. If <d:code>ptr</d:code> is <d:code>NULL</d:code>, no operation
+is performed.</d:para>
+<d:para><d:code>realloc()</d:code> changes the size of the memory block pointed
+to by <d:code>ptr</d:code> to <d:code>size</d:code> bytes. The contents will be
+unchanged to the minimum of the old and new sizes; newly allocated memory will
+be uninitialized. If <d:code>ptr</d:code> is <d:code>NULL</d:code>, then the
+call is equivalent to <d:code>malloc(size)</d:code>, for all values of
+<d:code>size</d:code>; if <d:code>size</d:code> is equal to zero, and
+<d:code>ptr</d:code> is not <d:code>NULL</d:code>, then the call is equivalent
+to <d:code>free(ptr)</d:code>. Unless <d:code>ptr</d:code> is
+<d:code>NULL</d:code>, it must have been returned by an earlier call to
+<d:code>malloc(), calloc()</d:code> or <d:code>realloc()</d:code>. If the area
+pointed to was moved, a <d:code>free(ptr)</d:code> is done.</d:para>
+<d:para>Let us consider a program:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of pointer.
+
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+
+int main()
+{
+  int *p = NULL;
+
+  p = (int*)malloc(sizeof(int)*8);
+
+  for(int i=0;i&lt;8;i++)
+  {
+    *(p+i)=i;
+    printf("Content at %dth location is %d.\n", i, *(p+i));
+  }
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Content at 0th location is 0.
+Content at 1th location is 1.
+Content at 2th location is 2.
+Content at 3th location is 3.
+Content at 4th location is 4.
+Content at 5th location is 5.
+Content at 6th location is 6.
+Content at 7th location is 7.</d:screen>
+<d:para>There are various ways to declare a simple pointer and initialize
+it. For example:</d:para>
+<d:programlisting role="CLexer">char *c;                           //Only declaration no initialization
+c = NULL;                          //Initialization
+void *p = NULL;                    //declaration and initialization
+void *q = malloc(sizeof(void)*10); //Declare and allocate memory for 10</d:programlisting>
+<d:para>On line number 15 and 16 you are seeing pointer arithmetic in previous
+program. Consider array a declared in the first example. We could have iterated
+in that example like <d:code>*(a+i)</d:code>.</d:para>
+      </d:sect1>
     </d:chapter>
     <d:index>
     <d:title>Index</d:title>

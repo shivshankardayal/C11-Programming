@@ -1,4 +1,4 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 9. Arrays and Pointers</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../cf/index.html" rel="prev" title="Chapter 8. Control Flow"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 9. Arrays and Pointers</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../cf/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 9. Arrays and Pointers"><div class="titlepage"><div><div><h2 class="title"><a name="idp3220784"></a>Chapter 9. Arrays and Pointers</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3223280">9.1. Single-Dimensional Array</a></span></dt><dt><span class="sect1"><a href="index.html#idp3243152">9.2. Multi-Dimensional Array</a></span></dt></dl></div><p>In this chapter I am going to tell you about two very powerful
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 9. Arrays and Pointers</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../cf/index.html" rel="prev" title="Chapter 8. Control Flow"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 9. Arrays and Pointers</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../cf/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 9. Arrays and Pointers"><div class="titlepage"><div><div><h2 class="title"><a name="idp3219888"></a>Chapter 9. Arrays and Pointers</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3222384">9.1. Single-Dimensional Array</a></span></dt><dt><span class="sect1"><a href="index.html#idp3242256">9.2. Multi-Dimensional Array</a></span></dt><dt><span class="sect1"><a href="index.html#idp3246496">9.3. Pointers</a></span></dt></dl></div><p>In this chapter I am going to tell you about two very powerful
 	constructs of C programming; arrays and pointers. Arrays are what they
 	are; array of some data type. There can be an array of any complete
 	type. You cannot create an array of any incomplete type, therefore, an
@@ -9,7 +9,7 @@
 	function. There is single-dimensional array and then there is
 	multi-dimensional array. We will first go through single-dimensional
 	array then multi-dimensional.
-      </p><div class="sect1" title="9.1. Single-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3223280"></a>9.1. Single-Dimensional Array</h2></div></div></div><p>Let us first create a basic array and then see how to access it
+      </p><div class="sect1" title="9.1. Single-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3222384"></a>9.1. Single-Dimensional Array</h2></div></div></div><p>Let us first create a basic array and then see how to access it
 	elements:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of array.</span>
 
@@ -71,7 +71,7 @@ can also initialize an array as <code class="code">a[]={1, 2, 3}; or a[3]={1, 2,
 elements of second array inside for loop one by one using the bracket operator
 or subscripting operator. The array elements are always in sequence in
 memory. A conceptual diagram is given below for first three elements of above
-array. Here 1 means first element.</p><div class="figure"><a name="idp3230064"></a><p class="title"><b>Figure 9.1. An Array's Memory Diagram</b></p><div class="figure-contents"><div class="mediaobject"><img alt="An Array's Memory Diagram" src="images/arraydia.png"/></div></div></div><br class="figure-break"/><p>Array elements are always(not always but most commonly. It is so coomon
+array. Here 1 means first element.</p><div class="figure"><a name="idp3229168"></a><p class="title"><b>Figure 9.1. An Array's Memory Diagram</b></p><div class="figure-contents"><div class="mediaobject"><img alt="An Array's Memory Diagram" src="images/arraydia.png"/></div></div></div><br class="figure-break"/><p>Array elements are always(not always but most commonly. It is so coomon
 that I have used always.) accessed using their indices so order of retrieval is
 <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 <mtext>O(1)</mtext>
@@ -150,7 +150,7 @@ preferable. Note that if you declare an array of size m and data type size of
 array is n bytes then the array will consume m*n bytes no matter what; even
 when you are not using those bytes. Note that all these arrays are on stack
 memory area. We will see how to allocate array on heap memory area once we have
-studied pointers.</p></div><div class="sect1" title="9.2. Multi-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3243152"></a>9.2. Multi-Dimensional Array</h2></div></div></div><p>Arrays can be n-dmensional. There is no limit on
+studied pointers.</p></div><div class="sect1" title="9.2. Multi-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3242256"></a>9.2. Multi-Dimensional Array</h2></div></div></div><p>Arrays can be n-dmensional. There is no limit on
 	dimensions. You can allocate as much as your memory allows. We will
 	begin with two-dimensional array. A two-dimensional array looks like a
 	matrix. Say a two-dimensional array has m as one dimension and n as
@@ -195,5 +195,83 @@ doing a transpose, inverse of a matrix and printing a yearly calenday for any
 year for example. With the current information given to you, you should be able
 to do all these easily. As shown for array a it is not really a single array
 but an array of array. How we can read this is array a has two arrays each of
-which have two integers.</p></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../cf/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 8. Control Flow </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+which have two integers.</p></div><div class="sect1" title="9.3. Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3246496"></a>9.3. Pointers</h2></div></div></div><p>A pointer can store an address. A pointer of some type can
+	store address of that type and a pointer to void can store address of
+	any type.</p><p>These are very interesting; considered to be one of the most
+	powerful in the hands of capable programmer and most dangerous tool in
+	the hands of an ignorant programmer. There are four standard library
+	functions associated with them. All these are declared in <span class="bold"><strong>stdlib.h</strong></span> which is part of standard c
+	library. The functions are: <code class="code">malloc(), calloc(),
+	realloc()</code> and <code class="code">free()</code>. Following is the
+	contents of man pages verbatim,later in the program you can go to
+	opengroup links as well. First signatures:</p><pre class="CLexer"><div class="highlight"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">calloc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">nmemb</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+<span class="kt">void</span> <span class="o">*</span><span class="nf">malloc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">free</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+<span class="kt">void</span> <span class="o">*</span><span class="nf">realloc</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+</pre></div>
+</pre><p>here <code class="code">size_t</code> is the unsigned integer type of the result
+of the sizeof operator. It is defined in <code class="code">stddef.h</code>. And now
+descriptions:</p><p><code class="code">calloc()</code> allocates memory for an array of
+<code class="code">nmemb</code> elements of <code class="code">size</code> bytes each and returns
+a pointer to the allocated memory. The memory is set to zero. If
+<code class="code">nmemb</code> or size is 0, then <code class="code">calloc()</code> returns
+either <code class="code">NULL</code>, or a unique pointer value that can later be
+successfully passed to <code class="code">free()</code>.</p><p><code class="code">malloc()</code> allocates <code class="code">size</code> bytes and
+returns a pointer to the allocated memory. The memory is not cleared. If size
+is 0, then <code class="code">malloc()</code> returns either <code class="code">NULL</code>, or a
+unique pointer value that can later be successfully passed to
+<code class="code">free()</code>.</p><p><code class="code">free()</code> frees the memory space pointed to by
+<code class="code">ptr</code>, which must have been returned by a previous call to
+<code class="code">malloc(), calloc()</code> or <code class="code">realloc()</code>. Otherwise,
+or if <code class="code">free(ptr)</code> has already been called before, undefined
+behavior occurs. If <code class="code">ptr</code> is <code class="code">NULL</code>, no operation
+is performed.</p><p><code class="code">realloc()</code> changes the size of the memory block pointed
+to by <code class="code">ptr</code> to <code class="code">size</code> bytes. The contents will be
+unchanged to the minimum of the old and new sizes; newly allocated memory will
+be uninitialized. If <code class="code">ptr</code> is <code class="code">NULL</code>, then the
+call is equivalent to <code class="code">malloc(size)</code>, for all values of
+<code class="code">size</code>; if <code class="code">size</code> is equal to zero, and
+<code class="code">ptr</code> is not <code class="code">NULL</code>, then the call is equivalent
+to <code class="code">free(ptr)</code>. Unless <code class="code">ptr</code> is
+<code class="code">NULL</code>, it must have been returned by an earlier call to
+<code class="code">malloc(), calloc()</code> or <code class="code">realloc()</code>. If the area
+pointed to was moved, a <code class="code">free(ptr)</code> is done.</p><p>Let us consider a program:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description : Demo of pointer.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+  <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">*</span><span class="mi">8</span><span class="p">);</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">8</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">i</span><span class="p">)</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Content at %dth location is %d.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">i</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Content at 0th location is 0.
+Content at 1th location is 1.
+Content at 2th location is 2.
+Content at 3th location is 3.
+Content at 4th location is 4.
+Content at 5th location is 5.
+Content at 6th location is 6.
+Content at 7th location is 7.</pre><p>There are various ways to declare a simple pointer and initialize
+it. For example:</p><pre class="CLexer"><div class="highlight"><pre><span class="kt">char</span> <span class="o">*</span><span class="n">c</span><span class="p">;</span>                           <span class="c1">//Only declaration no initialization</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>                          <span class="c1">//Initialization</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>                    <span class="c1">//declaration and initialization</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">);</span> <span class="c1">//Declare and allocate memory for 10</span>
+</pre></div>
+</pre><p>On line number 15 and 16 you are seeing pointer arithmetic in previous
+program. Consider array a declared in the first example. We could have iterated
+in that example like <code class="code">*(a+i)</code>.</p></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../cf/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 8. Control Flow </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
    GNU FDL license is applicable where not stated.</p></body></html>
