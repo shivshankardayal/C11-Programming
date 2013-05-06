@@ -59,7 +59,7 @@
             written (it does not matter whether the value is same or new) to then it is defined as
             access. Here point to be noted is that the expressions which will not be evaluated do
             not access objects.</d:para>
-          <d:para>There are certain issues wit the term read and modify. One can ask it it the case
+          <d:para>There are certain issues with the term read and modify. One can ask it it the case
             that multiplication or division of a number with 1 modifies it or addition or
             subtraction of a number with 0 modifies it. The answer is yes on all these accounts.
             Similarly, you can ask if a bit-field is accessed then is it the case that the
@@ -11304,7 +11304,7 @@ function. Optionally you can return a value.</d:para>
 	array then multi-dimensional.
       </d:para>
       <d:sect1>
-	<d:title>Single-Dimensional Attau</d:title>
+	<d:title>Single-Dimensional Array</d:title>
 	<d:para>Let us first create a basic array and then see how to access it
 	elements:</d:para>
 	<d:programlisting role="CLexer">//Author: Shiv S. Dayal
@@ -11333,6 +11333,181 @@ int main()
 
   return 0;
 }</d:programlisting>
+and the output is:
+<d:screen>b[0]=0
+b[1]=1
+b[2]=2
+b[3]=3
+b[4]=4
+b[5]=5
+b[6]=6
+b[7]=7
+a[0]=0
+a[1]=0
+a[2]=0
+a[3]=0
+a[4]=0
+a[5]=0
+a[6]=0
+a[7]=0</d:screen>
+<d:para>Here you see array subscripting operator in action. I have not covered
+this particular operator in fourth chapter so it becomes my duty to explain it
+here. There are two parts here one outside subscript and another outside. The
+expression which is outside will have type “const pointer to object type”. This
+means that array’s base address is fixed and cannot be changes. The expression
+which is inside will have integer type. The result of these two has type
+“type”. We will see pointer arithmetic with binary + operator in the pointers
+section which is equivalent to subscript expression.</d:para>
+<d:para>As you can see array a is fixed length array while array b is a
+variable length array. You are not allowed to initialize variable length arrays
+at the time of declaration. Notice that array indices do not start from 1 but
+0. Never ever make the mistake of thinking that array indices start from 1. You
+can also initialize an array as <d:code>a[]={1, 2, 3}; or a[3]={1, 2,
+3};</d:code>. The array elements would be <d:code>a[0], a[1]</d:code> and
+<d:code>a[2]</d:code> in both the cases. Notice how assignment is done to
+elements of second array inside for loop one by one using the bracket operator
+or subscripting operator. The array elements are always in sequence in
+memory. A conceptual diagram is given below for first three elements of above
+array. Here 1 means first element.</d:para>
+      <d:figure>
+        <d:title>An Array's Memory Diagram</d:title>
+        <d:mediaobject>
+          <d:imageobject>
+            <d:imagedata fileref="images/arraydia.png"/>
+          </d:imageobject>
+        </d:mediaobject>
+      </d:figure>
+<d:para>Array elements are always(not always but most commonly. It is so coomon
+that I have used always.) accessed using their indices so order of retrieval is
+<mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mtext>O(1)</mml:mtext>
+</mml:math>.(This is known as big-O notation. You can find it in any Data
+Structure and Algorithm book. If you wait you can find in my book as well but
+you should not. :-)) The above program will not compile using old compilers
+which do not support C99 standard like Turbo C++. Also, you may require to pass
+the flag <d:code>-std=c99</d:code> to some versions of gcc. For variable length
+arrays it is not necessary to declare the size in advance. Even, input to
+program from other sources will do.</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of array.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i=0;
+
+  printf("Enter the value of i:\n");
+  scanf("%d\n", &amp;i);
+
+  char c[i];
+
+  printf("Enter a string which contains one less no. of chars than i:\n");
+  gets(c);
+  puts(c);
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Enter the value of i:
+6
+shiv
+Enter a string which contains one less no. of chars than i:
+shiv
+shiv</d:screen>
+<d:para>As you can see variable length array should be declared after the size
+is known otherwise you may see strange output even though it is not compilation
+error. For example you could have declaraed array immediately after
+<d:code>i</d:code> but you will get some garbage output. The reason for this is
+that at that point of time i contains garbage value. Also, note that array
+indices are integers. Floating-point numbers or variables cannot be
+indices.</d:para>
+<d:para>Let us say you are writing a big piece of code and array is declared
+somewhere and you want to know how many elemnets you can fill in the array or
+what is the maximum size of array then you can use the following
+program:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of array.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  float f[10]={0.0};
+
+  printf("Size of array f is %d.\n", sizeof(f)/sizeof(float));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Size of array f is 10.</d:screen>
+<d:para>Now an experienced programmer may ask that if we can know the size of
+array then why we do not have something like out of bounds exception of Java in
+C. My answer to that is C was written in 1970 and Java in 1990. For example,
+there are certain compilers with flags which help you detect this at
+runtime.</d:para>
+<d:para>Feel free to experiment with arrays. Do whatever you like. Remember the
+more you will experiment the more you will learn. There are various ways in
+which you can define character arrays. For example, <d:code>char c[6]={'h',
+'e', 'l', 'l', 'o', '\0'};</d:code>. Remember, you must terminate a character
+array with a null terminator. Another way to define the same is: <d:code>char
+str[6] = "hello";</d:code>. In this example you do not need to add
+'<d:code>\0</d:code>' explicitly as it is added automatically. Also, 6 is
+optional here if you want you can ommit that. Of course second example is more
+preferable. Note that if you declare an array of size m and data type size of
+array is n bytes then the array will consume m*n bytes no matter what; even
+when you are not using those bytes. Note that all these arrays are on stack
+memory area. We will see how to allocate array on heap memory area once we have
+studied pointers.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Multi-Dimensional Array</d:title>
+	<d:para>Arrays can be n-dmensional. There is no limit on
+	dimensions. You can allocate as much as your memory allows. We will
+	begin with two-dimensional array. A two-dimensional array looks like a
+	matrix. Say a two-dimensional array has m as one dimension and n as
+	second diemnsion. Then total no. of elements will be m*n and size
+	occupied is m*m*size of data type of array. There are various ways to
+	initialize a two-dimensional array. Consider the following
+	example:</d:para>
+	<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description : Demo of two-dimensional array.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int a[2][2] = {{1,2},{3,4}};
+  int b[2][2] = {1,2,3,4};
+
+  //iterating over array
+  for(int i=0;i&lt;2;i++)
+  {
+    for(int j=0;j&lt;2;j++)
+      printf("%d ", a[i][j]);
+    printf("\n");
+  }
+  for(int i=0;i&lt;2;i++)
+  {
+    for(int j=0;j&lt;2;j++)
+      printf("%d ", b[i][j]);
+    printf("\n");
+  }
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>1 2
+3 4
+1 2
+3 4</d:screen>
+<d:para>Same way you can have multi-dimensional array. I leave it up to you to
+find applications of different arrays. For now, try multiplying two matrices,
+doing a transpose, inverse of a matrix and printing a yearly calenday for any
+year for example. With the current information given to you, you should be able
+to do all these easily. As shown for array a it is not really a single array
+but an array of array. How we can read this is array a has two arrays each of
+which have two integers.</d:para>
       </d:sect1>
     </d:chapter>
     <d:index>
