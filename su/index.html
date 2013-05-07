@@ -1,4 +1,4 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 11. Structures and Unions</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../func/index.html" rel="prev" title="Chapter 10. Functions"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 11. Structures and Unions</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../func/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 11. Structures and Unions"><div class="titlepage"><div><div><h2 class="title"><a name="idp3357152"></a>Chapter 11. Structures and Unions</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3524096">11.1. Pointer members of a Structure</a></span></dt></dl></div><p>So far what we have seen are data types defiend by the language
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 11. Structures and Unions</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../func/index.html" rel="prev" title="Chapter 10. Functions"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 11. Structures and Unions</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../func/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 11. Structures and Unions"><div class="titlepage"><div><div><h2 class="title"><a name="idp167072"></a>Chapter 11. Structures and Unions</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3528896">11.1. Pointer members of a Structure</a></span></dt><dt><span class="sect1"><a href="index.html#idp3399184">11.2. Usage of Structures and Unions</a></span></dt><dt><span class="sect1"><a href="index.html#idp3472560">11.3. Structures and Arrays</a></span></dt></dl></div><p>So far what we have seen are data types defiend by the language
     itself. However, there are times when these simple types are not
     enough. For this C has defined two types which can be defined by the user
     or programmer. The two keywords are struct and union. A structure or union
@@ -128,7 +128,7 @@ little-endian.</p><p>More ways to initialize a structure are given below:</p><pr
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">34 43 c e</pre><div class="sect1" title="11.1. Pointer members of a Structure"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3524096"></a>11.1. Pointer members of a Structure</h2></div></div></div><p>Sometime structures will contain pointer members. Obviously, you will
+<pre class="screen">34 43 c e</pre><div class="sect1" title="11.1. Pointer members of a Structure"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3528896"></a>11.1. Pointer members of a Structure</h2></div></div></div><p>Sometime structures will contain pointer members. Obviously, you will
   have to allocate memory to them or point them to some existing variable’s
   address. Let us see how this is done.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author:Shiv S. Dayal</span>
 <span class="c1">//Descrition: Pointer members of a structure</span>
@@ -193,5 +193,71 @@ correct version.</p><pre class="CLexer"><div class="highlight"><pre><span class=
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">s1->i=4 s1->j=5</pre></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../func/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 10. Functions </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+<pre class="screen">s1->i=4 s1->j=5</pre></div><div class="sect1" title="11.2. Usage of Structures and Unions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3399184"></a>11.2. Usage of Structures and Unions</h2></div></div></div><p>A structure can be used to represent rather complex entities. For
+  example, a car. Consider a car. It has weight, power, cost, mileage etc. All
+  this can be combined and represented as a structure. Structures can be
+  categorized in two categories. One will be normal structures and second is
+  seld-referential structures. Self-referential structures contain a pointer to
+  a structure of its own type. You will see its usage in the book when we deal
+  with data structures. We have already shown you normal structures. The data
+  members of a structure are referenced using . operator or -> if they are
+  pointer type as we have already seen. The rule of using structures or unions
+  is simple. When you cannot represent any entity using provided data types
+  then combine the basic entities and use them in an structure or union. Union
+  has one distiction which you already know. Consider you know that your entity
+  can have multiple type of values but only one at a time. Then you can use
+  unions.</p><p>Structures and unions can be nested as well. I will just give a
+  simple example and leave rest to your imagination and previously told
+  facts.</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+<span class="p">}</span><span class="n">t</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span><span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+  <span class="n">t</span> <span class="n">t1</span><span class="p">;</span>
+<span class="p">}</span><span class="n">s</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">s</span> <span class="n">s1</span><span class="p">;</span>
+
+  <span class="n">s1</span><span class="p">.</span><span class="n">i</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span>
+  <span class="n">s1</span><span class="p">.</span><span class="n">t1</span><span class="p">.</span><span class="n">j</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d&quot;</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">i</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">t1</span><span class="p">.</span><span class="n">j</span><span class="p">);</span>
+
+<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">4 5</pre></div><div class="sect1" title="11.3. Structures and Arrays"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3472560"></a>11.3. Structures and Arrays</h2></div></div></div><p>There are two posiibilities here. Structures containing arrays and
+  arrays of structure. Let us see an example which combines both:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Arrays as structure elements</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="p">}</span><span class="n">ais</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">ais</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+  <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d %d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">1 2 3 4</pre></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../func/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 10. Functions </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
    GNU FDL license is applicable where not stated.</p></body></html>

@@ -205,4 +205,77 @@ int main()
 and the output is:
 <d:screen>s1->i=4 s1->j=5</d:screen>
 </d:sect1>
+<d:sect1>
+  <d:title>Usage of Structures and Unions</d:title>
+  <d:para>A structure can be used to represent rather complex entities. For
+  example, a car. Consider a car. It has weight, power, cost, mileage etc. All
+  this can be combined and represented as a structure. Structures can be
+  categorized in two categories. One will be normal structures and second is
+  seld-referential structures. Self-referential structures contain a pointer to
+  a structure of its own type. You will see its usage in the book when we deal
+  with data structures. We have already shown you normal structures. The data
+  members of a structure are referenced using . operator or -> if they are
+  pointer type as we have already seen. The rule of using structures or unions
+  is simple. When you cannot represent any entity using provided data types
+  then combine the basic entities and use them in an structure or union. Union
+  has one distiction which you already know. Consider you know that your entity
+  can have multiple type of values but only one at a time. Then you can use
+  unions.</d:para>
+  <d:para>Structures and unions can be nested as well. I will just give a
+  simple example and leave rest to your imagination and previously told
+  facts.</d:para>
+  <d:programlisting role="CLexer">#include &lt;stdio.h>
+
+typedef struct {
+  int j;
+}t;
+
+typedef struct{
+  int i;
+  t t1;
+}s;
+
+int main()
+{
+  s s1;
+
+  s1.i=4;
+  s1.t1.j=5;
+
+  printf("%d %d", s1.i, s1.t1.j);
+
+return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>4 5</d:screen>
+</d:sect1>
+<d:sect1>
+  <d:title>Structures and Arrays</d:title>
+  <d:para>There are two posiibilities here. Structures containing arrays and
+  arrays of structure. Let us see an example which combines both:</d:para>
+  <d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Arrays as structure elements
+
+#include &lt;stdio.h>
+
+typedef struct {
+  int i[2];
+}ais;
+
+int main()
+{
+  ais a[2];
+
+  a[0].i[0] = 1;
+  a[0].i[1] = 2;
+  a[1].i[0] = 3;
+  a[1].i[1] = 4;
+
+  printf("%d %d %d %d\n", a[0].i[0], a[0].i[1], a[1].i[0], a[1].i[1]);
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>1 2 3 4</d:screen>
+</d:sect1>
 </d:chapter>
