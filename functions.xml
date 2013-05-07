@@ -680,4 +680,84 @@ given below:</d:para>
 <d:para>You should always prefer the second version as it is more
 portable across different compilers and environments.</d:para>
     </d:sect1>
+    <d:sect1>
+      <d:title>Passing and Receiving Function Pointers</d:title>
+      <d:para>You have already seen how to pass a function pointer as
+      an argument to a second function in the above
+      exercise. <d:code>call_fp(op1,op2, &amp;plus);</d:code> is where
+      you pass a function pointer and <d:code>void call_fp(doubleop1,
+      double op2, float (*pt2Func)(double, double))</d:code> is where
+      you receive it as an argument.</d:para>
+      <d:para>You can also return a function pointer from some
+      function. Consider the following</d:para>
+      <d:programlisting role="CLexer">return_type (*func1(arguments1))(arguments2)
+{
+  return &amp;func2;
+}</d:programlisting>
+<d:para>This piece of code is a function whose name is
+<d:code>func1</d:code>, it takes arguments1 as its arguments and
+returns <d:code>float</d:code>. The return value is a function pointer
+<d:code></d:code> whose arguments are <d:code></d:code>. However, this
+kind of declaration is messy and hard to read so we have a solution
+which makes things easier on us. Consider a following
+<d:code>typedef</d:code> and function signature:</d:para>
+<d:programlisting role="CLexer">typedef return_type (*function1)(arguments);
+function1 function2(arguments);</d:programlisting>
+<d:para>This is much simpler and cleaner. It is also easier to
+understand than above.</d:para>
+<d:para>Similarly you can declare an array of function pointers. This
+offers the feature of selection of a function using an index. For
+example, the menu bar of most of the GUI programns can be accessed
+using this. Similarly, there are two ways again to declare the array
+of function pointers. The first one is without using
+<d:code>typedef</d:code> and second one is using
+<d:code>typedef</d:code>. The choice is yours that which one you want
+to use. I prefer the typedef version. The syntax is given
+below:</d:para>
+<d:programlisting role="CLexer">typedef return_type (*function1)(arguments);
+function1 array_of_fp[MAX];
+
+return_type (*function2[MAX])(arguments);</d:programlisting>
+<d:para>One of the more clever usage of function pointers can be found
+in the library function <d:code>qsort</d:code> where you have to write
+the comparison function which is a callback function. Given below os
+the signature of <d:code>qsort</d:code> function.</d:para>
+<d:programlisting role="CLexer">void qsort (void * a, size_t count, size_t size, int (*comp) (
+            const void *, const void * ) );</d:programlisting>
+<d:para>The brief description is given here. Sorts the count elements
+of the array pointed by a, each element size bytes long, using the
+compa function to determine the order.</d:para>
+<d:para>The sorting algorithm used by this function compares pairs of
+values by calling the specified comparator function with two pointers
+to elements of the array.</d:para>
+<d:para>The function does not return any value, but modifies the
+content of the array pointed by base reordering its elements to the
+newly sorted order. Let us see an example:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Demo of qsort.
+
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+
+int values[] = { 4, 1, 4, 3, 7, 10, 9, 20, 25 };
+
+int compare (const void * a, const void * b)
+{
+  return ( *(int*)a - *(int*)b );
+}
+
+int main ()
+{
+  int n=0;
+
+  qsort (values, 6, sizeof(int), compare);
+
+  for (n=0; n&lt;9; n++)
+    printf ("%d ",values[n]);
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>1 3 4 4 7 10 9 20 25</d:screen>
+    </d:sect1>
 </d:chapter>

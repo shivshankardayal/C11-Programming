@@ -1,4 +1,4 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 9. Arrays and Pointers</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../cf/index.html" rel="prev" title="Chapter 8. Control Flow"/><link href="../func/index.html" rel="next" title="Chapter 10. Functions"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 9. Arrays and Pointers</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../cf/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../func/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 9. Arrays and Pointers"><div class="titlepage"><div><div><h2 class="title"><a name="idp3214240"></a>Chapter 9. Arrays and Pointers</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3216736">9.1. Single-Dimensional Array</a></span></dt><dt><span class="sect1"><a href="index.html#idp3236608">9.2. Multi-Dimensional Array</a></span></dt><dt><span class="sect1"><a href="index.html#idp3240848">9.3. Pointers</a></span></dt><dt><span class="sect1"><a href="index.html#idp3291248">9.4. Address and Indirection Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp3303552">9.5. Arrays of Pointers</a></span></dt><dt><span class="sect1"><a href="index.html#idp3310224">9.6. Pointers of Pointers</a></span></dt><dt><span class="sect1"><a href="index.html#idp3314544">9.7. realloc() Function</a></span></dt><dt><span class="sect1"><a href="index.html#idp3319632">9.8. free() Function</a></span></dt><dt><span class="sect1"><a href="index.html#idp3323984">9.9. Constness</a></span></dt></dl></div><p>In this chapter I am going to tell you about two very powerful
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 9. Arrays and Pointers</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../cf/index.html" rel="prev" title="Chapter 8. Control Flow"/><link href="../func/index.html" rel="next" title="Chapter 10. Functions"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 9. Arrays and Pointers</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../cf/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../func/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 9. Arrays and Pointers"><div class="titlepage"><div><div><h2 class="title"><a name="idp3213184"></a>Chapter 9. Arrays and Pointers</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3215680">9.1. Single-Dimensional Array</a></span></dt><dt><span class="sect1"><a href="index.html#idp3235552">9.2. Multi-Dimensional Array</a></span></dt><dt><span class="sect1"><a href="index.html#idp3239792">9.3. Pointers</a></span></dt><dt><span class="sect1"><a href="index.html#idp3290192">9.4. Address and Indirection Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp3302448">9.5. Arrays of Pointers</a></span></dt><dt><span class="sect1"><a href="index.html#idp3309120">9.6. Pointers of Pointers</a></span></dt><dt><span class="sect1"><a href="index.html#idp3313440">9.7. realloc() Function</a></span></dt><dt><span class="sect1"><a href="index.html#idp3318528">9.8. free() Function</a></span></dt><dt><span class="sect1"><a href="index.html#idp3322880">9.9. Constness</a></span></dt></dl></div><p>In this chapter I am going to tell you about two very powerful
 	constructs of C programming; arrays and pointers. Arrays are what they
 	are; array of some data type. There can be an array of any complete
 	type. You cannot create an array of any incomplete type, therefore, an
@@ -9,7 +9,7 @@
 	function. There is single-dimensional array and then there is
 	multi-dimensional array. We will first go through single-dimensional
 	array then multi-dimensional.
-      </p><div class="sect1" title="9.1. Single-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3216736"></a>9.1. Single-Dimensional Array</h2></div></div></div><p>Let us first create a basic array and then see how to access it
+      </p><div class="sect1" title="9.1. Single-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3215680"></a>9.1. Single-Dimensional Array</h2></div></div></div><p>Let us first create a basic array and then see how to access it
 	elements:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of array.</span>
 
@@ -71,7 +71,7 @@ can also initialize an array as <code class="code">a[]={1, 2, 3}; or a[3]={1, 2,
 elements of second array inside for loop one by one using the bracket operator
 or subscripting operator. The array elements are always in sequence in
 memory. A conceptual diagram is given below for first three elements of above
-array. Here 1 means first element.</p><div class="figure"><a name="idp3223520"></a><p class="title"><b>Figure 9.1. An Array's Memory Diagram</b></p><div class="figure-contents"><div class="mediaobject"><img alt="An Array's Memory Diagram" src="images/arraydia.png"/></div></div></div><br class="figure-break"/><p>Array elements are always(not always but most commonly. It is so coomon
+array. Here 1 means first element.</p><div class="figure"><a name="idp3222464"></a><p class="title"><b>Figure 9.1. An Array's Memory Diagram</b></p><div class="figure-contents"><div class="mediaobject"><img alt="An Array's Memory Diagram" src="images/arraydia.png"/></div></div></div><br class="figure-break"/><p>Array elements are always(not always but most commonly. It is so coomon
 that I have used always.) accessed using their indices so order of retrieval is
 <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 <mtext>O(1)</mtext>
@@ -150,7 +150,7 @@ preferable. Note that if you declare an array of size m and data type size of
 array is n bytes then the array will consume m*n bytes no matter what; even
 when you are not using those bytes. Note that all these arrays are on stack
 memory area. We will see how to allocate array on heap memory area once we have
-studied pointers.</p></div><div class="sect1" title="9.2. Multi-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3236608"></a>9.2. Multi-Dimensional Array</h2></div></div></div><p>Arrays can be n-dmensional. There is no limit on
+studied pointers.</p></div><div class="sect1" title="9.2. Multi-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3235552"></a>9.2. Multi-Dimensional Array</h2></div></div></div><p>Arrays can be n-dmensional. There is no limit on
 	dimensions. You can allocate as much as your memory allows. We will
 	begin with two-dimensional array. A two-dimensional array looks like a
 	matrix. Say a two-dimensional array has m as one dimension and n as
@@ -195,7 +195,7 @@ doing a transpose, inverse of a matrix and printing a yearly calenday for any
 year for example. With the current information given to you, you should be able
 to do all these easily. As shown for array a it is not really a single array
 but an array of array. How we can read this is array a has two arrays each of
-which have two integers.</p></div><div class="sect1" title="9.3. Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3240848"></a>9.3. Pointers</h2></div></div></div><p>A pointer can store an address. A pointer of some type can
+which have two integers.</p></div><div class="sect1" title="9.3. Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3239792"></a>9.3. Pointers</h2></div></div></div><p>A pointer can store an address. A pointer of some type can
 	store address of that type and a pointer to void can store address of
 	any type.</p><p>These are very interesting; considered to be one of the most
 	powerful in the hands of capable programmer and most dangerous tool in
@@ -356,7 +356,7 @@ Content at 3th location is 3.
 Content at 4th location is 4.
 Content at 5th location is 5.
 Content at 6th location is 6.
-Content at 7th location is 7.</pre></div><div class="sect1" title="9.4. Address and Indirection Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3291248"></a>9.4. Address and Indirection Operators</h2></div></div></div><p>As is the case with subscript operator and pointer arithmetic
+Content at 7th location is 7.</pre></div><div class="sect1" title="9.4. Address and Indirection Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3290192"></a>9.4. Address and Indirection Operators</h2></div></div></div><p>As is the case with subscript operator and pointer arithmetic
 	in the fourth chapter that I have delayed these two as well for I
 	wanted to put them here. Whenever you declare a plain variable you have
 	an address associated with it and that variable is an lvalue. Just to
@@ -436,7 +436,7 @@ pointer alll you need is an address.</p><div class="caution" style="margin-left:
 thoughtful that if you really really need it. Use loops to iterate
 arrays. Multiple levels of indirection is also bad. Typically I have not seen
 more than pointers to pointers. Now we will see array of
-pointers.</p></div></div><div class="sect1" title="9.5. Arrays of Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3303552"></a>9.5. Arrays of Pointers</h2></div></div></div><p>Pointers are just like ordinary variables so we can as well create
+pointers.</p></div></div><div class="sect1" title="9.5. Arrays of Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3302448"></a>9.5. Arrays of Pointers</h2></div></div></div><p>Pointers are just like ordinary variables so we can as well create
 	array of pointers. Consider following for example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of pointer.</span>
 
@@ -501,7 +501,7 @@ Memory location=0x87d101c Content=2</pre><p>Note missing four bytes between 6 an
 different on your system. But see how messy pointer syntax can go even with
 such simple code. Array to pointers are useful for containing variables of
 dynamic size of same type.</p><p>Pointers to pointers are same as array of pointers. The only difference
-is that you can dynamically modify the number of elements.</p></div><div class="sect1" title="9.6. Pointers of Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3310224"></a>9.6. Pointers of Pointers</h2></div></div></div><p>Consider the following example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+is that you can dynamically modify the number of elements.</p></div><div class="sect1" title="9.6. Pointers of Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3309120"></a>9.6. Pointers of Pointers</h2></div></div></div><p>Consider the following example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of pointer.</span>
 
 <span class="cp">#include &lt;stdio.h&gt;</span>
@@ -547,7 +547,7 @@ Memory location=0x9947034 content=11</pre><p>Again memory location may change on
 things can get messy with pointers. Believe me you will hate this. Also, I do
 not see any reason to use more than two levels of indirection. So you get the
 idea. If you need dynamic no. of elements with dynamic content you are going to
-use pointers to pointers.</p></div><div class="sect1" title="9.7. realloc() Function"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3314544"></a>9.7. realloc() Function</h2></div></div></div><p>Once <code class="code">malloc()</code> and <code class="code">calloc()</code>
+use pointers to pointers.</p></div><div class="sect1" title="9.7. realloc() Function"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3313440"></a>9.7. realloc() Function</h2></div></div></div><p>Once <code class="code">malloc()</code> and <code class="code">calloc()</code>
 	allocate some memory you have that certain amount of memory available
 	to you. When you have an array you have some memory but what if you
 	want more later. <code class="code">reallloc()</code> comes to rescue you. Here
@@ -587,7 +587,7 @@ Original 2nd element=7
 New 1st element=5
 New 2nd element=7
 New 3rd element=9
-New 4th element=11</pre></div><div class="sect1" title="9.8. free() Function"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3319632"></a>9.8. free() Function</h2></div></div></div><p>Whatever program we have written in this chapter related to
+New 4th element=11</pre></div><div class="sect1" title="9.8. free() Function"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3318528"></a>9.8. free() Function</h2></div></div></div><p>Whatever program we have written in this chapter related to
 	dynamic memory allocation using <code class="code">malloc()</code> etc are very
 	bad code just because we are not releasing memory properly. Any call to
 	memory allocation functions have to be matched with a corresponding
@@ -600,7 +600,7 @@ New 4th element=11</pre></div><div class="sect1" title="9.8. free() Function"><
 	operating system can reclaim the freed memmory.</p><p>You must heed this warning given here with all of your
 	focus. You got to handle heap that is dynamically allocated memory
 	yourself. You allocate and you free it. If you miss you have a memory
-	leak.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" title="Warning"><h3 class="title">Warning</h3><p>You must free all memory you allocate.</p></div></div><div class="sect1" title="9.9. Constness"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3323984"></a>9.9. Constness</h2></div></div></div><p>To make anything constant you need to associate const keyword
+	leak.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" title="Warning"><h3 class="title">Warning</h3><p>You must free all memory you allocate.</p></div></div><div class="sect1" title="9.9. Constness"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3322880"></a>9.9. Constness</h2></div></div></div><p>To make anything constant you need to associate const keyword
 	with it. For example, <code class="code">const int i; const float
 	f;</code>. However, with pointers in picture scenarios change
 	compared to two simple previous examples. When pointers are made

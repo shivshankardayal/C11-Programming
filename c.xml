@@ -11983,6 +11983,7 @@ program but other sources can still modify it.</d:para>
       </d:sect1>
     </d:chapter>
     <xi:include href="functions.xml"/>
+    <xi:include href="su.xml"/>
     <d:index>
     <d:title>Index</d:title>
   </d:index>

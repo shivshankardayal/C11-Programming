@@ -1,0 +1,197 @@
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 11. Structures and Unions</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../func/index.html" rel="prev" title="Chapter 10. Functions"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 11. Structures and Unions</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../func/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 11. Structures and Unions"><div class="titlepage"><div><div><h2 class="title"><a name="idp3357152"></a>Chapter 11. Structures and Unions</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3524096">11.1. Pointer members of a Structure</a></span></dt></dl></div><p>So far what we have seen are data types defiend by the language
+    itself. However, there are times when these simple types are not
+    enough. For this C has defined two types which can be defined by the user
+    or programmer. The two keywords are struct and union. A structure or union
+    is basically a composite type. These may consist of one more types of
+    C. That is they may contain one or more basic types like int, char etc or
+    other structures or unions. Consider following examples:</p><pre class="CLexer"><div class="highlight"><pre><span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+  <span class="kt">int</span><span class="o">*</span> <span class="n">p</span><span class="p">;</span>
+  <span class="kt">char</span><span class="o">*</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">mystruct</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+  <span class="k">struct</span> <span class="n">mystruct</span> <span class="n">S</span><span class="p">;</span>
+  <span class="p">}</span> <span class="n">another_struct</span><span class="p">;</span>
+
+<span class="k">union</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+  <span class="kt">int</span><span class="o">*</span> <span class="n">p</span><span class="p">;</span>
+  <span class="n">char8</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">myunion</span><span class="p">;</span>
+
+<span class="k">union</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+  <span class="k">union</span> <span class="n">myunion</span> <span class="n">S</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">another_union</span><span class="p">;</span>
+</pre></div>
+</pre><p>As you see from the declarations there is no difference between
+structures and unions. However, there is a subtle difference. Consider
+following program:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Author: Shiv Shankar Dayal</span>
+<span class="c1">// Description: Difference between strutures and unions.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">d</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">mystruct</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">union</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">d</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">myunion</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">mystruct</span> <span class="n">s</span><span class="p">;</span>
+  <span class="n">myunion</span> <span class="n">u</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of structure is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of union is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">u</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Size of structure is 12
+Size of union is 8</pre><p>Before explaining the output let me tell you this that using typedef is
+mandatory here to get the <code class="code">sizeof</code> operator working. If you try
+something like <code class="code">sizeof(struct mystruct);</code> then you will get this
+as error. <code class="code">invalid application of sizeof to incomplete type struct
+mystruct.</code> However, you can use an object of <code class="code">struct
+mystruct</code>.</p><p>By using <code class="code">typedef</code> we let the compiler recognize them as
+complete types. Now let us see the output. Size of structure is simple. It is
+equal to size of an integer plus size of a double. However, size of union is
+equal to size of double. Basically, size of a structure is equal to size of all
+its elements. For unions size of union is equal to size of biggest
+element. This means that elements for a union overlap on the same memory
+area. We can use this fact to write a very clever program. Before writing the
+program let me give you some background.</p><p>There is something called endianness of a machine. What it means that
+how bytes are stored. If a machine is little endian like most intel processors
+then the bytes are stoerd in reverse order. What this means that they are not
+in there natural order. On big endian machines like PPC architecture the bytes
+are in natural order. In other words if the least significant byte of an
+integer is stored at the lowest memory address then it is called
+little-endian. If the least significant byte is stored at the highest address
+then it is called big-endian. For example my machine is intel so let us see
+what output we get from this program.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Demo of endianness,</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="k">typedef</span> <span class="k">union</span> <span class="p">{</span>
+  <span class="kt">short</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">myunion</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">myunion</span> <span class="n">u</span><span class="p">;</span>
+
+  <span class="n">u</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">258</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">u</span><span class="p">.</span><span class="n">c</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">2</pre><p>So as you can see the extra 2 i.e. 258 - 256 is getting stored in
+c. Now 2 is the high order byte. Hence we can conclude that my machine is
+little-endian.</p><p>More ways to initialize a structure are given below:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Structure initialization</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">short</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">mystruct</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">mystruct</span> <span class="n">s1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">34</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">},</span> <span class="n">s2</span><span class="p">;</span>
+
+  <span class="n">s2</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">43</span><span class="p">;</span>
+  <span class="n">s2</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="sc">&#39;e&#39;</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d %c %c</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">i</span><span class="p">,</span> <span class="n">s2</span><span class="p">.</span><span class="n">i</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">c</span><span class="p">,</span> <span class="n">s2</span><span class="p">.</span><span class="n">c</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">34 43 c e</pre><div class="sect1" title="11.1. Pointer members of a Structure"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3524096"></a>11.1. Pointer members of a Structure</h2></div></div></div><p>Sometime structures will contain pointer members. Obviously, you will
+  have to allocate memory to them or point them to some existing variable’s
+  address. Let us see how this is done.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author:Shiv S. Dayal</span>
+<span class="c1">//Descrition: Pointer members of a structure</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">i</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+  <span class="p">}</span><span class="n">s</span><span class="p">;</span>
+
+  <span class="n">s</span><span class="o">*</span> <span class="n">s1</span><span class="p">;</span>
+
+  <span class="n">s1</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+  <span class="n">s1</span><span class="o">-&gt;</span><span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="mi">4</span><span class="p">;</span>
+  <span class="n">s1</span><span class="o">-&gt;</span><span class="n">j</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;s1-&gt;i=%p s1-&gt;j=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">s1</span><span class="o">-&gt;</span><span class="n">i</span><span class="p">,</span> <span class="n">s1</span><span class="o">-&gt;</span><span class="n">j</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">s1->i=0x4 s1->j=5</pre><p>You might be wondering why I have casted (<code class="code">int*</code>) to 4
+and used a <code class="code">%p</code> format specifier. The reason is
+<code class="code">*i</code> is a pointer to an interger and hence
+<code class="code">s1->i</code> is a pointer and will accept only an integer
+pointer. Therefore, casting is mandatory else you will get a warning. Again, at
+the time of assignment I have assigned value 4 which is an address
+actully. Therefore <code class="code">%p</code> is needed for conversion. However, this
+program is a bad, wrong program to death. The reason is the address 4 may be
+out of program’s segmenst and touching it in the sense of trying to read from
+it or write to it may doom your day. Try to burn your hands. Let us see the
+correct version.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author:Shiv S. Dayal</span>
+<span class="c1">//Descrition: Pointer members of a structure</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">i</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+  <span class="p">}</span><span class="n">s</span><span class="p">;</span>
+
+  <span class="n">s</span><span class="o">*</span> <span class="n">s1</span><span class="p">;</span>
+
+  <span class="n">s1</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+  <span class="n">s1</span><span class="o">-&gt;</span><span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+  <span class="o">*</span><span class="p">(</span><span class="n">s1</span><span class="o">-&gt;</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="n">s1</span><span class="o">-&gt;</span><span class="n">j</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;s1-&gt;i = %d s1-&gt;j = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">s1</span><span class="o">-&gt;</span><span class="n">i</span><span class="p">),</span> <span class="n">s1</span><span class="o">-&gt;</span><span class="n">j</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">s1->i=4 s1->j=5</pre></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../func/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 10. Functions </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+   GNU FDL license is applicable where not stated.</p></body></html>
