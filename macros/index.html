@@ -1,19 +1,82 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 12. Preprocessing Directives</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../su/index.html" rel="prev" title="Chapter 11. Structures and Unions"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 12. Preprocessing Directives</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../su/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 12. Preprocessing Directives"><div class="titlepage"><div><div><h2 class="title"><a name="idp3532208"></a>Chapter 12. Preprocessing Directives</h2></div></div></div><p>The following comes from section 6.10 of specification. It will
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 12. Preprocessing Directives</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../su/index.html" rel="prev" title="Chapter 11. Structures and Unions"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 12. Preprocessing Directives</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../su/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 12. Preprocessing Directives"><div class="titlepage"><div><div><h2 class="title"><a name="idp3500768"></a>Chapter 12. Preprocessing Directives</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3513856">12.1. Conditional Inclusion</a></span></dt></dl></div><p>The following comes from section 6.10 of specification. It will
     terminate when you see code starting. :-)</p><p>A <span class="italic">preprocessing directive</span>
     consists of a sequence of preprocessing tokens that begins with a
     <code class="code">#</code> preprocessing token that (at the start of translation
     phase 4) is either the first character in the source file (optionally after
     white space containing no new-line characters) or that follows white space
     containing at least one new-line character, and is ended by the next
-    new-line character.<sup>[<a class="footnote" href="#ftn.idp3361856" name="idp3361856">128</a>]</sup> A new-line character ends
+    new-line character.<sup>[<a class="footnote" href="#ftn.idp3504688" name="idp3504688">128</a>]</sup> A new-line character ends
     the preprocessing directive even if it occurs within what would otherwise
     be an invocation of a function-like macro.</p><p>A text line shall not begin with a <code class="code">#</code> preprocessing
     token. A non-directive shall not begin with any of the directive names
     appearing in the syntax.</p><p>When in a group that is skipped (12.1), the directive syntax is
     relaxed to allow any sequence of preprocessing tokens to occur between the
-    directive name and the following new-line character.</p><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp3361856" id="ftn.idp3361856">128</a>] </sup>Thus, preprocessing directives are
+    directive name and the following new-line character.</p><p><span class="bold"><strong>Constraints</strong></span></p><p>The only white-space characters that shall appear between
+    preprocessing tokens within a preprocessing directive (from just after the
+    introducing # preprocessing token through just before the terminating
+    new-line character) are space and horizontal-tab (including spaces that
+    have replaced comments or possibly other white-space characters in
+    translation phase 3).</p><p><span class="bold"><strong>Semantics</strong></span></p><p>The implementation can process and skip sections of source files
+    conditionally, include other source files, and replace macros. These
+    capabilities are called preprocessing, because conceptually they occur
+    before translation of the resulting translation unit.</p><p>The preprocessing tokens within a preprocessing directive are not
+    subject to macro expansion unless otherwise stated.</p><p>EXAMPLE In:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#define EMPTY</span>
+<span class="n">EMPTY</span> <span class="err">#</span> <span class="n">include</span> <span class="o">&lt;</span><span class="n">file</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</pre></div>
+</pre><p>the sequence of preprocessing tokens on the second line is not a
+preprocessing directive, because it does not begin with a <code class="code">#</code> at
+the start of translation phase 4, even though it will do so after the macro
+<code class="code">EMPTY</code> has been replaced.</p><div class="sect1" title="12.1. Conditional Inclusion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3513856"></a>12.1. Conditional Inclusion</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>The expression that controls conditional inclusion shall be an
+  integer constant expression except that: it shall not contain a cast;
+  identifiers (including those lexically identical to keywords) are interpreted
+  as described below; <sup>[<a class="footnote" href="#ftn.idp3515952" name="idp3515952">129</a>]</sup> and it may contain unary operator
+  expressions of the form:</p><pre class="screen">defined identifier</pre><p>or:</p><pre class="screen">defined (identifier)</pre><p>which evaluate to 1 if the identifier is currently defined as a macro
+  name (that is, if it is predefined or if it has been the subject of a
+  <code class="code">#define</code> preprocessing directive without an intervening
+  <code class="code">#undef</code> directive with the same subject identifier), 0 if it
+  is not.</p><p><span class="bold"><strong>Sematics</strong></span></p><p>Preprocessing directives of the forms:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># if constant-expression new-line group_opt</span>
+<span class="cp"># elif constant-expression new-line group_opt</span>
+</pre></div>
+</pre><p>check whether the controlling constant expression evaluates to
+nonzero.</p><p>Prior to evaluation, macro invocations in the list of preprocessing
+tokens that will become the controlling constant expression are replaced
+(except for those macro names modified by the defined unary operator), just as
+in normal text. If the token defined is generated as a result of this
+replacement process or use of the defined unary operator does not match one of
+the two specified forms prior to macro replacement, the behavior is
+undefined. After all replacements due to macro expansion and the defined unary
+operator have been performed, all remaining identifiers are replaced with the
+pp-number 0, and then each preprocessing token is converted into a token. The
+resulting tokens compose the controlling constant expression which is evaluated
+according to the rules of constant expressions. For the purposes of this token
+conversion and evaluation, all signed integer types and all unsigned integer
+types act as if they hav e the same representation as, respectively, the types
+<code class="code">intmax_t</code> and <code class="code">uintmax_t</code> defined in the header
+<code class="code"><stdint.h></code>.<sup>[<a class="footnote" href="#ftn.idp3524880" name="idp3524880">130</a>]</sup> This includes interpreting character constants, which
+may involve converting escape sequences into execution character set
+members. Whether the numeric value for these character constants matches the
+value obtained when an identical character constant occurs in an expression
+(other than within a <code class="code">#if</code> or <code class="code">#elif</code> directive)
+is implementation-defined.<sup>[<a class="footnote" href="#ftn.idp3529264" name="idp3529264">131</a>]</sup> Also, whether a
+single-character character constant may have a negative value is
+implementation-defined.</p></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp3504688" id="ftn.idp3504688">128</a>] </sup>Thus, preprocessing directives are
     commonly called “lines”. These “lines” have no other syntactic
     significance, as all white space is equivalent except in certain situations
     during preprocessing (see the # character string literal creation operator
-    in 12.3.2, for example).</p></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../su/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 11. Structures and Unions </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+    in 12.3.2, for example).</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3515952" id="ftn.idp3515952">129</a>] </sup>Because the controlling constant
+  expression is evaluated during translation phase 4, all identifiers either
+  are or are not macro names - there simply are no keywords, enumeration
+  constants, etc.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3524880" id="ftn.idp3524880">130</a>] </sup>Thus, on an implementation
+where <code class="code">INT_MAX</code> is <code class="code"></code> and
+<code class="code">UINT_MAX</code> is <code class="code">0xFFFF</code>, the constant
+<code class="code">0x8000</code> is signed and positive within a <code class="code">#if</code>
+expression even though it would be unsigned in translation phase
+7.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3529264" id="ftn.idp3529264">131</a>] </sup>Thus, the constant expression in
+the following <code class="code">#if</code> directive and if statement is not guaranteed
+to evaluate to the same value in these two contexts.
+</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#if &#39;z&#39; - &#39;a&#39; == 25</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="sc">&#39;z&#39;</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span> <span class="o">==</span> <span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</pre></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../su/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 11. Structures and Unions </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
    GNU FDL license is applicable where not stated.</p></body></html>

@@ -25,4 +25,83 @@
     <d:para>When in a group that is skipped (12.1), the directive syntax is
     relaxed to allow any sequence of preprocessing tokens to occur between the
     directive name and the following new-line character.</d:para>
+    <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
+    <d:para>The only white-space characters that shall appear between
+    preprocessing tokens within a preprocessing directive (from just after the
+    introducing # preprocessing token through just before the terminating
+    new-line character) are space and horizontal-tab (including spaces that
+    have replaced comments or possibly other white-space characters in
+    translation phase 3).</d:para>
+    <d:para><d:emphasis role="bold">Semantics</d:emphasis></d:para>
+    <d:para>The implementation can process and skip sections of source files
+    conditionally, include other source files, and replace macros. These
+    capabilities are called preprocessing, because conceptually they occur
+    before translation of the resulting translation unit.</d:para>
+    <d:para>The preprocessing tokens within a preprocessing directive are not
+    subject to macro expansion unless otherwise stated.</d:para>
+    <d:para>EXAMPLE In:</d:para>
+    <d:programlisting role="CLexer">#define EMPTY
+EMPTY # include &lt;file.h></d:programlisting>
+<d:para>the sequence of preprocessing tokens on the second line is not a
+preprocessing directive, because it does not begin with a <d:code>#</d:code> at
+the start of translation phase 4, even though it will do so after the macro
+<d:code>EMPTY</d:code> has been replaced.</d:para>
+<d:sect1>
+  <d:title>Conditional Inclusion</d:title>
+  <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
+  <d:para>The expression that controls conditional inclusion shall be an
+  integer constant expression except that: it shall not contain a cast;
+  identifiers (including those lexically identical to keywords) are interpreted
+  as described below; <d:footnote><d:para>Because the controlling constant
+  expression is evaluated during translation phase 4, all identifiers either
+  are or are not macro names - there simply are no keywords, enumeration
+  constants, etc.</d:para></d:footnote> and it may contain unary operator
+  expressions of the form:</d:para>
+  <d:screen>defined identifier</d:screen>
+  <d:para>or:</d:para>
+  <d:screen>defined (identifier)</d:screen>
+  <d:para>which evaluate to 1 if the identifier is currently defined as a macro
+  name (that is, if it is predefined or if it has been the subject of a
+  <d:code>#define</d:code> preprocessing directive without an intervening
+  <d:code>#undef</d:code> directive with the same subject identifier), 0 if it
+  is not.</d:para>
+  <d:para><d:emphasis role="bold">Sematics</d:emphasis></d:para>
+  <d:para>Preprocessing directives of the forms:</d:para>
+  <d:programlisting role="CLexer"># if constant-expression new-line group_opt
+# elif constant-expression new-line group_opt</d:programlisting>
+<d:para>check whether the controlling constant expression evaluates to
+nonzero.</d:para>
+<d:para>Prior to evaluation, macro invocations in the list of preprocessing
+tokens that will become the controlling constant expression are replaced
+(except for those macro names modified by the defined unary operator), just as
+in normal text. If the token defined is generated as a result of this
+replacement process or use of the defined unary operator does not match one of
+the two specified forms prior to macro replacement, the behavior is
+undefined. After all replacements due to macro expansion and the defined unary
+operator have been performed, all remaining identifiers are replaced with the
+pp-number 0, and then each preprocessing token is converted into a token. The
+resulting tokens compose the controlling constant expression which is evaluated
+according to the rules of constant expressions. For the purposes of this token
+conversion and evaluation, all signed integer types and all unsigned integer
+types act as if they hav e the same representation as, respectively, the types
+<d:code>intmax_t</d:code> and <d:code>uintmax_t</d:code> defined in the header
+<d:code>&lt;stdint.h></d:code>.<d:footnote><d:para>Thus, on an implementation
+where <d:code>INT_MAX</d:code> is <d:code></d:code> and
+<d:code>UINT_MAX</d:code> is <d:code>0xFFFF</d:code>, the constant
+<d:code>0x8000</d:code> is signed and positive within a <d:code>#if</d:code>
+expression even though it would be unsigned in translation phase
+7.</d:para></d:footnote> This includes interpreting character constants, which
+may involve converting escape sequences into execution character set
+members. Whether the numeric value for these character constants matches the
+value obtained when an identical character constant occurs in an expression
+(other than within a <d:code>#if</d:code> or <d:code>#elif</d:code> directive)
+is implementation-defined.<d:footnote><d:para>Thus, the constant expression in
+the following <d:code>#if</d:code> directive and if statement is not guaranteed
+to evaluate to the same value in these two contexts.
+<d:programlisting role="CLexer">#if 'z' - 'a' == 25
+
+if ('z' - 'a' == 25)</d:programlisting></d:para></d:footnote> Also, whether a
+single-character character constant may have a negative value is
+implementation-defined.</d:para>
+</d:sect1>
 </d:chapter>
