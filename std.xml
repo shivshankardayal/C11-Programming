@@ -1,0 +1,13 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+    <?dbhtml filename="std/index.html" ?>
+    <d:title>The C Standard Library</d:title>
+    <d:para>This chapter and rest of book eflects chapter 7 of
+    n1124.pdf. This chapter begins with assert.h. We will see three
+    parts of each function/macro as much as possible. From
+    specification, compiler and example point of view in that
+    order.</d:para>
+
+</d:chapter>
