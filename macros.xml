@@ -484,4 +484,250 @@ CX_LIMITED_RANGE pragma (13.3.4). 149).</d:para>
   <d:para><d:emphasis role="bold">Forward references:</d:emphasis> the asctime
   function (13.23.3.1), standard headers (13.1.2).</d:para>
 </d:sect1>
+<d:sect1>
+  <d:title>Pragma Operator</d:title>
+  <d:para><d:emphasis role="bold">Semantics</d:emphasis></d:para>
+  <d:para>A unary operator expression of the form:</d:para>
+  <d:programlisting role="CLexer">_Pragma ( string-literal )</d:programlisting>
+  <d:para>is processed as follows: The string literal is destringized by
+  deleting the L prefix, if present, deleting the leading and trailing
+  double-quotes, replacing each escape sequence \" by a double-quote, and
+  replacing each escape sequence \\ by a single backslash. The resulting
+  sequence of characters is processed through translation phase 3 to produce
+  preprocessing tokens that are executed as if they were the pp-tokens in a
+  pragma directive. The original four preprocessing tokens in the unary
+  operator expression are removed.</d:para>
+  <d:para>At this point specification material ends here and now we will see
+  usage of above discussed macros.</d:para>
+</d:sect1>
+<d:sect1>
+  <d:title>Usage</d:title>
+  <d:para>Note that for this part the compilation command should be
+  <d:code>clang -E filename.c</d:code>. Let us create two files
+  <d:code>test.c</d:code> and <d:code>test1.c</d:code> and their contents are
+  given below respectively.</d:para>
+  <d:sect2>
+    <d:title>#include</d:title>
+    <d:programlisting role="CLexer">#include "test1.c"
+I am test.</d:programlisting>
+<d:programlisting role="CLexer">#include "test.c"
+I am test1.</d:programlisting>
+<d:para>Keep both the files in same directory and execute <d:code>clang -E
+test.c</d:code> you will see following:</d:para>
+<d:programlisting role="CLexer"># 1 "test.c"
+# 1 "test.c" 1
+# 1 "&lt;built-in>" 1
+# 1 "&lt;built-in>" 3
+# 143 "&lt;built-in>" 3
+# 1 "&lt;command line>" 1
+# 1 "&lt;built-in>" 2
+# 1 "test.c" 2
+# 1 "./test1.c" 1
+...
+In file included from test.c:1:
+In file included from ./test1.c:1:
+In file included from test.c:1:
+In file included from ./test1.c:1:
+In file included from test.c:1:
+In file included from ./test1.c:1:
+...
+In file included from test.c:1:
+./test1.c:1:10: error: #include nested too deeply
+#include "test.c"
+
+I am test1.
+# 2 "test.c" 2
+I am test
+# 2 "./test1.c" 2
+I am test1.
+# 2 "test.c" 2
+I am test
+# 2 "./test1.c" 2
+I am test1.
+# 2 "test.c" 2</d:programlisting>
+<d:para>As you can see <d:code>test.c</d:code> includes
+<d:code>test1.c</d:code> and <d:code>test1.c</d:code> includes
+<d:code>test.c</d:code>. So they are including each other which is causing
+nested includes. After processesing for some time preprocessor’s head starts
+spinning as if it has drunk a full bottle of rum and it bails out. As you know
+headers are included in all meaningful C programs and headers include each
+other as well. This inclusion of each other can easily lead to nested inclusion
+so how do header authors circumvent this problem. Well, a technique has been
+devised known popularly as header guard. The lines which have the form
+<d:code>#</d:code> number text is actually <d:code># line</d:code>
+directive.</d:para>
+<d:para>Consider following code:</d:para>
+<d:programlisting role="CLexer">#ifndef ANYTHING
+#define ANYTHING
+
+#include "test1.c"
+
+I am test.
+
+#endif</d:programlisting>
+<d:programlisting role="CLexer">#ifndef ANYTHING_ELSE
+#define ANYTHING_ELSE
+
+#include "test.c"
+
+I am test1.
+
+#endif</d:programlisting>
+<d:para>Now what will happen that when <d:code>test.c</d:code> is included
+<d:code>ANYTHING</d:code> is defined and when <d:code>test1.c</d:code> is
+included via it <d:code>ANYTHING_ELSE</d:code> will be defined. After first
+round of inclusion no more inclusion can happen as governed by the
+directives. Please see headers of standard library to see the conventions for
+<d:code>ANYTHING</d:code>.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <d:title>Why we need headers?</d:title>
+    <d:para>Now that we have seen the <d:code>#include</d:code> directive I
+    would like to tell that why we even need header files. Header files contain
+    several elements of libraries which come with C. For example, function
+    prototypes, structure/type, declarations, macros, global variable
+    declaration etc. Actual code resides inside <d:code>*.a</d:code> or
+    <d:code>*.so</d:code> library files on GNU/Linux or UNIX OSes. Now let us
+    consider a case that we want to access a C function of standard
+    library. The compilation phase requires that prototype of function should
+    be known at compilation time. If we do not have headers we have no way to
+    provide this function prototype at compile time. Same stands true for
+    global variables. The declaration of these must be known at compilation
+    time. You take any language there has to be a mechanism to include code
+    from other files. Be it use directive of Perl or import of Python or any
+    other mechanism of any other language.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <d:title>#define</d:title>
+    <d:para><d:code>#define</d:code> and <d:code>#include</d:code> are probably
+    the most encountered macro in all C files. There are many usage of it. We
+    will first see the text replacement and function like usage which can be
+    avoided and should be replaced by global constants and inline
+    functions. First let us see what text replacement functionality we get
+    using <d:code>#define</d:code>. Consider the following code
+    fragment:</d:para>
+    <d:programlisting role="CLexer">#define MAX 5
+
+MAX
+
+I am MAX</d:programlisting>
+<d:para>Now run it though <d:code>clang -E filename.c</d:code> and you will get
+following output:</d:para>
+<d:screen># 1 "test.c"
+# 1 "&lt;built-in>"
+# 1 "&lt;command-line>"
+# 1 "test.c"
+
+
+5
+
+I am 5</d:screen>
+<d:para>So as you see both the occurrences are replaced by the text 5. This is
+the simplest form of text replacement which people use to handle many
+things. Most common are array sizes and symbolic constants. Another form is the
+form like functions which has been shown in 10.4.</d:para>
+<d:para>The bad part of these two is that both do not enter symbol table and
+make code hard to debug. The former can be replaced by const variables and
+latter by inline functions.</d:para>
+<d:para>The other usage of it is to define names. For example, we revisit our
+old example headers. Header guards usually declare something like
+this:</d:para>
+<d:programlisting role="CLexer">#ifndef SOMETHING
+#define SOMETHING
+
+/* header code */
+#endif</d:programlisting>
+<d:para>As you can see <d:code>#define</d:code> is used to define
+<d:code>SOMETHING</d:code> so second time the conditional inclusion
+<d:code>#ifndef</d:code> will fail. It can also be tested by defiend like
+<d:code>if(defined(SOMETHING)</d:code>. Now if <d:code>SOMETHING</d:code> has
+been defined if test will pass successfully. Similarly <d:code>#ifdef</d:code>
+can be used to test it as a shortcut i.e. <d:code>#ifdef
+SOMETHING</d:code>. The normal if-else statements are replaced in preprocessing
+directives using <d:code>#if, #elif</d:code> and
+<d:code>#endif</d:code>.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <d:title>#undef</d:title>
+    <d:para>Anything defined by <d:code>#define</d:code> can be undefined by
+    <d:code>#undef</d:code>. For example consider the following code:</d:para>
+    <d:programlisting role="CLexer">#define test
+#ifdef test
+
+//do something
+
+#undef test
+#ifdef test
+
+//do something else
+#endif
+#endif</d:programlisting>
+<d:para>If you do this then first something else will be executed while the
+second will not be.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <d:title># and ##</d:title>
+    <d:para>You can use following two examples and description given above to
+    understand both of these:</d:para>
+    <d:programlisting role="CLexer">#define hash_hash # ## #
+#define mkstr(a) # a
+#define in_between(a) mkstr(a)
+#define join(c, d) in_between(c hash_hash d)
+
+char p[] = join(x, y); //char p[]="x ## y"
+
+#define FIRST a # b
+#define SECOND a ## b
+
+char first[] = FIRST;
+char second[] = SECOND;</d:programlisting>
+  </d:sect2>
+  <d:sect2>
+    <d:title>#error</d:title>
+    <d:programlisting role="CLexer">#include &lt;stdio.h>
+
+int main()
+{
+  # error MAX
+
+  return 0;
+}</d:programlisting>
+<d:para>If you try to compile this like <d:code>clang filename.c</d:code> then
+you will get following:</d:para>
+<d:screen>clang test.c
+test.c:5:5: error: #error MAX
+  # error MAX
+  ^
+1 error generated.</d:screen>
+<d:para>You can combine <d:code># error</d:code> with <d:code>#if</d:code> but
+I have yet to see purposeful code written that way. Non-preprocessing
+constructs are better for handling such situations. Only if you want to test a
+preprocessing token then it should be used.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <d:title>#pragma</d:title>
+    <d:para><d:code>#pragma</d:code> is dependent on what follows it. You
+    should consult compiler documentation as it is mostly
+    implementation-defined. It is a way to tell compiler to do things which are
+    not governed by specification.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <d:title>Miscellaneous</d:title>
+    <d:para>Usage of <d:code>__LINE__, __FILE__, __DATE__</d:code> and
+    <d:code>__TIME__</d:code> is simple and shown in following
+    example:</d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+
+int main()
+{
+  printf("%s:%d:%s:%s", __FILE__, __LINE__, __DATE__, __TIME__);
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>test.c:5:Jun 24 2012:11:24:57</d:screen>
+<d:para>This concluded our discussion on macros. Rest of the book will describe
+the standard library.</d:para>
+  </d:sect2>
+</d:sect1>
 </d:chapter>
