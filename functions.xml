@@ -1,0 +1,70 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+    <?dbhtml filename="func/index.html" ?>
+    <d:title>Functions</d:title>
+    <d:para>I know that you will readily agree with me if I say that
+    humans get bored if they have to do same things again and again. I
+    know you get bored too and I too get bored. We all. We as humans have
+    this built-in nature that repititive things are just not fit for
+    us. Also, as a human being our capacity to understand large things at
+    once is difficult. We understand small-small things and build large
+    chunk based on those small things. Dennis Ritchie perhaps had known
+    this. I am saying because C has got something called functions. C
+    functions allow you to split a big logic into small ones and therefore
+    facilitating modular programming. They also form the basis of
+    strutctured programming the very base which made C popular. There is
+    also something called recursion which is a very poewrful tool. In this
+    chapter we will also see how to do multifile programming. I cannot
+    emphasize much that how important it is that you master the technique
+    of functions well and not to mention function pointers which can do
+    the magic. I will show you the very glimpse only. I can show you the
+    way but walking on that is your job. It is upto you to do the actual
+    work. I have kept things simple and minimal with a pupose. I do not
+    want you to get bogged down with a thick and heavy book. All my
+    examples are toy examples but you have seen things can get somehwat
+    complex.</d:para>
+    <d:para>We have already seen the special <d:code>main()</d:code>
+    function.</d:para>
+    <d:sect1>
+      <d:title>Pass by Value</d:title>
+      <d:para>Here I am going to present skeleton of a function
+      prototype and body. Consider:</d:para>
+      <d:screen>//function prototype
+return-type function-name(argument list); //here varible names may be ommitted
+
+//function body
+return-type function-name(argument list) //variable names cannot be ommitted``
+{
+  //your code here
+
+  //call some other function
+  function-name(arugment-list-without-type);
+
+  return value-of-return-type;
+}</d:screen>
+<d:para>This might be a bit abstract but please bear it a bit. In due
+course of time it will become clear. You will be able to see in its
+concrete forms soon. Consider a program which adds two numbers and let
+us say that you may need to add lots of them.</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Demo of function
+
+#include &lt;stdio.h>
+
+void add(int firstInt, int secondInt)
+{
+  printf("%d+%d=%d\n", firstInt, secondInt, firstInt+secondInt);
+}
+
+int main()
+{
+  int a=5, b=7;
+
+  add(a, b);
+
+  return 0;
+}</d:programlisting>
+    </d:sect1>
+</d:chapter>

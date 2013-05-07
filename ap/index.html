@@ -1,4 +1,4 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 9. Arrays and Pointers</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../cf/index.html" rel="prev" title="Chapter 8. Control Flow"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 9. Arrays and Pointers</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../cf/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 9. Arrays and Pointers"><div class="titlepage"><div><div><h2 class="title"><a name="idp3219888"></a>Chapter 9. Arrays and Pointers</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3222384">9.1. Single-Dimensional Array</a></span></dt><dt><span class="sect1"><a href="index.html#idp3242256">9.2. Multi-Dimensional Array</a></span></dt><dt><span class="sect1"><a href="index.html#idp3246496">9.3. Pointers</a></span></dt></dl></div><p>In this chapter I am going to tell you about two very powerful
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 9. Arrays and Pointers</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../cf/index.html" rel="prev" title="Chapter 8. Control Flow"/><link href="../func/index.html" rel="next" title="Chapter 10. Functions"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 9. Arrays and Pointers</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../cf/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../func/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 9. Arrays and Pointers"><div class="titlepage"><div><div><h2 class="title"><a name="idp3219008"></a>Chapter 9. Arrays and Pointers</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3221504">9.1. Single-Dimensional Array</a></span></dt><dt><span class="sect1"><a href="index.html#idp3241376">9.2. Multi-Dimensional Array</a></span></dt><dt><span class="sect1"><a href="index.html#idp3245552">9.3. Pointers</a></span></dt><dt><span class="sect1"><a href="index.html#idp3296096">9.4. Address and Indirection Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp3308352">9.5. Arrays of Pointers</a></span></dt><dt><span class="sect1"><a href="index.html#idp3315024">9.6. Pointers of Pointers</a></span></dt><dt><span class="sect1"><a href="index.html#idp3319344">9.7. realloc() Function</a></span></dt><dt><span class="sect1"><a href="index.html#idp3324432">9.8. free() Function</a></span></dt><dt><span class="sect1"><a href="index.html#idp3328832">9.9. Constness</a></span></dt></dl></div><p>In this chapter I am going to tell you about two very powerful
 	constructs of C programming; arrays and pointers. Arrays are what they
 	are; array of some data type. There can be an array of any complete
 	type. You cannot create an array of any incomplete type, therefore, an
@@ -9,7 +9,7 @@
 	function. There is single-dimensional array and then there is
 	multi-dimensional array. We will first go through single-dimensional
 	array then multi-dimensional.
-      </p><div class="sect1" title="9.1. Single-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3222384"></a>9.1. Single-Dimensional Array</h2></div></div></div><p>Let us first create a basic array and then see how to access it
+      </p><div class="sect1" title="9.1. Single-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3221504"></a>9.1. Single-Dimensional Array</h2></div></div></div><p>Let us first create a basic array and then see how to access it
 	elements:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of array.</span>
 
@@ -71,7 +71,7 @@ can also initialize an array as <code class="code">a[]={1, 2, 3}; or a[3]={1, 2,
 elements of second array inside for loop one by one using the bracket operator
 or subscripting operator. The array elements are always in sequence in
 memory. A conceptual diagram is given below for first three elements of above
-array. Here 1 means first element.</p><div class="figure"><a name="idp3229168"></a><p class="title"><b>Figure 9.1. An Array's Memory Diagram</b></p><div class="figure-contents"><div class="mediaobject"><img alt="An Array's Memory Diagram" src="images/arraydia.png"/></div></div></div><br class="figure-break"/><p>Array elements are always(not always but most commonly. It is so coomon
+array. Here 1 means first element.</p><div class="figure"><a name="idp3228288"></a><p class="title"><b>Figure 9.1. An Array's Memory Diagram</b></p><div class="figure-contents"><div class="mediaobject"><img alt="An Array's Memory Diagram" src="images/arraydia.png"/></div></div></div><br class="figure-break"/><p>Array elements are always(not always but most commonly. It is so coomon
 that I have used always.) accessed using their indices so order of retrieval is
 <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 <mtext>O(1)</mtext>
@@ -150,7 +150,7 @@ preferable. Note that if you declare an array of size m and data type size of
 array is n bytes then the array will consume m*n bytes no matter what; even
 when you are not using those bytes. Note that all these arrays are on stack
 memory area. We will see how to allocate array on heap memory area once we have
-studied pointers.</p></div><div class="sect1" title="9.2. Multi-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3242256"></a>9.2. Multi-Dimensional Array</h2></div></div></div><p>Arrays can be n-dmensional. There is no limit on
+studied pointers.</p></div><div class="sect1" title="9.2. Multi-Dimensional Array"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3241376"></a>9.2. Multi-Dimensional Array</h2></div></div></div><p>Arrays can be n-dmensional. There is no limit on
 	dimensions. You can allocate as much as your memory allows. We will
 	begin with two-dimensional array. A two-dimensional array looks like a
 	matrix. Say a two-dimensional array has m as one dimension and n as
@@ -195,7 +195,7 @@ doing a transpose, inverse of a matrix and printing a yearly calenday for any
 year for example. With the current information given to you, you should be able
 to do all these easily. As shown for array a it is not really a single array
 but an array of array. How we can read this is array a has two arrays each of
-which have two integers.</p></div><div class="sect1" title="9.3. Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3246496"></a>9.3. Pointers</h2></div></div></div><p>A pointer can store an address. A pointer of some type can
+which have two integers.</p></div><div class="sect1" title="9.3. Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3245552"></a>9.3. Pointers</h2></div></div></div><p>A pointer can store an address. A pointer of some type can
 	store address of that type and a pointer to void can store address of
 	any type.</p><p>These are very interesting; considered to be one of the most
 	powerful in the hands of capable programmer and most dangerous tool in
@@ -273,5 +273,357 @@ it. For example:</p><pre class="CLexer"><div class="highlight"><pre><span class=
 </pre></div>
 </pre><p>On line number 15 and 16 you are seeing pointer arithmetic in previous
 program. Consider array a declared in the first example. We could have iterated
-in that example like <code class="code">*(a+i)</code>.</p></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../cf/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 8. Control Flow </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+in that example like <code class="code">*(a+i)</code>.</p><p>A postfix expression followed by an expression in square brackets
+<code class="code">[]</code> is a subscripted designation of an element of an array
+object. The definition of the subscript operator <code class="code">[]</code> is that
+<code class="code">E1[E2]</code> is identical to
+<code class="code">(*((E1)+(E2)))</code>. Because of the conversion rules that apply to
+the binary <code class="code">+</code> operator, if <code class="code">E1</code> is an array
+object (equivalently, a pointer to the initial element of an array object) and
+<code class="code">E2</code> is an integer, <code class="code">E1[E2]</code> designates the
+<code class="code">E2</code>-th element of of <code class="code">E1</code> (counting from
+zero).</p><p>I had not covered some portion of additive operators in the chapter of
+operators and expression deliberately as I wanted to discuss them here. When an
+expression that has integer type is added to or subtracted from a pointer, the
+result has the type of the pointer operand. If the pointer operand points to an
+element of an array object, and the array is large enough, the result points to
+an element offset from the original element such that the difference of the
+subscripts of the resulting and original array elements equals the integer
+expression. In other words, if the expression <code class="code">P</code> points to the
+<code class="code">i</code>-th element of an array object, the expressions
+<code class="code">(P)+N</code> (equivalently, <code class="code">N+(P)</code>) and
+<code class="code">(P)-N</code> (where <code class="code">N</code> has the value
+<code class="code">n</code>) point to, respectively, the <code class="code">i+n</code>-th and
+<code class="code">i-n</code>-th elements of the array object, provided they
+exist. Moreover, if the expression <code class="code">P</code> points to the last
+element of an array object, the expression <code class="code">(P)+1</code> points one
+past the last element of the array object, and if the expression
+<code class="code">Q</code> points one past the last element of an array object, the
+expression <code class="code">(Q)-1</code> points to the last element of the array
+object. If both the pointer operand and the result point to elements of the
+same array object, or one past the last element of the array object, the
+evaluation will not produce an overflow; otherwise, the behavior is
+undefined. If the result points one past the last element of the array object,
+it will not be used as the operand of a unary <code class="code">*</code> operator that
+is evaluated.</p><p>When two pointers are subtracted, both shall point to elements of the
+same array object, or one past the last element of the array object; the result
+is the difference of the subscripts of the two array elements. The size of the
+result is implementation-defined, and its type (a signed integer type) is
+<code class="code">ptrdiff_t</code> defined in the <stddef.h> header. If the result
+is not representable in an object of that type, the behavior is undefined. In
+other words, if the expressions <code class="code">P</code> and <code class="code">Q</code> point
+to, respectively, the <code class="code">i</code>-th and <code class="code">j</code>-th elements
+of an array object, the expression <code class="code">(P)-(Q)</code> has the value
+<code class="code">i-j</code> provided the value fits in an object of type
+<code class="code">ptrdiff_t</code>. Moreover, if the expression <code class="code">P</code>
+points either to an element of an array object or one past the last element of
+an array object, and the expression <code class="code">Q</code> points to the last
+element of the same array object, the expression <code class="code">((Q)+1)-(P)</code>
+has the same value as <code class="code">((Q)-(P))+1</code> and as
+<code class="code">-((P)-((Q)+1))</code>, and has the value zero if the expression
+<code class="code">P</code> points one past the last element of the array object, even
+though the expression <code class="code">(Q)+1</code> does not point to an element of
+the array object.</p><p>You can also apply increment and decrement operators on pointers. I
+will show you a reimplementation of previos program using increment
+operators:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description : Demo of pointer.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+  <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">*</span><span class="mi">8</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">8</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">i</span><span class="p">)</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Content at %dth location is %d.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">++</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Content at 0th location is 0.
+Content at 1th location is 1.
+Content at 2th location is 2.
+Content at 3th location is 3.
+Content at 4th location is 4.
+Content at 5th location is 5.
+Content at 6th location is 6.
+Content at 7th location is 7.</pre></div><div class="sect1" title="9.4. Address and Indirection Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3296096"></a>9.4. Address and Indirection Operators</h2></div></div></div><p>As is the case with subscript operator and pointer arithmetic
+	in the fourth chapter that I have delayed these two as well for I
+	wanted to put them here. Whenever you declare a plain variable you have
+	an address associated with it and that variable is an lvalue. Just to
+	repeat an lvalue is a value whose address can be taken. To take the
+	address of an lvalue you use the address operator which is &. Now a
+	pointer points to address of any value as we know so we can use address
+	operator to get the address and use a pointer to store. There are
+	several usage of storing an address. Most notable of those is
+	pass-by-address which we will see in next chapter which will deal with
+	functions. Let us say we take address of a variable and assign that to
+	a pointer. Then if we change the value of the memory pointed to by the
+	pointer then the variable whose address has been taken will get updated
+	with this new value. Consider for example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description : Demo of pointer.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span>  <span class="n">i</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span>
+
+  <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i=%d *p=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">i=7 *p=7</pre><p>So you see the power of pointers that if you have an address you can
+modify its contents. This is exacly what <code class="code">scanf()</code> does. The
+dereference operator or indirection operator or aterisk (<code class="code">*</code>)
+gives you value at address pointed to by pointer <code class="code">o</code>. However,
+if you want to change address of some varible like that ofi by doing something
+like &i=&someOthervar; you cannot do that because address is not an
+lvalue. However, you can pass address of a pointer variable to some other
+function and use it using pointer to pointer notation which I will show you in
+next chapter. As I have shown pointers are kind of equivalent to array except
+the fact that they are on heap and sizeof operator will not work on
+them. Consider this example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description : Demo of pointer.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span>  <span class="n">a</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">};</span>
+  <span class="kt">int</span><span class="o">*</span> <span class="n">p</span>    <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+  <span class="kt">int</span><span class="o">*</span> <span class="n">q</span>    <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">calloc</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i=%d *p=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">i</span><span class="p">));</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of a=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of p=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">p</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of q=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">q</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">i=0 *p=1
+i=1 *p=2
+i=2 *p=3
+i=3 *p=4
+Size of a=16
+Size of p=4
+Size of q=4</pre><p>Here <code class="code">p</code> acts as pointer to array. You can have a
+pointer to any kind of array. You can point to any element of array because
+array elements are lvalues whose addresses can be taken and to initialize a
+pointer alll you need is an address.</p><div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;" title="Advice"><h3 class="title">Advice</h3><p>Complex pointer arithmetic is best avoided. Be very
+thoughtful that if you really really need it. Use loops to iterate
+arrays. Multiple levels of indirection is also bad. Typically I have not seen
+more than pointers to pointers. Now we will see array of
+pointers.</p></div></div><div class="sect1" title="9.5. Arrays of Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3308352"></a>9.5. Arrays of Pointers</h2></div></div></div><p>Pointers are just like ordinary variables so we can as well create
+	array of pointers. Consider following for example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description : Demo of pointer.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">char</span><span class="o">*</span> <span class="n">strArray</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span> <span class="s">&quot;Universe!&quot;</span><span class="p">};</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">strArray</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Hello
+Universe!</pre><p>Note how the length of two array elements are different as they are
+pointers. Let us do a more complex example.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description : Demo of pointer.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span><span class="o">*</span> <span class="n">intArray</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+  <span class="n">intArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">calloc</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+  <span class="n">intArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">calloc</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+
+  <span class="o">*</span><span class="n">intArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>     <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="o">*</span><span class="p">(</span><span class="n">intArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="o">*</span><span class="p">(</span><span class="n">intArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+
+
+  <span class="o">*</span><span class="n">intArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>     <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="o">*</span><span class="p">(</span><span class="n">intArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Memory location=%p Content=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">intArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">intArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">i</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Memory location=%p Content=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">intArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">intArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">i</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Memory location=0x87d1008 Content=4
+Memory location=0x87d100c Content=5
+Memory location=0x87d1010 Content=6
+Memory location=0x87d1018 Content=1
+Memory location=0x87d101c Content=2</pre><p>Note missing four bytes between 6 and 1. Memory locations may be
+different on your system. But see how messy pointer syntax can go even with
+such simple code. Array to pointers are useful for containing variables of
+dynamic size of same type.</p><p>Pointers to pointers are same as array of pointers. The only difference
+is that you can dynamically modify the number of elements.</p></div><div class="sect1" title="9.6. Pointers of Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3315024"></a>9.6. Pointers of Pointers</h2></div></div></div><p>Consider the following example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description : Demo of pointer.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span><span class="o">**</span> <span class="n">intPtr</span><span class="p">;</span>
+
+  <span class="n">intPtr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">**</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">));</span>
+
+  <span class="o">*</span><span class="n">intPtr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">);</span>
+  <span class="o">*</span><span class="p">(</span><span class="n">intPtr</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">*</span><span class="mi">4</span><span class="p">);</span>
+
+  <span class="o">**</span><span class="n">intPtr</span>     <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">intPtr</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">intPtr</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+
+
+  <span class="o">**</span><span class="p">(</span><span class="n">intPtr</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>      <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">intPtr</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">intPtr</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>  <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+  <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">intPtr</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span>  <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Memory location=%p content=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">intPtr</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">intPtr</span><span class="o">+</span><span class="n">i</span><span class="p">));</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Memory location=%p content=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">intPtr</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">intPtr</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">i</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Memory location=0x9947018 content=1
+Memory location=0x994701c content=2
+Memory location=0x9947020 content=7
+Memory location=0x9947028 content=3
+Memory location=0x994702c content=5
+Memory location=0x9947030 content=9
+Memory location=0x9947034 content=11</pre><p>Again memory location may change on your system. As you can see how
+things can get messy with pointers. Believe me you will hate this. Also, I do
+not see any reason to use more than two levels of indirection. So you get the
+idea. If you need dynamic no. of elements with dynamic content you are going to
+use pointers to pointers.</p></div><div class="sect1" title="9.7. realloc() Function"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3319344"></a>9.7. realloc() Function</h2></div></div></div><p>Once <code class="code">malloc()</code> and <code class="code">calloc()</code>
+	allocate some memory you have that certain amount of memory available
+	to you. When you have an array you have some memory but what if you
+	want more later. <code class="code">reallloc()</code> comes to rescue you. Here
+	is a sample program:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description : Demo of pointer.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="o">*</span><span class="n">p</span>     <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Original 1st element=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Original 2nd element=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+
+  <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">realloc</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">*</span><span class="mi">4</span><span class="p">);</span>
+
+  <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+  <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;New 1st element=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;New 2nd element=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;New 3rd element=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">2</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;New 4th element=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">3</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Original 1st element=5
+Original 2nd element=7
+New 1st element=5
+New 2nd element=7
+New 3rd element=9
+New 4th element=11</pre></div><div class="sect1" title="9.8. free() Function"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3324432"></a>9.8. free() Function</h2></div></div></div><p>Whatever program we have written in this chapter related to
+	dynamic memory allocation using <code class="code">malloc()</code> etc are very
+	bad code just because we are not releasing memory properly. Any call to
+	memory allocation functions have to be matched with a corresponding
+	<code class="code">free()</code> call. The reason for this is that when all
+	pointers to a memory area are lost and that memory is not freed then
+	operating system cannot recycle that memory. In case of servers or long
+	running processes this may eat up all the physical RAM and virtual
+	memory and eventually freeze the system. To guard against such events
+	you must macth all allocation calls with deallocation calls so that
+	operating system can reclaim the freed memmory.</p><p>You must heed this warning given here with all of your
+	focus. You got to handle heap that is dynamically allocated memory
+	yourself. You allocate and you free it. If you miss you have a memory
+	leak.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" title="Warning"><h3 class="title">Warning</h3><p>You must free all memory you allocate.</p></div></div><div class="sect1" title="9.9. Constness"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3328832"></a>9.9. Constness</h2></div></div></div><p>To make anything constant you need to associate const keyword
+	with it. For example, <code class="code">const int i; const float
+	f;</code>. However, with pointers in picture scenarios change
+	compared to two simple previous examples. When pointers are made
+	constant there are two elements. First is the pointer itself and second
+	is the value pointed to. Consider for example:</p><pre class="CLexer"><div class="highlight"><pre><span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="n">i</span><span class="p">;</span>  <span class="c1">//constant pointer data is not</span>
+<span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">i</span><span class="p">;</span>  <span class="c1">//constant data pointer is not</span>
+<span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">i</span><span class="p">;</span> <span class="c1">//both are const</span>
+</pre></div>
+</pre><p>The way to read it is you draw a vertical line where asterisk(*) is
+there and the value associated with const is constant. Whenever you need use a
+constant freely. Try to use constants more and more. Also, prefre them to
+following:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#define MAX 10</span>
+</pre></div>
+</pre><p>As told and shown to you it will replace <code class="code">MAX</code> with 10
+in the file everywhere without any concern of type-safety. Also, it does not
+enter in the symbol table so while debugging you will not see
+<code class="code">MAX</code> anywhere. So instead you should use something
+like:</p><pre class="CLexer"><div class="highlight"><pre><span class="k">const</span> <span class="kt">int</span> <span class="n">MAX</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span>
+</pre></div>
+</pre><p>I will also like to say something about volatile variables. Beginners
+are usually convinced that volatile variables cannot be declraed as const. Let
+me iterate the definitions once again. A const variable cannot be modifed by
+the program itself. A volatile variable can be modified by sources other than
+the program itself. Hence, a const volatile variable cannot be modified by the
+program but other sources can still modify it.</p></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../cf/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../func/index.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 8. Control Flow </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Chapter 10. Functions</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
    GNU FDL license is applicable where not stated.</p></body></html>
