@@ -1,0 +1,28 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+    <?dbhtml filename="macros/index.html" ?>
+    <d:title>Preprocessing Directives</d:title>
+    <d:para>The following comes from section 6.10 of specification. It will
+    terminate when you see code starting. :-)</d:para>
+    <d:para>A <d:emphasis role="italic">preprocessing directive</d:emphasis>
+    consists of a sequence of preprocessing tokens that begins with a
+    <d:code>#</d:code> preprocessing token that (at the start of translation
+    phase 4) is either the first character in the source file (optionally after
+    white space containing no new-line characters) or that follows white space
+    containing at least one new-line character, and is ended by the next
+    new-line character.<d:footnote><d:para>Thus, preprocessing directives are
+    commonly called “lines”. These “lines” have no other syntactic
+    significance, as all white space is equivalent except in certain situations
+    during preprocessing (see the # character string literal creation operator
+    in 12.3.2, for example).</d:para></d:footnote> A new-line character ends
+    the preprocessing directive even if it occurs within what would otherwise
+    be an invocation of a function-like macro.</d:para>
+    <d:para>A text line shall not begin with a <d:code>#</d:code> preprocessing
+    token. A non-directive shall not begin with any of the directive names
+    appearing in the syntax.</d:para>
+    <d:para>When in a group that is skipped (12.1), the directive syntax is
+    relaxed to allow any sequence of preprocessing tokens to occur between the
+    directive name and the following new-line character.</d:para>
+</d:chapter>
