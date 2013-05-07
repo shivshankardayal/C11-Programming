@@ -263,7 +263,7 @@ one more than the number of parameters in the macro definition (excluding the
   arguments shall form the preprocessing tokens used to replace it.</d:para>
 </d:sect2>
 <d:sect2>
-  <d:title>The # operator</d:title>
+  <d:title>The # Operator</d:title>
   <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
   <d:para>Each <d:code>#</d:code> preprocessing token in the replacement list
   for a function-like macro shall be followed by a parameter as the next
@@ -288,5 +288,103 @@ one more than the number of parameters in the macro definition (excluding the
   corresponding to an empty argument is "". The order of evaluation of
   <d:code>#</d:code> and <d:code>##</d:code> operators is unspecified.</d:para>
 </d:sect2>
+<d:sect2>
+  <d:title>The ## Operator</d:title>
+  <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
+  <d:para>A <d:code>##</d:code> preprocessing token shall not occur at the
+  beginning or at the end of a replacement list for either form of macro
+  definition.</d:para>
+  <d:para><d:emphasis role="bold">Semantics</d:emphasis></d:para>
+  <d:para>If, in the replacement list of a function-like macro, a parameter is
+  immediately preceded or followed by a <d:code>##</d:code> preprocessing
+  token, the parameter is replaced by the corresponding argument’s
+  preprocessing token sequence; however, if an argument consists of no
+  preprocessing tokens, the parameter is replaced by a placemarker
+  preprocessing token instead.<d:footnote><d:para>Placemarker preprocessing
+  tokens do not appear in the syntax because they are temporary entities that
+  exist only within translation phase 4.</d:para></d:footnote></d:para>
+  <d:para>For both object-like and function-like macro invocations, before the
+  replacement list is reexamined for more macro names to replace, each instance
+  of a <d:para>##</d:para> preprocessing token in the replacement list (not
+  from an argument) is deleted and the preceding preprocessing token is
+  concatenated with the following preprocessing token. Placemarker
+  preprocessing tokens are handled specially: concatenation of two placemarkers
+  results in a single placemarker preprocessing token, and concatenation of a
+  placemarker with a non-placemarker preprocessing token results in the
+  non-placemarker preprocessing token. If the result is not a valid
+  preprocessing token, the behavior is undefined. The resulting token is
+  available for further macro replacement. The order of evaluation of
+  <d:para>##</d:para> operators is unspecified.</d:para>
+</d:sect2>
+<d:sect2>
+  <d:title>Rescanning and Further Replacement</d:title>
+  <d:para>After all parameters in the replacement list have been substituted
+  and <d:code>#</d:code> and <d:code>##</d:code> processing has taken place,
+  all placemarker preprocessing tokens are removed. Then, the resulting
+  preprocessing token sequence is rescanned, along with all subsequent
+  preprocessing tokens of the source file, for more macro names to
+  replace.</d:para>
+  <d:code>If the name of the macro being replaced is found during this scan of
+  the replacement list (not including the rest of the source file’s
+  preprocessing tokens), it is not replaced. Furthermore, if any nested
+  replacements encounter the name of the macro being replaced, it is not
+  replaced. These nonreplaced macro name preprocessing tokens are no longer
+  available for further replacement even if they are later (re)examined in
+  contexts in which that macro name preprocessing token would otherwise have
+  been replaced.</d:code>
+  <d:code>The resulting completely macro-replaced preprocessing token sequence
+  is not processed as a preprocessing directive even if it resembles one, but
+  all pragma unary operator expressions within it are then processed as
+  specified in 12.9 below.</d:code>
+</d:sect2>
+<d:sect2>
+  <d:title>Scope of Macro Definitions</d:title>
+  <d:para>A macro definition lasts (independent of block structure) until a
+  corresponding <d:code>#undef</d:code> directive is encountered or (if none is
+  encountered) until the end of the preprocessing translation unit. Macro
+  definitions have no significance after translation phase 4.</d:para>
+  <d:para>A preprocessing directive of the form:</d:para>
+  <d:programlisting role="CLexer"># undef identifier new-line</d:programlisting>
+  <d:para>causes the specified identifier no longer to be defined as a macro
+  name. It is ignored if the specified identifier is not currently defined as a
+  macro name.</d:para>
+</d:sect2>
+</d:sect1>
+<d:sect1>
+  <d:title>Line Control</d:title>
+  <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
+  <d:para>The string literal of a <d:code>#line</d:code> directive, if present,
+  shall be a character string literal.</d:para>
+  <d:para><d:emphasis role="bold">Semantics</d:emphasis></d:para>
+  <d:para>The line number of the current source line is one greater than the
+  number of new-line characters read or introduced in translation phase 1 while
+  processing the source file to the current token.</d:para>
+  <d:para>A preprocessing directive of the form:</d:para>
+  <d:programlisting role="CLexer"># line digit-sequence new-line</d:programlisting>
+  <d:para>causes the implementation to behave as if the following sequence of
+  source lines begins with a source line that has a line number as specified by
+  the digit sequence (interpreted as a decimal integer). The digit sequence
+  shall not specify zero, nor a number greater than 2147483647.</d:para>
+  <d:para>A preprocessing directive of the form:</d:para>
+  <d:programlisting role="CLexer"># line digit-sequence "s-char-sequenceopt" new-line</d:programlisting>
+  <d:para>sets the presumed line number similarly and changes the presumed name
+  of the source file to be the contents of the character string
+  literal.</d:para>
+  <d:para>A preprocessing directive of the form:</d:para>
+  <d:programlisting role="CLexer"># line pp-tokens new-line</d:programlisting>
+  <d:para>(that does not match one of the two previous forms) is permitted. The
+  preprocessing tokens after line on the directive are processed just as in
+  normal text (each identifier currently defined as a macro name is replaced by
+  its replacement list of preprocessing tokens). The directive resulting after
+  all replacements shall match one of the two previous forms and is then
+  processed as appropriate.</d:para>
+</d:sect1>
+<d:sect1>
+  <d:title>Error Directive</d:title>
+  <d:para><d:emphasis role="bold">Semantics</d:emphasis></d:para>
+  <d:para>A preprocessing directive of the form <d:code># error
+  pp-tokensopt new-line</d:code> causes the implementation to produce a
+  diagnostic message that includes the specified sequence of preprocessing
+  tokens.</d:para>
 </d:sect1>
 </d:chapter>

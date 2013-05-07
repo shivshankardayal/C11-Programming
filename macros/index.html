@@ -1,11 +1,11 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 12. Preprocessing Directives</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../su/index.html" rel="prev" title="Chapter 11. Structures and Unions"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 12. Preprocessing Directives</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../su/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 12. Preprocessing Directives"><div class="titlepage"><div><div><h2 class="title"><a name="idp3538080"></a>Chapter 12. Preprocessing Directives</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3614576">12.1. Conditional Inclusion</a></span></dt><dt><span class="sect1"><a href="index.html#idp3511136">12.2. Source File Inclusion</a></span></dt><dt><span class="sect1"><a href="index.html#idp3525856">12.3. Macro Replacement</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp3672832">12.3.1. Argument Substitution</a></span></dt><dt><span class="sect2"><a href="index.html#idp3677056">12.3.2. The # operator</a></span></dt></dl></dd></dl></div><p>The following comes from section 6.10 of specification. It will
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 12. Preprocessing Directives</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../su/index.html" rel="prev" title="Chapter 11. Structures and Unions"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 12. Preprocessing Directives</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../su/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 12. Preprocessing Directives"><div class="titlepage"><div><div><h2 class="title"><a name="idp3539456"></a>Chapter 12. Preprocessing Directives</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3616656">12.1. Conditional Inclusion</a></span></dt><dt><span class="sect1"><a href="index.html#idp3515776">12.2. Source File Inclusion</a></span></dt><dt><span class="sect1"><a href="index.html#idp3530496">12.3. Macro Replacement</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp3701280">12.3.1. Argument Substitution</a></span></dt><dt><span class="sect2"><a href="index.html#idp3705504">12.3.2. The # Operator</a></span></dt><dt><span class="sect2"><a href="index.html#idp3712176">12.3.3. The ## Operator</a></span></dt><dt><span class="sect2"><a href="index.html#idp3719680">12.3.4. Rescanning and Further Replacement</a></span></dt><dt><span class="sect2"><a href="index.html#idp3723872">12.3.5. Scope of Macro Definitions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp3727856">12.4. Line Control</a></span></dt><dt><span class="sect1"><a href="index.html#idp3737776">12.5. Error Directive</a></span></dt></dl></div><p>The following comes from section 6.10 of specification. It will
     terminate when you see code starting. :-)</p><p>A <span class="italic">preprocessing directive</span>
     consists of a sequence of preprocessing tokens that begins with a
     <code class="code">#</code> preprocessing token that (at the start of translation
     phase 4) is either the first character in the source file (optionally after
     white space containing no new-line characters) or that follows white space
     containing at least one new-line character, and is ended by the next
-    new-line character.<sup>[<a class="footnote" href="#ftn.idp3605408" name="idp3605408">128</a>]</sup> A new-line character ends
+    new-line character.<sup>[<a class="footnote" href="#ftn.idp3607488" name="idp3607488">128</a>]</sup> A new-line character ends
     the preprocessing directive even if it occurs within what would otherwise
     be an invocation of a function-like macro.</p><p>A text line shall not begin with a <code class="code">#</code> preprocessing
     token. A non-directive shall not begin with any of the directive names
@@ -26,10 +26,10 @@
 </pre><p>the sequence of preprocessing tokens on the second line is not a
 preprocessing directive, because it does not begin with a <code class="code">#</code> at
 the start of translation phase 4, even though it will do so after the macro
-<code class="code">EMPTY</code> has been replaced.</p><div class="sect1" title="12.1. Conditional Inclusion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3614576"></a>12.1. Conditional Inclusion</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>The expression that controls conditional inclusion shall be an
+<code class="code">EMPTY</code> has been replaced.</p><div class="sect1" title="12.1. Conditional Inclusion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3616656"></a>12.1. Conditional Inclusion</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>The expression that controls conditional inclusion shall be an
   integer constant expression except that: it shall not contain a cast;
   identifiers (including those lexically identical to keywords) are interpreted
-  as described below; <sup>[<a class="footnote" href="#ftn.idp3616672" name="idp3616672">129</a>]</sup> and it may contain unary operator
+  as described below; <sup>[<a class="footnote" href="#ftn.idp3618752" name="idp3618752">129</a>]</sup> and it may contain unary operator
   expressions of the form:</p><pre class="screen">defined identifier</pre><p>or:</p><pre class="screen">defined (identifier)</pre><p>which evaluate to 1 if the identifier is currently defined as a macro
   name (that is, if it is predefined or if it has been the subject of a
   <code class="code">#define</code> preprocessing directive without an intervening
@@ -52,12 +52,12 @@ according to the rules of constant expressions. For the purposes of this token
 conversion and evaluation, all signed integer types and all unsigned integer
 types act as if they hav e the same representation as, respectively, the types
 <code class="code">intmax_t</code> and <code class="code">uintmax_t</code> defined in the header
-<code class="code"><stdint.h></code>.<sup>[<a class="footnote" href="#ftn.idp3500256" name="idp3500256">130</a>]</sup> This includes interpreting character constants, which
+<code class="code"><stdint.h></code>.<sup>[<a class="footnote" href="#ftn.idp3504896" name="idp3504896">130</a>]</sup> This includes interpreting character constants, which
 may involve converting escape sequences into execution character set
 members. Whether the numeric value for these character constants matches the
 value obtained when an identical character constant occurs in an expression
 (other than within a <code class="code">#if</code> or <code class="code">#elif</code> directive)
-is implementation-defined.<sup>[<a class="footnote" href="#ftn.idp3504640" name="idp3504640">131</a>]</sup> Also, whether a
+is implementation-defined.<sup>[<a class="footnote" href="#ftn.idp3509280" name="idp3509280">131</a>]</sup> Also, whether a
 single-character character constant may have a negative value is
 implementation-defined.</p><p>Preprocessing directives of the forms:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># ifdef identifier new-line group_opt</span>
 <span class="cp"># ifndef identifier new-line group_opt</span>
@@ -72,7 +72,7 @@ tokens are ignored, as are the other preprocessing tokens in the group. Only
 the first group whose control condition evaluates to true (nonzero) is
 processed. If none of the conditions evaluates to true, and there is a #else
 directive, the group controlled by the #else is processed; lacking a #else
-directive, all the groups until the #endif are skipped.<sup>[<a class="footnote" href="#ftn.idp3510176" name="idp3510176">132</a>]</sup></p></div><div class="sect1" title="12.2. Source File Inclusion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3511136"></a>12.2. Source File Inclusion</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>A <code class="code">#include</code> directive shall identify a header or
+directive, all the groups until the #endif are skipped.<sup>[<a class="footnote" href="#ftn.idp3514816" name="idp3514816">132</a>]</sup></p></div><div class="sect1" title="12.2. Source File Inclusion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3515776"></a>12.2. Source File Inclusion</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>A <code class="code">#include</code> directive shall identify a header or
   source file that can be processed by the implementation.</p><p><span class="bold"><strong>Semantics</strong></span></p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># include &lt;h-char-sequence&gt;  new-line</span>
 </pre></div>
 </pre><p>searches a sequence of implementation-defined places for a header
@@ -95,7 +95,7 @@ preprocessing tokens after include in the directive are processed just as in
 normal text. (Each identifier currently defined as a macro name is replaced by
 its replacement list of preprocessing tokens.) The directive resulting after
 all replacements shall match one of the two previous
-forms.<sup>[<a class="footnote" href="#ftn.idp3521552" name="idp3521552">133</a>]</sup> The method
+forms.<sup>[<a class="footnote" href="#ftn.idp3526192" name="idp3526192">133</a>]</sup> The method
 by which a sequence of preprocessing tokens between a < and a >
 preprocessing token pair or a pair of ” characters is combined into a single
 header name preprocessing token is implementation-defined.</p><p>The implementation shall provide unique mappings for sequences
@@ -105,7 +105,7 @@ ignore the distinctions of alphabetical case and restrict the mapping to eight
 significant characters before the period.</p><p>A <code class="code">#include</code> preprocessing directive may appear in a
 source file that has been read because of a <code class="code">#include</code> directive
 in another file, up to an implementation-defined nesting limit.</p><p><span class="bold"><strong>Forward References</strong></span>: macro
-replacement (12.3).</p></div><div class="sect1" title="12.3. Macro Replacement"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3525856"></a>12.3. Macro Replacement</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>Two replacement lists are identical if and only if the preprocessing
+replacement (12.3).</p></div><div class="sect1" title="12.3. Macro Replacement"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3530496"></a>12.3. Macro Replacement</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>Two replacement lists are identical if and only if the preprocessing
   tokens in both have the same number, ordering, spelling, and white-space
   separation, where all white-space separations are considered
   identical.</p><p>An identifier currently defined as an object-like macro shall not be
@@ -133,7 +133,7 @@ replacement (12.3).</p></div><div class="sect1" title="12.3. Macro Replacement"
   could begin, the identifier is not subject to macro replacement.</p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># define identifier replacement-list new-line</span>
 </pre></div>
 </pre><p>defines an object-like macro that causes each subsequent instance of
-  the macro name<sup>[<a class="footnote" href="#ftn.idp3666336" name="idp3666336">134</a>]</sup> to be replaced
+  the macro name<sup>[<a class="footnote" href="#ftn.idp3694784" name="idp3694784">134</a>]</sup> to be replaced
   by the replacement list of preprocessing tokens that constitute the remainder
   of the directive.</p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># define identifier lparen identifier-listopt ) replacement-list new-line</span>
 <span class="cp"># define identifier lparen ... ) replacement-list new-line</span>
@@ -156,13 +156,13 @@ macro. The individual arguments within the list are separated by comma
 preprocessing tokens, but comma preprocessing tokens between matching inner
 parentheses do not separate arguments. If there are sequences of preprocessing
 tokens within the list of arguments that would otherwise act as preprocessing
-directives,<sup>[<a class="footnote" href="#ftn.idp3671216" name="idp3671216">135</a>]</sup> the behavior is
+directives,<sup>[<a class="footnote" href="#ftn.idp3699664" name="idp3699664">135</a>]</sup> the behavior is
 undefined.</p><p>If there is a ... in the identifier-list in the macro definition, then
 the trailing arguments, including any separating comma preprocessing tokens,
 are merged to form a single item: the variable arguments. The number of
 arguments combined is such that, following merger, the number of arguments is
 one more than the number of parameters in the macro definition (excluding the
-...).</p><div class="sect2" title="12.3.1. Argument Substitution"><div class="titlepage"><div><div><h3 class="title"><a name="idp3672832"></a>12.3.1. Argument Substitution</h3></div></div></div><p>After the arguments for the invocation of a function-like macro have
+...).</p><div class="sect2" title="12.3.1. Argument Substitution"><div class="titlepage"><div><div><h3 class="title"><a name="idp3701280"></a>12.3.1. Argument Substitution</h3></div></div></div><p>After the arguments for the invocation of a function-like macro have
   been identified, argument substitution takes place. A parameter in the
   replacement list, unless preceded by a <code class="code">#</code> or
   <code class="code">##</code> preprocessing token or followed by a <code class="code">##</code>
@@ -172,7 +172,7 @@ one more than the number of parameters in the macro definition (excluding the
   replaced as if they formed the rest of the preprocessing file; no other
   preprocessing tokens are available.</p><p>An identifier <code class="code">__VA_ARGS__</code> that occurs in the
   replacement list shall be treated as if it were a parameter, and the variable
-  arguments shall form the preprocessing tokens used to replace it.</p></div><div class="sect2" title="12.3.2. The # operator"><div class="titlepage"><div><div><h3 class="title"><a name="idp3677056"></a>12.3.2. The # operator</h3></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>Each <code class="code">#</code> preprocessing token in the replacement list
+  arguments shall form the preprocessing tokens used to replace it.</p></div><div class="sect2" title="12.3.2. The # Operator"><div class="titlepage"><div><div><h3 class="title"><a name="idp3705504"></a>12.3.2. The # Operator</h3></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>Each <code class="code">#</code> preprocessing token in the replacement list
   for a function-like macro shall be followed by a parameter as the next
   preprocessing token in the replacement list.</p><p><span class="bold"><strong>Semantics</strong></span></p><p>If, in the replacement list, a parameter is immediately preceded by a
   <code class="code">#</code> preprocessing token, both are replaced by a single
@@ -191,34 +191,98 @@ one more than the number of parameters in the macro definition (excluding the
   character name. If the replacement that results is not a valid character
   string literal, the behavior is undefined. The character string literal
   corresponding to an empty argument is "". The order of evaluation of
-  <code class="code">#</code> and <code class="code">##</code> operators is unspecified.</p></div></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp3605408" id="ftn.idp3605408">128</a>] </sup>Thus, preprocessing directives are
+  <code class="code">#</code> and <code class="code">##</code> operators is unspecified.</p></div><div class="sect2" title="12.3.3. The ## Operator"><div class="titlepage"><div><div><h3 class="title"><a name="idp3712176"></a>12.3.3. The ## Operator</h3></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>A <code class="code">##</code> preprocessing token shall not occur at the
+  beginning or at the end of a replacement list for either form of macro
+  definition.</p><p><span class="bold"><strong>Semantics</strong></span></p><p>If, in the replacement list of a function-like macro, a parameter is
+  immediately preceded or followed by a <code class="code">##</code> preprocessing
+  token, the parameter is replaced by the corresponding argument’s
+  preprocessing token sequence; however, if an argument consists of no
+  preprocessing tokens, the parameter is replaced by a placemarker
+  preprocessing token instead.<sup>[<a class="footnote" href="#ftn.idp3716688" name="idp3716688">136</a>]</sup></p><p>For both object-like and function-like macro invocations, before the
+  replacement list is reexamined for more macro names to replace, each instance
+  of a </p><p>##</p><p> preprocessing token in the replacement list (not
+  from an argument) is deleted and the preceding preprocessing token is
+  concatenated with the following preprocessing token. Placemarker
+  preprocessing tokens are handled specially: concatenation of two placemarkers
+  results in a single placemarker preprocessing token, and concatenation of a
+  placemarker with a non-placemarker preprocessing token results in the
+  non-placemarker preprocessing token. If the result is not a valid
+  preprocessing token, the behavior is undefined. The resulting token is
+  available for further macro replacement. The order of evaluation of
+  </p><p>##</p><p> operators is unspecified.</p></div><div class="sect2" title="12.3.4. Rescanning and Further Replacement"><div class="titlepage"><div><div><h3 class="title"><a name="idp3719680"></a>12.3.4. Rescanning and Further Replacement</h3></div></div></div><p>After all parameters in the replacement list have been substituted
+  and <code class="code">#</code> and <code class="code">##</code> processing has taken place,
+  all placemarker preprocessing tokens are removed. Then, the resulting
+  preprocessing token sequence is rescanned, along with all subsequent
+  preprocessing tokens of the source file, for more macro names to
+  replace.</p><code class="code">If the name of the macro being replaced is found during this scan of
+  the replacement list (not including the rest of the source file’s
+  preprocessing tokens), it is not replaced. Furthermore, if any nested
+  replacements encounter the name of the macro being replaced, it is not
+  replaced. These nonreplaced macro name preprocessing tokens are no longer
+  available for further replacement even if they are later (re)examined in
+  contexts in which that macro name preprocessing token would otherwise have
+  been replaced.</code><code class="code">The resulting completely macro-replaced preprocessing token sequence
+  is not processed as a preprocessing directive even if it resembles one, but
+  all pragma unary operator expressions within it are then processed as
+  specified in 12.9 below.</code></div><div class="sect2" title="12.3.5. Scope of Macro Definitions"><div class="titlepage"><div><div><h3 class="title"><a name="idp3723872"></a>12.3.5. Scope of Macro Definitions</h3></div></div></div><p>A macro definition lasts (independent of block structure) until a
+  corresponding <code class="code">#undef</code> directive is encountered or (if none is
+  encountered) until the end of the preprocessing translation unit. Macro
+  definitions have no significance after translation phase 4.</p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># undef identifier new-line</span>
+</pre></div>
+</pre><p>causes the specified identifier no longer to be defined as a macro
+  name. It is ignored if the specified identifier is not currently defined as a
+  macro name.</p></div></div><div class="sect1" title="12.4. Line Control"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3727856"></a>12.4. Line Control</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>The string literal of a <code class="code">#line</code> directive, if present,
+  shall be a character string literal.</p><p><span class="bold"><strong>Semantics</strong></span></p><p>The line number of the current source line is one greater than the
+  number of new-line characters read or introduced in translation phase 1 while
+  processing the source file to the current token.</p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># line digit-sequence new-line</span>
+</pre></div>
+</pre><p>causes the implementation to behave as if the following sequence of
+  source lines begins with a source line that has a line number as specified by
+  the digit sequence (interpreted as a decimal integer). The digit sequence
+  shall not specify zero, nor a number greater than 2147483647.</p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># line digit-sequence &quot;s-char-sequenceopt&quot; new-line</span>
+</pre></div>
+</pre><p>sets the presumed line number similarly and changes the presumed name
+  of the source file to be the contents of the character string
+  literal.</p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># line pp-tokens new-line</span>
+</pre></div>
+</pre><p>(that does not match one of the two previous forms) is permitted. The
+  preprocessing tokens after line on the directive are processed just as in
+  normal text (each identifier currently defined as a macro name is replaced by
+  its replacement list of preprocessing tokens). The directive resulting after
+  all replacements shall match one of the two previous forms and is then
+  processed as appropriate.</p></div><div class="sect1" title="12.5. Error Directive"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3737776"></a>12.5. Error Directive</h2></div></div></div><p><span class="bold"><strong>Semantics</strong></span></p><p>A preprocessing directive of the form <code class="code"># error
+  pp-tokensopt new-line</code> causes the implementation to produce a
+  diagnostic message that includes the specified sequence of preprocessing
+  tokens.</p></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp3607488" id="ftn.idp3607488">128</a>] </sup>Thus, preprocessing directives are
     commonly called “lines”. These “lines” have no other syntactic
     significance, as all white space is equivalent except in certain situations
     during preprocessing (see the # character string literal creation operator
-    in 12.3.2, for example).</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3616672" id="ftn.idp3616672">129</a>] </sup>Because the controlling constant
+    in 12.3.2, for example).</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3618752" id="ftn.idp3618752">129</a>] </sup>Because the controlling constant
   expression is evaluated during translation phase 4, all identifiers either
   are or are not macro names - there simply are no keywords, enumeration
-  constants, etc.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3500256" id="ftn.idp3500256">130</a>] </sup>Thus, on an implementation
+  constants, etc.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3504896" id="ftn.idp3504896">130</a>] </sup>Thus, on an implementation
 where <code class="code">INT_MAX</code> is <code class="code"></code> and
 <code class="code">UINT_MAX</code> is <code class="code">0xFFFF</code>, the constant
 <code class="code">0x8000</code> is signed and positive within a <code class="code">#if</code>
 expression even though it would be unsigned in translation phase
-7.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3504640" id="ftn.idp3504640">131</a>] </sup>Thus, the constant expression in
+7.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3509280" id="ftn.idp3509280">131</a>] </sup>Thus, the constant expression in
 the following <code class="code">#if</code> directive and if statement is not guaranteed
 to evaluate to the same value in these two contexts.
 </p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#if &#39;z&#39; - &#39;a&#39; == 25</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="sc">&#39;z&#39;</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span> <span class="o">==</span> <span class="mi">25</span><span class="p">)</span>
 </pre></div>
-</pre></div><div class="footnote"><p><sup>[<a class="para" href="#idp3510176" id="ftn.idp3510176">132</a>] </sup>As
+</pre></div><div class="footnote"><p><sup>[<a class="para" href="#idp3514816" id="ftn.idp3514816">132</a>] </sup>As
 indicated by the syntax, a preprocessing token shall not follow a #else or
 #endif directive before the terminating new-line character. However, comments
 may appear anywhere in a source file, including within a preprocessing
-directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3521552" id="ftn.idp3521552">133</a>] </sup>Note that adjacent string literals are not
+directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3526192" id="ftn.idp3526192">133</a>] </sup>Note that adjacent string literals are not
 concatenated into a single string literal; thus, an expansion that results in
-two string literals is an invalid directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3666336" id="ftn.idp3666336">134</a>] </sup>Since, by macro-replacement time, all
+two string literals is an invalid directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3694784" id="ftn.idp3694784">134</a>] </sup>Since, by macro-replacement time, all
   character constants and string literals are preprocessing tokens, not
   sequences possibly containing identifier-like subsequences, they are never
-  scanned for macro names or parameters.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3671216" id="ftn.idp3671216">135</a>] </sup>Despite the name, a non-directive is a
-preprocessing directive.</p></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../su/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 11. Structures and Unions </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+  scanned for macro names or parameters.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3699664" id="ftn.idp3699664">135</a>] </sup>Despite the name, a non-directive is a
+preprocessing directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp3716688" id="ftn.idp3716688">136</a>] </sup>Placemarker preprocessing
+  tokens do not appear in the syntax because they are temporary entities that
+  exist only within translation phase 4.</p></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../su/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 11. Structures and Unions </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
    GNU FDL license is applicable where not stated.</p></body></html>
