@@ -1,4 +1,4 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 10. Functions</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../ap/index.html" rel="prev" title="Chapter 9. Arrays and Pointers"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 10. Functions</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../ap/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 10. Functions"><div class="titlepage"><div><div><h2 class="title"><a name="idp171792"></a>Chapter 10. Functions</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp168480">10.1. Pass by Value</a></span></dt></dl></div><p>I know that you will readily agree with me if I say that
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 10. Functions</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../ap/index.html" rel="prev" title="Chapter 9. Arrays and Pointers"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 10. Functions</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../ap/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 10. Functions"><div class="titlepage"><div><div><h2 class="title"><a name="idp167008"></a>Chapter 10. Functions</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp3351424">10.1. Pass by Value</a></span></dt><dt><span class="sect1"><a href="index.html#idp3365488">10.2. Pass by Address</a></span></dt><dt><span class="sect1"><a href="index.html#idp3368672">10.3. Recursion</a></span></dt><dt><span class="sect1"><a href="index.html#idp3540480">10.4. Function like Macros</a></span></dt><dt><span class="sect1"><a href="index.html#idp3547824">10.5. Inline Functions</a></span></dt><dt><span class="sect1"><a href="index.html#idp3550784">10.6. Function Pointers</a></span></dt></dl></div><p>I know that you will readily agree with me if I say that
     humans get bored if they have to do same things again and again. I
     know you get bored too and I too get bored. We all. We as humans have
     this built-in nature that repititive things are just not fit for
@@ -19,7 +19,7 @@
     want you to get bogged down with a thick and heavy book. All my
     examples are toy examples but you have seen things can get somehwat
     complex.</p><p>We have already seen the special <code class="code">main()</code>
-    function.</p><div class="sect1" title="10.1. Pass by Value"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp168480"></a>10.1. Pass by Value</h2></div></div></div><p>Here I am going to present skeleton of a function
+    function.</p><div class="sect1" title="10.1. Pass by Value"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3351424"></a>10.1. Pass by Value</h2></div></div></div><p>Here I am going to present skeleton of a function
       prototype and body. Consider:</p><pre class="screen">//function prototype
 return-type function-name(argument list); //here varible names may be ommitted
 
@@ -50,6 +50,574 @@ us say that you may need to add lots of them.</p><pre class="CLexer"><div class=
   <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span>
 
   <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">5+7=12</pre><p>Note that you need function body before its use else you need
+at least a function prototype before use. If you do not do so you will
+get a compiler warnign. An example is given below:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Demo of function</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="c1">//not how argument names are not required</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span>
+
+  <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">firstInt</span><span class="p">,</span> <span class="kt">int</span> <span class="n">secondInt</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d+%d=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">firstInt</span><span class="p">,</span> <span class="n">secondInt</span><span class="p">,</span> <span class="n">firstInt</span><span class="o">+</span><span class="n">secondInt</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</pre><p>output is same as above.</p><p>What you have seen just above is known as pass-by-value. In
+this case a copy of parameters is made and passed on to called
+function by caller function. So, if called function makes a change to
+values then those are not reflected back in the caller function. As an
+example I will use famous example of swapping values of two
+variables. First, I will show how pass-by-value works. So here is the
+code:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Demo of function</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Before swap a=%d and b=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;After swap a=%d and b=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="n">firstArg</span><span class="p">,</span> <span class="kt">int</span> <span class="n">secondArg</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">temp</span><span class="o">=</span><span class="n">firstArg</span><span class="p">;</span>
+  <span class="n">firstArg</span><span class="o">=</span><span class="n">secondArg</span><span class="p">;</span>
+  <span class="n">secondArg</span><span class="o">=</span><span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Before swap a=5 and b=7
+After swap a=5 and b=7</pre></div><div class="sect1" title="10.2. Pass by Address"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3365488"></a>10.2. Pass by Address</h2></div></div></div><p>Not exactly what we wanted. The solution is to
+      pass-by-address. When you the address to a called function, it
+      receives address in a pointer variable. Then if it modifies the
+      value stored at that address then it is reflected back in the
+      caller. Let us see an example to understand:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Demo of function</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Before swap a=%d and b=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;After swap a=%d and b=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">firstArg</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">secondArg</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">temp</span><span class="o">=*</span><span class="n">firstArg</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">firstArg</span><span class="o">=*</span><span class="n">secondArg</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">secondArg</span><span class="o">=</span><span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Before swap a=5 and b=7
+After swap a=7 and b=5</pre></div><div class="sect1" title="10.3. Recursion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3368672"></a>10.3. Recursion</h2></div></div></div><p>In C recusion is the concept of a function calling
+      itself. When a repeated operation has to be preformed over a
+      variable, recursion can be used. Recursion simplifies the code a
+      lot. Typically there is always a more effective iterative
+      solutions are available but there are certain cases where
+      recursion is always better than iteration. For example,
+      traversal of trees where iteration is not so effective as
+      compared to recursion. The first example I am going to give is
+      that of factorials. The formula for factorial is given
+      by <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<mi>n</mi>
+<mo>!</mo>
+<mo>=</mo>
+<munderover>
+<mo>∏</mo>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>k</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>n</mi>
+</munderover>
+<mi>k</mi>
+</math> and recursive definition of factorial is given
+      by:</p><div class="informalequation"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<mtable columnalign="right left" columnspacing="0.278em" rowspacing="3pt">
+<mtr>
+<mtd>
+<mi>n</mi>
+<mo>!</mo>
+<mo>=</mo>
+<mfenced close="" open="{">
+<mtable columnalign="left left" columnspacing="1em" rowspacing="4pt">
+<mtr>
+<mtd>
+<mn>1</mn>
+</mtd>
+<mtd>
+<mspace width="1em"></mspace>
+<mtext>if n=0</mtext>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<mo stretchy="false">(</mo>
+<mi>n</mi>
+<mo>−</mo>
+<mn>1</mn>
+<mo stretchy="false">)</mo>
+<mo>!</mo>
+<mo>∗</mo>
+<mi>n</mi>
+</mtd>
+<mtd>
+<mspace width="1em"></mspace>
+<mtext>if n>0</mtext>
+</mtd>
+</mtr>
+</mtable>
+</mfenced>
+</mtd>
+</mtr>
+</mtable>
+</math></div><p>Note that every recursion has to be written carefully in thse
+sense that it must have a termination condition and that in all the
+cases the termination condition must be reached. If a recursion is too
+deep or infinite there will be a stack overlow and the program will
+terminate. First, I will show you an iterative version with a
+function.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Iterative factorial.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">fact</span><span class="p">(</span><span class="kt">int</span> <span class="n">input</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">input</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter a number whose input has to be computed:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">input</span><span class="p">);</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Factorial of %d is %lld.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">fact</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">fact</span><span class="p">(</span><span class="kt">int</span> <span class="n">input</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">long</span> <span class="kt">long</span> <span class="n">output</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">input</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">output</span><span class="o">*=</span><span class="n">input</span><span class="p">;</span>
+    <span class="n">input</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Enter a number whose factorial has to be computed:
+17
+Factorial of 17 is 355687428096000.</pre><p>Now we will see recursive version:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Recursive factorial.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">fact</span><span class="p">(</span><span class="kt">int</span> <span class="n">input</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">input</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter a number whose factorial has to be computed:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">input</span><span class="p">);</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Factorial of %d is %lld.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">fact</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">fact</span><span class="p">(</span><span class="kt">int</span> <span class="n">input</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">input</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="n">fact</span><span class="p">(</span><span class="n">input</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">input</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Enter a number whose factorial has to be computed:
+16
+Factorial of 16 is 20922789888000.</pre><p>Recursion is very simple yet may be very deceptive to
+understand for beginners. Let us dissect the code. Our input was 16 so
+if will not match and <code class="code">return fact(15)*16;</code> will be
+executed. Here, before <code class="code">fact(16)</code> can return
+<code class="code">fact(15)</code> has to return. And, similarly before
+<code class="code">fact(15)</code> can return <code class="code">fact(14)</code> has to
+return. Now, note that for <code class="code">fact(0)</code> there is no such
+condition and it can return 1 making it possible for fact(1) to
+return, which, in turn will make it posible for fact(2) to return and
+so on. So, what is happening is function is calling itself by creating
+more and more function frames and when the termination condition
+reaches the stack unwinds.</p><p>Let us consider one more famous example for recursive
+function, that is of computing Fibonacci numbers. The Fibonacci series
+is given by:</p><div class="informalequation"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<msub>
+<mi>F</mi>
+<mi>n</mi>
+</msub>
+<mo>=</mo>
+<msub>
+<mi>F</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>n</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>+</mo>
+<msub>
+<mi>F</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>n</mi>
+<mo>−</mo>
+<mn>2</mn>
+</mrow>
+</msub>
+</math></div><p>where first two numebrs are given by: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<msub>
+<mi>F</mi>
+<mn>0</mn>
+</msub>
+<mo>=</mo>
+<mn>0</mn>
+<mtext> and </mtext>
+<msub>
+<mi>F</mi>
+<mn>1</mn>
+</msub>
+<mo>=</mo>
+<mn>1</mn>
+</math>First consider the iterative version:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Iterative Fibonacci series.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">void</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="kt">int</span> <span class="n">input</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">input</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;How many Fibonacci numbers you want?</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">input</span><span class="p">);</span>
+
+  <span class="n">fibonacci</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">input</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">fib0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fib1</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">input</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+  <span class="k">return</span><span class="p">;</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fib0</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fib0</span><span class="p">,</span> <span class="n">fib1</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d&quot;</span><span class="p">,</span> <span class="n">fib0</span><span class="p">,</span> <span class="n">fib1</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">input</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">fib1</span><span class="o">=</span><span class="n">fib1</span><span class="o">+</span><span class="n">fib0</span><span class="p">;</span>
+      <span class="n">fib0</span><span class="o">=</span><span class="n">fib1</span><span class="o">-</span><span class="n">fib0</span><span class="p">;</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot; %d&quot;</span><span class="p">,</span> <span class="n">fib1</span><span class="p">);</span>
+      <span class="n">input</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">How many Fibonacci numbers you want?
+16
+0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987</pre><p>Now we will see recursive version:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: iRecursive Fibonacci series.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="kt">int</span> <span class="n">input</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">input</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Which Fibonacci number you want?</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">input</span><span class="p">);</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="kt">int</span> <span class="n">input</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">long</span> <span class="kt">long</span> <span class="n">fib0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fib1</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">input</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="n">fib0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="n">fib1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">fib</span> <span class="o">=</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">input</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">fibonacci</span><span class="p">(</span><span class="n">input</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">fib</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Which Fibonacci number you want?
+32
+2178309</pre></div><div class="sect1" title="10.4. Function like Macros"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3540480"></a>10.4. Function like Macros</h2></div></div></div><p>Functions are costly if they are very small. For
+      example, let us say we want to add two integers only then it
+      does not make sense to write a function. When you call a
+      function a new function frame has to be created, new variables
+      are created, when function returns things are cleaned and return
+      value is returned. All this consume memory and CPU cycles so old
+      C style was to use macros. For example, consider following
+      program:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Demo of macros.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="cp">#define SUM(a, b) a+b</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SUM</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">SUM</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">12 17</pre><p>However, such usage of macros are inappropriate, dangerous and
+higly adivised against. First you have to take care that you
+parenthesize all parameters carefully. Even then consider
+following:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#define MIN(a,b)((a)&lt;(b))?(a):(b);</span>
+</pre></div>
+</pre><p>If it gets a call like:</p><pre class="CLexer"><div class="highlight"><pre><span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+<span class="n">MIN</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="o">++</span><span class="n">b</span><span class="p">)</span><span class="c1">//then macro will expand to</span>
+<span class="p">((</span><span class="n">a</span><span class="p">)</span><span class="o">&lt;</span><span class="p">(</span><span class="o">++</span><span class="n">b</span><span class="p">))</span><span class="o">?</span><span class="p">(</span><span class="n">a</span><span class="p">);(</span><span class="o">++</span><span class="n">b</span><span class="p">);</span>
+</pre></div>
+</pre><p>Now since <code class="code">b</code> is less than <code class="code">a</code>
+it will be incremented twice otherwise it will be incremented
+once. Such behavior is confusing at best. Older C programmers had no
+choice but only macros. But with new C99 standard we have something
+called inline functions. New C99 programmers have no excuse for
+writing macros like shown above.</p></div><div class="sect1" title="10.5. Inline Functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3547824"></a>10.5. Inline Functions</h2></div></div></div><p><code class="code">inline</code> functions are somewhat a mix of
+      macros and functions. It is a request to compiler to expand the
+      code inline like macros while maintaining the type-safety of
+      functions. Note that it is a request not a command. Compilers
+      may choose to ignore the request of inline expansion of code if
+      the inline function is too complicated. Also, recursive
+      functions are not inlined. You should use inline functions to
+      replace small functions only. The reasons are being that you may
+      get problems mentioned in Item 33 of “Effective C++” by Scott
+      Meyers. For smaller functions you have a much higher chance of
+      getting your functions inlined. To use the inline function you
+      just need to prefix the function signature and prototype
+      declaration with keyword inline. For smaller functions code
+      generated for inline functions will outweigh the overhead which
+      is there for function calls. However, if you inline too much the
+      size of your binary will become bigger and bigger and it may be
+      a problem on systems; straved for memory; in systems like
+      embedded systems. Typically inline functoins are declared in
+      headers so that all source files can benefit from it. However,
+      this may cause problems if functions are not inlined by
+      compiler.</p></div><div class="sect1" title="10.6. Function Pointers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp3550784"></a>10.6. Function Pointers</h2></div></div></div><p>These are very powerful but have got somewhat complex
+      syntax. Due to their complex syntax programmers typically shun
+      them. However, they are must if you want to do certain stuff
+      which C typically does not allow, like, object oriented
+      programming, generic programming, switch/if statement
+      replacement etc. to name a few. New programmers may wonder how
+      can we have pointers to functions as they are not
+      variables. Well they are not varibles that I agree but still
+      their addresses can be taken. However, their addresses lie in
+      code segment or text segment which happens to be read-only area,
+      hence, that address cannot be modified. Let us consider a
+      program of a desk calculator with four operations. Addition,
+      subtraction, multiplication and division. As a typical desk
+      calculator I will take double as data type as it has sufficient
+      range and precision. How would you write such a program? Well
+      with our current knowledge we can write four functions for four
+      operations. Then we can use a switch for choosing the
+      function. Let us see it in action:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Demo of function pointers.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="n">op</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">op1</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">op2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">result</span><span class="o">=</span><span class="mf">0.0</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter operation (should be one of + - * /):&quot;</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%c&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">op</span><span class="p">);</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter two operands separated by a space:&quot;</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%lf %lf&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">op1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">op2</span><span class="p">);</span>
+
+  <span class="k">switch</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">case</span> <span class="sc">&#39;+&#39;</span>:
+      <span class="n">result</span> <span class="o">=</span> <span class="n">op1</span> <span class="o">+</span> <span class="n">op2</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;-&#39;</span>:
+      <span class="n">result</span> <span class="o">=</span> <span class="n">op1</span> <span class="o">-</span> <span class="n">op2</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;*&#39;</span>:
+      <span class="n">result</span> <span class="o">=</span> <span class="n">op1</span> <span class="o">*</span> <span class="n">op2</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;/&#39;</span>:
+      <span class="n">result</span> <span class="o">=</span> <span class="n">op1</span> <span class="o">/</span> <span class="n">op2</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="nl">default:</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lf%c%lf=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">op1</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">op2</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre>
+and the output is:
+<pre class="screen">Enter operation (should be one of + - * /):+
+Enter two operands separated by a space: 2.4 1.2
+2.400000+1.200000=3.600000</pre><p>As you can see depending on the operation the switch statement
+performs the operation on two operands. We can use function pointers
+to replace this swiccth statement:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
+<span class="c1">//Description: Demo of function pointers.</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cm">/* Since there are four arithmetic operations we need four function pointers.*/</span>
+
+<span class="kt">float</span> <span class="nf">plus</span><span class="p">(</span><span class="kt">double</span> <span class="n">op1</span><span class="p">,</span> <span class="kt">double</span> <span class="n">op2</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">double</span> <span class="n">result</span><span class="o">=</span><span class="mf">0.0</span><span class="p">;</span>
+
+  <span class="n">result</span><span class="o">=</span><span class="n">op1</span><span class="o">+</span><span class="n">op2</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lf+%lf=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">float</span> <span class="nf">minus</span><span class="p">(</span><span class="kt">double</span> <span class="n">op1</span><span class="p">,</span> <span class="kt">double</span> <span class="n">op2</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">double</span> <span class="n">result</span><span class="o">=</span><span class="mf">0.0</span><span class="p">;</span>
+
+  <span class="n">result</span><span class="o">=</span><span class="n">op1</span><span class="o">-</span><span class="n">op2</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lf-%lf=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">float</span> <span class="nf">multiply</span><span class="p">(</span><span class="kt">double</span> <span class="n">op1</span><span class="p">,</span> <span class="kt">double</span> <span class="n">op2</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">double</span> <span class="n">result</span><span class="o">=</span><span class="mf">0.0</span><span class="p">;</span>
+
+  <span class="n">result</span><span class="o">=</span><span class="n">op1</span><span class="o">*</span><span class="n">op2</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lf*%lf=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">float</span> <span class="nf">divide</span><span class="p">(</span><span class="kt">double</span> <span class="n">op1</span><span class="p">,</span> <span class="kt">double</span> <span class="n">op2</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">double</span> <span class="n">result</span><span class="o">=</span><span class="mf">0.0</span><span class="p">;</span>
+
+  <span class="n">result</span><span class="o">=</span><span class="n">op1</span><span class="o">/</span><span class="n">op2</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lf/%lf=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">call_fp</span><span class="p">(</span><span class="kt">double</span> <span class="n">op1</span><span class="p">,</span> <span class="kt">double</span> <span class="n">op2</span><span class="p">,</span> <span class="kt">float</span> <span class="p">(</span><span class="o">*</span><span class="n">pt2Func</span><span class="p">)(</span><span class="kt">double</span><span class="p">,</span> <span class="kt">double</span><span class="p">))</span>
+<span class="p">{</span>
+  <span class="n">pt2Func</span><span class="p">(</span><span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Execute example code</span>
+<span class="kt">void</span> <span class="nf">Switch</span><span class="p">(</span><span class="kt">double</span> <span class="n">op1</span><span class="p">,</span> <span class="kt">double</span> <span class="n">op2</span><span class="p">,</span> <span class="kt">char</span> <span class="n">op</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">switch</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">case</span> <span class="sc">&#39;+&#39;</span>:
+      <span class="n">call_fp</span><span class="p">(</span><span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">plus</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;-&#39;</span>:
+      <span class="n">call_fp</span><span class="p">(</span><span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">minus</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;*&#39;</span>:
+      <span class="n">call_fp</span><span class="p">(</span><span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">multiply</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;/&#39;</span>:
+      <span class="n">call_fp</span><span class="p">(</span><span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">divide</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="nl">default:</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="n">op</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">op1</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">op2</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="mf">0.0</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter operation (should be one of + - * /):&quot;</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%c&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">op</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter two operands separated by a space:&quot;</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%lf %lf&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">op1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">op2</span><span class="p">);</span>
+
+  <span class="n">Switch</span><span class="p">(</span><span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">,</span> <span class="n">op</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>

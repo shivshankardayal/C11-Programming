@@ -66,5 +66,618 @@ int main()
 
   return 0;
 }</d:programlisting>
+and the output is:
+<d:screen>5+7=12</d:screen>
+<d:para>Note that you need function body before its use else you need
+at least a function prototype before use. If you do not do so you will
+get a compiler warnign. An example is given below:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Demo of function
+
+#include &lt;stdio.h>
+
+//not how argument names are not required
+void add(int, int);
+
+int main()
+{
+  int a=5, b=7;
+
+  add(a, b);
+
+  return 0;
+}
+
+void add(int firstInt, int secondInt)
+{
+  printf("%d+%d=%d\n", firstInt, secondInt, firstInt+secondInt);
+}</d:programlisting>
+<d:para>output is same as above.</d:para>
+<d:para>What you have seen just above is known as pass-by-value. In
+this case a copy of parameters is made and passed on to called
+function by caller function. So, if called function makes a change to
+values then those are not reflected back in the caller function. As an
+example I will use famous example of swapping values of two
+variables. First, I will show how pass-by-value works. So here is the
+code:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Demo of function
+
+#include &lt;stdio.h>
+
+void swap(int, int);
+
+int main()
+{
+  int a=5, b=7;
+
+  printf("Before swap a=%d and b=%d\n", a, b);
+  swap(a, b);
+  printf("After swap a=%d and b=%d\n", a, b);
+
+  return 0;
+}
+
+void swap(int firstArg, int secondArg)
+{
+  int temp=firstArg;
+  firstArg=secondArg;
+  secondArg=temp;
+}</d:programlisting>
+and the output is:
+<d:screen>Before swap a=5 and b=7
+After swap a=5 and b=7</d:screen>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Pass by Address</d:title>
+      <d:para>Not exactly what we wanted. The solution is to
+      pass-by-address. When you the address to a called function, it
+      receives address in a pointer variable. Then if it modifies the
+      value stored at that address then it is reflected back in the
+      caller. Let us see an example to understand:</d:para>
+      <d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Demo of function
+
+#include &lt;stdio.h>
+
+void swap(int*, int*);
+
+int main()
+{
+  int a=5, b=7;
+
+  printf("Before swap a=%d and b=%d\n", a, b);
+  swap(&amp;a, &amp;b);
+  printf("After swap a=%d and b=%d\n", a, b);
+
+  return 0;
+}
+
+void swap(int* firstArg, int* secondArg)
+{
+  int temp=*firstArg;
+  *firstArg=*secondArg;
+  *secondArg=temp;
+}</d:programlisting>
+and the output is:
+<d:screen>Before swap a=5 and b=7
+After swap a=7 and b=5</d:screen>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Recursion</d:title>
+      <d:para>In C recusion is the concept of a function calling
+      itself. When a repeated operation has to be preformed over a
+      variable, recursion can be used. Recursion simplifies the code a
+      lot. Typically there is always a more effective iterative
+      solutions are available but there are certain cases where
+      recursion is always better than iteration. For example,
+      traversal of trees where iteration is not so effective as
+      compared to recursion. The first example I am going to give is
+      that of factorials. The formula for factorial is given
+      by <d:inlineequation>
+<mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>n</mml:mi>
+  <mml:mo>!</mml:mo>
+  <mml:mo>=</mml:mo>
+  <mml:munderover>
+    <mml:mo>&#x220F;<!-- ∏ --></mml:mo>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mi>k</mml:mi>
+      <mml:mo>=</mml:mo>
+      <mml:mn>1</mml:mn>
+    </mml:mrow>
+    <mml:mi>n</mml:mi>
+  </mml:munderover>
+  <mml:mi>k</mml:mi>
+</mml:math>
+</d:inlineequation> and recursive definition of factorial is given
+      by:</d:para><d:informalequation>
+<mml:math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mml:mtable columnalign="right left" rowspacing="3pt" columnspacing="0.278em">
+    <mml:mtr>
+      <mml:mtd>
+        <mml:mi>n</mml:mi>
+        <mml:mo>!</mml:mo>
+        <mml:mo>=</mml:mo>
+        <mml:mfenced open="{" close="">
+          <mml:mtable columnalign="left left" rowspacing="4pt" columnspacing="1em">
+            <mml:mtr>
+              <mml:mtd>
+                <mml:mn>1</mml:mn>
+              </mml:mtd>
+              <mml:mtd>
+                <mml:mspace width="1em" />
+                <mml:mtext>if n=0</mml:mtext>
+              </mml:mtd>
+            </mml:mtr>
+            <mml:mtr>
+              <mml:mtd>
+                <mml:mo stretchy="false">(</mml:mo>
+                <mml:mi>n</mml:mi>
+                <mml:mo>&#x2212;<!-- − --></mml:mo>
+                <mml:mn>1</mml:mn>
+                <mml:mo stretchy="false">)</mml:mo>
+                <mml:mo>!</mml:mo>
+                <mml:mo>&#x2217;<!-- ∗ --></mml:mo>
+                <mml:mi>n</mml:mi>
+              </mml:mtd>
+              <mml:mtd>
+                <mml:mspace width="1em" />
+                <mml:mtext>if n&gt;0</mml:mtext>
+              </mml:mtd>
+            </mml:mtr>
+          </mml:mtable>
+        </mml:mfenced>
+      </mml:mtd>
+    </mml:mtr>
+  </mml:mtable>
+</mml:math>
+    </d:informalequation>
+<d:para>Note that every recursion has to be written carefully in thse
+sense that it must have a termination condition and that in all the
+cases the termination condition must be reached. If a recursion is too
+deep or infinite there will be a stack overlow and the program will
+terminate. First, I will show you an iterative version with a
+function.</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Iterative factorial.
+
+#include &lt;stdio.h>
+
+long long fact(int input);
+
+int main()
+{
+  int input=0;
+
+  printf("Enter a number whose input has to be computed:\n");
+  scanf("%d", &amp;input);
+
+  printf("Factorial of %d is %lld.\n", input, fact(input));
+
+  return 0;
+}
+
+long long fact(int input)
+{
+  long long output=1;
+  while(input!=0)
+  {
+    output*=input;
+    input--;
+  }
+
+  return output;
+}</d:programlisting>
+and the output is:
+<d:screen>Enter a number whose factorial has to be computed:
+17
+Factorial of 17 is 355687428096000.</d:screen>
+<d:para>Now we will see recursive version:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Recursive factorial.
+
+#include &lt;stdio.h>
+
+long long fact(int input);
+
+int main()
+{
+  int input=0;
+
+  printf("Enter a number whose factorial has to be computed:\n");
+  scanf("%d", &amp;input);
+
+  printf("Factorial of %d is %lld.\n", input, fact(input));
+
+  return 0;
+}
+
+long long fact(int input)
+{
+  if(input==0)
+    return 1;
+  else
+    return fact(input-1)*input;
+}</d:programlisting>
+and the output is:
+<d:screen>Enter a number whose factorial has to be computed:
+16
+Factorial of 16 is 20922789888000.</d:screen>
+<d:para>Recursion is very simple yet may be very deceptive to
+understand for beginners. Let us dissect the code. Our input was 16 so
+if will not match and <d:code>return fact(15)*16;</d:code> will be
+executed. Here, before <d:code>fact(16)</d:code> can return
+<d:code>fact(15)</d:code> has to return. And, similarly before
+<d:code>fact(15)</d:code> can return <d:code>fact(14)</d:code> has to
+return. Now, note that for <d:code>fact(0)</d:code> there is no such
+condition and it can return 1 making it possible for fact(1) to
+return, which, in turn will make it posible for fact(2) to return and
+so on. So, what is happening is function is calling itself by creating
+more and more function frames and when the termination condition
+reaches the stack unwinds.</d:para>
+<d:para>Let us consider one more famous example for recursive
+function, that is of computing Fibonacci numbers. The Fibonacci series
+is given by:</d:para>
+<d:informalequation>
+<mml:math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mml:msub>
+    <mml:mi>F</mml:mi>
+    <mml:mi>n</mml:mi>
+  </mml:msub>
+  <mml:mo>=</mml:mo>
+  <mml:msub>
+    <mml:mi>F</mml:mi>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mi>n</mml:mi>
+      <mml:mo>&#x2212;<!-- − --></mml:mo>
+      <mml:mn>1</mml:mn>
+    </mml:mrow>
+  </mml:msub>
+  <mml:mo>+</mml:mo>
+  <mml:msub>
+    <mml:mi>F</mml:mi>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mi>n</mml:mi>
+      <mml:mo>&#x2212;<!-- − --></mml:mo>
+      <mml:mn>2</mml:mn>
+    </mml:mrow>
+  </mml:msub>
+</mml:math>
+</d:informalequation>
+<d:para>where first two numebrs are given by: <d:inlineequation>
+<mml:math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mml:msub>
+    <mml:mi>F</mml:mi>
+    <mml:mn>0</mml:mn>
+  </mml:msub>
+  <mml:mo>=</mml:mo>
+  <mml:mn>0</mml:mn>
+  <mml:mtext>&#xA0;and&#xA0;</mml:mtext>
+  <mml:msub>
+    <mml:mi>F</mml:mi>
+    <mml:mn>1</mml:mn>
+  </mml:msub>
+  <mml:mo>=</mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math>
+</d:inlineequation>First consider the iterative version:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Iterative Fibonacci series.
+
+#include &lt;stdio.h>
+
+void fibonacci(int input);
+
+int main()
+{
+  int input=0;
+
+  printf("How many Fibonacci numbers you want?\n");
+  scanf("%d", &amp;input);
+
+  fibonacci(input);
+
+  return 0;
+}
+
+void fibonacci(input)
+{
+  int fib0=0, fib1=1;
+
+  if(input==0)
+  return;
+  else if(input==1)
+  {
+    printf("%d\n", fib0);
+  }
+  else if(input==2)
+  {
+    printf("%d %d\n", fib0, fib1);
+  }
+  else if(input>2)
+  {
+    printf("%d %d", fib0, fib1);
+    while(input>1)
+    {
+      fib1=fib1+fib0;
+      fib0=fib1-fib0;
+      printf(" %d", fib1);
+      input--;
+    }
+  }
+  printf("\n");
+}</d:programlisting>
+and the output is:
+<d:screen>How many Fibonacci numbers you want?
+16
+0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987</d:screen>
+<d:para>Now we will see recursive version:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: iRecursive Fibonacci series.
+
+#include &lt;stdio.h>
+
+long long fibonacci(int input);
+
+int main()
+{
+  int input=0;
+
+  printf("Which Fibonacci number you want?\n");
+  scanf("%d", &amp;input);
+
+  printf("%lld\n", fibonacci(input));
+
+  return 0;
+}
+
+long long fibonacci(int input)
+{
+  long long fib0=0, fib1=1;
+
+  if(input==0)
+  {
+    return fib0;
+  }
+  else if(input==1)
+  {
+    return fib1;
+  }
+  else
+  {
+    long long fib = fibonacci(input-1)+fibonacci(input-2);
+    return fib;
+  }
+}</d:programlisting>
+and the output is:
+<d:screen>Which Fibonacci number you want?
+32
+2178309</d:screen>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Function like Macros</d:title>
+      <d:para>Functions are costly if they are very small. For
+      example, let us say we want to add two integers only then it
+      does not make sense to write a function. When you call a
+      function a new function frame has to be created, new variables
+      are created, when function returns things are cleaned and return
+      value is returned. All this consume memory and CPU cycles so old
+      C style was to use macros. For example, consider following
+      program:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Demo of macros.
+
+#include &lt;stdio.h>
+
+#define SUM(a, b) a+b
+
+int main()
+{
+  printf("%d %d\n", SUM(5, 7), SUM(8, 9));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>12 17</d:screen>
+<d:para>However, such usage of macros are inappropriate, dangerous and
+higly adivised against. First you have to take care that you
+parenthesize all parameters carefully. Even then consider
+following:</d:para>
+<d:programlisting role="CLexer">#define MIN(a,b)((a)&lt;(b))?(a):(b);
+</d:programlisting>
+<d:para>If it gets a call like:</d:para>
+<d:programlisting role="CLexer">int a=7, b=3;
+MIN(a,++b)//then macro will expand to
+((a)&lt;(++b))?(a);(++b);</d:programlisting>
+<d:para>Now since <d:code>b</d:code> is less than <d:code>a</d:code>
+it will be incremented twice otherwise it will be incremented
+once. Such behavior is confusing at best. Older C programmers had no
+choice but only macros. But with new C99 standard we have something
+called inline functions. New C99 programmers have no excuse for
+writing macros like shown above.</d:para>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Inline Functions</d:title>
+      <d:para><d:code>inline</d:code> functions are somewhat a mix of
+      macros and functions. It is a request to compiler to expand the
+      code inline like macros while maintaining the type-safety of
+      functions. Note that it is a request not a command. Compilers
+      may choose to ignore the request of inline expansion of code if
+      the inline function is too complicated. Also, recursive
+      functions are not inlined. You should use inline functions to
+      replace small functions only. The reasons are being that you may
+      get problems mentioned in Item 33 of “Effective C++” by Scott
+      Meyers. For smaller functions you have a much higher chance of
+      getting your functions inlined. To use the inline function you
+      just need to prefix the function signature and prototype
+      declaration with keyword inline. For smaller functions code
+      generated for inline functions will outweigh the overhead which
+      is there for function calls. However, if you inline too much the
+      size of your binary will become bigger and bigger and it may be
+      a problem on systems; straved for memory; in systems like
+      embedded systems. Typically inline functoins are declared in
+      headers so that all source files can benefit from it. However,
+      this may cause problems if functions are not inlined by
+      compiler.</d:para>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Function Pointers</d:title>
+      <d:para>These are very powerful but have got somewhat complex
+      syntax. Due to their complex syntax programmers typically shun
+      them. However, they are must if you want to do certain stuff
+      which C typically does not allow, like, object oriented
+      programming, generic programming, switch/if statement
+      replacement etc. to name a few. New programmers may wonder how
+      can we have pointers to functions as they are not
+      variables. Well they are not varibles that I agree but still
+      their addresses can be taken. However, their addresses lie in
+      code segment or text segment which happens to be read-only area,
+      hence, that address cannot be modified. Let us consider a
+      program of a desk calculator with four operations. Addition,
+      subtraction, multiplication and division. As a typical desk
+      calculator I will take double as data type as it has sufficient
+      range and precision. How would you write such a program? Well
+      with our current knowledge we can write four functions for four
+      operations. Then we can use a switch for choosing the
+      function. Let us see it in action:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Demo of function pointers.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  char op=0;
+  double op1=0.0,op2=0.0,result=0.0;
+
+  printf("Enter operation (should be one of + - * /):");
+  scanf("%c", &amp;op);
+
+  printf("Enter two operands separated by a space:");
+  scanf("%lf %lf", &amp;op1, &amp;op2);
+
+  switch(op)
+  {
+    case '+':
+      result = op1 + op2;
+      break;
+    case '-':
+      result = op1 - op2;
+      break;
+    case '*':
+      result = op1 * op2;
+      break;
+    case '/':
+      result = op1 / op2;
+      break;
+    default:
+      break;
+  }
+
+  printf("%lf%c%lf=%lf\n", op1, op, op2, result);
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Enter operation (should be one of + - * /):+
+Enter two operands separated by a space: 2.4 1.2
+2.400000+1.200000=3.600000</d:screen>
+<d:para>As you can see depending on the operation the switch statement
+performs the operation on two operands. We can use function pointers
+to replace this swiccth statement:</d:para>
+<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+//Description: Demo of function pointers.
+
+#include &lt;stdio.h>
+/* Since there are four arithmetic operations we need four function pointers.*/
+
+float plus(double op1, double op2)
+{
+  double result=0.0;
+
+  result=op1+op2;
+  printf("%lf+%lf=%lf\n", op1, op2, result);
+}
+
+float minus(double op1, double op2)
+{
+  double result=0.0;
+
+  result=op1-op2;
+  printf("%lf-%lf=%lf\n", op1, op2, result);
+}
+
+float multiply(double op1, double op2)
+{
+  double result=0.0;
+
+  result=op1*op2;
+  printf("%lf*%lf=%lf\n", op1, op2, result);
+}
+
+float divide(double op1, double op2)
+{
+  double result=0.0;
+
+  result=op1/op2;
+  printf("%lf/%lf=%lf\n", op1, op2, result);
+}
+
+void call_fp(double op1, double op2, float (*pt2Func)(double, double))
+{
+  pt2Func(op1, op2);
+}
+
+// Execute example code
+void Switch(double op1, double op2, char op)
+{
+  switch(op)
+  {
+    case '+':
+      call_fp(op1, op2, &amp;plus);
+      break;
+    case '-':
+      call_fp(op1, op2, &amp;minus);
+      break;
+    case '*':
+      call_fp(op1, op2, &amp;multiply);
+      break;
+    case '/':
+      call_fp(op1, op2, &amp;divide);
+      break;
+    default:
+      break;
+  }
+}
+
+int main()
+{
+  char op = 0;
+  double op1 = 0.0, op2 = 0.0, result=0.0;
+
+  printf("Enter operation (should be one of + - * /):");
+  scanf("%c", &amp;op);
+  printf("Enter two operands separated by a space:");
+  scanf("%lf %lf", &amp;op1, &amp;op2);
+
+  Switch(op1, op2, op);
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Enter operation (should be one of + - * /):+
+Enter two operands separated by a space:2.4
+1.2
+2.400000+1.200000=3.600000</d:screen>
+<d:para>So you see how a switch statement can be replaced with
+function pointers. The abstract declaration of a function pointer is
+given below:</d:para>
+<d:screen>return_type (*function_name)(arguments);</d:screen>
+<d:para>You can call these functions in two ways:</d:para>
+<d:screen>function_name(arguments); //shortcut call
+(*function_name)(arguments); //long and correct call</d:screen>
+<d:para>You should always prefer the second version as it is more
+portable across different compilers and environments.</d:para>
     </d:sect1>
 </d:chapter>
