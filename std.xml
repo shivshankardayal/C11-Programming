@@ -9,5 +9,74 @@
     parts of each function/macro as much as possible. From
     specification, compiler and example point of view in that
     order.</d:para>
-
+    <d:sect1>
+      <d:title>Introduction</d:title>
+      <d:sect2>
+	<d:title>Definition of Terms</d:title>
+	<d:para>A <d:emphasis role="italic">string</d:emphasis> is a contiguous
+	sequence of characters terminated by and including the first null
+	character. The term <d:emphasis role="italic">multibyte
+	string</d:emphasis> is sometimes used instead to emphasize special
+	processing given to multibyte characters contained in the string or to
+	avoid confusion with a <d:emphasis role="italic">wide
+	string</d:emphasis>. A <d:emphasis role="italic">pointer to a
+	string</d:emphasis> is a pointer to its initial (lowest addressed)
+	character. The length of a string is the number of bytes preceding the
+	null character and the <d:emphasis role="italic">value of a
+	string</d:emphasis> is the sequence of the values of the contained
+	characters, in order.</d:para>
+	<d:para>The <d:emphasis role="italic">decimal-point
+	character</d:emphasis> is the character used by functions that convert
+	floating-point numbers to or from character sequences to denote the
+	beginning of the fractional part of such character
+	sequences.<d:footnote><d:para>The functions that make use of the
+	decimal-point character are the numeric conversion functions (14.20.1,
+	14.24.4.1) and the formatted input/output functions (14.19.6,
+	14.24.2).</d:para></d:footnote>  It is represented in the text and
+	examples by a period, but may be changed by the
+	<d:code>setlocale</d:code> function.</d:para>
+	<d:para>A <d:emphasis role="italic">null wide character</d:emphasis> is
+	a wide character with code value zero.</d:para>
+	<d:para>A <d:emphasis role="italic">wide string</d:emphasis> is a
+	contiguous sequence of wide characters terminated by and including the
+	first null wide character. A <d:emphasis role="italic">pointer to a
+	wide string</d:emphasis> is a pointer to its initial (lowest addressed)
+	wide character. The <d:emphasis role="italic">length of a wide
+	string</d:emphasis> is the number of wide characters preceding the null
+	wide character and the <d:emphasis role="italic">value of a wide
+	string</d:emphasis> is the sequence of code values of the contained
+	wide characters, in order.</d:para>
+	<d:para>A <d:emphasis role="italic">shift sequence</d:emphasis> is a
+	contiguous sequence of bytes within a multibyte string that
+	(potentially) causes a change in shift state. A shift sequence shall
+	not have a corresponding wide character; it is instead taken to be an
+	adjunct to an adjacent multibyte character.<d:footnote><d:para>For
+	state-dependent encodings, the values for <d:code>MB_CUR_MAX</d:code>
+	and <d:code>MB_LEN_MAX</d:code> shall thus be large enough to count all
+	the bytes in any complete multibyte character plus at least one
+	adjacent shift sequence of maximum length. Whether these counts provide
+	for more than one shift sequence is the implementation’s
+	choice.</d:para></d:footnote></d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>Standard Headers</d:title>
+	<d:para>Each library function is declared, with a type that includes a
+	prototype, in a header,<d:footnote><d:para>A header is not necessarily
+	a source file, nor are the &lt; and > delimited sequences in header
+	names necessarily valid source file names.</d:para></d:footnote>
+	whose contents are made available by the <d:code>#include</d:code>
+	preprocessing directive. The header declares a set of related
+	functions, plus any necessary types and additional macros needed to
+	facilitate their use. Declarations of types described in this clause
+	shall not include type qualifiers, unless explicitly stated
+	otherwise.</d:para>
+	<d:para>The standard headers are:</d:para>
+	<d:screen>&amp;lt;assert.h>  &amp;lt;inttypes.h> &amp;lt;signal.h>  &amp;lt;stdlib.h>
+&amp;lt;complex.h> &amp;lt;iso646.h>   &amp;lt;stdarg.h>  &amp;lt;string.h>
+&amp;lt;ctype.h>   &amp;lt;limits.h>   &amp;lt;stdbool.h> &amp;lt;tgmath.h>
+&amp;lt;errno.h>   &amp;lt;locale.h>   &amp;lt;stddef.h>  &amp;lt;time.h>
+&amp;lt;fenv.h>    &amp;lt;math.h>     &amp;lt;stdint.h>  &amp;lt;wchar.h>
+&amp;lt;float.h>   &amp;lt;setjmp.h>   &amp;lt;stdio.h>   &amp;lt;wctype.h></d:screen>
+      </d:sect2>
+    </d:sect1>
 </d:chapter>

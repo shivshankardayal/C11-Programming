@@ -85,7 +85,7 @@ according to the rules of constant expressions. For the purposes of this token
 conversion and evaluation, all signed integer types and all unsigned integer
 types act as if they hav e the same representation as, respectively, the types
 <d:code>intmax_t</d:code> and <d:code>uintmax_t</d:code> defined in the header
-<d:code>&lt;stdint.h></d:code>.<d:footnote><d:para>Thus, on an implementation
+<d:code>&amp;lt;stdint.h></d:code>.<d:footnote><d:para>Thus, on an implementation
 where <d:code>INT_MAX</d:code> is <d:code></d:code> and
 <d:code>UINT_MAX</d:code> is <d:code>0xFFFF</d:code>, the constant
 <d:code>0x8000</d:code> is signed and positive within a <d:code>#if</d:code>
@@ -132,7 +132,7 @@ directive.</d:para></d:footnote></d:para>
   <d:para>A preprocessing directive of the form:</d:para>
   <d:programlisting role="CLexer"># include &lt;h-char-sequence>  new-line</d:programlisting>
   <d:para>searches a sequence of implementation-defined places for a header
-  identified uniquely by the specified sequence between the &lt; and >
+  identified uniquely by the specified sequence between the &amp;lt; and >
   delimiters, and causes the replacement of that directive by the entire
   contents of the header. How the places are specified or the header identified
   is implementation-defined.</d:para>
@@ -156,7 +156,7 @@ all replacements shall match one of the two previous
 forms.<d:footnote><d:para>Note that adjacent string literals are not
 concatenated into a single string literal; thus, an expansion that results in
 two string literals is an invalid directive.</d:para></d:footnote> The method
-by which a sequence of preprocessing tokens between a &lt; and a >
+by which a sequence of preprocessing tokens between a &amp;lt; and a >
 preprocessing token pair or a pair of ” characters is combined into a single
 header name preprocessing token is implementation-defined.</d:para> 
 <d:para>The implementation shall provide unique mappings for sequences
@@ -305,7 +305,7 @@ one more than the number of parameters in the macro definition (excluding the
   exist only within translation phase 4.</d:para></d:footnote></d:para>
   <d:para>For both object-like and function-like macro invocations, before the
   replacement list is reexamined for more macro names to replace, each instance
-  of a <d:para>##</d:para> preprocessing token in the replacement list (not
+  of a <d:code>##</d:code> preprocessing token in the replacement list (not
   from an argument) is deleted and the preceding preprocessing token is
   concatenated with the following preprocessing token. Placemarker
   preprocessing tokens are handled specially: concatenation of two placemarkers
@@ -314,7 +314,7 @@ one more than the number of parameters in the macro definition (excluding the
   non-placemarker preprocessing token. If the result is not a valid
   preprocessing token, the behavior is undefined. The resulting token is
   available for further macro replacement. The order of evaluation of
-  <d:para>##</d:para> operators is unspecified.</d:para>
+  <d:code>##</d:code> operators is unspecified.</d:para>
 </d:sect2>
 <d:sect2>
   <d:title>Rescanning and Further Replacement</d:title>
@@ -324,18 +324,18 @@ one more than the number of parameters in the macro definition (excluding the
   preprocessing token sequence is rescanned, along with all subsequent
   preprocessing tokens of the source file, for more macro names to
   replace.</d:para>
-  <d:code>If the name of the macro being replaced is found during this scan of
+  <d:para>If the name of the macro being replaced is found during this scan of
   the replacement list (not including the rest of the source file’s
   preprocessing tokens), it is not replaced. Furthermore, if any nested
   replacements encounter the name of the macro being replaced, it is not
   replaced. These nonreplaced macro name preprocessing tokens are no longer
   available for further replacement even if they are later (re)examined in
   contexts in which that macro name preprocessing token would otherwise have
-  been replaced.</d:code>
-  <d:code>The resulting completely macro-replaced preprocessing token sequence
+  been replaced.</d:para>
+  <d:para>The resulting completely macro-replaced preprocessing token sequence
   is not processed as a preprocessing directive even if it resembles one, but
   all pragma unary operator expressions within it are then processed as
-  specified in 12.9 below.</d:code>
+  specified in 12.9 below.</d:para>
 </d:sect2>
 <d:sect2>
   <d:title>Scope of Macro Definitions</d:title>
