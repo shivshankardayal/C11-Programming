@@ -2655,6 +2655,7 @@ program but other sources can still modify it.</d:para>
     <xi:include href="su.xml"/>
     <xi:include href="macros.xml"/>
     <xi:include href="std.xml"/>
+    <xi:include href="assert.xml"/>
     <d:index>
     <d:title>Index</d:title>
   </d:index>
