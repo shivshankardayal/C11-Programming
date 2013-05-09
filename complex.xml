@@ -9,9 +9,137 @@
       <d:para>The header <d:code>&amp;lt;complex.h></d:code> defines macros and
       declares functions that support complex arithmetic. Each synopsis
       specifies a family of functions consisting of a principal function with
-      one or more double complex parameters and a double complex or double
+      one or more <d:code>double complex</d:code> parameters and a
+      <d:code>double complex</d:code> or <d:code>double</d:code> 
       return value; and other functions with the same name but with f and l
-      suffixes which are corresponding functions with float and long double
-      parameters and return values.</d:para>
+      suffixes which are corresponding functions with <d:code>float</d:code>
+      and <d:code>long double</d:code> parameters and return values.</d:para>
+      <d:para>The macro complex expands to <d:code>_Complex</d:code>; the macro
+      <d:code>_Complex_I</d:code> expands to a constant expression of type
+      <d:code>const float _Complex</d:code>, with the value of the imaginary
+      unit.<d:footnote><d:para>The imaginary unit is a number
+      <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>i</mml:mi>
+</mml:math></d:inlineequation> such that <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mi>i</mml:mi>
+    <mml:mn>2</mml:mn>
+  </mml:msup>
+  <mml:mo>=</mml:mo>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation></d:para></d:footnote>.</d:para>
+<d:para>The macro <d:code>I</d:code> expands to
+<d:code>_Complex_I</d:code>.</d:para>
+<d:para>Notwithstanding the provisions of reserved identifiers, a program may
+undefine and perhaps then redefine the macros <d:code>complex</d:code> and
+<d:code>I</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> IEC
+60559-compatible complex arithmetic (annex G).</d:para>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Conventions</d:title>
+      <d:para>Values are interpreted as radians, not degrees. An implementation
+      may set errno but is not required to.</d:para>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Branch Cuts</d:title>
+      <d:para>Some of the functions below have branch cuts, across which the
+      function is discontinuous. For implementations with a signed zero
+      (including all IEC 60559 implementations) that follow the specifications
+      of annex G, the sign of zero distinguishes one side of a cut from another
+      so the function is continuous (except for format limitations) as the cut
+      is approached from either side. For example, for the square root
+      function, which has a branch cut along the negative real axis, the top of
+      the cut, with imaginary part +0, maps to the positive imaginary axis, and
+      the bottom of the cut, with imaginary part -0, maps to the negative
+      imaginary axis.</d:para>
+      <d:para>Implementations that do not support a signed zero (see annex F)
+      cannot distinguish the sides of branch cuts. These implementations shall
+      map a cut so the function is continuous as the cut is approached coming
+      around the finite endpoint of the cut in a counter clockwise
+      direction. (Branch cuts for the functions specified here have just one
+      finite endpoint.) For example, for the square root function, coming
+      counter clockwise around the finite endpoint of the cut along the
+      negative real axis approaches the cut from above, so the cut maps to the
+      positive imaginary axis.</d:para>
+    </d:sect1>
+    <d:sect1>
+      <d:title>The CX_LIMITED_RANGE Pragma</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;complex.h>
+#pragma STDC CX_LIMITED_RANGE on-off-switch</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The usual mathematical formulas for complex multiply, divide, and
+absolute value are problematic because of their treatment of infinities and
+because of undue overflow and underflow. The <d:code>CX_LIMITED_RANGE</d:code>
+pragma can be used to inform the implementation that (where the state is “on”)
+the usual mathematical formulas are acceptable.<d:footnote><d:para>The purpose
+of the pragma is to allow the implementation to use the
+formulas.</d:para></d:footnote> The pragma can occur either outside external
+declarations or preceding all explicit declarations and statements inside a
+compound statement. When outside external declarations, the pragma takes effect
+from its occurrence until another <d:code>CX_LIMITED_RANGE</d:code> pragma is
+encountered, or until the end of the translation unit. When inside a compound
+statement, the pragma takes effect from its occurrence until another
+<d:code>CX_LIMITED_RANGE</d:code> pragma is encountered (including within a
+nested compound statement), or until the end of the compound statement; at the
+end of a compound statement the state for the pragma is restored to its
+condition just before the compound statement. If this pragma is used in any
+other context, the behavior is undefined. The default state for the pragma is
+“off”.</d:para>
+<d:sect1>
+  <d:title>Trigonometric Functions</d:title>
+  <d:sect2>
+    <d:title>The cscos Functions</d:title>
+    <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+    <d:programlisting role="CLexer">#include &lt;complex.h>
+double complex cacos(double complex z);
+float complex cacosf(float complex z);
+long double complex cacosl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Descriptiotn</d:emphasis></d:para>
+<d:para>The <d:code>cacos</d:code> functions compute the complex arc cosine of
+<d:code>z</d:code>, with branch cuts outside the interval <d:code>[-1,
++1]</d:code> along the real axis.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The cacos functions return the complex arc cosine value, in the range
+of a strip mathematically unbounded along the imaginary axis and in the
+interval [0, <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+</mml:math></d:inlineequation>] along the real axis.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex cacos(double complex z);
+float complex cacosf(float complex z);
+long double complex cacosl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>cacos()</d:code> function calculates the complex arc cosine
+of <d:code>z</d:code>. If <d:code>y = cacos(z)</d:code>, then <d:code>z =
+ccos(y)</d:code>. The real part of <d:code>y</d:code> is chosen in the interval
+[0, <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+</mml:math></d:inlineequation>].</d:para>
+<d:para>One has:</d:para>
+<d:screen>cacos(z) = -i * clog(z + i * csqrt(1 - z * z))</d:screen>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[cacos(z)]=%lf and Im[cacos(z)]=%lf\n", creal(cacos(z)), cimag(cacos(z)));
+
+  return 0;
+}</d:programlisting>
+<d:para>Compile like <d:code>clang filename.c -lm</d:code>. Execution gives
+following output:</d:para>
+<d:screen>Re[cacos(z)]=0.936812 and Im[cacos(z)]=-2.305509</d:screen>
+  </d:sect2>
+</d:sect1>
     </d:sect1>
 </d:chapter>

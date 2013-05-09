@@ -1,8 +1,99 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 15. Complex arithmetic &lt;complex.h></title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../assert/index.html" rel="prev" title="Chapter 14. Diagnostics &lt;assert.h>"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 15. Complex arithmetic &lt;complex.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../assert/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 15. Complex arithmetic &lt;complex.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp1355392"></a>Chapter 15. Complex arithmetic &lt;complex.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp1314400">15.1. Introduction</a></span></dt></dl></div><div class="sect1" title="15.1. Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1314400"></a>15.1. Introduction</h2></div></div></div><p>The header <code class="code">&lt;complex.h></code> defines macros and
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 15. Complex arithmetic &lt;complex.h></title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../assert/index.html" rel="prev" title="Chapter 14. Diagnostics &lt;assert.h>"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 15. Complex arithmetic &lt;complex.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../assert/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 15. Complex arithmetic &lt;complex.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp1312544"></a>Chapter 15. Complex arithmetic &lt;complex.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp1013456">15.1. Introduction</a></span></dt><dt><span class="sect1"><a href="index.html#idp2499632">15.2. Conventions</a></span></dt><dt><span class="sect1"><a href="index.html#idp2501072">15.3. Branch Cuts</a></span></dt><dt><span class="sect1"><a href="index.html#idp2504160">15.4. The CX_LIMITED_RANGE Pragma</a></span></dt></dl></div><div class="sect1" title="15.1. Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1013456"></a>15.1. Introduction</h2></div></div></div><p>The header <code class="code">&lt;complex.h></code> defines macros and
       declares functions that support complex arithmetic. Each synopsis
       specifies a family of functions consisting of a principal function with
-      one or more double complex parameters and a double complex or double
+      one or more <code class="code">double complex</code> parameters and a
+      <code class="code">double complex</code> or <code class="code">double</code> 
       return value; and other functions with the same name but with f and l
-      suffixes which are corresponding functions with float and long double
-      parameters and return values.</p></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../assert/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 14. Diagnostics &lt;assert.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+      suffixes which are corresponding functions with <code class="code">float</code>
+      and <code class="code">long double</code> parameters and return values.</p><p>The macro complex expands to <code class="code">_Complex</code>; the macro
+      <code class="code">_Complex_I</code> expands to a constant expression of type
+      <code class="code">const float _Complex</code>, with the value of the imaginary
+      unit.<sup>[<a class="footnote" href="#ftn.idp2483552" name="idp2483552">147</a>]</sup>.</p><p>The macro <code class="code">I</code> expands to
+<code class="code">_Complex_I</code>.</p><p>Notwithstanding the provisions of reserved identifiers, a program may
+undefine and perhaps then redefine the macros <code class="code">complex</code> and
+<code class="code">I</code>.</p><p><span class="bold"><strong>Forward references:</strong></span> IEC
+60559-compatible complex arithmetic (annex G).</p></div><div class="sect1" title="15.2. Conventions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2499632"></a>15.2. Conventions</h2></div></div></div><p>Values are interpreted as radians, not degrees. An implementation
+      may set errno but is not required to.</p></div><div class="sect1" title="15.3. Branch Cuts"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2501072"></a>15.3. Branch Cuts</h2></div></div></div><p>Some of the functions below have branch cuts, across which the
+      function is discontinuous. For implementations with a signed zero
+      (including all IEC 60559 implementations) that follow the specifications
+      of annex G, the sign of zero distinguishes one side of a cut from another
+      so the function is continuous (except for format limitations) as the cut
+      is approached from either side. For example, for the square root
+      function, which has a branch cut along the negative real axis, the top of
+      the cut, with imaginary part +0, maps to the positive imaginary axis, and
+      the bottom of the cut, with imaginary part -0, maps to the negative
+      imaginary axis.</p><p>Implementations that do not support a signed zero (see annex F)
+      cannot distinguish the sides of branch cuts. These implementations shall
+      map a cut so the function is continuous as the cut is approached coming
+      around the finite endpoint of the cut in a counter clockwise
+      direction. (Branch cuts for the functions specified here have just one
+      finite endpoint.) For example, for the square root function, coming
+      counter clockwise around the finite endpoint of the cut along the
+      negative real axis approaches the cut from above, so the cut maps to the
+      positive imaginary axis.</p></div><div class="sect1" title="15.4. The CX_LIMITED_RANGE Pragma"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2504160"></a>15.4. The CX_LIMITED_RANGE Pragma</h2></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<span class="cp">#pragma STDC CX_LIMITED_RANGE on-off-switch</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The usual mathematical formulas for complex multiply, divide, and
+absolute value are problematic because of their treatment of infinities and
+because of undue overflow and underflow. The <code class="code">CX_LIMITED_RANGE</code>
+pragma can be used to inform the implementation that (where the state is “on”)
+the usual mathematical formulas are acceptable.<sup>[<a class="footnote" href="#ftn.idp2508320" name="idp2508320">148</a>]</sup> The pragma can occur either outside external
+declarations or preceding all explicit declarations and statements inside a
+compound statement. When outside external declarations, the pragma takes effect
+from its occurrence until another <code class="code">CX_LIMITED_RANGE</code> pragma is
+encountered, or until the end of the translation unit. When inside a compound
+statement, the pragma takes effect from its occurrence until another
+<code class="code">CX_LIMITED_RANGE</code> pragma is encountered (including within a
+nested compound statement), or until the end of the compound statement; at the
+end of a compound statement the state for the pragma is restored to its
+condition just before the compound statement. If this pragma is used in any
+other context, the behavior is undefined. The default state for the pragma is
+“off”.</p><div class="sect1" title="1. Trigonometric Functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2510624"></a>1. Trigonometric Functions</h2></div></div></div><div class="sect2" title="1.1. The cscos Functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp2511360"></a>1.1. The cscos Functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacos</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
+<span class="kt">float</span> <span class="n">complex</span> <span class="nf">cacosf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
+<span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacosl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Descriptiotn</strong></span></p><p>The <code class="code">cacos</code> functions compute the complex arc cosine of
+<code class="code">z</code>, with branch cuts outside the interval <code class="code">[-1,
++1]</code> along the real axis.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The cacos functions return the complex arc cosine value, in the range
+of a strip mathematically unbounded along the imaginary axis and in the
+interval [0, <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<mi>π</mi>
+</math>] along the real axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacos</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
+<span class="kt">float</span> <span class="n">complex</span> <span class="nf">cacosf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
+<span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacosl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
+</pre></div>
+</pre><p>Link with <code class="code">-lm</code>.</p><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">cacos()</code> function calculates the complex arc cosine
+of <code class="code">z</code>. If <code class="code">y = cacos(z)</code>, then <code class="code">z =
+ccos(y)</code>. The real part of <code class="code">y</code> is chosen in the interval
+[0, <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<mi>π</mi>
+</math>].</p><p>One has:</p><pre class="screen">cacos(z) = -i * clog(z + i * csqrt(1 - z * z))</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;complex.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[cacos(z)]=%lf and Im[cacos(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cacos</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cacos</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</pre><p>Compile like <code class="code">clang filename.c -lm</code>. Execution gives
+following output:</p><pre class="screen">Re[cacos(z)]=0.936812 and Im[cacos(z)]=-2.305509</pre></div></div></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp2483552" id="ftn.idp2483552">147</a>] </sup>The imaginary unit is a number
+      <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<mi>i</mi>
+</math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<msup>
+<mi>i</mi>
+<mn>2</mn>
+</msup>
+<mo>=</mo>
+<mo>−</mo>
+<mn>1</mn>
+</math></p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2508320" id="ftn.idp2508320">148</a>] </sup>The purpose
+of the pragma is to allow the implementation to use the
+formulas.</p></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../assert/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 14. Diagnostics &lt;assert.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
    GNU FDL license is applicable where not stated.</p></body></html>
