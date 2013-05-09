@@ -1,4 +1,4 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 7. Operators and Expressions</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../io/index.html" rel="prev" title="Chapter 6. Console I/O"/><link href="../cf/index.html" rel="next" title="Chapter 8. Control Flow"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 7. Operators and Expressions</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../io/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../cf/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 7. Operators and Expressions"><div class="titlepage"><div><div><h2 class="title"><a name="idp414672"></a>Chapter 7. Operators and Expressions</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp417872">7.1. Basic Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp429424">7.2. Relational Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp433520">7.3. Equality Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp436896">7.4. Increment and Decrement Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp440736">7.5. Logical Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp447664">7.6. Bitwise Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp451424">7.7. Bitwise Shift Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp453968">7.8. Assignment Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp458784">7.9. Conditional Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp460864">7.10. Comma Operator</a></span></dt><dt><span class="sect1"><a href="index.html#idp462368">7.11. sizeof Operator</a></span></dt><dt><span class="sect1"><a href="index.html#idp465456">7.12. Unary Arithmetic Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp488608">7.13. Grouping parentheses</a></span></dt></dl></div><p>Operators and expressions are in the core of every programming
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 7. Operators and Expressions</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../io/index.html" rel="prev" title="Chapter 6. Console I/O"/><link href="../cf/index.html" rel="next" title="Chapter 8. Control Flow"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 7. Operators and Expressions</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../io/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../cf/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 7. Operators and Expressions"><div class="titlepage"><div><div><h2 class="title"><a name="idp421584"></a>Chapter 7. Operators and Expressions</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp424784">7.1. Basic Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp436336">7.2. Relational Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp440432">7.3. Equality Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp443808">7.4. Increment and Decrement Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp447648">7.5. Logical Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp454576">7.6. Bitwise Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp458336">7.7. Bitwise Shift Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp460880">7.8. Assignment Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp465696">7.9. Conditional Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp467776">7.10. Comma Operator</a></span></dt><dt><span class="sect1"><a href="index.html#idp469280">7.11. sizeof Operator</a></span></dt><dt><span class="sect1"><a href="index.html#idp472368">7.12. Unary Arithmetic Operators</a></span></dt><dt><span class="sect1"><a href="index.html#idp495568">7.13. Grouping parentheses</a></span></dt></dl></div><p>Operators and expressions are in the core of every programming
       language. They form the major part of BNF grammar. They also decide how
       the syntax will look like. You as a programmer will spend considerable
       time using C operators. C has sevral type of operators like arithmetic
@@ -13,7 +13,7 @@
       clear soon.</p><p>Whenever operators and expressions come in picture you may have a
       set of mixed data then to perform opration data is converted from one
       type to another. This is known as “Usual Arithmetic Conversion”, which I
-      am going to tell you next.</p><div class="sect1" title="7.1. Basic Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp417872"></a>7.1. Basic Operators</h2></div></div></div><p>There are five here. +, -, *, / and %. Please refer to chapter
+      am going to tell you next.</p><div class="sect1" title="7.1. Basic Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp424784"></a>7.1. Basic Operators</h2></div></div></div><p>There are five here. +, -, *, / and %. Please refer to chapter
 	4 for their behavior. Let us see a simple example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Arithmetic operators</span>
 <span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: Demo of arithmetic operators</span>
@@ -80,7 +80,7 @@ data types. Also, if there is a data type on left side of assignment the result
 of applying the operator to operands will be converted to the type of
 that. chars are promoted to ints, ints are promoted to floats anf floats to
 double. The point is that conversion will try to keep as much data as
-possible.</p></div><div class="sect1" title="7.2. Relational Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp429424"></a>7.2. Relational Operators</h2></div></div></div><p>There are four relational operators: <, >, <= and
+possible.</p></div><div class="sect1" title="7.2. Relational Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp436336"></a>7.2. Relational Operators</h2></div></div></div><p>There are four relational operators: <, >, <= and
 	>=. Once again these are described in chapter 4. Let us see an
 	example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Author : Shiv S. Dayal</span>
 <span class="c1">// Description : Demo of relational operator</span>
@@ -113,7 +113,7 @@ possible.</p></div><div class="sect1" title="7.2. Relational Operators"><div cl
 1
 0</pre><p>Note that you should not apply these to floating-point data types as
 they may not be represented correctly and two different entities have the same
-internal representation.</p></div><div class="sect1" title="7.3. Equality Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp433520"></a>7.3. Equality Operators</h2></div></div></div><p>There are two equlity operators == and !=. </p><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Author : Shiv S. Dayal</span>
+internal representation.</p></div><div class="sect1" title="7.3. Equality Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp440432"></a>7.3. Equality Operators</h2></div></div></div><p>There are two equlity operators == and !=. </p><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Author : Shiv S. Dayal</span>
 <span class="c1">// Description : Demo of equality operator</span>
 
 <span class="cp">#include &lt;stdio.h&gt;</span>
@@ -133,7 +133,7 @@ internal representation.</p></div><div class="sect1" title="7.3. Equality Opera
 <span class="p">}</span>
 </pre></div>
 </pre><p>and the output is:</p><pre class="screen">0
-1</pre></div><div class="sect1" title="7.4. Increment and Decrement Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp436896"></a>7.4. Increment and Decrement Operators</h2></div></div></div><p>There is one increment and one decrement operator. ++ and
+1</pre></div><div class="sect1" title="7.4. Increment and Decrement Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp443808"></a>7.4. Increment and Decrement Operators</h2></div></div></div><p>There is one increment and one decrement operator. ++ and
 	--. Both come in two forms prefix and postfix. First we will see prefix
 	versions then postfix ones. There is only one constraint on prefix
 	operators of these and that is the operand of the prefix increment or
@@ -160,7 +160,7 @@ internal representation.</p></div><div class="sect1" title="7.3. Equality Opera
 7.123000
 7.123000
 8.123000
-7.123000</pre></div><div class="sect1" title="7.5. Logical Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp440736"></a>7.5. Logical Operators</h2></div></div></div><p>There are two such operators. && logical AND and ||
+7.123000</pre></div><div class="sect1" title="7.5. Logical Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp447648"></a>7.5. Logical Operators</h2></div></div></div><p>There are two such operators. && logical AND and ||
 	locical OR. Both the operators have the same constraints and it is that
 	both the operands will have scalar type.</p><p>The && operator gives 1 if both the operands are
 	non-zero else 0. The result type is int. It is different from bitwise
@@ -202,7 +202,7 @@ internal representation.</p></div><div class="sect1" title="7.3. Equality Opera
 1
 0
 1</pre><p>note the use of <code class="code">bool</code> here instead of
-<code class="code">_Bool</code>.</p></div><div class="sect1" title="7.6. Bitwise Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp447664"></a>7.6. Bitwise Operators</h2></div></div></div><p>There are three bitwise operators. &, |, and ^. AND, OR and
+<code class="code">_Bool</code>.</p></div><div class="sect1" title="7.6. Bitwise Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp454576"></a>7.6. Bitwise Operators</h2></div></div></div><p>There are three bitwise operators. &, |, and ^. AND, OR and
 	EX-OR respectively. OR is also called inclusive OR. These have the same
 	contsraints and it is that operands should be integer types. The usual
 	arithmetic conversions are performed on the operands.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Author : Shiv S. Dayal</span>
@@ -230,7 +230,7 @@ internal representation.</p></div><div class="sect1" title="7.3. Equality Opera
 </pre></div>
 </pre><p>and the output is:</p><pre class="screen">4
 5
-1</pre></div><div class="sect1" title="7.7. Bitwise Shift Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp451424"></a>7.7. Bitwise Shift Operators</h2></div></div></div><p>The constraint is same as other bitwise operators that operands
+1</pre></div><div class="sect1" title="7.7. Bitwise Shift Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp458336"></a>7.7. Bitwise Shift Operators</h2></div></div></div><p>The constraint is same as other bitwise operators that operands
 	should be integers. The integer promotions are performed on each of the
 	operands. The type of the result if that of the promoted left
 	operand. If the value of the right operand is negative or is greater
@@ -255,7 +255,7 @@ internal representation.</p></div><div class="sect1" title="7.3. Equality Opera
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-</pre></div><div class="sect1" title="7.8. Assignment Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp453968"></a>7.8. Assignment Operators</h2></div></div></div><p>These are = *= /= %= += -= <<= >>= &= ^= and |= The only
+</pre></div><div class="sect1" title="7.8. Assignment Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp460880"></a>7.8. Assignment Operators</h2></div></div></div><p>These are = *= /= %= += -= <<= >>= &= ^= and |= The only
 	constraint is that left operand should be modifiable lvalue. An
 	assignment operator stores a value in the object designated by the left
 	operand. An assignment expression has the value of the left operand
@@ -291,7 +291,7 @@ internal representation.</p></div><div class="sect1" title="7.3. Equality Opera
 </pre></div>
 </pre><p>and the output is:</p><pre class="screen">7.700000
 3.000000
-24</pre></div><div class="sect1" title="7.9. Conditional Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp458784"></a>7.9. Conditional Operators</h2></div></div></div><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Author : Shiv S. Dayal</span>
+24</pre></div><div class="sect1" title="7.9. Conditional Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp465696"></a>7.9. Conditional Operators</h2></div></div></div><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Author : Shiv S. Dayal</span>
 <span class="c1">// Description : Demo of conditional operator</span>
 
 <span class="cp">#include &lt;stdio.h&gt;</span>
@@ -305,11 +305,11 @@ internal representation.</p></div><div class="sect1" title="7.3. Equality Opera
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-</pre><p>output is 7 as 4 is less than 5 which is true.</p></div><div class="sect1" title="7.10. Comma Operator"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp460864"></a>7.10. Comma Operator</h2></div></div></div><p>It is a very simple operator. The left operand of a comma
+</pre><p>output is 7 as 4 is less than 5 which is true.</p></div><div class="sect1" title="7.10. Comma Operator"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp467776"></a>7.10. Comma Operator</h2></div></div></div><p>It is a very simple operator. The left operand of a comma
 	operator is evaluated as a void expression; there is a sequence point
 	between its evaluation and that of the right operand. Then the right
 	operand is evaluated; the result has its type and value. A comma
-	operator does not give an lvalue.</p></div><div class="sect1" title="7.11. sizeof Operator"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp462368"></a>7.11. sizeof Operator</h2></div></div></div><p>You have already see sizeof operator in second chapter when we
+	operator does not give an lvalue.</p></div><div class="sect1" title="7.11. sizeof Operator"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp469280"></a>7.11. sizeof Operator</h2></div></div></div><p>You have already see sizeof operator in second chapter when we
 	saw sizes of data types. However here is the constraint: the sizeof
 	operator will not be applied to an expression that has function type or
 	an incomplete type, to the parenthesized name of such a type, or to an
@@ -323,12 +323,12 @@ internal representation.</p></div><div class="sect1" title="7.3. Equality Opera
 	applied to an operand that has array type, the result is the total
 	number of bytes in the array. When applied to an operand that has
 	structure or union type, the result is the total number of bytes in
-	such an object, including internal and trailing padding.</p></div><div class="sect1" title="7.12. Unary Arithmetic Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp465456"></a>7.12. Unary Arithmetic Operators</h2></div></div></div><p>We will see casting, array subscripting, function parenthes,
+	such an object, including internal and trailing padding.</p></div><div class="sect1" title="7.12. Unary Arithmetic Operators"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp472368"></a>7.12. Unary Arithmetic Operators</h2></div></div></div><p>We will see casting, array subscripting, function parenthes,
 	address and indirection operators later at appropriate time. For now I
 	am going to tell you about operator precedence and associativity and
 	then about grouping parenthes. Given below is the table for operator
 	precedence and associativity, however, you may not be familiar with few
-	of them but later you will be:</p><table border="1" class="leftcenter" frame="border" id="idp466928"><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><caption>Table 7.1. Priority and assiciativity table</caption><thead><tr bgcolor="#aaa">
+	of them but later you will be:</p><table border="1" class="leftcenter" frame="border" id="idp473840"><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><caption>Table 7.1. Priority and assiciativity table</caption><thead><tr bgcolor="#aaa">
 <th>Operators</th>
 <th>Associativity</th>
 </tr></thead><tr>
@@ -373,7 +373,7 @@ internal representation.</p></div><div class="sect1" title="7.3. Equality Opera
 </tr><tr>
 <td>,</td>
 <td>left-to-right</td>
-</tr></table></div><div class="sect1" title="7.13. Grouping parentheses"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp488608"></a>7.13. Grouping parentheses</h2></div></div></div><p>Grouping parentheses are used to override operator precedence
+</tr></table></div><div class="sect1" title="7.13. Grouping parentheses"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp495568"></a>7.13. Grouping parentheses</h2></div></div></div><p>Grouping parentheses are used to override operator precedence
 	and group expressions. NEVER EVER try to memorize and rely on
 	precedence of operators. Always use grouping parentheses. Till now I
 	have shown very simple examples of operators; here are some complex
