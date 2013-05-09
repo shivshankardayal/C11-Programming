@@ -88,6 +88,7 @@ end of a compound statement the state for the pragma is restored to its
 condition just before the compound statement. If this pragma is used in any
 other context, the behavior is undefined. The default state for the pragma is
 “off”.</d:para>
+</d:sect1>
 <d:sect1>
   <d:title>Trigonometric Functions</d:title>
   <d:sect2>
@@ -259,8 +260,80 @@ int main()
 <d:para>Compile like . Execution<d:code>clang filename.c -lm</d:code> gives
 following output:</d:para>
 <d:screen>Re[cactan(z)]=1.448307 and Im[cactan(z)]=0.158997</d:screen>
-
   </d:sect2>
-</d:sect1>
+  <d:sect2>
+    <d:title>The ccos Functions</d:title>
+    <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+    <d:programlisting role="CLexer">#include &lt;complex.h>
+double complex ccos(double complex z);
+float complex ccosf(float complex z);
+long double complex ccosl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>ccos</d:code> functions compute the complex cosine of
+<d:code>z</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>ccos</d:code> functions return the complex cosine
+value.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex ccos(double complex z);
+float complex ccosf(float complex z);
+long double complex ccosl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The complex cosine function is defined as:</d:para>
+<d:screen>ccos(z) = (exp(i * z) + exp(-i * z)) / 2</d:screen>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[ccos(z)]=%lf and Im[ccos(z)]=%lf\n", creal(ccos(z)), cimag(ccos(z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[ccos(z)]=-27.034946 and Im[ccos(z)]=-3.851153</d:screen>
+  </d:sect2>
+  <d:sect2>
+    <d:title>The csin Functions</d:title>
+    <d:para>Synopsis</d:para>
+    <d:programlisting role="CLexer">#include &lt;complex.h>
+double complex csin(double complex z);
+float complex csinf(float complex z);
+long double complex csinl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code></d:code> functions compute the complex sine of
+<d:code>z</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Desciption</d:emphasis></d:para>
+<d:para>The <d:code>csin</d:code> functions return the complex sine
+value.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex csin(double complex z);
+float complex csinf(float complex z);
+long double complex csinl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The complex sine function is defined as:</d:para>
+<d:screen>csin(z) = (exp(i * z) - exp(-i * z)) / (2 * i)</d:screen>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[csin(z)]=%lf and Im[csin(z)]=%lf\n", creal(csin(z)), cimag(csin(z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[csin(z)]=3.853738 and Im[csin(z)]=-27.01681</d:screen>
+  </d:sect2>
     </d:sect1>
 </d:chapter>
