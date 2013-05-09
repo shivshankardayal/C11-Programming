@@ -57,6 +57,26 @@ program. The message "assertion failed in file foo.c, function do_bar(), line
 <d:para>No value is returned.</d:para>
 <d:para>In C89, expression is required to be of type int and undefiend behavior
 results if it is not, but in C99 it may have scalar type.</d:para>
+<d:para><d:code>assert()</d:code> is implemented as a macro; if the expression
+tested hasside-effects, program behavior will be different depending on whether
+<d:code>NDEBUG</d:code> is defined. This may create Heisenbugs which go away
+whendebugging is turned on.</d:para>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;assert.h>
+
+int main()
+{
+  assert(0);
+  printf("Not gonna happen!");
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>a.out: test.c:5: int main(): Assertion `0' failed.
+Aborted (core dumped)</d:screen>
+<d:para>You should replace 0 inside assert() by the expression to be
+tested.</d:para>
   </d:sect2>
 </d:sect1>
 </d:chapter>

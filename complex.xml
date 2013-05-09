@@ -1,0 +1,17 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+    <?dbhtml filename="complex/index.html" ?>
+    <d:title>Complex arithmetic &amp;lt;complex.h></d:title>
+    <d:sect1>
+      <d:title>Introduction</d:title>
+      <d:para>The header <d:code>&amp;lt;complex.h></d:code> defines macros and
+      declares functions that support complex arithmetic. Each synopsis
+      specifies a family of functions consisting of a principal function with
+      one or more double complex parameters and a double complex or double
+      return value; and other functions with the same name but with f and l
+      suffixes which are corresponding functions with float and long double
+      parameters and return values.</d:para>
+    </d:sect1>
+</d:chapter>
