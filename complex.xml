@@ -335,5 +335,42 @@ int main()
 and the output is:
 <d:screen>Re[csin(z)]=3.853738 and Im[csin(z)]=-27.01681</d:screen>
   </d:sect2>
+  <d:sect2>
+    <d:title>The ctan Functions</d:title>
+    <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+    <d:programlisting role="CLexer">#include &lt;complex.h>
+double complex ctan(double complex z);
+float complex ctanf(float complex z);
+long double complex ctanl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>ctan</d:code> functions compute the complex tangent of
+<d:code>z</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>ctan</d:code> functions return the complex tangent
+value.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex ctan(double complex z);
+float complex ctanf(float complex z);
+long double complex ctanl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The complex tangent function is defined as:</d:para>
+<d:screen>ctan(z) = csin(z) / ccos(z)</d:screen>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[ctann(z)]=%lf and Im[ctan(z)]=%lf\n", creal(ctan(z)), cimag(ctan(z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[ctann(z)]=-0.000187 and Im[ctan(z)]=0.999356</d:screen>
+  </d:sect2>
     </d:sect1>
 </d:chapter>
