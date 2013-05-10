@@ -510,7 +510,8 @@ and the output is:
 <d:screen>Re[casinh(z)]=2.299914 and Im[casinh(z)]=0.917617</d:screen>
       </d:sect2>
       <d:sect2>
-	<d:title></d:title>
+	<d:title>The catanh functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       </d:sect2>
     </d:sect1>
 </d:chapter>
