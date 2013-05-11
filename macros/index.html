@@ -1,11 +1,11 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 12. Preprocessing Directives</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../su/index.html" rel="prev" title="Chapter 11. Structures and Unions"/><link href="../std/index.html" rel="next" title="Chapter 13. The C Standard Library"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 12. Preprocessing Directives</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../su/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../std/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 12. Preprocessing Directives"><div class="titlepage"><div><div><h2 class="title"><a name="idp3277920"></a>Chapter 12. Preprocessing Directives</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp2885584">12.1. Conditional Inclusion</a></span></dt><dt><span class="sect1"><a href="index.html#idp1079328">12.2. Source File Inclusion</a></span></dt><dt><span class="sect1"><a href="index.html#idp1206608">12.3. Macro Replacement</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp1391120">12.3.1. Argument Substitution</a></span></dt><dt><span class="sect2"><a href="index.html#idp1395344">12.3.2. The # Operator</a></span></dt><dt><span class="sect2"><a href="index.html#idp1402016">12.3.3. The ## Operator</a></span></dt><dt><span class="sect2"><a href="index.html#idp1409520">12.3.4. Rescanning and Further Replacement</a></span></dt><dt><span class="sect2"><a href="index.html#idp1413712">12.3.5. Scope of Macro Definitions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp1417696">12.4. Line Control</a></span></dt><dt><span class="sect1"><a href="index.html#idp1427616">12.5. Error Directive</a></span></dt><dt><span class="sect1"><a href="index.html#idp1430400">12.6. Pragma Directive</a></span></dt><dt><span class="sect1"><a href="index.html#idp1439696">12.7. Null Directive</a></span></dt><dt><span class="sect1"><a href="index.html#idp1443072">12.8. Predefined Macro Names</a></span></dt><dt><span class="sect1"><a href="index.html#idp2208032">12.9. Pragma Operator</a></span></dt><dt><span class="sect1"><a href="index.html#idp2212496">12.10. Usage</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp2215120">12.10.1. #include</a></span></dt><dt><span class="sect2"><a href="index.html#idp2228288">12.10.2. Why we need headers?</a></span></dt><dt><span class="sect2"><a href="index.html#idp2231872">12.10.3. #define</a></span></dt><dt><span class="sect2"><a href="index.html#idp2244240">12.10.4. #undef</a></span></dt><dt><span class="sect2"><a href="index.html#idp2247840">12.10.5. # and ##</a></span></dt><dt><span class="sect2"><a href="index.html#idp2250224">12.10.6. #error</a></span></dt><dt><span class="sect2"><a href="index.html#idp2254848">12.10.7. #pragma</a></span></dt><dt><span class="sect2"><a href="index.html#idp1112752">12.10.8. Miscellaneous</a></span></dt></dl></dd></dl></div><p>The following comes from section 6.10 of specification. It will
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 12. Preprocessing Directives</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../su/index.html" rel="prev" title="Chapter 11. Structures and Unions"/><link href="../std/index.html" rel="next" title="Chapter 13. The C Standard Library"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 12. Preprocessing Directives</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../su/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../std/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 12. Preprocessing Directives"><div class="titlepage"><div><div><h2 class="title"><a name="idp856448"></a>Chapter 12. Preprocessing Directives</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp2340176">12.1. Conditional Inclusion</a></span></dt><dt><span class="sect1"><a href="index.html#idp2370272">12.2. Source File Inclusion</a></span></dt><dt><span class="sect1"><a href="index.html#idp2385008">12.3. Macro Replacement</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp1264080">12.3.1. Argument Substitution</a></span></dt><dt><span class="sect2"><a href="index.html#idp1268304">12.3.2. The # Operator</a></span></dt><dt><span class="sect2"><a href="index.html#idp1274976">12.3.3. The ## Operator</a></span></dt><dt><span class="sect2"><a href="index.html#idp1187248">12.3.4. Rescanning and Further Replacement</a></span></dt><dt><span class="sect2"><a href="index.html#idp1191440">12.3.5. Scope of Macro Definitions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp1195424">12.4. Line Control</a></span></dt><dt><span class="sect1"><a href="index.html#idp1205344">12.5. Error Directive</a></span></dt><dt><span class="sect1"><a href="index.html#idp1208128">12.6. Pragma Directive</a></span></dt><dt><span class="sect1"><a href="index.html#idp1217424">12.7. Null Directive</a></span></dt><dt><span class="sect1"><a href="index.html#idp1220800">12.8. Predefined Macro Names</a></span></dt><dt><span class="sect1"><a href="index.html#idp2274992">12.9. Pragma Operator</a></span></dt><dt><span class="sect1"><a href="index.html#idp2279456">12.10. Usage</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp2282080">12.10.1. #include</a></span></dt><dt><span class="sect2"><a href="index.html#idp2295248">12.10.2. Why we need headers?</a></span></dt><dt><span class="sect2"><a href="index.html#idp2298832">12.10.3. #define</a></span></dt><dt><span class="sect2"><a href="index.html#idp985808">12.10.4. #undef</a></span></dt><dt><span class="sect2"><a href="index.html#idp989408">12.10.5. # and ##</a></span></dt><dt><span class="sect2"><a href="index.html#idp991792">12.10.6. #error</a></span></dt><dt><span class="sect2"><a href="index.html#idp996416">12.10.7. #pragma</a></span></dt><dt><span class="sect2"><a href="index.html#idp998240">12.10.8. Miscellaneous</a></span></dt></dl></dd></dl></div><p>The following comes from section 6.10 of specification. It will
     terminate when you see code starting. :-)</p><p>A <span class="italic">preprocessing directive</span>
     consists of a sequence of preprocessing tokens that begins with a
     <code class="code">#</code> preprocessing token that (at the start of translation
     phase 4) is either the first character in the source file (optionally after
     white space containing no new-line characters) or that follows white space
     containing at least one new-line character, and is ended by the next
-    new-line character.<sup>[<a class="footnote" href="#ftn.idp2833360" name="idp2833360">128</a>]</sup> A new-line character ends
+    new-line character.<sup>[<a class="footnote" href="#ftn.idp2331008" name="idp2331008">128</a>]</sup> A new-line character ends
     the preprocessing directive even if it occurs within what would otherwise
     be an invocation of a function-like macro.</p><p>A text line shall not begin with a <code class="code">#</code> preprocessing
     token. A non-directive shall not begin with any of the directive names
@@ -26,10 +26,10 @@
 </pre><p>the sequence of preprocessing tokens on the second line is not a
 preprocessing directive, because it does not begin with a <code class="code">#</code> at
 the start of translation phase 4, even though it will do so after the macro
-<code class="code">EMPTY</code> has been replaced.</p><div class="sect1" title="12.1. Conditional Inclusion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2885584"></a>12.1. Conditional Inclusion</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>The expression that controls conditional inclusion shall be an
+<code class="code">EMPTY</code> has been replaced.</p><div class="sect1" title="12.1. Conditional Inclusion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2340176"></a>12.1. Conditional Inclusion</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>The expression that controls conditional inclusion shall be an
   integer constant expression except that: it shall not contain a cast;
   identifiers (including those lexically identical to keywords) are interpreted
-  as described below; <sup>[<a class="footnote" href="#ftn.idp2887680" name="idp2887680">129</a>]</sup> and it may contain unary operator
+  as described below; <sup>[<a class="footnote" href="#ftn.idp2342272" name="idp2342272">129</a>]</sup> and it may contain unary operator
   expressions of the form:</p><pre class="screen">defined identifier</pre><p>or:</p><pre class="screen">defined (identifier)</pre><p>which evaluate to 1 if the identifier is currently defined as a macro
   name (that is, if it is predefined or if it has been the subject of a
   <code class="code">#define</code> preprocessing directive without an intervening
@@ -52,12 +52,12 @@ according to the rules of constant expressions. For the purposes of this token
 conversion and evaluation, all signed integer types and all unsigned integer
 types act as if they hav e the same representation as, respectively, the types
 <code class="code">intmax_t</code> and <code class="code">uintmax_t</code> defined in the header
-<code class="code">&lt;stdint.h></code>.<sup>[<a class="footnote" href="#ftn.idp2896528" name="idp2896528">130</a>]</sup> This includes interpreting character constants, which
+<code class="code">&lt;stdint.h></code>.<sup>[<a class="footnote" href="#ftn.idp2351280" name="idp2351280">130</a>]</sup> This includes interpreting character constants, which
 may involve converting escape sequences into execution character set
 members. Whether the numeric value for these character constants matches the
 value obtained when an identical character constant occurs in an expression
 (other than within a <code class="code">#if</code> or <code class="code">#elif</code> directive)
-is implementation-defined.<sup>[<a class="footnote" href="#ftn.idp1072832" name="idp1072832">131</a>]</sup> Also, whether a
+is implementation-defined.<sup>[<a class="footnote" href="#ftn.idp2363776" name="idp2363776">131</a>]</sup> Also, whether a
 single-character character constant may have a negative value is
 implementation-defined.</p><p>Preprocessing directives of the forms:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># ifdef identifier new-line group_opt</span>
 <span class="cp"># ifndef identifier new-line group_opt</span>
@@ -72,7 +72,7 @@ tokens are ignored, as are the other preprocessing tokens in the group. Only
 the first group whose control condition evaluates to true (nonzero) is
 processed. If none of the conditions evaluates to true, and there is a #else
 directive, the group controlled by the #else is processed; lacking a #else
-directive, all the groups until the #endif are skipped.<sup>[<a class="footnote" href="#ftn.idp1078368" name="idp1078368">132</a>]</sup></p></div><div class="sect1" title="12.2. Source File Inclusion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1079328"></a>12.2. Source File Inclusion</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>A <code class="code">#include</code> directive shall identify a header or
+directive, all the groups until the #endif are skipped.<sup>[<a class="footnote" href="#ftn.idp2369312" name="idp2369312">132</a>]</sup></p></div><div class="sect1" title="12.2. Source File Inclusion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2370272"></a>12.2. Source File Inclusion</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>A <code class="code">#include</code> directive shall identify a header or
   source file that can be processed by the implementation.</p><p><span class="bold"><strong>Semantics</strong></span></p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># include &lt;h-char-sequence&gt;  new-line</span>
 </pre></div>
 </pre><p>searches a sequence of implementation-defined places for a header
@@ -95,7 +95,7 @@ preprocessing tokens after include in the directive are processed just as in
 normal text. (Each identifier currently defined as a macro name is replaced by
 its replacement list of preprocessing tokens.) The directive resulting after
 all replacements shall match one of the two previous
-forms.<sup>[<a class="footnote" href="#ftn.idp1202288" name="idp1202288">133</a>]</sup> The method
+forms.<sup>[<a class="footnote" href="#ftn.idp2380688" name="idp2380688">133</a>]</sup> The method
 by which a sequence of preprocessing tokens between a &lt; and a >
 preprocessing token pair or a pair of ” characters is combined into a single
 header name preprocessing token is implementation-defined.</p><p>The implementation shall provide unique mappings for sequences
@@ -105,7 +105,7 @@ ignore the distinctions of alphabetical case and restrict the mapping to eight
 significant characters before the period.</p><p>A <code class="code">#include</code> preprocessing directive may appear in a
 source file that has been read because of a <code class="code">#include</code> directive
 in another file, up to an implementation-defined nesting limit.</p><p><span class="bold"><strong>Forward References</strong></span>: macro
-replacement (12.3).</p></div><div class="sect1" title="12.3. Macro Replacement"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1206608"></a>12.3. Macro Replacement</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>Two replacement lists are identical if and only if the preprocessing
+replacement (12.3).</p></div><div class="sect1" title="12.3. Macro Replacement"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2385008"></a>12.3. Macro Replacement</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>Two replacement lists are identical if and only if the preprocessing
   tokens in both have the same number, ordering, spelling, and white-space
   separation, where all white-space separations are considered
   identical.</p><p>An identifier currently defined as an object-like macro shall not be
@@ -133,7 +133,7 @@ replacement (12.3).</p></div><div class="sect1" title="12.3. Macro Replacement"
   could begin, the identifier is not subject to macro replacement.</p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># define identifier replacement-list new-line</span>
 </pre></div>
 </pre><p>defines an object-like macro that causes each subsequent instance of
-  the macro name<sup>[<a class="footnote" href="#ftn.idp1217424" name="idp1217424">134</a>]</sup> to be replaced
+  the macro name<sup>[<a class="footnote" href="#ftn.idp1257584" name="idp1257584">134</a>]</sup> to be replaced
   by the replacement list of preprocessing tokens that constitute the remainder
   of the directive.</p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># define identifier lparen identifier-listopt ) replacement-list new-line</span>
 <span class="cp"># define identifier lparen ... ) replacement-list new-line</span>
@@ -156,13 +156,13 @@ macro. The individual arguments within the list are separated by comma
 preprocessing tokens, but comma preprocessing tokens between matching inner
 parentheses do not separate arguments. If there are sequences of preprocessing
 tokens within the list of arguments that would otherwise act as preprocessing
-directives,<sup>[<a class="footnote" href="#ftn.idp1222304" name="idp1222304">135</a>]</sup> the behavior is
+directives,<sup>[<a class="footnote" href="#ftn.idp1262464" name="idp1262464">135</a>]</sup> the behavior is
 undefined.</p><p>If there is a ... in the identifier-list in the macro definition, then
 the trailing arguments, including any separating comma preprocessing tokens,
 are merged to form a single item: the variable arguments. The number of
 arguments combined is such that, following merger, the number of arguments is
 one more than the number of parameters in the macro definition (excluding the
-...).</p><div class="sect2" title="12.3.1. Argument Substitution"><div class="titlepage"><div><div><h3 class="title"><a name="idp1391120"></a>12.3.1. Argument Substitution</h3></div></div></div><p>After the arguments for the invocation of a function-like macro have
+...).</p><div class="sect2" title="12.3.1. Argument Substitution"><div class="titlepage"><div><div><h3 class="title"><a name="idp1264080"></a>12.3.1. Argument Substitution</h3></div></div></div><p>After the arguments for the invocation of a function-like macro have
   been identified, argument substitution takes place. A parameter in the
   replacement list, unless preceded by a <code class="code">#</code> or
   <code class="code">##</code> preprocessing token or followed by a <code class="code">##</code>
@@ -172,7 +172,7 @@ one more than the number of parameters in the macro definition (excluding the
   replaced as if they formed the rest of the preprocessing file; no other
   preprocessing tokens are available.</p><p>An identifier <code class="code">__VA_ARGS__</code> that occurs in the
   replacement list shall be treated as if it were a parameter, and the variable
-  arguments shall form the preprocessing tokens used to replace it.</p></div><div class="sect2" title="12.3.2. The # Operator"><div class="titlepage"><div><div><h3 class="title"><a name="idp1395344"></a>12.3.2. The # Operator</h3></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>Each <code class="code">#</code> preprocessing token in the replacement list
+  arguments shall form the preprocessing tokens used to replace it.</p></div><div class="sect2" title="12.3.2. The # Operator"><div class="titlepage"><div><div><h3 class="title"><a name="idp1268304"></a>12.3.2. The # Operator</h3></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>Each <code class="code">#</code> preprocessing token in the replacement list
   for a function-like macro shall be followed by a parameter as the next
   preprocessing token in the replacement list.</p><p><span class="bold"><strong>Semantics</strong></span></p><p>If, in the replacement list, a parameter is immediately preceded by a
   <code class="code">#</code> preprocessing token, both are replaced by a single
@@ -191,14 +191,14 @@ one more than the number of parameters in the macro definition (excluding the
   character name. If the replacement that results is not a valid character
   string literal, the behavior is undefined. The character string literal
   corresponding to an empty argument is "". The order of evaluation of
-  <code class="code">#</code> and <code class="code">##</code> operators is unspecified.</p></div><div class="sect2" title="12.3.3. The ## Operator"><div class="titlepage"><div><div><h3 class="title"><a name="idp1402016"></a>12.3.3. The ## Operator</h3></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>A <code class="code">##</code> preprocessing token shall not occur at the
+  <code class="code">#</code> and <code class="code">##</code> operators is unspecified.</p></div><div class="sect2" title="12.3.3. The ## Operator"><div class="titlepage"><div><div><h3 class="title"><a name="idp1274976"></a>12.3.3. The ## Operator</h3></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>A <code class="code">##</code> preprocessing token shall not occur at the
   beginning or at the end of a replacement list for either form of macro
   definition.</p><p><span class="bold"><strong>Semantics</strong></span></p><p>If, in the replacement list of a function-like macro, a parameter is
   immediately preceded or followed by a <code class="code">##</code> preprocessing
   token, the parameter is replaced by the corresponding argument’s
   preprocessing token sequence; however, if an argument consists of no
   preprocessing tokens, the parameter is replaced by a placemarker
-  preprocessing token instead.<sup>[<a class="footnote" href="#ftn.idp1406528" name="idp1406528">136</a>]</sup></p><p>For both object-like and function-like macro invocations, before the
+  preprocessing token instead.<sup>[<a class="footnote" href="#ftn.idp1184256" name="idp1184256">136</a>]</sup></p><p>For both object-like and function-like macro invocations, before the
   replacement list is reexamined for more macro names to replace, each instance
   of a <code class="code">##</code> preprocessing token in the replacement list (not
   from an argument) is deleted and the preceding preprocessing token is
@@ -209,7 +209,7 @@ one more than the number of parameters in the macro definition (excluding the
   non-placemarker preprocessing token. If the result is not a valid
   preprocessing token, the behavior is undefined. The resulting token is
   available for further macro replacement. The order of evaluation of
-  <code class="code">##</code> operators is unspecified.</p></div><div class="sect2" title="12.3.4. Rescanning and Further Replacement"><div class="titlepage"><div><div><h3 class="title"><a name="idp1409520"></a>12.3.4. Rescanning and Further Replacement</h3></div></div></div><p>After all parameters in the replacement list have been substituted
+  <code class="code">##</code> operators is unspecified.</p></div><div class="sect2" title="12.3.4. Rescanning and Further Replacement"><div class="titlepage"><div><div><h3 class="title"><a name="idp1187248"></a>12.3.4. Rescanning and Further Replacement</h3></div></div></div><p>After all parameters in the replacement list have been substituted
   and <code class="code">#</code> and <code class="code">##</code> processing has taken place,
   all placemarker preprocessing tokens are removed. Then, the resulting
   preprocessing token sequence is rescanned, along with all subsequent
@@ -224,14 +224,14 @@ one more than the number of parameters in the macro definition (excluding the
   been replaced.</p><p>The resulting completely macro-replaced preprocessing token sequence
   is not processed as a preprocessing directive even if it resembles one, but
   all pragma unary operator expressions within it are then processed as
-  specified in 12.9 below.</p></div><div class="sect2" title="12.3.5. Scope of Macro Definitions"><div class="titlepage"><div><div><h3 class="title"><a name="idp1413712"></a>12.3.5. Scope of Macro Definitions</h3></div></div></div><p>A macro definition lasts (independent of block structure) until a
+  specified in 12.9 below.</p></div><div class="sect2" title="12.3.5. Scope of Macro Definitions"><div class="titlepage"><div><div><h3 class="title"><a name="idp1191440"></a>12.3.5. Scope of Macro Definitions</h3></div></div></div><p>A macro definition lasts (independent of block structure) until a
   corresponding <code class="code">#undef</code> directive is encountered or (if none is
   encountered) until the end of the preprocessing translation unit. Macro
   definitions have no significance after translation phase 4.</p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># undef identifier new-line</span>
 </pre></div>
 </pre><p>causes the specified identifier no longer to be defined as a macro
   name. It is ignored if the specified identifier is not currently defined as a
-  macro name.</p></div></div><div class="sect1" title="12.4. Line Control"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1417696"></a>12.4. Line Control</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>The string literal of a <code class="code">#line</code> directive, if present,
+  macro name.</p></div></div><div class="sect1" title="12.4. Line Control"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1195424"></a>12.4. Line Control</h2></div></div></div><p><span class="bold"><strong>Constraints</strong></span></p><p>The string literal of a <code class="code">#line</code> directive, if present,
   shall be a character string literal.</p><p><span class="bold"><strong>Semantics</strong></span></p><p>The line number of the current source line is one greater than the
   number of new-line characters read or introduced in translation phase 1 while
   processing the source file to the current token.</p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># line digit-sequence new-line</span>
@@ -250,13 +250,13 @@ one more than the number of parameters in the macro definition (excluding the
   normal text (each identifier currently defined as a macro name is replaced by
   its replacement list of preprocessing tokens). The directive resulting after
   all replacements shall match one of the two previous forms and is then
-  processed as appropriate.</p></div><div class="sect1" title="12.5. Error Directive"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1427616"></a>12.5. Error Directive</h2></div></div></div><p><span class="bold"><strong>Semantics</strong></span></p><p>A preprocessing directive of the form <code class="code"># error
+  processed as appropriate.</p></div><div class="sect1" title="12.5. Error Directive"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1205344"></a>12.5. Error Directive</h2></div></div></div><p><span class="bold"><strong>Semantics</strong></span></p><p>A preprocessing directive of the form <code class="code"># error
   pp-tokensopt new-line</code> causes the implementation to produce a
   diagnostic message that includes the specified sequence of preprocessing
-  tokens.</p></div><div class="sect1" title="12.6. Pragma Directive"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1430400"></a>12.6. Pragma Directive</h2></div></div></div><p><span class="bold"><strong>Semantics</strong></span></p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># pragma pp-tokensopt new-line</span>
+  tokens.</p></div><div class="sect1" title="12.6. Pragma Directive"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1208128"></a>12.6. Pragma Directive</h2></div></div></div><p><span class="bold"><strong>Semantics</strong></span></p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># pragma pp-tokensopt new-line</span>
 </pre></div>
 </pre><p>where the preprocessing token STDC does not immediately follow pragma
-  in the directive (prior to any macro replacement)<sup>[<a class="footnote" href="#ftn.idp1433584" name="idp1433584">137</a>]</sup>
+  in the directive (prior to any macro replacement)<sup>[<a class="footnote" href="#ftn.idp1211312" name="idp1211312">137</a>]</sup>
   causes the implementation to behave in an implementation-defined manner. The
   behavior might cause translation to fail or cause the translator or the
   resulting program to behave in a non-conforming manner. Any such pragma that
@@ -269,16 +269,16 @@ one more than the number of parameters in the macro definition (excluding the
 </pre></div>
 </pre><p><span class="italic">on-off-switch: </span> on of</p><p>ON OFF DEFAULT</p><p><span class="bold"><strong>Forward references:</strong></span> the
 FP_CONTRACT pragma (13.12.2), the FENV_ACCESS pragma (13.6.1), the
-CX_LIMITED_RANGE pragma (13.3.4). 149).</p></div><div class="sect1" title="12.7. Null Directive"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1439696"></a>12.7. Null Directive</h2></div></div></div><p><span class="bold"><strong>Semantics</strong></span></p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># new-line</span>
+CX_LIMITED_RANGE pragma (13.3.4). 149).</p></div><div class="sect1" title="12.7. Null Directive"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1217424"></a>12.7. Null Directive</h2></div></div></div><p><span class="bold"><strong>Semantics</strong></span></p><p>A preprocessing directive of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp"># new-line</span>
 </pre></div>
-</pre><p>has no effect.</p></div><div class="sect1" title="12.8. Predefined Macro Names"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1443072"></a>12.8. Predefined Macro Names</h2></div></div></div><p>The following macro names shall be defined by the
+</pre><p>has no effect.</p></div><div class="sect1" title="12.8. Predefined Macro Names"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1220800"></a>12.8. Predefined Macro Names</h2></div></div></div><p>The following macro names shall be defined by the
   implementation:</p><p><code class="code">__DATE__</code> The date of translation of the
   preprocessing translation unit: a character string literal of the form "Mmm
   dd yyyy", where the names of the months are the same as those generated by
   the asctime function, and the first character of dd is a space character if
   the value is less than 10. If the date of translation is not available, an
   implementation-defined valid date shall be supplied.</p><p><code class="code">__FILE__</code> The presumed name of the current source
-  file (a character string literal)<sup>[<a class="footnote" href="#ftn.idp2192944" name="idp2192944">138</a>]</sup></p><p><code class="code">__LINE__</code> The presumed line number (within the
+  file (a character string literal)<sup>[<a class="footnote" href="#ftn.idp2259904" name="idp2259904">138</a>]</sup></p><p><code class="code">__LINE__</code> The presumed line number (within the
   current source file) of the current source line (an integer
   constant).<sup>[<a class="footnote" href="#ftn.line" name="line">139</a>]</sup></p><p><code class="code">__STDC__</code> The integer constant 1, intended to
   indicate a conforming implementation. <code class="code">__STDC_HOSTED__</code> The
@@ -308,7 +308,7 @@ CX_LIMITED_RANGE pragma (13.3.4). 149).</p></div><div class="sect1" title="12.7.
   underscore.</p><p>The implementation shall not predefine the macro
   <code class="code">__cplusplus</code>, nor shall it define it in any standard
   header.</p><p><span class="bold"><strong>Forward references:</strong></span> the asctime
-  function (13.23.3.1), standard headers (13.1.2).</p></div><div class="sect1" title="12.9. Pragma Operator"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2208032"></a>12.9. Pragma Operator</h2></div></div></div><p><span class="bold"><strong>Semantics</strong></span></p><p>A unary operator expression of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="n">_Pragma</span> <span class="p">(</span> <span class="n">string</span><span class="o">-</span><span class="n">literal</span> <span class="p">)</span>
+  function (13.23.3.1), standard headers (13.1.2).</p></div><div class="sect1" title="12.9. Pragma Operator"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2274992"></a>12.9. Pragma Operator</h2></div></div></div><p><span class="bold"><strong>Semantics</strong></span></p><p>A unary operator expression of the form:</p><pre class="CLexer"><div class="highlight"><pre><span class="n">_Pragma</span> <span class="p">(</span> <span class="n">string</span><span class="o">-</span><span class="n">literal</span> <span class="p">)</span>
 </pre></div>
 </pre><p>is processed as follows: The string literal is destringized by
   deleting the L prefix, if present, deleting the leading and trailing
@@ -318,10 +318,10 @@ CX_LIMITED_RANGE pragma (13.3.4). 149).</p></div><div class="sect1" title="12.7.
   preprocessing tokens that are executed as if they were the pp-tokens in a
   pragma directive. The original four preprocessing tokens in the unary
   operator expression are removed.</p><p>At this point specification material ends here and now we will see
-  usage of above discussed macros.</p></div><div class="sect1" title="12.10. Usage"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2212496"></a>12.10. Usage</h2></div></div></div><p>Note that for this part the compilation command should be
+  usage of above discussed macros.</p></div><div class="sect1" title="12.10. Usage"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2279456"></a>12.10. Usage</h2></div></div></div><p>Note that for this part the compilation command should be
   <code class="code">clang -E filename.c</code>. Let us create two files
   <code class="code">test.c</code> and <code class="code">test1.c</code> and their contents are
-  given below respectively.</p><div class="sect2" title="12.10.1. #include"><div class="titlepage"><div><div><h3 class="title"><a name="idp2215120"></a>12.10.1. #include</h3></div></div></div><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &quot;test1.c&quot;</span>
+  given below respectively.</p><div class="sect2" title="12.10.1. #include"><div class="titlepage"><div><div><h3 class="title"><a name="idp2282080"></a>12.10.1. #include</h3></div></div></div><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &quot;test1.c&quot;</span>
 <span class="n">I</span> <span class="n">am</span> <span class="n">test</span><span class="p">.</span>
 </pre></div>
 </pre><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &quot;test.c&quot;</span>
@@ -393,7 +393,7 @@ directive.</p><p>Consider following code:</p><pre class="CLexer"><div class="hig
 included via it <code class="code">ANYTHING_ELSE</code> will be defined. After first
 round of inclusion no more inclusion can happen as governed by the
 directives. Please see headers of standard library to see the conventions for
-<code class="code">ANYTHING</code>.</p></div><div class="sect2" title="12.10.2. Why we need headers?"><div class="titlepage"><div><div><h3 class="title"><a name="idp2228288"></a>12.10.2. Why we need headers?</h3></div></div></div><p>Now that we have seen the <code class="code">#include</code> directive I
+<code class="code">ANYTHING</code>.</p></div><div class="sect2" title="12.10.2. Why we need headers?"><div class="titlepage"><div><div><h3 class="title"><a name="idp2295248"></a>12.10.2. Why we need headers?</h3></div></div></div><p>Now that we have seen the <code class="code">#include</code> directive I
     would like to tell that why we even need header files. Header files contain
     several elements of libraries which come with C. For example, function
     prototypes, structure/type, declarations, macros, global variable
@@ -406,7 +406,7 @@ directives. Please see headers of standard library to see the conventions for
     global variables. The declaration of these must be known at compilation
     time. You take any language there has to be a mechanism to include code
     from other files. Be it use directive of Perl or import of Python or any
-    other mechanism of any other language.</p></div><div class="sect2" title="12.10.3. #define"><div class="titlepage"><div><div><h3 class="title"><a name="idp2231872"></a>12.10.3. #define</h3></div></div></div><p><code class="code">#define</code> and <code class="code">#include</code> are probably
+    other mechanism of any other language.</p></div><div class="sect2" title="12.10.3. #define"><div class="titlepage"><div><div><h3 class="title"><a name="idp2298832"></a>12.10.3. #define</h3></div></div></div><p><code class="code">#define</code> and <code class="code">#include</code> are probably
     the most encountered macro in all C files. There are many usage of it. We
     will first see the text replacement and function like usage which can be
     avoided and should be replaced by global constants and inline
@@ -448,7 +448,7 @@ been defined if test will pass successfully. Similarly <code class="code">#ifdef
 can be used to test it as a shortcut i.e. <code class="code">#ifdef
 SOMETHING</code>. The normal if-else statements are replaced in preprocessing
 directives using <code class="code">#if, #elif</code> and
-<code class="code">#endif</code>.</p></div><div class="sect2" title="12.10.4. #undef"><div class="titlepage"><div><div><h3 class="title"><a name="idp2244240"></a>12.10.4. #undef</h3></div></div></div><p>Anything defined by <code class="code">#define</code> can be undefined by
+<code class="code">#endif</code>.</p></div><div class="sect2" title="12.10.4. #undef"><div class="titlepage"><div><div><h3 class="title"><a name="idp985808"></a>12.10.4. #undef</h3></div></div></div><p>Anything defined by <code class="code">#define</code> can be undefined by
     <code class="code">#undef</code>. For example consider the following code:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#define test</span>
 <span class="cp">#ifdef test</span>
 
@@ -462,7 +462,7 @@ directives using <code class="code">#if, #elif</code> and
 <span class="cp">#endif</span>
 </pre></div>
 </pre><p>If you do this then first something else will be executed while the
-second will not be.</p></div><div class="sect2" title="12.10.5. # and ##"><div class="titlepage"><div><div><h3 class="title"><a name="idp2247840"></a>12.10.5. # and ##</h3></div></div></div><p>You can use following two examples and description given above to
+second will not be.</p></div><div class="sect2" title="12.10.5. # and ##"><div class="titlepage"><div><div><h3 class="title"><a name="idp989408"></a>12.10.5. # and ##</h3></div></div></div><p>You can use following two examples and description given above to
     understand both of these:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#define hash_hash # ## #</span>
 <span class="cp">#define mkstr(a) # a</span>
 <span class="cp">#define in_between(a) mkstr(a)</span>
@@ -476,7 +476,7 @@ second will not be.</p></div><div class="sect2" title="12.10.5. # and ##"><div 
 <span class="kt">char</span> <span class="n">first</span><span class="p">[]</span> <span class="o">=</span> <span class="n">FIRST</span><span class="p">;</span>
 <span class="kt">char</span> <span class="n">second</span><span class="p">[]</span> <span class="o">=</span> <span class="n">SECOND</span><span class="p">;</span>
 </pre></div>
-</pre></div><div class="sect2" title="12.10.6. #error"><div class="titlepage"><div><div><h3 class="title"><a name="idp2250224"></a>12.10.6. #error</h3></div></div></div><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+</pre></div><div class="sect2" title="12.10.6. #error"><div class="titlepage"><div><div><h3 class="title"><a name="idp991792"></a>12.10.6. #error</h3></div></div></div><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
@@ -493,10 +493,10 @@ test.c:5:5: error: #error MAX
 1 error generated.</pre><p>You can combine <code class="code"># error</code> with <code class="code">#if</code> but
 I have yet to see purposeful code written that way. Non-preprocessing
 constructs are better for handling such situations. Only if you want to test a
-preprocessing token then it should be used.</p></div><div class="sect2" title="12.10.7. #pragma"><div class="titlepage"><div><div><h3 class="title"><a name="idp2254848"></a>12.10.7. #pragma</h3></div></div></div><p><code class="code">#pragma</code> is dependent on what follows it. You
+preprocessing token then it should be used.</p></div><div class="sect2" title="12.10.7. #pragma"><div class="titlepage"><div><div><h3 class="title"><a name="idp996416"></a>12.10.7. #pragma</h3></div></div></div><p><code class="code">#pragma</code> is dependent on what follows it. You
     should consult compiler documentation as it is mostly
     implementation-defined. It is a way to tell compiler to do things which are
-    not governed by specification.</p></div><div class="sect2" title="12.10.8. Miscellaneous"><div class="titlepage"><div><div><h3 class="title"><a name="idp1112752"></a>12.10.8. Miscellaneous</h3></div></div></div><p>Usage of <code class="code">__LINE__, __FILE__, __DATE__</code> and
+    not governed by specification.</p></div><div class="sect2" title="12.10.8. Miscellaneous"><div class="titlepage"><div><div><h3 class="title"><a name="idp998240"></a>12.10.8. Miscellaneous</h3></div></div></div><p>Usage of <code class="code">__LINE__, __FILE__, __DATE__</code> and
     <code class="code">__TIME__</code> is simple and shown in following
     example:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 
@@ -510,44 +510,44 @@ preprocessing token then it should be used.</p></div><div class="sect2" title="1
 </pre>
 and the output is:
 <pre class="screen">test.c:5:Jun 24 2012:11:24:57</pre><p>This concluded our discussion on macros. Rest of the book will describe
-the standard library.</p></div></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp2833360" id="ftn.idp2833360">128</a>] </sup>Thus, preprocessing directives are
+the standard library.</p></div></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp2331008" id="ftn.idp2331008">128</a>] </sup>Thus, preprocessing directives are
     commonly called “lines”. These “lines” have no other syntactic
     significance, as all white space is equivalent except in certain situations
     during preprocessing (see the # character string literal creation operator
-    in 12.3.2, for example).</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2887680" id="ftn.idp2887680">129</a>] </sup>Because the controlling constant
+    in 12.3.2, for example).</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2342272" id="ftn.idp2342272">129</a>] </sup>Because the controlling constant
   expression is evaluated during translation phase 4, all identifiers either
   are or are not macro names - there simply are no keywords, enumeration
-  constants, etc.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2896528" id="ftn.idp2896528">130</a>] </sup>Thus, on an implementation
+  constants, etc.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2351280" id="ftn.idp2351280">130</a>] </sup>Thus, on an implementation
 where <code class="code">INT_MAX</code> is <code class="code"></code> and
 <code class="code">UINT_MAX</code> is <code class="code">0xFFFF</code>, the constant
 <code class="code">0x8000</code> is signed and positive within a <code class="code">#if</code>
 expression even though it would be unsigned in translation phase
-7.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp1072832" id="ftn.idp1072832">131</a>] </sup>Thus, the constant expression in
+7.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2363776" id="ftn.idp2363776">131</a>] </sup>Thus, the constant expression in
 the following <code class="code">#if</code> directive and if statement is not guaranteed
 to evaluate to the same value in these two contexts.
 </p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#if &#39;z&#39; - &#39;a&#39; == 25</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="sc">&#39;z&#39;</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span> <span class="o">==</span> <span class="mi">25</span><span class="p">)</span>
 </pre></div>
-</pre></div><div class="footnote"><p><sup>[<a class="para" href="#idp1078368" id="ftn.idp1078368">132</a>] </sup>As
+</pre></div><div class="footnote"><p><sup>[<a class="para" href="#idp2369312" id="ftn.idp2369312">132</a>] </sup>As
 indicated by the syntax, a preprocessing token shall not follow a #else or
 #endif directive before the terminating new-line character. However, comments
 may appear anywhere in a source file, including within a preprocessing
-directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp1202288" id="ftn.idp1202288">133</a>] </sup>Note that adjacent string literals are not
+directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2380688" id="ftn.idp2380688">133</a>] </sup>Note that adjacent string literals are not
 concatenated into a single string literal; thus, an expansion that results in
-two string literals is an invalid directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp1217424" id="ftn.idp1217424">134</a>] </sup>Since, by macro-replacement time, all
+two string literals is an invalid directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp1257584" id="ftn.idp1257584">134</a>] </sup>Since, by macro-replacement time, all
   character constants and string literals are preprocessing tokens, not
   sequences possibly containing identifier-like subsequences, they are never
-  scanned for macro names or parameters.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp1222304" id="ftn.idp1222304">135</a>] </sup>Despite the name, a non-directive is a
-preprocessing directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp1406528" id="ftn.idp1406528">136</a>] </sup>Placemarker preprocessing
+  scanned for macro names or parameters.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp1262464" id="ftn.idp1262464">135</a>] </sup>Despite the name, a non-directive is a
+preprocessing directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp1184256" id="ftn.idp1184256">136</a>] </sup>Placemarker preprocessing
   tokens do not appear in the syntax because they are temporary entities that
-  exist only within translation phase 4.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp1433584" id="ftn.idp1433584">137</a>] </sup>An
+  exist only within translation phase 4.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp1211312" id="ftn.idp1211312">137</a>] </sup>An
   implementation is not required to perform macro replacement in pragmas, but
   it is permitted except for in standard pragmas (where <code class="code">STDC</code>
   immediately follows pragma). If the result of macro replacement in a
   non-standard pragma has the same form as a standard pragma, the behavior is
   still implementation-defined; an implementation is permitted to behave as if
-  it were the standard pragma, but is not required to.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2192944" id="ftn.idp2192944">138</a>] </sup>The presumed source file
+  it were the standard pragma, but is not required to.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2259904" id="ftn.idp2259904">138</a>] </sup>The presumed source file
   name and line number can be changed by the <code class="code">#line</code>
   directive.</p></div><div class="footnote"><p><sup>[<a class="para" href="#line" id="ftn.line">139</a>] </sup>This macro was not specified in
   ISO/IEC 9899:1990 and was specified as 199409L in ISO/IEC 9899/AMD1:1995. The

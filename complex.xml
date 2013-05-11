@@ -697,7 +697,7 @@ and the output is:
 <d:screen>Re[ctanh(z)]=1.000710 and Im[ctanh(z)]=0.004908</d:screen>
       </d:sect2>
     </d:sect1>
-    <d:sect2>
+    <d:sect1>
       <d:title>Exponential and logrithmic functions</d:title>
       <d:sect2>
 	<d:title>The cexp functions</d:title>
@@ -706,6 +706,177 @@ and the output is:
 double complex cexp(double complex z);
 float complex cexpf(float complex z);
 long double complex cexpl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>cexp</d:code> functions compute the complex base-e
+exponential of <d:code>z</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>cexp</d:code> functions return the complex base-e
+exponential value.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex cexp(double complex z);
+float complex cexpf(float complex z);
+long double complex cexpl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para><d:emphasis role="bold">The function calculates e (2.71828..., the base
+of natural logarithms) raised to the power of
+<d:code>z</d:code>.</d:emphasis></d:para>
+<d:para>One has:</d:para>
+<d:screen>cexp(I * z) = ccos(z) + I * csin(z)</d:screen>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[cexp(z)]=%lf and Im[cexp(z)]=%lf\n", creal(cexp(z)), cimag(cexp(z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[cexp(z)]=-13.128783 and Im[cexp(z)]=-15.200784</d:screen>
       </d:sect2>
-    </d:sect2>
+      <d:sect2>
+	<d:title>The clog functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex clog(double complex z);
+float complex clogf(float complex z);
+long double complex clogl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>clog</d:code> functions compute the complex natural
+(base-e) logarithm of <d:code>z</d:code>, with a branch cut along the negative
+real axis.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The clog functions return the complex natural logarithm value, in the
+range of a strip mathematically unbounded along the real axis and in the
+interval [<d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mi>i</mml:mi>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+  <mml:mo>,</mml:mo>
+  <mml:mo>+</mml:mo>
+  <mml:mi>i</mml:mi>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+</mml:math></d:inlineequation> ] along the imaginary axis.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex clog(double complex z);
+float complex clogf(float complex z);
+long double complex clogl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The logarithm <d:code>code</d:code> is the inverse function of the
+exponential <d:code>cesp()</d:code>. Thus, if <d:code>y = clog(z)</d:code>,
+then <d:code>z = cexp(y)</d:code>. The imaginary part of <d:code>y</d:code> is
+chosen in the interval [<d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+  <mml:mo>,</mml:mo>
+  <mml:mo>+</mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+</mml:math></d:inlineequation>].</d:para>
+<d:para>One has:</d:para>
+<d:screen>clog(z) = log(cabs(z)) + I * carg(z)</d:screen>
+<d:para><d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[clog(z)]=%lf and Im[clog(z)]=%lf\n", creal(clog(z)), cimag(clog(z)));
+
+  return 0;
+}</d:programlisting></d:para>
+and the output is:
+<d:screen>Re[clog(z)]=1.609438 and Im[clog(z)]=0.927295</d:screen>
+      </d:sect2>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Power and absolute-value functions</d:title>
+      <d:sect2>
+	<d:title>The cabs functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;complex.h>
+double cabs(double complex z);
+float cabsf(float complex z);
+long double cabsl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>cabs</d:code> functions compute the complex absolute value
+(also called norm, modulus, or magnitude) of <d:code>z</d:code>.</d:para>
+<d:para><d:emphasis role="bold">The <d:code>cabs</d:code> functions return the
+complex absolute value.</d:emphasis></d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double cabs(double complex z);
+float cabsf(float complex z);
+long double cabsl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>cabs()</d:code> function returns the absolute value of the
+complex number <d:code>z</d:code>. The result is a real number.</d:para>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[cabs(z)]=%lf and Im[cabs(z)]=%lf\n", creal(cabs(z)), cimag(cabs(z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[cabs(z)]=5.000000 and Im[cabs(z)]=0.000000</d:screen>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The cpow functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex cpow(double complex x, double complex y);
+float complex cpowf(float complex x, float complex y);
+long double complex cpowl(long double complex x, long double complex y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>cpow</d:code> functions compute the complex power function
+<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mi>x</mml:mi>
+    <mml:mi>y</mml:mi>
+  </mml:msup>
+</mml:math></d:inlineequation>, with a branch cut for the first parameter along
+the negative real axis.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>cpow</d:code> functions return the complex power function
+value.</d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex cpow(double complex x, double complex y);
+float complex cpowf(float complex x, float complex y);
+long double complex cpowl(long double complex x, long double complex y);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The function calculates <d:code>x</d:code> raised to the power
+<d:code>z</d:code>. (With a branch cut for <d:code>x</d:code> along the
+negative real axis.)</d:para>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[cpow(z, z)]=%lf and Im[cpow(z, z)]=%lf\n", creal(cpow(z, z)), cimag(cpow(z, z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[cpow(z, z)]=-2.997991 and Im[cpow(z, z)]=0.623785</d:screen>
+      </d:sect2>
+    </d:sect1>
 </d:chapter>
