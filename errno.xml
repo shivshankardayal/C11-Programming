@@ -15,5 +15,25 @@
     lvalue<d:footnote><d:para>The macro errno need not be the identifier of an
     object. It might expand to a modifiable lvalue resulting from a function
     call (for example, <d:code>*errno()</d:code>).</d:para></d:footnote>
-    </d:para>
+    that has type <d:code>int</d:code>, the value of which is set to a positive
+    error number by several library functions. It is unspecified whether
+    <d:code>errno</d:code> is a macro or an identifier declared with external
+    linkage. If a macro definition is suppressed in order to access an actual
+    object, or a program defines an identifier with the name errno, the
+    behavior is undefined.</d:para>
+    <d:para>The value of <d:code>errno</d:code> is zero at program startup, but
+    is never set to zero by any library function.<d:footnote><d:para>Thus, a
+    program that uses <d:code>errno</d:code> for error checking should set it
+    to zero before a library function call, then inspect it before a subsequent
+    library function call. Of course, a library function can save the value of
+    <d:code>errno</d:code> on entry and then set it to zero, as long as the
+    original value is restored if <d:code>errno</d:code>'s value is still zero
+    just before the return.</d:para></d:footnote> The value of
+    <d:code>errno</d:code> may be set to nonzero by a library function call
+    whether or not there is an error, provided the use of
+    <d:code>errno</d:code> is not documented in the description of the function
+    in this International Standard.</d:para>
+    <d:para>Additional macro definitions, beginning with <d:code>E</d:code> and
+    a digit or <d:code>E</d:code> and an uppercase letter, may also be
+    specified by the implementation.</d:para>
 </d:chapter>
