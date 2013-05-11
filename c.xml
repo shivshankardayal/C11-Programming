@@ -2657,6 +2657,7 @@ program but other sources can still modify it.</d:para>
     <xi:include href="std.xml"/>
     <xi:include href="assert.xml"/>
     <xi:include href="complex.xml" />
+    <xi:include href="ctypes.xml" />
     <d:index>
     <d:title>Index</d:title>
   </d:index>
