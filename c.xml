@@ -37,6 +37,8 @@
   <xi:include href="fenv.xml" />
   <xi:include href="float.xml" />
   <xi:include href="inttypes.xml" />
+  <xi:include href="iso646.xml" />
+  <xi:include href="limits.xml" />
   <d:index>
     <d:title>Index</d:title>
   </d:index>

@@ -43,5 +43,133 @@
       type as described in Integer types. For example,
       <d:code>PRIdFAST32</d:code> can be used in a format string to print the
       value of an integer of type <d:code>int_fast32_t</d:code>.</d:para>
+      <d:para>The <d:code>fprintf</d:code> macros for signed integers
+      are:</d:para>
+      <d:blockquote><d:para> PRIdN PRIdLEASTN PRIdFASTN PRIdMAX
+      PRIdPTR</d:para>
+      <d:para>PRIiN PRIiLEASTN PRIiFASTN PRIiMAX
+      PRIiPTR</d:para></d:blockquote>
+      <d:para>The <d:code>fprintf</d:code> macros for unsigned integers
+      are:</d:para>
+      <d:blockquote>
+      <d:para>PRIoN PRIoLEASTN PRIoFASTN PRIoMAX PRIoPTR</d:para>
+      <d:para>PRIuN PRIuLEASTN PRIuFASTN PRIuMAX PRIuPTR</d:para>
+      <d:para>PRIxN PRIxLEASTN PRIxFASTN PRIxMAX PRIxPTR</d:para>
+      <d:para>PRIXN PRIXLEASTN PRIXFASTN PRIXMAX PRIXPTR</d:para>
+      </d:blockquote>
+      <d:para>The <d:code>fscanf</d:code> macros for signed integers
+      are:</d:para>
+      <d:blockquote>
+	<d:para>SCNdN SCNdLEASTN SCNdFASTN SCNdMAX SCNdPTR</d:para>
+	<d:para>SCNiN SCNiLEASTN SCNiFASTN SCNiMAX SCNiPTR</d:para>
+      </d:blockquote>
+      <d:para>The <d:code>fscanf</d:code> macros for unsigned integers
+      are:</d:para>
+      <d:blockquote>
+	<d:para>SCNoN SCNoLEASTN SCNoFASTN SCNoMAX SCNoPTR</d:para>
+	<d:para>SCNuN SCNuLEASTN SCNuFASTN SCNuMAX SCNuPTR</d:para>
+	<d:para>SCNxN SCNxLEASTN SCNxFASTN SCNxMAX SCNxPTR</d:para>
+      </d:blockquote>
+      <d:para>For each type that the implementation provides in
+      &amp;lt;stdint.h>, the corresponding fprintf macros shall be defined and
+      the corresponding fscanf macros shall be defined unless the
+      implementation does not have a suitable fscanf length modifier for the
+      type.</d:para>
+      <d:para>EXAMPLE</d:para>
+      <d:programlisting role="CLexer">#include &lt;inttypes.h>
+#include &lt;wchar.h>
+
+int main(void)
+{
+  uintmax_t i = UINTMAX_MAX; // this type always exists
+
+  wprintf(L"The largest integer value is %020" PRIxMAX "\n", i);
+
+  return 0;
+}</d:programlisting>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Functions for greatest-width integer types</d:title>
+      <d:sect2>
+	<d:title>The imaxabs function</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;inttypes.h>
+intmax_t imaxabs(intmax_t j);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>imaxabs</d:code> function computes the absolute value of an
+integer <d:code>j</d:code>. If the result cannot be represented, the behavior
+is undefined.<d:footnote><d:para>The absolute value of the most negative number
+cannot be represented in two's complement.</d:para></d:footnote></d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>imaxabs</d:code> function returns the absolute
+value.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The imaxdiv function</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;inttypes.h>
+imaxdiv_t imaxdiv(intmax_t numer, intmax_t denom);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>imaxdiv</d:code> function computes <d:code>numer /
+denom</d:code> and <d:code>numer % denom</d:code> in a single
+operation.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>imaxdiv</d:code> function returns a structure of type
+<d:code>imaxdiv_t</d:code> comprising both the quotient and the remainder. The
+structure shall contain (in either order) the members quot (the quotient) and
+rem (the remainder), each of which has type <d:code>intmax_t</d:code>. If
+either part of the result cannot be represented, the behavior is
+undefined.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The strtoimax and strtoumax functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;inttypes.h>
+intmax_t strtoimax(const char * restrict nptr,
+char ** restrict endptr, int base);
+uintmax_t strtoumax(const char * restrict nptr,
+char ** restrict endptr, int base);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>strtoimax</d:code> and <d:code>strtoumax</d:code> functions
+are equivalent to the <d:code>strtol, strtoll, strtoul</d:code> and
+<d:code>strtoull</d:code> functions, except that the initial portion of the
+string is converted to <d:code>intmax_t</d:code> and <d:code>uintmax_t</d:code>
+representation, respectively.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>strtoimax</d:code> and <d:code>strtoumax</d:code> functions
+return the converted value, if any. If no conversion could be performed, zero
+is returned. If the correct value is outside the range of representable values,
+<d:code>INTMAX_MAX, INTMAX_MIN</d:code> or <d:code>UINTMAX_MAX</d:code> is
+returned (according to the return type and sign of the value, if any), and the
+value of the macro <d:code>ERANGE</d:code> is stored in
+<d:code>errno</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
+<d:code>strtol, strtoll, strtoul</d:code> and <d:code>strtoull</d:code>
+functions (The strtol, strtoll, strtoul and strtoull functions).</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The wcstoimax and wcstoumax functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;stddef.h> // for wchar_t
+#include &lt;inttypes.h>
+intmax_t wcstoimax(const wchar_t * restrict nptr,
+wchar_t ** restrict endptr, int base);
+uintmax_t wcstoumax(const wchar_t * restrict nptr,
+wchar_t ** restrict endptr, int base);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>wcstoimax</d:code> and <d:code>wcstoumax</d:code> functions
+are equivalent to the <d:code>wcstol, wcstoll, wcstoul</d:code> and
+<d:code>wcstoull</d:code> functions except that the initial portion of the wide
+string is converted to <d:code>intmax_t</d:code> and <d:code>uintmax_t</d:code>
+representation, respectively.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>wcstoimax</d:code> function returns the converted value, if
+any. If no conversion could be performed, zero is returned. If the correct
+value is outside the range of representable values, <d:code>INTMAX_MAX,
+INTMAX_MIN</d:code> or <d:code>UINTMAX_MAX</d:code> is returned (according to
+the return type and sign of the value, if any), and the value of the macro
+<d:code>ERANGE</d:code> is stored in <d:code>errno</d:code>.</d:para>
+      </d:sect2>
     </d:sect1>
 </d:chapter>
+

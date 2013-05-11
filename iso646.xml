@@ -1,0 +1,22 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+    <?dbhtml filename="iso646/index.html" ?>
+    <d:title>Alternative spellings &amp;lt;iso646.h></d:title>
+    <d:para>The header &amp;lt;iso646.h> defines the following eleven macros
+    (on the left) that expand to the corresponding tokens (on the
+    right):</d:para>
+    <d:programlisting role="CLexer">
+    and &amp;&amp;
+    and_eq &amp;=
+    bitand &amp;
+    bitor |
+    compl ~
+    not !
+    not_eq !=
+    or ||
+    or_eq |=
+    xor ^
+    xor_eq ^=
+</d:programlisting>
+</d:chapter>

@@ -1,0 +1,10 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+    <?dbhtml filename="limits/index.html" ?>
+    <d:title>Sizes of integer types &amp;lt;limits.h></d:title>
+    <d:para>The header &amp;lt;limits.h> defines several macros that expand to
+    various limits and parameters of the standard integer types.</d:para>
+    <d:para>The macros, their meanings, and the constraints (or restrictions)
+    on their values are listed in Numerical limits.</d:para>
+</d:chapter>
