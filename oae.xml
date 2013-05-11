@@ -1,0 +1,494 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+    <?dbhtml filename="oae/index.html" ?>
+      <d:title>Operators and Expressions</d:title>
+      <d:para>Operators and expressions are in the core of every programming
+      language. They form the major part of BNF grammar. They also decide how
+      the syntax will look like. You as a programmer will spend considerable
+      time using C operators. C has sevral type of operators like arithmetic
+      operators, relational operators, bitwise operators, unary operators,
+      logical operators to name some of them. Since C was first of very
+      poopular structured general-pupose lnguages therefore many modern
+      language use almost all the operators and supplement with their own. It
+      is needless to say that to become a good programmar you must know all the
+      operators of C and know where to use which one as it may decide
+      performance, readability, simplicity of your code. Whenever you see array
+      and pointer in following sections just plow through them. All will be
+      clear soon.</d:para>
+      <d:para>Whenever operators and expressions come in picture you may have a
+      set of mixed data then to perform opration data is converted from one
+      type to another. This is known as “Usual Arithmetic Conversion”, which I
+      am going to tell you next.</d:para>
+      <d:sect1>
+	<d:title>Basic Operators</d:title>
+	<d:para>There are five here. +, -, *, / and %. Please refer to chapter
+	4 for their behavior. Let us see a simple example:</d:para>
+	<d:programlisting role="CLexer">// Arithmetic operators
+// Author: Shiv S. Dayal
+// Description: Demo of arithmetic operators
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i = 10;
+  float f= 6.45;
+  char c = 'A';
+  int iResult = 0;
+  float fResult = 0.0;
+  char cResult = '\0';
+
+  cResult = c + i;
+  printf("cResult = %c\n", cResult);
+  cResult = cResult - 5;
+  printf("cResult = %c\n", cResult);
+
+  iResult = i - 10;
+  printf("iResult = %d\n", iResult);
+  iResult = i * c;
+  printf("iResult = %d\n", iResult);
+  iResult = (i + c)/3;
+  printf("Result = %d\n", iResult);
+  iResult = (i + c)%2;
+  printf("iesult = %d\n", iResult);
+
+  fResult = f * 2.12;
+  printf("fesult = %f\n", fResult);
+  fResult = f - i;
+  printf("fesult = %f\n", fResult);
+  fResult = f / 1.12;
+  printf("fesult = %f\n", fResult);
+  fResult = 1 % 3;
+  printf("fesult = %f\n", fResult);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>cResult = K
+cResult = F
+iResult = 0
+iResult = 650
+Result = 25
+iesult = 1
+fesult = 13.674000
+fesult = -3.550000
+fesult = 5.758928
+fesult = 1.000000</d:screen>
+<d:para>First <d:code>cResult</d:code> is sum of <d:code>'A' + i</d:code> which
+is <d:code>'K'</d:code> as <d:code>'K'</d:code> comes ten positions after A in
+ASCII table. Then we subtract five and go back to F.</d:para>
+<d:para>First <d:code>iReasult</d:code> is 10 - <d:code>i</d:code> where value
+of <d:code>i</d:code> is 10 hence result is 0. Next we multiply it with
+<d:code>i</d:code> which contains <d:code>'A'</d:code> who has got ASCII value
+of 65 and result becomes 650. Then We take sum of <d:code>'A'</d:code> and
+<d:code>i</d:code> and divide by 3 so the result is 25 as it is a division of
+75 by 3. Next we use modulus operator and remainder is 1. Note that in case of
+/ and % if denominator is zero the behavior is undefined.</d:para>
+<d:para>Same way you can udnerstand floating-point operations. Note that you
+cannot use modulus operator if either of the operands are floating-point
+numbers as it will make no sense because of data type promotion rules. Here
+data type promotion rule says smaller data types will be converted to bigger
+data types. Also, if there is a data type on left side of assignment the result
+of applying the operator to operands will be converted to the type of
+that. chars are promoted to ints, ints are promoted to floats anf floats to
+double. The point is that conversion will try to keep as much data as
+possible.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Relational Operators</d:title>
+	<d:para>There are four relational operators: &lt;, >, &lt;= and
+	>=. Once again these are described in chapter 4. Let us see an
+	example:</d:para>
+<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of relational operator
+
+#include &lt;stdio.h>
+#include &lt;stdbool.h>
+
+int main()
+{
+  int i = 4, j = 5;
+  _Bool result = 0;
+
+  result = i &lt; j;
+  printf("%d\n", result);
+
+  result = i > j;
+  printf("%d\n", result);
+
+  result = i &lt;= j;
+  printf("%d\n", result);
+
+  result = i >= j;
+  printf("%d\n", result);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>1
+0
+1
+0</d:screen>
+<d:para>Note that you should not apply these to floating-point data types as
+they may not be represented correctly and two different entities have the same
+internal representation.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Equality Operators</d:title>
+	<d:para>There are two equlity operators == and !=. </d:para>
+	<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of equality operator
+
+#include &lt;stdio.h>
+#include &lt;stdbool.h>
+int main()
+{
+  int i = 4, j = 5;
+  _Bool result = 0;
+
+  result = i == j;
+  printf("%d\n", result);
+
+  result = i != j;
+  printf("%d\n", result);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>0
+1</d:screen>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Increment and Decrement Operators</d:title>
+	<d:para>There is one increment and one decrement operator. ++ and
+	--. Both come in two forms prefix and postfix. First we will see prefix
+	versions then postfix ones. There is only one constraint on prefix
+	operators of these and that is the operand of the prefix increment or
+	decrement operator will have qualified or unqualified real or pointer
+	type and will be a modifiable lvalue.</d:para>
+	<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of increment decrement operators
+
+#include &lt;stdio.h>
+
+int main()
+{
+  float f = 7.123;
+
+  printf("%f\n", ++f);
+  printf("%f\n", --f);
+  printf("%f\n", f++);
+  printf("%f\n", f--);
+  printf("%f\n", f);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>8.123000
+7.123000
+7.123000
+8.123000
+7.123000</d:screen>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Logical Operators</d:title>
+	<d:para>There are two such operators. &amp;&amp; logical AND and ||
+	locical OR. Both the operators have the same constraints and it is that
+	both the operands will have scalar type.</d:para>
+	<d:para>The &amp;&amp; operator gives 1 if both the operands are
+	non-zero else 0. The result type is int. It is different from bitwise
+	&amp; operator in the sense that it guarantess left-to-right
+	evaluation; if the second operand is evaluated, there is a sequence
+	point between the evaluations of the first and second operands. If the
+	first operand is 0 then the second operand is not evaluated. This is
+	known as “short-circuit evaluation”.</d:para>
+	<d:para>The || operator gives 1 if any of operands are non-zero else it
+	gives 0. Same as logical AND operator and unlike bitwise | operator it
+	guarantees left-to-right evaluation and same goes for sequence
+	points. If first operand is non-zero, the second is not
+	evaluated.</d:para>
+<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of logical AND &amp; OR operators
+
+#include &lt;stdio.h>
+#include &lt;stdbool.h>
+
+int main()
+{
+  int i = 4, j = 5, k = 0;
+  bool result;
+
+  result = i&amp;&amp;j;
+  printf("%d\n", result);
+
+  result = i||j;
+  printf("%d\n", result);
+
+  result = k&amp;&amp;j;
+  printf("%d\n", result);
+
+  result = k||j;
+  printf("%d\n", result);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>1
+1
+0
+1</d:screen>
+<d:para>note the use of <d:code>bool</d:code> here instead of
+<d:code>_Bool</d:code>.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Bitwise Operators</d:title>
+	<d:para>There are three bitwise operators. &amp;, |, and ^. AND, OR and
+	EX-OR respectively. OR is also called inclusive OR. These have the same
+	contsraints and it is that operands should be integer types. The usual
+	arithmetic conversions are performed on the operands.</d:para>
+<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of bitwise operators
+
+#include &amp;stdio.h>
+#include &amp;stdbool.h>
+
+int main()
+{
+  int i = 4, j = 5;
+  int result;
+
+  result = i&amp;j;
+  printf("%d\n", result);
+
+  result = i|j;
+  printf("%d\n", result);
+
+  result = i^j;
+  printf("%d\n", result);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>4
+5
+1</d:screen>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Bitwise Shift Operators</d:title>
+	<d:para>The constraint is same as other bitwise operators that operands
+	should be integers. The integer promotions are performed on each of the
+	operands. The type of the result if that of the promoted left
+	operand. If the value of the right operand is negative or is greater
+	than or equal to the width of the promoted left operand, the behavior
+	is undefined.</d:para>
+<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of shift operators
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i  = 4;
+  char c ='A';
+  int result;
+
+  result = c&lt;&lt;i;
+  printf("%d\n", result);
+
+  result = c>>i;
+  printf("%d\n", result);
+
+  return 0;
+}</d:programlisting>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Assignment Operators</d:title>
+	<d:para>These are = *= /= %= += -= &lt;&lt;= >>= &amp;= ^= and |= The only
+	constraint is that left operand should be modifiable lvalue. An
+	assignment operator stores a value in the object designated by the left
+	operand. An assignment expression has the value of the left operand
+	after the assignment, but is not an lvalue. The type of an assignment
+	expression is the type of the left operand unless the left operand has
+	qualified type, in which case it is the unqualified version of the type
+	of the left operand. The side effect of updating the stored value of
+	the left operand is sequenced after the value computations of the left
+	and right operands. The evaluations of the operands are
+	unsequenced.</d:para>
+<d:programlisting role="CLexer">// Author: Shiv S. Dayal
+// Description: Demo of compound assignments.
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i   = 3;
+  int j   = 3;
+  float f = 4.7;
+  float result=0.0;
+
+  result += i+f;
+  printf("%f\n", result);
+
+  result -= f;
+  printf("%f\n", result);
+
+  j &lt;&lt;= i;
+  printf("%d\n", j);
+
+  return 0;
+}</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>7.700000
+3.000000
+24</d:screen>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Conditional Operators</d:title>
+<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+// Description : Demo of conditional operator
+
+#include &lt;stdio.h>
+
+int main()
+{
+  int i = (4 &lt; 5)? 7:10;
+
+  printf("%d\n", i);
+
+  return 0;
+}</d:programlisting>
+<d:para>output is 7 as 4 is less than 5 which is true.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Comma Operator</d:title>
+	<d:para>It is a very simple operator. The left operand of a comma
+	operator is evaluated as a void expression; there is a sequence point
+	between its evaluation and that of the right operand. Then the right
+	operand is evaluated; the result has its type and value. A comma
+	operator does not give an lvalue.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>sizeof Operator</d:title>
+	<d:para>You have already see sizeof operator in second chapter when we
+	saw sizes of data types. However here is the constraint: the sizeof
+	operator will not be applied to an expression that has function type or
+	an incomplete type, to the parenthesized name of such a type, or to an
+	expression that designates a bit-field member.</d:para>
+	<d:para>The sizeof operator yields the size (in bytes) of its operand,
+	which may be an expression or the parenthesized name of a type. The
+	size is determined from the type of the operand. The result is an
+	integer. If the type of the operand is a variable length array type,
+	the operand is evaluated; otherwise, the operand is not evaluated and
+	the result is an integer constant.</d:para>
+	<d:para>When applied to an operand that has type char, unsigned char,
+	or signed char, (or a qualified version thereof) the result is 1. When
+	applied to an operand that has array type, the result is the total
+	number of bytes in the array. When applied to an operand that has
+	structure or union type, the result is the total number of bytes in
+	such an object, including internal and trailing padding.</d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Unary Arithmetic Operators</d:title>
+	<d:para>We will see casting, array subscripting, function parenthes,
+	address and indirection operators later at appropriate time. For now I
+	am going to tell you about operator precedence and associativity and
+	then about grouping parenthes. Given below is the table for operator
+	precedence and associativity, however, you may not be familiar with few
+	of them but later you will be:</d:para>
+	<d:table frame="border" class="leftcenter"
+          border="1">
+	  <d:colgroup width="0*"/>
+	  <d:colgroup width="0*"/>
+          <d:caption>Priority and assiciativity table</d:caption>
+          <d:thead>
+            <d:tr bgcolor="#aaa">
+              <d:th>Operators</d:th>
+              <d:th>Associativity</d:th>
+            </d:tr>
+          </d:thead>
+	  <d:tr>
+	    <d:td>() [] . -> ++ – (postfix)</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>++ – + - (unary) ! ~ (types) * &amp; sizeof</d:td>
+	    <d:td>right-to-left</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>* / %</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>+ - (Addition/Subtraction)</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>&lt;&lt; >></d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>&lt; > &lt;= >=</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>== !=</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>&amp;</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>^</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>|</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>&amp;&amp;</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>||</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>Assignemnt operators</d:td>
+	    <d:td>right-to-left</d:td>
+	  </d:tr>
+	  <d:tr>
+	    <d:td>,</d:td>
+	    <d:td>left-to-right</d:td>
+	  </d:tr>
+	</d:table>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Grouping parentheses</d:title>
+	<d:para>Grouping parentheses are used to override operator precedence
+	and group expressions. NEVER EVER try to memorize and rely on
+	precedence of operators. Always use grouping parentheses. Till now I
+	have shown very simple examples of operators; here are some complex
+	ones:</d:para>
+	<d:programlisting role="CLexer">// Author: Shiv Shankar Dayal
+// Description: Demo of grouping parentheses
+
+#include &lt;stdio.h>
+
+int main()
+{
+  printf("%f\n", 5.2*(3.7+2.3));
+  printf("%d\n", ((4&lt;5)||(7^5)));
+
+  return 0;
+}</d:programlisting>
+<d:para>This small program shows you what can go wrong if you rely on
+memory. It allows you do addition first and then multiplcation. Inner
+parentheses are evaluated first then inner ones. This concludes our chapter on
+operators and expressions. Next we focus on control statements and flow
+statements.</d:para> 
+      </d:sect1>
+    </d:chapter>
