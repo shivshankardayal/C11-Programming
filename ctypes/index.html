@@ -1,4 +1,4 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 16. Character Handling &lt;ctype.h></title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../complex/index.html" rel="prev" title="Chapter 15. Complex arithmetic &lt;complex.h>"/><link href="../errno/index.html" rel="next" title="Chapter 17. Errors &lt;errno.h>"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 16. Character Handling &lt;ctype.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../complex/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../errno/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 16. Character Handling &lt;ctype.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp1705248"></a>Chapter 16. Character Handling &lt;ctype.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp2181376">16.1. Character classification functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp2182720">16.1.1. The isalnum functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp2248256">16.1.2. The isalpha function</a></span></dt><dt><span class="sect2"><a href="index.html#idp2264032">16.1.3. The isblank function</a></span></dt><dt><span class="sect2"><a href="index.html#idp2649040">16.1.4. The iscntrl function</a></span></dt><dt><span class="sect2"><a href="index.html#idp2660256">16.1.5. The isdigit function</a></span></dt><dt><span class="sect2"><a href="index.html#idp2671360">16.1.6. The isgraph function</a></span></dt><dt><span class="sect2"><a href="index.html#idp2682496">16.1.7. The islower function</a></span></dt><dt><span class="sect2"><a href="index.html#idp2695088">16.1.8. The isprint function</a></span></dt><dt><span class="sect2"><a href="index.html#idp2706208">16.1.9. The ispunct function</a></span></dt><dt><span class="sect2"><a href="index.html#idp2475680">16.1.10. The isspace function</a></span></dt><dt><span class="sect2"><a href="index.html#idp2487744">16.1.11. The isupper function</a></span></dt><dt><span class="sect2"><a href="index.html#idp2500336">16.1.12. The isxdigit function</a></span></dt></dl></dd></dl></div><p>The header <code class="code">&lt;ctype.h></code> declares several functions
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><title>Chapter 16. Character Handling &lt;ctype.h></title><link href="../../css/style.css" rel="stylesheet" type="text/css"><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"><link href="../index.html" rel="home" title="C Programming with C99"><link href="../index.html" rel="up" title="C Programming with C99"><link href="../complex/index.html" rel="prev" title="Chapter 15. Complex arithmetic &lt;complex.h>"><link href="../errno/index.html" rel="next" title="Chapter 17. Errors &lt;errno.h>"><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></link></link></link></link></meta></link></meta></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 16. Character Handling &lt;ctype.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../complex/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../errno/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 16. Character Handling &lt;ctype.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp33711344"></a>Chapter 16. Character Handling &lt;ctype.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp33662944">16.1. Character classification functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp33664240">16.1.1. The isalnum functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp33548416">16.1.2. The isalpha function</a></span></dt><dt><span class="sect2"><a href="index.html#idp33563104">16.1.3. The isblank function</a></span></dt><dt><span class="sect2"><a href="index.html#idp33573888">16.1.4. The iscntrl function</a></span></dt><dt><span class="sect2"><a href="index.html#idp33584368">16.1.5. The isdigit function</a></span></dt><dt><span class="sect2"><a href="index.html#idp33594768">16.1.6. The isgraph function</a></span></dt><dt><span class="sect2"><a href="index.html#idp33605232">16.1.7. The islower function</a></span></dt><dt><span class="sect2"><a href="index.html#idp33617024">16.1.8. The isprint function</a></span></dt><dt><span class="sect2"><a href="index.html#idp33627456">16.1.9. The ispunct function</a></span></dt><dt><span class="sect2"><a href="index.html#idp33639312">16.1.10. The isspace function</a></span></dt><dt><span class="sect2"><a href="index.html#idp33517552">16.1.11. The isupper function</a></span></dt><dt><span class="sect2"><a href="index.html#idp33525856">16.1.12. The isxdigit function</a></span></dt></dl></dd></dl></div><p>The header <code class="code">&lt;ctype.h></code> declares several functions
     useful for classifying and mapping characters. In all cases the argument is
     an int, the value of which shall be representable as an unsigned char or
     shall equal the value of the macro EOF. If the argument has any other
@@ -8,16 +8,16 @@
     set of characters, each of which occupies one printing position on a
     display device; the term control character refers to a member of a
     locale-specific set of characters that are not printing
-    characters.<sup>[<a class="footnote" href="#ftn.idp2177328" name="idp2177328">149</a>]</sup> All letters and digits
+    characters.<sup>[<a class="footnote" href="#ftn.idp33658976" name="idp33658976">149</a>]</sup> All letters and digits
     are printing characters.</p><p><span class="bold"><strong>Forward references: </strong></span>EOF
-    (14.19.1), localization (14.11).</p><div class="sect1" title="16.1. Character classification functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2181376"></a>16.1. Character classification functions</h2></div></div></div><p>The functions in this subclause return nonzero (true) if and only
+    (14.19.1), localization (14.11).</p><div class="sect1" title="16.1. Character classification functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp33662944"></a>16.1. Character classification functions</h2></div></div></div><p>The functions in this subclause return nonzero (true) if and only
       if the value of the argument c conforms to that in the description of the
-      function.</p><div class="sect2" title="16.1.1. The isalnum functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp2182720"></a>16.1.1. The isalnum functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isalnum</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+      function.</p><div class="sect2" title="16.1.1. The isalnum functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp33664240"></a>16.1.1. The isalnum functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">isalnum</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isalnum</code> function tests for any character for which
 <code class="code">isalpha</code> or <code class="code">isdigit</code> is true.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isalnum</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">isalnum</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for an alphanumeric character; it is equivalent to
 <code class="code">(isalpha(c) || isdigit(c))</code>.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The values returned are nonzero if the character <code class="code">c</code>
@@ -35,8 +35,8 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">8 0 0 8</pre></div><div class="sect2" title="16.1.2. The isalpha function"><div class="titlepage"><div><div><h3 class="title"><a name="idp2248256"></a>16.1.2. The isalpha function</h3></div></div></div><p><span class="bold"><strong>Description</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isalpha</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<pre class="screen">8 0 0 8</pre></div><div class="sect2" title="16.1.2. The isalpha function"><div class="titlepage"><div><div><h3 class="title"><a name="idp33548416"></a>16.1.2. The isalpha function</h3></div></div></div><p><span class="bold"><strong>Description</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">isalpha</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isalpha</code> function tests for any character for which
 <code class="code">isupper</code> or <code class="code">islower</code> is true, or any character
@@ -45,7 +45,7 @@ that is one of a locale-specific set of alphabetic characters for which none of
 true. In the "C" locale, <code class="code">isalpha</code> returns true only for the
 characters for which <code class="code">isupper</code> or <code class="code">islower</code> is
 <code class="code">true</code>.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isalpha</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">isalpha</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for an alphabetic character; in the standard "C" locale, it is
 equivalent to <code class="code">(isupper(c) || islower(c))</code>. In some locales,
@@ -65,8 +65,8 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">1024 0 0 0</pre></div><div class="sect2" title="16.1.3. The isblank function"><div class="titlepage"><div><div><h3 class="title"><a name="idp2264032"></a>16.1.3. The isblank function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isblank</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<pre class="screen">1024 0 0 0</pre></div><div class="sect2" title="16.1.3. The isblank function"><div class="titlepage"><div><div><h3 class="title"><a name="idp33563104"></a>16.1.3. The isblank function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">isblank</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isblank</code> function tests for any character that is a
 standard blank character or is one of a locale-specific set of characters for
@@ -74,7 +74,7 @@ which isspace is true and that is used to separate words within a line of
 text. The standard blank characters are the following: space (' ' ), and
 horizontal tab ('\t'). In the "C" locale, isblank returns true only for the
 standard blank characters.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isblank</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">isblank</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for a blank character; that is, a space or a tab.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The values returned are nonzero if the character <code class="code">c</code>
 falls into the tested class, and a zero value if not.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
@@ -91,12 +91,12 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">1 0 1 0</pre></div><div class="sect2" title="16.1.4. The iscntrl function"><div class="titlepage"><div><div><h3 class="title"><a name="idp2649040"></a>16.1.4. The iscntrl function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">iscntrl</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<pre class="screen">1 0 1 0</pre></div><div class="sect2" title="16.1.4. The iscntrl function"><div class="titlepage"><div><div><h3 class="title"><a name="idp33573888"></a>16.1.4. The iscntrl function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">iscntrl</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">iscntrl</code> function tests for any control
 character.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">iscntrl</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">iscntrl</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for a control character.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The values returned are nonzero if the character <code class="code">c</code>
 falls into the tested class, and a zero value if not.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
@@ -116,12 +116,12 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">2 2 2 2</pre></div><div class="sect2" title="16.1.5. The isdigit function"><div class="titlepage"><div><div><h3 class="title"><a name="idp2660256"></a>16.1.5. The isdigit function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isdigit</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<pre class="screen">2 2 2 2</pre></div><div class="sect2" title="16.1.5. The isdigit function"><div class="titlepage"><div><div><h3 class="title"><a name="idp33584368"></a>16.1.5. The isdigit function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">isdigit</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isdigit</code> function tests for any decimal-digit
 character.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isdigit</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">isdigit</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for a digit (0 through 9).</p><p><span class="bold"><strong>Returns</strong></span></p><p>The values returned are nonzero if the character <code class="code">c</code>
 falls into the tested class, and a zero value if not.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
@@ -138,12 +138,12 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">0 2048</pre></div><div class="sect2" title="16.1.6. The isgraph function"><div class="titlepage"><div><div><h3 class="title"><a name="idp2671360"></a>16.1.6. The isgraph function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isgraph</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<pre class="screen">0 2048</pre></div><div class="sect2" title="16.1.6. The isgraph function"><div class="titlepage"><div><div><h3 class="title"><a name="idp33594768"></a>16.1.6. The isgraph function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">isgraph</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isgraph</code> function tests for any printing character
 except space (‘ ‘).</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isgraph</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">isgraph</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for any printable character except space.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The values returned are nonzero if the character <code class="code">c</code>
 falls into the tested class, and a zero value if not.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
@@ -160,15 +160,15 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">32768 0</pre></div><div class="sect2" title="16.1.7. The islower function"><div class="titlepage"><div><div><h3 class="title"><a name="idp2682496"></a>16.1.7. The islower function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">islower</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<pre class="screen">32768 0</pre></div><div class="sect2" title="16.1.7. The islower function"><div class="titlepage"><div><div><h3 class="title"><a name="idp33605232"></a>16.1.7. The islower function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">islower</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">islower</code> function tests for any character that is a
 lowercase letter or is one of a locale-specific set of characters for which
 none of <code class="code">iscntrl, isdigit, ispunct</code> or <code class="code">isspace</code>
 is true. In the "C" locale, <code class="code">islower</code> returns true only for the
 lowercase letters</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">islower</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">islower</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for a lower-case character.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The values returned are nonzero if the character <code class="code">c</code>
 falls into the tested class, and a zero value if not.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
@@ -185,12 +185,12 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">512 0</pre></div><div class="sect2" title="16.1.8. The isprint function"><div class="titlepage"><div><div><h3 class="title"><a name="idp2695088"></a>16.1.8. The isprint function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isprint</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<pre class="screen">512 0</pre></div><div class="sect2" title="16.1.8. The isprint function"><div class="titlepage"><div><div><h3 class="title"><a name="idp33617024"></a>16.1.8. The isprint function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">isprint</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isprint</code> function tests for any printing character
 including space (' ').</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isprint</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">isprint</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for any printable character including space.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The values returned are nonzero if the character <code class="code">c</code>
 falls into the tested class, and a zero value if not.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
@@ -207,15 +207,15 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">16384 0</pre></div><div class="sect2" title="16.1.9. The ispunct function"><div class="titlepage"><div><div><h3 class="title"><a name="idp2706208"></a>16.1.9. The ispunct function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">ispunct</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<pre class="screen">16384 0</pre></div><div class="sect2" title="16.1.9. The ispunct function"><div class="titlepage"><div><div><h3 class="title"><a name="idp33627456"></a>16.1.9. The ispunct function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">ispunct</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">ispunct</code> function tests for any printing character
 that is one of a locale-specific set of punctuation characters for which
 neither isspace nor isalnum is true. In the "C" locale,
 <code class="code">ispunct</code> returns true for every printing character for which
 neither <code class="code">isspace</code> nor <code class="code">isalnum</code> is true.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">ispunct</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">ispunct</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for any printable character which is not a space or an
 alphanumeric character.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The values returned are nonzero if the character <code class="code">c</code>
@@ -233,8 +233,8 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">0 4</pre></div><div class="sect2" title="16.1.10. The isspace function"><div class="titlepage"><div><div><h3 class="title"><a name="idp2475680"></a>16.1.10. The isspace function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isspace</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<pre class="screen">0 4</pre></div><div class="sect2" title="16.1.10. The isspace function"><div class="titlepage"><div><div><h3 class="title"><a name="idp33639312"></a>16.1.10. The isspace function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">isspace</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isspace</code> function tests for any character that is a
 standard white-space character or is one of a locale-specific set of characters
@@ -243,7 +243,7 @@ following: space (' '), form feed ('\f'), new-line ('\n'), carriage return
 ('\r'), horizontal tab ('\t'), and vertical tab ('\v'). In the "C" locale,
 <code class="code">isspace</code> returns true only for the standard white-space
 characters.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isspace</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">isspace</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for white-space characters. In the "C" and "POSIX" locales,
 these are: space, form-feed ('\f'), newline ('\n'), carriage return ('\r'),
@@ -262,15 +262,15 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">8192 0</pre></div><div class="sect2" title="16.1.11. The isupper function"><div class="titlepage"><div><div><h3 class="title"><a name="idp2487744"></a>16.1.11. The isupper function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isupper</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<pre class="screen">8192 0</pre></div><div class="sect2" title="16.1.11. The isupper function"><div class="titlepage"><div><div><h3 class="title"><a name="idp33517552"></a>16.1.11. The isupper function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">isupper</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isupper</code> function tests for any character that is
 an uppercase letter or is one of a locale-specific set of characters for which
 none of <code class="code">iscntrl, isdigit, ispunct</code> or <code class="code">isspace</code>
 is true. In the "C" locale, <code class="code">isupper</code> returns true only for the
 uppercase letters.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isupper</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">isupper</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for an uppercase letter.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The values returned are nonzero if the character <code class="code">c</code>
 falls into the tested class, and a zero value if not.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
@@ -287,12 +287,12 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">256 0</pre></div><div class="sect2" title="16.1.12. The isxdigit function"><div class="titlepage"><div><div><h3 class="title"><a name="idp2500336"></a>16.1.12. The isxdigit function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isxdigit</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<pre class="screen">256 0</pre></div><div class="sect2" title="16.1.12. The isxdigit function"><div class="titlepage"><div><div><h3 class="title"><a name="idp33525856"></a>16.1.12. The isxdigit function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
+<span class="kt">int</span> <span class="n">isxdigit</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isxdigit</code> function tests for any hexadecimal-digit
 character.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;ctype.h&gt;</span>
-<span class="kt">int</span> <span class="nf">isxdigit</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">isxdigit</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Checks for a hexadecimal digits, that is, one of:</p><pre class="screen">0 1 2 3 4 5 6 7 8 9 a b c d e f A B C D E F.</pre><p><span class="bold"><strong>Returns</strong></span></p><p>The values returned are nonzero if the character <code class="code">c</code>
 falls into the tested class, and a zero value if not.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
@@ -309,10 +309,10 @@ falls into the tested class, and a zero value if not.</p><p><span class="bold"><
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">4096 0</pre></div></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp2177328" id="ftn.idp2177328">149</a>] </sup>In an implementation that uses the seven-bit
+<pre class="screen">4096 0</pre></div></div><div class="footnotes"><br><hr align="left" width="100"><div class="footnote"><p><sup>[<a class="para" href="#idp33658976" id="ftn.idp33658976">149</a>] </sup>In an implementation that uses the seven-bit
     US ASCII character set, the printing characters are those whose values lie
     from <code class="code">0x20 (space)</code> through <code class="code">0x7E (tilde)</code>;
     the control characters are those whose values lie from <code class="code">0
     (NUL)</code> through <code class="code">0x1F (US)</code>, and the character
-    <code class="code">0x7F (DEL)</code>.</p></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../complex/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../errno/index.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 15. Complex arithmetic &lt;complex.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Chapter 17. Errors &lt;errno.h></td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+    <code class="code">0x7F (DEL)</code>.</p></div></hr></br></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../complex/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../errno/index.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 15. Complex arithmetic &lt;complex.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Chapter 17. Errors &lt;errno.h></td></tr></table></hr></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
    GNU FDL license is applicable where not stated.</p></body></html>

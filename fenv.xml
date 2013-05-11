@@ -159,5 +159,356 @@ suffice.</d:para></d:footnote></d:para>
   or the bitwise OR of one or more floating-point exception macros, for example
   <d:code>FE_OVERFLOW | FE_INEXACT</d:code>. For other argument values the
   behavior of these functions is undefined.</d:para>
+  <d:sect2>
+    <d:title>The feclearexcept function</d:title>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;fenv.h>
+int feclearexcept(int excepts);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>feclearexcept</d:code> function attempts to clear the
+supported floating-point exceptions represented by its argument.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>feclearexcept</d:code> function returns zero if the excepts
+argument is zero or if all the specified exceptions were successfully
+cleared. Otherwise, it returns a nonzero value.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;fenv.h>
+int feclearexcept(int excepts);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para>Following description, exceptions, rounding mode, floating-point
+environment and return values are applicable to all functions of this
+header</d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>This function was defined in C99, and describe the handling of
+floating-point rounding and exceptions (overflow, zero-divide, etc.).</d:para>
+<d:para><d:emphasis role="bold">Exceptions</d:emphasis></d:para>
+<d:para>The <d:emphasis role="italic">divide-by-zero</d:emphasis> exception
+occurs when an operation on finite numbers produces infinity as exact
+answer.</d:para>
+<d:para>The <d:emphasis role="italic">overflow</d:emphasis> exception occurs
+when a result has to be represented as a floating-point number, but has (much)
+larger absolute value than the largest (finite) floating-point number that is
+representable.</d:para>
+<d:para>The <d:emphasis role="italic">underflow</d:emphasis> exception occurs
+when a result has to be represented as a floating-point number, but has smaller
+absolute value than the smallest positive normalized floating-point number (and
+would lose much accuracy when represented as a denormalized number).</d:para>
+<d:para>The <d:emphasis role="italic">inexact</d:emphasis> exception occurs
+when the rounded result of an operation is not equal to the infinite precision
+result. It may occur whenever <d:emphasis role="italic">overflow</d:emphasis>
+or <d:emphasis role="italic">underflow</d:emphasis> occurs.</d:para>
+<d:para>The <d:emphasis role="italic">invalid</d:emphasis> exception occurs
+when there is no well-defined result for an operation, as for 0/0 or infinity -
+infinity or sqrt(-1).</d:para>
+<d:para><d:emphasis role="bold">Exception Handling</d:emphasis></d:para>
+<d:para>Exceptions are represented in two ways: as a single bit (exception
+present/absent), and these bits correspond in some implementation- defined way
+with bit positions in an integer, and also as an opaque structure that may
+contain more information about the exception (perhaps the code address where it
+occurred).</d:para>
+<d:para>Each of the macros <d:code>FE_DIVBYZERO, FE_INEXACT,  FE_INVALID,
+FE_OVERFLOW, FE_UNDERFLOW</d:code> is defined when the implementation supports
+handling of the corresponding exception, and if so then defines the
+corresponding bit(s), so that one can call exception handling functions, for
+example, using the integer argument
+<d:code>FE_OVERFLOW|FE_UNDERFLOW</d:code>. Other exceptions may be
+supported. The macro <d:code>FE_ALL_EXCEPT</d:code> is the bitwise OR of all
+bits corresponding to supported exceptions.</d:para>
+<d:para>The <d:code>feclearexcept()</d:code> function clears the supported
+exceptions represented by the bits in its argument.</d:para>
+<d:para>The <d:code>fegetexceptflag()</d:code> function stores a representation
+of the state of the exception flags represented by the argument excepts in the
+opaque object <d:code>*flagp</d:code>.</d:para>
+<d:para>The <d:code>feraiseexcept()</d:code> function raises the supported
+exceptions represented by the bits in excepts.</d:para>
+<d:para>The <d:code>fesetexceptflag()</d:code> function sets the complete
+status for the exceptions represented by excepts to the value
+<d:code>*flagp</d:code>. This value must have been obtained by an earlier call
+of <d:code>fegetexceptflag()</d:code> with a last argument that contained all
+bits in excepts.</d:para>
+<d:para>The <d:code>fetestexcept()</d:code> function returns a word in which
+the bits are set that were set in the argument excepts and for which the
+corresponding exception is currently set.</d:para>
+<d:para><d:emphasis role="bold">Rounding Mode</d:emphasis></d:para>
+<d:para>The rounding mode determines how the result of floating-point
+operations is treated when the result cannot be exactly represented in the
+significand. Various rounding modes may be provided: round to nearest (the
+default), round up (toward positive infinity), round down (toward negative
+infinity), and round toward zero.</d:para>
+<d:para>Each of the macros <d:code>FE_TONEAREST, FE_UPWARD,
+FE_DOWNWARD</d:code> and <d:code>FE_TOWARDZERO</d:code> is defined when the
+implementation supports getting and setting the corresponding rounding
+direction.</d:para>
+<d:para>The <d:code>fegetround()</d:code> function returns the macro
+corresponding to the current rounding mode.</d:para>
+<d:para>The <d:code>fesetround()</d:code> function sets the rounding mode as
+specified by its argument and returns zero when it was successful.</d:para>
+<d:para>C99 and POSIX.1-2008 specify an identifier,
+<d:code>FLT_ROUNDS</d:code>, defined in &amp;lt;float.h>, which indicates the
+implementation-defined rounding behavior for floating-point addition. This
+identifier has one of the following values:</d:para>
+<d:blockquote><d:para>-1 The rounding mode is not determinable.</d:para>
+<d:para>1 Rounding is toward nearest number.</d:para>
+<d:para>2 Rounding is toward positive infinity.</d:para>
+<d:para>3 Rounding is toward negative infinity.</d:para>
+</d:blockquote>
+<d:para>Other values represent machine-dependent, nonstandard rounding
+modes.</d:para>
+<d:para>The value of <d:code>FLT_ROUNDS</d:code> should reflect the current
+rounding mode as set by <d:code>fesetround()</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Floating-point
+environment</d:emphasis></d:para>
+<d:para>The entire floating-point environment, including control modes and
+status flags, can be handled as one opaque object, of type
+<d:code>fenv_t</d:code>. The default environment is denoted by
+<d:code>FE_DFL_ENV</d:code> (of type <d:code>const fenv_t *</d:code>). This is
+the environment setup at program start and it is defined by ISO C to have round
+to nearest, all exceptions cleared and a nonstop (continue on exceptions)
+mode.</d:para>
+<d:para>The <d:code>fegetenv()</d:code> function saves the current
+floating-point environment in the object <d:code>*envp</d:code>.</d:para>
+<d:para>The <d:code>feholdexcept()</d:code> function does the same, then clears
+all exception flags, and sets a nonstop (continue on exceptions) mode, if
+available. It returns zero when successful.</d:para>
+<d:para>The <d:code>fesetenv()</d:code> function restores the floating-point
+environment from the object <d:code>*envp</d:code>. This object must be known
+to be valid, for example, the result of a call to <d:code>fegetenv()</d:code>
+or <d:code>feholdexcept()</d:code> or equal to
+<d:code>FE_DFL_ENV</d:code>. This call does not raise exceptions.</d:para>
+<d:para>The <d:code>feupdateenv()</d:code> function installs the floating-point
+environment represented by the object <d:code>*envp</d:code>, except that
+currently raised exceptions are not cleared. After calling this function, the
+raised exceptions will be a bitwise OR of those previously set with those in
+<d:code>*envp</d:code>. As before, the object <d:code>*envp</d:code> must be
+known to be valid.</d:para>
+<d:para><d:emphasis role="bold">RETURN VALUE</d:emphasis></d:para>
+<d:para>These functions return zero on success and nonzero if an error
+occurred.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <d:title>The fegetexceptflag function</d:title>
+    <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+    <d:programlisting role="CLexer">#include &lt;fenv.h>
+int fegetexceptflag(fexcept_t *flagp, int excepts);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fegetexceptflag</d:code> function attempts to store an
+implementation-defined representation of the states of the floating-point
+status flags indicated by the argument excepts in the object pointed to by the
+argument flagp.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fegetexceptflag</d:code> function returns zero if the
+representation was successfully stored. Otherwise, it returns a nonzero
+value.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <d:title>The feraiseexcept function</d:title>
+    <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+    <d:programlisting role="CLexer">#include &lt;fenv.h>
+int feraiseexcept(int excepts);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>feraiseexcept</d:code> function attempts to raise the
+supported floating-point exceptions represented by its
+argument.<d:footnote><d:para>The effect is intended to be similar to that of
+floating-point exceptions raised by arithmetic operations. Hence, enabled traps
+for floating-point exceptions raised by this function are taken. The
+specification in F.7.6 of specification is in the same
+spirit.</d:para></d:footnote> The order in which these floating-point
+exceptions are raised is unspecified, except as stated in F.7.6 of
+specification. Whether the feraiseexcept function additionally raises the
+"inexact" floating-point exception whenever it raises the "overflow" or
+"underflow" floating-point exception is implementation-defined.</d:para>
+<d:para><d:emphasis role="bold">Return</d:emphasis></d:para>
+<d:para>The <d:code>feraiseexcept</d:code> function returns zero if the excepts
+argument is zero or if all the specified exceptions were successfully
+raised. Otherwise, it returns a nonzero value.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <d:title>The fesetexceptflag function</d:title>
+    <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+    <d:programlisting role="CLexer">#include &lt;fenv.h>
+int fesetexceptflag(const fexcept_t *flagp, int excepts);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fesetexceptflag</d:code> function attempts to set the
+floating-point status flags indicated by the argument excepts to the states
+stored in the object pointed to by <d:code>flagp</d:code>. The value of
+<d:code>*flagp</d:code> shall have been set by a previous call to
+<d:code>fegetexceptflag</d:code> whose second argument represented at least
+those floating-point exceptions represented by the argument excepts. This
+function does not raise floating-point exceptions, but only sets the state of
+the flags.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fesetexceptflag</d:code> function returns zero if the
+excepts argument is zero or if all the specified flags were successfully set to
+the appropriate state. Otherwise, it returns a nonzero value.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <d:title>The fetestexcept function</d:title>
+    <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+    <d:programlisting role="CLexer">#include &lt;fenv.h>
+int fetestexcept(int excepts);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The fetestexcept function determines which of a specified subset of the
+floating-point exception flags are currently set. The excepts argument
+specifies the floating-point status flags to be
+queried.<d:footnote><d:para>This mechanism allows testing several
+floating-point exceptions with just one function call.</d:para><d:para>EXAMPLE
+Call <d:code>f</d:code> if "invalid" is set, then <d:code>g</d:code> if
+"overflow" is set:</d:para><d:programlisting role="CLexer">#include &lt;fenv.h>
+/* ... */
+{
+  #pragma STDC FENV_ACCESS ON
+  int set_excepts;
+  feclearexcept(FE_INVALID | FE_OVERFLOW);
+  // maybe raise exceptions
+  set_excepts = fetestexcept(FE_INVALID | FE_OVERFLOW);
+  if (set_excepts &amp; FE_INVALID) f();
+  if (set_excepts &amp; FE_OVERFLOW) g();
+  /* ... */
+}</d:programlisting></d:footnote></d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fetestexcept</d:code> function returns the value of the
+bitwise OR of the floating-point exception macros corresponding to the
+currently set floating-point exceptions included in
+<d:code>excepts</d:code>.</d:para>
+  </d:sect2>
 </d:sect1>
+<d:sect1>
+  <d:title>Rounding</d:title>
+  <d:para>The <d:code>fegetround</d:code> and <d:code>fesetround</d:code>
+  functions provide control of rounding direction modes.</d:para>
+  <d:sect2>
+    <d:title>The fegetround function</d:title>
+    <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+    <d:programlisting role="CLexer">#include &lt;fenv.h>
+int fegetround(void);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fegetround</d:code> function gets the current rounding
+direction.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fegetround</d:code> function returns the value of the
+rounding direction macro representing the current rounding direction or a
+negative value if there is no such rounding direction macro or the current
+rounding direction is not determinable.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <d:title>The fesetround function</d:title>
+    <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+    <d:programlisting role="CLexer">#include &lt;fenv.h>
+int fesetround(int round);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fesetround</d:code> function establishes the rounding
+direction represented by its argument round. If the argument is not equal to
+the value of a rounding direction macro, the rounding direction is not
+changed.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fesetround</d:code> function returns zero if and only if
+the requested rounding direction was established.</d:para>
+<d:para>EXAMPLE Save, set, and restore the rounding direction. Report an error
+and abort if setting the rounding direction fails.</d:para>
+<d:programlisting role="CLexer">#include &lt;fenv.h>
+#include &lt;assert.h>
+void f(int round_dir)
+{
+  #pragma STDC FENV_ACCESS ON
+  int save_round;
+  int setround_ok;
+  save_round = fegetround();
+  setround_ok = fesetround(round_dir);
+  assert(setround_ok == 0);
+  /* ... */
+  fesetround(save_round);
+  /* ... */
+}</d:programlisting>
+  </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Environment</d:title>
+    <d:para>The functions in this section manage the floating-point environment
+    - status flags and control modes - as one entity.</d:para>
+    <d:sect2>
+      <d:title>The fegetenv function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;fenv.h>
+int fegetenv(fenv_t *envp);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fegetenv</d:code> function attempts to store the current
+floating-point environment in the object pointed to by envp.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fegetenv</d:code> function returns zero if the environment
+was successfully stored. Otherwise, it returns a nonzero value.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The feholdexcept function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;fenv.h>
+int feholdexcept(fenv_t *envp);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>feholdexcept</d:code> function saves the current
+floating-point environment in the object pointed to by <d:code>envp</d:code>,
+clears the floating-point status flags, and then installs a non-stop (continue
+on floating-point exceptions) mode, if available, for all floating-point
+exceptions.<d:footnote><d:para>IEC 60559 systems have a default non-stop mode,
+and typically at least one other mode for trap handling or aborting; if the
+system provides only the non-stop mode then installing it is trivial. For such
+systems, the <d:code>feholdexcept</d:code> function can be used in conjunction
+with the <d:code>feupdateenv</d:code> function to write routines that hide
+spurious floating-point exceptions from their
+callers.</d:para></d:footnote></d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>feholdexcept</d:code> function returns zero if and only if
+non-stop floating-point exception handling was successfully installed.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The fesetenv function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;fenv.h>
+int fesetenv(const fenv_t *envp);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fesetenv</d:code> function attempts to establish the
+floating-point environment represented by the object pointed to by
+<d:code>envp</d:code>. The argument envp shall point to an object set by a call
+to <d:code>fegetenv</d:code> or <d:code>feholdexcept</d:code>, or equal a
+floating-point environment macro. Note that fesetenv merely installs the state
+of the floating-point status flags represented through its argument, and does
+not raise these floating-point exceptions.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fesetenv</d:code> function returns zero if the environment
+was successfully established. Otherwise, it returns a nonzero value.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The feupdateenv function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;fenv.h>
+int feupdateenv(const fenv_t *envp);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>feupdateenv</d:code> function attempts to save the
+currently raised floating-point exceptions in its automatic storage, install
+the floating-point environment represented by the object pointed to by
+<d:code>envp</d:code>, and then raise the saved floating-point exceptions. The
+argument <d:code>envp</d:code> shall point to an object set by a call to
+<d:code>feholdexcept</d:code> or <d:code>fegetenv</d:code>, or equal a
+floating-point environment macro.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>feupdateenv</d:code> function returns zero if all the
+actions were successfully carried out. Otherwise, it returns a nonzero
+value.</d:para>
+<d:para>EXAMPLE Hide spurious underflow floating-point exceptions:</d:para>
+<d:programlisting role="CLexer">#include &lt;fenv.h>
+double f(double x)
+{
+  #pragma STDC FENV_ACCESS ON
+  double result;
+  fenv_t save_env;
+  if (feholdexcept(&amp;save_env))
+    return /* indication of an environmental problem */;
+  // compute result
+  if (/* test spurious underflow */)
+    if (feclearexcept(FE_UNDERFLOW))
+      return /* indication of an environmental problem */;
+  if (feupdateenv(&amp;save_env))
+    return /* indication of an environmental problem */;
+  return result;
+}</d:programlisting>
+    </d:sect2>
+  </d:sect1>
 </d:chapter>
