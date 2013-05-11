@@ -121,5 +121,43 @@ execution passes from a part of the program translated with
 <d:code>FENV_ACCESS</d:code> "on", the state of the floating-point status flags
 is unspecified and the floating-point control modes have their default
 settings.)</d:para>
+<d:para>EXAMPLE</d:para>
+<d:programlisting role="CLexer">#include &lt;fenv.h>
+void f(double x)
+{
+  #pragma STDC FENV_ACCESS ON
+  void g(double);
+  void h(double);
+  /* ... */
+  g(x + 1);
+  h(x + 1);
+  /* ... */
+}</d:programlisting>
+<d:para>If the function <d:code>g</d:code> might depend on status flags set as
+a side effect of the first <d:code>x + 1</d:code>, or if the second <d:code>x +
+1</d:code> might depend on control modes set as a side effect of the call to
+function <d:code>g</d:code>, then the program shall contain an appropriately
+placed invocation of <d:code>#pragma STDC FENV_ACCESS
+ON</d:code>.<d:footnote><d:para>The side effects impose a temporal ordering
+that requires two evaluations of <d:code>x + 1</d:code>. On the other hand,
+without the <d:code>#pragma STDC FENV_ACCESS ON</d:code> pragma, and assuming
+the default state is "off", just one evaluation of <d:code>x + 1</d:code> would
+suffice.</d:para></d:footnote></d:para>
+</d:sect1>
+<d:sect1>
+  <d:title>Floating-point exceptions</d:title>
+  <d:para>The following functions provide access to the floating-point status
+  flags.<d:footnote><d:para>The functions <d:code>fetestexcept,
+  feraiseexcept</d:code> and <d:code>feclearexcept</d:code> support the basic
+  abstraction of flags that are either set or clear. An implementation may
+  endow floating-point status flags with more information - for example, the
+  address of the code which first raised the floating-point exception; the
+  functions <d:code>fegetexceptflag</d:code> and
+  <d:code>fesetexceptflag</d:code> deal with the full content of
+  flags.</d:para></d:footnote> The <d:code>int</d:code> input argument for the
+  functions represents a subset of floating-point exceptions, and can be zero
+  or the bitwise OR of one or more floating-point exception macros, for example
+  <d:code>FE_OVERFLOW | FE_INEXACT</d:code>. For other argument values the
+  behavior of these functions is undefined.</d:para>
 </d:sect1>
 </d:chapter>
