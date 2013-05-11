@@ -1,0 +1,11 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+    <?dbhtml filename="float/index.html" ?>
+    <d:title>Characterictics of floating types &amp;lt;float.h></d:title>
+    <d:para>The header &amp;lt;float.h> defines several macros that expand to
+    various limits and parameters of the standard floating-point
+    types.</d:para>
+    <d:para>The macros, their meanings, and the constraints (or restrictions)
+    on their values are listed in Numerical limits.</d:para>
+</d:chapter>

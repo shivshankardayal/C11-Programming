@@ -35,6 +35,8 @@
   <xi:include href="ctypes.xml" />
   <xi:include href="errno.xml" />
   <xi:include href="fenv.xml" />
+  <xi:include href="float.xml" />
+  <xi:include href="inttypes.xml" />
   <d:index>
     <d:title>Index</d:title>
   </d:index>
