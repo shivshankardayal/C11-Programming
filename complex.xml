@@ -878,5 +878,274 @@ int main()
 and the output is:
 <d:screen>Re[cpow(z, z)]=-2.997991 and Im[cpow(z, z)]=0.623785</d:screen>
       </d:sect2>
+      <d:sect2>
+	<d:title>The csqrt functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex csqrt(double complex z);
+float complex csqrtf(float complex z);
+long double complex csqrtl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>csqrt</d:code> functions compute the complex square root of
+<d:code>z</d:code>, with a branch cut along the negative real axis.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code></d:code> functions return the complex square root value,
+in the range of the right halfplane (including the imaginary axis).</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex csqrt(double complex z);
+float complex csqrtf(float complex z);
+long double complex csqrtl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>Calculate the square root of a given complex number, with nonnegative
+real part, and with a branch cut along the negative real axis. (That means that
+<d:code>csqrt(-1+eps*I)</d:code> will be close to <d:code>I</d:code> while
+<d:code>csqrt(-1-eps*I)</d:code> will be close to <d:code>-I</d:code>, if
+<d:code>eps</d:code> is a small positive real number.)</d:para>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[csqrt(z)]=%lf and Im[csqrt(z)]=%lf\n", creal(csqrt(z)), cimag(csqrt(z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[csqrt(z)]=2.000000 and Im[csqrt(z)]=1.000000</d:screen>
+      </d:sect2>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Manipulation functions</d:title>
+      <d:sect2>
+	<d:title>The carg functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;complex.h>
+double carg(double complex z);
+float cargf(float complex z);
+long double cargl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code></d:code> functions compute the argument (also called phase
+angle) of <d:code>z</d:code>, with a branch cut along the negative real
+axis.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The carg functions return the value of the argument in the interval [<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+  <mml:mo>,</mml:mo>
+  <mml:mo>+</mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+</mml:math></d:inlineequation></d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double carg(double complex z);
+float cargf(float complex z);
+long double cargl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>A complex number can be described by two real coordinates. One may use
+rectangular coordinates and gets</d:para>
+<d:screen>z = x + I * y</d:screen>
+<d:para>where <d:code>x = creal(z)</d:code> and <d:code>y =
+cimag(z)</d:code>.</d:para>
+<d:para>Or one may use polar coordinates and gets:</d:para>
+<d:screen>z = r * cexp(I * a)</d:screen>
+<d:para>where <d:code>r = cabs(z)</d:code> is the "radius", the "modulus", the
+absolute value of <d:code>z</d:code>, and <d:code>a = carg(z)</d:code> is the
+"phase angle", the argument of <d:code>z</d:code>.</d:para>
+<d:para>One has:</d:para>
+<d:screen>tan(carg(z)) = cimag(z) / creal(z)</d:screen>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The return value is the range of [<d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+  <mml:mo>,</mml:mo>
+  <mml:mo>+</mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+</mml:math></d:inlineequation>].</d:para>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[carg(z)]=%lf and Im[carg(z)]=%lf\n", creal(carg(z)), cimag(carg(z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[carg(z)]=0.927295 and Im[carg(z)]=0.000000</d:screen>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The cimag functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;complex.h>
+double cimag(double complex z);
+float cimagf(float complex z);
+long double cimagl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>cimag</d:code> functions compute the imaginary part of
+<d:code>z</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>cimag</d:code> functions return the imaginary part value
+(as a real).</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double cimag(double complex z);
+float cimagf(float complex z);
+long double cimagl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>cimag()</d:code> function returns the imaginary part of the
+complex number <d:code>z</d:code>.</d:para>
+<d:para>One has:</d:para>
+<d:screen>z = creal(z) + I * cimag(z)</d:screen>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[cimag(z)]=%lf and Im[cimag(z)]=%lf\n", creal(cimag(z)), cimag(cimag(z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[cimag(z)]=4.000000 and Im[cimag(z)]=0.000000</d:screen>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The conj functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex conj(double complex z);
+float complex conjf(float complex z);
+long double complex conjl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>conj</d:code> functions compute the complex conjugate of
+<d:code>z</d:code>, by reversing the sign of its imaginary part.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>conj</d:code> functions return the complex conjugate
+value.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex conj(double complex z);
+float complex conjf(float complex z);
+long double complex conjl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>conj()</d:code> function returns the complex conjugate
+value of <d:code>z</d:code>. That is the value obtained by changing the sign of
+the imaginary part.</d:para>
+<d:para>One has:</d:para>
+<d:screen>cabs(z) = csqrt(z * conj(z))</d:screen>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[conj(z)]=%lf and Im[conj(z)]=%lf\n", creal(conj(z)), cimag(conj(z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[conj(z)]=3.000000 and Im[conj(z)]=-4.000000</d:screen>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The cproj functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex cproj(double complex z);
+float complex cprojf(float complex z);
+long double complex cprojl(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>cproj</d:code> functions compute a projection of
+<d:code>z</d:code> onto the Riemann sphere: <d:code>z</d:code> projects to
+<d:code>z</d:code> except that all complex infinities (even those with one
+infinite part and one NaN part) project to positive infinity on the real
+axis. If <d:code>z</d:code> has an infinite part, then
+<d:code>cproj(z)</d:code> is equivalent to:</d:para>
+<d:screen>INFINITY + I * copysign(0.0, cimag(z))</d:screen>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>cproj</d:code> functions return the value of the projection
+onto the Riemann sphere.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double complex cproj(double complex z);
+float complex cprojf(float complex z);
+long double complex cprojl(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>This function projects a point in the plane onto the surface of a
+Riemann Sphere, the one-point compactification of the complex plane. Each
+finite point <d:code>z</d:code> projects to <d:code>z</d:code> itself. Every
+complex infinite value is projected to a single infinite value, namely to
+positive infinity on the real axis.</d:para>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[cproj(z)]=%lf and Im[cproj(z)]=%lf\n", creal(cproj(z)), cimag    (cproj(z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[cproj(z)]=3.000000 and Im[cproj(z)]=4.000000</d:screen>
+<d:para>Since our complex number was finite, it projected itself.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The creal function</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;complex.h>
+double creal(double complex z);
+float crealf(float complex z);
+long double creall(long double complex z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>creal</d:code> functions compute the real part of
+<d:code>z</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>creal</d:code> functions return the real part
+value.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;complex.h>
+double creal(double complex z);
+float crealf(float complex z);
+long double creall(long double complex z);</d:programlisting>
+<d:para>Link with <d:code>-lm.</d:code></d:para>
+<d:para><d:emphasis role="bold">Desciption</d:emphasis></d:para>
+<d:para>The <d:code>creal()</d:code> function returns the real part of the
+complex number <d:code>z</d:code>.</d:para>
+<d:para>One has:</d:para>
+<d:screen>z = creal(z) + I * cimag(z)</d:screen>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;complex.h>
+
+int main()
+{
+  double complex z = 3.0 + 4.0i;
+
+  printf("Re[creal(z)]=%lf and Im[creal(z)]=%lf\n", creal(creal(z)), cimag    (creal(z)));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>Re[creal(z)]=3.000000 and Im[creal(z)]=0.000000</d:screen>
+      </d:sect2>
     </d:sect1>
 </d:chapter>
