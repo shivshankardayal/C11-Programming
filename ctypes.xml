@@ -297,5 +297,40 @@ int main()
 and the output is:
 <d:screen>16384 0</d:screen>
       </d:sect2>
+      <d:sect2>
+	<d:title>The ispunct function</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;ctype.h>
+int ispunct(int c);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>ispunct</d:code> function tests for any printing character
+that is one of a locale-specific set of punctuation characters for which
+neither isspace nor isalnum is true. In the "C" locale,
+<d:code>ispunct</d:code> returns true for every printing character for which
+neither <d:code>isspace</d:code> nor <d:code>isalnum</d:code> is true.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;ctype.h>
+int ispunct(int c);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>Checks for any printable character which is not a space or an
+alphanumeric character.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The values returned are nonzero if the character <d:code>c</d:code>
+falls into the tested class, and a zero value if not.</d:para>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;ctype.h>
+
+int main()
+{
+  char c1='a', c2=';';
+
+  printf("%d %d\n", ispunct(c1), ispunct(c2));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>0 4</d:screen>
+      </d:sect2>
     </d:sect1>
 </d:chapter>
