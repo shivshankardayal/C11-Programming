@@ -332,5 +332,109 @@ int main()
 and the output is:
 <d:screen>0 4</d:screen>
       </d:sect2>
+      <d:sect2>
+	<d:title>The isspace function</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;ctype.h>
+int isspace(int c);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>isspace</d:code> function tests for any character that is a
+standard white-space character or is one of a locale-specific set of characters
+for which isalnum is false. The standard white-space characters are the
+following: space (' '), form feed ('\f'), new-line ('\n'), carriage return
+('\r'), horizontal tab ('\t'), and vertical tab ('\v'). In the "C" locale,
+<d:code>isspace</d:code> returns true only for the standard white-space
+characters.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;ctype.h>
+int isspace(int c);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>Checks for white-space characters. In the "C" and "POSIX" locales,
+these are: space, form-feed ('\f'), newline ('\n'), carriage return ('\r'),
+horizontal tab ('\t'), and vertical tab ('\v').</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The values returned are nonzero if the character <d:code>c</d:code>
+falls into the tested class, and a zero value if not.</d:para>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;ctype.h>
+
+int main()
+{
+  char c1='\n', c2=';';
+
+  printf("%d %d\n", isspace(c1), isspace(c2));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>8192 0</d:screen>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The isupper function</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;ctype.h>
+int isupper(int c);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>isupper</d:code> function tests for any character that is
+an uppercase letter or is one of a locale-specific set of characters for which
+none of <d:code>iscntrl, isdigit, ispunct</d:code> or <d:code>isspace</d:code>
+is true. In the "C" locale, <d:code>isupper</d:code> returns true only for the
+uppercase letters.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;ctype.h>
+int isupper(int c);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>Checks for an uppercase letter.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The values returned are nonzero if the character <d:code>c</d:code>
+falls into the tested class, and a zero value if not.</d:para>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;ctype.h>
+
+int main()
+{
+  char c1='A', c2=';';
+
+  printf("%d %d\n", isupper(c1), isupper(c2));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>256 0</d:screen>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The isxdigit function</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;ctype.h>
+int isxdigit(int c);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>isxdigit</d:code> function tests for any hexadecimal-digit
+character.</d:para>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;ctype.h>
+int isxdigit(int c);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>Checks for a hexadecimal digits, that is, one of:</d:para>
+<d:screen>0 1 2 3 4 5 6 7 8 9 a b c d e f A B C D E F.</d:screen>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The values returned are nonzero if the character <d:code>c</d:code>
+falls into the tested class, and a zero value if not.</d:para>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+#include &lt;ctype.h>
+
+int main()
+{
+  char c1='a', c2=';';
+
+  printf("%d %d\n", isxdigit(c1), isxdigit(c2));
+
+  return 0;
+}</d:programlisting>
+and the output is:
+<d:screen>4096 0</d:screen>
+      </d:sect2>
     </d:sect1>
 </d:chapter>
