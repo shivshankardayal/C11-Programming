@@ -1,0 +1,19 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+    <?dbhtml filename="errno/index.html" ?>
+    <d:title>Errors &amp;lt;errno.h></d:title>
+    <d:para>The header &amp;lt;errno.h> defines several macros, all relating to
+    the reporting of error conditions.</d:para>
+    <d:para>The macros are:</d:para>
+    <d:blockquote><d:para>EDOM EILSEQ ERANGE</d:para></d:blockquote>
+    <d:para>which expand to integer constant expressions with type
+    <d:code>int</d:code>, distinct positive values, and which are suitable for
+    use in <d:code>#if</d:code> preprocessing directives; and
+    <d:code>errno</d:code> which expands to a modifiable
+    lvalue<d:footnote><d:para>The macro errno need not be the identifier of an
+    object. It might expand to a modifiable lvalue resulting from a function
+    call (for example, <d:code>*errno()</d:code>).</d:para></d:footnote>
+    </d:para>
+</d:chapter>
