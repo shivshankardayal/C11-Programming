@@ -1439,7 +1439,325 @@ xmlns="http://www.w3.org/1998/Math/MathML">
   <mml:mi>x</mml:mi>
 </mml:math></d:inlineequation>".This definition is applicable for all
 implementations.</d:para></d:footnote></d:para>
-
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>remainder</d:code> functions return
+<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>x</mml:mi>
+  <mml:mi>R</mml:mi>
+  <mml:mi>E</mml:mi>
+  <mml:mi>M</mml:mi>
+  <mml:mi>y</mml:mi>
+</mml:math></d:inlineequation>. If y is zero, whether a domain error occurs or
+the functions return zero is implementation defined.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The remquo functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double remquo(double x, double y, int *quo);
+float remquof(float x, float y, int *quo);
+long double remquol(long double x, long double y, int *quo);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>remquo</d:code> functions compute the same remainder as the remainder<d:code>remainder</d:code> functions. In the object pointed to by <d:code>quo</d:code> they store a value whose sign is the sign of <d:code>x/y</d:code> and whose magnitude is congruent modulo <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mi>n</mml:mi>
+  </mml:msup>
+</mml:math></d:inlineequation> to the magnitude of the integral quotient of
+<d:code>x/y</d:code>, where <d:code>n</d:code> is an implementation-defined
+integer greater than or equal to 3.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>remquo</d:code> functions return <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>x</mml:mi>
+  <mml:mi>R</mml:mi>
+  <mml:mi>E</mml:mi>
+  <mml:mi>M</mml:mi>
+  <mml:mi>y</mml:mi>
+</mml:math></d:inlineequation>. If <d:code>y</d:code> is zero, the value stored
+in the object pointed to by <d:code>quo</d:code> is unspecified and whether a
+domain error occurs or the functions return zero is implementation
+defined.</d:para>
+      </d:sect2>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Manipulation functions</d:title>
+      <d:sect2>
+	<d:title>The copysign function</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double copysign(double x, double y);
+float copysignf(float x, float y);
+long double copysignl(long double x, long double y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>copysign</d:code> functions produce a value with the
+magnitude of <d:code>x</d:code> and the sign of <d:code>y</d:code>. They
+produce a NaN (with the sign of <d:code>y</d:code>) if <d:code>x</d:code> is a
+NaN. On implementations that represent a signed zero but do not treat negative
+zero consistently in arithmetic operations, the copysign functions regard the
+sign of zero as positive.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>copysign</d:code> functions return a value with the
+magnitude of <d:code>x</d:code> and the sign of <d:code>y</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The nan functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double nan(const char *tagp);
+float nanf(const char *tagp);
+long double nanl(const char *tagp);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The call nan("<d:emphasis role="italic">n-char-sequence</d:emphasis>")
+is equivalent to <d:code>strtod</d:code>("NAN(<d:emphasis
+role="italic">n-char-sequence</d:emphasis>)", <d:code>(char**) NULL);</d:code>
+the call nan("") is equivalent to strtod("NAN()", <d:code>(char**)
+NULL</d:code>). If <d:code>tagp</d:code> does not point to an n-char sequence
+or an empty string, the call is equivalent to <d:code>strtod</d:code>("NAN",
+<d:code>(char**) NULL</d:code>). Calls to <d:code>nanf</d:code> and
+<d:code>nanl</d:code> are equivalent to the corresponding calls to
+<d:code>strtof</d:code> and <d:code>strtold</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>nan</d:code> functions return a quiet NaN, if available,
+with content indicated through <d:code>tagp</d:code>. If the implementation
+does not support quiet NaNs, the functions return zero.</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
+<d:code>strtod, strtof</d:code> and <d:code>strtold</d:code> functions (The
+strtod, strtof and strtold functions).</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The nextafter functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double nextafter(double x, double y);
+float nextafterf(float x, float y);
+long double nextafterl(long double x, long double y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The nextafter functions determine the next representable value, in the
+type of the function, after <d:code>x</d:code> in the direction of
+<d:code>y</d:code>, where <d:code>x</d:code> and <d:code>y</d:code> are first
+converted to the type of the function.<d:footnote><d:para>The argument values
+are converted to the type of the function, even by a macro implementation of
+the function.</d:para></d:footnote> The nextafter functions return
+<d:code>y</d:code> if <d:code>x</d:code> equals <d:code>y</d:code>. A range
+error may occur if the magnitude of <d:code>x</d:code> is the largest finite
+value representable in the type and the result is infinite or not representable
+in the type.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>nextafter</d:code> functions return the next representable
+value in the specified format after <d:code>x</d:code> in the direction of
+<d:code>y</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The nexttoward functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double nexttoward(double x, long double y);
+float nexttowardf(float x, long double y);
+long double nexttowardl(long double x, long double y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>nexttoward</d:code> functions are equivalent to the
+<d:code>nextafter</d:code> functions except that the second parameter has type
+<d:code>long double</d:code> and the functions return <d:code>y</d:code>
+converted to the type of the function if <d:code>x</d:code> equals
+<d:code>y</d:code>.<d:footnote><d:para>The result of the
+<d:code>nexttoward</d:code> functions is determined in the type of the
+function, without loss of range or precision in a floating second
+argument.</d:para></d:footnote></d:para>
+      </d:sect2>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Maximum, minimum and positive difference functions</d:title>
+      <d:sect2>
+	<d:title>The fdim funcitons</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double fdim(double x, double y);
+float fdimf(float x, float y);
+long double fdiml(long double x, long double y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fdim</d:code> functions determine the positive difference
+between their arguments:<d:informalequation>
+<mml:math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mml:mtable columnalign="right left" rowspacing="3pt" columnspacing="0.278em">
+    <mml:mtr>
+      <mml:mtd>
+        <mml:mfenced open="{" close="">
+          <mml:mtable columnalign="left left" rowspacing="4pt" columnspacing="1em">
+            <mml:mtr>
+              <mml:mtd>
+                <mml:mi>x</mml:mi>
+                <mml:mo>&#x2212;<!-- − --></mml:mo>
+                <mml:mi>y</mml:mi>
+              </mml:mtd>
+              <mml:mtd>
+                <mml:mspace width="1em" />
+                <mml:mtext>if&#xA0;</mml:mtext>
+                <mml:mrow class="MJX-TeXAtom-ORD">
+                  <mml:mi>x</mml:mi>
+                  <mml:mo>&#x2265;<!-- ≥ --></mml:mo>
+                  <mml:mi>y</mml:mi>
+                </mml:mrow>
+              </mml:mtd>
+            </mml:mtr>
+            <mml:mtr>
+              <mml:mtd>
+                <mml:mo>+</mml:mo>
+                <mml:mn>0</mml:mn>
+              </mml:mtd>
+              <mml:mtd>
+                <mml:mspace width="1em" />
+                <mml:mtext>if&#xA0;</mml:mtext>
+                <mml:mrow class="MJX-TeXAtom-ORD">
+                  <mml:mi>x</mml:mi>
+                  <mml:mo>&#x2264;<!-- ≤ --></mml:mo>
+                  <mml:mi>y</mml:mi>
+                </mml:mrow>
+              </mml:mtd>
+            </mml:mtr>
+          </mml:mtable>
+        </mml:mfenced>
+      </mml:mtd>
+    </mml:mtr>
+  </mml:mtable>
+</mml:math></d:informalequation>
+A range error may occur.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fdim</d:code> functions return the positive difference
+value.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The fmax function</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double fmax(double x, double y);
+float fmaxf(float x, float y);
+long double fmaxl(long double x, long double y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fmax</d:code> functions determine the maximum numeric value
+of their arguments.<d:footnote><d:para>NaN arguments are treated as missing
+data: if one argument is a NaN and the other numeric, then the
+<d:code>fmax</d:code> functions choose the numeric value. See
+F.9.9.2.</d:para></d:footnote></d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fmax</d:code> functions return the maximum numeric value of
+their arguments.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The fmin functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double fmin(double x, double y);
+float fminf(float x, float y);
+long double fminl(long double x, long double y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fmin</d:code> functions determine the minimum numeric value
+of their arguments.<d:footnote><d:para>The <d:code>fmin</d:code> functions are
+analogous to the <d:code>fmax</d:code> functions in their treatment of
+NaNs.</d:para></d:footnote></d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fmin</d:code> functions return the minimum numeric value of
+their arguments.</d:para>
+      </d:sect2>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Floating multiply-add</d:title>
+      <d:sect2>
+	<d:title>The fma functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double fma(double x, double y, double z);
+float fmaf(float x, float y, float z);
+long double fmal(long double x, long double y, long double z);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>     
+<d:para>The <d:code>fma</d:code> functions compute <d:code>(x * y) +
+z</d:code>, rounded as one ternary operation: they compute the value (as if) to
+infinite precision and round once to the result format, according to the
+rounding mode characterized by the value of <d:code>FLT_ROUNDS</d:code>. A
+range error may occur.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fma</d:code> functions return <d:code>(x * y) + z</d:code>,
+rounded as one ternary operation.</d:para>
+      </d:sect2>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Comparison macros</d:title>
+      <d:para>The relational and equality operators support the usual
+      mathematical relationships between numeric values. For any ordered pair
+      of numeric values exactly one of the relationships -- <d:emphasis
+      role="italic">less, greater</d:emphasis> and <d:emphasis
+      role="italic">equal</d:emphasis> -- is true. Relational operators may
+      raise the "invalid" floating-point exception when argument values are
+      NaNs. For a NaN and a numeric value, or for two NaNs, just the unordered
+      relationship is true.<d:footnote><d:para>IEC 60559 requires that the
+      built-in relational operators raise the "invalid" floating-point
+      exception if the operands compare unordered, as an error indicator for
+      programs written without consideration of NaNs; the result in these cases
+      is false.</d:para></d:footnote> The following subclauses provide macros
+      that are quiet (non floating-point exception raising) versions of the
+      relational operators, and other comparison macros that facilitate writing
+      efficient code that accounts for NaNs without suffering the "invalid"
+      floating-point exception. In the synopses in this subclause, <d:emphasis
+      role="italic">real-floating</d:emphasis> indicates that the argument
+      shall be an expression of real floating type.</d:para>
+      <d:sect2>
+	<d:title>The isgreater macro</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+int isgreater(real-floating x, real-floating y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>isgreater</d:code> macro determines whether its first
+argument is greater than its second argument. The value of <d:code>isgreater(x,
+y)</d:code> is always equal to <d:code>(x) > (y)</d:code>; however, unlike
+<d:code>(x) > (y)</d:code>, <d:code>isgreater(x, y)</d:code> does not raise the
+"invalid" floating-point exception when <d:code>x</d:code> and
+<d:code>y</d:code> are unordered.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>isgreater</d:code> macro returns the value of <d:code>(x) >
+(y)</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The isgreaterequal macro</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+int isgreaterequal(real-floating x, real-floating y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>isgreaterequal</d:code> macro determines whether its first
+argument is greater than or equal to its second argument. The value of
+<d:code>isgreaterequal(x, y)</d:code> is always equal to <d:code>(x) >=
+(y)</d:code>; however, unlike <d:code>(x) >= (y), isgreaterequal(x, y)</d:code>
+does not raise the "invalid" floating-point exception when <d:code>x</d:code>
+and <d:code>y</d:code> are unordered.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>isgreaterequal</d:code> macro returns the value of
+<d:code>(x) >= (y)</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The isless macro</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+int isless(real-floating x, real-floating y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>isless</d:code> macro determines whether its first argument
+is less than its second argument. The value of <d:code>isless(x, y)</d:code> is
+always equal to (<d:code>x) &amp;lt; (y)</d:code>; however, unlike <d:code>(x)
+&amp;lt; (y), isless(x, y)</d:code> does not raise the "invalid" floating-point
+exception when <d:code>x</d:code> and <d:code>y</d:code> are
+unordered.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>isless</d:code> macro returns the value of <d:code>(x)
+&amp;lt; (y)</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The islessequal macro</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+int islessequal(real-floating x, real-floating y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>islessequal</d:code> macro determines whether its first
+argument is less than or equal to its second argument. The value of
+<d:code>islessequal(x, y)</d:code> is always equal to <d:code>(x) &amp;lt;=
+(y)</d:code>; however, unlike <d:code>(x) &amp;lt;isunordered</d:code> macro returns 1 if its arguments are
+unordered and 0 otherwise.</d:para>
       </d:sect2>
     </d:sect1>
 </d:chapter>
