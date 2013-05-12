@@ -332,6 +332,463 @@ the interval [-1, +1].</d:para>
 double asin(double x);
 float asinf(float x);
 long double asinl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>asin</d:code> functions compute the principal value of the
+arc sine of <d:code>x</d:code>. A domain error occurs for arguments not in the
+interval [-1, +1].</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>asin</d:code> functions return arcsin <d:code>x</d:code> in
+the interval [<d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo>/</mml:mo>
+  </mml:mrow>
+  <mml:mn>2</mml:mn>
+  <mml:mo>,</mml:mo>
+  <mml:mo>+</mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo>/</mml:mo>
+  </mml:mrow>
+  <mml:mn>2</mml:mn>
+</mml:math></d:inlineequation>] radians.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The atan functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double atan(double x);
+float atanf(float x);
+long double atanl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>atan</d:code> functions compute the principal value of the
+arc tangent of <d:code>x</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>atan</d:code> functions return arctan <d:code>x</d:code> in
+the interval [<d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo>/</mml:mo>
+  </mml:mrow>
+  <mml:mn>2</mml:mn>
+  <mml:mo>,</mml:mo>
+  <mml:mo>+</mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo>/</mml:mo>
+  </mml:mrow>
+  <mml:mn>2</mml:mn>
+</mml:math></d:inlineequation>] radians.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The atan2 functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double atan2(double y, double x);
+float atan2f(float y, float x);
+long double atan2l(long double y, long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>atan2</d:code> functions compute the value of the arc
+tangent of <d:code>y/x</d:code>, using the signs of both arguments to determine
+the quadrant of the return value. A domain error may occur if both arguments
+are zero.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>atan2</d:code> functions return arctan <d:code>y/x</d:code>
+in the interval [<d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+  <mml:mo>,</mml:mo>
+  <mml:mo>+</mml:mo>
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+</mml:math></d:inlineequation>] radians.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The cos functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double cos(double x);
+float cosf(float x);
+long double cosl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>cos</d:code> functions compute the cosine of
+<d:code>x</d:code> (measured in radians).</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>cos</d:code> functions return cos
+<d:code>x</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The sin functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double sin(double x);
+float sinf(float x);
+long double sinl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>sin</d:code> functions compute the sine of
+<d:code>x</d:code> (measured in radians).</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>sin</d:code> functions return sin
+<d:code>x</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The tan functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double tan(double x);
+float tanf(float x);
+long double tanl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>tan</d:code> functions return the tangent of
+<d:code>x</d:code> (measured in radians).</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>tan</d:code> functions return tan
+<d:code>x</d:code>.</d:para>
       </d:sect2>
     </d:sect1>
-  </d:chapter>
+    <d:sect1>
+      <d:title>Hyperbolic functions</d:title>
+      <d:sect2>
+	<d:title>The acosh functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double acosh(double x);
+float acoshf(float x);
+long double acoshl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>acosh</d:code> functions compute the (nonnegative) arc
+hyperbolic cosine of <d:code>x</d:code>. A domain error occurs for arguments
+less than 1.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The acosh functions return arcosh <d:code>x</d:code> in the interval
+[<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mn>0</mml:mn>
+  <mml:mo>,</mml:mo>
+  <mml:mo>+</mml:mo>
+  <mml:mi mathvariant="normal">&#x221E;<!-- ∞ --></mml:mi>
+</mml:math></d:inlineequation>].</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The asinh functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double asinh(double x);
+float asinhf(float x);
+long double asinhl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>asinh</d:code> functions compute the arc hyperbolic sine of
+<d:code>x</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>asinh</d:code> functions return arsinh
+<d:code>x</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The atanh functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double atanh(double x);
+float atanhf(float x);
+long double atanhl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>atanh</d:code> functions compute the arc hyperbolic tangent
+of <d:code>x</d:code>. A domain error occurs for arguments not in the interval
+[-1, +1]. A range error may occur if the argument equals -1 or +1.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>atanh</d:code> functions return atanh
+<d:code>x</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The cosh functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double cosh(double x);
+float coshf(float x);
+long double coshl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>cosh</d:code> functions compute the hyperbolic cosine of
+<d:code>x</d:code>. A range error occurs if the magnitude of <d:code>x</d:code>
+is too large.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>cosh</d:code> functions return cosh
+<d:code>x</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The sinh functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double sinh(double x);
+float sinhf(float x);
+long double sinhl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>sinh</d:code> functions compute the hyperbolic sine of
+<d:code>x</d:code>. A range error occurs if the magnitude of <d:code>x</d:code>
+is too large.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>sinh</d:code> functions return sinh
+<d:code>x</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The tanh functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double tanh(double x);
+float tanhf(float x);
+long double tanhl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>tanh</d:code> functions compute the hyperbolic tangent of
+<d:code>x</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>tanh</d:code> functions return tanh
+<d:code>x</d:code>.</d:para>
+      </d:sect2>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Exponential and logrithmic functions</d:title>
+      <d:sect2>
+	<d:title>The exp functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double exp(double x);
+float expf(float x);
+long double expl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>exp</d:code> functions compute the base-e exponential of
+<d:code>x</d:code>. A range error occurs if the magnitude of <d:code>x</d:code>
+is too large.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>exp</d:code> functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML"> 
+  <mml:msup>
+    <mml:mi>e</mml:mi>
+    <mml:mi>x</mml:mi>
+  </mml:msup>
+</mml:math></d:inlineequation>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The exp2 functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double exp2(double x);
+float exp2f(float x);
+long double exp2l(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>exp2</d:code> functions compute the base-2 exponential of
+<d:code>x</d:code>. A range error occurs if the magnitude of <d:code>x</d:code>
+is too large.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The exp2 functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML"> 
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mi>x</mml:mi>
+  </mml:msup>
+</mml:math></d:inlineequation>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The expml functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double expm1(double x);
+float expm1f(float x);
+long double expm1l(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>expm1</d:code> functions compute the base-e exponential of
+the argument, minus 1. A range error occurs if <d:code>x</d:code> is too
+large.<d:footnote><d:para>For small magnitude <d:code>x</d:code>,
+<d:code>expm1(x)</d:code> is expected to be more accurate than <d:code>exp(x) -
+1</d:code>.</d:para></d:footnote></d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The expm1 functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mi>e</mml:mi>
+    <mml:mi>x</mml:mi>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation></d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The frexp functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double frexp(double value, int *exp);
+float frexpf(float value, int *exp);
+long double frexpl(long double value, int *exp);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>frexp</d:code> functions break a floating-point number into
+a normalized fraction and an integral power of 2. They store the integer in the
+int object pointed to by <d:code>exp</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>If <d:code>value</d:code> is not a floating-point number, the results
+are unspecified. Otherwise, the <d:code>frexp</d:code> functions return the
+value <d:code>x</d:code>, such that <d:code>x</d:code> has a magnitude in the
+interval [1/2, 1) or zero, and value equals <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>x</mml:mi>
+  <mml:mo>&#x2217;<!-- ∗ --></mml:mo>
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mo>&#x2217;<!-- ∗ --></mml:mo>
+      <mml:mi>e</mml:mi>
+      <mml:mi>x</mml:mi>
+      <mml:mi>p</mml:mi>
+    </mml:mrow>
+  </mml:msup>
+</mml:math></d:inlineequation>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The ilogb functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+int ilogb(double x);
+int ilogbf(float x);
+int ilogbl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>ilogb</d:code> functions extract the exponent of
+<d:code>x</d:code> as a signed int value. If <d:code>x</d:code> is zero they
+compute the value <d:code>FP_ILOGB0</d:code>; if <d:code>x</d:code> is infinite
+they compute the value <d:code>INT_MAX</d:code>; if <d:code>x</d:code> is a NaN
+they compute the value <d:code>FP_ILOGBNAN</d:code>; otherwise, they are
+equivalent to calling the corresponding <d:code>logb</d:code> function and
+casting the returned value to type <d:code>int</d:code>. A domain error or
+range error may occur if <d:code>x</d:code> is zero, infinite, or NaN. If the
+correct value is outside the range of the return type, the numeric result is
+unspecified.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>ilogb</d:code> functions return the exponent of
+<d:code>x</d:code> as a signed int value.</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
+<d:code>logb</d:code> functions (The logb functions).</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The ldexp functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double ldexp(double x, int exp);
+float ldexpf(float x, int exp);
+long double ldexpl(long double x, int exp);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>ldexp</d:code> functions multiply a floating-point number
+by an integral power of 2. A range error may occur.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The ldexp functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>x</mml:mi>
+  <mml:mo>&#x2217;<!-- ∗ --></mml:mo>
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mi>e</mml:mi>
+      <mml:mi>x</mml:mi>
+      <mml:mi>p</mml:mi>
+    </mml:mrow>
+  </mml:msup>
+</mml:math></d:inlineequation>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The log functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double log(double x);
+float logf(float x);
+long double logl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>log</d:code> functions compute the base-e (natural)
+logarithm of <d:code>x</d:code>. A domain error occurs if the argument is
+negative. A range error may occur if the argument is zero.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The log functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>l</mml:mi>
+  <mml:mi>o</mml:mi>
+  <mml:msub>
+    <mml:mi>g</mml:mi>
+    <mml:mi>e</mml:mi>
+  </mml:msub>
+  <mml:mi>x</mml:mi>
+</mml:math></d:inlineequation>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The log10 functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double log10(double x);
+float log10f(float x);
+long double log10l(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>log10</d:code> functions compute the base-10 (natural)
+logarithm of <d:code>x</d:code>. A domain error occurs if the argument is
+negative. A range error may occur if the argument is zero.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The log10 functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>l</mml:mi>
+  <mml:mi>o</mml:mi>
+  <mml:msub>
+    <mml:mi>g</mml:mi>
+    <mml:mn>10</mml:mn>
+  </mml:msub>
+  <mml:mi>x</mml:mi>
+</mml:math></d:inlineequation>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The log1p functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double log1p(double x);
+float log1pf(float x);
+long double log1pl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>log1p</d:code> functions compute the base-e (natural)
+logarithm of 1 plus the argument.<d:footnote><d:para>For small magnitude
+<d:code></d:code>, <d:code>log1p(x)</d:code> is expected to be more accurate
+than <d:code>log(1 + x)</d:code>.</d:para></d:footnote> A domain error occurs
+if the argument is less than -1. A range error may occur if the argument equals
+11.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The log1p functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML"> 
+  <mml:mi>l</mml:mi>
+  <mml:mi>o</mml:mi>
+  <mml:msub>
+    <mml:mi>g</mml:mi>
+    <mml:mi>e</mml:mi>
+  </mml:msub>
+  <mml:mo stretchy="false">(</mml:mo>
+  <mml:mn>1</mml:mn>
+  <mml:mo>+</mml:mo>
+  <mml:mi>x</mml:mi>
+  <mml:mo stretchy="false">)</mml:mo>
+</mml:math></d:inlineequation></d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The log2 functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double log2(double x);
+float log2f(float x);
+long double log2l(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>log2</d:code> functions compute the base-2 logarithm of
+<d:code>x</d:code>. A domain error occurs if the argument is less than zero. A
+range error may occur if the argument is zero.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>log2</d:code> functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>l</mml:mi>
+  <mml:mi>o</mml:mi>
+  <mml:msub>
+    <mml:mi>g</mml:mi>
+    <mml:mn>2</mml:mn>
+  </mml:msub>
+  <mml:mi>x</mml:mi>
+</mml:math></d:inlineequation></d:para>
+      </d:sect2>
+    </d:sect1>
+</d:chapter>
