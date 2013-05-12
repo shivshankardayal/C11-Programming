@@ -44,6 +44,9 @@
   <xi:include href="setjmp.xml" />
   <xi:include href="signal.xml" />
   <xi:include href="stdarg.xml" />
+  <xi:include href="stdbool.xml" />
+  <xi:include href="stddef.xml" />
+  <xi:include href="stdint.xml" />
   <d:index>
     <d:title>Index</d:title>
   </d:index>

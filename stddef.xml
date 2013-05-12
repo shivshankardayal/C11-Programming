@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?dbhtml filename="stddef/index.html" ?>
+  <d:title>Common definitions &amp;lt;stddef.h></d:title>
+  <d:para>The following types and macros are defined in the standard header
+  <d:code>&amp;lt;stddef.h></d:code>. Some are also defined in other headers,
+  as noted in their respective subclauses.</d:para>
+  <d:para>The tyeps are</d:para>
+  <d:blockquote><d:para><d:code>ptrdiff_t</d:code></d:para></d:blockquote>
+  <d:para>which is the signed integer type of the result of subtracting two
+  pointers;</d:para>
+  <d:blockquote><d:para><d:code>size_t</d:code></d:para></d:blockquote>
+  <d:para>which is the unsigned integer type of the result of the sizeof
+  operator; and</d:para>
+  <d:blockquote><d:para><d:code>wchar_t</d:code></d:para></d:blockquote>
+  <d:para>which is an integer type whose range of values can represent distinct
+  codes for all members of the largest extended character set specified among
+  the supported locales; the null character shall have the code value
+  zero.</d:para>
+  <d:para>The macros are</d:para>
+  <d:blockquote><d:para><d:code>NULL</d:code></d:para></d:blockquote>
+  <d:para>which expands to an implementation-defined null pointer constant;
+  and</d:para>
+  <d:blockquote><d:para><d:code>offsetof</d:code> <d:emphasis
+  role="italic">(type, member-designator)</d:emphasis></d:para></d:blockquote>
+  <d:para>which expands to an integer constant expression that has type
+  <d:code>size_t</d:code>, the value of which is the offset in bytes, to the
+  structure member (designated by member-designator), from the beginning of its
+  structure (designated by type). The type and member designator shall be such
+  that given</d:para>
+  <d:blockquote><d:para><d:code>static type t;</d:code></d:para></d:blockquote>
+  <d:para>then the expression &amp; (t.<d:emphasis
+  role="italic">member-designator</d:emphasis>) evaluates to an address
+  constant. (If the specified member is a bit-field, the behavior is
+  undefined.)</d:para>
+  <d:para><d:emphasis role="bold">Recommended practice</d:emphasis></d:para>
+  <d:para>The types used for <d:code>size_t</d:code> and
+  <d:code>ptrdiff_t</d:code> should not have an integer conversion rank greater
+  than that of <d:code>signed long int</d:code> unless the implementation
+  supports objects large enough to make this necessary.</d:para>
+</d:chapter>

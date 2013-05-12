@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?dbhtml filename="stdbool/index.html" ?>
+  <d:title>Boolean types and values &amp;lt;stdbool.h></d:title>
+  <d:para>The header <d:code>&amp;lt;stdbool.h></d:code> defines four
+  macros. The macro</d:para>
+  <d:blockquote><d:para><d:code>bool</d:code></d:para></d:blockquote>
+  <d:para>expands to <d:code>_Bool</d:code></d:para>
+  <d:para>The remaining three macros are suitable for use in
+  <d:code>#if</d:code> preprocessing directives. They are</d:para>
+  <d:blockquote><d:para><d:code>true</d:code></d:para></d:blockquote>
+  <d:para>which expands to the integer constant 1,</d:para>
+  <d:blockquote><d:para><d:code>false</d:code></d:para></d:blockquote>
+  <d:para>which expands to the integer constant 0, and</d:para>
+  <d:blockquote><d:para><d:code>__bool_true_false_are_defined</d:code></d:para></d:blockquote>
+<d:para>which expands to the integer constant 1.</d:para>
+<d:para>Notwithstanding the provisions of macro Replacement, a program may
+undefine and perhaps then redefine the macros <d:code>bool, true</d:code> and
+<d:code>false</d:code>.</d:para>
+</d:chapter>

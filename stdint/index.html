@@ -1,0 +1,83 @@
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><title>Chapter 30. Integer types &lt;stdint.h></title><link href="../../css/style.css" rel="stylesheet" type="text/css"><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"><link href="../index.html" rel="home" title="C Programming with C99"><link href="../index.html" rel="up" title="C Programming with C99"><link href="../stddef/index.html" rel="prev" title="Chapter 29. Common definitions &lt;stddef.h>"><link href="../ix01.html" rel="next" title="Index"><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></link></link></link></link></meta></link></meta></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 30. Integer types &lt;stdint.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../stddef/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 30. Integer types &lt;stdint.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp38145872"></a>Chapter 30. Integer types &lt;stdint.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp38157760">30.1. Integer types</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp38160112">30.1.1. Exact-width integer types</a></span></dt><dt><span class="sect2"><a href="index.html#idp38165280">30.1.2. Minimum-width integer types</a></span></dt><dt><span class="sect2"><a href="index.html#idp38173232">30.1.3. Fastest minimum-width integer types</a></span></dt><dt><span class="sect2"><a href="index.html#idp38181296">30.1.4. Integer types capable of holding object pointers</a></span></dt><dt><span class="sect2"><a href="index.html#idp38185264">30.1.5. Greatest-width integer types</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp38189088">30.2. Limits of specific-width integer types</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp38193600">30.2.1. Limits of exact-width integer types</a></span></dt></dl></dd></dl></div><p>The header &lt;stdint.h> declares sets of integer types having
+  specified widths, and defines corresponding sets of macros. It also defines
+  macros that specify limits of integer types corresponding to types defined in
+  other standard headers.</p><p>Types are defined in the following categories:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>integer types having certain exact widths;</p></li><li class="listitem"><p>integer types having at least certain specified widths;</p></li><li class="listitem"><p>fastest integer types having at least certain specified
+      widths;</p></li><li class="listitem"><p>integer types wide enough to hold pointers to objects;</p></li><li class="listitem"><p>integer types having greatest width.</p></li></ul></div><p>(Some of these types may denote the same type.)</p><p>Corresponding macros specify limits of the declared types and
+  construct suitable constants.</p><p>For each type described herein that the implementation
+  provides,<sup>[<a class="footnote" href="#ftn.idp38155008" name="idp38155008">191</a>]</sup>
+<code class="code">&lt;stdint.h></code> shall declare that
+  <code class="code">typedef</code> name and define the associated macros. Conversely,
+  for each type described herein that the implementation does not provide,
+  <code class="code">&lt;stdint.h></code> shall not declare that
+  <code class="code">typedef</code> name nor shall it define the associated macros. An
+  implementation shall provide those types described as "required", but need
+  not provide any of the others (described as "optional").</p><div class="sect1" title="30.1. Integer types"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp38157760"></a>30.1. Integer types</h2></div></div></div><p>When typedef names differing only in the absence or presence of the
+    initial <code class="code">u</code> are defined, they shall denote corresponding
+    signed and unsigned types as described in Types; an implementation
+    providing one of these corresponding types shall also provide the
+    other.</p><p>In the following descriptions, the symbol N represents an unsigned
+    decimal integer with no leading zeros (e.g., 8 or 24, but not 04 or
+    048).</p><div class="sect2" title="30.1.1. Exact-width integer types"><div class="titlepage"><div><div><h3 class="title"><a name="idp38160112"></a>30.1.1. Exact-width integer types</h3></div></div></div><p>The typedef name <code class="code">intN_t</code>
+      designates a signed integer type with width <code class="code">N</code>, no
+      padding bits and a two's complement representation. Thus,
+      <code class="code">int8_t</code> denotes a signed integer type with a width of
+      exactly 8 bits.</p><p>The typedef name <code class="code">uintN_t</code> designates an unsigned
+      integer type with width <code class="code">N</code>. Thus,
+      <code class="code">uint24_t</code> denotes an unsigned integer type with a width
+      of exactly 24 bits.</p><p>These types are optional. However, if an implementation provides
+      integer types with widths of 8, 16, 32 or 64 bits, no padding bits, and
+      (for the signed types) that have a two's complement representation, it
+      shall define the corresponding typedef names.</p></div><div class="sect2" title="30.1.2. Minimum-width integer types"><div class="titlepage"><div><div><h3 class="title"><a name="idp38165280"></a>30.1.2. Minimum-width integer types</h3></div></div></div><p>The typedef name <code class="code">int_leastN_t</code> designates a
+      signed integer type with a width of at least <code class="code">N</code>, such
+      that no signed integer type with lesser size has at least the specified
+      width. Thus, <code class="code">int_least32_t</code> denotes a signed integer type
+      with a width of at least 32 bits.</p><p>The typedef name <code class="code">uint_leastN_t</code> designates an
+      unsigned integer type with a width of at least <code class="code">N</code>, such
+      that no unsigned integer type with lesser size has at least the specified
+      width. Thus, xcode<code class="code">uint_least16_t</code> denotes an unsigned
+      integer type with a width of at least 16 bits.</p><p>The following types are required:</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">int_least8_t      uint_least8_t</code></p><p><code class="code">int_least16_t  uint_least16_t</code></p><p><code class="code">int_least32_t  uint_least32_t</code></p><p><code class="code">int_least64_t  uint_least64_t</code></p></blockquote></div><p>All other types of this form are optional.</p></div><div class="sect2" title="30.1.3. Fastest minimum-width integer types"><div class="titlepage"><div><div><h3 class="title"><a name="idp38173232"></a>30.1.3. Fastest minimum-width integer types</h3></div></div></div><p>Each of the following types designates an integer type that is
+      usually fastest<sup>[<a class="footnote" href="#ftn.idp38174304" name="idp38174304">192</a>]</sup> to operate with among all integer
+      types that have at least the specified width.</p><p>The typedef name <code class="code">int_fastN_t</code> designates the
+      fastest signed integer type with a width of at least
+      <code class="code">N</code>. The typedef name <code class="code">uint_fastN_t</code>
+      designates the fastest unsigned integer type with a width of at least
+      <code class="code">N</code>.</p><p>The following types are required:</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">int_fast8_t  uint_fast8_t</code></p><p><code class="code">int_fast16_t uint_fast16_t</code></p><p><code class="code">int_fast32_t uint_fast32_t</code></p><p><code class="code">int_fast64_t uint_fast64_t</code></p></blockquote></div><p>All other types of this form are optional.</p></div><div class="sect2" title="30.1.4. Integer types capable of holding object pointers"><div class="titlepage"><div><div><h3 class="title"><a name="idp38181296"></a>30.1.4. Integer types capable of holding object pointers</h3></div></div></div><p>The following type designates a signed integer type with the
+      property that any valid pointer to void can be converted to this type,
+      then converted back to pointer to void, and the result will compare equal
+      to the original pointer:</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">intptr_t</code></p></blockquote></div><p>The following type designates an unsigned integer type with the
+      property that any valid pointer to void can be converted to this type,
+      then converted back to pointer to void, and the result will compare equal
+      to the original pointer:</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">uintptr_t</code></p></blockquote></div><p>These types are optional.</p></div><div class="sect2" title="30.1.5. Greatest-width integer types"><div class="titlepage"><div><div><h3 class="title"><a name="idp38185264"></a>30.1.5. Greatest-width integer types</h3></div></div></div><p>The following type designates a signed integer type capable of
+      representing any value of any signed integer type:</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">intmax_t</code></p></blockquote></div><p>The following type designates an unsigned integer type capable of
+      representing any value of any unsigned integer type:</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">uintmax_t</code></p></blockquote></div><p>These types are required.</p></div></div><div class="sect1" title="30.2. Limits of specific-width integer types"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp38189088"></a>30.2. Limits of specific-width integer types</h2></div></div></div><p>The following object-like macros<sup>[<a class="footnote" href="#ftn.idp38190112" name="idp38190112">193</a>]</sup>
+    specify the minimum and maximum limits of the types declared in
+    <code class="code">&lt;stdint.h></code>. Each macro name corresponds to a
+    similar type name in Integer types.</p><p>Each instance of any defined macro shall be replaced by a constant
+    expression suitable for use in <code class="code">#if</code> preprocessing
+    directives, and this expression shall have the same type as would an
+    expression that is an object of the corresponding type converted according
+    to the integer promotions. Its implementation-defined value shall be equal
+    to or greater in magnitude (absolute value) than the corresponding value
+    given below, with the same sign, except where stated to be exactly the
+    given value.</p><div class="sect2" title="30.2.1. Limits of exact-width integer types"><div class="titlepage"><div><div><h3 class="title"><a name="idp38193600"></a>30.2.1. Limits of exact-width integer types</h3></div></div></div><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>minimum values of exact-width signed integer types</p><p><code class="code">INTN_MIN</code> exactly <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<mo>−</mo>
+<mo stretchy="false">(</mo>
+<msup>
+<mn>2</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>N</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo stretchy="false">)</mo>
+</math></p></li></ol></div></div></div><div class="footnotes"><br><hr align="left" width="100"><div class="footnote"><p><sup>[<a class="para" href="#idp38155008" id="ftn.idp38155008">191</a>] </sup>Some of these types may denote
+  implementation-defined extended integer types.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp38174304" id="ftn.idp38174304">192</a>] </sup>The designated type is not guaranteed
+      to be fastest for all purposes; if the implementation has no clear
+      grounds for choosing one type over another, it will simply pick some
+      integer type satisfying the signedness and width
+      requirements.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp38190112" id="ftn.idp38190112">193</a>] </sup>C++
+    implementations should define these macros only when
+    <code class="code">__STDC_LIMIT_MACROS</code> is defined before
+    <code class="code">&lt;stdint.h></code> is included.</p></div></hr></br></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../stddef/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 29. Common definitions &lt;stddef.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></hr></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+   GNU FDL license is applicable where not stated.</p></body></html>
