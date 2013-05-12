@@ -790,5 +790,416 @@ xmlns="http://www.w3.org/1998/Math/MathML">
   <mml:mi>x</mml:mi>
 </mml:math></d:inlineequation></d:para>
       </d:sect2>
+      <d:sect2>
+	<d:title>The logb functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double logb(double x);
+float logbf(float x);
+long double logbl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>logb</d:code> functions extract the exponent of
+<d:code>x</d:code>, as a signed integer value in floating-point format. If
+<d:code>x</d:code> is subnormal it is treated as though it were normalized;
+thus, for positive finite <d:code>x</d:code>, <d:informalequation>
+<mml:math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mml:mtable columnalign="right left" rowspacing="3pt" columnspacing="0.278em">
+    <mml:mtr>
+      <mml:mtd>
+        <mml:mn>1</mml:mn>
+        <mml:mtext>&#xA0;</mml:mtext>
+        <mml:mo>&#x2264;<!-- ≤ --></mml:mo>
+        <mml:mtext>&#xA0;</mml:mtext>
+        <mml:mi>x</mml:mi>
+        <mml:mtext>&#xA0;</mml:mtext>
+        <mml:mo>&#x2217;<!-- ∗ --></mml:mo>
+        <mml:mtext>&#xA0;</mml:mtext>
+        <mml:mi>F</mml:mi>
+        <mml:mi>L</mml:mi>
+        <mml:mi>T</mml:mi>
+        <mml:mi mathvariant="normal">&#x005F;<!-- _ --></mml:mi>
+        <mml:mi>R</mml:mi>
+        <mml:mi>A</mml:mi>
+        <mml:mi>D</mml:mi>
+        <mml:mi>I</mml:mi>
+        <mml:msup>
+          <mml:mi>X</mml:mi>
+          <mml:mrow class="MJX-TeXAtom-ORD">
+            <mml:mo>&#x2212;<!-- − --></mml:mo>
+            <mml:mi>l</mml:mi>
+            <mml:mi>o</mml:mi>
+            <mml:mi>g</mml:mi>
+            <mml:mi>b</mml:mi>
+            <mml:mo stretchy="false">(</mml:mo>
+            <mml:mi>x</mml:mi>
+            <mml:mo stretchy="false">)</mml:mo>
+          </mml:mrow>
+        </mml:msup>
+        <mml:mtext>&#xA0;</mml:mtext>
+        <mml:mo>&lt;</mml:mo>
+        <mml:mtext>&#xA0;</mml:mtext>
+        <mml:mi>F</mml:mi>
+        <mml:mi>L</mml:mi>
+        <mml:mi>T</mml:mi>
+        <mml:mi mathvariant="normal">&#x005F;<!-- _ --></mml:mi>
+        <mml:mi>R</mml:mi>
+        <mml:mi>A</mml:mi>
+        <mml:mi>D</mml:mi>
+        <mml:mi>I</mml:mi>
+        <mml:mi>X</mml:mi>
+      </mml:mtd>
+    </mml:mtr>
+  </mml:mtable>
+</mml:math>
+</d:informalequation> A domain error or range error may occur if the argument
+is zero.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>logb</d:code> functions return the signed exponent of
+<d:code>x</d:code>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The modf functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double modf(double value, double *iptr);
+float modff(float value, float *iptr);
+long double modfl(long double value, long double *iptr);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>modf</d:code> functions break the argument value into
+integral and fractional parts, each of which has the same type and sign as the
+argument. They store the integral part (in floating-point format) in the object
+pointed to by <d:code>iptr</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>modf</d:code> functions return the signed fractional part
+of value.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The scalbn and scalbln functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double scalbn(double x, int n);
+float scalbnf(float x, int n);
+long double scalbnl(long double x, int n);
+double scalbln(double x, long int n);
+float scalblnf(float x, long int n);
+long double scalblnl(long double x, long int n);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>scalbn</d:code> and <d:code>scalbln</d:code> functions
+compute <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>x</mml:mi>
+  <mml:mo>&#x2217;<!-- ∗ --></mml:mo>
+  <mml:mi>F</mml:mi>
+  <mml:mi>L</mml:mi>
+  <mml:mi>T</mml:mi>
+  <mml:mi mathvariant="normal">&#x005F;<!-- _ --></mml:mi>
+  <mml:mi>R</mml:mi>
+  <mml:mi>A</mml:mi>
+  <mml:mi>D</mml:mi>
+  <mml:mi>I</mml:mi>
+  <mml:msup>
+    <mml:mi>X</mml:mi>
+    <mml:mi>n</mml:mi>
+  </mml:msup>
+</mml:math></d:inlineequation> efficiently, not normally by computin <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>F</mml:mi>
+  <mml:mi>L</mml:mi>
+  <mml:mi>T</mml:mi>
+  <mml:mi mathvariant="normal">&#x005F;<!-- _ --></mml:mi>
+  <mml:mi>R</mml:mi>
+  <mml:mi>A</mml:mi>
+  <mml:mi>D</mml:mi>
+  <mml:mi>I</mml:mi>
+  <mml:msup>
+    <mml:mi>X</mml:mi>
+    <mml:mi>n</mml:mi>
+  </mml:msup>
+</mml:math></d:inlineequation> explicitly. A range error may occur.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>scalbn</d:code> and <d:code>scalbln</d:code> functions return <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>x</mml:mi>
+  <mml:mo>&#x2217;<!-- ∗ --></mml:mo>
+  <mml:mi>F</mml:mi>
+  <mml:mi>L</mml:mi>
+  <mml:mi>T</mml:mi>
+  <mml:mi mathvariant="normal">&#x005F;<!-- _ --></mml:mi>
+  <mml:mi>R</mml:mi>
+  <mml:mi>A</mml:mi>
+  <mml:mi>D</mml:mi>
+  <mml:mi>I</mml:mi>
+  <mml:msup>
+    <mml:mi>X</mml:mi>
+    <mml:mi>n</mml:mi>
+  </mml:msup>
+</mml:math></d:inlineequation>.</d:para>
+      </d:sect2>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Power and absolute-value functions</d:title>
+      <d:sect2>
+	<d:title>The cbrt functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double cbrt(double x);
+float cbrtf(float x);
+long double cbrtl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>cbrt</d:code> functions compute the real cube root of
+<d:code>x</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>cbrt</d:code> functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mi>x</mml:mi>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mn>1</mml:mn>
+      <mml:mrow class="MJX-TeXAtom-ORD">
+        <mml:mo>/</mml:mo>
+      </mml:mrow>
+      <mml:mn>3</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+</mml:math></d:inlineequation>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The fabs function</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double fabs(double x);
+float fabsf(float x);
+long double fabsl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fabs</d:code> functions compute the absolute value of a
+floating-point number <d:code>x</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fabs</d:code> functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo stretchy="false">|</mml:mo>
+  </mml:mrow>
+  <mml:mi>x</mml:mi>
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo stretchy="false">|</mml:mo>
+  </mml:mrow>
+</mml:math></d:inlineequation>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The hypot functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double hypot(double x, double y);
+float hypotf(float x, float y);
+long double hypotl(long double x, long double y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>hypot</d:code> functions compute the square root of the sum
+of the squares of <d:code>x</d:code> and <d:code>y</d:code>, without undue
+overflow or underflow. A range error may occur.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>hypot</d:code> functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msqrt>
+    <mml:msup>
+      <mml:mi>x</mml:mi>
+      <mml:mn>2</mml:mn>
+    </mml:msup>
+    <mml:mo>+</mml:mo>
+    <mml:msup>
+      <mml:mi>y</mml:mi>
+      <mml:mn>2</mml:mn>
+    </mml:msup>
+  </mml:msqrt>
+</mml:math></d:inlineequation></d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The pow functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double pow(double x, double y);
+float powf(float x, float y);
+long double powl(long double x, long double y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>pow</d:code> functions compute <d:code>x</d:code> raised to
+the power <d:code>y</d:code>. A domain error occurs if <d:code>x</d:code> is
+finite and negative and <d:code>y</d:code> is finite and not an integer
+value. A range error may occur. A domain error may occur if <d:code>x</d:code>
+is zero and <d:code>y</d:code> is zero. A domain error or range error may occur
+if <d:code>x</d:code> is zero and <d:code>y</d:code> is less than
+zero.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>pow</d:code> functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mi>x</mml:mi>
+    <mml:mi>y</mml:mi>
+  </mml:msup>
+</mml:math></d:inlineequation>.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The sqrt functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double sqrt(double x);
+float sqrtf(float x);
+long double sqrtl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>sqrt</d:code> functions compute the nonnegative square root
+of <d:code>x</d:code>. A domain error occurs if the argument is less than
+zero.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>sqrt</d:code> functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msqrt>
+    <mml:mi>x</mml:mi>
+  </mml:msqrt>
+</mml:math></d:inlineequation></d:para>
+      </d:sect2>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Error and gamma functions</d:title>
+      <d:sect2>
+	<d:title>The erf functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double erf(double x);
+float erff(float x);
+long double erfl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>erf</d:code> functions compute the error function of
+<d:code></d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code></d:code> functions return <d:code>erf</d:code>
+<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>x</mml:mi>
+  <mml:mo>=</mml:mo>
+  <mml:mfrac>
+    <mml:mn>2</mml:mn>
+    <mml:msqrt>
+      <mml:mi>&#x03C0;<!-- π --></mml:mi>
+    </mml:msqrt>
+  </mml:mfrac>
+  <mml:msubsup>
+    <mml:mo>&#x222B;<!-- ∫ --></mml:mo>
+    <mml:mn>0</mml:mn>
+    <mml:mi>x</mml:mi>
+  </mml:msubsup>
+  <mml:msup>
+    <mml:mi>e</mml:mi>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mo>&#x2212;<!-- − --></mml:mo>
+      <mml:msup>
+        <mml:mi>t</mml:mi>
+        <mml:mn>2</mml:mn>
+      </mml:msup>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mi>d</mml:mi>
+  <mi>t</mi>
+</mml:math></d:inlineequation></d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The erfc functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double erfc(double x);
+float erfcf(float x);
+long double erfcl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>erfc</d:code> functions compute the complementary error
+function of <d:code>x</d:code>. A range error occurs if <d:code>x</d:code> is
+too large.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>erfc</d:code> functions return <d:code>erfc</d:code>
+<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>x</mml:mi>
+  <mml:mo>=</mml:mo>
+  <mml:mn>1</mml:mn>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mi>e</mml:mi>
+  <mml:mi>r</mml:mi>
+  <mml:mi>f</mml:mi>
+  <mml:mi>x</mml:mi>
+  <mml:mo>=</mml:mo>
+  <mml:mfrac>
+    <mml:mn>2</mml:mn>
+    <mml:msqrt>
+      <mml:mi>&#x03C0;<!-- π --></mml:mi>
+    </mml:msqrt>
+  </mml:mfrac>
+  <mml:msubsup>
+    <mml:mo>&#x222B;<!-- ∫ --></mml:mo>
+    <mml:mn>0</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mi mathvariant="normal">&#x221E;<!-- ∞ --></mml:mi>
+    </mml:mrow>
+  </mml:msubsup>
+  <mml:msup>
+    <mml:mi>e</mml:mi>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mo>&#x2212;<!-- − --></mml:mo>
+      <mml:msup>
+        <mml:mi>t</mml:mi>
+        <mml:mn>2</mml:mn>
+      </mml:msup>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mi>d</mml:mi>
+  <mml:mi>t</mml:mi>
+</mml:math></d:inlineequation></d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The lgamma functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double lgamma(double x);
+float lgammaf(float x);
+long double lgammal(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>lgamma</d:code> functions compute the natural logarithm of
+the absolute value of gamma of <d:code>x</d:code>. A range error occurs if
+<d:code>x</d:code> is too large. A range error may occur if <d:code>x</d:code>
+is a negative integer or zero.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>lgamma</d:code> functions return <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>l</mml:mi>
+  <mml:mi>o</mml:mi>
+  <mml:msub>
+    <mml:mi>g</mml:mi>
+    <mml:mi>e</mml:mi>
+  </mml:msub>
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo stretchy="false">|</mml:mo>
+  </mml:mrow>
+  <mml:mi mathvariant="normal">&#x0393;<!-- Γ --></mml:mi>
+  <mml:mo stretchy="false">(</mml:mo>
+  <mml:mi>x</mml:mi>
+  <mml:mo stretchy="false">)</mml:mo>
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo stretchy="false">|</mml:mo>
+  </mml:mrow>
+</mml:math></d:inlineequation></d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The tgamma functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double tgamma(double x);
+float tgammaf(float x);
+long double tgammal(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code></d:code> functions compute the gamma function of
+<d:code>x</d:code>. A domain error or range error may occur if
+<d:code>x</d:code> is a negative integer or zero. A range error may occur if
+the magnitude of <d:code>x</d:code> is too large or too small.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>tgamma</d:code> functions return
+<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi mathvariant="normal">&#x0393;<!-- Γ --></mml:mi>
+  <mml:mo stretchy="false">(</mml:mo>
+  <mml:mi>x</mml:mi>
+  <mml:mo stretchy="false">)</mml:mo>
+</mml:math></d:inlineequation></d:para>
+      </d:sect2>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Nearest integer functions</d:title>
     </d:sect1>
 </d:chapter>
