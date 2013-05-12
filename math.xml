@@ -1201,5 +1201,245 @@ the magnitude of <d:code>x</d:code> is too large or too small.</d:para>
     </d:sect1>
     <d:sect1>
       <d:title>Nearest integer functions</d:title>
+      <d:sect2>
+	<d:title>The ceil functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double ceil(double x);
+float ceilf(float x);
+long double ceill(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>ceil</d:code> functions compute the smallest integer value
+not less than <d:code>x</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code></d:code> functions return <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo fence="false" stretchy="false">&#x2308;<!-- ⌈ --></mml:mo>
+  <mml:mi>x</mml:mi>
+  <mml:mo fence="false" stretchy="false">&#x2309;<!-- ⌉ --></mml:mo>
+</mml:math></d:inlineequation>, expressed as a floating-point number.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The floor functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double floor(double x);
+float floorf(float x);
+long double floorl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>floor</d:code> functions compute the largest integer value
+not greater than <d:code>x</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>floor</d:code> functions return <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo fence="false" stretchy="false">&#x230A;<!-- ⌊ --></mml:mo>
+  <mml:mi>x</mml:mi>
+  <mml:mo fence="false" stretchy="false">&#x230B;<!-- ⌋ --></mml:mo>
+</mml:math></d:inlineequation>, expressed as a floating-point number.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The nearbyint functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double nearbyint(double x);
+float nearbyintf(float x);
+long double nearbyintl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>nearbyint</d:code> functions round their argument to an
+integer value in floating-point format, using the current rounding direction
+and without raising the "inexact" floatingpoint exception.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>nearbyint</d:code> functions return the rounded integer
+value.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The rint functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double rint(double x);
+float rintf(float x);
+long double rintl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>rint</d:code> functions differ from the nearbyint functions
+(The nearbyint functions) only in that the rint functions may raise the
+"inexact" floating-point exception if the result differs in value from the
+argument.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>rint</d:code> functions return the rounded integer
+value.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The lrint and llrint functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+long int lrint(double x);
+long int lrintf(float x);
+long int lrintl(long double x);
+long long int llrint(double x);
+long long int llrintf(float x);
+long long int llrintl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>lrint</d:code> and <d:code>llrint</d:code> functions round
+their argument to the nearest integer value, rounding according to the current
+rounding direction. If the rounded value is outside the range of the return
+type, the numeric result is unspecified and a domain error or range error may
+occur.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>lrint</d:code> and <d:code>llrint</d:code> functions return
+the rounded integer value.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The round functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double round(double x);
+float roundf(float x);
+long double roundl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>round</d:code> functions round their argument to the
+nearest integer value in floating-point format, rounding halfway cases away
+from zero, regardless of the current rounding direction.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>round</d:code> functions return the rounded integer
+value.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The lround and llround functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+long int lround(double x);
+long int lroundf(float x);
+long int lroundl(long double x);
+long long int llround(double x);
+long long int llroundf(float x);
+long long int llroundl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>lround</d:code> and <d:code>llround</d:code> functions
+round their argument to the nearest integer value, rounding halfway cases away
+from zero, regardless of the current rounding direction. If the rounded value
+is outside the range of the return type, the numeric result is unspecified and
+a domain error or range error may occur.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>lround</d:code> and <d:code>llround</d:code> functions
+return the rounded integer value.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The trunc functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double trunc(double x);
+float truncf(float x);
+long double truncl(long double x);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>trunc</d:code> functions round their argument to the
+integer value, in floating format, nearest to but no larger in magnitude than
+the argument.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>trunc</d:code> functions return the truncated integer
+value.</d:para>
+      </d:sect2>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Remainder functions</d:title>
+      <d:sect2>
+	<d:title>The fmod functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double fmod(double x, double y);
+float fmodf(float x, float y);
+long double fmodl(long double x, long double y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fmod</d:code> functions compute the floating-point
+remainder of <d:code>x/y</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fmod</d:code> functions return the value
+<d:code>x-ny</d:code>, for some integer <d:code>n</d:code> such that, if
+<d:code>y</d:code> is nonzero, the result has the same sign as
+<d:code>x</d:code> and magnitude less than the magnitude of
+<d:code>y</d:code>. If <d:code>y</d:code> is zero, whether a domain error
+occurs or the <d:code>fmod</d:code> functions return zero is
+implementationdefined.</d:para>
+      </d:sect2>
+      <d:sect2>
+	<d:title>The remainder functions</d:title>
+	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+	<d:programlisting role="CLexer">#include &lt;math.h>
+double remainder(double x, double y);
+float remainderf(float x, float y);
+long double remainderl(long double x, long double y);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>remainder</d:code> functions compute the remainder
+<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML"> 
+  <mml:mi>x</mml:mi>
+  <mml:mi>R</mml:mi>
+  <mml:mi>E</mml:mi>
+  <mml:mi>M</mml:mi>
+  <mml:mi>y</mml:mi>
+</mml:math></d:inlineequation> required by IEC 60559.<d:footnote><d:para>"When <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>y</mml:mi>
+  <mml:mo>&#x2260;<!-- ≠ --></mml:mo>
+  <mml:mn>0</mml:mn>
+</mml:math></d:inlineequation>, the remainder <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+<mml:mi>r = </mml:mi>
+  <mml:mi>x</mml:mi>
+  <mml:mi>R</mml:mi>
+  <mml:mi>E</mml:mi>
+  <mml:mi>M</mml:mi>
+  <mml:mi>y</mml:mi>
+</mml:math></d:inlineequation> is defined regardless of the rounding mode by
+the mathematical relation <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>r</mml:mi>
+  <mml:mo>=</mml:mo>
+  <mml:mi>x</mml:mi>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mi>n</mml:mi>
+  <mml:mi>y</mml:mi>
+</mml:math></d:inlineequation>, where <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>n</mml:mi>
+</mml:math></d:inlineequation> is the integer nearest the exact value of <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>x</mml:mi>
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo>/</mml:mo>
+  </mml:mrow>
+  <mml:mi>y</mml:mi>
+</mml:math></d:inlineequation>; whenever <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML"> 
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo stretchy="false">|</mml:mo>
+  </mml:mrow>
+  <mml:mi>n</mml:mi>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mi>x</mml:mi>
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo>/</mml:mo>
+  </mml:mrow>
+  <mml:mi>y</mml:mi>
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo stretchy="false">|</mml:mo>
+  </mml:mrow>
+  <mml:mo>=</mml:mo>
+  <mml:mn>1</mml:mn>
+  <mml:mrow class="MJX-TeXAtom-ORD">
+    <mml:mo>/</mml:mo>
+  </mml:mrow>
+  <mml:mn>2</mml:mn>
+</mml:math></d:inlineequation> then <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>n</mml:mi>
+</mml:math></d:inlineequation> is even. Thus, the remainder is always exact. If
+<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>r</mml:mi>
+  <mml:mo>=</mml:mo>
+  <mml:mn>0</mml:mn>
+</mml:math></d:inlineequation>, its sign shall be that of
+<d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>x</mml:mi>
+</mml:math></d:inlineequation>".This definition is applicable for all
+implementations.</d:para></d:footnote></d:para>
+
+      </d:sect2>
     </d:sect1>
 </d:chapter>
