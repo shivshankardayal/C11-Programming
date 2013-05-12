@@ -41,6 +41,9 @@
   <xi:include href="limits.xml" />
   <xi:include href="locale.xml" />
   <xi:include href="math.xml" />
+  <xi:include href="setjmp.xml" />
+  <xi:include href="signal.xml" />
+  <xi:include href="stdarg.xml" />
   <d:index>
     <d:title>Index</d:title>
   </d:index>

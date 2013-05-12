@@ -1,0 +1,153 @@
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><title>Chapter 27. Variable arguments &lt;stdarg.h></title><link href="../../css/style.css" rel="stylesheet" type="text/css"><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"><link href="../index.html" rel="home" title="C Programming with C99"><link href="../index.html" rel="up" title="C Programming with C99"><link href="../signal/index.html" rel="prev" title="Chapter 26. Signal handling &lt;signal.h>"><link href="../ix01.html" rel="next" title="Index"><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></link></link></link></link></meta></link></meta></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 27. Variable arguments &lt;stdarg.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../signal/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 27. Variable arguments &lt;stdarg.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp38230256"></a>Chapter 27. Variable arguments &lt;stdarg.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp38074272">27.1. Variable argument list access macros</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp38078784">27.1.1. The va_arg macro</a></span></dt><dt><span class="sect2"><a href="index.html#idp38092960">27.1.2. The va_copy macro</a></span></dt><dt><span class="sect2"><a href="index.html#idp38102528">27.1.3. The va_end macro</a></span></dt><dt><span class="sect2"><a href="index.html#idp38112640">27.1.4. The va_start macro</a></span></dt></dl></dd></dl></div><p>The header <code class="code">&lt;stdarg.h></code> declares a type and
+  defines four macros, for advancing through a list of arguments whose number
+  and types are not known to the called function when it is
+  translated.</p><p>A function may be called with a variable number of arguments of
+  varying types. As described in Function definitions, its parameter list
+  contains one or more parameters. The rightmost parameter plays a special role
+  in the access mechanism, and will be designated <code class="code">parmN</code> in
+  this description.</p><p>The type declared is</p><div class="blockquote"><blockquote class="blockquote"><p>va_list</p></blockquote></div><p>which is an object type suitable for holding information needed by
+  the macros <code class="code">va_start, va_arg, va_end</code> and
+  <code class="code">va_copy</code>. If access to the varying arguments is desired, the
+  called function shall declare an object (generally referred to as ap in this
+  subclause) having type <code class="code">va_list</code>. The object
+  <code class="code">ap</code> may be passed as an argument to another function; if that
+  function invokes the <code class="code">va_arg</code> macro with parameter
+  <code class="code">ap</code>, the value of <code class="code">ap</code> in the calling function
+  is indeterminate and shall be passed to the <code class="code">va_end</code> macro
+  prior to any further reference to <code class="code">ap</code>.<sup>[<a class="footnote" href="#ftn.idp38073120" name="idp38073120">190</a>]</sup></p><div class="sect1" title="27.1. Variable argument list access macros"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp38074272"></a>27.1. Variable argument list access macros</h2></div></div></div><p>The <code class="code">va_start</code> and <code class="code">va_arg</code> macros
+    described in this subclause shall be implemented as macros, not
+    functions. It is unspecified whether <code class="code">va_copy</code> and
+    <code class="code">va_end</code> are macros or identifiers declared with external
+    linkage. If a macro definition is suppressed in order to access an actual
+    function, or a program defines an external identifier with the same name,
+    the behavior is undefined. Each invocation of the <code class="code">va_start</code>
+    and <code class="code">va_copy</code> macros shall be matched by a corresponding
+    invocation of the <code class="code">va_end</code> macro in the same
+    function.</p><div class="sect2" title="27.1.1. The va_arg macro"><div class="titlepage"><div><div><h3 class="title"><a name="idp38078784"></a>27.1.1. The va_arg macro</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdarg.h&gt;</span>
+<span class="n">type</span> <span class="n">va_arg</span><span class="p">(</span><span class="kt">va_list</span> <span class="n">ap</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">va_arg</code> macro expands to an expression that has the
+specified type and the value of the next argument in the call. The parameter
+<code class="code">ap</code> shall have been initialized by the
+<code class="code">va_start</code> or <code class="code">va_copy</code> macro (without an
+intervening invocation of the <code class="code">va_end</code> macro for the same
+<code class="code">ap</code>). Each invocation of the <code class="code">va_arg</code> macro
+modifies <code class="code">ap</code> so that the values of successive arguments are
+returned in turn. The parameter type shall be a type name specified such that
+the type of a pointer to an object that has the specified type can be obtained
+simply by postfixing a <code class="code">*</code> to <span class="italic">type</span>. If there is no actual next argument, or if
+type is not compatible with the <span class="italic">type</span> of
+the actual next argument (as promoted according to the default argument
+promotions), the behavior is undefined, except for the following
+cases:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>one type is a signed integer type, the other type is the
+    corresponding unsigned integer type, and the value is representable in both
+    types;</p></li><li class="listitem"><p>one type is pointer to void and the other is a pointer to a
+    character type.</p></li></ul></div><p><span class="bold"><strong>Returns</strong></span></p><p>The first invocation of the <code class="code">va_arg</code> macro after that of
+the <code class="code">va_start</code> macro returns the value of the argument after
+that specified by <code class="code">parmN</code>. Successive invocations return the
+values of the remaining arguments in succession.</p></div><div class="sect2" title="27.1.2. The va_copy macro"><div class="titlepage"><div><div><h3 class="title"><a name="idp38092960"></a>27.1.2. The va_copy macro</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdarg.h&gt;</span>
+<span class="kt">void</span> <span class="n">va_copy</span><span class="p">(</span><span class="kt">va_list</span> <span class="n">dest</span><span class="p">,</span> <span class="kt">va_list</span> <span class="n">src</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">va_copy</code> macro initializes dest as a copy of
+<code class="code">src</code>, as if the <code class="code">va_start</code> macro had been
+applied to <code class="code">dest</code> followed by the same sequence of uses of the
+<code class="code">va_arg</code> macro as had previously been used to reach the present
+state of <code class="code">src</code>. Neither the <code class="code">va_copy</code> nor
+<code class="code">va_start</code> macro shall be invoked to reinitialize dest without
+an intervening invocation of the <code class="code">va_end</code> macro for the same
+<code class="code">dest</code>.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">va_copy</code> macro returns no value.</p></div><div class="sect2" title="27.1.3. The va_end macro"><div class="titlepage"><div><div><h3 class="title"><a name="idp38102528"></a>27.1.3. The va_end macro</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdarg.h&gt;</span>
+<span class="kt">void</span> <span class="n">va_end</span><span class="p">(</span><span class="kt">va_list</span> <span class="n">ap</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">va_end</code> macro facilitates a normal return from the
+function whose variable argument list was referred to by the expansion of the
+<code class="code">va_start</code> macro, or the function containing the expansion of
+the <code class="code">va_copy</code> macro, that initialized the <code class="code">va_list
+ap</code>. The <code class="code">va_end</code> macro may modify <code class="code">ap</code>
+so that it is no longer usable (without being reinitialized by the
+<code class="code">va_start</code> or <code class="code">va_copy</code> macro). If there is no
+corresponding invocation of the <code class="code">va_start</code> or
+<code class="code">va_copy</code> macro or if the <code class="code">va_end</code> macro is not
+invoked before the return, the behavior is undefined.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">va_end</code> macro returns no value.</p></div><div class="sect2" title="27.1.4. The va_start macro"><div class="titlepage"><div><div><h3 class="title"><a name="idp38112640"></a>27.1.4. The va_start macro</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdarg.h&gt;</span>
+<span class="kt">void</span> <span class="n">va_start</span><span class="p">(</span><span class="kt">va_list</span> <span class="n">ap</span><span class="p">,</span> <span class="n">parmN</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">va_start</code> macro shall be invoked before any access
+to the unnamed arguments.</p><p>The <code class="code">va_start</code> macro initializes <code class="code">ap</code> for
+subsequent use by the <code class="code">va_arg</code> and <code class="code">va_end</code>
+macros. Neither the <code class="code">va_start</code> nor <code class="code">va_copy</code>
+macro shall be invoked to reinitialize <code class="code">ap</code> without an
+intervening invocation of the <code class="code">va_end</code> macro for the same
+<code class="code">ap</code>.</p><p>The parameter <code class="code">parmN</code> is the identifier of the rightmost
+parameter in the variable parameter list in the function definition (the one
+just before the , ...). If the parameter <code class="code">parmN</code> is declared
+with the <code class="code">register</code> storage class, with a function or array
+type, or with a type that is not compatible with the type that results after
+application of the default argument promotions, the behavior is
+undefined.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">va_start</code> macro returns no value.</p><p>EXAMPLE 1 The function <code class="code">f1</code> gathers into an array a list
+of arguments that are pointers to strings (but not more than
+<code class="code">MAXARGS</code> arguments), then passes the array as a single argument
+to function <code class="code">f2</code>. The number of pointers is specified by the
+first argument to <code class="code">f1</code>.</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdarg.h&gt;</span>
+
+<span class="cp">#define MAXARGS 31</span>
+
+<span class="kt">void</span> <span class="nf">f1</span><span class="p">(</span><span class="kt">int</span> <span class="n">n_ptrs</span><span class="p">,</span> <span class="p">...)</span>
+<span class="p">{</span>
+  <span class="kt">va_list</span> <span class="n">ap</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">array</span><span class="p">[</span><span class="n">MAXARGS</span><span class="p">];</span>
+  <span class="kt">int</span> <span class="n">ptr_no</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">n_ptrs</span> <span class="o">&gt;</span> <span class="n">MAXARGS</span><span class="p">)</span>
+      <span class="n">n_ptrs</span> <span class="o">=</span> <span class="n">MAXARGS</span><span class="p">;</span>
+
+    <span class="n">va_start</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="n">n_ptrs</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">ptr_no</span> <span class="o">&lt;</span> <span class="n">n_ptrs</span><span class="p">)</span>
+      <span class="n">array</span><span class="p">[</span><span class="n">ptr_no</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">va_arg</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="p">);</span>
+
+    <span class="n">va_end</span><span class="p">(</span><span class="n">ap</span><span class="p">);</span>
+    <span class="n">f2</span><span class="p">(</span><span class="n">n_ptrs</span><span class="p">,</span> <span class="n">array</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</pre><p>Each call to <code class="code">f1</code> is required to have visible the
+definition of the function or a declaration such as</p><pre class="CLexer"><div class="highlight"><pre><span class="kt">void</span> <span class="n">f1</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="p">...);</span>
+</pre></div>
+</pre><p>EXAMPLE 2 The function <code class="code">f3</code> is similar, but saves the
+status of the variable argument list after the indicated number of arguments;
+after <code class="code">f2</code> has been called once with the whole list, the
+trailing part of the list is gathered again and passed to function
+<code class="code">f4</code>.</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdarg.h&gt;</span>
+
+<span class="cp">#define MAXARGS 31</span>
+
+<span class="kt">void</span> <span class="nf">f3</span><span class="p">(</span><span class="kt">int</span> <span class="n">n_ptrs</span><span class="p">,</span> <span class="kt">int</span> <span class="n">f4_after</span><span class="p">,</span> <span class="p">...)</span>
+<span class="p">{</span>
+  <span class="kt">va_list</span> <span class="n">ap</span><span class="p">,</span> <span class="n">ap_save</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">array</span><span class="p">[</span><span class="n">MAXARGS</span><span class="p">];</span>
+  <span class="kt">int</span> <span class="n">ptr_no</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">n_ptrs</span> <span class="o">&gt;</span> <span class="n">MAXARGS</span><span class="p">)</span>
+    <span class="n">n_ptrs</span> <span class="o">=</span> <span class="n">MAXARGS</span><span class="p">;</span>
+
+  <span class="n">va_start</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="n">f4_after</span><span class="p">);</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">ptr_no</span> <span class="o">&lt;</span> <span class="n">n_ptrs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">array</span><span class="p">[</span><span class="n">ptr_no</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">va_arg</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ptr_no</span> <span class="o">==</span> <span class="n">f4_after</span><span class="p">)</span>
+      <span class="n">va_copy</span><span class="p">(</span><span class="n">ap_save</span><span class="p">,</span> <span class="n">ap</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">va_end</span><span class="p">(</span><span class="n">ap</span><span class="p">);</span>
+  <span class="n">f2</span><span class="p">(</span><span class="n">n_ptrs</span><span class="p">,</span> <span class="n">array</span><span class="p">);</span>
+  <span class="c1">// Now process the saved copy.</span>
+  <span class="n">n_ptrs</span> <span class="o">-=</span> <span class="n">f4_after</span><span class="p">;</span>
+  <span class="n">ptr_no</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">ptr_no</span> <span class="o">&lt;</span> <span class="n">n_ptrs</span><span class="p">)</span>
+    <span class="n">array</span><span class="p">[</span><span class="n">ptr_no</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">va_arg</span><span class="p">(</span><span class="n">ap_save</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="p">);</span>
+  <span class="n">va_end</span><span class="p">(</span><span class="n">ap_save</span><span class="p">);</span>
+  <span class="n">f4</span><span class="p">(</span><span class="n">n_ptrs</span><span class="p">,</span> <span class="n">array</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</pre></div></div><div class="footnotes"><br><hr align="left" width="100"><div class="footnote"><p><sup>[<a class="para" href="#idp38073120" id="ftn.idp38073120">190</a>] </sup>It
+  is permitted to create a pointer to a <code class="code">va_list</code> and pass that
+  pointer to another function, in which case the original function may make
+  further use of the original list after the other function
+  returns.</p></div></hr></br></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../signal/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 26. Signal handling &lt;signal.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></hr></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+   GNU FDL license is applicable where not stated.</p></body></html>

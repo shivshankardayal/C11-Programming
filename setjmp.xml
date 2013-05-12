@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?dbhtml filename="setjmp/index.html" ?>
+  <d:title>Nonlocal jumps &amp;lt;setjmp.h></d:title>
+  <d:para>The header <d:code>&amp;lt;setjmp.h></d:code> defines the macro
+  <d:code>setjmp</d:code>, and declares one function and one type, for
+  bypassing the normal function call and return
+  discipline.<d:footnote><d:para>These functions are useful for dealing with
+  unusual conditions encountered in a low-level function of a
+  program.</d:para></d:footnote></d:para>
+  <d:para>The type declared is</d:para>
+  <d:blockquote><d:para>jmp_buf</d:para></d:blockquote>
+  <d:para>which is an array type suitable for holding the information needed
+  to restore a calling environment. The environment of a call to the setjmp
+  macro consists of information sufficient for a call to the longjmp function
+  to return execution to the correct block and invocation of that block, were
+  it called recursively. It does not include the state of the floating-point
+  status flags, of open files, or of any other component of the abstract
+  machine.</d:para>
+  <d:para>It is unspecified whether <d:code>setjmp</d:code> is a macro or an
+  identifier declared with external linkage. If a macro definition is
+  suppressed in order to access an actual function, or a program defines an
+  external identifier with the name setjmp, the behavior is
+  undefined.</d:para>
+  <d:sect1>
+    <d:title>Save calling environment</d:title>
+    <d:sect2>
+      <d:title>The setjmp macro</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;setjmp.h>
+int setjmp(jmp_buf env);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>setjmp</d:code> macro saves its calling environment in its
+<d:code>jmp_buf</d:code> argument for later use by the <d:code>longjmp</d:code>
+function.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>If the return is from a direct invocation, the <d:code>setjmp</d:code>
+macro returns the value zero. If the return is from a call to the
+<d:code>longjmp</d:code> function, the <d:code>setjmp</d:code> macro returns a
+nonzero value.</d:para>
+<d:para><d:emphasis role="bold">Environmental limits</d:emphasis></d:para>
+<d:para>An invocation of the <d:code>setjmp</d:code> macro shall appear only in
+one of the following contexts:</d:para>
+<d:itemizedlist>
+  <d:listitem>
+    <d:para>the entire controlling expression of a selection or iteration
+    statement;</d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>one operand of a relational or equality operator with the other
+    operand an integer constant expression, with the resulting expression being
+    the entire controlling expression of a selection or iteration
+    statement;</d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>the operand of a unary ! operator with the resulting expression
+    being the entire controlling expression of a selection or iteration
+    statement; or</d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>the entire expression of an expression statement (possibly cast to
+    <d:code>void</d:code>).</d:para>
+  </d:listitem>
+</d:itemizedlist>
+<d:para>If the invocation appears in any other context, the behavior is
+undefined.</d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Restore calling environment</d:title>
+    <d:sect2>
+      <d:title>The longjmp function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;setjmp.h>
+void longjmp(jmp_buf env, int val);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>longjmp</d:code> function restores the environment saved by
+the most recent invocation of the <d:code>setjmp</d:code> macro in the same
+invocation of the program with the corresponding <d:code>jmp_buf</d:code>
+argument. If there has been no such invocation, or if the function containing
+the invocation of the setjmp macro has terminated
+execution<d:footnote><d:para>For example, by executing a
+<d:code>return</d:code> statement or because another <d:code>longjmp</d:code>
+call has caused a transfer to a <d:code>setjmp</d:code> invocation in a
+function earlier in the set of nested calls.</d:para></d:footnote> in the
+interim, or if the invocation of the <d:code>setjmp</d:code> macro was within
+the scope of an identifier with variably modified type and execution has left
+that scope in the interim, the behavior is undefined.</d:para>
+<d:para>All accessible objects have values, and all other components of the
+abstract machine<d:footnote><d:para>This includes, but is not limited to, the
+floating-point status flags and the state of open files.</d:para></d:footnote>
+have state, as of the time the <d:code>longjmp</d:code> function was called,
+except that the values of objects of automatic storage duration that are local
+to the function containing the invocation of the corresponding setjmp macro
+that do not have volatile-qualified type and have been changed between the
+<d:code>setjmp</d:code> invocation and <d:code>longjmp</d:code> call are
+indeterminate.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>After <d:code>longjmp</d:code> is completed, program execution
+continues as if the corresponding invocation of the <d:code>setjmp</d:code>
+macro had just returned the value specified by <d:code>val</d:code>. The
+<d:code>longjmp</d:code> function cannot cause the <d:code>setjmp</d:code>
+macro to return the value 0; if val is 0, the <d:code>setjmp</d:code> macro
+returns the value 1.</d:para>
+<d:para>EXAMPLE The <d:code>longjmp</d:code> function that returns control back
+to the point of the <d:code>setjmp</d:code> invocation might cause memory
+associated with a variable length array object to be squandered.</d:para>
+<d:programlisting role="CLexer">#include &lt;1setjmp.h>
+
+jmp_buf buf;
+void g(int n);
+void h(int n);
+int n = 6;
+
+void f(void)
+{
+  int x[n]; // valid: f is not terminated
+  setjmp(buf);
+  g(n);
+}
+
+void g(int n)
+{
+  int a[n]; // a may remain allocated
+  h(n);
+}
+
+void h(int n)
+{
+  int b[n]; // b may remain allocated
+  longjmp(buf, 2); // might cause memory loss
+}</d:programlisting>
+    </d:sect2>
+  </d:sect1>
+</d:chapter>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?dbhtml filename="stdarg/index.html" ?>
+  <d:title>Variable arguments &amp;lt;stdarg.h></d:title>
+  <d:para>The header <d:code>&amp;lt;stdarg.h></d:code> declares a type and
+  defines four macros, for advancing through a list of arguments whose number
+  and types are not known to the called function when it is
+  translated.</d:para>
+  <d:para>A function may be called with a variable number of arguments of
+  varying types. As described in Function definitions, its parameter list
+  contains one or more parameters. The rightmost parameter plays a special role
+  in the access mechanism, and will be designated <d:code>parmN</d:code> in
+  this description.</d:para>
+  <d:para>The type declared is</d:para>
+  <d:blockquote><d:para>va_list</d:para></d:blockquote>
+  <d:para>which is an object type suitable for holding information needed by
+  the macros <d:code>va_start, va_arg, va_end</d:code> and
+  <d:code>va_copy</d:code>. If access to the varying arguments is desired, the
+  called function shall declare an object (generally referred to as ap in this
+  subclause) having type <d:code>va_list</d:code>. The object
+  <d:code>ap</d:code> may be passed as an argument to another function; if that
+  function invokes the <d:code>va_arg</d:code> macro with parameter
+  <d:code>ap</d:code>, the value of <d:code>ap</d:code> in the calling function
+  is indeterminate and shall be passed to the <d:code>va_end</d:code> macro
+  prior to any further reference to <d:code>ap</d:code>.<d:footnote><d:para>It
+  is permitted to create a pointer to a <d:code>va_list</d:code> and pass that
+  pointer to another function, in which case the original function may make
+  further use of the original list after the other function
+  returns.</d:para></d:footnote></d:para>
+  <d:sect1>
+    <d:title>Variable argument list access macros</d:title>
+    <d:para>The <d:code>va_start</d:code> and <d:code>va_arg</d:code> macros
+    described in this subclause shall be implemented as macros, not
+    functions. It is unspecified whether <d:code>va_copy</d:code> and
+    <d:code>va_end</d:code> are macros or identifiers declared with external
+    linkage. If a macro definition is suppressed in order to access an actual
+    function, or a program defines an external identifier with the same name,
+    the behavior is undefined. Each invocation of the <d:code>va_start</d:code>
+    and <d:code>va_copy</d:code> macros shall be matched by a corresponding
+    invocation of the <d:code>va_end</d:code> macro in the same
+    function.</d:para>
+    <d:sect2>
+      <d:title>The va_arg macro</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdarg.h>
+type va_arg(va_list ap, type);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>va_arg</d:code> macro expands to an expression that has the
+specified type and the value of the next argument in the call. The parameter
+<d:code>ap</d:code> shall have been initialized by the
+<d:code>va_start</d:code> or <d:code>va_copy</d:code> macro (without an
+intervening invocation of the <d:code>va_end</d:code> macro for the same
+<d:code>ap</d:code>). Each invocation of the <d:code>va_arg</d:code> macro
+modifies <d:code>ap</d:code> so that the values of successive arguments are
+returned in turn. The parameter type shall be a type name specified such that
+the type of a pointer to an object that has the specified type can be obtained
+simply by postfixing a <d:code>*</d:code> to <d:emphasis
+role="italic">type</d:emphasis>. If there is no actual next argument, or if
+type is not compatible with the <d:emphasis role="italic">type</d:emphasis> of
+the actual next argument (as promoted according to the default argument
+promotions), the behavior is undefined, except for the following
+cases:</d:para>
+<d:itemizedlist>
+  <d:listitem>
+    <d:para>one type is a signed integer type, the other type is the
+    corresponding unsigned integer type, and the value is representable in both
+    types;</d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>one type is pointer to void and the other is a pointer to a
+    character type.</d:para>
+  </d:listitem>
+</d:itemizedlist>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The first invocation of the <d:code>va_arg</d:code> macro after that of
+the <d:code>va_start</d:code> macro returns the value of the argument after
+that specified by <d:code>parmN</d:code>. Successive invocations return the
+values of the remaining arguments in succession.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The va_copy macro</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdarg.h>
+void va_copy(va_list dest, va_list src);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>va_copy</d:code> macro initializes dest as a copy of
+<d:code>src</d:code>, as if the <d:code>va_start</d:code> macro had been
+applied to <d:code>dest</d:code> followed by the same sequence of uses of the
+<d:code>va_arg</d:code> macro as had previously been used to reach the present
+state of <d:code>src</d:code>. Neither the <d:code>va_copy</d:code> nor
+<d:code>va_start</d:code> macro shall be invoked to reinitialize dest without
+an intervening invocation of the <d:code>va_end</d:code> macro for the same
+<d:code>dest</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>va_copy</d:code> macro returns no value.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The va_end macro</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdarg.h>
+void va_end(va_list ap);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>va_end</d:code> macro facilitates a normal return from the
+function whose variable argument list was referred to by the expansion of the
+<d:code>va_start</d:code> macro, or the function containing the expansion of
+the <d:code>va_copy</d:code> macro, that initialized the <d:code>va_list
+ap</d:code>. The <d:code>va_end</d:code> macro may modify <d:code>ap</d:code>
+so that it is no longer usable (without being reinitialized by the
+<d:code>va_start</d:code> or <d:code>va_copy</d:code> macro). If there is no
+corresponding invocation of the <d:code>va_start</d:code> or
+<d:code>va_copy</d:code> macro or if the <d:code>va_end</d:code> macro is not
+invoked before the return, the behavior is undefined.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>va_end</d:code> macro returns no value.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The va_start macro</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdarg.h>
+void va_start(va_list ap, parmN);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>va_start</d:code> macro shall be invoked before any access
+to the unnamed arguments.</d:para>
+<d:para>The <d:code>va_start</d:code> macro initializes <d:code>ap</d:code> for
+subsequent use by the <d:code>va_arg</d:code> and <d:code>va_end</d:code>
+macros. Neither the <d:code>va_start</d:code> nor <d:code>va_copy</d:code>
+macro shall be invoked to reinitialize <d:code>ap</d:code> without an
+intervening invocation of the <d:code>va_end</d:code> macro for the same
+<d:code>ap</d:code>.</d:para>
+<d:para>The parameter <d:code>parmN</d:code> is the identifier of the rightmost
+parameter in the variable parameter list in the function definition (the one
+just before the , ...). If the parameter <d:code>parmN</d:code> is declared
+with the <d:code>register</d:code> storage class, with a function or array
+type, or with a type that is not compatible with the type that results after
+application of the default argument promotions, the behavior is
+undefined.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>va_start</d:code> macro returns no value.</d:para>
+<d:para>EXAMPLE 1 The function <d:code>f1</d:code> gathers into an array a list
+of arguments that are pointers to strings (but not more than
+<d:code>MAXARGS</d:code> arguments), then passes the array as a single argument
+to function <d:code>f2</d:code>. The number of pointers is specified by the
+first argument to <d:code>f1</d:code>.</d:para>
+<d:programlisting role="CLexer">#include &lt;stdarg.h>
+
+#define MAXARGS 31
+
+void f1(int n_ptrs, ...)
+{
+  va_list ap;
+  char *array[MAXARGS];
+  int ptr_no = 0;
+
+    if (n_ptrs > MAXARGS)
+      n_ptrs = MAXARGS;
+
+    va_start(ap, n_ptrs);
+    while (ptr_no &lt; n_ptrs)
+      array[ptr_no++] = va_arg(ap, char *);
+
+    va_end(ap);
+    f2(n_ptrs, array);
+}</d:programlisting>
+<d:para>Each call to <d:code>f1</d:code> is required to have visible the
+definition of the function or a declaration such as</d:para>
+<d:programlisting role="CLexer">void f1(int, ...);</d:programlisting>
+<d:para>EXAMPLE 2 The function <d:code>f3</d:code> is similar, but saves the
+status of the variable argument list after the indicated number of arguments;
+after <d:code>f2</d:code> has been called once with the whole list, the
+trailing part of the list is gathered again and passed to function
+<d:code>f4</d:code>.</d:para>
+<d:programlisting role="CLexer">#include &lt;stdarg.h>
+
+#define MAXARGS 31
+
+void f3(int n_ptrs, int f4_after, ...)
+{
+  va_list ap, ap_save;
+  char *array[MAXARGS];
+  int ptr_no = 0;
+
+  if (n_ptrs > MAXARGS)
+    n_ptrs = MAXARGS;
+
+  va_start(ap, f4_after);
+
+  while (ptr_no &lt; n_ptrs) {
+    array[ptr_no++] = va_arg(ap, char *);
+    if (ptr_no == f4_after)
+      va_copy(ap_save, ap);
+  }
+  va_end(ap);
+  f2(n_ptrs, array);
+  // Now process the saved copy.
+  n_ptrs -= f4_after;
+  ptr_no = 0;
+  while (ptr_no &lt; n_ptrs)
+    array[ptr_no++] = va_arg(ap_save, char *);
+  va_end(ap_save);
+  f4(n_ptrs, array);
+}</d:programlisting>
+    </d:sect2>
+  </d:sect1>
+</d:chapter>
