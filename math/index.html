@@ -1,0 +1,211 @@
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><title>Chapter 24. Mathematics &lt;math.h></title><link href="../../css/style.css" rel="stylesheet" type="text/css"><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"><link href="../index.html" rel="home" title="C Programming with C99"><link href="../index.html" rel="up" title="C Programming with C99"><link href="../locale/index.html" rel="prev" title="Chapter 23. Localization &lt;locale.h>"><link href="../ix01.html" rel="next" title="Index"><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></link></link></link></link></meta></link></meta></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 24. Mathematics &lt;math.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../locale/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 24. Mathematics &lt;math.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp33769968"></a>Chapter 24. Mathematics &lt;math.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp37765776">24.1. Treatment of error conditions</a></span></dt><dt><span class="sect1"><a href="index.html#idp37777808">24.2. The FP_CONTRACT pragma</a></span></dt><dt><span class="sect1"><a href="index.html#idp37783488">24.3. Classification macros</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp37784736">24.3.1. The fpclassify macro</a></span></dt><dt><span class="sect2"><a href="index.html#idp37794272">24.3.2. The isfinite macro</a></span></dt><dt><span class="sect2"><a href="index.html#idp37800176">24.3.3. The isinf macro</a></span></dt><dt><span class="sect2"><a href="index.html#idp37806032">24.3.4. The isnan macro</a></span></dt><dt><span class="sect2"><a href="index.html#idp37812384">24.3.5. The isnormal macro</a></span></dt><dt><span class="sect2"><a href="index.html#idp37818272">24.3.6. The signbit macro</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp37825040">24.4. Trigonometric functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp37825744">24.4.1. The acos functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp37833552">24.4.2. The asin functions</a></span></dt></dl></dd></dl></div><p>The header <code class="code">&lt;math.h></code> declares two types and
+    many mathematical functions and defines several macros. Most synopses
+    specify a family of functions consisting of a principal function with one
+    or more double parameters, a <code class="code">double</code> return value, or both;
+    and other functions with the same name but with <code class="code">f</code> and
+    <code class="code">l</code> suffixes, which are corresponding functions with
+    <code class="code">float</code> and <code class="code">long double</code> parameters, return
+    values, or both.<sup>[<a class="footnote" href="#ftn.idp37717248" name="idp37717248">167</a>]</sup> Integer arithmetic functions and
+    conversion functions are discussed later.</p><p>The types</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">float_t</code></p><p><code class="code">double_t</code></p></blockquote></div><p>are floating types at least as wide as <code class="code">float</code> and
+    <code class="code">double</code>, respectively, and such that
+    <code class="code">double_t</code> is at least as wide as
+    <code class="code">float_t</code>. If <code class="code">FLT_EVAL_METHOD</code> equals 0,
+    <code class="code">float_t</code> and <code class="code">double_t</code> are
+    <code class="code">float</code> and <code class="code">double</code>, respectively; if
+    <code class="code">FLT_EVAL_METHOD</code> equals 1, they are both
+    <code class="code">double</code>; if <code class="code">FLT_EVAL_METHOD</code> equals 2, they
+    are both <code class="code">long double</code>; and for other values of
+    <code class="code">FLT_EVAL_METHOD</code>, they are otherwise
+    implementation-defined.<sup>[<a class="footnote" href="#ftn.idp37726656" name="idp37726656">168</a>]</sup></p><p>The macro</p><div class="blockquote"><blockquote class="blockquote"><p>HUGE_VAL</p></blockquote></div><p>expands to a positive <code class="code">double</code> constant expression,
+    not necessarily representable as a <code class="code">float</code>. The
+    macros</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">HUGE_VALF</code></p><p><code class="code">HUGE_VALL</code></p></blockquote></div><p>are respectively <code class="code">float</code> and <code class="code">long
+    double</code> analogs of
+    <code class="code">HUGE_VAL</code>.<sup>[<a class="footnote" href="#ftn.idp37735232" name="idp37735232">169</a>]</sup></p><p>The macro</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">INFINITY</code></p></blockquote></div><p>expands to a constant expression of type <code class="code">float</code>
+    representing positive or unsigned infinity, if available; else to a
+    positive constant of type <code class="code">float</code> that overflows at
+    translation time.<sup>[<a class="footnote" href="#ftn.idp37738912" name="idp37738912">170</a>]</sup></p><p>The macro</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">NAN</code></p></blockquote></div><p>is defined if and only if the implementation supports quiet NaNs
+    for the <code class="code">float</code> type. It expands to a constant expression of
+    type float representing a quiet NaN.</p><p>The <span class="italic">number classification
+    macros</span></p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">FP_INFINITE</code></p><p><code class="code">FP_NAN</code></p><p><code class="code">FP_NORMAL</code></p><p><code class="code">FP_SUBNORMAL</code></p><p><code class="code">FP_ZERO</code></p></blockquote></div><p>represent the mutually exclusive kinds of floating-point
+    values. They expand to integer constant expressions with distinct
+    values. Additional implementation-defined floatingpoint classifications,
+    with macro definitions beginning with <code class="code">FP_1</code> and an
+    uppercase letter, may also be specified by the implementation.</p><p>The macro</p><div class="blockquote"><blockquote class="blockquote"><p>FP_FAST_FMA</p></blockquote></div><p>is optionally defined. If defined, it indicates that the fma
+    function generally executes about as fast as, or faster than, a multiply
+    and an add of double operands.<sup>[<a class="footnote" href="#ftn.idp37748640" name="idp37748640">171</a>]</sup> The macros</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">FP_FAST_FMAF</code></p><p><code class="code">FP_FAST_FMAL</code></p></blockquote></div><p>are, respectively, <code class="code">float</code> and <code class="code">long
+    double</code> analogs of <code class="code">FP_FAST_FMA</code>. If defined, these
+    macros expand to the integer constant 1.</p><p>The macros</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">FP_ILOGB0</code></p><p><code class="code">FP_ILOGBNAN</code></p></blockquote></div><p>expand to integer constant expressions whose values are returned by
+    <code class="code">ilogb(x)</code> if <code class="code">x</code> is zero or NaN,
+    respectively. The value of <code class="code">FP_ILOGB0</code> shall be either
+    <code class="code">INT_MIN</code> or <code class="code">-INT_MAX</code>. The value of
+    <code class="code">FP_ILOGBNAN</code> shall be either <code class="code">INT_MAX</code> or
+    <code class="code">INT_MIN</code>.</p><p>The macros</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">MATH_ERRNO</code></p><p><code class="code">MATH_ERREXCEPT</code></p></blockquote></div><p>expand to the integer constants 1 and 2, respectively; the
+    macro</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">
+    math_errhandling
+    </code></p></blockquote></div><p>expands to an expression that has type int and the value
+    <code class="code">MATH_ERRNO, MATH_ERREXCEPT</code> or the bitwise OR of both. The
+    value of <code class="code">math_errhandling</code> is constant for the duration of
+    the program. It is unspecified whether <code class="code">math_errhandling</code> is
+    a macro or an identifier with external linkage. If a macro definition is
+    suppressed or a program defines an identifier with the name
+    <code class="code">math_errhandling</code>, the behavior is undefined. If the
+    expression math_errhandling & <code class="code">MATH_ERREXCEPT</code> can be
+    nonzero, the implementation shall define the macros <code class="code">FE_DIVBYZERO,
+    FE_INVALID</code> and <code class="code"></code> in &lt;fenv.h>.</p><div class="sect1" title="24.1. Treatment of error conditions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp37765776"></a>24.1. Treatment of error conditions</h2></div></div></div><p>The behavior of each of the functions in &lt;math.h> is
+      specified for all representable values of its input arguments, except
+      where stated otherwise. Each function shall execute as if it were a
+      single operation without generating any externally visible exceptional
+      conditions.</p><p>For all functions, a domain error occurs if an input argument is
+      outside the domain over which the mathematical function is defined. The
+      description of each function lists any required domain errors; an
+      implementation may define additional domain errors, provided that such
+      errors are consistent with the mathematical definition of the
+      function.<sup>[<a class="footnote" href="#ftn.idp37767824" name="idp37767824">172</a>]</sup> On a domain error, the function returns
+      an implementation-defined value; if the integer expression
+      <code class="code">math_errhandling & MATH_ERRNO</code> is nonzero, the
+      integer expression errno acquires the value <code class="code">EDOM</code>; if the
+      integer expression <code class="code">math_errhandling & MATH_ERREXCEPT</code>
+      is nonzero, the "invalid" floating-point exception is raised.</p><p>Similarly, a range error occurs if the mathematical result of the
+      function cannot be represented in an object of the specified type, due to
+      extreme magnitude.</p><p>A floating result overflows if the magnitude of the mathematical
+      result is finite but so large that the mathematical result cannot be
+      represented without extraordinary roundoff error in an object of the
+      specified type. If a floating result overflows and default rounding is in
+      effect, or if the mathematical result is an exact infinity (for example
+      <code class="code">log(0.0)</code>), then the function returns the value of the
+      macro <code class="code">HUGE_VAL, HUGE_VALF</code> or <code class="code">HUGE_VALL</code>
+      according to the return type, with the same sign as the correct value of
+      the function; if the integer expression <code class="code">math_errhandling &
+      MATH_ERRNO</code> is nonzero, the integer expression errno acquires the
+      value <code class="code">ERANGE</code>; if the integer expression
+      <code class="code">math_errhandling & MATH_ERREXCEPT</code> is nonzero, the
+      "divide-by-zero" floating-point exception is raised if the mathematical
+      result is an exact infinity and the "overflow" floating-point exception
+      is raised otherwise.</p><p>The result underflows if the magnitude of the mathematical result
+      is so small that the mathematical result cannot be represented, without
+      extraordinary roundoff error, in an object of the specified
+      type.<sup>[<a class="footnote" href="#ftn.idp37775136" name="idp37775136">173</a>]</sup> If the result underflows, the function
+      returns an implementation-defined value whose magnitude is no greater
+      than the smallest normalized positive number in the specified type; if
+      the integer expression <code class="code">math_errhandling & MATH_ERRNO</code>
+      is nonzero, whether errno acquires the value <code class="code">ERANGE</code> is
+      implementation-defined; if the integer expression
+      <code class="code">math_errhandling & MATH_ERREXCEPT</code> is nonzero,
+      whether the "underflow" floating-point exception is raised is
+      implementation-defined.</p></div><div class="sect1" title="24.2. The FP_CONTRACT pragma"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp37777808"></a>24.2. The FP_CONTRACT pragma</h2></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;math.h&gt;</span>
+<span class="cp">#pragma STDC FP_CONTRACT on-off-switch</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">FP_CONTRACT</code> pragma can be used to allow (if the
+state is "on") or disallow (if the state is "off") the implementation to
+contract expressions (Expressions). Each pragma can occur either outside
+external declarations or preceding all explicit declarations and statements
+inside a compound statement. When outside external declarations, the pragma
+takes effect from its occurrence until another <code class="code">FP_CONTRACT</code>
+pragma is encountered, or until the end of the translation unit. When inside a
+compound statement, the pragma takes effect from its occurrence until another
+<code class="code">FP_CONTRACT</code> pragma is encountered (including within a nested
+compound statement), or until the end of the compound statement; at the end of
+a compound statement the state for the pragma is restored to its condition just
+before the compound statement. If this pragma is used in any other context, the
+behavior is undefined. The default state ("on" or "off") for the pragma is
+implementation-defined.</p></div><div class="sect1" title="24.3. Classification macros"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp37783488"></a>24.3. Classification macros</h2></div></div></div><p>In the synopses in this subclause, real-floating indicates that
+      the argument shall be an expression of real floating type.</p><div class="sect2" title="24.3.1. The fpclassify macro"><div class="titlepage"><div><div><h3 class="title"><a name="idp37784736"></a>24.3.1. The fpclassify macro</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;math.h&gt;</span>
+<span class="kt">int</span> <span class="n">fpclassify</span><span class="p">(</span><span class="n">real</span><span class="o">-</span><span class="n">floating</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">fpclassify</code> macro classifies its argument value as
+NaN, infinite, normal, subnormal, zero, or into another implementation-defined
+category. First, an argument represented in a format wider than its semantic
+type is converted to its semantic type. Then classification is based on the
+type of the argument.<sup>[<a class="footnote" href="#ftn.idp37788688" name="idp37788688">174</a>]</sup></p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">fpclassify</code> macro returns the value of the number
+classification macro appropriate to the value of its argument.</p><p>EXAMPLE The <code class="code">fpclassify</code> macro might be implemented in
+terms of ordinary functions as</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#define fpclassify(x) \</span>
+<span class="cp">        ((sizeof (x) == sizeof (float)) ? _ _fpclassifyf(x) : \</span>
+<span class="cp">        (sizeof (x) == sizeof (double)) ? _ _fpclassifyd(x) : \</span>
+<span class="cp">        _ _fpclassifyl(x))</span>
+</pre></div>
+</pre></div><div class="sect2" title="24.3.2. The isfinite macro"><div class="titlepage"><div><div><h3 class="title"><a name="idp37794272"></a>24.3.2. The isfinite macro</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;math.h&gt;</span>
+<span class="kt">int</span> <span class="n">isfinite</span><span class="p">(</span><span class="n">real</span><span class="o">-</span><span class="n">floating</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isfinite</code> macro determines whether its argument has
+a finite value (zero, subnormal, or normal, and not infinite or NaN). First, an
+argument represented in a format wider than its semantic type is converted to
+its semantic type. Then determination is based on the type of the
+argument.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">isfinite</code> macro returns a nonzero value if and only
+if its argument has a finite value.</p></div><div class="sect2" title="24.3.3. The isinf macro"><div class="titlepage"><div><div><h3 class="title"><a name="idp37800176"></a>24.3.3. The isinf macro</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;math.h&gt;</span>
+<span class="kt">int</span> <span class="n">isinf</span><span class="p">(</span><span class="n">real</span><span class="o">-</span><span class="n">floating</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isinf</code> macro determines whether its argument value
+is an infinity (positive or negative). First, an argument represented in a
+format wider than its semantic type is converted to its semantic type. Then
+determination is based on the type of the argument.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">isinf</code> macro returns a nonzero value if and only if
+its argument has an infinite value.</p></div><div class="sect2" title="24.3.4. The isnan macro"><div class="titlepage"><div><div><h3 class="title"><a name="idp37806032"></a>24.3.4. The isnan macro</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;math.h&gt;</span>
+<span class="kt">int</span> <span class="n">isnan</span><span class="p">(</span><span class="n">real</span><span class="o">-</span><span class="n">floating</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isnan</code> macro determines whether its argument value
+is a NaN. First, an argument represented in a format wider than its semantic
+type is converted to its semantic type. Then determination is based on the type
+of the argument.<sup>[<a class="footnote" href="#ftn.idp37809872" name="idp37809872">175</a>]</sup></p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">isnan</code> macro returns a nonzero value if and only if
+its argument has a NaN value.</p></div><div class="sect2" title="24.3.5. The isnormal macro"><div class="titlepage"><div><div><h3 class="title"><a name="idp37812384"></a>24.3.5. The isnormal macro</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;math.h&gt;</span>
+<span class="kt">int</span> <span class="n">isnormal</span><span class="p">(</span><span class="n">real</span><span class="o">-</span><span class="n">floating</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">isnormal</code> macro determines whether its argument
+value is normal (neither zero, subnormal, infinite, nor NaN). First, an
+argument represented in a format wider than its semantic type is converted to
+its semantic type. Then determination is based on the type of the
+argument.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">isnormal</code> macro returns a nonzero value if and only
+if its argument has a normal value.</p></div><div class="sect2" title="24.3.6. The signbit macro"><div class="titlepage"><div><div><h3 class="title"><a name="idp37818272"></a>24.3.6. The signbit macro</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;math.h&gt;</span>
+<span class="kt">int</span> <span class="n">signbit</span><span class="p">(</span><span class="n">real</span><span class="o">-</span><span class="n">floating</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">signbit</code> macro determines whether the sign of its
+argument value is negative.<sup>[<a class="footnote" href="#ftn.idp37821984" name="idp37821984">176</a>]</sup></p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">signbit</code> macro returns a nonzero value if and only
+if the sign of its argument value is negative.</p></div></div><div class="sect1" title="24.4. Trigonometric functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp37825040"></a>24.4. Trigonometric functions</h2></div></div></div><div class="sect2" title="24.4.1. The acos functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp37825744"></a>24.4.1. The acos functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;math.h&gt;</span>
+<span class="kt">double</span> <span class="n">acos</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span><span class="p">);</span>
+<span class="kt">float</span> <span class="n">acosf</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">);</span>
+<span class="kt">long</span> <span class="kt">double</span> <span class="n">acosl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">acos</code> functions compute the principal value of the
+arc cosine of <code class="code">x</code>. A domain error occurs for arguments not in
+the interval [-1, +1].</p><p><span class="bold"><strong>Returns</strong></span></p><p>The acos functions return arccos x in the interval
+[<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<mn>0</mn>
+<mo>,</mo>
+<mi>π</mi>
+</math>] radians.</p></div><div class="sect2" title="24.4.2. The asin functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp37833552"></a>24.4.2. The asin functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;math.h&gt;</span>
+<span class="kt">double</span> <span class="n">asin</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span><span class="p">);</span>
+<span class="kt">float</span> <span class="n">asinf</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">);</span>
+<span class="kt">long</span> <span class="kt">double</span> <span class="n">asinl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</pre></div></div><div class="footnotes"><br><hr align="left" width="100"><div class="footnote"><p><sup>[<a class="para" href="#idp37717248" id="ftn.idp37717248">167</a>] </sup>Particularly on systems with wide
+    expression evaluation, a <code class="code">&lt;math.h></code> function might
+    pass arguments and return values in wider format than the synopsis
+    prototype indicates.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37726656" id="ftn.idp37726656">168</a>] </sup>The types
+    <code class="code">float_t</code> and <code class="code">double_t</code> are intended to be
+    the implementation's most efficient types at least as wide as
+    <code class="code">float</code> and <code class="code">double</code>, respectively. For
+    <code class="code">FLT_EVAL_METHOD</code> equal 0, 1 or 2, the type
+    <code class="code">float_t</code> is the narrowest type used by the implementation
+    to evaluate floating expressions.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37735232" id="ftn.idp37735232">169</a>] </sup><code class="code">HUGE_VAL,
+    HUGE_VALF</code> and <code class="code">HUGE_VALL</code> can be positive
+    infinities in an implementation that supports
+    infinities.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37738912" id="ftn.idp37738912">170</a>] </sup>In this case, using
+    <code class="code">INFINITY</code> will violate the constraint in Constants and thus
+    require a diagnostic.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37748640" id="ftn.idp37748640">171</a>] </sup>Typically, the
+    <code class="code">FP_FAST_FMA</code> macro is defined if and only if the
+    <code class="code">fma</code> function is implemented directly with a hardware
+    multiply-add instruction. Software implementations are expected to be
+    substantially slower.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37767824" id="ftn.idp37767824">172</a>] </sup>In an implementation that supports
+      infinities, this allows an infinity as an argument to be a domain error
+      if the mathematical domain of the function does not include the
+      infinity.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37775136" id="ftn.idp37775136">173</a>] </sup>The term underflow here is intended to encompass
+      both "gradual underflow" as in IEC 60559 and also "flush-to-zero"
+      underflow.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37788688" id="ftn.idp37788688">174</a>] </sup>Since an expression can be evaluated
+with more range and precision than its type has, it is important to know the
+type that classification is based on. For example, a normal <code class="code">long
+double</code> value might become subnormal when converted to
+<code class="code">double</code>, and zero when converted to
+<code class="code">float</code>.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37809872" id="ftn.idp37809872">175</a>] </sup>For the isnan macro, the type for
+determination does not matter unless the implementation supports NaNs in the
+evaluation type but not in the semantic type.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37821984" id="ftn.idp37821984">176</a>] </sup>The <code class="code">signbit</code>
+macro reports the sign of all values, including infinities, zeros, and NaNs. If
+zero is unsigned, it is treated as positive.</p></div></hr></br></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../locale/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 23. Localization &lt;locale.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></hr></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+   GNU FDL license is applicable where not stated.</p></body></html>

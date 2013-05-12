@@ -1,0 +1,266 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+    <?dbhtml filename="locale/index.html" ?>
+    <d:title>Localization &amp;lt;locale.h></d:title>
+    <d:para>The header &amp;lt;locale.h> declares two functions, one type, and
+    defines several macros.</d:para>
+    <d:para>The type is</d:para>
+    <d:programlisting role="CLexer">struct lconv</d:programlisting>
+    <d:para>which contains members related to the formatting of numeric
+    values. The structure shall contain at least the following members, in any
+    order. The semantics of the members and their normal ranges are explained
+    in The localeconv function. In the "C" locale, the members shall have the
+    values specified in the comments.</d:para>
+    <d:programlisting role="CLexer">char *decimal_point;     // "."
+char *thousands_sep;     // ""
+char *grouping;          // ""
+char *mon_decimal_point; // ""
+char *mon_thousands_sep; // ""
+char *mon_grouping;      // ""
+char *positive_sign;     // ""
+char *negative_sign;     // ""
+char *currency_symbol;   // ""
+char frac_digits;        // CHAR_MAX
+char p_cs_precedes;      // CHAR_MAX
+char n_cs_precedes;      // CHAR_MAX
+char p_sep_by_space;     // CHAR_MAX
+char n_sep_by_space;     // CHAR_MAX
+char p_sign_posn;        // CHAR_MAX
+char n_sign_posn;        // CHAR_MAX
+char *int_curr_symbol;   // ""
+char int_frac_digits;    // CHAR_MAX
+char int_p_cs_precedes;  // CHAR_MAX
+char int_n_cs_precedes;  // CHAR_MAX
+char int_p_sep_by_space; // CHAR_MAX
+char int_n_sep_by_space; // CHAR_MAX
+char int_p_sign_posn;    // CHAR_MAX
+char int_n_sign_posn;    // CHAR_MAX</d:programlisting>
+<d:para>The macros defined are NULL (described in Common definitions
+&amp;lt;stddef.h>); and</d:para>
+<d:blockquote>
+  <d:para>LC_ALL</d:para>
+  <d:para>LC_COLLATE</d:para>
+  <d:para>LC_CTYPE</d:para>
+  <d:para>LC_MONETARY</d:para>
+  <d:para>LC_NUMERIC</d:para>
+  <d:para>LC_TIME</d:para>
+</d:blockquote>
+<d:para>which expand to integer constant expressions with distinct values,
+suitable for use as the first argument to the setlocale
+function.<d:footnote><d:para>ISO/IEC 9945-2 specifies locale and charmap
+formats that may be used to specify locales for C.</d:para></d:footnote>
+Additional macro definitions, beginning with the characters
+<d:code>LC_</d:code> and an uppercase letter.</d:para>
+<d:sect1>
+  <d:title>Locale Control</d:title>
+  <d:sect2>
+    <d:title>The setlocale function</d:title>
+    <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+    <d:programlisting role="CLexer">#include &lt;locale.h>
+char *setlocale(int category, const char *locale);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>setlocale</d:code> function selects the appropriate portion
+of the program's locale as specified by the category and locale arguments. The
+<d:code>setlocale</d:code> function may be used to change or query the programs
+entire current locale or portions thereof. The value <d:code>LC_ALL</d:code>
+for category names the program's entire locale; the other values for category
+name only a portion of the program's locale. <d:code>LC_COLLATE</d:code>
+affects the behavior of the <d:code>strcoll</d:code> and
+<d:code>strxfrm</d:code> functions. <d:code>eLC_CTYPE</d:code> affects the
+behavior of the character handling functions<d:footnote><d:para>The only
+functions in Character Handling &amp;lt;ctype.h> whose behavior is not affected
+by the current locale are <d:code>isdigit</d:code> and
+<d:code>isxdigit</d:code>.</d:para></d:footnote> and the multibyte and wide
+character functions. <d:code>LC_MONETARY</d:code> affects the monetary
+formatting information returned by the localeconv
+function. <d:code>LC_NUMERIC</d:code> affects the decimal-point character for
+the formatted input/output functions and the string conversion functions, as
+well as the nonmonetary formatting information returned by the
+<d:code>localeconv</d:code> function. <d:code>LC_TIME</d:code> affects the
+behavior of the <d:code>strftime</d:code> and <d:code>wcsftime</d:code>
+functions.</d:para>
+<d:para>A value of "C" for locale specifies the minimal environment for C
+translation; a value of "" for locale specifies the locale-specific native
+environment. Other implementation-defined strings may be passed as the second
+argument to <d:code>setlocale</d:code>.</d:para>
+<d:para>At program startup, the equivalent of</d:para>
+<d:programlisting role="CLexer">setlocale(LC_ALL, "C");</d:programlisting>
+<d:para>is executed.</d:para>
+<d:para>The implementation shall behave as if no library function calls the
+<d:code>setlocale</d:code> function.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>If a pointer to a string is given for <d:code>locale</d:code> and the
+selection can be honored, the <d:code>setlocale</d:code> function returns a
+pointer to the string associated with the specified category for the new
+<d:code>locale</d:code>. If the selection cannot be honored, the
+<d:code>setlocale</d:code> function returns a null pointer and the program's
+<d:code>locale</d:code> is not changed.</d:para>
+<d:para>A null pointer for <d:code>locale</d:code> causes the
+<d:code>setlocale</d:code> function to return a pointer to the string
+associated with the category for the program's current <d:code>locale</d:code>;
+the program's <d:code>locale</d:code> is not changed.</d:para>
+<d:para>The pointer to string returned by the <d:code>setlocale</d:code>
+function is such that a subsequent call with that string value and its
+associated category will restore that part of the program's
+<d:code>locale</d:code>. The string pointed to shall not be modified by the
+program, but may be overwritten by a subsequent call to the
+<d:code>setlocale</d:code> function.</d:para>
+  </d:sect2>
+</d:sect1>
+<d:sect1>
+  <d:title>Numeric formatting convention inquiry</d:title>
+  <d:sect2>
+    <d:title>The localeconv function</d:title>
+    <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+    <d:programlisting role="CLexer">#include &lt;locale.h>
+struct lconv *localeconv(void);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>localeconv</d:code> function sets the components of an
+object with type <d:code>struct lconv</d:code> with values appropriate for the
+formatting of numeric quantities (monetary and otherwise) according to the
+rules of the current <d:code>locale</d:code>.</d:para>
+<d:para>The members of the structure with type <d:code>char *</d:code> are
+pointers to strings, any of which (except decimal_point) can point to "", to
+indicate that the value is not available in the current <d:code>locale</d:code>
+or is of zero length. Apart from grouping and mon_grouping, the strings shall
+start and end in the initial shift state. The members with type char are
+nonnegative numbers, any of which can be <d:code>CHAR_MAX</d:code> to indicate
+that the value is not available in the current <d:code>locale</d:code>. The
+members include the following:</d:para>
+<d:programlisting role="CLexer">char *decimal_point</d:programlisting>
+<d:para>The decimal-point character used to format nonmonetary
+quantities.</d:para>
+<d:programlisting role="CLexer">char *thousands_sep</d:programlisting>
+<d:para>The character used to separate groups of digits before the
+decimal-point. character in formatted nonmonetary quantities.</d:para>
+<d:programlisting role="CLexer">char *grouping</d:programlisting>
+<d:para>A string whose elements indicate the size of each group of digits in
+formatted nonmonetary quantities.</d:para>
+<d:programlisting role="CLexer">char *mon_decimal_point</d:programlisting>
+<d:para>The decimal-point used to format monetary quantities.</d:para>
+<d:programlisting role="CLexer">char *mon_thousands_sep</d:programlisting>
+<d:para>The separator for groups of digits before the decimal-point in
+formatted monetary quantities.</d:para>
+<d:programlisting role="CLexer">char *mon_grouping</d:programlisting>
+<d:para>A string whose elements indicate the size of each group of digits in
+formatted monetary quantities.</d:para>
+<d:programlisting role="CLexer">char *positive_sign</d:programlisting>
+<d:para>The string used to indicate a nonnegative-valued formatted monetary
+quantity.</d:para>
+<d:programlisting role="CLexer">char *negative_sign</d:programlisting>
+<d:para>The string used to indicate a negative-valued formatted monetary
+quantity.</d:para>
+<d:programlisting role="CLexer">char *currency_symbol</d:programlisting>
+<d:para>The local currency symbol applicable to the current locale.</d:para>
+<d:programlisting role="CLexer">char frac_digits</d:programlisting>
+<d:para>The number of fractional digits (those after the decimal-point) to be
+displayed in a locally formatted monetary quantity.</d:para>
+<d:programlisting role="CLexer">char p_cs_precedes</d:programlisting>
+<d:para>Set to 1 or 0 if the <d:code>currency_symbol</d:code> respectively
+precedes or succeeds the value for a nonnegative locally formatted monetary
+quantity.</d:para>
+<d:programlisting role="CLexer">char n_cs_precedes</d:programlisting>
+<d:para>Set to 1 or 0 if the <d:code>currency_symbol</d:code> respectively
+precedes or succeeds the value for a negative locally formatted monetary
+quantity.</d:para>
+<d:programlisting role="CLexer">char p_sep_by_space</d:programlisting>
+<d:para>Set to a value indicating the separation of the
+<d:code>currency_symbol</d:code>, the sign string, and the value for a
+nonnegative locally formatted monetary quantity.</d:para>
+<d:programlisting role="CLexer">char n_sep_by_space</d:programlisting>
+<d:para>Set to a value indicating the separation of the
+<d:code>currency_symbol</d:code>, the sign string, and the value for a negative
+locally formatted monetary quantity.</d:para>
+<d:programlisting role="CLexer">char p_sign_posn</d:programlisting>
+<d:para>Set to a value indicating the positioning of the
+<d:code>positive_sign</d:code> for a nonnegative locally formatted monetary
+quantity.</d:para>
+<d:programlisting role="CLexer">char n_sign_posn</d:programlisting>
+<d:para>Set to a value indicating the positioning of the
+<d:code>negative_sign</d:code> for a negative locally formatted monetary
+quantity.</d:para>
+<d:programlisting role="CLexer">char *int_curr_symbol</d:programlisting>
+<d:para>The international currency symbol applicable to the current locale. The
+first three characters contain the alphabetic international currency symbol in
+accordance with those specified in ISO 4217. The fourth character (immediately
+preceding the null character) is the character used to separate the
+international currency symbol from the monetary quantity.</d:para>
+<d:programlisting role="CLexer">char int_frac_digits</d:programlisting>
+<d:para>The number of fractional digits (those after the decimal-point) to be
+displayed in an internationally formatted monetary quantity.</d:para>
+<d:programlisting role="CLexer">char int_p_cs_precedes</d:programlisting>
+<d:para>Set to 1 or 0 if the <d:code>int_curr_symbol</d:code> respectively
+precedes or succeeds the value for a nonnegative internationally formatted
+monetary quantity.</d:para>
+<d:programlisting role="CLexer">char int_n_cs_precedes</d:programlisting>
+<d:para>Set to 1 or 0 if the <d:code>int_curr_symbol</d:code> respectively
+precedes or succeeds the value for a negative internationally formatted
+monetary quantity.</d:para>
+<d:programlisting role="CLexer">char int_p_sep_by_space</d:programlisting>
+<d:para>Set to a value indicating the separation of the
+<d:code>int_curr_symbol</d:code>, the sign string, and the value for a
+nonnegative internationally formatted monetary quantity.</d:para>
+<d:programlisting role="CLexer">char int_n_sep_by_space</d:programlisting>
+<d:para>Set to a value indicating the separation of the
+<d:code>int_curr_symbol</d:code>, the sign string, and the value for a negative
+internationally formatted monetary quantity.</d:para>
+<d:programlisting role="CLexer">char int_p_sign_posn</d:programlisting>
+<d:para>Set to a value indicating the positioning of the
+<d:code>positive_sign</d:code> for a nonnegative internationally formatted
+monetary quantity.</d:para>
+<d:programlisting role="CLexer">char int_n_sign_posn</d:programlisting>
+<d:para>Set to a value indicating the positioning of the
+<d:code>negative_sign</d:code> for a negative internationally formatted
+monetary quantity.</d:para>
+<d:para>The elements of grouping and mon_grouping are interpreted according to
+the following:</d:para>
+<d:blockquote>
+<d:para><d:code>CHAR_MAX</d:code> No further grouping is to be
+performed.</d:para>
+<d:para>0 The previous element is to be repeatedly used for the remainder of the
+digits.</d:para>
+<d:para><d:emphasis role="italic">other</d:emphasis> The integer value is the
+number of digits that compose the current group.</d:para>
+<d:para>The next element is examined to determine the size of the next group of
+digits before the current group.</d:para>
+</d:blockquote>
+<d:para>The values of <d:code>p_sep_by_space, n_sep_by_space,
+int_p_sep_by_space</d:code> and <d:code>int_n_sep_by_space</d:code> are
+interpreted according to the following:</d:para>
+<d:blockquote>
+  <d:para>0 No space separates the currency symbol and value.</d:para>
+  <d:para>1 If the currency symbol and sign string are adjacent, a space
+  separates them from the value; otherwise, a space separates the currency
+  symbol from the value.</d:para>
+  <d:para>2 If the currency symbol and sign string are adjacent, a space
+  separates them; otherwise, a space separates the sign string from the
+  value.</d:para>
+</d:blockquote>
+<d:para>For <d:code>int_p_sep_by_space</d:code> and
+<d:code>int_n_sep_by_space</d:code>, the fourth character of
+<d:code>int_curr_symbol</d:code> is used instead of a space.</d:para>
+<d:para>The values of <d:code>p_sign_posn, n_sign_posn,
+int_p_sign_posn</d:code> and <d:code>int_n_sign_posn</d:code> are interpreted
+according to the following:</d:para>
+<d:blockquote>
+  <d:para>0 Parentheses surround the quantity and currency symbol.</d:para>
+  <d:para>1 The sign string precedes the quantity and currency symbol.</d:para>
+  <d:para>2 The sign string succeeds the quantity and currency symbol.</d:para>
+  <d:para>3 The sign string immediately precedes the currency symbol.</d:para>
+  <d:para>4 The sign string immediately succeeds the currency symbol.</d:para>
+</d:blockquote>
+<d:para>The implementation shall behave as if no library function calls the
+<d:code>localeconv</d:code> function.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>localeconv</d:code> function returns a pointer to the
+filled-in object. The structure pointed to by the return value shall not be
+modified by the program, but may be overwritten by a subsequent call to the
+<d:code>localeconv</d:code> function. In addition, calls to the setlocale
+function with categories <d:code>LC_ALL, LC_MONETARY</d:code> or
+<d:code>LC_NUMERIC</d:code> may overwrite the contents of the
+structure.</d:para>
+<d:para>Please refer to three tables in specification for reference examples.</d:para>
+  </d:sect2>
+</d:sect1>
+</d:chapter>

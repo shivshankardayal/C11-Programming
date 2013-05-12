@@ -39,6 +39,8 @@
   <xi:include href="inttypes.xml" />
   <xi:include href="iso646.xml" />
   <xi:include href="limits.xml" />
+  <xi:include href="locale.xml" />
+  <xi:include href="math.xml" />
   <d:index>
     <d:title>Index</d:title>
   </d:index>
