@@ -47,6 +47,7 @@
   <xi:include href="stdbool.xml" />
   <xi:include href="stddef.xml" />
   <xi:include href="stdint.xml" />
+  <xi:include href="stdio.xml" />
   <d:index>
     <d:title>Index</d:title>
   </d:index>

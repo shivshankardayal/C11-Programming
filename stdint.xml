@@ -479,4 +479,47 @@
     and the value of <d:code>WINT_MIN</d:code> shall be 0 and the value of
     <d:code>WINT_MAX</d:code> shall be no less than 65535.</d:para>
   </d:sect1>
+  <d:sect1>
+    <d:title>Macros for integer constants</d:title>
+    <d:para>The following function-like macros<d:footnote><d:para>C++
+    implementations should define these macros only when
+    <d:code>__STDC_CONSTANT_MACROS</d:code> is defined before
+    <d:code>&amp;lt;stdint.h></d:code> is
+    included.</d:para></d:footnote> expand to integer constants suitable for
+    initializing objects that have integer types corresponding to types defined
+    in <d:code>&amp;lt;stdint.h></d:code>. Each macro name corresponds to a
+    similar type name in Minimum-width integer types or Greatest-width integer
+    types.</d:para>
+    <d:para>The argument in any instance of these macros shall be a decimal,
+    octal, or hexadecimal constant (as defined in Integer Constants) with a
+    value that does not exceed the limits for the corresponding type.</d:para>
+    <d:para>Each invocation of one of these macros shall expand to an integer
+    constant expression suitable for use in <d:code>#if</d:code> preprocessing
+    directives. The type of the expression shall have the same type as would an
+    expression of the corresponding type converted according to the integer
+    promotions. The value of the expression shall be that of the
+    argument.</d:para>
+    <d:sect2>
+      <d:title>Macros for minimum-width integer constants</d:title>
+      <d:para>The macro <d:code>INTN_C</d:code> (value) shall expand to an
+      integer constant expression corresponding to the type
+      <d:code>int_leastN_t</d:code>. The macro <d:code>UINTN_C</d:code> (value)
+      shall expand to an integer constant expression corresponding to the type
+      <d:code>uint_leastN_t</d:code>. For example, if
+      <d:code>uint_least64_t</d:code> is a name for the type <d:code>unsigned
+      long long</d:code> int, then <d:code>UINT64_C(0x123)</d:code> might
+      expand to the integer constant <d:code>0x123ULL</d:code>.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Macros for greatest-width integer constants</d:title>
+      <d:para>The following macro expands to an integer constant expression
+      having the value specified by its argument and the type
+      <d:code>intmax_t</d:code>:</d:para>
+      <d:blockquote><d:para><d:code>INTMAX_C</d:code> (value)</d:para></d:blockquote>
+      <d:para>The following macro expands to an integer constant expression
+      having the value specified by its argument and the type
+      <d:code>uintmax_t</d:code>:</d:para>
+      <d:blockquote><d:para><d:code>UINTMAX_C</d:code> (value)</d:para></d:blockquote>
+    </d:sect2>
+  </d:sect1>
 </d:chapter>
