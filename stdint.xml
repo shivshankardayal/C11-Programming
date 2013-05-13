@@ -156,7 +156,8 @@
       <d:itemizedlist>
 	<d:listitem>
 	  <d:para>minimum values of exact-width signed integer types</d:para>
-	  <d:para><d:code>INTN_MIN</d:code> exactly <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+	  <d:para><d:code>INTN_MIN</d:code> exactly <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
   <mml:mo>&#x2212;<!-- − --></mml:mo>
   <mml:mo stretchy="false">(</mml:mo>
   <mml:msup>
@@ -172,7 +173,8 @@
 	</d:listitem>
 	<d:listitem>
 	  <d:para>maximum values of exact-width signed integer types</d:para>
-	  <d:para><d:code>INTN_MAX</d:code> exactly <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+	  <d:para><d:code>INTN_MAX</d:code> exactly <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
   <mml:msup>
     <mml:mn>2</mml:mn>
     <mml:mrow class="MJX-TeXAtom-ORD">
@@ -185,7 +187,296 @@
   <mml:mn>1</mml:mn>
 </mml:math></d:inlineequation></d:para>
 	</d:listitem>
+	<d:listitem>
+	  <d:para>maximum values of exact-width unsigned integer types</d:para>
+	  <d:para><d:code>UINT_MAX</d:code> exactly <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mi>N</mml:mi>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
       </d:itemizedlist>
     </d:sect2>
+    <d:sect2>
+      <d:title>Limits of minimum-width integer types</d:title>
+      <d:itemizedlist>
+	<d:listitem>
+	  <d:para>minimum values of minimum-width signed integer types</d:para>
+	  <d:para><d:code>INT_LEASTN_MIN</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mo stretchy="false">(</mml:mo>
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mi>N</mml:mi>
+      <mml:mo>&#x2212;<!-- − --></mml:mo>
+      <mml:mn>1</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+  <mml:mo stretchy="false">)</mml:mo>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+	<d:listitem>
+	  <d:para>maximum values of minimum-width signed integer types</d:para>
+	  <d:para><d:code>INT_LEASTN_MAX</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mi>N</mml:mi>
+      <mml:mo>&#x2212;<!-- − --></mml:mo>
+      <mml:mn>1</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+	<d:listitem>
+	  <d:para>maximum values of minimum-width unsigned integer
+	  types</d:para>
+	  <d:para><d:code>UINT_LEASTN_MAX</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML"> 
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mi>N</mml:mi>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+      </d:itemizedlist>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Limits of fastest minimum-width integer types</d:title>
+      <d:itemizedlist>
+	<d:listitem>
+	  <d:para>minimum values of fastest minimum-width signed integer
+	  types</d:para>
+	  <d:para><d:code>INT_FASTN_MIN</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mo stretchy="false">(</mml:mo>
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mi>N</mml:mi>
+      <mml:mo>&#x2212;<!-- − --></mml:mo>
+      <mml:mn>1</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+  <mml:mo stretchy="false">)</mml:mo>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+	<d:listitem>
+	  <d:para>maximum values of fastest minimum-width signed integer
+	  types</d:para>
+	  <d:para><d:code>INT_FASTN_MAX</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mi>N</mml:mi>
+      <mml:mo>&#x2212;<!-- − --></mml:mo>
+      <mml:mn>1</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+	<d:listitem>
+	  <d:para>maximum values of fastest minimum-width unsigned integer
+	  types</d:para>
+	  <d:para><d:code>UINT_FASTN_MAX</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mi>N</mml:mi>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+      </d:itemizedlist>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Limits of integer types capable of holding object
+      pointers</d:title>
+      <d:itemizedlist>
+	<d:listitem>
+	  <d:para>minimum value of pointer-holding signed integer type</d:para>
+	  <d:para><d:code>INTPTR_MIN</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mo stretchy="false">(</mml:mo>
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mn>15</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+  <mml:mo stretchy="false">)</mml:mo>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+	<d:listitem>
+	  <d:para>maximum value of pointer-holding signed integer type</d:para>
+	  <d:para><d:code>INTPTR_MAX</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mn>15</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+	<d:listitem>
+	  <d:para>maximum value of pointer-holding unsigned integer
+	  type</d:para>
+	  <d:para><d:code>UINTPTR_MAX</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mn>16</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+      </d:itemizedlist>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Limits of greatest-width integer types</d:title>
+      <d:itemizedlist>
+	<d:listitem>
+	  <d:para>minimum value of greatest-width signed integer type</d:para>
+	  <d:para><d:code>INTMAX_MIN</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mo stretchy="false">(</mml:mo>
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mn>63</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+  <mml:mo stretchy="false">)</mml:mo>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+	<d:listitem>
+	  <d:para>maximum value of greatest-width signed integer type</d:para>
+	  <d:para><d:code>INTMAX_MAX</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML"> 
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mn>63</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+	<d:listitem>
+	  <d:para>maximum value of greatest-width unsigned integer
+	  type</d:para>
+	  <d:para><d:code>UINTMAX_MAX</d:code> <d:inlineequation><mml:math
+	  xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mn>2</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mn>64</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation></d:para>
+	</d:listitem>
+      </d:itemizedlist>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Limits of other integer types</d:title>
+    <d:para>The following object-like macros<d:footnote><d:para>C++
+    implementations should define these macros only when <d:code></d:code> is
+    defined before <d:code>&amp;lt;stdint.h></d:code> is
+    included.</d:para></d:footnote> specify the minimum and maximum limits of
+    integer types corresponding to types defined in other standard
+    headers.</d:para>
+    <d:para>Each instance of these macros shall be replaced by a constant
+    expression suitable for use in <d:code>#if</d:code> preprocessing
+    directives, and this expression shall have the same type as would an
+    expression that is an object of the corresponding type converted according
+    to the integer promotions. Its implementation-defined value shall be equal
+    to or greater in magnitude (absolute value) than the corresponding value
+    given below, with the same sign. An implementation shall define only the
+    macros corresponding to those typedef names it actually
+    provides.<d:footnote><d:para>A freestanding implementation need not provide
+    all of these types.</d:para></d:footnote></d:para>
+    <d:itemizedlist>
+      <d:listitem>
+	<d:para>limits of <d:code>ptrdiff_t</d:code></d:para>
+	<d:para><d:code>PTRDIFF_MIN</d:code> -65535</d:para>
+	<d:para><d:code>PTRDIFF_MAX</d:code> +65535</d:para>
+      </d:listitem>
+      <d:listitem>
+	<d:para>limits of <d:code>sig_atomic_t</d:code></d:para>
+	<d:para><d:code>SIG_ATOMIC_MIN</d:code> see below</d:para>
+	<d:para><d:code>SIG_ATOMIC_MAX</d:code> see below</d:para>
+      </d:listitem>
+      <d:listitem>
+	<d:para>limits of <d:code>size_t</d:code></d:para>
+	<d:para><d:code>SIZE_MAX</d:code> 65535</d:para>
+      </d:listitem>
+      <d:listitem>
+	<d:para>limits of <d:code>wchar_t</d:code></d:para>
+	<d:para><d:code>WCHAR_MIN</d:code> see below</d:para>
+	<d:para><d:code>WCHAR_MAX</d:code> see below</d:para>
+      </d:listitem>
+      <d:listitem>
+	<d:para>limits of <d:code>wint_t</d:code></d:para>
+	<d:para><d:code>WINT_MIN</d:code> see below</d:para>
+	<d:para><d:code>WINT_MAX</d:code> see below</d:para>
+      </d:listitem>
+    </d:itemizedlist>
+    <d:para>If <d:code>sig_atomic_t</d:code> (see Signal handling
+    &amp;lt;signal.h>) is defined as a signed integer type, the value of
+    <d:code>SIG_ATOMIC_MIN</d:code> shall be no greater than -127 and the value
+    of <d:code>SIG_ATOMIC_MAX</d:code> shall be no less than 127; otherwise,
+    <d:code>sig_atomic_t</d:code> is defined as an unsigned integer type, and
+    the value of <d:code>SIG_ATOMIC_MIN</d:code> shall be 0 and the value of
+    <d:code>SIG_ATOMIC_MAX</d:code> shall be no less than 255.</d:para>
+    <d:para>If <d:code>wchar_t</d:code> (see Common definitions
+    &amp;lt;stddef.h>) is defined as a signed integer type, the value of
+    <d:code>WCHAR_MIN</d:code> shall be no greater than -127 and the value of
+    <d:code>WCHAR_MAX</d:code> shall be no less than 127; otherwise,
+    <d:code>wchar_t</d:code> is defined as an unsigned integer type, and the
+    value of <d:code>WCHAR_MIN</d:code> shall be 0 and the value of
+    <d:code>WCHAR_MAX</d:code> shall be no less than 255.</d:para>
+    <d:para>If <d:code>wint_t</d:code> (see Extended multibyte and wide
+    character utilities &amp;lt;wchar.h>) is defined as a signed integer type,
+    the value of <d:code>WINT_MIN</d:code> shall be no greater than -32767 and
+    the value of <d:code>WINT_MAX</d:code> shall be no less than 32767;
+    otherwise, <d:code>wint_t</d:code> is defined as an unsigned integer type,
+    and the value of <d:code>WINT_MIN</d:code> shall be 0 and the value of
+    <d:code>WINT_MAX</d:code> shall be no less than 65535.</d:para>
   </d:sect1>
 </d:chapter>
