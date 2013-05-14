@@ -462,20 +462,20 @@ undefined.<d:footnote><d:para>If the string begins with one of the above
 sequences, the implementation might choose to ignore the remaining characters,
 or it might use them to select different kinds of a file (some of which might
 not conform to the properties in Streams).</d:para></d:footnote></d:para>
-<d:literallayout>
-  <d:code>r</d:code> open test file for reading
-  <d:code>w</d:code> truncate zero length or create text file for writing
-  <d:code>a</d:code> append; open or create text file for writing at end-of-file
-  <d:code>rb</d:code> open binary file for reading
-  <d:code>wb</d:code> truncate to zero length or create binary file for writing
-  <d:code>ab</d:code> append; open or create binary file for writing at end-of-file
-  <d:code>r+</d:code> open text file for update (reading and writing)
-  <d:code>w+</d:code> truncate to zero length or create text file for update
-  <d:code>a+</d:code> append; open or create text file for update, writing at end-of-file
-  <d:code>r+b</d:code> or <d:code>rb+</d:code> open binary file for update (reading and writing)
-  <d:code>w+b</d:code> or <d:code>wb+</d:code> truncate to zero length or create binary file for update
-  <d:code>a+b</d:code> or <d:code>ab+</d:code> append; open or create binary file for update, writing at end-of-file
-</d:literallayout>
+<d:blockquote>
+  <d:para><d:code>r</d:code> open test file for reading</d:para>
+  <d:para><d:code>w</d:code> truncate zero length or create text file for writing</d:para>
+  <d:para><d:code>a</d:code> append; open or create text file for writing at end-of-file</d:para>
+  <d:para><d:code>rb</d:code> open binary file for reading</d:para>
+  <d:para><d:code>wb</d:code> truncate to zero length or create binary file for writing</d:para>
+  <d:para><d:code>ab</d:code> append; open or create binary file for writing at end-of-file</d:para>
+  <d:para><d:code>r+</d:code> open text file for update (reading and writing)</d:para>
+  <d:para><d:code>w+</d:code> truncate to zero length or create text file for update</d:para>
+  <d:para><d:code>a+</d:code> append; open or create text file for update, writing at end-of-file</d:para>
+  <d:para><d:code>r+b</d:code> or <d:code>rb+</d:code> open binary file for update (reading and writing)</d:para>
+  <d:para><d:code>w+b</d:code> or <d:code>wb+</d:code> truncate to zero length or create binary file for update</d:para>
+  <d:para><d:code>a+b</d:code> or <d:code>ab+</d:code> append; open or create binary file for update, writing at end-of-file</d:para>
+</d:blockquote>
 <d:para>Opening a file with read mode ('<d:code>r</d:code>' as the first
 character in the mode argument) fails if the file does not exist or cannot be
 read.</d:para>
@@ -506,6 +506,199 @@ controlling the stream. If the open operation fails, fopen returns a null
 pointer.</d:para>
 <d:para><d:emphasis role="bold">Forward references:</d:emphasis> file
 positioning functions (File positioning functions).</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The freopen function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h>
+FILE *freopen(const char * restrict filename, const char * restrict mode, FILE * restrict stream);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>freopen</d:code> function opens the file whose name is the
+string pointed to by filename and associates the stream pointed to by stream
+with it. The mode argument is used just as in the <d:code>fopen</d:code>
+function.<d:footnote><d:para>The primary use of the <d:code>freopen</d:code>
+function is to change the file associated with a standard text stream
+(<d:code>stderr, stdin</d:code> or <d:code>stdout</d:code>), as those
+identifiers need not be modifiable lvalues to which the value returned by the
+fopen function may be assigned.</d:para></d:footnote></d:para>
+<d:para>If filename is a null pointer, the <d:code>freopen</d:code> function
+attempts to change the mode of the stream to that specified by mode, as if the
+name of the file currently associated with the stream had been used. It is
+implementation-defined which changes of mode are permitted (if any), and under
+what circumstances.</d:para>
+<d:para>The <d:code>freopen</d:code> function first attempts to close any file
+that is associated with the specified stream. Failure to close the file is
+ignored. The error and end-of-file indicators for the stream are
+cleared.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>freopen</d:code> function returns a null pointer if the
+open operation fails. Otherwise, <d:code>freopen</d:code> returns the value of
+stream.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The setbuf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h>
+void setbuf(FILE * restrict stream, char * restrict buf);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>Except that it returns no value, the <d:code>setbuf</d:code> function
+is equivalent to the <d:code>setvbuf</d:code> function invoked with the values
+<d:code>_IOFBF</d:code> for mode and <d:code>BUFSIZ</d:code> for size, or (if
+<d:code>buf</d:code> is a null pointer), with the value <d:code>_IONBF</d:code>
+for mode.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>setbuf</d:code> function returns no value.</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
+<d:code>setvbuf</d:code> function (The setvbuf function).</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The setvbuf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h>
+int setvbuf(FILE * restrict stream, char * restrict buf, int mode, size_t size);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>setvbuf</d:code> function may be used only after the stream
+pointed to by stream has been associated with an open file and before any other
+operation (other than an unsuccessful call to <d:code>setvbuf</d:code>) is
+performed on the stream. The argument mode determines how stream will be
+buffered, as follows: <d:code>_IOFBF</d:code> causes input/output to be fully
+buffered; <d:code>_IOLBF</d:code> causes input/output to be line buffered;
+<d:code>_IONBF</d:code> causes input/output to be unbuffered. If
+<d:code>buf</d:code> is not a null pointer, the array it points to may be used
+instead of a buffer allocated by the <d:code>setvbuf</d:code>
+function<d:footnote><d:para>The buffer has to have a lifetime at least as great
+as the open stream, so the stream should be closed before a buffer that has
+automatic storage duration is deallocated upon block
+exit.</d:para></d:footnote> and the argument size specifies the size of the
+array; otherwise, size may determine the size of a buffer allocated by the
+<d:code>setvbuf</d:code> function. The contents of the array at any time are
+indeterminate.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>setvbuf</d:code> function returns zero on success, or
+nonzero if an invalid value is given for mode or if the request cannot be
+honored.</d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Formatted input/output function</d:title>
+    <d:para>The formatted input/output functions shall behave as if there is a
+    sequence point after the actions associated with each
+    specifier.<d:footnote><d:para>The <d:code>fprintf</d:code> functions
+    perform writes to memory for the <d:code>%n</d:code>
+    specifier.</d:para></d:footnote></d:para>
+    <d:sect2>
+      <d:title>The fprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h>
+int fprintf(FILE * restrict stream, const char * restrict format, ...);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fprintf</d:code> function writes output to the stream
+pointed to by stream, under control of the string pointed to by format that
+specifies how subsequent arguments are converted for output. If there are
+insufficient arguments for the format, the behavior is undefined. If the format
+is exhausted while arguments remain, the excess arguments are evaluated (as
+always) but are otherwise ignored. The <d:code>fprintf</d:code> function
+returns when the end of the format string is encountered.</d:para>
+<d:para>The format shall be a multibyte character sequence, beginning and
+ending in its initial shift state. The format is composed of zero or more
+directives: ordinary multibyte characters (not <d:code>%</d:code>), which are
+copied unchanged to the output stream; and conversion pecifications, each of
+which results in fetching zero or more subsequent arguments, converting them,
+if applicable, according to the corresponding conversion specifier, and then
+writing the result to the output stream.</d:para>
+<d:para>Each conversion specification is introduced by the character
+<d:code>%</d:code>. After the <d:code>%</d:code>, the following appear in
+sequence:</d:para>
+<d:itemizedlist>
+  <d:listitem>
+    <d:para>Zero or more flags (in any order) that modify the meaning of the conversion specification.</d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>An optional minimum field width. If the converted value has fewer
+    characters than the field width, it is padded with spaces (by default) on
+    the left (or right, if the left adjustment flag, described later, has been
+    given) to the field width. The field width takes the form of an asterisk *
+    (described later) or a nonnegative decimal integer.<d:footnote><d:para>Note
+    that 0 is taken as a flag, not as the beginning of a field
+    width.</d:para></d:footnote></d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>An optional precision that gives the minimum number of digits to
+    appear for the <d:code>d, i, o, u, x</d:code> and <d:code>X</d:code>
+    conversions, the number of digits to appear after the decimal-point
+    character for <d:code>a, A, e, E, f</d:code> and <d:code>F</d:code>
+    conversions, the maximum number of significant digits for the
+    <d:code>g</d:code> and <d:code>G</d:code> conversions, or the maximum
+    number of bytes to be written for <d:code>s</d:code> conversions. The
+    precision takes the form of a period (.) followed either by an asterisk *
+    (described later) or by an optional decimal integer; if only the period is
+    specified, the precision is taken as zero. If a precision appears with any
+    other conversion specifier, the behavior is undefined.</d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>An optional length modifier that specifies the size of the
+    argument.</d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>A conversion specifier character that specifies the type of
+    conversion to be applied.</d:para>
+  </d:listitem>
+</d:itemizedlist>
+<d:para>As noted above, a field width, or precision, or both, may be indicated
+by an asterisk. In this case, an int argument supplies the field width or
+precision. The arguments specifying field width, or precision, or both, shall
+appear (in that order) before the argument (if any) to be converted. A negative
+field width argument is taken as a - flag followed by a positive field width. A
+negative precision argument is taken as if the precision were omitted.</d:para>
+<d:para>The flag characters and their meanings are:</d:para>
+<d:para>- The result of the conversion is left-justified within the field. (It
+is right-justified if this flag is not specified.)</d:para>
+<d:para>+ The result of a signed conversion always begins with a plus or minus
+sign. (It begins with a sign only when a negative value is converted if this
+flag is not specified.)<d:footnote><d:para>The results of all floating
+conversions of a negative zero, and of negative values that round to zero,
+include a minus sign.</d:para></d:footnote></d:para>
+<d:para><d:emphasis role="italic">space</d:emphasis> If the first character of
+a signed conversion is not a sign, or if a signed conversion results in no
+characters, a space is prefixed to the result. If the space and + flags both
+appear, the space flag is ignored.</d:para>
+<d:para># The result is converted to an "alternative form". For
+<d:code>o</d:code> conversion, it increases the precision, if and only if
+necessary, to force the first digit of the result to be a zero (if the value
+and precision are both 0, a single 0 is printed). For <d:code>x</d:code> (or
+<d:code>X</d:code>) conversion, a nonzero result has <d:code>0x</d:code> (or
+<d:code>0X</d:code>) prefixed to it. For <d:code>a, A, e, E, f, F, g</d:code>
+and <d:code>G</d:code> conversions, the result of converting a floating-point
+number always contains a decimal-point character, even if no digits follow
+it. (Normally, a decimal-point character appears in the result of these
+conversions only if a digit follows it.) For <d:code>g</d:code> and
+<d:code>G</d:code> conversions, trailing zeros are not removed from the
+result. For other conversions, the behavior is undefined.</d:para>
+<d:para>0 For <d:code>d, i, o, u, x, X, a, A, e, E, f, F, g</d:code> and
+<d:code>G</d:code> conversions, leading zeros (following any indication of sign
+or base) are used to pad to the field width rather than performing space
+padding, except when converting an infinity or NaN. If the 0 and - flags both
+appear, the 0 flag is ignored. For <d:code>d, i, o, u, x</d:code> and
+<d:code>X</d:code> conversions, if a precision is specified, the 0 flag is
+ignored. For other conversions, the behavior is undefined.</d:para>
+<d:para>The length modifiers and their meanings are:</d:para>
+<d:para><d:code>hh</d:code> Specifies that a following <d:code>d, i, o, u,
+x</d:code> or <d:code>X</d:code> conversion specifier applies to a
+<d:code>signed char</d:code> or <d:code>unsigned char</d:code> argument (the
+argument will have been promoted according to the integer promotions, but its
+value shall be converted to <d:code>signed char</d:code> or <d:code>unsigned
+char</d:code> before printing); or that a following <d:code>n</d:code>
+conversion specifier applies to a pointer to a <d:code>signed char</d:code>
+argument.</d:para>
+<d:para><d:code>h</d:code> Specifies that a following <d:code>d, i, o, u,
+x</d:code> or <d:code>X</d:code> conversion specifier applies to a
+<d:code>short int</d:code> or <d:code>unsigned short int</d:code> argument (the
+argument will have been promoted according to the integer promotions, but its
+value shall be converted to <d:code>short int</d:code> or <d:code>unsigned
+short int</d:code> before printing); or that a following <d:code>n</d:code>
+conversion specifier applies to a pointer to a <d:code>short int</d:code>
+argument.</d:para>
+<d:para>l (ell) Specifies that a following <d:code>d, i, o, u, x</d:code> or <d:code>X</d:code> conversion specifier applies to a <d:code>long int</d:code> or <d:code>unsigned long int</d:code> argument; that a following <d:code>n</d:code> conversion specifier applies to a pointer to a long int argument; that a following c conversion specifier applies to a wint_t argument; that a following s conversion specifier applies to a pointer to a wchar_t argument; or has no effect on a following a, A, e, E, f, F, g or G conversion specifier.</d:para>
     </d:sect2>
   </d:sect1>
 </d:chapter>
