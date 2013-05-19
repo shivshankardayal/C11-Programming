@@ -761,7 +761,7 @@ appears. If a decimal-point character appears, at least one digit appears
 before it. The value is rounded to the appropriate number of digits.</d:para>
 <d:para>A <d:code>double</d:code> argument representing an infinity is
 converted in one of the styles <d:emphasis role="bold">[-]inf</d:emphasis> or
-<d:emphasis role="bold"></d:emphasis> &#x2014; which style is
+<d:emphasis role="bold"></d:emphasis> &#x2014;- which style is
 implementation-defined. A double argument representing a NaN is converted in
 one of the styles <d:emphasis role="bold">[-]nan</d:emphasis> or <d:emphasis
 role="bold">[-]nan</d:emphasis> (<d:emphasis
@@ -773,7 +773,9 @@ or <d:code>NAN</d:code> instead of <d:code>inf, infinity</d:code> or
 and NaN values, the -, + and space flag characters have their usual meaning;
 the # and 0 flag characters have no effect.</d:para></d:footnote></d:para>
 <d:para><d:code>e, E</d:code> A double argument representing a floating-point
-number is converted in the style <d:emphasis role="italic">[-]d.ddd</d:emphasis> e<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+number is converted in the style <d:emphasis
+role="italic">[-]d.ddd</d:emphasis> e<d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
   <mml:mo>&#x00B1;<!-- ± --></mml:mo>
   <mml:mi>d</mml:mi>
   <mml:mi>d</mml:mi>
@@ -789,7 +791,228 @@ exponent. If the value is zero, the exponent is zero.</d:para>
 <d:para>A <d:code>double</d:code> argument representing an infinity or NaN is
 converted in the style of an <d:code>f</d:code> or <d:code>F</d:code>
 conversion specifier.</d:para>
-
+<d:para><d:code>g, G</d:code> A double argument representing a floating-point
+number is converted in style <d:code>f</d:code> or <d:code>e</d:code> (or in
+style <d:code>F</d:code> or <d:code>E</d:code> in the case of a
+<d:code>G</d:code> conversion specifier), depending on the value converted and
+the precision. Let <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>P</mml:mi>
+</mml:math></d:inlineequation> equal the precision if nonzero, 6 if the
+precision is omitted, or 1 if the precision is zero. Then, if a conversion with
+style <d:code>E</d:code> would have an exponent of <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>X</mml:mi>
+</mml:math></d:inlineequation>:</d:para>
+<d:itemizedlist>
+  <d:listitem>
+    <d:para>If <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>P</mml:mi>
+  <mml:mo>&gt;</mml:mo>
+  <mml:mi>X</mml:mi>
+  <mml:mo>&#x2265;<!-- ≥ --></mml:mo>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>4</mml:mn>
+</mml:math></d:inlineequation>. the conversion is with style <d:code>f</d:code>
+(or <d:code>F</d:code>) and precision <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>P</mml:mi>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mo stretchy="false">(</mml:mo>
+  <mml:mi>X</mml:mi>
+  <mml:mo>+</mml:mo>
+  <mml:mn>1</mml:mn>
+  <mml:mo stretchy="false">)</mml:mo>
+</mml:math></d:inlineequation></d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>otherwise, the conversion is with style <d:code>e</d:code> (or
+    <d:code>E</d:code>) and precision <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>P</mml:mi>
+  <mml:mo>&#x2212;<!-- − --></mml:mo>
+  <mml:mn>1</mml:mn>
+</mml:math></d:inlineequation>.</d:para>
+  </d:listitem>
+</d:itemizedlist>
+<d:para>Finally, unless the <d:code>#</d:code> flag is used, any trailing zeros
+are removed from the fractional portion of the result and the decimal-point
+character is removed if there is no fractional portion remaining.</d:para>
+<d:para>A <d:code>double</d:code> argument representing an infinity or NaN is
+converted in the style of an <d:code>f</d:code> or <d:code>F</d:code>
+conversion specifier.</d:para>
+<d:para><d:code>a, A</d:code> A <d:code>double</d:code> argument representing a
+floating-point number is converted in the style <d:emphasis
+role="italic">[-]0xh.hhhh</d:emphasis> <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>p</mml:mi>
+  <mml:mo>&#x00B1;<!-- ± --></mml:mo>
+  <mml:mi>d</mml:mi>
+</mml:math></d:inlineequation>, where there is one hexadecimal digit (which is
+nonzero if the argument is a normalized floating-point number and is otherwise
+unspecified) before the decimal-point character<d:footnote><d:para>Binary
+implementations can choose the hexadecimal digit to the left of the
+decimal-point character so that subsequent digits align to nibble (4-bit)
+boundaries.</d:para></d:footnote> nd the number of hexadecimal digits after it
+is equal to the precision; if the precision is missing and
+<d:code>FLT_RADIX</d:code> is a power of 2, then the precision is sufficient
+for an exact representation of the value; if the precision is missing and
+<d:code>FLT_RADIX</d:code> is not a power of 2, then the precision is
+sufficient to distinguish<d:footnote><d:para>The precision <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>p</mml:mi>
+</mml:math></d:inlineequation> is sufficient to
+distinguish values of the source type if <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:msup>
+    <mml:mn>16</mml:mn>
+    <mml:mrow class="MJX-TeXAtom-ORD">
+      <mml:mi>p</mml:mi>
+      <mml:mo>&#x2212;<!-- − --></mml:mo>
+      <mml:mn>1</mml:mn>
+    </mml:mrow>
+  </mml:msup>
+  <mml:mo>&gt;</mml:mo>
+  <mml:msup>
+    <mml:mi>b</mml:mi>
+    <mml:mi>n</mml:mi>
+  </mml:msup>
+</mml:math></d:inlineequation> where
+<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>b</mml:mi>
+</mml:math></d:inlineequation> is <d:code>FLT_RADIX</d:code> and
+<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>n</mml:mi>
+</mml:math></d:inlineequation> is the number of base-b digits in the
+significand of the source type. A smaller <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>p</mml:mi>
+</mml:math></d:inlineequation> might suffice depending on the implementation’s
+scheme for determining the digit to the left of the decimal-point
+character.</d:para></d:footnote> values of type double, except that trailing
+zeros may be omitted; if the precision is zero and the <d:code>#</d:code> flag
+is not specified, no decimal-point character appears. The letters abcdef are
+used for a conversion and the letters <d:code>ABCDEF</d:code> for A
+conversion. The A conversion specifier produces a number with
+<d:code>X</d:code> and <d:code>P</d:code> instead of <d:code>x</d:code> and
+<d:code>p</d:code>. The exponent always contains at least one digit, and only
+as many more digits as necessary to represent the decimal exponent of 2. If the
+value is zero, the exponent is zero. A double argument representing an infinity
+or NaN is converted in the style of an <d:code>f</d:code> or <d:code>F</d:code>
+conversion specifier.</d:para>
+<d:para><d:code>c</d:code> If no <d:code>l</d:code> length modifier is present,
+the <d:code>int</d:code> argument is converted to an <d:code>unsigned
+char</d:code>, and the resulting character is written.</d:para>
+<d:para>If an <d:code>l</d:code> length modifier is present, the
+<d:code>wint_t</d:code> argument is converted as if by an <d:code>ls</d:code>
+conversion specification with no precision and an argument that points to the
+initial element of a two-element array of <d:code>wchar_t</d:code>, the first
+element containing the <d:code>wint_t</d:code> argument to the
+<d:code>lc</d:code> conversion specification and the second a null wide
+character.</d:para>
+<d:para><d:code>s</d:code> If no <d:code>l</d:code> length modifier is present,
+the argument shall be a pointer to the initial element of an array of character
+type.<d:footnote><d:para>No special provisions are made for multibyte
+characters.</d:para></d:footnote> Characters from the array are written up to
+(but not including) the terminating null character. If the precision is
+specified, no more than that many bytes are written. If the precision is not
+specified or is greater than the size of the array, the array shall contain a
+null character.</d:para>
+<d:para>If an <d:code>l</d:code> length modifier is present, the argument shall
+be a pointer to the initial element of an array of <d:code>wchar_t</d:code>
+type. Wide characters from the array are converted to multibyte characters
+(each as if by a call to the <d:code>wcrtomb</d:code> function, with the
+conversion state described by an <d:code>mbstate_t</d:code> object initialized
+to zero before the first wide character is converted) up to and including a
+terminating null wide character. The resulting multibyte characters are written
+up to (but not including) the terminating null character (byte). If no
+precision is specified, the array shall contain a null wide character. If a
+precision is specified, no more than that many bytes are written (including
+shift sequences, if any), and the array shall contain a null wide character if,
+to equal the multibyte character sequence length given by the precision, the
+function would need to access a wide character one past the end of the
+array. In no case is a partial multibyte character
+written.<d:footnote><d:para>Redundant shift sequences may result if multibyte
+characters have a state-dependent encoding.</d:para></d:footnote></d:para>
+<d:para><d:code>p</d:code> The argument shall be a pointer to
+<d:code>void</d:code>. The value of the pointer is converted to a sequence of
+printing characters, in an implementation-defined manner.</d:para>
+<d:para><d:code>n</d:code> The argument shall be a pointer to signed integer
+into which is written the number of characters written to the output stream so
+far by this call to fprintf. No argument is converted, but one is consumed. If
+the conversion specification includes any flags, a field width, or a precision,
+the behavior is undefined.</d:para>
+<d:para><d:code>%</d:code> A <d:code>%</d:code> character is written. No
+argument is converted. The complete conversion specification shall be
+<d:code>%%</d:code>.</d:para>
+<d:para>If a conversion specification is invalid, the behavior is undefined. If
+any argument is not the correct type for the corresponding conversion
+specification, the behavior is undefined.</d:para>
+<d:para>In no case does a nonexistent or small field width cause truncation of
+a field; if the result of a conversion is wider than the field width, the field
+is expanded to contain the conversion result.</d:para>
+<d:para>For a and A conversions, if <d:code>FLT_RADIX</d:code> is a power of 2,
+the value is correctly rounded to a hexadecimal floating number with the given
+precision.</d:para>
+<d:para><d:emphasis role="bold">Recommended practice</d:emphasis></d:para>
+<d:para>For <d:code>a</d:code> and <d:code>A</d:code> conversions, if
+<d:code>FLT_RADIX</d:code> is not a power of 2 and the result is not exactly
+representable in the given precision, the result should be one of the two
+adjacent numbers in hexadecimal floating style with the given precision, with
+the extra stipulation that the error should have a correct sign for the current
+rounding direction.</d:para>
+<d:para>For <d:code>e, E, f, F, g</d:code> and <d:code>G</d:code> conversions,
+if the number of significant decimal digits is at most
+<d:code>DECIMAL_DIG</d:code>, then the result should be correctly
+rounded.<d:footnote><d:para>For binary-to-decimal conversion, the result
+format’s values are the numbers representable with the given format
+specifier. The number of significant digits is determined by the format
+specifier, and in the case of fixed-point conversion by the source value as
+well.</d:para></d:footnote> If the number of significant decimal digits is more
+than <d:code>DECIMAL_DIG</d:code> but the source value is exactly representable
+with <d:code>DECIMAL_DIG</d:code> digits, then the result should be an exact
+representation with trailing zeros. Otherwise, the source value is bounded by
+two adjacent decimal strings <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>L</mml:mi>
+  <mml:mo>&lt;</mml:mo>
+  <mml:mi>U</mml:mi>
+</mml:math></d:inlineequation>, both having <d:code>DECIMAL_DIG</d:code>
+significant digits; the value of the resultant decimal string <mml:math
+xmlns="http://www.w3.org/1998/Math/MathML"> 
+  <mml:mi>D</mml:mi>
+</mml:math> should satisfy <d:inlineequation><mml:math
+xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>L</mml:mi>
+  <mml:mo>&#x2264;<!-- ≤ --></mml:mo>
+  <mml:mi>D</mml:mi>
+  <mml:mo>&#x2264;<!-- ≤ --></mml:mo>
+  <mml:mi>U</mml:mi>
+</mml:math></d:inlineequation>, with the extra stipulation that the error
+should have a correct sign for the current rounding direction.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fprintf</d:code> function returns the number of characters
+transmitted, or a negative value if an output or encoding error
+occurred.</d:para>
+<d:para><d:emphasis role="bold">Environmental limits</d:emphasis></d:para>
+<d:para>The number of characters that can be produced by any single conversion
+shall be at least 4095.</d:para>
+<d:para>EXAMPLE 1 To print a date and time in the form "Sunday, July 3, 10:02"
+followed by <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mi>&#x03C0;<!-- π --></mml:mi>
+</mml:math></d:inlineequation> to five decimal places: <d:programlisting role="CLexer">#include &lt;math.h>
+#include &lt;stdio.h>
+/* ... */
+char *weekday, *month; // pointers to strings
+int day, hour, min;
+fprintf(stdout, "%s, %s %d, %.2d:%.2d\n",
+weekday, month, day, hour, min);
+fprintf(stdout, "pi = %.5f\n", 4 * atan(1.0));</d:programlisting></d:para>
+<d:para>EXAMPLE 2 In this example, multibyte characters do not have a
+state-dependent encoding, and the members of the extended character set that
+consist of more than one byte each consist of exactly two bytes, the first of
+which is denoted here by a and the second by an uppercase letter.</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> conversion
+state (Extended multibyte/wide character conversion utilities), the
+<d:code>wcrtomb</d:code> function (The wcrtomb function).</d:para>
     </d:sect2>
   </d:sect1>
 </d:chapter>

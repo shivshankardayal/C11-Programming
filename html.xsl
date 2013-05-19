@@ -18,8 +18,8 @@
   -->
 
   <!-- Use the official stylesheet distro -->
-  <!--xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/html/chunk.xsl" /-->
-  <xsl:import href="/opt/local//share/xsl/docbook-xsl-ns/html/chunk.xsl" />
+  <xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/html/chunk.xsl" />
+  <!--<xsl:import href="/opt/local//share/xsl/docbook-xsl-ns/html/chunk.xsl" /-->
 
   <!-- The location of the highlighting configuration -->
   <!--<xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/highlighting/common.xsl" />
