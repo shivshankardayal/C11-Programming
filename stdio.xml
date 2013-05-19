@@ -511,7 +511,8 @@ positioning functions (File positioning functions).</d:para>
       <d:title>The freopen function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
-FILE *freopen(const char * restrict filename, const char * restrict mode, FILE * restrict stream);</d:programlisting>
+FILE *freopen(const char * restrict filename, const char * restrict mode,
+              FILE * restrict stream);</d:programlisting>
 <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
 <d:para>The <d:code>freopen</d:code> function opens the file whose name is the
 string pointed to by filename and associates the stream pointed to by stream
@@ -698,7 +699,97 @@ value shall be converted to <d:code>short int</d:code> or <d:code>unsigned
 short int</d:code> before printing); or that a following <d:code>n</d:code>
 conversion specifier applies to a pointer to a <d:code>short int</d:code>
 argument.</d:para>
-<d:para>l (ell) Specifies that a following <d:code>d, i, o, u, x</d:code> or <d:code>X</d:code> conversion specifier applies to a <d:code>long int</d:code> or <d:code>unsigned long int</d:code> argument; that a following <d:code>n</d:code> conversion specifier applies to a pointer to a long int argument; that a following c conversion specifier applies to a wint_t argument; that a following s conversion specifier applies to a pointer to a wchar_t argument; or has no effect on a following a, A, e, E, f, F, g or G conversion specifier.</d:para>
+<d:para><d:code>l</d:code> (ell) Specifies that a following <d:code>d, i, o, u,
+x</d:code> or <d:code>X</d:code> conversion specifier applies to a <d:code>long
+int</d:code> or <d:code>unsigned long int</d:code> argument; that a following
+<d:code>n</d:code> conversion specifier applies to a pointer to a <d:code>long
+int</d:code> argument; that a following c conversion specifier applies to a
+<d:code>wint_t</d:code> argument; that a following <d:code>s</d:code>
+conversion specifier applies to a pointer to a <d:code>wchar_t</d:code>
+argument; or has no effect on a following <d:code>a, A, e, E, f, F, g</d:code>
+or <d:code>G</d:code> conversion specifier.</d:para>
+<d:para><d:code>ll</d:code> (ell-ell) Specifies that a following <d:code>d, i,
+o, u, x</d:code> or <d:code>X</d:code> conversion specifier applies to a
+<d:code>long long int</d:code> or <d:code>unsigned long long</d:code> int
+argument; or that a following n conversion specifier applies to a pointer to a
+<d:code>long long int</d:code> argument.</d:para>
+<d:para><d:code>j</d:code> Specifies that a following <d:code>d, i, o, u,
+x</d:code> or <d:code>X</d:code> conversion specifier applies to an
+<d:code>intmax_t</d:code> or <d:code>uintmax_t</d:code> argument; or that a
+following <d:code>en</d:code> conversion specifier applies to a pointer to an
+<d:code>intmax_t</d:code> argument.</d:para>
+<d:para><d:code>z</d:code> Specifies that a following <d:code>d, i, o, u,
+x</d:code> or <d:code>X</d:code> conversion specifier applies to a
+<d:code>size_t</d:code> or the corresponding signed integer type argument; or
+that a following <d:code>n</d:code> conversion specifier applies to a pointer
+to a signed integer type corresponding to <d:code>size_t</d:code>
+argument.</d:para>
+<d:para><d:code>t</d:code> Specifies that a following <d:code>d, i, o, u,
+x</d:code> or <d:code>X</d:code> conversion specifier applies to a
+<d:code>ptrdiff_t</d:code> or the corresponding unsigned integer type argument;
+or that a following n conversion specifier applies to a pointer to a
+<d:code>ptrdiff_t</d:code> argument.</d:para>
+<d:para><d:code>L</d:code> Specifies that a following <d:code>a, A, e, E, f, F,
+g</d:code> or <d:code>G</d:code> conversion specifier applies to a <d:code>long
+double</d:code> argument.</d:para>
+<d:para>If a length modifier appears with any conversion specifier other than
+as specified above, the behavior is undefined.</d:para>
+<d:para>The conversion specifiers and their meanings are:</d:para>
+<d:para><d:code>d, i</d:code> The <d:code>int</d:code> argument is converted to
+signed decimal in the style <d:emphasis role="italic">[-]dddd</d:emphasis>. The
+precision specifies the minimum number of digits to appear; if the value being
+converted can be represented in fewer digits, it is expanded with leading
+zeros. The default precision is 1. The result of converting a zero value with a
+precision of zero is no characters.</d:para>
+<d:para><d:code>o, u, x, X</d:code> The <d:code>unsigned int</d:code> argument
+is converted to unsigned octal (o), unsigned decimal (u), or unsigned
+hexadecimal notation (<d:code>x</d:code> or <d:code>X</d:code>) in the style
+<d:code>dddd</d:code>; the letters <d:code>abcdef</d:code> are used for
+<d:code>y</d:code> conversion and the letters <d:code>ABCDEF</d:code> for
+<d:code>X</d:code> conversion. The precision specifies the minimum number of
+digits to appear; if the value being converted can be represented in fewer
+digits, it is expanded with leading zeros. The default precision is 1. The
+result of converting a zero value with a precision of zero is no
+characters.</d:para>
+<d:para><d:code>f, F</d:code> A double argument representing a floating-point
+number is converted to decimal notation in the style <d:emphasis
+role="italic">[-]ddd.ddd</d:emphasis>, where the number of digits after the
+decimal-point character is equal to the precision specification. If the
+precision is missing, it is taken as 6; if the precision is zero and the
+<d:code>#</d:code> flag is not specified, no decimal-point character
+appears. If a decimal-point character appears, at least one digit appears
+before it. The value is rounded to the appropriate number of digits.</d:para>
+<d:para>A <d:code>double</d:code> argument representing an infinity is
+converted in one of the styles <d:emphasis role="bold">[-]inf</d:emphasis> or
+<d:emphasis role="bold"></d:emphasis> &#x2014; which style is
+implementation-defined. A double argument representing a NaN is converted in
+one of the styles <d:emphasis role="bold">[-]nan</d:emphasis> or <d:emphasis
+role="bold">[-]nan</d:emphasis> (<d:emphasis
+role="italic">n-char-sequence</d:emphasis>) &#x2014; which style, and the
+meaning of any n-char-sequence, is implementation-defined. The
+<d:code>F</d:code> conversion specifier produces <d:code>INF, INFINITY</d:code>
+or <d:code>NAN</d:code> instead of <d:code>inf, infinity</d:code> or
+<d:code>nan</d:code> respectively.<d:footnote><d:para>When applied to infinite
+and NaN values, the -, + and space flag characters have their usual meaning;
+the # and 0 flag characters have no effect.</d:para></d:footnote></d:para>
+<d:para><d:code>e, E</d:code> A double argument representing a floating-point
+number is converted in the style <d:emphasis role="italic">[-]d.ddd</d:emphasis> e<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mml:mo>&#x00B1;<!-- ± --></mml:mo>
+  <mml:mi>d</mml:mi>
+  <mml:mi>d</mml:mi>
+</mml:math></d:inlineequation> , where there is one digit (which is nonzero if
+the argument is nonzero) before the decimal-point character and the number of
+digits after it is equal to the precision; if the precision is missing, it is
+taken as 6; if the precision is zero and the <d:code>#</d:code> flag is not
+specified, no decimal-point character appears. The value is rounded to the
+appropriate number of digits. The E conversion specifier produces a number with
+E instead of e introducing the exponent. The exponent always contains at least
+two digits, and only as many more digits as necessary to represent the
+exponent. If the value is zero, the exponent is zero.</d:para>
+<d:para>A <d:code>double</d:code> argument representing an infinity or NaN is
+converted in the style of an <d:code>f</d:code> or <d:code>F</d:code>
+conversion specifier.</d:para>
+
     </d:sect2>
   </d:sect1>
 </d:chapter>

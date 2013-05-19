@@ -1,10 +1,10 @@
 body {
 	margin:0;
 	padding:0;
-	width:800px;
+/*	width:800px;*/
 	margin:40px auto 80px auto;
 	padding:10px 20px 10px 20px;
-/*	border-radius: 10px;
+	/*border-radius: 10px;
 	box-shadow: 2px 2px 19px #444;*/
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 15px;
@@ -55,7 +55,7 @@ pre.CommonLispLexer, pre.CLexer, pre.MakefileLexer {
     border: 1px solid #aaa;
     padding: 0px 10px 0px 10px;
     font-family: "Courier New", Monospace;
-    font-size: 13px;
+    font-size: 15px;
     border-radius: 5px;
 }
 
@@ -63,7 +63,7 @@ pre.screen {
     border: 1px solid #aaa;
     padding: 0px 10px 0px 10px;
     font-family: "Courier New", Monospace;
-    font-size: 13px;
+    font-size: 15px;
     border-radius: 5px;
 }
 
@@ -103,7 +103,7 @@ table th {
 }
 
 code.code {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 /*div.informalequation {
@@ -339,7 +339,7 @@ margin-bottom: -20px;
 .k { color: #007020; font-weight: bold } /* Keyword */
 .o { color: #666666 } /* Operator */
 .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
-.cp { color: #007020 } /* Comment.Preproc */
+.cp { color: #007020 } /* Comment.Preg1proc */
 .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
 .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
 .gd { color: #A00000 } /* Generic.Deleted */
@@ -394,3 +394,15 @@ margin-bottom: -20px;
 .vg { color: #bb60d5 } /* Name.Variable.Global */
 .vi { color: #bb60d5 } /* Name.Variable.Instance */
 .il { color: #40a070 } /* Literal.Number.Integer.Long */
+
+    /* Large desktop */
+    @media (min-width: 1200px) { body{width:800px;} }
+     
+    /* Portrait tablet to landscape and desktop */
+    @media (min-width: 768px) and (max-width: 979px) { body{width:760px;} }
+     
+    /* Landscape phone to portrait tablet */
+    @media (max-width: 767px) { body{width:760px;} }
+     
+    /* Landscape phones and down */
+    @media (max-width: 480px) { body{width:480px;} }

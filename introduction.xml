@@ -131,7 +131,7 @@
           <title>Development flowchart of a computer program.</title>
           <mediaobject>
             <imageobject>
-              <imagedata fileref="images/flowchart.png" valign="middle" scale="70" align="center"/>
+              <imagedata fileref="images/flowchart.png" valign="middle" align="center"/>
             </imageobject>
           </mediaobject>
         </figure>
