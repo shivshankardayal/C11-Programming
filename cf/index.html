@@ -1,4 +1,4 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 8. Control Flow</title><link href="../../css/bootstrap.css" rel="stylesheet" type="text/css"/><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../oae/index.html" rel="prev" title="Chapter 7. Operators and Expressions"/><link href="../ap/index.html" rel="next" title="Chapter 9. Arrays and Pointers"/><script src="../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div id="navbar" class="navbar navbar-fixed-top">    <div class="navbar-inner">      <div class="container-fluid">      <a class="brand" href="../../">Home</a>      <a class="brand" href="../">Books</a>  <ul class="nav">  <li class="dropdown">      <a href="#"            class="dropdown-toggle"            data-toggle="dropdown">Chapter 8. Control Flow<b class="caret"></b>      </a>      <ul class="dropdown-menu"><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp55128816">8.1. Storage Classes</a></span></dt><dt><span class="sect1"><a href="index.html#idp55632768">8.2. if else Statement</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp53474848">8.2.1. Dangling else Problem</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp53478624">8.3. switch Statement</a></span></dt><dt><span class="sect1"><a href="index.html#idp54877152">8.4. while Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp54881904">8.5. do-while Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp53536032">8.6. for Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp53248752">8.7. break and continue Statements</a></span></dt><dt><span class="sect1"><a href="index.html#idp53258224">8.8. typedef and return Statements</a></span></dt></dl></div>     </ul>    </li>  </ul> <ul class="nav"><li><a href="../oae/index.html">&lt;&lt; Chapter 7. Operators and Expressions </a><li><li><a href="../ap/index.html"> Chapter 9. Arrays and Pointers >></a><li></ul>    </div>    </div>  </div><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 8. Control Flow</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../oae/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ap/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 8. Control Flow"><div class="titlepage"><div><div><h2 class="title"><a name="idp53882336"></a>Chapter 8. Control Flow</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp55128816">8.1. Storage Classes</a></span></dt><dt><span class="sect1"><a href="index.html#idp55632768">8.2. if else Statement</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp53474848">8.2.1. Dangling else Problem</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp53478624">8.3. switch Statement</a></span></dt><dt><span class="sect1"><a href="index.html#idp54877152">8.4. while Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp54881904">8.5. do-while Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp53536032">8.6. for Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp53248752">8.7. break and continue Statements</a></span></dt><dt><span class="sect1"><a href="index.html#idp53258224">8.8. typedef and return Statements</a></span></dt></dl></div><p>There are three things you will learn in this chapter. Switching
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 8. Control Flow</title><link href="../../css/bootstrap.css" rel="stylesheet" type="text/css"/><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../oae/index.html" rel="prev" title="Chapter 7. Operators and Expressions"/><link href="../ap/index.html" rel="next" title="Chapter 9. Arrays and Pointers"/><script src="../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div id="navbar" class="navbar navbar-fixed-top">    <div class="navbar-inner">      <div class="container-fluid">      <a class="brand" href="../../">Home</a>      <a class="brand" href="../">Books</a>  <ul class="nav">  <li class="dropdown">      <a href="#"            class="dropdown-toggle"            data-toggle="dropdown">Chapter 8. Control Flow<b class="caret"></b>      </a>      <ul class="dropdown-menu"><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp1830528">8.1. Storage Classes</a></span></dt><dt><span class="sect1"><a href="index.html#idp1646400">8.2. if else Statement</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp735136">8.2.1. Dangling else Problem</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp2721456">8.3. switch Statement</a></span></dt><dt><span class="sect1"><a href="index.html#idp2311856">8.4. while Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp2316544">8.5. do-while Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp562704">8.6. for Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp569824">8.7. break and continue Statements</a></span></dt><dt><span class="sect1"><a href="index.html#idp1978064">8.8. typedef and return Statements</a></span></dt></dl></div>     </ul>    </li>  </ul> <ul class="nav"><li><a href="../oae/index.html">&lt;&lt; Chapter 7. Operators and Expressions </a><li><li><a href="../ap/index.html"> Chapter 9. Arrays and Pointers >></a><li></ul>    </div>    </div>  </div><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 8. Control Flow</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../oae/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ap/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 8. Control Flow"><div class="titlepage"><div><div><h2 class="title"><a name="idp558464"></a>Chapter 8. Control Flow</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp1830528">8.1. Storage Classes</a></span></dt><dt><span class="sect1"><a href="index.html#idp1646400">8.2. if else Statement</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp735136">8.2.1. Dangling else Problem</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp2721456">8.3. switch Statement</a></span></dt><dt><span class="sect1"><a href="index.html#idp2311856">8.4. while Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp2316544">8.5. do-while Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp562704">8.6. for Loop</a></span></dt><dt><span class="sect1"><a href="index.html#idp569824">8.7. break and continue Statements</a></span></dt><dt><span class="sect1"><a href="index.html#idp1978064">8.8. typedef and return Statements</a></span></dt></dl></div><p>There are three things you will learn in this chapter. Switching
       the path of execution in program depending upon program variables or
       states using control statements. Repeating a set of instructions using
       loops. Bypassing certain set of instructions in a loop and jump
@@ -8,7 +8,7 @@
       begin with if-else without spending much time over boring stuff. Before
       we proceed I would like to tell you about storage classes of array and
       their scope. I could have covered it in second chapter but I did not want
-      to scare you with too many things in itself.</p><div class="sect1" title="8.1. Storage Classes"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp55128816"></a>8.1. Storage Classes</h2></div></div></div><p>In C99 variables can be declared at any point in class without
+      to scare you with too many things in itself.</p><div class="sect1" title="8.1. Storage Classes"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1830528"></a>8.1. Storage Classes</h2></div></div></div><p>In C99 variables can be declared at any point in class without
 	breaking an expression. This was not possible in older C and you could
 	only declare at start of function. There is <code class="code">auto, register,
 	static</code> and <code class="code">extern</code>.</p><p><code class="code">auto</code> is the default storage class for local
@@ -29,7 +29,7 @@
 	of opposite but not really opposite. What it does is that the programs
 	other than the program itself where it has been declared are allowed to
 	change it. This means that a variable can be a <code class="code">const</code>
-	as well as <code class="code">volatile</code> at the same time.</p></div><div class="sect1" title="8.2. if else Statement"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp55632768"></a>8.2. if else Statement</h2></div></div></div><p>An if-else statement may consist of only <code class="code">if</code> or
+	as well as <code class="code">volatile</code> at the same time.</p></div><div class="sect1" title="8.2. if else Statement"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1646400"></a>8.2. if else Statement</h2></div></div></div><p>An if-else statement may consist of only <code class="code">if</code> or
 	both <code class="code">if</code> and <code class="code">else</code> or
 	<code class="code">if</code> and <code class="code">else if</code> or <code class="code">if, else
 	if</code> and <code class="code">else</code>. An if-else statement must have
@@ -40,41 +40,41 @@
 	and may not come. Consider the following program:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of if-else statements.</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">"Please enter two integers i and j:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-  <span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span> <span class="o">&</span><span class="n">i</span> <span class="p">,</span> <span class="o">&</span><span class="n">j</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Please enter two integers i and j:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span> <span class="p">,</span> <span class="o">&amp;</span><span class="n">j</span><span class="p">);</span>
 
   <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"you entered 4 for i.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;you entered 4 for i.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 
   <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">7</span><span class="p">)</span>
   <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"you entered 7 for i.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"I am happy for you.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;you entered 7 for i.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;I am happy for you.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
   <span class="p">}</span>
   <span class="k">else</span>
   <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"You did not enter 7 for i.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;You did not enter 7 for i.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
   <span class="p">}</span>
   <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">7</span><span class="p">)</span>
   <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"you entered 7 for i.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"I am happy for you.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;you entered 7 for i.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;I am happy for you.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
   <span class="p">}</span>
   <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="mi">8</span><span class="p">)</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"You entered 8 for i.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;You entered 8 for i.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 
   <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">7</span><span class="p">)</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"you entered my lucky number.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-  <span class="k">else</span> <span class="k">if</span><span class="p">((</span><span class="n">i</span><span class="o">==</span><span class="mi">7</span><span class="p">)</span> <span class="o">&&</span><span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="mi">8</span><span class="p">))</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"May god bless you!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;you entered my lucky number.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">((</span><span class="n">i</span><span class="o">==</span><span class="mi">7</span><span class="p">)</span> <span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;May god bless you!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
   <span class="k">else</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"You entered bad number.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;You entered bad number.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -96,25 +96,25 @@ the syntax for missing else and missing else if. One if-else can be nested
 inside another for example see the following code:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of if-else statements.</span>
 
-<span class="cp">#include <stdio.h></span>
-<span class="cp">#include <string.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">char</span> <span class="n">fName</span><span class="p">[</span><span class="mi">128</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">},</span> <span class="n">lName</span><span class="p">[</span><span class="mi">128</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">"Enter your first name and last name in that order:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter your first name and last name in that order:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
   <span class="n">gets</span><span class="p">(</span><span class="n">fName</span><span class="p">);</span>
   <span class="n">gets</span><span class="p">(</span><span class="n">lName</span><span class="p">);</span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">fName</span><span class="p">,</span> <span class="s">"Shiv"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">fName</span><span class="p">,</span> <span class="s">&quot;Shiv&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
   <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">lName</span><span class="p">,</span> <span class="s">"Dayal"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-      <span class="n">printf</span><span class="p">(</span><span class="s">"Your name is Shiv Dayal.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">lName</span><span class="p">,</span> <span class="s">&quot;Dayal&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Your name is Shiv Dayal.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
   <span class="p">}</span>
   <span class="k">else</span>
   <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"Your name is %s %s.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">fName</span><span class="p">,</span> <span class="n">lName</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Your name is %s %s.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fName</span><span class="p">,</span> <span class="n">lName</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
@@ -139,16 +139,16 @@ chapter named C Standard Library.</p><div class="warning" style="margin-left: 0.
   you should never do an ASSIGNMENT inside if and else if as it will always
   evaluate to what is assigned. It can render all your logic meaningless. C is
   not Python, where assignment inside if is not allowed. However, if you assign
-  0 to some variable it will evaluate to <code class="code">false</code>.</p></div><div class="sect2" title="8.2.1. Dangling else Problem"><div class="titlepage"><div><div><h3 class="title"><a name="idp53474848"></a>8.2.1. Dangling else Problem</h3></div></div></div><p>The <code class="code">else</code> part has a property that it will cling to
+  0 to some variable it will evaluate to <code class="code">false</code>.</p></div><div class="sect2" title="8.2.1. Dangling else Problem"><div class="titlepage"><div><div><h3 class="title"><a name="idp735136"></a>8.2.1. Dangling else Problem</h3></div></div></div><p>The <code class="code">else</code> part has a property that it will cling to
   closest if. So the following piece of code may give you surprise:</p><pre class="CLexer"><div class="highlight"><pre><span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">></span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"foo</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;foo</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 <span class="k">else</span>
-  <span class="nf">printf</span><span class="p">(</span><span class="s">"bar</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="nf">printf</span><span class="p">(</span><span class="s">&quot;bar</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 </pre></div>
 </pre><p>Now consider <code class="code">x!=1</code> then you may think that bar will be
 printed. However, that will not be the case. The else part clings to inner
-if. This can be fixed by using curly braces.</p></div></div><div class="sect1" title="8.3. switch Statement"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53478624"></a>8.3. switch Statement</h2></div></div></div><p><code class="code">switch</code> statement is kind of if-else
+if. This can be fixed by using curly braces.</p></div></div><div class="sect1" title="8.3. switch Statement"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2721456"></a>8.3. switch Statement</h2></div></div></div><p><code class="code">switch</code> statement is kind of if-else
 	replacement to simplify it. Usage of switch statement is to compare one
 	expression with others, and then execute a series of sub-statements
 	inside case and default based on the result of the comparisons. Note
@@ -157,7 +157,7 @@ if. This can be fixed by using curly braces.</p></div></div><div class="sect1" t
 	example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of if-else statements.</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
@@ -165,11 +165,11 @@ if. This can be fixed by using curly braces.</p></div></div><div class="sect1" t
 
   <span class="k">switch</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
   <span class="p">{</span>
-    <span class="k">case</span> <span class="sc">'A'</span>:
-      <span class="n">printf</span><span class="p">(</span><span class="s">"Value of i is 'A'.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">case</span> <span class="sc">&#39;A&#39;</span>:
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value of i is &#39;A&#39;.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
       <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="sc">'B'</span>:
-      <span class="n">printf</span><span class="p">(</span><span class="s">"Value of i is 'B'.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">case</span> <span class="sc">&#39;B&#39;</span>:
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value of i is &#39;B&#39;.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
       <span class="k">break</span><span class="p">;</span>
     <span class="nl">default:</span>
       <span class="k">break</span><span class="p">;</span>
@@ -185,7 +185,7 @@ execution once a match has been found for a particular case else what will
 happen is shown below:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of switch statement.</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
@@ -193,12 +193,12 @@ happen is shown below:</p><pre class="CLexer"><div class="highlight"><pre><span 
 
   <span class="k">switch</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
   <span class="p">{</span>
-    <span class="k">case</span> <span class="sc">'A'</span>:
-      <span class="n">printf</span><span class="p">(</span><span class="s">"Value of i is 'A'.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-    <span class="k">case</span> <span class="sc">'B'</span>:
-      <span class="n">printf</span><span class="p">(</span><span class="s">"Value of i is 'B'.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">case</span> <span class="sc">&#39;A&#39;</span>:
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value of i is &#39;A&#39;.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="k">case</span> <span class="sc">&#39;B&#39;</span>:
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value of i is &#39;B&#39;.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
     <span class="nl">default:</span>
-      <span class="n">printf</span><span class="p">(</span><span class="s">"Value of i is %c.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value of i is %c.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
       <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
 
@@ -214,20 +214,20 @@ statement. Notice, the use of default that how it is analogous to
 <code class="code">else</code> statement. <code class="code">switch</code> statements can also be
 nested inside each other. However, node that lots of nesting is not good. At
 most 2-3 levels are more than enough else you should look at alternative ways
-of writing code.</p></div><div class="sect1" title="8.4. while Loop"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp54877152"></a>8.4. while Loop</h2></div></div></div><p>Of three loops I am first going to cover <code class="code">while</code>
+of writing code.</p></div><div class="sect1" title="8.4. while Loop"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2311856"></a>8.4. while Loop</h2></div></div></div><p>Of three loops I am first going to cover <code class="code">while</code>
 	loop. It is simplest of three. I will just give an example for you to
 	understand.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of while statement.</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-  <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o"><=</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span>
   <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d * %2d = %4d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d * %2d = %4d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">);</span>
     <span class="n">i</span><span class="o">++</span><span class="p">;</span>
   <span class="p">}</span>
 
@@ -247,25 +247,25 @@ and the output is:
 2 *  8 =   16
 2 *  9 =   18
 2 * 10 =   20</pre><p><code class="code">while</code> loop just has one expression which is its
-terminating condition. We have written <code class="code">i which is
+terminating condition. We have written <code class="code">i<=10</code> which is
 terminating condition for our loop. The moment i will become greater than that
 the loop will terminated. We are initializing our loop index to 0 and
 incrementing within while loop. Note that you must use curly braces for body of
 block of loop. If you have only one statement as body of loop then braces are
-optional.</code></p></div><div class="sect1" title="8.5. do-while Loop"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp54881904"></a>8.5. do-while Loop</h2></div></div></div><p>It is very much similar to <code class="code">while</code> loop but with
+optional.</p></div><div class="sect1" title="8.5. do-while Loop"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2316544"></a>8.5. do-while Loop</h2></div></div></div><p>It is very much similar to <code class="code">while</code> loop but with
 	a very subtle difference. Consider the following code:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of do while statement.</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
   <span class="k">do</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"I am Shiv.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;I am Shiv.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
     <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-  <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o"><</span><span class="mi">5</span><span class="p">);</span>
+  <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -280,23 +280,23 @@ I am Shiv.</pre><p>Notice the semicolon at the end of while. Now time for that s
 difference:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of do while statement.</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 
   <span class="k">do</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"2 * 10 = 20</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;2 * 10 = 20</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
     <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-  <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o"><</span><span class="mi">5</span><span class="p">);</span>
+  <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">2 * 10 = 20</pre><p>Notice how <code class="code">do while</code> loop executes once even if the loop index is more than the terminating condition in the while part.</p></div><div class="sect1" title="8.6. for Loop"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53536032"></a>8.6. for Loop</h2></div></div></div><p><code class="code">for</code> loop is the last of loops and most
+<pre class="screen">2 * 10 = 20</pre><p>Notice how <code class="code">do while</code> loop executes once even if the loop index is more than the terminating condition in the while part.</p></div><div class="sect1" title="8.6. for Loop"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp562704"></a>8.6. for Loop</h2></div></div></div><p><code class="code">for</code> loop is the last of loops and most
 	versatile. It has three parts: initialization of loop counters,
 	terminating condition, and loop index modification. If you declare a
 	variable in the initialization part then that variable has just loop
@@ -306,12 +306,12 @@ and the output is:
 	computing squares of numbers:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of for statement.</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
-  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="p">(</span><span class="n">i</span><span class="o"><=</span><span class="mi">10</span><span class="p">)</span><span class="o">||</span><span class="p">(</span><span class="n">j</span><span class="o"><=</span><span class="mi">10</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">,</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%2d * %2d = %4d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">);</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">)</span><span class="o">||</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">,</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%2d * %2d = %4d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -335,21 +335,21 @@ incremented/decremented properly or your termination condition is
 incorrect. Also, always make sure that loop indices are initialized. As an
 exercise you can try to implement this program using <code class="code">while</code> and
 <code class="code">do while</code> loop. Last line of the above output is not having
-first space properly.</p></div><div class="sect1" title="8.7. break and continue Statements"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53248752"></a>8.7. break and continue Statements</h2></div></div></div><p><code class="code">break</code> statement breaks out of innermost
+first space properly.</p></div><div class="sect1" title="8.7. break and continue Statements"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp569824"></a>8.7. break and continue Statements</h2></div></div></div><p><code class="code">break</code> statement breaks out of innermost
 	<code class="code">for, do, while</code> and <code class="code">switch</code>
 	statements. It terminates that loop. Consider for example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of break statement.</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
 
   <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;;</span><span class="n">i</span> <span class="o">+=</span><span class="mi">10</span><span class="p">)</span>
   <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">></span><span class="mi">100</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">100</span><span class="p">)</span>
       <span class="k">break</span><span class="p">;</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
@@ -376,16 +376,16 @@ loop but simply does not execute remaining instructions of that block. Consider
 for example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description : Demo of continue statement.</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
 
-  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o"><=</span><span class="mi">100</span><span class="p">;</span><span class="n">i</span> <span class="o">+=</span><span class="mi">10</span><span class="p">)</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">;</span><span class="n">i</span> <span class="o">+=</span><span class="mi">10</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">50</span><span class="p">)</span>
       <span class="k">continue</span><span class="p">;</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
@@ -401,7 +401,7 @@ and the output is:<pre class="screen">0
 70
 80
 90
-100</pre><p>Notice how 50 is missing from output.</p></div><div class="sect1" title="8.8. typedef and return Statements"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53258224"></a>8.8. typedef and return Statements</h2></div></div></div><p><code class="code">typedef</code> statement is used to define new types
+100</pre><p>Notice how 50 is missing from output.</p></div><div class="sect1" title="8.8. typedef and return Statements"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1978064"></a>8.8. typedef and return Statements</h2></div></div></div><p><code class="code">typedef</code> statement is used to define new types
 	from existing types. For example:</p><pre class="CLexer"><div class="highlight"><pre><span class="k">typedef</span> <span class="kt">char</span> <span class="n">s8</span><span class="p">;</span>
 <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">s8</span><span class="p">;</span>
 <span class="k">typedef</span> <span class="kt">short</span> <span class="kt">int</span> <span class="n">s16</span><span class="p">;</span>

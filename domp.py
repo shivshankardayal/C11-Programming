@@ -14,22 +14,6 @@ def findReplace(directory, find, replace, filePattern):
 				s = f.read()
 				s = s.replace(find, replace)
 				soup = BeautifulSoup(s)
-
-				for i in soup.find_all("pre", "CommonLispLexer"):
-					i.string.replace_with(highlight(i.string, CommonLispLexer(), HtmlFormatter()))
-
-				for i in soup.find_all("pre", "CLexer"):
-					i.string.replace_with(highlight(i.string, CLexer(), HtmlFormatter()))
-
-				for i in soup.find_all("pre", "MakefileLexer"):
-					i.string.replace_with(highlight(i.string, MakefileLexer(), HtmlFormatter()))
-			with open(filepath, "w") as f:
-				f.write(soup.encode(formatter=None))
-				#f.write(BeautifulSoup(soup.prettify(formatter=None)).encode(formatter=None))
-			with open(filepath) as f:
-				s=f.read()
-				soup=BeautifulSoup(s)
-				
 				p=''
 				n=''
 				pl=''
@@ -94,6 +78,15 @@ def findReplace(directory, find, replace, filePattern):
 
 #print navbar
 				soup.body.insert(0, navbar)
+
+				for i in soup.find_all("pre", "CommonLispLexer"):
+					i.string.replace_with(highlight(i.string, CommonLispLexer(), HtmlFormatter()))
+
+				for i in soup.find_all("pre", "CLexer"):
+					i.string.replace_with(highlight(i.string, CLexer(), HtmlFormatter()))
+
+				for i in soup.find_all("pre", "MakefileLexer"):
+					i.string.replace_with(highlight(i.string, MakefileLexer(), HtmlFormatter()))
 			with open(filepath, "w") as f:
 				f.write(soup.encode(formatter=None))
 

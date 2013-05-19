@@ -1,4 +1,4 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 11. Structures and Unions</title><link href="../../css/bootstrap.css" rel="stylesheet" type="text/css"/><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../func/index.html" rel="prev" title="Chapter 10. Functions"/><link href="../macros/index.html" rel="next" title="Chapter 12. Preprocessing Directives"/><script src="../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div id="navbar" class="navbar navbar-fixed-top">    <div class="navbar-inner">      <div class="container-fluid">      <a class="brand" href="../../">Home</a>      <a class="brand" href="../">Books</a>  <ul class="nav">  <li class="dropdown">      <a href="#"            class="dropdown-toggle"            data-toggle="dropdown">Chapter 11. Structures and Unions<b class="caret"></b>      </a>      <ul class="dropdown-menu"><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp53469744">11.1. Pointer members of a Structure</a></span></dt><dt><span class="sect1"><a href="index.html#idp55213936">11.2. Usage of Structures and Unions</a></span></dt><dt><span class="sect1"><a href="index.html#idp53246576">11.3. Structures and Arrays</a></span></dt></dl></div>     </ul>    </li>  </ul> <ul class="nav"><li><a href="../func/index.html">&lt;&lt; Chapter 10. Functions </a><li><li><a href="../macros/index.html"> Chapter 12. Preprocessing Directives >></a><li></ul>    </div>    </div>  </div><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 11. Structures and Unions</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../func/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../macros/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 11. Structures and Unions"><div class="titlepage"><div><div><h2 class="title"><a name="idp55127392"></a>Chapter 11. Structures and Unions</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp53469744">11.1. Pointer members of a Structure</a></span></dt><dt><span class="sect1"><a href="index.html#idp55213936">11.2. Usage of Structures and Unions</a></span></dt><dt><span class="sect1"><a href="index.html#idp53246576">11.3. Structures and Arrays</a></span></dt></dl></div><p>So far what we have seen are data types defiend by the language
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 11. Structures and Unions</title><link href="../../css/bootstrap.css" rel="stylesheet" type="text/css"/><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../func/index.html" rel="prev" title="Chapter 10. Functions"/><link href="../macros/index.html" rel="next" title="Chapter 12. Preprocessing Directives"/><script src="../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div id="navbar" class="navbar navbar-fixed-top">    <div class="navbar-inner">      <div class="container-fluid">      <a class="brand" href="../../">Home</a>      <a class="brand" href="../">Books</a>  <ul class="nav">  <li class="dropdown">      <a href="#"            class="dropdown-toggle"            data-toggle="dropdown">Chapter 11. Structures and Unions<b class="caret"></b>      </a>      <ul class="dropdown-menu"><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp1881664">11.1. Pointer members of a Structure</a></span></dt><dt><span class="sect1"><a href="index.html#idp511936">11.2. Usage of Structures and Unions</a></span></dt><dt><span class="sect1"><a href="index.html#idp2187152">11.3. Structures and Arrays</a></span></dt></dl></div>     </ul>    </li>  </ul> <ul class="nav"><li><a href="../func/index.html">&lt;&lt; Chapter 10. Functions </a><li><li><a href="../macros/index.html"> Chapter 12. Preprocessing Directives >></a><li></ul>    </div>    </div>  </div><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 11. Structures and Unions</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../func/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../macros/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 11. Structures and Unions"><div class="titlepage"><div><div><h2 class="title"><a name="idp749664"></a>Chapter 11. Structures and Unions</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp1881664">11.1. Pointer members of a Structure</a></span></dt><dt><span class="sect1"><a href="index.html#idp511936">11.2. Usage of Structures and Unions</a></span></dt><dt><span class="sect1"><a href="index.html#idp2187152">11.3. Structures and Arrays</a></span></dt></dl></div><p>So far what we have seen are data types defiend by the language
     itself. However, there are times when these simple types are not
     enough. For this C has defined two types which can be defined by the user
     or programmer. The two keywords are struct and union. A structure or union
@@ -33,7 +33,7 @@ structures and unions. However, there is a subtle difference. Consider
 following program:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Author: Shiv Shankar Dayal</span>
 <span class="c1">// Description: Difference between strutures and unions.</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
   <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
@@ -50,8 +50,8 @@ following program:</p><pre class="CLexer"><div class="highlight"><pre><span clas
   <span class="n">mystruct</span> <span class="n">s</span><span class="p">;</span>
   <span class="n">myunion</span> <span class="n">u</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">"Size of structure is %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">"Size of union is %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">u</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of structure is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of union is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">u</span><span class="p">));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -82,7 +82,7 @@ then it is called big-endian. For example my machine is intel so let us see
 what output we get from this program.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description: Demo of endianness,</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="k">typedef</span> <span class="k">union</span> <span class="p">{</span>
   <span class="kt">short</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
@@ -95,7 +95,7 @@ what output we get from this program.</p><pre class="CLexer"><div class="highlig
 
   <span class="n">u</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">258</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">u</span><span class="p">.</span><span class="n">c</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">u</span><span class="p">.</span><span class="n">c</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -107,7 +107,7 @@ c. Now 2 is the high order byte. Hence we can conclude that my machine is
 little-endian.</p><p>More ways to initialize a structure are given below:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description: Structure initialization</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
   <span class="kt">short</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
@@ -116,25 +116,25 @@ little-endian.</p><p>More ways to initialize a structure are given below:</p><pr
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
-  <span class="n">mystruct</span> <span class="n">s1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">34</span><span class="p">,</span> <span class="sc">'c'</span><span class="p">},</span> <span class="n">s2</span><span class="p">;</span>
+  <span class="n">mystruct</span> <span class="n">s1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">34</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">},</span> <span class="n">s2</span><span class="p">;</span>
 
   <span class="n">s2</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">43</span><span class="p">;</span>
-  <span class="n">s2</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="sc">'e'</span><span class="p">;</span>
+  <span class="n">s2</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="sc">&#39;e&#39;</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">"%d %d %c %c</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">i</span><span class="p">,</span> <span class="n">s2</span><span class="p">.</span><span class="n">i</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">c</span><span class="p">,</span> <span class="n">s2</span><span class="p">.</span><span class="n">c</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d %c %c</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">i</span><span class="p">,</span> <span class="n">s2</span><span class="p">.</span><span class="n">i</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">c</span><span class="p">,</span> <span class="n">s2</span><span class="p">.</span><span class="n">c</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">34 43 c e</pre><div class="sect1" title="11.1. Pointer members of a Structure"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53469744"></a>11.1. Pointer members of a Structure</h2></div></div></div><p>Sometime structures will contain pointer members. Obviously, you will
+<pre class="screen">34 43 c e</pre><div class="sect1" title="11.1. Pointer members of a Structure"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1881664"></a>11.1. Pointer members of a Structure</h2></div></div></div><p>Sometime structures will contain pointer members. Obviously, you will
   have to allocate memory to them or point them to some existing variable’s
   address. Let us see how this is done.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author:Shiv S. Dayal</span>
 <span class="c1">//Descrition: Pointer members of a structure</span>
 
-<span class="cp">#include <stdio.h></span>
-<span class="cp">#include <stdlib.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
@@ -146,10 +146,10 @@ and the output is:
   <span class="n">s</span><span class="o">*</span> <span class="n">s1</span><span class="p">;</span>
 
   <span class="n">s1</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
-  <span class="n">s1</span><span class="o">-></span><span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="mi">4</span><span class="p">;</span>
-  <span class="n">s1</span><span class="o">-></span><span class="n">j</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+  <span class="n">s1</span><span class="o">-&gt;</span><span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="mi">4</span><span class="p">;</span>
+  <span class="n">s1</span><span class="o">-&gt;</span><span class="n">j</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">"s1->i=%p s1->j=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s1</span><span class="o">-></span><span class="n">i</span><span class="p">,</span> <span class="n">s1</span><span class="o">-></span><span class="n">j</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;s1-&gt;i=%p s1-&gt;j=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">s1</span><span class="o">-&gt;</span><span class="n">i</span><span class="p">,</span> <span class="n">s1</span><span class="o">-&gt;</span><span class="n">j</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -169,8 +169,8 @@ it or write to it may doom your day. Try to burn your hands. Let us see the
 correct version.</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author:Shiv S. Dayal</span>
 <span class="c1">//Descrition: Pointer members of a structure</span>
 
-<span class="cp">#include <stdio.h></span>
-<span class="cp">#include <stdlib.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
@@ -182,18 +182,18 @@ correct version.</p><pre class="CLexer"><div class="highlight"><pre><span class=
   <span class="n">s</span><span class="o">*</span> <span class="n">s1</span><span class="p">;</span>
 
   <span class="n">s1</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
-  <span class="n">s1</span><span class="o">-></span><span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
-  <span class="o">*</span><span class="p">(</span><span class="n">s1</span><span class="o">-></span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-  <span class="n">s1</span><span class="o">-></span><span class="n">j</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="n">s1</span><span class="o">-&gt;</span><span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+  <span class="o">*</span><span class="p">(</span><span class="n">s1</span><span class="o">-&gt;</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="n">s1</span><span class="o">-&gt;</span><span class="n">j</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">"s1->i = %d s1->j = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">s1</span><span class="o">-></span><span class="n">i</span><span class="p">),</span> <span class="n">s1</span><span class="o">-></span><span class="n">j</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;s1-&gt;i = %d s1-&gt;j = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">s1</span><span class="o">-&gt;</span><span class="n">i</span><span class="p">),</span> <span class="n">s1</span><span class="o">-&gt;</span><span class="n">j</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">s1->i=4 s1->j=5</pre></div><div class="sect1" title="11.2. Usage of Structures and Unions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp55213936"></a>11.2. Usage of Structures and Unions</h2></div></div></div><p>A structure can be used to represent rather complex entities. For
+<pre class="screen">s1->i=4 s1->j=5</pre></div><div class="sect1" title="11.2. Usage of Structures and Unions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp511936"></a>11.2. Usage of Structures and Unions</h2></div></div></div><p>A structure can be used to represent rather complex entities. For
   example, a car. Consider a car. It has weight, power, cost, mileage etc. All
   this can be combined and represented as a structure. Structures can be
   categorized in two categories. One will be normal structures and second is
@@ -208,7 +208,7 @@ and the output is:
   can have multiple type of values but only one at a time. Then you can use
   unions.</p><p>Structures and unions can be nested as well. I will just give a
   simple example and leave rest to your imagination and previously told
-  facts.</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+  facts.</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
   <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
@@ -226,18 +226,18 @@ and the output is:
   <span class="n">s1</span><span class="p">.</span><span class="n">i</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span>
   <span class="n">s1</span><span class="p">.</span><span class="n">t1</span><span class="p">.</span><span class="n">j</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">i</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">t1</span><span class="p">.</span><span class="n">j</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d&quot;</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">i</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">t1</span><span class="p">.</span><span class="n">j</span><span class="p">);</span>
 
 <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">4 5</pre></div><div class="sect1" title="11.3. Structures and Arrays"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53246576"></a>11.3. Structures and Arrays</h2></div></div></div><p>There are two posiibilities here. Structures containing arrays and
+<pre class="screen">4 5</pre></div><div class="sect1" title="11.3. Structures and Arrays"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2187152"></a>11.3. Structures and Arrays</h2></div></div></div><p>There are two posiibilities here. Structures containing arrays and
   arrays of structure. Let us see an example which combines both:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//Author: Shiv S. Dayal</span>
 <span class="c1">//Description: Arrays as structure elements</span>
 
-<span class="cp">#include <stdio.h></span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
   <span class="kt">int</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
@@ -252,7 +252,7 @@ and the output is:
   <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
   <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">"%d %d %d %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d %d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>

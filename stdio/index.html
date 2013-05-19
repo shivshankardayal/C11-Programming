@@ -1,14 +1,14 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 31. Input/Output <stdio.h></title><link href="../../css/bootstrap.css" rel="stylesheet" type="text/css"/><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../stdint/index.html" rel="prev" title="Chapter 30. Integer types <stdint.h>"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div id="navbar" class="navbar navbar-fixed-top">    <div class="navbar-inner">      <div class="container-fluid">      <a class="brand" href="../../">Home</a>      <a class="brand" href="../">Books</a>  <ul class="nav">  <li class="dropdown">      <a href="#"            class="dropdown-toggle"            data-toggle="dropdown">Chapter 31. Input/Output <stdio.h><b class="caret"></b>      </a>      <ul class="dropdown-menu"><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp58358688">31.1. Introduction</a></span></dt><dt><span class="sect1"><a href="index.html#idp58226848">31.2. Streams</a></span></dt><dt><span class="sect1"><a href="index.html#idp59499328">31.3. Files</a></span></dt><dt><span class="sect1"><a href="index.html#idp59537920">31.4. Operations on files</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp59538656">31.4.1. The remove function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59545424">31.4.2. The rename function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59553440">31.4.3. The tmpfile function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59564304">31.4.4. The tmpnam function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp59576976">31.5. File acces functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp59577712">31.5.1. The fclose functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp59585536">31.5.2. The fflush function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59593616">31.5.3. The fopen function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59619408">31.5.4. The freopen function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59630768">31.5.5. The setbuf function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59640576">31.5.6. The setvbuf function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp59651344">31.6. Formatted input/output function</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp59654016">31.6.1. The fprintf function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59821664">31.6.2. The fscanf function</a></span></dt></dl></dd></dl></div>     </ul>    </li>  </ul> <ul class="nav"><li><a href="../stdint/index.html">&lt;&lt; Chapter 30. Integer types <stdint.h> </a><li><li><a href="../ix01.html"> Index >></a><li></ul>    </div>    </div>  </div><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 31. Input/Output <stdio.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../stdint/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 31. Input/Output <stdio.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp58065040"></a>Chapter 31. Input/Output <stdio.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp58358688">31.1. Introduction</a></span></dt><dt><span class="sect1"><a href="index.html#idp58226848">31.2. Streams</a></span></dt><dt><span class="sect1"><a href="index.html#idp59499328">31.3. Files</a></span></dt><dt><span class="sect1"><a href="index.html#idp59537920">31.4. Operations on files</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp59538656">31.4.1. The remove function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59545424">31.4.2. The rename function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59553440">31.4.3. The tmpfile function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59564304">31.4.4. The tmpnam function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp59576976">31.5. File acces functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp59577712">31.5.1. The fclose functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp59585536">31.5.2. The fflush function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59593616">31.5.3. The fopen function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59619408">31.5.4. The freopen function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59630768">31.5.5. The setbuf function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59640576">31.5.6. The setvbuf function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp59651344">31.6. Formatted input/output function</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp59654016">31.6.1. The fprintf function</a></span></dt><dt><span class="sect2"><a href="index.html#idp59821664">31.6.2. The fscanf function</a></span></dt></dl></dd></dl></div><div class="sect1" title="31.1. Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp58358688"></a>31.1. Introduction</h2></div></div></div><p>The header <code class="code"><stdio.h></code> declares three types,
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 31. Input/Output &lt;stdio.h></title><link href="../../css/bootstrap.css" rel="stylesheet" type="text/css"/><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../stdint/index.html" rel="prev" title="Chapter 30. Integer types &lt;stdint.h>"/><link href="../ix01.html" rel="next" title="Index"/><script src="../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div id="navbar" class="navbar navbar-fixed-top">    <div class="navbar-inner">      <div class="container-fluid">      <a class="brand" href="../../">Home</a>      <a class="brand" href="../">Books</a>  <ul class="nav">  <li class="dropdown">      <a href="#"            class="dropdown-toggle"            data-toggle="dropdown">Chapter 31. Input/Output &lt;stdio.h><b class="caret"></b>      </a>      <ul class="dropdown-menu"><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp5142000">31.1. Introduction</a></span></dt><dt><span class="sect1"><a href="index.html#idp5459504">31.2. Streams</a></span></dt><dt><span class="sect1"><a href="index.html#idp6587168">31.3. Files</a></span></dt><dt><span class="sect1"><a href="index.html#idp6625792">31.4. Operations on files</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp6626528">31.4.1. The remove function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6633296">31.4.2. The rename function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6641312">31.4.3. The tmpfile function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6652176">31.4.4. The tmpnam function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp6664848">31.5. File acces functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp6665584">31.5.1. The fclose functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp6673408">31.5.2. The fflush function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6681488">31.5.3. The fopen function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6707280">31.5.4. The freopen function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6718640">31.5.5. The setbuf function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6728448">31.5.6. The setvbuf function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp6739216">31.6. Formatted input/output function</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp6741888">31.6.1. The fprintf function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6909536">31.6.2. The fscanf function</a></span></dt></dl></dd></dl></div>     </ul>    </li>  </ul> <ul class="nav"><li><a href="../stdint/index.html">&lt;&lt; Chapter 30. Integer types &lt;stdint.h> </a><li><li><a href="../ix01.html"> Index >></a><li></ul>    </div>    </div>  </div><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 31. Input/Output &lt;stdio.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../stdint/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 31. Input/Output &lt;stdio.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp5103328"></a>Chapter 31. Input/Output &lt;stdio.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp5142000">31.1. Introduction</a></span></dt><dt><span class="sect1"><a href="index.html#idp5459504">31.2. Streams</a></span></dt><dt><span class="sect1"><a href="index.html#idp6587168">31.3. Files</a></span></dt><dt><span class="sect1"><a href="index.html#idp6625792">31.4. Operations on files</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp6626528">31.4.1. The remove function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6633296">31.4.2. The rename function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6641312">31.4.3. The tmpfile function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6652176">31.4.4. The tmpnam function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp6664848">31.5. File acces functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp6665584">31.5.1. The fclose functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp6673408">31.5.2. The fflush function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6681488">31.5.3. The fopen function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6707280">31.5.4. The freopen function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6718640">31.5.5. The setbuf function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6728448">31.5.6. The setvbuf function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp6739216">31.6. Formatted input/output function</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp6741888">31.6.1. The fprintf function</a></span></dt><dt><span class="sect2"><a href="index.html#idp6909536">31.6.2. The fscanf function</a></span></dt></dl></dd></dl></div><div class="sect1" title="31.1. Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp5142000"></a>31.1. Introduction</h2></div></div></div><p>The header <code class="code">&lt;stdio.h></code> declares three types,
     several macros, and many functions for performing input and
     output.</p><p>The types declared are <code class="code">size_t</code> (described in Common
-    definitions <stddef.h>);</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">FILE</code></p></blockquote></div><p>which is an object type capable of recording all the information
+    definitions &lt;stddef.h>);</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">FILE</code></p></blockquote></div><p>which is an object type capable of recording all the information
     needed to control a stream, including its file position indicator, a
     pointer to its associated buffer (if any), an error indicator that records
     whether a read/write error has occurred, and an end-of-file indicator that
     records whether the end of the file has been reached; and</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">fpos_t</code></p></blockquote></div><p>which is an object type other than an array type capable of
     recording all the information needed to specify uniquely every position
     within a file.</p><p>The macros are NULL (described in Common definitions
-    <stddef.h>);</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">_IOFBF</code></p><p><code class="code">_IOLBF</code></p><p><code class="code">_IONBF</code></p></blockquote></div><p>which expand to integer constant expressions with distinct values,
+    &lt;stddef.h>);</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">_IOFBF</code></p><p><code class="code">_IOLBF</code></p><p><code class="code">_IONBF</code></p></blockquote></div><p>which expand to integer constant expressions with distinct values,
     suitable for use as the third argument to the <code class="code">setvbuf</code>
     function;</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">BUFSIZ</code></p></blockquote></div><p>which expands to an integer constant expression that is the size of
     the buffer used by the <code class="code">setbuf</code> function;</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">EOF</code></p></blockquote></div><p>which expands to an integer constant expression, with type int and
@@ -18,11 +18,11 @@
     simultaneously;</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">FILENAME_MAX</code></p></blockquote></div><p>which expands to an integer constant expression that is the size
     needed for an array of char large enough to hold the longest file name
     string that the implementation guarantees can be
-    opened;<sup>[<a class="footnote" href="#ftn.idp57917568" name="idp57917568">197</a>]</sup></p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">L_tmpnam</code></p></blockquote></div><p>which expands to an integer constant expression that is the size
+    opened;<sup>[<a class="footnote" href="#ftn.idp5156384" name="idp5156384">197</a>]</sup></p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">L_tmpnam</code></p></blockquote></div><p>which expands to an integer constant expression that is the size
     needed for an array of char large enough to hold a temporary file name
     string generated by the <code class="code">tmpnam</code> function;</p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">stderr</code></p><p><code class="code">stdin</code></p><p><code class="code">stdout</code></p></blockquote></div><p>which are expressions of type "pointer to <code class="code">FILE</code>"
     that point to the <code class="code">FILE</code> objects associated, respectively,
-    with the standard error, input, and output streams.</p><p>The header <code class="code"><wchar.h></code> declares a number of
+    with the standard error, input, and output streams.</p><p>The header <code class="code">&lt;wchar.h></code> declares a number of
     functions useful for wide character input and output. The wide character
     input/output functions described in that subclause provide operations
     analogous to most of those described here, except that the fundamental
@@ -31,12 +31,12 @@
     characters, as described further in Files.</p><p>The input/output functions are given the following collective
     terms:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The <span class="italic">wide character input
 	functions</span> - those functions described in Extended
-	multibyte and wide character utilities <wchar.h> that perform
+	multibyte and wide character utilities &lt;wchar.h> that perform
 	input into wide characters and wide strings: <code class="code">fgetwc, fgetws,
 	getwc, getwchar, fwscanf, wscanf, vfwscanf</code> and
 	<code class="code">vwscanf</code>.</p></li><li class="listitem"><p>The <span class="italic">wide character output
 	functions</span> - those functions described in Extended
-	multibyte and wide character utilities <wchar.h> that perform
+	multibyte and wide character utilities &lt;wchar.h> that perform
 	output from wide characters and wide strings: <code class="code">fputwc, fputws,
 	putwc, putwchar, fwprintf, wprintf, vfwprintf</code> and
 	<code class="code">vwprintf</code>.</p></li><li class="listitem"><p>The <span class="italic">wide character input/output
@@ -47,12 +47,12 @@
 	that perform input/output: <code class="code">fgetc, fgets, fprintf, fputc, fputs,
 	fread, fscanf, fwrite, getc, getchar, gets, perror, printf, putc,
 	putchar, puts, scanf, ungetc, vfprintf, vfscanf, vprintf</code> and
-	<code class="code">vscanf</code>.</p></li></ul></div></div><div class="sect1" title="31.2. Streams"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp58226848"></a>31.2. Streams</h2></div></div></div><p>Input and output, whether to or from physical devices such as
+	<code class="code">vscanf</code>.</p></li></ul></div></div><div class="sect1" title="31.2. Streams"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp5459504"></a>31.2. Streams</h2></div></div></div><p>Input and output, whether to or from physical devices such as
     terminals and tape drives, or whether to or from files supported on
     structured storage devices, are mapped into logical data streams, whose
     properties are more uniform than their various inputs and outputs. Two
     forms of mapping are supported, for text streams and for binary
-    streams.<sup>[<a class="footnote" href="#ftn.idp58228224" name="idp58228224">198</a>]</sup></p><p>A text stream is an ordered sequence of characters composed into
+    streams.<sup>[<a class="footnote" href="#ftn.idp5460880" name="idp5460880">198</a>]</sup></p><p>A text stream is an ordered sequence of characters composed into
     lines, each line consisting of zero or more characters plus a terminating
     new-line character. Whether the last line requires a terminating new-line
     character is implementation-defined. Characters may have to be added,
@@ -80,7 +80,7 @@
     orientation, the stream becomes a byte-oriented stream. Only a call to the
     <code class="code">freopen</code> function or the fwide function can otherwise alter
     the orientation of a stream. (A successful call to <code class="code">freopen</code>
-    removes any orientation.)<sup>[<a class="footnote" href="#ftn.idp58233776" name="idp58233776">199</a>]</sup></p><p>Byte input/output functions shall not be applied to a wide-oriented
+    removes any orientation.)<sup>[<a class="footnote" href="#ftn.idp5466432" name="idp5466432">199</a>]</sup></p><p>Byte input/output functions shall not be applied to a wide-oriented
     stream and wide character input/output functions shall not be applied to a
     byte-oriented stream. The remaining stream operations do not affect, and
     are not affected by, a stream's orientation, except for the following
@@ -98,7 +98,7 @@
     associated <code class="code">mbstate_t</code> object as well as the position within
     the controlled stream.</p><p><span class="bold"><strong>Environmental limits</strong></span></p><p>An implementation shall support text files with lines containing at
     least 254 characters, including the terminating new-line character. The
-    value of the macro <code class="code">BUFSIZ</code> shall be at least 256.</p></div><div class="sect1" title="31.3. Files"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp59499328"></a>31.3. Files</h2></div></div></div><p>A stream is associated with an external file (which may be a
+    value of the macro <code class="code">BUFSIZ</code> shall be at least 256.</p></div><div class="sect1" title="31.3. Files"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp6587168"></a>31.3. Files</h2></div></div></div><p>A stream is associated with an external file (which may be a
     physical device) by opening a file, which may involve <span class="italic">creating</span> a new file. Creating an existing file
     causes its former contents to be discarded, if necessary. If a file can
     support positioning requests (such as a disk file, as opposed to a
@@ -156,7 +156,7 @@
     generalized as follows:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Multibyte encodings within files may contain embedded null
 	bytes (unlike multibyte encodings valid for use internal to the
 	program).</p></li><li class="listitem"><p>A file need not begin nor end in the initial shift
-	state.<sup>[<a class="footnote" href="#ftn.idp59518752" name="idp59518752">200</a>]</sup></p></li></ul></div><p>Moreover, the encodings used for multibyte characters may differ
+	state.<sup>[<a class="footnote" href="#ftn.idp6606624" name="idp6606624">200</a>]</sup></p></li></ul></div><p>Moreover, the encodings used for multibyte characters may differ
     among files. Both the nature and choice of such encodings are
     implementation-defined.</p><p>The wide character input functions read multibyte characters from
     the stream and convert them to wide characters as if they were read by
@@ -192,7 +192,7 @@
     <code class="code">fputwc</code> function (The fputwc function), conversion state
     (Extended multibyte/wide character conversion utilities), the
     <code class="code">mbrtowc</code> function (The mbrtowc function), the
-    <code class="code">wcrtomb</code> function (The wcrtomb function)</p></div><div class="sect1" title="31.4. Operations on files"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp59537920"></a>31.4. Operations on files</h2></div></div></div><div class="sect2" title="31.4.1. The remove function"><div class="titlepage"><div><div><h3 class="title"><a name="idp59538656"></a>31.4.1. The remove function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+    <code class="code">wcrtomb</code> function (The wcrtomb function)</p></div><div class="sect1" title="31.4. Operations on files"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp6625792"></a>31.4. Operations on files</h2></div></div></div><div class="sect2" title="31.4.1. The remove function"><div class="titlepage"><div><div><h3 class="title"><a name="idp6626528"></a>31.4.1. The remove function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">int</span> <span class="nf">remove</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">remove</code> function causes the file whose name
@@ -200,7 +200,7 @@
       name. A subsequent attempt to open that file using that name will fail,
       unless it is created anew. If the file is open, the behavior of the
       <code class="code">remove</code> function is implementation-defined.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">remove</code> function returns zero if the
-      operation succeeds, nonzero if it fails.</p></div><div class="sect2" title="31.4.2. The rename function"><div class="titlepage"><div><div><h3 class="title"><a name="idp59545424"></a>31.4.2. The rename function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+      operation succeeds, nonzero if it fails.</p></div><div class="sect2" title="31.4.2. The rename function"><div class="titlepage"><div><div><h3 class="title"><a name="idp6633296"></a>31.4.2. The rename function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">int</span> <span class="nf">rename</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">old</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">new</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">rename</code> function causes the file whose name is the
@@ -209,8 +209,8 @@ pointed to by new. The file named old is no longer accessible by that name. If
 a file named by the string pointed to by new exists prior to the call to the
 <code class="code">rename</code> function, the behavior is
 implementation-defined.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">rename</code> function returns zero if the operation
-succeeds, nonzero if it fails,<sup>[<a class="footnote" href="#ftn.idp59551904" name="idp59551904">201</a>]</sup> in which case if the file existed previously it
-is still known by its original name.</p></div><div class="sect2" title="31.4.3. The tmpfile function"><div class="titlepage"><div><div><h3 class="title"><a name="idp59553440"></a>31.4.3. The tmpfile function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+succeeds, nonzero if it fails,<sup>[<a class="footnote" href="#ftn.idp6639776" name="idp6639776">201</a>]</sup> in which case if the file existed previously it
+is still known by its original name.</p></div><div class="sect2" title="31.4.3. The tmpfile function"><div class="titlepage"><div><div><h3 class="title"><a name="idp6641312"></a>31.4.3. The tmpfile function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">FILE</span> <span class="o">*</span><span class="nf">tmpfile</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">tmpfile</code> function creates a temporary binary file
@@ -224,12 +224,12 @@ simultaneously open other than this limit and any limit on the number of open
 files (<code class="code">FOPEN_MAX</code>).</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">tmpfile</code> function returns a pointer to the stream
 of the file that it created. If the file cannot be created, the
 <code class="code">tmpfile</code> function returns a null pointer.</p><p><code class="code">Forward references:</code> the <code class="code">fopen</code>
-function (The fopen function).</p></div><div class="sect2" title="31.4.4. The tmpnam function"><div class="titlepage"><div><div><h3 class="title"><a name="idp59564304"></a>31.4.4. The tmpnam function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+function (The fopen function).</p></div><div class="sect2" title="31.4.4. The tmpnam function"><div class="titlepage"><div><div><h3 class="title"><a name="idp6652176"></a>31.4.4. The tmpnam function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">char</span> <span class="o">*</span><span class="nf">tmpnam</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">tmpnam</code> function generates a string that is a valid
 file name and that is not the same as the name of an existing
-file.<sup>[<a class="footnote" href="#ftn.idp59568320" name="idp59568320">202</a>]</sup> The function is
+file.<sup>[<a class="footnote" href="#ftn.idp6656192" name="idp6656192">202</a>]</sup> The function is
 potentially capable of generating <code class="code">TMP_MAX</code> different strings,
 but any or all of them may already be in use by existing files and thus not be
 suitable return values.</p><p>The <code class="code">tmpnam</code> function generates a different string each
@@ -242,7 +242,7 @@ the same object). If the argument is not a null pointer, it is assumed to point
 to an array of at least <code class="code">L_tmpnam</code> chars; the
 <code class="code">tmpnam</code> function writes its result in that array and returns
 the argument as its value.</p><p><span class="bold"><strong>Environemental limits</strong></span></p><p>The value of the macro <code class="code">TMP_MAX</code> shall be at least
-25.</p></div></div><div class="sect1" title="31.5. File acces functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp59576976"></a>31.5. File acces functions</h2></div></div></div><div class="sect2" title="31.5.1. The fclose functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp59577712"></a>31.5.1. The fclose functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+25.</p></div></div><div class="sect1" title="31.5. File acces functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp6664848"></a>31.5. File acces functions</h2></div></div></div><div class="sect2" title="31.5.1. The fclose functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp6665584"></a>31.5.1. The fclose functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">int</span> <span class="nf">fclose</span><span class="p">(</span><span class="kt">FILE</span> <span class="o">*</span><span class="n">stream</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>A successful call to the <code class="code">fclose</code> function causes the
@@ -254,7 +254,7 @@ the file and any buffer set by the <code class="code">setbuf</code> or
 <code class="code">setvbuf</code> function is disassociated from the stream (and
 deallocated if it was automatically allocated).</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">fclose</code> function returns zero if the stream was
 successfully closed, or <code class="code">EOF</code> if any errors were
-detected.</p></div><div class="sect2" title="31.5.2. The fflush function"><div class="titlepage"><div><div><h3 class="title"><a name="idp59585536"></a>31.5.2. The fflush function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+detected.</p></div><div class="sect2" title="31.5.2. The fflush function"><div class="titlepage"><div><div><h3 class="title"><a name="idp6673408"></a>31.5.2. The fflush function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">int</span> <span class="nf">fflush</span><span class="p">(</span><span class="kt">FILE</span> <span class="o">*</span><span class="n">stream</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>If stream points to an output stream or an update stream in which the
@@ -265,13 +265,13 @@ undefined.</p><p>If stream is a null pointer, the fflush function performs this 
 action on all streams for which the behavior is defined above.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">fflush</code> function sets the error indicator for the
 stream and returns EOF if a write error occurs, otherwise it returns
 zero.</p><p><code class="code">Forward references:</code> the <code class="code">fopen</code>
-function (The fopen function).</p></div><div class="sect2" title="31.5.3. The fopen function"><div class="titlepage"><div><div><h3 class="title"><a name="idp59593616"></a>31.5.3. The fopen function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+function (The fopen function).</p></div><div class="sect2" title="31.5.3. The fopen function"><div class="titlepage"><div><div><h3 class="title"><a name="idp6681488"></a>31.5.3. The fopen function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">FILE</span> <span class="o">*</span><span class="nf">fopen</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">filename</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">mode</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">fopen</code> function opens the file whose name is the
 string pointed to by filename, and associates a stream with it.</p><p>The argument mode points to a string. If the string is one of the
 following, the file is open in the indicated mode. Otherwise, the behavior is
-undefined.<sup>[<a class="footnote" href="#ftn.idp59598272" name="idp59598272">203</a>]</sup></p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">r</code> open test file for reading</p><p><code class="code">w</code> truncate zero length or create text file for writing</p><p><code class="code">a</code> append; open or create text file for writing at end-of-file</p><p><code class="code">rb</code> open binary file for reading</p><p><code class="code">wb</code> truncate to zero length or create binary file for writing</p><p><code class="code">ab</code> append; open or create binary file for writing at end-of-file</p><p><code class="code">r+</code> open text file for update (reading and writing)</p><p><code class="code">w+</code> truncate to zero length or create text file for update</p><p><code class="code">a+</code> append; open or create text file for update, writing at end-of-file</p><p><code class="code">r+b</code> or <code class="code">rb+</code> open binary file for update (reading and writing)</p><p><code class="code">w+b</code> or <code class="code">wb+</code> truncate to zero length or create binary file for update</p><p><code class="code">a+b</code> or <code class="code">ab+</code> append; open or create binary file for update, writing at end-of-file</p></blockquote></div><p>Opening a file with read mode ('<code class="code">r</code>' as the first
+undefined.<sup>[<a class="footnote" href="#ftn.idp6686144" name="idp6686144">203</a>]</sup></p><div class="blockquote"><blockquote class="blockquote"><p><code class="code">r</code> open test file for reading</p><p><code class="code">w</code> truncate zero length or create text file for writing</p><p><code class="code">a</code> append; open or create text file for writing at end-of-file</p><p><code class="code">rb</code> open binary file for reading</p><p><code class="code">wb</code> truncate to zero length or create binary file for writing</p><p><code class="code">ab</code> append; open or create binary file for writing at end-of-file</p><p><code class="code">r+</code> open text file for update (reading and writing)</p><p><code class="code">w+</code> truncate to zero length or create text file for update</p><p><code class="code">a+</code> append; open or create text file for update, writing at end-of-file</p><p><code class="code">r+b</code> or <code class="code">rb+</code> open binary file for update (reading and writing)</p><p><code class="code">w+b</code> or <code class="code">wb+</code> truncate to zero length or create binary file for update</p><p><code class="code">a+b</code> or <code class="code">ab+</code> append; open or create binary file for update, writing at end-of-file</p></blockquote></div><p>Opening a file with read mode ('<code class="code">r</code>' as the first
 character in the mode argument) fails if the file does not exist or cannot be
 read.</p><p>Opening a file with append mode ('<code class="code">a</code>' as the first
 character in the mode argument) causes all subsequent writes to the file to be
@@ -294,14 +294,14 @@ determined not to refer to an interactive device. The error and end-of-file
 indicators for the stream are cleared.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">fopen</code> function returns a pointer to the object
 controlling the stream. If the open operation fails, fopen returns a null
 pointer.</p><p><span class="bold"><strong>Forward references:</strong></span> file
-positioning functions (File positioning functions).</p></div><div class="sect2" title="31.5.4. The freopen function"><div class="titlepage"><div><div><h3 class="title"><a name="idp59619408"></a>31.5.4. The freopen function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+positioning functions (File positioning functions).</p></div><div class="sect2" title="31.5.4. The freopen function"><div class="titlepage"><div><div><h3 class="title"><a name="idp6707280"></a>31.5.4. The freopen function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">FILE</span> <span class="o">*</span><span class="nf">freopen</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">filename</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">mode</span><span class="p">,</span>
               <span class="kt">FILE</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">stream</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">freopen</code> function opens the file whose name is the
 string pointed to by filename and associates the stream pointed to by stream
 with it. The mode argument is used just as in the <code class="code">fopen</code>
-function.<sup>[<a class="footnote" href="#ftn.idp59624016" name="idp59624016">204</a>]</sup></p><p>If filename is a null pointer, the <code class="code">freopen</code> function
+function.<sup>[<a class="footnote" href="#ftn.idp6711888" name="idp6711888">204</a>]</sup></p><p>If filename is a null pointer, the <code class="code">freopen</code> function
 attempts to change the mode of the stream to that specified by mode, as if the
 name of the file currently associated with the stream had been used. It is
 implementation-defined which changes of mode are permitted (if any), and under
@@ -310,7 +310,7 @@ that is associated with the specified stream. Failure to close the file is
 ignored. The error and end-of-file indicators for the stream are
 cleared.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">freopen</code> function returns a null pointer if the
 open operation fails. Otherwise, <code class="code">freopen</code> returns the value of
-stream.</p></div><div class="sect2" title="31.5.5. The setbuf function"><div class="titlepage"><div><div><h3 class="title"><a name="idp59630768"></a>31.5.5. The setbuf function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+stream.</p></div><div class="sect2" title="31.5.5. The setbuf function"><div class="titlepage"><div><div><h3 class="title"><a name="idp6718640"></a>31.5.5. The setbuf function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">void</span> <span class="nf">setbuf</span><span class="p">(</span><span class="kt">FILE</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">stream</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">buf</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>Except that it returns no value, the <code class="code">setbuf</code> function
@@ -318,7 +318,7 @@ is equivalent to the <code class="code">setvbuf</code> function invoked with the
 <code class="code">_IOFBF</code> for mode and <code class="code">BUFSIZ</code> for size, or (if
 <code class="code">buf</code> is a null pointer), with the value <code class="code">_IONBF</code>
 for mode.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">setbuf</code> function returns no value.</p><p><span class="bold"><strong>Forward references:</strong></span> the
-<code class="code">setvbuf</code> function (The setvbuf function).</p></div><div class="sect2" title="31.5.6. The setvbuf function"><div class="titlepage"><div><div><h3 class="title"><a name="idp59640576"></a>31.5.6. The setvbuf function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<code class="code">setvbuf</code> function (The setvbuf function).</p></div><div class="sect2" title="31.5.6. The setvbuf function"><div class="titlepage"><div><div><h3 class="title"><a name="idp6728448"></a>31.5.6. The setvbuf function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">int</span> <span class="nf">setvbuf</span><span class="p">(</span><span class="kt">FILE</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">stream</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mode</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">setvbuf</code> function may be used only after the stream
@@ -330,14 +330,14 @@ buffered; <code class="code">_IOLBF</code> causes input/output to be line buffer
 <code class="code">_IONBF</code> causes input/output to be unbuffered. If
 <code class="code">buf</code> is not a null pointer, the array it points to may be used
 instead of a buffer allocated by the <code class="code">setvbuf</code>
-function<sup>[<a class="footnote" href="#ftn.idp59647648" name="idp59647648">205</a>]</sup> and the argument size specifies the size of the
+function<sup>[<a class="footnote" href="#ftn.idp6735520" name="idp6735520">205</a>]</sup> and the argument size specifies the size of the
 array; otherwise, size may determine the size of a buffer allocated by the
 <code class="code">setvbuf</code> function. The contents of the array at any time are
 indeterminate.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">setvbuf</code> function returns zero on success, or
 nonzero if an invalid value is given for mode or if the request cannot be
-honored.</p></div></div><div class="sect1" title="31.6. Formatted input/output function"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp59651344"></a>31.6. Formatted input/output function</h2></div></div></div><p>The formatted input/output functions shall behave as if there is a
+honored.</p></div></div><div class="sect1" title="31.6. Formatted input/output function"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp6739216"></a>31.6. Formatted input/output function</h2></div></div></div><p>The formatted input/output functions shall behave as if there is a
     sequence point after the actions associated with each
-    specifier.<sup>[<a class="footnote" href="#ftn.idp59652512" name="idp59652512">206</a>]</sup></p><div class="sect2" title="31.6.1. The fprintf function"><div class="titlepage"><div><div><h3 class="title"><a name="idp59654016"></a>31.6.1. The fprintf function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+    specifier.<sup>[<a class="footnote" href="#ftn.idp6740384" name="idp6740384">206</a>]</sup></p><div class="sect2" title="31.6.1. The fprintf function"><div class="titlepage"><div><div><h3 class="title"><a name="idp6741888"></a>31.6.1. The fprintf function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">int</span> <span class="nf">fprintf</span><span class="p">(</span><span class="kt">FILE</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">stream</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">format</span><span class="p">,</span> <span class="p">...);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">fprintf</code> function writes output to the stream
@@ -358,7 +358,7 @@ sequence:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li 
     characters than the field width, it is padded with spaces (by default) on
     the left (or right, if the left adjustment flag, described later, has been
     given) to the field width. The field width takes the form of an asterisk *
-    (described later) or a nonnegative decimal integer.<sup>[<a class="footnote" href="#ftn.idp59663936" name="idp59663936">207</a>]</sup></p></li><li class="listitem"><p>An optional precision that gives the minimum number of digits to
+    (described later) or a nonnegative decimal integer.<sup>[<a class="footnote" href="#ftn.idp6751808" name="idp6751808">207</a>]</sup></p></li><li class="listitem"><p>An optional precision that gives the minimum number of digits to
     appear for the <code class="code">d, i, o, u, x</code> and <code class="code">X</code>
     conversions, the number of digits to appear after the decimal-point
     character for <code class="code">a, A, e, E, f</code> and <code class="code">F</code>
@@ -378,7 +378,7 @@ field width argument is taken as a - flag followed by a positive field width. A
 negative precision argument is taken as if the precision were omitted.</p><p>The flag characters and their meanings are:</p><p>- The result of the conversion is left-justified within the field. (It
 is right-justified if this flag is not specified.)</p><p>+ The result of a signed conversion always begins with a plus or minus
 sign. (It begins with a sign only when a negative value is converted if this
-flag is not specified.)<sup>[<a class="footnote" href="#ftn.idp59673776" name="idp59673776">208</a>]</sup></p><p><span class="italic">space</span> If the first character of
+flag is not specified.)<sup>[<a class="footnote" href="#ftn.idp6761648" name="idp6761648">208</a>]</sup></p><p><span class="italic">space</span> If the first character of
 a signed conversion is not a sign, or if a signed conversion results in no
 characters, a space is prefixed to the result. If the space and + flags both
 appear, the space flag is ignored.</p><p># The result is converted to an "alternative form". For
@@ -468,7 +468,7 @@ one of the styles <span class="bold"><strong>[-]nan</strong></span> or <span cla
 meaning of any n-char-sequence, is implementation-defined. The
 <code class="code">F</code> conversion specifier produces <code class="code">INF, INFINITY</code>
 or <code class="code">NAN</code> instead of <code class="code">inf, infinity</code> or
-<code class="code">nan</code> respectively.<sup>[<a class="footnote" href="#ftn.idp59730080" name="idp59730080">209</a>]</sup></p><p><code class="code">e, E</code> A double argument representing a floating-point
+<code class="code">nan</code> respectively.<sup>[<a class="footnote" href="#ftn.idp6817952" name="idp6817952">209</a>]</sup></p><p><code class="code">e, E</code> A double argument representing a floating-point
 number is converted in the style <span class="italic">[-]d.ddd</span> e<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 <mo>±</mo>
 <mi>d</mi>
@@ -525,12 +525,12 @@ floating-point number is converted in the style <span class="italic">[-]0xh.hhhh
 <mi>d</mi>
 </math>, where there is one hexadecimal digit (which is
 nonzero if the argument is a normalized floating-point number and is otherwise
-unspecified) before the decimal-point character<sup>[<a class="footnote" href="#ftn.idp59764752" name="idp59764752">210</a>]</sup> nd the number of hexadecimal digits after it
+unspecified) before the decimal-point character<sup>[<a class="footnote" href="#ftn.idp6852624" name="idp6852624">210</a>]</sup> nd the number of hexadecimal digits after it
 is equal to the precision; if the precision is missing and
 <code class="code">FLT_RADIX</code> is a power of 2, then the precision is sufficient
 for an exact representation of the value; if the precision is missing and
 <code class="code">FLT_RADIX</code> is not a power of 2, then the precision is
-sufficient to distinguish<sup>[<a class="footnote" href="#ftn.idp59766624" name="idp59766624">211</a>]</sup> values of type double, except that trailing
+sufficient to distinguish<sup>[<a class="footnote" href="#ftn.idp6854496" name="idp6854496">211</a>]</sup> values of type double, except that trailing
 zeros may be omitted; if the precision is zero and the <code class="code">#</code> flag
 is not specified, no decimal-point character appears. The letters abcdef are
 used for a conversion and the letters <code class="code">ABCDEF</code> for A
@@ -550,7 +550,7 @@ element containing the <code class="code">wint_t</code> argument to the
 <code class="code">lc</code> conversion specification and the second a null wide
 character.</p><p><code class="code">s</code> If no <code class="code">l</code> length modifier is present,
 the argument shall be a pointer to the initial element of an array of character
-type.<sup>[<a class="footnote" href="#ftn.idp59788848" name="idp59788848">212</a>]</sup> Characters from the array are written up to
+type.<sup>[<a class="footnote" href="#ftn.idp6876720" name="idp6876720">212</a>]</sup> Characters from the array are written up to
 (but not including) the terminating null character. If the precision is
 specified, no more than that many bytes are written. If the precision is not
 specified or is greater than the size of the array, the array shall contain a
@@ -568,7 +568,7 @@ shift sequences, if any), and the array shall contain a null wide character if,
 to equal the multibyte character sequence length given by the precision, the
 function would need to access a wide character one past the end of the
 array. In no case is a partial multibyte character
-written.<sup>[<a class="footnote" href="#ftn.idp59792864" name="idp59792864">213</a>]</sup></p><p><code class="code">p</code> The argument shall be a pointer to
+written.<sup>[<a class="footnote" href="#ftn.idp6880736" name="idp6880736">213</a>]</sup></p><p><code class="code">p</code> The argument shall be a pointer to
 <code class="code">void</code>. The value of the pointer is converted to a sequence of
 printing characters, in an implementation-defined manner.</p><p><code class="code">n</code> The argument shall be a pointer to signed integer
 into which is written the number of characters written to the output stream so
@@ -590,15 +590,15 @@ the extra stipulation that the error should have a correct sign for the current
 rounding direction.</p><p>For <code class="code">e, E, f, F, g</code> and <code class="code">G</code> conversions,
 if the number of significant decimal digits is at most
 <code class="code">DECIMAL_DIG</code>, then the result should be correctly
-rounded.<sup>[<a class="footnote" href="#ftn.idp59804448" name="idp59804448">214</a>]</sup> If the number of significant decimal digits is more
+rounded.<sup>[<a class="footnote" href="#ftn.idp6892320" name="idp6892320">214</a>]</sup> If the number of significant decimal digits is more
 than <code class="code">DECIMAL_DIG</code> but the source value is exactly representable
 with <code class="code">DECIMAL_DIG</code> digits, then the result should be an exact
 representation with trailing zeros. Otherwise, the source value is bounded by
 two adjacent decimal strings <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 <mi>L</mi>
-<mo>
+<mo><</mo>
 <mi>U</mi>
-</mo></math>, both having <code class="code">DECIMAL_DIG</code>
+</math>, both having <code class="code">DECIMAL_DIG</code>
 significant digits; the value of the resultant decimal string <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 <mi>D</mi>
 </math> should satisfy <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
@@ -614,21 +614,21 @@ occurred.</p><p><span class="bold"><strong>Environmental limits</strong></span><
 shall be at least 4095.</p><p>EXAMPLE 1 To print a date and time in the form "Sunday, July 3, 10:02"
 followed by <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 <mi>π</mi>
-</math> to five decimal places: </p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <math.h></span>
-<span class="cp">#include <stdio.h></span>
+</math> to five decimal places: </p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;math.h&gt;</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="cm">/* ... */</span>
 <span class="kt">char</span> <span class="o">*</span><span class="n">weekday</span><span class="p">,</span> <span class="o">*</span><span class="n">month</span><span class="p">;</span> <span class="c1">// pointers to strings</span>
 <span class="kt">int</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span> <span class="n">min</span><span class="p">;</span>
-<span class="n">fprintf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">"%s, %s %d, %.2d:%.2d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&quot;%s, %s %d, %.2d:%.2d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
 <span class="n">weekday</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span> <span class="n">min</span><span class="p">);</span>
-<span class="n">fprintf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">"pi = %.5f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">atan</span><span class="p">(</span><span class="mf">1.0</span><span class="p">));</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&quot;pi = %.5f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">atan</span><span class="p">(</span><span class="mf">1.0</span><span class="p">));</span>
 </pre></div>
 </pre><p>EXAMPLE 2 In this example, multibyte characters do not have a
 state-dependent encoding, and the members of the extended character set that
 consist of more than one byte each consist of exactly two bytes, the first of
 which is denoted here by a and the second by an uppercase letter.</p><p><span class="bold"><strong>Forward references:</strong></span> conversion
 state (Extended multibyte/wide character conversion utilities), the
-<code class="code">wcrtomb</code> function (The wcrtomb function).</p></div><div class="sect2" title="31.6.2. The fscanf function"><div class="titlepage"><div><div><h3 class="title"><a name="idp59821664"></a>31.6.2. The fscanf function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<code class="code">wcrtomb</code> function (The wcrtomb function).</p></div><div class="sect2" title="31.6.2. The fscanf function"><div class="titlepage"><div><div><h3 class="title"><a name="idp6909536"></a>31.6.2. The fscanf function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="kt">int</span> <span class="nf">fscanf</span><span class="p">(</span><span class="kt">FILE</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">stream</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="kr">restrict</span> <span class="n">format</span><span class="p">,</span> <span class="p">...);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">fscanf</code> function reads input from the stream
@@ -663,11 +663,11 @@ matching input sequences, as described below for each specifier. A conversion
 specification is executed in the following steps:</p><p>Input white-space characters (as specified by the
 <code class="code">isspace</code> function) are skipped, unless the specification
 includes a <code class="code">[, c</code> or <code class="code">n</code>
-specifier.<sup>[<a class="footnote" href="#ftn.idp59839488" name="idp59839488">215</a>]</sup></p><p>An input item is read from the stream, unless the specification
+specifier.<sup>[<a class="footnote" href="#ftn.idp6927360" name="idp6927360">215</a>]</sup></p><p>An input item is read from the stream, unless the specification
 includes an n specifier. An input item is defined as the longest sequence of
 input characters which does not exceed any specified field width and which is,
 or is a prefix of, a matching input
-sequence.<sup>[<a class="footnote" href="#ftn.idp59840672" name="idp59840672">216</a>]</sup> The first character, if any,
+sequence.<sup>[<a class="footnote" href="#ftn.idp6928544" name="idp6928544">216</a>]</sup> The first character, if any,
 after the input item remains unread. If the length of the input item is zero,
 the execution of the directive fails; this condition is a matching failure
 unless end-of-file, an encoding error, or a read error prevented input from the
@@ -728,7 +728,7 @@ number, infinity, or NaN, whose format is the same as expected for the subject
 sequence of the <code class="code">strtod</code> function. The corresponding argument
 shall be a pointer to floating.</p><p><code class="code">c</code> Matches a sequence of characters of exactly the
 number specified by the field width (1 if no field width is present in the
-directive).<sup>[<a class="footnote" href="#ftn.idp59878080" name="idp59878080">217</a>]</sup> If no <code class="code">l</code> length modifier is
+directive).<sup>[<a class="footnote" href="#ftn.idp6965952" name="idp6965952">217</a>]</sup> If no <code class="code">l</code> length modifier is
 present, the corresponding argument shall be a pointer to the initial element
 of a character array large enough to accept the sequence. No null character is
 added.</p><p>If an <code class="code">l</code> length modifier is present, the input shall be
@@ -802,29 +802,29 @@ directive.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <c
 <code class="code">EOF</code> if an input failure occurs before any
 conversion. Otherwise, the function returns the number of input items assigned,
 which can be fewer than provided for, or even zero, in the event of an early
-matching failure.</p><p>EXAMPLE 1 The call:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+matching failure.</p><p>EXAMPLE 1 The call:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="cm">/* ... */</span>
 <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span> <span class="kt">float</span> <span class="n">x</span><span class="p">;</span> <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">fscanf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="s">"%d%f%s"</span><span class="p">,</span> <span class="o">&</span><span class="n">i</span><span class="p">,</span> <span class="o">&</span><span class="n">x</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">fscanf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="s">&quot;%d%f%s&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
 </pre></div>
 </pre><p>with the input line:</p><pre class="screen">25 54.32E-1 thompson</pre><p>will assign to <code class="code">n</code> the value 3, to <code class="code">i</code>
 the value 25, to <code class="code">x</code> the value 5.432, and to name the sequence
-<code class="code">thompson\0</code>.</p><p>EXAMPLE 2 The call:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<code class="code">thompson\0</code>.</p><p>EXAMPLE 2 The call:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="cm">/* ... */</span>
 <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="kt">float</span> <span class="n">x</span><span class="p">;</span> <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
-<span class="n">fscanf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="s">"%2d%f%*d %[0123456789]"</span><span class="p">,</span> <span class="o">&</span><span class="n">i</span><span class="p">,</span> <span class="o">&</span><span class="n">x</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+<span class="n">fscanf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="s">&quot;%2d%f%*d %[0123456789]&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
 </pre></div>
 </pre><p>with input:</p><pre class="screen">56789 0123 56a72</pre><p>will assign to <code class="code">i</code> the value 56 and to
 <code class="code">x</code> the value 789.0, will skip 0123, and will assign to name the
 sequence <code class="code">56\0</code>. The next character read from the input stream
 will be <code class="code">a</code>.</p><p>EXAMPLE 3 To accept repeatedly from stdin a quantity, a unit of
-measure, and an item name:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+measure, and an item name:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="cm">/* ... */</span>
 <span class="kt">int</span> <span class="n">count</span><span class="p">;</span> <span class="kt">float</span> <span class="n">quant</span><span class="p">;</span> <span class="kt">char</span> <span class="n">units</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">21</span><span class="p">];</span>
 <span class="k">do</span> <span class="p">{</span>
-  <span class="n">count</span> <span class="o">=</span> <span class="n">fscanf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="s">"%f%20s of %20s"</span><span class="p">,</span> <span class="o">&</span><span class="n">quant</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">item</span><span class="p">);</span>
-  <span class="n">fscanf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span><span class="s">"%*[^</span><span class="se">\n</span><span class="s">]"</span><span class="p">);</span>
-<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">feof</span><span class="p">(</span><span class="n">stdin</span><span class="p">)</span> <span class="o">&&</span> <span class="o">!</span><span class="n">ferror</span><span class="p">(</span><span class="n">stdin</span><span class="p">));</span>
+  <span class="n">count</span> <span class="o">=</span> <span class="n">fscanf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="s">&quot;%f%20s of %20s&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">quant</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">item</span><span class="p">);</span>
+  <span class="n">fscanf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span><span class="s">&quot;%*[^</span><span class="se">\n</span><span class="s">]&quot;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">feof</span><span class="p">(</span><span class="n">stdin</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">ferror</span><span class="p">(</span><span class="n">stdin</span><span class="p">));</span>
 </pre></div>
 </pre><p>If the stdin stream contains the following lines:</p><pre class="screen">2 quarts of oil
 -12.8degrees Celsius
@@ -841,10 +841,10 @@ count = 0; // "l" fails to match "%f"
 quant = 10.0; strcpy(units, "LBS"); strcpy(item, "dirt");
 count = 3;
 count = 0; // "100e" fails to match "%f"
-count = EOF;</pre><p>EXAMPLE 4 In:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+count = EOF;</pre><p>EXAMPLE 4 In:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="cm">/* ... */</span>
 <span class="kt">int</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
-<span class="n">i</span> <span class="o">=</span> <span class="n">sscanf</span><span class="p">(</span><span class="s">"123"</span><span class="p">,</span> <span class="s">"%d%n%n%d"</span><span class="p">,</span> <span class="o">&</span><span class="n">d1</span><span class="p">,</span> <span class="o">&</span><span class="n">n1</span><span class="p">,</span> <span class="o">&</span><span class="n">n2</span><span class="p">,</span> <span class="o">&</span><span class="n">d2</span><span class="p">);</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">sscanf</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">,</span> <span class="s">&quot;%d%n%n%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">d1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">d2</span><span class="p">);</span>
 </pre></div>
 </pre><p>the value 123 is assigned to <code class="code">d1</code> and the value 3 to
 <code class="code">n1</code>. Because <code class="code">%n</code> can never get an input failure
@@ -856,51 +856,51 @@ strtod, strtof and strtold functions), the <code class="code">strtol, strtoll,
 strtoul</code> and <code class="code">strtoull</code> functions (The strtol, strtoll,
 strtoul and strtoull functions), conversion state (Extended multibyte/wide
 character conversion utilities), the <code class="code">wcrtomb</code> function (The
-wcrtomb function).</p></div></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp57917568" id="ftn.idp57917568">197</a>] </sup>If the implementation imposes no practical limit
+wcrtomb function).</p></div></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp5156384" id="ftn.idp5156384">197</a>] </sup>If the implementation imposes no practical limit
     on the length of file name strings, the value of
     <code class="code">FILENAME_MAX</code> should instead be the recommended size of an
     array intended to hold a file name string. Of course, file name string
     contents are subject to other system-specific constraints; therefore all
     possible strings of length <code class="code">FILENAME_MAX</code> cannot be expected
-    to be opened successfully.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp58228224" id="ftn.idp58228224">198</a>] </sup>An implementation need not distinguish between
+    to be opened successfully.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp5460880" id="ftn.idp5460880">198</a>] </sup>An implementation need not distinguish between
     text streams and binary streams. In such an implementation, there need be
     no new-line characters in a text stream nor any limit to the length of a
-    line.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp58233776" id="ftn.idp58233776">199</a>] </sup>The three predefined streams
+    line.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp5466432" id="ftn.idp5466432">199</a>] </sup>The three predefined streams
     <code class="code">stdin, stdout</code> and <code class="code">stderr</code> are unoriented
-    at program startup.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59518752" id="ftn.idp59518752">200</a>] </sup>Setting the file position indicator to
+    at program startup.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6606624" id="ftn.idp6606624">200</a>] </sup>Setting the file position indicator to
 	end-of-file, as with <code class="code">fseek(file, 0, SEEK_END)</code>, has
 	undefined behavior for a binary stream (because of possible trailing
 	null characters) or for any stream with state-dependent encoding that
 	does not assuredly end in the initial shift
-	state.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59551904" id="ftn.idp59551904">201</a>] </sup>Among the reasons the
+	state.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6639776" id="ftn.idp6639776">201</a>] </sup>Among the reasons the
 implementation may cause the <code class="code">rename</code> function to fail are that
 the file is open or that it is necessary to copy its contents to effectuate its
-renaming.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59568320" id="ftn.idp59568320">202</a>] </sup>Files created using strings generated by the tmpnam
+renaming.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6656192" id="ftn.idp6656192">202</a>] </sup>Files created using strings generated by the tmpnam
 function are temporary only in the sense that their names should not collide
 with those generated by conventional naming rules for the implementation. It is
 still necessary to use the remove function to remove such files when their use
-is ended, and before program termination.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59598272" id="ftn.idp59598272">203</a>] </sup>If the string begins with one of the above
+is ended, and before program termination.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6686144" id="ftn.idp6686144">203</a>] </sup>If the string begins with one of the above
 sequences, the implementation might choose to ignore the remaining characters,
 or it might use them to select different kinds of a file (some of which might
-not conform to the properties in Streams).</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59624016" id="ftn.idp59624016">204</a>] </sup>The primary use of the <code class="code">freopen</code>
+not conform to the properties in Streams).</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6711888" id="ftn.idp6711888">204</a>] </sup>The primary use of the <code class="code">freopen</code>
 function is to change the file associated with a standard text stream
 (<code class="code">stderr, stdin</code> or <code class="code">stdout</code>), as those
 identifiers need not be modifiable lvalues to which the value returned by the
-fopen function may be assigned.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59647648" id="ftn.idp59647648">205</a>] </sup>The buffer has to have a lifetime at least as great
+fopen function may be assigned.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6735520" id="ftn.idp6735520">205</a>] </sup>The buffer has to have a lifetime at least as great
 as the open stream, so the stream should be closed before a buffer that has
 automatic storage duration is deallocated upon block
-exit.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59652512" id="ftn.idp59652512">206</a>] </sup>The <code class="code">fprintf</code> functions
+exit.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6740384" id="ftn.idp6740384">206</a>] </sup>The <code class="code">fprintf</code> functions
     perform writes to memory for the <code class="code">%n</code>
-    specifier.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59663936" id="ftn.idp59663936">207</a>] </sup>Note
+    specifier.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6751808" id="ftn.idp6751808">207</a>] </sup>Note
     that 0 is taken as a flag, not as the beginning of a field
-    width.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59673776" id="ftn.idp59673776">208</a>] </sup>The results of all floating
+    width.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6761648" id="ftn.idp6761648">208</a>] </sup>The results of all floating
 conversions of a negative zero, and of negative values that round to zero,
-include a minus sign.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59730080" id="ftn.idp59730080">209</a>] </sup>When applied to infinite
+include a minus sign.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6817952" id="ftn.idp6817952">209</a>] </sup>When applied to infinite
 and NaN values, the -, + and space flag characters have their usual meaning;
-the # and 0 flag characters have no effect.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59764752" id="ftn.idp59764752">210</a>] </sup>Binary
+the # and 0 flag characters have no effect.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6852624" id="ftn.idp6852624">210</a>] </sup>Binary
 implementations can choose the hexadecimal digit to the left of the
 decimal-point character so that subsequent digits align to nibble (4-bit)
-boundaries.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59766624" id="ftn.idp59766624">211</a>] </sup>The precision <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+boundaries.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6854496" id="ftn.idp6854496">211</a>] </sup>The precision <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 <mi>p</mi>
 </math> is sufficient to
 distinguish values of the source type if <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
@@ -928,17 +928,17 @@ significand of the source type. A smaller <math xmlns="http://www.w3.org/1998/Ma
 <mi>p</mi>
 </math> might suffice depending on the implementation’s
 scheme for determining the digit to the left of the decimal-point
-character.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59788848" id="ftn.idp59788848">212</a>] </sup>No special provisions are made for multibyte
-characters.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59792864" id="ftn.idp59792864">213</a>] </sup>Redundant shift sequences may result if multibyte
-characters have a state-dependent encoding.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59804448" id="ftn.idp59804448">214</a>] </sup>For binary-to-decimal conversion, the result
+character.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6876720" id="ftn.idp6876720">212</a>] </sup>No special provisions are made for multibyte
+characters.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6880736" id="ftn.idp6880736">213</a>] </sup>Redundant shift sequences may result if multibyte
+characters have a state-dependent encoding.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6892320" id="ftn.idp6892320">214</a>] </sup>For binary-to-decimal conversion, the result
 format’s values are the numbers representable with the given format
 specifier. The number of significant digits is determined by the format
 specifier, and in the case of fixed-point conversion by the source value as
-well.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59839488" id="ftn.idp59839488">215</a>] </sup>These white-space characters are not counted
-against a specified field width.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59840672" id="ftn.idp59840672">216</a>] </sup><code class="code">fscanf</code> pushes back at most one
+well.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6927360" id="ftn.idp6927360">215</a>] </sup>These white-space characters are not counted
+against a specified field width.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6928544" id="ftn.idp6928544">216</a>] </sup><code class="code">fscanf</code> pushes back at most one
 input character onto the input stream. Therefore, some sequences that are
 acceptable to <code class="code">strtod, strtol</code> etc. are unacceptable to
-<code class="code">fscanf</code>.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp59878080" id="ftn.idp59878080">217</a>] </sup>No special provisions are made for multibyte
+<code class="code">fscanf</code>.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp6965952" id="ftn.idp6965952">217</a>] </sup>No special provisions are made for multibyte
 characters in the matching rules used by the <code class="code">c, s</code> and
 <code class="code">[</code> conversion specifiers — the extent of the input field
 is determined on a byte-by-byte basis. The resulting field is nevertheless a
@@ -946,5 +946,5 @@ sequence of multibyte characters that begins in the initial shift
 state.</p></div><div class="footnote"><p><sup>[<a class="para" href="#c" id="ftn.c">218</a>] </sup>As the functions <code class="code">vfprintf, vfscanf,
 vprintf, vscanf, vsnprintf, vsprintf</code> and <code class="code">vsscanf</code>
 invoke the <code class="code">va_arg</code> macro, the value of <code class="code">arg</code>
-after the return is indeterminate.</p></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../stdint/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 30. Integer types <stdint.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+after the return is indeterminate.</p></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../stdint/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ix01.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 30. Integer types &lt;stdint.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Index</td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
     GNU FDL license is applicable where not stated.</p></body></html>

@@ -1,8 +1,8 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 13. The C Standard Library</title><link href="../../css/bootstrap.css" rel="stylesheet" type="text/css"/><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../macros/index.html" rel="prev" title="Chapter 12. Preprocessing Directives"/><link href="../assert/index.html" rel="next" title="Chapter 14. Diagnostics <assert.h>"/><script src="../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div id="navbar" class="navbar navbar-fixed-top">    <div class="navbar-inner">      <div class="container-fluid">      <a class="brand" href="../../">Home</a>      <a class="brand" href="../">Books</a>  <ul class="nav">  <li class="dropdown">      <a href="#"            class="dropdown-toggle"            data-toggle="dropdown">Chapter 13. The C Standard Library<b class="caret"></b>      </a>      <ul class="dropdown-menu"><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp54974432">13.1. Introduction</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp54975168">13.1.1. Definition of Terms</a></span></dt><dt><span class="sect2"><a href="index.html#idp53680304">13.1.2. Standard Headers</a></span></dt><dt><span class="sect2"><a href="index.html#idp55382080">13.1.3. Reserved Identifiers</a></span></dt><dt><span class="sect2"><a href="index.html#idp55395200">13.1.4. Use of Library Functions</a></span></dt></dl></dd></dl></div>     </ul>    </li>  </ul> <ul class="nav"><li><a href="../macros/index.html">&lt;&lt; Chapter 12. Preprocessing Directives </a><li><li><a href="../assert/index.html"> Chapter 14. Diagnostics <assert.h> >></a><li></ul>    </div>    </div>  </div><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 13. The C Standard Library</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../macros/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../assert/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 13. The C Standard Library"><div class="titlepage"><div><div><h2 class="title"><a name="idp53102448"></a>Chapter 13. The C Standard Library</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp54974432">13.1. Introduction</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp54975168">13.1.1. Definition of Terms</a></span></dt><dt><span class="sect2"><a href="index.html#idp53680304">13.1.2. Standard Headers</a></span></dt><dt><span class="sect2"><a href="index.html#idp55382080">13.1.3. Reserved Identifiers</a></span></dt><dt><span class="sect2"><a href="index.html#idp55395200">13.1.4. Use of Library Functions</a></span></dt></dl></dd></dl></div><p>This chapter and rest of book eflects chapter 7 of
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 13. The C Standard Library</title><link href="../../css/bootstrap.css" rel="stylesheet" type="text/css"/><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../macros/index.html" rel="prev" title="Chapter 12. Preprocessing Directives"/><link href="../assert/index.html" rel="next" title="Chapter 14. Diagnostics &lt;assert.h>"/><script src="../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div id="navbar" class="navbar navbar-fixed-top">    <div class="navbar-inner">      <div class="container-fluid">      <a class="brand" href="../../">Home</a>      <a class="brand" href="../">Books</a>  <ul class="nav">  <li class="dropdown">      <a href="#"            class="dropdown-toggle"            data-toggle="dropdown">Chapter 13. The C Standard Library<b class="caret"></b>      </a>      <ul class="dropdown-menu"><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp669760">13.1. Introduction</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp670496">13.1.1. Definition of Terms</a></span></dt><dt><span class="sect2"><a href="index.html#idp709568">13.1.2. Standard Headers</a></span></dt><dt><span class="sect2"><a href="index.html#idp1964368">13.1.3. Reserved Identifiers</a></span></dt><dt><span class="sect2"><a href="index.html#idp2037344">13.1.4. Use of Library Functions</a></span></dt></dl></dd></dl></div>     </ul>    </li>  </ul> <ul class="nav"><li><a href="../macros/index.html">&lt;&lt; Chapter 12. Preprocessing Directives </a><li><li><a href="../assert/index.html"> Chapter 14. Diagnostics &lt;assert.h> >></a><li></ul>    </div>    </div>  </div><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 13. The C Standard Library</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../macros/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../assert/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 13. The C Standard Library"><div class="titlepage"><div><div><h2 class="title"><a name="idp939616"></a>Chapter 13. The C Standard Library</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp669760">13.1. Introduction</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp670496">13.1.1. Definition of Terms</a></span></dt><dt><span class="sect2"><a href="index.html#idp709568">13.1.2. Standard Headers</a></span></dt><dt><span class="sect2"><a href="index.html#idp1964368">13.1.3. Reserved Identifiers</a></span></dt><dt><span class="sect2"><a href="index.html#idp2037344">13.1.4. Use of Library Functions</a></span></dt></dl></dd></dl></div><p>This chapter and rest of book eflects chapter 7 of
     n1124.pdf. This chapter begins with assert.h. We will see three
     parts of each function/macro as much as possible. From
     specification, compiler and example point of view in that
-    order.</p><div class="sect1" title="13.1. Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp54974432"></a>13.1. Introduction</h2></div></div></div><div class="sect2" title="13.1.1. Definition of Terms"><div class="titlepage"><div><div><h3 class="title"><a name="idp54975168"></a>13.1.1. Definition of Terms</h3></div></div></div><p>A <span class="italic">string</span> is a contiguous
+    order.</p><div class="sect1" title="13.1. Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp669760"></a>13.1. Introduction</h2></div></div></div><div class="sect2" title="13.1.1. Definition of Terms"><div class="titlepage"><div><div><h3 class="title"><a name="idp670496"></a>13.1.1. Definition of Terms</h3></div></div></div><p>A <span class="italic">string</span> is a contiguous
 	sequence of characters terminated by and including the first null
 	character. The term <span class="italic">multibyte
 	string</span> is sometimes used instead to emphasize special
@@ -17,7 +17,7 @@
 	character</span> is the character used by functions that convert
 	floating-point numbers to or from character sequences to denote the
 	beginning of the fractional part of such character
-	sequences.<sup>[<a class="footnote" href="#ftn.idp53596144" name="idp53596144">140</a>]</sup>  It is represented in the text and
+	sequences.<sup>[<a class="footnote" href="#ftn.idp2339936" name="idp2339936">140</a>]</sup>  It is represented in the text and
 	examples by a period, but may be changed by the
 	<code class="code">setlocale</code> function.</p><p>A <span class="italic">null wide character</span> is
 	a wide character with code value zero.</p><p>A <span class="italic">wide string</span> is a
@@ -32,25 +32,25 @@
 	contiguous sequence of bytes within a multibyte string that
 	(potentially) causes a change in shift state. A shift sequence shall
 	not have a corresponding wide character; it is instead taken to be an
-	adjunct to an adjacent multibyte character.<sup>[<a class="footnote" href="#ftn.idp53573904" name="idp53573904">141</a>]</sup></p></div><div class="sect2" title="13.1.2. Standard Headers"><div class="titlepage"><div><div><h3 class="title"><a name="idp53680304"></a>13.1.2. Standard Headers</h3></div></div></div><p>Each library function is declared, with a type that includes a
-	prototype, in a header,<sup>[<a class="footnote" href="#ftn.idp53681296" name="idp53681296">142</a>]</sup>
+	adjunct to an adjacent multibyte character.<sup>[<a class="footnote" href="#ftn.idp707680" name="idp707680">141</a>]</sup></p></div><div class="sect2" title="13.1.2. Standard Headers"><div class="titlepage"><div><div><h3 class="title"><a name="idp709568"></a>13.1.2. Standard Headers</h3></div></div></div><p>Each library function is declared, with a type that includes a
+	prototype, in a header,<sup>[<a class="footnote" href="#ftn.idp710560" name="idp710560">142</a>]</sup>
 	whose contents are made available by the <code class="code">#include</code>
 	preprocessing directive. The header declares a set of related
 	functions, plus any necessary types and additional macros needed to
 	facilitate their use. Declarations of types described in this clause
 	shall not include type qualifiers, unless explicitly stated
-	otherwise.</p><p>The standard headers are:</p><pre class="screen"><assert.h>  <inttypes.h> <signal.h>  <stdlib.h>
-<complex.h> <iso646.h>   <stdarg.h>  <string.h>
-<ctype.h>   <limits.h>   <stdbool.h> <tgmath.h>
-<errno.h>   <locale.h>   <stddef.h>  <time.h>
-<fenv.h>    <math.h>     <stdint.h>  <wchar.h>
-<float.h>   <setjmp.h>   <stdio.h>   <wctype.h></pre><p>If a file with the same name as one of the above < and >
+	otherwise.</p><p>The standard headers are:</p><pre class="screen">&lt;assert.h>  &lt;inttypes.h> &lt;signal.h>  &lt;stdlib.h>
+&lt;complex.h> &lt;iso646.h>   &lt;stdarg.h>  &lt;string.h>
+&lt;ctype.h>   &lt;limits.h>   &lt;stdbool.h> &lt;tgmath.h>
+&lt;errno.h>   &lt;locale.h>   &lt;stddef.h>  &lt;time.h>
+&lt;fenv.h>    &lt;math.h>     &lt;stdint.h>  &lt;wchar.h>
+&lt;float.h>   &lt;setjmp.h>   &lt;stdio.h>   &lt;wctype.h></pre><p>If a file with the same name as one of the above &lt; and >
 delimited sequences, not provided as part of the implementation, is placed in
 any of the standard places that are searched for included source files, the
 behavior is undefined.</p><p>Standard headers may be included in any order; each may be included
 more thanonce in a giv en scope, with no effect different from being included
 only once, except that the effect of including
-<code class="code"><assert.h></code> depends on the definition of
+<code class="code">&lt;assert.h></code> depends on the definition of
 <code class="code">NDEBUG</code> (see 14.2). If used, a header shall be included outside
 of any external declaration or definition, and it shall first be included
 before the first reference to any of the functions or objects it declares, or
@@ -63,7 +63,7 @@ expand to code that is fully protected by parentheses where necessary, so that
 it groups in an arbitrary expression as if it were a single
 identifier.</p><p>Any declaration of a library function shall have external
 linkage.</p><p>A summary of the contents of the standard headers is given in annex
-B.</p><p>Forward references:</p><p> diagnostics (14.2).</p></div><div class="sect2" title="13.1.3. Reserved Identifiers"><div class="titlepage"><div><div><h3 class="title"><a name="idp55382080"></a>13.1.3. Reserved Identifiers</h3></div></div></div><p>Each header declares or defines all identifiers listed in its
+B.</p><p>Forward references:</p><p> diagnostics (14.2).</p></div><div class="sect2" title="13.1.3. Reserved Identifiers"><div class="titlepage"><div><div><h3 class="title"><a name="idp1964368"></a>13.1.3. Reserved Identifiers</h3></div></div></div><p>Each header declares or defines all identifiers listed in its
 	associated subclause, and optionally declares or defines identifiers
 	listed in its associated future library directions subclause and
 	identifiers which are always reserved either for any use or for use as
@@ -77,7 +77,7 @@ B.</p><p>Forward references:</p><p> diagnostics (14.2).</p></div><div class="sec
 	    explicitly stated otherwise (see 14.1.4).</p></li><li class="listitem"><p>All identifiers with external linkage in any of the
 	    following subclauses (including the future library directions) are
 	    always reserved for use as identifiers with external
-	    linkage.<sup>[<a class="footnote" href="#ftn.idp55387760" name="idp55387760">143</a>]</sup></p></li><li class="listitem"><p>Each identifier with file scope listed in any of the
+	    linkage.<sup>[<a class="footnote" href="#ftn.idp2058016" name="idp2058016">143</a>]</sup></p></li><li class="listitem"><p>Each identifier with file scope listed in any of the
 	    following subclauses (including the future library directions) is
 	    reserved for use as a macro name and as an identifier with file
 	    scope in the same name space if any of its associated headers is
@@ -86,7 +86,7 @@ B.</p><p>Forward references:</p><p> diagnostics (14.2).</p></div><div class="sec
 	as allowed by 14.1.4), or defines a reserved identifier as a macro
 	name, the behavior is undefined.</p><p>If the program removes (with <code class="code">#undef</code>) any macro
 	definition of an identifier in the first group listed above, the
-	behavior is undefined.</p></div><div class="sect2" title="13.1.4. Use of Library Functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp55395200"></a>13.1.4. Use of Library Functions</h3></div></div></div><p>Each of the following statements applies unless explicitly
+	behavior is undefined.</p></div><div class="sect2" title="13.1.4. Use of Library Functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp2037344"></a>13.1.4. Use of Library Functions</h3></div></div></div><p>Each of the following statements applies unless explicitly
 	stated otherwise in the detailed descriptions that follow: If an
 	argument to a function has an invalid value (such as a value outside
 	the domain of the function, or a pointer outside the address space of
@@ -107,7 +107,7 @@ B.</p><p>Forward references:</p><p> diagnostics (14.2).</p></div><div class="sec
 	then not followed by the left parenthesis that indicates expansion of a
 	macro function name. For the same syntactic reason, it is permitted to
 	take the address of a library function even if it is also defined as a
-	macro.<sup>[<a class="footnote" href="#ftn.idp55397680" name="idp55397680">144</a>]</sup> The use of
+	macro.<sup>[<a class="footnote" href="#ftn.idp2039824" name="idp2039824">144</a>]</sup> The use of
 	<code class="code">#undef</code> to remove any macro definition will also ensure
 	that an actual function is referred to. Any invocation of a library
 	function that is implemented as a macro shall expand to code that
@@ -116,7 +116,7 @@ B.</p><p>Forward references:</p><p> diagnostics (14.2).</p></div><div class="sec
 	expressions as arguments. Likewise, those function-like macros
 	described in the following subclauses may be invoked in an expression
 	anywhere a function with a compatible return type could be
-	called.<sup>[<a class="footnote" href="#ftn.idp55399344" name="idp55399344">145</a>]</sup>
+	called.<sup>[<a class="footnote" href="#ftn.idp2041488" name="idp2041488">145</a>]</sup>
 	All object-like macros listed as expanding to integer constant
 	expressions shall additionally be suitable for use in
 	<code class="code">#if</code> preprocessing directives.</p><p>Provided that a library function can be declared without
@@ -125,23 +125,23 @@ B.</p><p>Forward references:</p><p> diagnostics (14.2).</p></div><div class="sec
 	header.</p><p>There is a sequence point immediately before a library function
 	returns.</p><p>The functions in the standard library are not guaranteed to be
 	reentrant and may modify objects with static storage
-	duration.<sup>[<a class="footnote" href="#ftn.idp55402192" name="idp55402192">146</a>]</sup></p></div></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp53596144" id="ftn.idp53596144">140</a>] </sup>The functions that make use of the
+	duration.<sup>[<a class="footnote" href="#ftn.idp2044336" name="idp2044336">146</a>]</sup></p></div></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp2339936" id="ftn.idp2339936">140</a>] </sup>The functions that make use of the
 	decimal-point character are the numeric conversion functions (14.20.1,
 	14.24.4.1) and the formatted input/output functions (14.19.6,
-	14.24.2).</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp53573904" id="ftn.idp53573904">141</a>] </sup>For
+	14.24.2).</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp707680" id="ftn.idp707680">141</a>] </sup>For
 	state-dependent encodings, the values for <code class="code">MB_CUR_MAX</code>
 	and <code class="code">MB_LEN_MAX</code> shall thus be large enough to count all
 	the bytes in any complete multibyte character plus at least one
 	adjacent shift sequence of maximum length. Whether these counts provide
 	for more than one shift sequence is the implementation’s
-	choice.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp53681296" id="ftn.idp53681296">142</a>] </sup>A header is not necessarily
-	a source file, nor are the  delimited sequences in header
-	names necessarily valid source file names.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp55387760" id="ftn.idp55387760">143</a>] </sup>The list of reserved identifiers with
+	choice.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp710560" id="ftn.idp710560">142</a>] </sup>A header is not necessarily
+	a source file, nor are the < and > delimited sequences in header
+	names necessarily valid source file names.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2058016" id="ftn.idp2058016">143</a>] </sup>The list of reserved identifiers with
 	    external linkage includes <code class="code">errno, ath_errhandling,
 	    setjmp,</code> and
-	    <code class="code">va_end</code>.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp55397680" id="ftn.idp55397680">144</a>] </sup>This means that an implementation shall
+	    <code class="code">va_end</code>.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2039824" id="ftn.idp2039824">144</a>] </sup>This means that an implementation shall
 	provide an actual function for each library function, even if it also
-	provides a macro for that function.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp55399344" id="ftn.idp55399344">145</a>] </sup>Such macros might not contain the sequence
-	points that the corresponding function calls do.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp55402192" id="ftn.idp55402192">146</a>] </sup>Thus, a signal handler cannot, in general,
-	call standard library functions.</p></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../macros/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../assert/index.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 12. Preprocessing Directives </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Chapter 14. Diagnostics <assert.h></td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+	provides a macro for that function.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2041488" id="ftn.idp2041488">145</a>] </sup>Such macros might not contain the sequence
+	points that the corresponding function calls do.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2044336" id="ftn.idp2044336">146</a>] </sup>Thus, a signal handler cannot, in general,
+	call standard library functions.</p></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../macros/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../assert/index.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 12. Preprocessing Directives </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Chapter 14. Diagnostics &lt;assert.h></td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
     GNU FDL license is applicable where not stated.</p></body></html>
