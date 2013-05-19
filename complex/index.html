@@ -1,4 +1,4 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 15. Complex arithmetic &lt;complex.h></title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../assert/index.html" rel="prev" title="Chapter 14. Diagnostics &lt;assert.h>"/><link href="../ctypes/index.html" rel="next" title="Chapter 16. Character Handling &lt;ctype.h>"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 15. Complex arithmetic &lt;complex.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../assert/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ctypes/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 15. Complex arithmetic &lt;complex.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp197376"></a>Chapter 15. Complex arithmetic &lt;complex.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp2714704">15.1. Introduction</a></span></dt><dt><span class="sect1"><a href="index.html#idp2373664">15.2. Conventions</a></span></dt><dt><span class="sect1"><a href="index.html#idp2375104">15.3. Branch Cuts</a></span></dt><dt><span class="sect1"><a href="index.html#idp2378192">15.4. The CX_LIMITED_RANGE Pragma</a></span></dt><dt><span class="sect1"><a href="index.html#idp2384816">15.5. Trigonometric functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp2385552">15.5.1. The cscos functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp2405552">15.5.2. The casin functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4431088">15.5.3. The cstan functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4460096">15.5.4. The ccos functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4473312">15.5.5. The csin functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4485952">15.5.6. The ctan functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp4499152">15.6. Hyperbolic functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp4499888">15.6.1. The cscosh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4522896">15.6.2. The casinh function</a></span></dt><dt><span class="sect2"><a href="index.html#idp4552736">15.6.3. The catanh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4582736">15.6.4. The ccosh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4595744">15.6.5. The csinh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4608784">15.6.6. The ctanh functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp4622000">15.7. Exponential and logrithmic functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp4622752">15.7.1. The cexp functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4636288">15.7.2. The clog functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp4658928">15.8. Power and absolute-value functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp4659680">15.8.1. The cabs functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4672752">15.8.2. The cpow functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4687616">15.8.3. The csqrt functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp4702640">15.9. Manipulation functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp4703376">15.9.1. The carg functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4729312">15.9.2. The cimag functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4743680">15.9.3. The conj functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4758160">15.9.4. The cproj functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp4774768">15.9.5. The creal function</a></span></dt></dl></dd></dl></div><div class="sect1" title="15.1. Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2714704"></a>15.1. Introduction</h2></div></div></div><p>The header <code class="code">&lt;complex.h></code> defines macros and
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 15. Complex arithmetic <complex.h></title><link href="../../css/bootstrap.css" rel="stylesheet" type="text/css"/><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../assert/index.html" rel="prev" title="Chapter 14. Diagnostics <assert.h>"/><link href="../ctypes/index.html" rel="next" title="Chapter 16. Character Handling <ctype.h>"/><script src="../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div id="navbar" class="navbar navbar-fixed-top">    <div class="navbar-inner">      <div class="container-fluid">      <a class="brand" href="../../">Home</a>      <a class="brand" href="../">Books</a>  <ul class="nav">  <li class="dropdown">      <a href="#"            class="dropdown-toggle"            data-toggle="dropdown">Chapter 15. Complex arithmetic <complex.h><b class="caret"></b>      </a>      <ul class="dropdown-menu"><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp55623296">15.1. Introduction</a></span></dt><dt><span class="sect1"><a href="index.html#idp55343360">15.2. Conventions</a></span></dt><dt><span class="sect1"><a href="index.html#idp55344800">15.3. Branch Cuts</a></span></dt><dt><span class="sect1"><a href="index.html#idp55347888">15.4. The CX_LIMITED_RANGE Pragma</a></span></dt><dt><span class="sect1"><a href="index.html#idp55354512">15.5. Trigonometric functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp55355248">15.5.1. The cscos functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp55375248">15.5.2. The casin functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57339712">15.5.3. The cstan functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57368368">15.5.4. The ccos functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57381584">15.5.5. The csin functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57394224">15.5.6. The ctan functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp57407424">15.6. Hyperbolic functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp57408160">15.6.1. The cscosh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57431168">15.6.2. The casinh function</a></span></dt><dt><span class="sect2"><a href="index.html#idp57461008">15.6.3. The catanh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57491008">15.6.4. The ccosh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57504016">15.6.5. The csinh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57517056">15.6.6. The ctanh functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp57530272">15.7. Exponential and logrithmic functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp57531024">15.7.1. The cexp functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57544560">15.7.2. The clog functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp57567200">15.8. Power and absolute-value functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp57567952">15.8.1. The cabs functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57581024">15.8.2. The cpow functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57595888">15.8.3. The csqrt functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp57610912">15.9. Manipulation functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp57611648">15.9.1. The carg functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57637584">15.9.2. The cimag functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57651952">15.9.3. The conj functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57666432">15.9.4. The cproj functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57683040">15.9.5. The creal function</a></span></dt></dl></dd></dl></div>     </ul>    </li>  </ul> <ul class="nav"><li><a href="../assert/index.html">&lt;&lt; Chapter 14. Diagnostics <assert.h> </a><li><li><a href="../ctypes/index.html"> Chapter 16. Character Handling <ctype.h> >></a><li></ul>    </div>    </div>  </div><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 15. Complex arithmetic <complex.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../assert/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../ctypes/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 15. Complex arithmetic <complex.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp54972880"></a>Chapter 15. Complex arithmetic <complex.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp55623296">15.1. Introduction</a></span></dt><dt><span class="sect1"><a href="index.html#idp55343360">15.2. Conventions</a></span></dt><dt><span class="sect1"><a href="index.html#idp55344800">15.3. Branch Cuts</a></span></dt><dt><span class="sect1"><a href="index.html#idp55347888">15.4. The CX_LIMITED_RANGE Pragma</a></span></dt><dt><span class="sect1"><a href="index.html#idp55354512">15.5. Trigonometric functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp55355248">15.5.1. The cscos functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp55375248">15.5.2. The casin functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57339712">15.5.3. The cstan functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57368368">15.5.4. The ccos functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57381584">15.5.5. The csin functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57394224">15.5.6. The ctan functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp57407424">15.6. Hyperbolic functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp57408160">15.6.1. The cscosh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57431168">15.6.2. The casinh function</a></span></dt><dt><span class="sect2"><a href="index.html#idp57461008">15.6.3. The catanh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57491008">15.6.4. The ccosh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57504016">15.6.5. The csinh functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57517056">15.6.6. The ctanh functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp57530272">15.7. Exponential and logrithmic functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp57531024">15.7.1. The cexp functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57544560">15.7.2. The clog functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp57567200">15.8. Power and absolute-value functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp57567952">15.8.1. The cabs functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57581024">15.8.2. The cpow functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57595888">15.8.3. The csqrt functions</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp57610912">15.9. Manipulation functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp57611648">15.9.1. The carg functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57637584">15.9.2. The cimag functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57651952">15.9.3. The conj functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57666432">15.9.4. The cproj functions</a></span></dt><dt><span class="sect2"><a href="index.html#idp57683040">15.9.5. The creal function</a></span></dt></dl></dd></dl></div><div class="sect1" title="15.1. Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp55623296"></a>15.1. Introduction</h2></div></div></div><p>The header <code class="code"><complex.h></code> defines macros and
       declares functions that support complex arithmetic. Each synopsis
       specifies a family of functions consisting of a principal function with
       one or more <code class="code">double complex</code> parameters and a
@@ -8,12 +8,12 @@
       and <code class="code">long double</code> parameters and return values.</p><p>The macro complex expands to <code class="code">_Complex</code>; the macro
       <code class="code">_Complex_I</code> expands to a constant expression of type
       <code class="code">const float _Complex</code>, with the value of the imaginary
-      unit.<sup>[<a class="footnote" href="#ftn.idp2720544" name="idp2720544">147</a>]</sup>.</p><p>The macro <code class="code">I</code> expands to
+      unit.<sup>[<a class="footnote" href="#ftn.idp55629200" name="idp55629200">147</a>]</sup>.</p><p>The macro <code class="code">I</code> expands to
 <code class="code">_Complex_I</code>.</p><p>Notwithstanding the provisions of reserved identifiers, a program may
 undefine and perhaps then redefine the macros <code class="code">complex</code> and
 <code class="code">I</code>.</p><p><span class="bold"><strong>Forward references:</strong></span> IEC
-60559-compatible complex arithmetic (annex G).</p></div><div class="sect1" title="15.2. Conventions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2373664"></a>15.2. Conventions</h2></div></div></div><p>Values are interpreted as radians, not degrees. An implementation
-      may set errno but is not required to.</p></div><div class="sect1" title="15.3. Branch Cuts"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2375104"></a>15.3. Branch Cuts</h2></div></div></div><p>Some of the functions below have branch cuts, across which the
+60559-compatible complex arithmetic (annex G).</p></div><div class="sect1" title="15.2. Conventions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp55343360"></a>15.2. Conventions</h2></div></div></div><p>Values are interpreted as radians, not degrees. An implementation
+      may set errno but is not required to.</p></div><div class="sect1" title="15.3. Branch Cuts"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp55344800"></a>15.3. Branch Cuts</h2></div></div></div><p>Some of the functions below have branch cuts, across which the
       function is discontinuous. For implementations with a signed zero
       (including all IEC 60559 implementations) that follow the specifications
       of annex G, the sign of zero distinguishes one side of a cut from another
@@ -30,14 +30,14 @@ undefine and perhaps then redefine the macros <code class="code">complex</code> 
       finite endpoint.) For example, for the square root function, coming
       counter clockwise around the finite endpoint of the cut along the
       negative real axis approaches the cut from above, so the cut maps to the
-      positive imaginary axis.</p></div><div class="sect1" title="15.4. The CX_LIMITED_RANGE Pragma"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2378192"></a>15.4. The CX_LIMITED_RANGE Pragma</h2></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+      positive imaginary axis.</p></div><div class="sect1" title="15.4. The CX_LIMITED_RANGE Pragma"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp55347888"></a>15.4. The CX_LIMITED_RANGE Pragma</h2></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="cp">#pragma STDC CX_LIMITED_RANGE on-off-switch</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The usual mathematical formulas for complex multiply, divide, and
 absolute value are problematic because of their treatment of infinities and
 because of undue overflow and underflow. The <code class="code">CX_LIMITED_RANGE</code>
 pragma can be used to inform the implementation that (where the state is “on”)
-the usual mathematical formulas are acceptable.<sup>[<a class="footnote" href="#ftn.idp2382352" name="idp2382352">148</a>]</sup> The pragma can occur either outside external
+the usual mathematical formulas are acceptable.<sup>[<a class="footnote" href="#ftn.idp55352048" name="idp55352048">148</a>]</sup> The pragma can occur either outside external
 declarations or preceding all explicit declarations and statements inside a
 compound statement. When outside external declarations, the pragma takes effect
 from its occurrence until another <code class="code">CX_LIMITED_RANGE</code> pragma is
@@ -48,7 +48,7 @@ nested compound statement), or until the end of the compound statement; at the
 end of a compound statement the state for the pragma is restored to its
 condition just before the compound statement. If this pragma is used in any
 other context, the behavior is undefined. The default state for the pragma is
-“off”.</p></div><div class="sect1" title="15.5. Trigonometric functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2384816"></a>15.5. Trigonometric functions</h2></div></div></div><div class="sect2" title="15.5.1. The cscos functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp2385552"></a>15.5.1. The cscos functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+“off”.</p></div><div class="sect1" title="15.5. Trigonometric functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp55354512"></a>15.5. Trigonometric functions</h2></div></div></div><div class="sect2" title="15.5.1. The cscos functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp55355248"></a>15.5.1. The cscos functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacos</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">cacosf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacosl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -59,7 +59,7 @@ other context, the behavior is undefined. The default state for the pragma is
 of a strip mathematically unbounded along the imaginary axis and in the
 interval [0, <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 <mi>π</mi>
-</math>] along the real axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+</math>] along the real axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacos</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">cacosf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacosl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -69,20 +69,20 @@ of <code class="code">z</code>. If <code class="code">y = cacos(z)</code>, then 
 ccos(y)</code>. The real part of <code class="code">y</code> is chosen in the interval
 [0, <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 <mi>π</mi>
-</math>].</p><p>One has:</p><pre class="screen">cacos(z) = -i * clog(z + i * csqrt(1 - z * z))</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</math>].</p><p>One has:</p><pre class="screen">cacos(z) = -i * clog(z + i * csqrt(1 - z * z))</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[cacos(z)]=%lf and Im[cacos(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cacos</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cacos</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[cacos(z)]=%lf and Im[cacos(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cacos</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cacos</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre><p>Compile like <code class="code">clang filename.c -lm</code>. Execution gives
-following output:</p><pre class="screen">Re[cacos(z)]=0.936812 and Im[cacos(z)]=-2.305509</pre></div><div class="sect2" title="15.5.2. The casin functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp2405552"></a>15.5.2. The casin functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+following output:</p><pre class="screen">Re[cacos(z)]=0.936812 and Im[cacos(z)]=-2.305509</pre></div><div class="sect2" title="15.5.2. The casin functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp55375248"></a>15.5.2. The casin functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">casin</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">casinf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">casinl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -105,25 +105,25 @@ the interval [<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http:/
 <mo>/</mo>
 </mrow>
 <mn>2</mn>
-</math>] along the real axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+</math>] along the real axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">casin</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">casinf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">casinl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
-</pre><p><span class="bold"><strong>Description</strong></span></p><pre class="screen">csin(z) = (exp(i * z) - exp(-i * z)) / (2 * i)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</pre><p><span class="bold"><strong>Description</strong></span></p><pre class="screen">csin(z) = (exp(i * z) - exp(-i * z)) / (2 * i)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[cacsin(z)]=%lf and Im[cacsin(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">casin</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">casin</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[cacsin(z)]=%lf and Im[cacsin(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">casin</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">casin</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre><p>Compile like <code class="code">clang filename.c -lm</code>. Execution gives
-following output:</p><pre class="screen">Re[cacsin(z)]=0.633984 and Im[cacsin(z)]=2.305509</pre></div><div class="sect2" title="15.5.3. The cstan functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4431088"></a>15.5.3. The cstan functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+following output:</p><pre class="screen">Re[cacsin(z)]=0.633984 and Im[cacsin(z)]=2.305509</pre></div><div class="sect2" title="15.5.3. The cstan functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57339712"></a>15.5.3. The cstan functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">catan</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">catanf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">catanl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -147,7 +147,7 @@ interval [<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www
 <mo>/</mo>
 </mrow>
 <mn>2</mn>
-</math>] along the real axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+</math>] along the real axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">catan</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">catanf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">catanl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -165,98 +165,98 @@ interval [<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www
 <mo>/</mo>
 </mrow>
 <mn>2</mn>
-</math>].</p><p>One has:</p><pre class="screen">catan(z) = (clog(1 + i * z) - clog(1 - i * z)) / (2 * i)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</math>].</p><p>One has:</p><pre class="screen">catan(z) = (clog(1 + i * z) - clog(1 - i * z)) / (2 * i)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[cactan(z)]=%lf and Im[cactan(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">catan</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">catan</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[cactan(z)]=%lf and Im[cactan(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">catan</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">catan</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre><p>Compile like . Execution<code class="code">clang filename.c -lm</code> gives
-following output:</p><pre class="screen">Re[cactan(z)]=1.448307 and Im[cactan(z)]=0.158997</pre></div><div class="sect2" title="15.5.4. The ccos functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4460096"></a>15.5.4. The ccos functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+following output:</p><pre class="screen">Re[cactan(z)]=1.448307 and Im[cactan(z)]=0.158997</pre></div><div class="sect2" title="15.5.4. The ccos functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57368368"></a>15.5.4. The ccos functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ccos</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">ccosf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ccosl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">ccos</code> functions compute the complex cosine of
 <code class="code">z</code>.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">ccos</code> functions return the complex cosine
-value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ccos</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">ccosf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ccosl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
-</pre><p>Link with <code class="code">-lm</code>.</p><p><span class="bold"><strong>Description</strong></span></p><p>The complex cosine function is defined as:</p><pre class="screen">ccos(z) = (exp(i * z) + exp(-i * z)) / 2</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</pre><p>Link with <code class="code">-lm</code>.</p><p><span class="bold"><strong>Description</strong></span></p><p>The complex cosine function is defined as:</p><pre class="screen">ccos(z) = (exp(i * z) + exp(-i * z)) / 2</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[ccos(z)]=%lf and Im[ccos(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">ccos</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">ccos</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[ccos(z)]=%lf and Im[ccos(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">ccos</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">ccos</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[ccos(z)]=-27.034946 and Im[ccos(z)]=-3.851153</pre></div><div class="sect2" title="15.5.5. The csin functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4473312"></a>15.5.5. The csin functions</h3></div></div></div><p>Synopsis</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[ccos(z)]=-27.034946 and Im[ccos(z)]=-3.851153</pre></div><div class="sect2" title="15.5.5. The csin functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57381584"></a>15.5.5. The csin functions</h3></div></div></div><p>Synopsis</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csin</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">csinf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csinl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code"></code> functions compute the complex sine of
 <code class="code">z</code>.</p><p><span class="bold"><strong>Desciption</strong></span></p><p>The <code class="code">csin</code> functions return the complex sine
-value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csin</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">csinf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csinl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
-</pre><p>Link with <code class="code">-lm</code>.</p><p><span class="bold"><strong>Description</strong></span></p><p>The complex sine function is defined as:</p><pre class="screen">csin(z) = (exp(i * z) - exp(-i * z)) / (2 * i)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</pre><p>Link with <code class="code">-lm</code>.</p><p><span class="bold"><strong>Description</strong></span></p><p>The complex sine function is defined as:</p><pre class="screen">csin(z) = (exp(i * z) - exp(-i * z)) / (2 * i)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[csin(z)]=%lf and Im[csin(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">csin</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">csin</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[csin(z)]=%lf and Im[csin(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">csin</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">csin</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[csin(z)]=3.853738 and Im[csin(z)]=-27.01681</pre></div><div class="sect2" title="15.5.6. The ctan functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4485952"></a>15.5.6. The ctan functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[csin(z)]=3.853738 and Im[csin(z)]=-27.01681</pre></div><div class="sect2" title="15.5.6. The ctan functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57394224"></a>15.5.6. The ctan functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ctan</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">ctanf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ctanl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">ctan</code> functions compute the complex tangent of
 <code class="code">z</code>.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">ctan</code> functions return the complex tangent
-value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ctan</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">ctanf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ctanl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
-</pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Description</strong></span></p><p>The complex tangent function is defined as:</p><pre class="screen">ctan(z) = csin(z) / ccos(z)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Description</strong></span></p><p>The complex tangent function is defined as:</p><pre class="screen">ctan(z) = csin(z) / ccos(z)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[ctann(z)]=%lf and Im[ctan(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">ctan</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">ctan</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[ctann(z)]=%lf and Im[ctan(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">ctan</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">ctan</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[ctann(z)]=-0.000187 and Im[ctan(z)]=0.999356</pre></div></div><div class="sect1" title="15.6. Hyperbolic functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp4499152"></a>15.6. Hyperbolic functions</h2></div></div></div><div class="sect2" title="15.6.1. The cscosh functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4499888"></a>15.6.1. The cscosh functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[ctann(z)]=-0.000187 and Im[ctan(z)]=0.999356</pre></div></div><div class="sect1" title="15.6. Hyperbolic functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp57407424"></a>15.6. Hyperbolic functions</h2></div></div></div><div class="sect2" title="15.6.1. The cscosh functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57408160"></a>15.6.1. The cscosh functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacosh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">cacoshf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacoshl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -273,7 +273,7 @@ real axis and in the interval [<math xmlns="http://www.w3.org/1998/Math/MathML" 
 <mo>+</mo>
 <mi>i</mi>
 <mi>π</mi>
-</math>] along the imaginary axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+</math>] along the imaginary axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacosh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">cacoshf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cacoshl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -288,21 +288,21 @@ chosen in the interval [<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:m
 <mi>π</mi>
 </math>]. The real part of <code class="code">y</code> is chosen
 nonnegative.</p><p>One has:</p><pre class="screen">cacosh(z) = 2 * clog(csqrt((z + 1) / 2) + csqrt((z - 1) /
-2))</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+2))</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[cacosh(z)]=%lf and Im[cacosh(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cacosh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cacosh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[cacosh(z)]=%lf and Im[cacosh(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cacosh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cacosh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[cacosh(z)]=2.305509 and Im[cacosh(z)]=0.93681</pre></div><div class="sect2" title="15.6.2. The casinh function"><div class="titlepage"><div><div><h3 class="title"><a name="idp4522896"></a>15.6.2. The casinh function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[cacosh(z)]=2.305509 and Im[cacosh(z)]=0.93681</pre></div><div class="sect2" title="15.6.2. The casinh function"><div class="titlepage"><div><div><h3 class="title"><a name="idp57431168"></a>15.6.2. The casinh function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">casinh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">casinhf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">casinhl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -327,7 +327,7 @@ axis and in the interval [<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns
 <mo>/</mo>
 </mrow>
 <mn>2</mn>
-</math>] along the imaginary axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+</math>] along the imaginary axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">casinh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">casinhf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">casinhl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -349,21 +349,21 @@ interval [<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www
 <mo>/</mo>
 </mrow>
 <mn>2</mn>
-</math>].</p><p>One has:</p><pre class="screen">casinh(z) = clog(z + csqrt(z * z + 1))</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</math>].</p><p>One has:</p><pre class="screen">casinh(z) = clog(z + csqrt(z * z + 1))</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[casinh(z)]=%lf and Im[casinh(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">casinh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">casinh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[casinh(z)]=%lf and Im[casinh(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">casinh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">casinh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[casinh(z)]=2.299914 and Im[casinh(z)]=0.917617</pre></div><div class="sect2" title="15.6.3. The catanh functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4552736"></a>15.6.3. The catanh functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[casinh(z)]=2.299914 and Im[casinh(z)]=0.917617</pre></div><div class="sect2" title="15.6.3. The catanh functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57461008"></a>15.6.3. The catanh functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">catanh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">catanhf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">catanhl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -388,7 +388,7 @@ axis and in the interval [<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns
 <mo>/</mo>
 </mrow>
 <mn>2</mn>
-</math></p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+</math></p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">catanh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">catanhf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">catanhl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -410,128 +410,128 @@ chosen in the interval [<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:m
 <mo>/</mo>
 </mrow>
 <mn>2</mn>
-</math>].</p><p>One has:</p><pre class="screen">catanh(z) = 0.5 * (clog(1 + z) - clog(1 - z))</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</math>].</p><p>One has:</p><pre class="screen">catanh(z) = 0.5 * (clog(1 + z) - clog(1 - z))</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[catanh(z)]=%lf and Im[catanh(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">catanh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">catanh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[catanh(z)]=%lf and Im[catanh(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">catanh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">catanh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[catanh(z)]=0.117501 and Im[catanh(z)]=1.409921</pre></div><div class="sect2" title="15.6.4. The ccosh functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4582736"></a>15.6.4. The ccosh functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[catanh(z)]=0.117501 and Im[catanh(z)]=1.409921</pre></div><div class="sect2" title="15.6.4. The ccosh functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57491008"></a>15.6.4. The ccosh functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ccosh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">ccoshf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ccoshl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">ccosh</code> functions compute the complex hyperbolic
 cosine of <code class="code">z</code>.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">ccosh</code> functions return the complex hyperbolic
-cosine value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+cosine value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ccosh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">ccoshf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ccoshl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
-</pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Description</strong></span></p><p>One has:</p><pre class="screen">ccosh(z) = (exp(z)+exp(-z))/2</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Description</strong></span></p><p>One has:</p><pre class="screen">ccosh(z) = (exp(z)+exp(-z))/2</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[ccosh(z)]=%lf and Im[ccosh(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">ccosh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">ccosh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[ccosh(z)]=%lf and Im[ccosh(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">ccosh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">ccosh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[ccosh(z)]=-6.580663 and Im[ccosh(z)]=-7.581553</pre></div><div class="sect2" title="15.6.5. The csinh functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4595744"></a>15.6.5. The csinh functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[ccosh(z)]=-6.580663 and Im[ccosh(z)]=-7.581553</pre></div><div class="sect2" title="15.6.5. The csinh functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57504016"></a>15.6.5. The csinh functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csinh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">csinhf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csinhl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">csinh</code> functions compute the complex hyperbolic
 sine of <code class="code">z</code>.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">csinh</code> functions return the complex hyperbolic sine
-value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csinh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">csinhf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csinhl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
-</pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Description</strong></span></p><p>The complex hyperbolic sine function is defined as:</p><pre class="screen">csinh(z) = (exp(z)-exp(-z))/2</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Description</strong></span></p><p>The complex hyperbolic sine function is defined as:</p><pre class="screen">csinh(z) = (exp(z)-exp(-z))/2</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[csinh(z)]=%lf and Im[csinh(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">csinh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">csinh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[csinh(z)]=%lf and Im[csinh(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">csinh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">csinh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[csinh(z)]=-6.548120 and Im[csinh(z)]=-7.619232</pre></div><div class="sect2" title="15.6.6. The ctanh functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4608784"></a>15.6.6. The ctanh functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[csinh(z)]=-6.548120 and Im[csinh(z)]=-7.619232</pre></div><div class="sect2" title="15.6.6. The ctanh functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57517056"></a>15.6.6. The ctanh functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ctanh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">ctanhf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ctanhl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">ctanh</code> functions compute the complex hyperbolic
 tangent of <code class="code">z</code>.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">ctanh</code> functions return the complex hyperbolic
-tangent value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+tangent value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ctanh</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">ctanhf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">ctanhl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Description</strong></span></p><p>The complex hyperbolic tangent function is defined mathematically
-as:</p><pre class="screen">ctanh(z) = csinh(z) / ccosh(z)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+as:</p><pre class="screen">ctanh(z) = csinh(z) / ccosh(z)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[ctanh(z)]=%lf and Im[ctanh(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">ctanh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">ctanh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[ctanh(z)]=%lf and Im[ctanh(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">ctanh</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">ctanh</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[ctanh(z)]=1.000710 and Im[ctanh(z)]=0.004908</pre></div></div><div class="sect1" title="15.7. Exponential and logrithmic functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp4622000"></a>15.7. Exponential and logrithmic functions</h2></div></div></div><div class="sect2" title="15.7.1. The cexp functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4622752"></a>15.7.1. The cexp functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[ctanh(z)]=1.000710 and Im[ctanh(z)]=0.004908</pre></div></div><div class="sect1" title="15.7. Exponential and logrithmic functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp57530272"></a>15.7. Exponential and logrithmic functions</h2></div></div></div><div class="sect2" title="15.7.1. The cexp functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57531024"></a>15.7.1. The cexp functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cexp</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">cexpf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cexpl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">cexp</code> functions compute the complex base-e
 exponential of <code class="code">z</code>.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">cexp</code> functions return the complex base-e
-exponential value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+exponential value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cexp</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">cexpf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cexpl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>The function calculates e (2.71828..., the base
 of natural logarithms) raised to the power of
-<code class="code">z</code>.</strong></span></p><p>One has:</p><pre class="screen">cexp(I * z) = ccos(z) + I * csin(z)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+<code class="code">z</code>.</strong></span></p><p>One has:</p><pre class="screen">cexp(I * z) = ccos(z) + I * csin(z)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[cexp(z)]=%lf and Im[cexp(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cexp</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cexp</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[cexp(z)]=%lf and Im[cexp(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cexp</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cexp</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[cexp(z)]=-13.128783 and Im[cexp(z)]=-15.200784</pre></div><div class="sect2" title="15.7.2. The clog functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4636288"></a>15.7.2. The clog functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[cexp(z)]=-13.128783 and Im[cexp(z)]=-15.200784</pre></div><div class="sect2" title="15.7.2. The clog functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57544560"></a>15.7.2. The clog functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">clog</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">clogf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">clogl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -548,7 +548,7 @@ interval [<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www
 <mo>+</mo>
 <mi>i</mi>
 <mi>π</mi>
-</math> ] along the imaginary axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+</math> ] along the imaginary axis.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">clog</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">clogf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">clogl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -562,48 +562,48 @@ chosen in the interval [<math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:m
 <mo>,</mo>
 <mo>+</mo>
 <mi>π</mi>
-</math>].</p><p>One has:</p><pre class="screen">clog(z) = log(cabs(z)) + I * carg(z)</pre><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</math>].</p><p>One has:</p><pre class="screen">clog(z) = log(cabs(z)) + I * carg(z)</pre><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[clog(z)]=%lf and Im[clog(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">clog</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">clog</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[clog(z)]=%lf and Im[clog(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">clog</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">clog</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[clog(z)]=1.609438 and Im[clog(z)]=0.927295</pre></div></div><div class="sect1" title="15.8. Power and absolute-value functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp4658928"></a>15.8. Power and absolute-value functions</h2></div></div></div><div class="sect2" title="15.8.1. The cabs functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4659680"></a>15.8.1. The cabs functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[clog(z)]=1.609438 and Im[clog(z)]=0.927295</pre></div></div><div class="sect1" title="15.8. Power and absolute-value functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp57567200"></a>15.8. Power and absolute-value functions</h2></div></div></div><div class="sect2" title="15.8.1. The cabs functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57567952"></a>15.8.1. The cabs functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="nf">cabs</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="nf">cabsf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="nf">cabsl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">cabs</code> functions compute the complex absolute value
 (also called norm, modulus, or magnitude) of <code class="code">z</code>.</p><p><span class="bold"><strong>The <code class="code">cabs</code> functions return the
-complex absolute value.</strong></span></p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+complex absolute value.</strong></span></p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="nf">cabs</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="nf">cabsf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="nf">cabsl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">cabs()</code> function returns the absolute value of the
-complex number <code class="code">z</code>. The result is a real number.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+complex number <code class="code">z</code>. The result is a real number.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[cabs(z)]=%lf and Im[cabs(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cabs</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cabs</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[cabs(z)]=%lf and Im[cabs(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cabs</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cabs</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[cabs(z)]=5.000000 and Im[cabs(z)]=0.000000</pre></div><div class="sect2" title="15.8.2. The cpow functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4672752"></a>15.8.2. The cpow functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[cabs(z)]=5.000000 and Im[cabs(z)]=0.000000</pre></div><div class="sect2" title="15.8.2. The cpow functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57581024"></a>15.8.2. The cpow functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cpow</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">y</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">cpowf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">x</span><span class="p">,</span> <span class="kt">float</span> <span class="n">complex</span> <span class="n">y</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cpowl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">x</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">y</span><span class="p">);</span>
@@ -616,35 +616,35 @@ and the output is:
 </msup>
 </math>, with a branch cut for the first parameter along
 the negative real axis.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">cpow</code> functions return the complex power function
-value.</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+value.</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cpow</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">y</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">cpowf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">x</span><span class="p">,</span> <span class="kt">float</span> <span class="n">complex</span> <span class="n">y</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cpowl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">x</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">y</span><span class="p">);</span>
 </pre></div>
 </pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Description</strong></span></p><p>The function calculates <code class="code">x</code> raised to the power
 <code class="code">z</code>. (With a branch cut for <code class="code">x</code> along the
-negative real axis.)</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+negative real axis.)</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[cpow(z, z)]=%lf and Im[cpow(z, z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cpow</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cpow</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[cpow(z, z)]=%lf and Im[cpow(z, z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cpow</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cpow</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[cpow(z, z)]=-2.997991 and Im[cpow(z, z)]=0.623785</pre></div><div class="sect2" title="15.8.3. The csqrt functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4687616"></a>15.8.3. The csqrt functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[cpow(z, z)]=-2.997991 and Im[cpow(z, z)]=0.623785</pre></div><div class="sect2" title="15.8.3. The csqrt functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57595888"></a>15.8.3. The csqrt functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csqrt</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">csqrtf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csqrtl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">csqrt</code> functions compute the complex square root of
 <code class="code">z</code>, with a branch cut along the negative real axis.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code"></code> functions return the complex square root value,
-in the range of the right halfplane (including the imaginary axis).</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+in the range of the right halfplane (including the imaginary axis).</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csqrt</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">csqrtf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">csqrtl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -653,21 +653,21 @@ in the range of the right halfplane (including the imaginary axis).</p><p><span 
 real part, and with a branch cut along the negative real axis. (That means that
 <code class="code">csqrt(-1+eps*I)</code> will be close to <code class="code">I</code> while
 <code class="code">csqrt(-1-eps*I)</code> will be close to <code class="code">-I</code>, if
-<code class="code">eps</code> is a small positive real number.)</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+<code class="code">eps</code> is a small positive real number.)</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[csqrt(z)]=%lf and Im[csqrt(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">csqrt</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">csqrt</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[csqrt(z)]=%lf and Im[csqrt(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">csqrt</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">csqrt</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[csqrt(z)]=2.000000 and Im[csqrt(z)]=1.000000</pre></div></div><div class="sect1" title="15.9. Manipulation functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp4702640"></a>15.9. Manipulation functions</h2></div></div></div><div class="sect2" title="15.9.1. The carg functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4703376"></a>15.9.1. The carg functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[csqrt(z)]=2.000000 and Im[csqrt(z)]=1.000000</pre></div></div><div class="sect1" title="15.9. Manipulation functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp57610912"></a>15.9. Manipulation functions</h2></div></div></div><div class="sect2" title="15.9.1. The carg functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57611648"></a>15.9.1. The carg functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="nf">carg</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="nf">cargf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="nf">cargl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -680,7 +680,7 @@ axis.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The carg fu
 <mo>,</mo>
 <mo>+</mo>
 <mi>π</mi>
-</math></p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+</math></p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="nf">carg</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="nf">cargf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="nf">cargl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -695,76 +695,76 @@ absolute value of <code class="code">z</code>, and <code class="code">a = carg(z
 <mo>,</mo>
 <mo>+</mo>
 <mi>π</mi>
-</math>].</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+</math>].</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[carg(z)]=%lf and Im[carg(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">carg</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">carg</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[carg(z)]=%lf and Im[carg(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">carg</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">carg</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[carg(z)]=0.927295 and Im[carg(z)]=0.000000</pre></div><div class="sect2" title="15.9.2. The cimag functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4729312"></a>15.9.2. The cimag functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[carg(z)]=0.927295 and Im[carg(z)]=0.000000</pre></div><div class="sect2" title="15.9.2. The cimag functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57637584"></a>15.9.2. The cimag functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="nf">cimag</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="nf">cimagf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="nf">cimagl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">cimag</code> functions compute the imaginary part of
 <code class="code">z</code>.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">cimag</code> functions return the imaginary part value
-(as a real).</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+(as a real).</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="nf">cimag</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="nf">cimagf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="nf">cimagl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">cimag()</code> function returns the imaginary part of the
-complex number <code class="code">z</code>.</p><p>One has:</p><pre class="screen">z = creal(z) + I * cimag(z)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+complex number <code class="code">z</code>.</p><p>One has:</p><pre class="screen">z = creal(z) + I * cimag(z)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[cimag(z)]=%lf and Im[cimag(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cimag</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cimag</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[cimag(z)]=%lf and Im[cimag(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cimag</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">cimag</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[cimag(z)]=4.000000 and Im[cimag(z)]=0.000000</pre></div><div class="sect2" title="15.9.3. The conj functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4743680"></a>15.9.3. The conj functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[cimag(z)]=4.000000 and Im[cimag(z)]=0.000000</pre></div><div class="sect2" title="15.9.3. The conj functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57651952"></a>15.9.3. The conj functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">conj</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">conjf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">conjl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">conj</code> functions compute the complex conjugate of
 <code class="code">z</code>, by reversing the sign of its imaginary part.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">conj</code> functions return the complex conjugate
-value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+value.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">conj</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">conjf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">conjl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">conj()</code> function returns the complex conjugate
 value of <code class="code">z</code>. That is the value obtained by changing the sign of
-the imaginary part.</p><p>One has:</p><pre class="screen">cabs(z) = csqrt(z * conj(z))</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+the imaginary part.</p><p>One has:</p><pre class="screen">cabs(z) = csqrt(z * conj(z))</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[conj(z)]=%lf and Im[conj(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">conj</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">conj</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[conj(z)]=%lf and Im[conj(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">conj</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">conj</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[conj(z)]=3.000000 and Im[conj(z)]=-4.000000</pre></div><div class="sect2" title="15.9.4. The cproj functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp4758160"></a>15.9.4. The cproj functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[conj(z)]=3.000000 and Im[conj(z)]=-4.000000</pre></div><div class="sect2" title="15.9.4. The cproj functions"><div class="titlepage"><div><div><h3 class="title"><a name="idp57666432"></a>15.9.4. The cproj functions</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cproj</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">cprojf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cprojl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -775,7 +775,7 @@ and the output is:
 infinite part and one NaN part) project to positive infinity on the real
 axis. If <code class="code">z</code> has an infinite part, then
 <code class="code">cproj(z)</code> is equivalent to:</p><pre class="screen">INFINITY + I * copysign(0.0, cimag(z))</pre><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">cproj</code> functions return the value of the projection
-onto the Riemann sphere.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+onto the Riemann sphere.</p><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cproj</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="n">complex</span> <span class="nf">cprojf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="nf">cprojl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -784,48 +784,48 @@ onto the Riemann sphere.</p><p><span class="bold"><strong>Synopsis</strong></spa
 Riemann Sphere, the one-point compactification of the complex plane. Each
 finite point <code class="code">z</code> projects to <code class="code">z</code> itself. Every
 complex infinite value is projected to a single infinite value, namely to
-positive infinity on the real axis.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+positive infinity on the real axis.</p><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[cproj(z)]=%lf and Im[cproj(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cproj</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span>    <span class="p">(</span><span class="n">cproj</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[cproj(z)]=%lf and Im[cproj(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">cproj</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span>    <span class="p">(</span><span class="n">cproj</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[cproj(z)]=3.000000 and Im[cproj(z)]=4.000000</pre><p>Since our complex number was finite, it projected itself.</p></div><div class="sect2" title="15.9.5. The creal function"><div class="titlepage"><div><div><h3 class="title"><a name="idp4774768"></a>15.9.5. The creal function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+<pre class="screen">Re[cproj(z)]=3.000000 and Im[cproj(z)]=4.000000</pre><p>Since our complex number was finite, it projected itself.</p></div><div class="sect2" title="15.9.5. The creal function"><div class="titlepage"><div><div><h3 class="title"><a name="idp57683040"></a>15.9.5. The creal function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="nf">creal</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="nf">crealf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="nf">creall</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">creal</code> functions compute the real part of
 <code class="code">z</code>.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">creal</code> functions return the real part
-value.</p><p><span class="bold"><strong>Returns</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;complex.h&gt;</span>
+value.</p><p><span class="bold"><strong>Returns</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <complex.h></span>
 <span class="kt">double</span> <span class="nf">creal</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">float</span> <span class="nf">crealf</span><span class="p">(</span><span class="kt">float</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 <span class="kt">long</span> <span class="kt">double</span> <span class="nf">creall</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </pre><p>Link with <code class="code">-lm.</code></p><p><span class="bold"><strong>Desciption</strong></span></p><p>The <code class="code">creal()</code> function returns the real part of the
-complex number <code class="code">z</code>.</p><p>One has:</p><pre class="screen">z = creal(z) + I * cimag(z)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+complex number <code class="code">z</code>.</p><p>One has:</p><pre class="screen">z = creal(z) + I * cimag(z)</pre><p><span class="bold"><strong>Example</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">4.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Re[creal(z)]=%lf and Im[creal(z)]=%lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">creal</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span>    <span class="p">(</span><span class="n">creal</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Re[creal(z)]=%lf and Im[creal(z)]=%lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">creal</span><span class="p">(</span><span class="n">z</span><span class="p">)),</span> <span class="n">cimag</span>    <span class="p">(</span><span class="n">creal</span><span class="p">(</span><span class="n">z</span><span class="p">)));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre>
 and the output is:
-<pre class="screen">Re[creal(z)]=3.000000 and Im[creal(z)]=0.000000</pre></div></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp2720544" id="ftn.idp2720544">147</a>] </sup>The imaginary unit is a number
+<pre class="screen">Re[creal(z)]=3.000000 and Im[creal(z)]=0.000000</pre></div></div><div class="footnotes"><br/><hr align="left" width="100"/><div class="footnote"><p><sup>[<a class="para" href="#idp55629200" id="ftn.idp55629200">147</a>] </sup>The imaginary unit is a number
       <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 <mi>i</mi>
 </math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mml="http://www.w3.org/1998/Math/MathML">
@@ -836,7 +836,7 @@ and the output is:
 <mo>=</mo>
 <mo>−</mo>
 <mn>1</mn>
-</math></p></div><div class="footnote"><p><sup>[<a class="para" href="#idp2382352" id="ftn.idp2382352">148</a>] </sup>The purpose
+</math></p></div><div class="footnote"><p><sup>[<a class="para" href="#idp55352048" id="ftn.idp55352048">148</a>] </sup>The purpose
 of the pragma is to allow the implementation to use the
-formulas.</p></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../assert/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ctypes/index.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 14. Diagnostics &lt;assert.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Chapter 16. Character Handling &lt;ctype.h></td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+formulas.</p></div></div></div><div class="navfooter"><hr/><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../assert/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../ctypes/index.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 14. Diagnostics <assert.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Chapter 16. Character Handling <ctype.h></td></tr></table></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
     GNU FDL license is applicable where not stated.</p></body></html>

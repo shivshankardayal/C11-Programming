@@ -1014,5 +1014,319 @@ which is denoted here by a and the second by an uppercase letter.</d:para>
 state (Extended multibyte/wide character conversion utilities), the
 <d:code>wcrtomb</d:code> function (The wcrtomb function).</d:para>
     </d:sect2>
+    <d:sect2>
+      <d:title>The fscanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h>
+int fscanf(FILE * restrict stream, const char * restrict format, ...);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>fscanf</d:code> function reads input from the stream
+pointed to by stream, under control of the string pointed to by format that
+specifies the admissible input sequences and how they are to be converted for
+assignment, using subsequent arguments as pointers to the objects to receive
+the converted input. If there are insufficient arguments for the format, the
+behavior is undefined. If the format is exhausted while arguments remain, the
+excess arguments are evaluated (as always) but are otherwise ignored.</d:para>
+<d:para>The format shall be a multibyte character sequence, beginning and
+ending in its initial shift state. The format is composed of zero or more
+directives: one or more white-space characters, an ordinary multibyte character
+(neither <d:code>%</d:code> nor a white-space character), or a conversion
+specification. Each conversion specification is introduced by the character
+<d:code>%</d:code>. After the <d:code>%</d:code>, the following appear in
+sequence:</d:para>
+<d:itemizedlist>
+  <d:listitem>
+    <d:para>An optional assignment-suppressing character
+    <d:code>*</d:code>.</d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>An optional decimal integer greater than zero that specifies the
+    maximum field width (in characters).</d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>An optional <d:emphasis role="italic">length modifier</d:emphasis>
+    that specifies the size of the receiving object.</d:para>
+  </d:listitem>
+  <d:listitem>
+    <d:para>A <d:emphasis role="italic">conversion specifier</d:emphasis>
+    character that specifies the type of conversion to be applied.</d:para>
+  </d:listitem>
+</d:itemizedlist>
+<d:para>The <d:code>fscanf</d:code> function executes each directive of the
+format in turn. If a directive fails, as detailed below, the function
+returns. Failures are described as input failures (due to the occurrence of an
+encoding error or the unavailability of input characters), or matching failures
+(due to inappropriate input).</d:para>
+<d:para>A directive composed of white-space character(s) is executed by reading
+input up to the first non-white-space character (which remains unread), or
+until no more characters can be read.</d:para>
+<d:para>A directive that is an ordinary multibyte character is executed by
+reading the next characters of the stream. If any of those characters differ
+from the ones composing the directive, the directive fails and the differing
+and subsequent characters remain unread. Similarly, if end-of-file, an encoding
+error, or a read error prevents a character from being read, the directive
+fails.</d:para>
+<d:para>A directive that is a conversion specification defines a set of
+matching input sequences, as described below for each specifier. A conversion
+specification is executed in the following steps:</d:para>
+<d:para>Input white-space characters (as specified by the
+<d:code>isspace</d:code> function) are skipped, unless the specification
+includes a <d:code>[, c</d:code> or <d:code>n</d:code>
+specifier.<d:footnote><d:para>These white-space characters are not counted
+against a specified field width.</d:para></d:footnote></d:para>
+<d:para>An input item is read from the stream, unless the specification
+includes an n specifier. An input item is defined as the longest sequence of
+input characters which does not exceed any specified field width and which is,
+or is a prefix of, a matching input
+sequence.<d:footnote><d:para><d:code>fscanf</d:code> pushes back at most one
+input character onto the input stream. Therefore, some sequences that are
+acceptable to <d:code>strtod, strtol</d:code> etc. are unacceptable to
+<d:code>fscanf</d:code>.</d:para></d:footnote> The first character, if any,
+after the input item remains unread. If the length of the input item is zero,
+the execution of the directive fails; this condition is a matching failure
+unless end-of-file, an encoding error, or a read error prevented input from the
+stream, in which case it is an input failure.</d:para>
+<d:para>Except in the case of a <d:code>%</d:code> specifier, the input item
+(or, in the case of a <d:code>%n</d:code> directive, the count of input
+characters) is converted to a type appropriate to the conversion specifier. If
+the input item is not a matching sequence, the execution of the directive
+fails: this condition is a matching failure. Unless assignment suppression was
+indicated by a <d:code>*</d:code>, the result of the conversion is placed in
+the object pointed to by the first argument following the format argument that
+has not already received a conversion result. If this object does not have an
+appropriate type, or if the result of the conversion cannot be represented in
+the object, the behavior is undefined.</d:para>
+<d:para>The length modifiers and their meanings are:</d:para>
+<d:para><d:code>hh</d:code> Specifies that a following <d:code>d, i, o, u, x,
+X</d:code> or <d:code>n</d:code> conversion specifier applies to an argument
+with type pointer to <d:code>signed char</d:code> or <d:code>unsigned
+char</d:code>.</d:para>
+<d:para><d:code>h</d:code> Specifies that a following <d:code>d, i, o, u, x,
+X</d:code> or <d:code>n</d:code> conversion specifier applies to an argument
+with type pointer to <d:code>short int</d:code> or <d:code>unsigned short
+int</d:code>.</d:para>
+<d:para><d:code>l</d:code> (ell) Specifies that a following <d:code>d, i, o, u,
+x, X</d:code> or <d:code>n</d:code> conversion specifier applies to an argument
+with type pointer to <d:code>long int</d:code> or <d:code>unsigned long
+int</d:code>; that a following <d:code>a, A, e, E, f, F, g</d:code> or
+<d:code>G</d:code> conversion specifier applies to an argument with type
+pointer to <d:code>double</d:code>; or that a following <d:code>c, s</d:code>
+or <d:code>[</d:code> conversion specifier applies to an argument with type
+pointer to <d:code>wchar_t</d:code>.</d:para>
+<d:para><d:code>ll</d:code> (ell-ell) Specifies that a following <d:code>d, i,
+o, u, x, X</d:code> or <d:code>n</d:code> conversion specifier applies to an
+argument with type pointer to <d:code>long long int</d:code> or
+<d:code>unsigned long long int</d:code>.</d:para>
+<d:para><d:code>j</d:code> Specifies that a following <d:code>d, i, o, u, x,
+X</d:code> or <d:code>n</d:code> conversion specifier applies to an argument
+with type pointer to <d:code>intmax_t</d:code> or
+<d:code>uintmax_t</d:code>.</d:para>
+<d:para><d:code>z</d:code> Specifies that a following <d:code>d, i, o, u, x,
+X</d:code> or <d:code>n</d:code> conversion specifier applies to an argument
+with type pointer to <d:code>size_t</d:code> or the corresponding signed
+integer type.</d:para>
+<d:para><d:code>t</d:code> Specifies that a following <d:code>d, i, o, u, x,
+X</d:code> or <d:code>n</d:code> conversion specifier applies to an argument
+with type pointer to <d:code>ptrdiff_t</d:code> or the corresponding unsigned
+integer type.</d:para>
+<d:para><d:code>L</d:code> Specifies that a following <d:code>a, A, e, E, f, F,
+g</d:code> or <d:code>G</d:code> conversion specifier applies to an argument
+with type pointer to <d:code>long double</d:code>.</d:para>
+<d:para>If a length modifier appears with any conversion specifier other than
+as specified above, the behavior is undefined.</d:para>
+<d:para>The conversion specifiers and their meanings are:</d:para>
+<d:para><d:code>d</d:code> Matches an optionally signed decimal integer, whose
+format is the same as expected for the subject sequence of the
+<d:code>strtol</d:code> function with the value 10 for the base argument. The
+corresponding argument shall be a pointer to signed integer.</d:para>
+<d:para><d:code>i</d:code> Matches an optionally signed integer, whose format
+is the same as expected for the subject sequence of the <d:code>strtol</d:code>
+function with the value 0 for the base argument. The corresponding argument
+shall be a pointer to signed integer.</d:para>
+<d:para><d:code>o</d:code> Matches an optionally signed octal integer, whose
+format is the same as expected for the subject sequence of the
+<d:code>strtoul</d:code> function with the value 8 for the base argument. The
+corresponding argument shall be a pointer to unsigned integer.</d:para>
+<d:para><d:code>u</d:code> Matches an optionally signed decimal integer, whose
+format is the same as expected for the subject sequence of the
+<d:code>strtoul</d:code> function with the value 10 for the base argument. The
+corresponding argument shall be a pointer to unsigned integer.</d:para>
+<d:para><d:code>x</d:code> Matches an optionally signed hexadecimal integer,
+whose format is the same as expected for the subject sequence of the
+<d:code>strtoul</d:code> function with the value 16 for the base argument. The
+corresponding argument shall be a pointer to unsigned integer.</d:para>
+<d:para><d:code>a, e, f, g</d:code> Matches an optionally signed floating-point
+number, infinity, or NaN, whose format is the same as expected for the subject
+sequence of the <d:code>strtod</d:code> function. The corresponding argument
+shall be a pointer to floating.</d:para>
+<d:para><d:code>c</d:code> Matches a sequence of characters of exactly the
+number specified by the field width (1 if no field width is present in the
+directive).<d:footnote><d:para>No special provisions are made for multibyte
+characters in the matching rules used by the <d:code>c, s</d:code> and
+<d:code>[</d:code> conversion specifiers &#x2014; the extent of the input field
+is determined on a byte-by-byte basis. The resulting field is nevertheless a
+sequence of multibyte characters that begins in the initial shift
+state.</d:para></d:footnote> If no <d:code>l</d:code> length modifier is
+present, the corresponding argument shall be a pointer to the initial element
+of a character array large enough to accept the sequence. No null character is
+added.</d:para>
+<d:para>If an <d:code>l</d:code> length modifier is present, the input shall be
+a sequence of multibyte characters that begins in the initial shift state. Each
+multibyte character in the sequence is converted to a wide character as if by a
+call to the <d:code>mbrtowc</d:code> function, with the conversion state
+described by an <d:code>mbstate_t</d:code> object initialized to zero before
+the first multibyte character is converted. The corresponding argument shall be
+a pointer to the initial element of an array of <d:code>wchar_t</d:code> large
+enough to accept the resulting sequence of wide characters. No null wide
+character is added.</d:para>
+<d:para><d:code>s</d:code> Matches a sequence of non-white-space
+characters.<d:footnote xml:id="c"><d:para>As the functions <d:code>vfprintf, vfscanf,
+vprintf, vscanf, vsnprintf, vsprintf</d:code> and <d:code>vsscanf</d:code>
+invoke the <d:code>va_arg</d:code> macro, the value of <d:code>arg</d:code>
+after the return is indeterminate.</d:para></d:footnote></d:para>
+<d:para>If no <d:code>l</d:code> length modifier is present, the corresponding
+argument shall be a pointer to the initial element of a character array large
+enough to accept the sequence and a terminating null character, which will be
+added automatically.</d:para>
+<d:para>If an <d:code>l</d:code> length modifier is present, the input shall be
+a sequence of multibyte characters that begins in the initial shift state. Each
+multibyte character is converted to a wide character as if by a call to the
+<d:code>mbrtowc</d:code> function, with the conversion state described by an
+<d:code>mbstate_t</d:code> object initialized to zero before the first
+multibyte character is converted. The corresponding argument shall be a pointer
+to the initial element of an array of <d:code>wchar_t</d:code> large enough to
+accept the sequence and the terminating null wide character, which will be
+added automatically.</d:para>
+<d:para><d:code>[</d:code> Matches a nonempty sequence of characters from a set
+of expected characters (the <d:emphasis
+role="italic">scanset</d:emphasis>).<d:footnoteref linkend="c" /></d:para>
+<d:para>If no <d:code>l</d:code> length modifier is present, the corresponding
+argument shall be a pointer to the initial element of a character array large
+enough to accept the sequence and a terminating null character, which will be
+added automatically.</d:para>
+<d:para>If an <d:code>l</d:code> length modifier is present, the input shall be
+a sequence of multibyte characters that begins in the initial shift state. Each
+multibyte character is converted to a wide character as if by a call to the
+<d:code>mbrtowc</d:code> function, with the conversion state described by an
+<d:code>mbstate_t</d:code> object initialized to zero before the first
+multibyte character is converted. The corresponding argument shall be a pointer
+to the initial element of an array of <d:code>wchar_t</d:code> large enough to
+accept the sequence and the terminating null wide character, which will be
+added automatically.</d:para>
+<d:para>The conversion specifier includes all subsequent characters in the
+format string, up to and including the matching right bracket
+(<d:code>]</d:code>). The characters between the brackets (the scanlist)
+compose the scanset, unless the character after the left bracket is a
+circumflex (<d:code>^</d:code>), in which case the scanset contains all
+characters that do not appear in the scanlist between the circumflex and the
+right bracket. If the conversion specifier begins with <d:code>[]</d:code> or
+<d:code>[^]</d:code>, the right bracket character is in the scanlist and the
+next following right bracket character is the matching right bracket that ends
+the specification; otherwise the first following right bracket character is the
+one that ends the specification. If a - character is in the scanlist and is not
+the first, nor the second where the first character is a <d:code>^</d:code>,
+nor the last character, the behavior is implementation-defined.</d:para>
+<d:para><d:code>p</d:code> Matches an implementation-defined set of sequences,
+which should be the same as the set of sequences that may be produced by the
+<d:para>%p</d:para> conversion of the <d:code>fprintf</d:code> function. The
+corresponding argument shall be a pointer to a pointer to
+<d:code>void</d:code>. The input item is converted to a pointer value in an
+implementation-defined manner. If the input item is a value converted earlier
+during the same program execution, the pointer that results shall compare equal
+to that value; otherwise the behavior of the <d:code>%p</d:code> conversion is
+undefined.</d:para>
+<d:para><d:code>n</d:code> No input is consumed. The corresponding argument
+shall be a pointer to signed integer into which is to be written the number of
+characters read from the input stream so far by this call to the
+<d:code>fscanf</d:code> function. Execution of a <d:code>%n</d:code> directive
+does not increment the assignment count returned at the completion of execution
+of the <d:code>fscanf</d:code> function. No argument is converted, but one is
+consumed. If the conversion specification includes an assignment-suppressing
+character or a field width, the behavior is undefined.</d:para>
+<d:para><d:code>%</d:code> Matches a single <d:code>%</d:code> character; no
+conversion or assignment occurs. The complete conversion specification shall be
+<d:code>%%</d:code>.</d:para>
+<d:para>If a conversion specification is invalid, the behavior is
+undefined.</d:para>
+<d:para>The conversion specifiers <d:code>A, E, F, G</d:code> and
+<d:code>X</d:code> are also valid and behave the same as, respectively,
+<d:code>a, e, f, g</d:code> and <d:code>x</d:code>.</d:para>
+<d:para>Trailing white space (including new-line characters) is left unread
+unless matched by a directive. The success of literal matches and suppressed
+assignments is not directly determinable other than via the %n
+directive.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>fscanf</d:code> function returns the value of the macro
+<d:code>EOF</d:code> if an input failure occurs before any
+conversion. Otherwise, the function returns the number of input items assigned,
+which can be fewer than provided for, or even zero, in the event of an early
+matching failure.</d:para>
+<d:para>EXAMPLE 1 The call:</d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+/* ... */
+int n, i; float x; char name[50];
+n = fscanf(stdin, "%d%f%s", &amp;i, &amp;x, name);</d:programlisting>
+<d:para>with the input line:</d:para>
+<d:screen>25 54.32E-1 thompson</d:screen>
+<d:para>will assign to <d:code>n</d:code> the value 3, to <d:code>i</d:code>
+the value 25, to <d:code>x</d:code> the value 5.432, and to name the sequence
+<d:code>thompson\0</d:code>.</d:para>
+<d:para>EXAMPLE 2 The call:</d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+/* ... */
+int i; float x; char name[50];
+fscanf(stdin, "%2d%f%*d %[0123456789]", &amp;i, &amp;x, name);</d:programlisting>
+<d:para>with input:</d:para>
+<d:screen>56789 0123 56a72</d:screen>
+<d:para>will assign to <d:code>i</d:code> the value 56 and to
+<d:code>x</d:code> the value 789.0, will skip 0123, and will assign to name the
+sequence <d:code>56\0</d:code>. The next character read from the input stream
+will be <d:code>a</d:code>.</d:para>
+<d:para>EXAMPLE 3 To accept repeatedly from stdin a quantity, a unit of
+measure, and an item name:</d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+/* ... */
+int count; float quant; char units[21], item[21];
+do {
+  count = fscanf(stdin, "%f%20s of %20s", &amp;quant, units, item);
+  fscanf(stdin,"%*[^\n]");
+} while (!feof(stdin) &amp;&amp; !ferror(stdin));</d:programlisting>
+<d:para>If the stdin stream contains the following lines:</d:para>
+<d:screen>2 quarts of oil
+-12.8degrees Celsius
+lots of luck
+10.0LBS
+of
+dirt
+100ergs of energy</d:screen>
+<d:para>the execution of the above example will be analogous to the following
+assignments:</d:para>
+<d:screen>quant = 2; strcpy(units, "quarts"); strcpy(item, "oil");
+count = 3;
+quant = -12.8; strcpy(units, "degrees");
+count = 2; // "C" fails to match "o"
+count = 0; // "l" fails to match "%f"
+quant = 10.0; strcpy(units, "LBS"); strcpy(item, "dirt");
+count = 3;
+count = 0; // "100e" fails to match "%f"
+count = EOF;</d:screen>
+<d:para>EXAMPLE 4 In:</d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h>
+/* ... */
+int d1, d2, n1, n2, i;
+i = sscanf("123", "%d%n%n%d", &amp;d1, &amp;n1, &amp;n2, &amp;d2);</d:programlisting>
+<d:para>the value 123 is assigned to <d:code>d1</d:code> and the value 3 to
+<d:code>n1</d:code>. Because <d:code>%n</d:code> can never get an input failure
+the value of 3 is also assigned to <d:code>n2</d:code>. The value of
+<d:code>d2</d:code> is not affected. The value 1 is assigned to
+<d:code>i</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
+<d:code>strtod, strtof</d:code> and <d:code>strtold</d:code> functions (The
+strtod, strtof and strtold functions), the <d:code>strtol, strtoll,
+strtoul</d:code> and <d:code>strtoull</d:code> functions (The strtol, strtoll,
+strtoul and strtoull functions), conversion state (Extended multibyte/wide
+character conversion utilities), the <d:code>wcrtomb</d:code> function (The
+wcrtomb function).</d:para>
+    </d:sect2>
   </d:sect1>
 </d:chapter>

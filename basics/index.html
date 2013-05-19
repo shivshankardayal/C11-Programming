@@ -1,5 +1,6 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 5. Basics of C</title><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../lang/index.html" rel="prev" title="Chapter 4. Language"/><link href="../io/index.html" rel="next" title="Chapter 6. Console I/O"/><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 5. Basics of C</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../lang/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../io/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 5. Basics of C"><div class="titlepage"><div><div><h2 class="title"><a name="idp559952"></a>Chapter 5. Basics of C</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp1777424">5.1. The C Character Set</a></span></dt><dt><span class="sect1"><a href="index.html#idp1780208">5.2. Keywords</a></span></dt><dt><span class="sect1"><a href="index.html#idp426032">5.3. Identifers</a></span></dt><dt><span class="sect1"><a href="index.html#idp429728">5.4. Programming</a></span></dt><dt><span class="sect1"><a href="index.html#idp2260560">5.5. Data Types</a></span></dt><dt><span class="sect1"><a href="index.html#idp683472">5.6. New Data Types of C99</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp685648">5.6.1. Boolean Types</a></span></dt><dt><span class="sect2"><a href="index.html#idp807072">5.6.2. Complex Types</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp2234336">5.7. <code class="code">void</code> and <code class="code">enum</code>
-        Types</a></span></dt><dt><span class="sect1"><a href="index.html#idp2240704">5.8. Constants</a></span></dt><dt><span class="sect1"><a href="index.html#idp323152">5.9. Escape Sequences</a></span></dt></dl></div><p>Now is the time for learning basics. There are certain rules in every language, certain
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Chapter 5. Basics of C</title><link href="../../css/bootstrap.css" rel="stylesheet" type="text/css"/><link href="../../css/style.css" rel="stylesheet" type="text/css"/><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"/><link href="../index.html" rel="home" title="C Programming with C99"/><link href="../index.html" rel="up" title="C Programming with C99"/><link href="../lang/index.html" rel="prev" title="Chapter 4. Language"/><link href="../io/index.html" rel="next" title="Chapter 6. Console I/O"/><script src="../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/jquery.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/bootstrap.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script><script src="../../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div id="navbar" class="navbar navbar-fixed-top">    <div class="navbar-inner">      <div class="container-fluid">      <a class="brand" href="../../">Home</a>      <a class="brand" href="../">Books</a>  <ul class="nav">  <li class="dropdown">      <a href="#"            class="dropdown-toggle"            data-toggle="dropdown">Chapter 5. Basics of C<b class="caret"></b>      </a>      <ul class="dropdown-menu"><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp53491808">5.1. The C Character Set</a></span></dt><dt><span class="sect1"><a href="index.html#idp53494592">5.2. Keywords</a></span></dt><dt><span class="sect1"><a href="index.html#idp53507184">5.3. Identifers</a></span></dt><dt><span class="sect1"><a href="index.html#idp53510832">5.4. Programming</a></span></dt><dt><span class="sect1"><a href="index.html#idp54618416">5.5. Data Types</a></span></dt><dt><span class="sect1"><a href="index.html#idp54671856">5.6. New Data Types of C99</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp54674112">5.6.1. Boolean Types</a></span></dt><dt><span class="sect2"><a href="index.html#idp54688928">5.6.2. Complex Types</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp53110416">5.7. <code class="code">void</code> and <code class="code">enum</code>
+        Types</a></span></dt><dt><span class="sect1"><a href="index.html#idp53116784">5.8. Constants</a></span></dt><dt><span class="sect1"><a href="index.html#idp53436416">5.9. Escape Sequences</a></span></dt></dl></div>     </ul>    </li>  </ul> <ul class="nav"><li><a href="../lang/index.html">&lt;&lt; Chapter 4. Language </a><li><li><a href="../io/index.html"> Chapter 6. Console I/O >></a><li></ul>    </div>    </div>  </div><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 5. Basics of C</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../lang/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../io/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 5. Basics of C"><div class="titlepage"><div><div><h2 class="title"><a name="idp53402576"></a>Chapter 5. Basics of C</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp53491808">5.1. The C Character Set</a></span></dt><dt><span class="sect1"><a href="index.html#idp53494592">5.2. Keywords</a></span></dt><dt><span class="sect1"><a href="index.html#idp53507184">5.3. Identifers</a></span></dt><dt><span class="sect1"><a href="index.html#idp53510832">5.4. Programming</a></span></dt><dt><span class="sect1"><a href="index.html#idp54618416">5.5. Data Types</a></span></dt><dt><span class="sect1"><a href="index.html#idp54671856">5.6. New Data Types of C99</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp54674112">5.6.1. Boolean Types</a></span></dt><dt><span class="sect2"><a href="index.html#idp54688928">5.6.2. Complex Types</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp53110416">5.7. <code class="code">void</code> and <code class="code">enum</code>
+        Types</a></span></dt><dt><span class="sect1"><a href="index.html#idp53116784">5.8. Constants</a></span></dt><dt><span class="sect1"><a href="index.html#idp53436416">5.9. Escape Sequences</a></span></dt></dl></div><p>Now is the time for learning basics. There are certain rules in every language, certain
       grammar which dictates the way language will be spoken and written. It has a script to write
       using. Similarly, programming languages have BNF (Backus-Naur Form) context-free grammar.
       There are valid characters in a programming language and a set of keywords. However,
@@ -8,13 +9,13 @@
       person can understand your intent but in programming you cannot violate rules. The grammar is
       context-free. Compilers or interpreters cannot deduce your intent by reading code. They are
       not intelligent. You make a mistake and it will refuse to listen to you no matter what you do.
-      Therefore, it is very essential to understand these rules very clearly and correctly.</p><div class="sect1" title="5.1. The C Character Set"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1777424"></a>5.1. The C Character Set</h2></div></div></div><p>The following form the C character set you are allowed to use in it:</p><pre class="screen">[a-z] [A-Z] [0-9] ~ ! # % ^ & * ( ) - = [ ] \ ; ' , . / _ + { } | : " < > ?</pre><p>This means along with other symbols you can use all English alphabets (both uppercase
+      Therefore, it is very essential to understand these rules very clearly and correctly.</p><div class="sect1" title="5.1. The C Character Set"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53491808"></a>5.1. The C Character Set</h2></div></div></div><p>The following form the C character set you are allowed to use in it:</p><pre class="screen">[a-z] [A-Z] [0-9] ~ ! # % ^ & * ( ) - = [ ] \ ; ' , . / _ + { } | : "  ?</pre><p>This means along with other symbols you can use all English alphabets (both uppercase
         and lowercase) and Arabic numerals. However, English is not the only spoken language in the
         world. Therefore in other non-English speaking counties there are keyboard where certain
         characters present in above set are not present. The inventors of C were wise enough to
         envision this and provide the facility in form of trigraph sequences. The table of trigraph
-        sequences is given in chapter 4.</p></div><div class="sect1" title="5.2. Keywords"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1780208"></a>5.2. Keywords</h2></div></div></div><p>The following are reserved keywords for C programming language which you are not
-        allows to use other than what they are meant for:</p><table border="1" class="dynamic" frame="void" id="idp1781472"><caption>Table 5.1. Keywords of C</caption><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><tbody><tr>
+        sequences is given in chapter 4.</p></div><div class="sect1" title="5.2. Keywords"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53494592"></a>5.2. Keywords</h2></div></div></div><p>The following are reserved keywords for C programming language which you are not
+        allows to use other than what they are meant for:</p><table border="1" class="dynamic" frame="void" id="idp53495856"><caption>Table 5.1. Keywords of C</caption><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><tbody><tr>
 <td>auto</td>
 <td>enum</td>
 <td>restrict</td>
@@ -65,7 +66,7 @@
 <td>union</td>
 <td></td>
 </tr></tbody></table><p>These keywords serve specific purpose. You will come to know about all of them as you
-        progress through the book. Next we look at identifiers.</p></div><div class="sect1" title="5.3. Identifers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp426032"></a>5.3. Identifers</h2></div></div></div><p>The names which we give to our variables are known as identifiers. Something with
+        progress through the book. Next we look at identifiers.</p></div><div class="sect1" title="5.3. Identifers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53507184"></a>5.3. Identifers</h2></div></div></div><p>The names which we give to our variables are known as identifiers. Something with
         which we identify. As you have already seen what is allowed in C’s character set but not all
         are allowed in an identifiers name. Only alphabets from English language both lowercase and
         uppercase, Arabic digits from zero to nine and underscore (<code class="code">_</code>) are allowed
@@ -75,12 +76,12 @@
         However, take care with names starting from underscore as they are mostly used by different
         library authors. Invalid identifier examples are <code class="code">9x, my$, your age</code>. Please
         read this section carefully and make sure understand the rules for naming identifiers. Later
-        at the end of chapter there are some simple problems to work on.</p></div><div class="sect1" title="5.4. Programming"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp429728"></a>5.4. Programming</h2></div></div></div><p>Now is time for some programming. Let us revisit our first program and try to
+        at the end of chapter there are some simple problems to work on.</p></div><div class="sect1" title="5.4. Programming"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53510832"></a>5.4. Programming</h2></div></div></div><p>Now is time for some programming. Let us revisit our first program and try to
         understand what it does. Here I am giving code once again for quick reference:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">//My first program</span>
 <span class="cm">/* Author: Shiv Shankar Dayal</span>
 <span class="cm">   Description: This program does nothing.*/</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
@@ -139,21 +140,21 @@
 <span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: It adds two numbers</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sum</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Please enter an integer:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Please enter an integer:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&</span><span class="n">x</span><span class="p">);</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Please enter another integer:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Please enter another integer:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&</span><span class="n">y</span><span class="p">);</span>
 
   <span class="n">sum</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d + %d = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%d + %d = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -217,7 +218,7 @@ shiv@shiv:~/book/code$</pre><p>Note that <code class="code">shiv@shiv:~/book/cod
         You will see <code class="code">&</code> operator in action later when we deal with pointers.
         Just remember for now that to use a simple variable with <code class="code">scanf()</code> requires
           <code class="code">&</code> before its name.</p><p>Now I am going to take you on a tour of data types. Till now we have just seen only
-          <code class="code">int</code>. So onward to data types.</p></div><div class="sect1" title="5.5. Data Types"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2260560"></a>5.5. Data Types</h2></div></div></div><p>Why data types? What is the need? When everything is a voltage level why not just deal
+          <code class="code">int</code>. So onward to data types.</p></div><div class="sect1" title="5.5. Data Types"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp54618416"></a>5.5. Data Types</h2></div></div></div><p>Why data types? What is the need? When everything is a voltage level why not just deal
         with 0s and 1s? The answer is simple. You need to abstract and segregate how much is
         required. For example, say you are given a sequence of 0s and 1s how much can you work with
         them. We as humans are not very versed with 0s and 1s. Also, say we encode character
@@ -241,19 +242,19 @@ shiv@shiv:~/book/code$</pre><p>Note that <code class="code">shiv@shiv:~/book/cod
 <span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: It gives ranges of integral data types</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;limits.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
+<span class="cp">#include <limits.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of char is..........%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">));</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of short int is.....%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">short</span> <span class="kt">int</span><span class="p">));</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of int is...........%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of long is..........%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span><span class="p">));</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of long long is.....%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">));</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of float is.........%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of double is........%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Size of long double is...%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span><span class="p">));</span><span class="n">c</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Size of char is..........%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Size of short int is.....%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">short</span> <span class="kt">int</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Size of int is...........%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Size of long is..........%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Size of long long is.....%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Size of float is.........%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Size of double is........%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Size of long double is...%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span><span class="p">));</span><span class="n">c</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -287,13 +288,13 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 <span class="cm">02111-1307 USA.  */</span>
 
 <span class="cm">/*</span>
-<span class="cm">*      ISO C99 Standard: 7.10/5.2.4.2.1 Sizes of integer types &lt;limits.h&gt;</span>
+<span class="cm">*      ISO C99 Standard: 7.10/5.2.4.2.1 Sizes of integer types <limits.h></span>
 <span class="cm">*/</span>
 
 <span class="cp">#ifndef _LIBC_LIMITS_H_</span>
 <span class="cp">#define _LIBC_LIMITS_H_ 1</span>
 
-<span class="cp">#include &lt;features.h&gt;</span>
+<span class="cp">#include <features.h></span>
 
 
 <span class="cm">/* Maximum length of any multibyte character in any locale.</span>
@@ -303,34 +304,34 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 
 
 <span class="cm">/* If we are not using GNU CC we have to define all the symbols ourself.</span>
-<span class="cm">Otherwise use gcc&#39;s definitions (see below).  */</span>
-<span class="cp">#if !defined __GNUC__ || __GNUC__ &lt; 2</span>
+<span class="cm">Otherwise use gcc's definitions (see below).  */</span>
+<span class="cp">#if !defined __GNUC__ || __GNUC__ < 2</span>
 
 <span class="cm">/* We only protect from multiple inclusion here, because all the other</span>
-<span class="cm">#include&#39;s protect themselves, and in GCC 2 we may #include_next through</span>
-<span class="cm">multiple copies of this file before we get to GCC&#39;s.  */</span>
+<span class="cm">#include's protect themselves, and in GCC 2 we may #include_next through</span>
+<span class="cm">multiple copies of this file before we get to GCC's.  */</span>
 <span class="cp"># ifndef _LIMITS_H</span>
 <span class="cp">#  define _LIMITS_H     1</span>
 
-<span class="cp">#include &lt;bits/wordsize.h&gt;</span>
+<span class="cp">#include <bits/wordsize.h></span>
 
-<span class="cm">/* We don&#39;t have #include_next.</span>
-<span class="cm">Define ANSI &lt;limits.h&gt; for standard 32-bit words.  */</span>
+<span class="cm">/* We don't have #include_next.</span>
+<span class="cm">Define ANSI <limits.h> for standard 32-bit words.  */</span>
 
-<span class="cm">/* These assume 8-bit `char&#39;s, 16-bit `short int&#39;s,</span>
-<span class="cm">and 32-bit `int&#39;s and `long int&#39;s.  */</span>
+<span class="cm">/* These assume 8-bit `char's, 16-bit `short int's,</span>
+<span class="cm">and 32-bit `int's and `long int's.  */</span>
 
-<span class="cm">/* Number of bits in a `char&#39;.  */</span>
+<span class="cm">/* Number of bits in a `char'.  */</span>
 <span class="cp">#  define CHAR_BIT      8</span>
 
-<span class="cm">/* Minimum and maximum values a `signed char&#39; can hold.  */</span>
+<span class="cm">/* Minimum and maximum values a `signed char' can hold.  */</span>
 <span class="cp">#  define SCHAR_MIN     (-128)</span>
 <span class="cp">#  define SCHAR_MAX     127</span>
 
-<span class="cm">/* Maximum value an `unsigned char&#39; can hold.  (Minimum is 0.)  */</span>
+<span class="cm">/* Maximum value an `unsigned char' can hold.  (Minimum is 0.)  */</span>
 <span class="cp">#  define UCHAR_MAX     255</span>
 
-<span class="cm">/* Minimum and maximum values a `char&#39; can hold.  */</span>
+<span class="cm">/* Minimum and maximum values a `char' can hold.  */</span>
 <span class="cp">#  ifdef __CHAR_UNSIGNED__</span>
 <span class="cp">#   define CHAR_MIN     0</span>
 <span class="cp">#   define CHAR_MAX     UCHAR_MAX</span>
@@ -339,21 +340,21 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 <span class="cp">#   define CHAR_MAX     SCHAR_MAX</span>
 <span class="cp">#  endif</span>
 
-<span class="cm">/* Minimum and maximum values a `signed short int&#39; can hold.  */</span>
+<span class="cm">/* Minimum and maximum values a `signed short int' can hold.  */</span>
 <span class="cp">#  define SHRT_MIN      (-32768)</span>
 <span class="cp">#  define SHRT_MAX      32767</span>
 
-<span class="cm">/* Maximum value an `unsigned short int&#39; can hold.  (Minimum is 0.)  */</span>
+<span class="cm">/* Maximum value an `unsigned short int' can hold.  (Minimum is 0.)  */</span>
 <span class="cp">#  define USHRT_MAX     65535</span>
 
-<span class="cm">/* Minimum and maximum values a `signed int&#39; can hold.  */</span>
+<span class="cm">/* Minimum and maximum values a `signed int' can hold.  */</span>
 <span class="cp">#  define INT_MIN       (-INT_MAX - 1)</span>
 <span class="cp">#  define INT_MAX       2147483647</span>
 
-<span class="cm">/* Maximum value an `unsigned int&#39; can hold.  (Minimum is 0.)  */</span>
+<span class="cm">/* Maximum value an `unsigned int' can hold.  (Minimum is 0.)  */</span>
 <span class="cp">#  define UINT_MAX      4294967295U</span>
 
-<span class="cm">/* Minimum and maximum values a `signed long int&#39; can hold.  */</span>
+<span class="cm">/* Minimum and maximum values a `signed long int' can hold.  */</span>
 <span class="cp">#  if __WORDSIZE == 64</span>
 <span class="cp">#   define LONG_MAX     9223372036854775807L</span>
 <span class="cp">#  else</span>
@@ -361,7 +362,7 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 <span class="cp">#  endif</span>
 <span class="cp">#  define LONG_MIN      (-LONG_MAX - 1L)</span>
 
-<span class="cm">/* Maximum value an `unsigned long int&#39; can hold.  (Minimum is 0.)  */</span>
+<span class="cm">/* Maximum value an `unsigned long int' can hold.  (Minimum is 0.)  */</span>
 <span class="cp">#  if __WORDSIZE == 64</span>
 <span class="cp">#   define ULONG_MAX    18446744073709551615UL</span>
 <span class="cp">#  else</span>
@@ -370,11 +371,11 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 
 <span class="cp">#  ifdef __USE_ISOC99</span>
 
-<span class="cm">/* Minimum and maximum values a `signed long long int&#39; can hold.  */</span>
+<span class="cm">/* Minimum and maximum values a `signed long long int' can hold.  */</span>
 <span class="cp">#   define LLONG_MAX    9223372036854775807LL</span>
 <span class="cp">#   define LLONG_MIN    (-LLONG_MAX - 1LL)</span>
 
-<span class="cm">/* Maximum value an `unsigned long long int&#39; can hold.  (Minimum is 0.)  */</span>
+<span class="cm">/* Maximum value an `unsigned long long int' can hold.  (Minimum is 0.)  */</span>
 <span class="cp">#   define ULLONG_MAX   18446744073709551615ULL</span>
 
 <span class="cp">#  endif </span><span class="cm">/* ISO C99 */</span><span class="cp"></span>
@@ -384,20 +385,20 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 
 <span class="cp">#endif  </span><span class="cm">/* !_LIBC_LIMITS_H_ */</span><span class="cp"></span>
 
-<span class="cm">/* Get the compiler&#39;s limits.h, which defines almost all the ISO constants.</span>
+<span class="cm">/* Get the compiler's limits.h, which defines almost all the ISO constants.</span>
 
 <span class="cm">We put this #include_next outside the double inclusion check because</span>
 <span class="cm">it should be possible to include this file more than once and still get</span>
-<span class="cm">the definitions from gcc&#39;s header.  */</span>
-<span class="cp">#if defined __GNUC__ &amp;&amp; !defined _GCC_LIMITS_H_</span>
-<span class="cm">/* `_GCC_LIMITS_H_&#39; is what GCC&#39;s file defines.  */</span>
-<span class="cp"># include_next &lt;limits.h&gt;</span>
+<span class="cm">the definitions from gcc's header.  */</span>
+<span class="cp">#if defined __GNUC__ && !defined _GCC_LIMITS_H_</span>
+<span class="cm">/* `_GCC_LIMITS_H_' is what GCC's file defines.  */</span>
+<span class="cp"># include_next <limits.h></span>
 <span class="cp">#endif</span>
 
-<span class="cm">/* The &lt;limits.h&gt; files in some gcc versions don&#39;t define LLONG_MIN,</span>
+<span class="cm">/* The <limits.h> files in some gcc versions don't define LLONG_MIN,</span>
 <span class="cm">LLONG_MAX, and ULLONG_MAX.  Instead only the values gcc defined for</span>
 <span class="cm">ages are available.  */</span>
-<span class="cp">#if defined __USE_ISOC99 &amp;&amp; defined __GNUC__</span>
+<span class="cp">#if defined __USE_ISOC99 && defined __GNUC__</span>
 <span class="cp"># ifndef LLONG_MIN</span>
 <span class="cp">#  define LLONG_MIN     (-LLONG_MAX-1)</span>
 <span class="cp"># endif</span>
@@ -410,16 +411,16 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 <span class="cp">#endif</span>
 
 <span class="cp">#ifdef  __USE_POSIX</span>
-<span class="cm">/* POSIX adds things to &lt;limits.h&gt;.  */</span>
-<span class="cp"># include &lt;bits/posix1_lim.h&gt;</span>
+<span class="cm">/* POSIX adds things to <limits.h>.  */</span>
+<span class="cp"># include <bits/posix1_lim.h></span>
 <span class="cp">#endif</span>
 
 <span class="cp">#ifdef  __USE_POSIX2</span>
-<span class="cp"># include &lt;bits/posix2_lim.h&gt;</span>
+<span class="cp"># include <bits/posix2_lim.h></span>
 <span class="cp">#endif</span>
 
 <span class="cp">#ifdef  __USE_XOPEN</span>
-<span class="cp"># include &lt;bits/xopen_lim.h&gt;</span>
+<span class="cp"># include <bits/xopen_lim.h></span>
 <span class="cp">#endif</span>
 </pre></div>
 </pre><p>Here, I have given <span class="application">gcc</span>’s <code class="code">limits.h</code> as
@@ -427,14 +428,14 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
         floating-point implementation on your platform I recommend you to read <a class="link" href="http://en.wikipedia.org/wiki/IEEE_754-2008" target="_top">http://en.wikipedia.org/wiki/IEEE_754-2008</a>. It is not possible to present all the
         information in detail here and I do not want to give you partial information. :-) I
         recommend you to go through <a class="link" href="http://en.wikipedia.org/wiki/Single_precision" target="_top">http://en.wikipedia.org/wiki/Single_precision</a> and <a class="link" href="http://en.wikipedia.org/wiki/Double_precision" target="_top">http://en.wikipedia.org/wiki/Double_precision</a> in particular. The range of log
-        double varies from compiler to compiler.</p></div><div class="sect1" title="5.6. New Data Types of C99"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp683472"></a>5.6. New Data Types of C99</h2></div></div></div><p>There are some new data types introduced in C99. They are <code class="code">_Bool,
-          _Complex</code> and <code class="code">_Imaginary</code>.</p><div class="sect2" title="5.6.1. Boolean Types"><div class="titlepage"><div><div><h3 class="title"><a name="idp685648"></a>5.6.1. Boolean Types</h3></div></div></div><p><code class="code">_Bool</code> counts as an integral type and is used to represent boolean
+        double varies from compiler to compiler.</p></div><div class="sect1" title="5.6. New Data Types of C99"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp54671856"></a>5.6. New Data Types of C99</h2></div></div></div><p>There are some new data types introduced in C99. They are <code class="code">_Bool,
+          _Complex</code> and <code class="code">_Imaginary</code>.</p><div class="sect2" title="5.6.1. Boolean Types"><div class="titlepage"><div><div><h3 class="title"><a name="idp54674112"></a>5.6.1. Boolean Types</h3></div></div></div><p><code class="code">_Bool</code> counts as an integral type and is used to represent boolean
           values. Here is <code class="code">stdbool.h</code> for your quick reference.</p><pre class="CLexer"><div class="highlight"><pre><span class="cm">/*===---- stdbool.h - Standard header for booleans -------------------------===</span>
 <span class="cm"> *</span>
 <span class="cm"> * Copyright (c) 2008 Eli Friedman</span>
 <span class="cm"> *</span>
 <span class="cm"> * Permission is hereby granted, free of charge, to any person obtaining a copy</span>
-<span class="cm"> * of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="cm"> * of this software and associated documentation files (the "Software"), to deal</span>
 <span class="cm"> * in the Software without restriction, including without limitation the rights</span>
 <span class="cm"> * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
 <span class="cm"> * copies of the Software, and to permit persons to whom the Software is</span>
@@ -443,7 +444,7 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 <span class="cm"> * The above copyright notice and this permission notice shall be included in</span>
 <span class="cm"> * all copies or substantial portions of the Software.</span>
 <span class="cm"> *</span>
-<span class="cm"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="cm"> * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
 <span class="cm"> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
 <span class="cm"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
 <span class="cm"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
@@ -457,12 +458,12 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 <span class="cp">#ifndef __STDBOOL_H</span>
 <span class="cp">#define __STDBOOL_H</span>
 
-<span class="cm">/* Don&#39;t define bool, true, and false in C++, except as a GNU extension. */</span>
+<span class="cm">/* Don't define bool, true, and false in C++, except as a GNU extension. */</span>
 <span class="cp">#ifndef __cplusplus</span>
 <span class="cp">#define bool _Bool</span>
 <span class="cp">#define true 1</span>
 <span class="cp">#define false 0</span>
-<span class="cp">#elif defined(__GNUC__) &amp;&amp; !defined(__STRICT_ANSI__)</span>
+<span class="cp">#elif defined(__GNUC__) && !defined(__STRICT_ANSI__)</span>
 <span class="cm">/* Define _Bool, bool, false, true as a GNU extension. */</span>
 <span class="cp">#define _Bool bool</span>
 <span class="cp">#define bool  bool</span>
@@ -480,8 +481,8 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 <span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: Demo of boolean data typec</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;stdbool.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
+<span class="cp">#include <stdbool.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
@@ -492,7 +493,7 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
   <span class="kt">bool</span> <span class="n">bFalseCPP</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span><span class="p">;</span>
   <span class="kt">_Bool</span> <span class="n">bFalseC</span>  <span class="o">=</span> <span class="o">-</span><span class="mi">7</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d %d %d %d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">bcpp</span><span class="p">,</span> <span class="n">bc</span><span class="p">,</span> <span class="n">True</span><span class="p">,</span> <span class="n">False</span><span class="p">,</span> <span class="n">bFalseCPP</span><span class="p">,</span> <span class="n">bFalseC</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%d %d %d %d %d %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bcpp</span><span class="p">,</span> <span class="n">bc</span><span class="p">,</span> <span class="n">True</span><span class="p">,</span> <span class="n">False</span><span class="p">,</span> <span class="n">bFalseCPP</span><span class="p">,</span> <span class="n">bFalseC</span><span class="p">);</span>
 
   <span class="n">getchar</span><span class="p">();</span>
 
@@ -517,7 +518,7 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 </pre></div>
 </pre><p>Just do <span class="command"><strong>$clang -E define.c</strong></span> to see the magic. Note that
             <code class="code">#define</code> parameters are not type safe. Compiler will just paste the
-          contents. Notice how <code class="code">MAX</code> is replaced by 7.</p></div><div class="sect2" title="5.6.2. Complex Types"><div class="titlepage"><div><div><h3 class="title"><a name="idp807072"></a>5.6.2. Complex Types</h3></div></div></div><p>For complex types, there is a system header <code class="code">complex.h</code> which
+          contents. Notice how <code class="code">MAX</code> is replaced by 7.</p></div><div class="sect2" title="5.6.2. Complex Types"><div class="titlepage"><div><div><h3 class="title"><a name="idp54688928"></a>5.6.2. Complex Types</h3></div></div></div><p>For complex types, there is a system header <code class="code">complex.h</code> which
           internally includes various other headers. However I am giving you the summary here. There
           are following <code class="code">#define</code> macros:</p><p><code class="code">complex</code>: Expands to <code class="code">_Complex</code>
 <code class="code">_Complex_I</code>: Expands to a constant expression of type <code class="code">const float
@@ -535,7 +536,7 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 <span class="kt">long</span> <span class="kt">double</span> <span class="nf">cabsl</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
 
 <span class="c1">//carg, cargf, cargl - these compute and return argument of a complex</span>
-<span class="c1">//number z. The range of return value&#39;s range from one +ve pi radian</span>
+<span class="c1">//number z. The range of return value's range from one +ve pi radian</span>
 <span class="c1">//to one -ve pi radian.</span>
 
 <span class="kt">double</span> <span class="nf">carg</span><span class="p">(</span><span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span><span class="p">);</span>
@@ -728,17 +729,17 @@ Size of long double is...12</pre><p>Based on this it is left as an exercise to r
 <span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: Demo of complex data type</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;complex.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
+<span class="cp">#include <complex.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">+</span> <span class="mf">3.0</span><span class="n">i</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Absolute value of z is %lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cabs</span><span class="p">(</span><span class="n">z</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Absolute value of z is %lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">cabs</span><span class="p">(</span><span class="n">z</span><span class="p">));</span>
 
   <span class="kt">double</span> <span class="n">complex</span> <span class="n">zConj</span> <span class="o">=</span> <span class="n">conj</span><span class="p">(</span><span class="n">z</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Imaghinary part of conjugate is now %lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cimag</span><span class="p">(</span><span class="n">zConj</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Imaghinary part of conjugate is now %lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">cimag</span><span class="p">(</span><span class="n">zConj</span><span class="p">));</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -755,7 +756,7 @@ Imaghinary part of conjugate is now -3.000000</pre><p>You must note that in Make
           data type will occupy. The types without leading <code class="code">u</code> are of signed type and
           the ones with it are of unsigned type. You can use the good old <code class="code">%d</code> or
             <code class="code">%i</code> for decimal integers and <code class="code">%o</code> and <code class="code">%x</code>
-          for octals and hexes. Have a look at headers and try to decipher them.</p></div></div><div class="sect1" title="5.7. void and enum Types"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2234336"></a>5.7. <code class="code">void</code> and <code class="code">enum</code>
+          for octals and hexes. Have a look at headers and try to decipher them.</p></div></div><div class="sect1" title="5.7. void and enum Types"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53110416"></a>5.7. <code class="code">void</code> and <code class="code">enum</code>
         Types</h2></div></div></div><p>There are these two types remianing. void type comprises an empty set of values; it is
         an incomplete type that cannot be completed. You cannot declare an array of
           <code class="code">void</code>s. It is a generic type in the sense that any other pointer to any
@@ -769,22 +770,22 @@ Imaghinary part of conjugate is now -3.000000</pre><p>You must note that in Make
         specified. Consider the following example:</p><pre class="CLexer"><div class="highlight"><pre><span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: Demo of enum</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span><span class="n">zero</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">}</span> <span class="n">enum1</span><span class="p">;</span>
   <span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span><span class="n">alpha</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">omega</span><span class="p">}</span> <span class="n">enum2</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;zero = %d, one = %d, two=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;alpha = %d, beta = %d, gamma=%d, theta=%d, delta=%d, omega=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> \
+  <span class="n">printf</span><span class="p">(</span><span class="s">"zero = %d, one = %d, two=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"alpha = %d, beta = %d, gamma=%d, theta=%d, delta=%d, omega=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> \
           <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">omega</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </pre><p>and the output is:</p><pre class="screen">zero = 0, one = 1, two=2
-alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</pre></div><div class="sect1" title="5.8. Constants"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp2240704"></a>5.8. Constants</h2></div></div></div><p>We have seen some variables now let us see some constants. There are five categories
+alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</pre></div><div class="sect1" title="5.8. Constants"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53116784"></a>5.8. Constants</h2></div></div></div><p>We have seen some variables now let us see some constants. There are five categories
         of constants: character, integer, floating-point, string, and enumeration constant. We will
         see enumeration constants later first we see remaining four types of constants. There are
         certain rules about constants. Commas and spaces are not allowed except for character and
@@ -793,7 +794,7 @@ alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</pre></div><div class
 <span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: Demo of integer constants</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
@@ -801,7 +802,7 @@ alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</pre></div><div class
   <span class="kt">int</span> <span class="n">octal</span> <span class="o">=</span> <span class="mo">06</span><span class="p">;</span>
   <span class="kt">int</span> <span class="n">hex</span> <span class="o">=</span> <span class="mh">0xb</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %o %x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">decimal</span><span class="p">,</span> <span class="n">octal</span><span class="p">,</span> <span class="n">hex</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%d %o %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">decimal</span><span class="p">,</span> <span class="n">octal</span><span class="p">,</span> <span class="n">hex</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -821,7 +822,7 @@ alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</pre></div><div class
 <span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: Demo of floating-point constants</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
@@ -829,7 +830,7 @@ alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</pre></div><div class
   <span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="mf">13.894578834538578234784</span><span class="p">;</span>
   <span class="kt">long</span> <span class="kt">double</span> <span class="n">ld</span> <span class="o">=</span> <span class="mf">759.8263478234729402354028358208358230829304</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%f %lf, %Lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ld</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%f %lf, %Lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ld</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -843,14 +844,14 @@ alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</pre></div><div class
 <span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: Demo of character constants</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
-  <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="sc">&#39;S&#39;</span><span class="p">;</span>
-  <span class="kt">char</span><span class="o">*</span> <span class="n">str</span> <span class="o">=</span><span class="s">&quot;Shiv S, Dayal&quot;</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="sc">'S'</span><span class="p">;</span>
+  <span class="kt">char</span><span class="o">*</span> <span class="n">str</span> <span class="o">=</span><span class="s">"Shiv S, Dayal"</span><span class="p">;</span>
 
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%c %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%c %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -868,8 +869,8 @@ alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</pre></div><div class
         stdout. It is printed like <code class="code">%%</code>. It was simple,wasn’t it? C program have got
         something called ASCII table which is a 7-bit character table values ranging from0 to 127.
         There is also something called escape sequences and it is worth to have a look at
-        them.</p></div><div class="sect1" title="5.9. Escape Sequences"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp323152"></a>5.9. Escape Sequences</h2></div></div></div><p>All escape sequences start with a leading <code class="code">\</code> . Following table shows
-          them:</p><table border="1" class="centered" frame="border" id="idp324736"><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><caption>Table 5.2. Escape Sequences</caption><thead><tr bgcolor="#aaa">
+        them.</p></div><div class="sect1" title="5.9. Escape Sequences"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp53436416"></a>5.9. Escape Sequences</h2></div></div></div><p>All escape sequences start with a leading <code class="code">\</code> . Following table shows
+          them:</p><table border="1" class="centered" frame="border" id="idp53438000"><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><colgroup width="0*"></colgroup><caption>Table 5.2. Escape Sequences</caption><thead><tr bgcolor="#aaa">
 <th>Character</th>
 <th>Escape Sequences</th>
 <th>ASCII Value</th>
@@ -934,11 +935,11 @@ alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</pre></div><div class
 <span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: Demo of bell escape sequence</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;hello</span><span class="se">\a</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"hello</span><span class="se">\a</span><span class="s">"</span><span class="p">);</span>
 
   <span class="n">getchar</span><span class="p">();</span>
 
@@ -952,12 +953,12 @@ alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</pre></div><div class
 <span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: Demo of backspace escape sequence</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;h</span><span class="se">\b</span><span class="s">*e</span><span class="se">\b</span><span class="s">*l</span><span class="se">\b</span><span class="s">*l</span><span class="se">\b</span><span class="s">*o</span><span class="se">\b</span><span class="s">*</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\b</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"h</span><span class="se">\b</span><span class="s">*e</span><span class="se">\b</span><span class="s">*l</span><span class="se">\b</span><span class="s">*l</span><span class="se">\b</span><span class="s">*o</span><span class="se">\b</span><span class="s">*</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\b</span><span class="s">"</span><span class="p">);</span>
 
   <span class="n">getchar</span><span class="p">();</span>
 
@@ -976,12 +977,12 @@ alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</pre></div><div class
 <span class="c1">// Author: Shiv S. Dayal</span>
 <span class="c1">// Description: Demo of newline and horizontal tab escape sequence</span>
 
-<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include <stdio.h></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Before tab</span><span class="se">\t</span><span class="s">Aftertab</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">After newline</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Before tab</span><span class="se">\t</span><span class="s">Aftertab</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">After newline</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 
   <span class="n">getchar</span><span class="p">();</span>
 

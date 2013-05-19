@@ -27,7 +27,12 @@
   
   <xsl:param name="html.stylesheet" select="'../css/style.css'" />
   <xsl:template name="user.head.content">
+    <script src="../css/jquery.js" type="text/javascript"></script>
+    <script src="../css/bootstrap.js" type="text/javascript"></script>
     <script src="../css/analytics.js" type="text/javascript"></script>
+    <script src="../../css/jquery.js" type="text/javascript"></script>
+    <script src="../../css/bootstrap.js" type="text/javascript"></script>
+    <script src="../../css/analytics.js" type="text/javascript"></script>
   </xsl:template>
   <xsl:template name="user.footer.navigation">
     <p style="text-align: center;">&#x00A9; 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
