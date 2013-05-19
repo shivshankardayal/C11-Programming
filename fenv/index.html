@@ -1,15 +1,15 @@
-<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><title>Chapter 18. Floating-point environment &lt;fenv.h></title><link href="../../css/style.css" rel="stylesheet" type="text/css"><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"><link href="../index.html" rel="home" title="C Programming with C99"><link href="../index.html" rel="up" title="C Programming with C99"><link href="../errno/index.html" rel="prev" title="Chapter 17. Errors &lt;errno.h>"><link href="../float/index.html" rel="next" title="Chapter 19. Characterictics of floating types &lt;float.h>"><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></link></link></link></link></meta></link></meta></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 18. Floating-point environment &lt;fenv.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../errno/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../float/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 18. Floating-point environment &lt;fenv.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp33649616"></a>Chapter 18. Floating-point environment &lt;fenv.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp35047296">18.1. The FENV_ACCESS pragma</a></span></dt><dt><span class="sect1"><a href="index.html#idp35287840">18.2. Floating-point exceptions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp35284320">18.2.1. The feclearexcept function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37517264">18.2.2. The fegetexceptflag function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37523136">18.2.3. The feraiseexcept function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37530048">18.2.4. The fesetexceptflag function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37537392">18.2.5. The fetestexcept function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp37545856">18.3. Rounding</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp37547840">18.3.1. The fegetround function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37553632">18.3.2. The fesetround function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp37561040">18.4. Environment</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp37562256">18.4.1. The fegetenv function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37568000">18.4.2. The feholdexcept function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37575872">18.4.3. The fesetenv function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37583136">18.4.4. The feupdateenv function</a></span></dt></dl></dd></dl></div><p>The header &lt;fenv.h> declares two types and several macros
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><title>Chapter 18. Floating-point environment &lt;fenv.h></title><link href="../../css/bootstrap.css" rel="stylesheet" type="text/css"><link href="../../css/style.css" rel="stylesheet" type="text/css"><meta content="DocBook XSL-NS Stylesheets V1.76.1" name="generator"><link href="../index.html" rel="home" title="C Programming with C99"><link href="../index.html" rel="up" title="C Programming with C99"><link href="../errno/index.html" rel="prev" title="Chapter 17. Errors &lt;errno.h>"><link href="../float/index.html" rel="next" title="Chapter 19. Characterictics of floating types &lt;float.h>"><script src="../css/analytics.js" type="text/javascript" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format"></script></link></link></link></link></meta></link></link></meta></head><body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter 18. Floating-point environment &lt;fenv.h></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="../errno/index.html">Prev</a> </td><th align="center" width="60%"> </th><td align="right" width="20%"> <a accesskey="n" href="../float/index.html">Next</a></td></tr></table><hr/></div><div class="chapter" title="Chapter 18. Floating-point environment &lt;fenv.h>"><div class="titlepage"><div><div><h2 class="title"><a name="idp33652400"></a>Chapter 18. Floating-point environment &lt;fenv.h></h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="index.html#idp35499152">18.1. The FENV_ACCESS pragma</a></span></dt><dt><span class="sect1"><a href="index.html#idp35285072">18.2. Floating-point exceptions</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp35297184">18.2.1. The feclearexcept function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37516912">18.2.2. The fegetexceptflag function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37522784">18.2.3. The feraiseexcept function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37529696">18.2.4. The fesetexceptflag function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37537040">18.2.5. The fetestexcept function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp37545504">18.3. Rounding</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp37547488">18.3.1. The fegetround function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37553280">18.3.2. The fesetround function</a></span></dt></dl></dd><dt><span class="sect1"><a href="index.html#idp37560688">18.4. Environment</a></span></dt><dd><dl><dt><span class="sect2"><a href="index.html#idp37561904">18.4.1. The fegetenv function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37567648">18.4.2. The feholdexcept function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37575520">18.4.3. The fesetenv function</a></span></dt><dt><span class="sect2"><a href="index.html#idp37582784">18.4.4. The feupdateenv function</a></span></dt></dl></dd></dl></div><p>The header &lt;fenv.h> declares two types and several macros
     and functions to provide access to the floating-point environment. The
     floating-point environment refers collectively to any floating-point status
     flags and control modes supported by the
-    implementation.<sup>[<a class="footnote" href="#ftn.idp33651600" name="idp33651600">152</a>]</sup> A floating-point status flag is a system
+    implementation.<sup>[<a class="footnote" href="#ftn.idp35104304" name="idp35104304">152</a>]</sup> A floating-point status flag is a system
     variable whose value is set (but never cleared) when a floating-point
     exception is raised, which occurs as a side effect of exceptional
     floating-point arithmetic to provide auxiliary information. A
     floating-point control mode is a system variable whose value may be set by
     the user to affect the subsequent behavior of floating-point
     arithmetic.</p><p>Certain programming conventions support the intended model of use
-    for the floating-point environment:<sup>[<a class="footnote" href="#ftn.idp35102704" name="idp35102704">153</a>]</sup></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>a function call does not alter its caller's floating-point
+    for the floating-point environment:<sup>[<a class="footnote" href="#ftn.idp35105904" name="idp35105904">153</a>]</sup></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>a function call does not alter its caller's floating-point
 	control modes, clear its caller’s floating-point status flags, nor
 	depend on the state of its caller’s floating-point status flags unless
 	the function is so documented;</p></li><li class="listitem"><p>a function call is assumed to require default floating-point
@@ -20,7 +20,7 @@
     status flags collectively, including any status the implementation
     associates with the flags.</p><p>Each of the macros:</p><div class="blockquote"><blockquote class="blockquote"><p>FE_DIVBYZERO FE_INEXACT FE_INVALID FE_OVERFLOW FE_UNDERFLOW</p></blockquote></div><p>is defined if and only if the implementation supports the
 floating-point exception by means of the functions in
-13.6.2.<sup>[<a class="footnote" href="#ftn.idp35518432" name="idp35518432">154</a>]</sup> Additional
+13.6.2.<sup>[<a class="footnote" href="#ftn.idp35505424" name="idp35505424">154</a>]</sup> Additional
 implementation-defined floating-point exceptions, with macro definitions
 beginning with <code class="code">FE_</code> and an uppercase letter, may also be
 specified by the implementation. The defined macros expand to integer constant
@@ -37,20 +37,20 @@ fesetround functions. Additional implementation-defined rounding directions,
 with macro definitions beginning with FE_ and an uppercase letter, may also be
 specified by the implementation. The defined macros expand to integer constant
 expressions whose values are distinct nonnegative
-values.<sup>[<a class="footnote" href="#ftn.idp35523872" name="idp35523872">155</a>]</sup></p><p>The macro <code class="code">FE_DFL_ENV</code> represents the default
+values.<sup>[<a class="footnote" href="#ftn.idp35495168" name="idp35495168">155</a>]</sup></p><p>The macro <code class="code">FE_DFL_ENV</code> represents the default
 floating-point environment - the one installed at program startup - and has
 type "pointer to const-qualified <code class="code">fenv_t</code>”. It can be used as an
 argument to &lt;fenv.h> functions that manage the floating-point
 environment.</p><p>Additional implementation-defined environments, with macro definitions
 beginning with <code class="code">FE_</code> and an uppercase letter, and having type
 "pointer to const-qualified <code class="code">fenv_t</code>", may also be specified by
-the implementation.</p><div class="sect1" title="18.1. The FENV_ACCESS pragma"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp35047296"></a>18.1. The FENV_ACCESS pragma</h2></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+the implementation.</p><div class="sect1" title="18.1. The FENV_ACCESS pragma"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp35499152"></a>18.1. The FENV_ACCESS pragma</h2></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="cp">#pragma STDC FENV_ACCESS on-off-switch</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">FENV_ACCESS</code> pragma provides a means to inform the
 implementation when a program might access the floating-point environment to
 test floating-point status flags or run under non-default floating-point
-control modes.<sup>[<a class="footnote" href="#ftn.idp35509872" name="idp35509872">156</a>]</sup> The
+control modes.<sup>[<a class="footnote" href="#ftn.idp35506688" name="idp35506688">156</a>]</sup> The
 pragma shall occur either outside external declarations or preceding all
 explicit declarations and statements inside a compound statement. When outside
 external declarations, the pragma takes effect from its occurrence until
@@ -86,12 +86,12 @@ a side effect of the first <code class="code">x + 1</code>, or if the second <co
 1</code> might depend on control modes set as a side effect of the call to
 function <code class="code">g</code>, then the program shall contain an appropriately
 placed invocation of <code class="code">#pragma STDC FENV_ACCESS
-ON</code>.<sup>[<a class="footnote" href="#ftn.idp35512976" name="idp35512976">157</a>]</sup></p></div><div class="sect1" title="18.2. Floating-point exceptions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp35287840"></a>18.2. Floating-point exceptions</h2></div></div></div><p>The following functions provide access to the floating-point status
-  flags.<sup>[<a class="footnote" href="#ftn.idp35288880" name="idp35288880">158</a>]</sup> The <code class="code">int</code> input argument for the
+ON</code>.<sup>[<a class="footnote" href="#ftn.idp35291920" name="idp35291920">157</a>]</sup></p></div><div class="sect1" title="18.2. Floating-point exceptions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp35285072"></a>18.2. Floating-point exceptions</h2></div></div></div><p>The following functions provide access to the floating-point status
+  flags.<sup>[<a class="footnote" href="#ftn.idp35286096" name="idp35286096">158</a>]</sup> The <code class="code">int</code> input argument for the
   functions represents a subset of floating-point exceptions, and can be zero
   or the bitwise OR of one or more floating-point exception macros, for example
   <code class="code">FE_OVERFLOW | FE_INEXACT</code>. For other argument values the
-  behavior of these functions is undefined.</p><div class="sect2" title="18.2.1. The feclearexcept function"><div class="titlepage"><div><div><h3 class="title"><a name="idp35284320"></a>18.2.1. The feclearexcept function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+  behavior of these functions is undefined.</p><div class="sect2" title="18.2.1. The feclearexcept function"><div class="titlepage"><div><div><h3 class="title"><a name="idp35297184"></a>18.2.1. The feclearexcept function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="kt">int</span> <span class="n">feclearexcept</span><span class="p">(</span><span class="kt">int</span> <span class="n">excepts</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">feclearexcept</code> function attempts to clear the
@@ -171,7 +171,7 @@ currently raised exceptions are not cleared. After calling this function, the
 raised exceptions will be a bitwise OR of those previously set with those in
 <code class="code">*envp</code>. As before, the object <code class="code">*envp</code> must be
 known to be valid.</p><p><span class="bold"><strong>RETURN VALUE</strong></span></p><p>These functions return zero on success and nonzero if an error
-occurred.</p></div><div class="sect2" title="18.2.2. The fegetexceptflag function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37517264"></a>18.2.2. The fegetexceptflag function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+occurred.</p></div><div class="sect2" title="18.2.2. The fegetexceptflag function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37516912"></a>18.2.2. The fegetexceptflag function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="kt">int</span> <span class="n">fegetexceptflag</span><span class="p">(</span><span class="n">fexcept_t</span> <span class="o">*</span><span class="n">flagp</span><span class="p">,</span> <span class="kt">int</span> <span class="n">excepts</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">fegetexceptflag</code> function attempts to store an
@@ -179,18 +179,18 @@ implementation-defined representation of the states of the floating-point
 status flags indicated by the argument excepts in the object pointed to by the
 argument flagp.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">fegetexceptflag</code> function returns zero if the
 representation was successfully stored. Otherwise, it returns a nonzero
-value.</p></div><div class="sect2" title="18.2.3. The feraiseexcept function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37523136"></a>18.2.3. The feraiseexcept function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+value.</p></div><div class="sect2" title="18.2.3. The feraiseexcept function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37522784"></a>18.2.3. The feraiseexcept function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="kt">int</span> <span class="n">feraiseexcept</span><span class="p">(</span><span class="kt">int</span> <span class="n">excepts</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">feraiseexcept</code> function attempts to raise the
 supported floating-point exceptions represented by its
-argument.<sup>[<a class="footnote" href="#ftn.idp37526896" name="idp37526896">159</a>]</sup> The order in which these floating-point
+argument.<sup>[<a class="footnote" href="#ftn.idp37526544" name="idp37526544">159</a>]</sup> The order in which these floating-point
 exceptions are raised is unspecified, except as stated in F.7.6 of
 specification. Whether the feraiseexcept function additionally raises the
 "inexact" floating-point exception whenever it raises the "overflow" or
 "underflow" floating-point exception is implementation-defined.</p><p><span class="bold"><strong>Return</strong></span></p><p>The <code class="code">feraiseexcept</code> function returns zero if the excepts
 argument is zero or if all the specified exceptions were successfully
-raised. Otherwise, it returns a nonzero value.</p></div><div class="sect2" title="18.2.4. The fesetexceptflag function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37530048"></a>18.2.4. The fesetexceptflag function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+raised. Otherwise, it returns a nonzero value.</p></div><div class="sect2" title="18.2.4. The fesetexceptflag function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37529696"></a>18.2.4. The fesetexceptflag function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="kt">int</span> <span class="n">fesetexceptflag</span><span class="p">(</span><span class="k">const</span> <span class="n">fexcept_t</span> <span class="o">*</span><span class="n">flagp</span><span class="p">,</span> <span class="kt">int</span> <span class="n">excepts</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">fesetexceptflag</code> function attempts to set the
@@ -202,24 +202,24 @@ those floating-point exceptions represented by the argument excepts. This
 function does not raise floating-point exceptions, but only sets the state of
 the flags.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">fesetexceptflag</code> function returns zero if the
 excepts argument is zero or if all the specified flags were successfully set to
-the appropriate state. Otherwise, it returns a nonzero value.</p></div><div class="sect2" title="18.2.5. The fetestexcept function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37537392"></a>18.2.5. The fetestexcept function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+the appropriate state. Otherwise, it returns a nonzero value.</p></div><div class="sect2" title="18.2.5. The fetestexcept function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37537040"></a>18.2.5. The fetestexcept function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="kt">int</span> <span class="n">fetestexcept</span><span class="p">(</span><span class="kt">int</span> <span class="n">excepts</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The fetestexcept function determines which of a specified subset of the
 floating-point exception flags are currently set. The excepts argument
 specifies the floating-point status flags to be
-queried.<sup>[<a class="footnote" href="#ftn.idp37540832" name="idp37540832">160</a>]</sup></p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">fetestexcept</code> function returns the value of the
+queried.<sup>[<a class="footnote" href="#ftn.idp37540480" name="idp37540480">160</a>]</sup></p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">fetestexcept</code> function returns the value of the
 bitwise OR of the floating-point exception macros corresponding to the
 currently set floating-point exceptions included in
-<code class="code">excepts</code>.</p></div></div><div class="sect1" title="18.3. Rounding"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp37545856"></a>18.3. Rounding</h2></div></div></div><p>The <code class="code">fegetround</code> and <code class="code">fesetround</code>
-  functions provide control of rounding direction modes.</p><div class="sect2" title="18.3.1. The fegetround function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37547840"></a>18.3.1. The fegetround function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+<code class="code">excepts</code>.</p></div></div><div class="sect1" title="18.3. Rounding"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp37545504"></a>18.3. Rounding</h2></div></div></div><p>The <code class="code">fegetround</code> and <code class="code">fesetround</code>
+  functions provide control of rounding direction modes.</p><div class="sect2" title="18.3.1. The fegetround function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37547488"></a>18.3.1. The fegetround function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="kt">int</span> <span class="n">fegetround</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">fegetround</code> function gets the current rounding
 direction.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">fegetround</code> function returns the value of the
 rounding direction macro representing the current rounding direction or a
 negative value if there is no such rounding direction macro or the current
-rounding direction is not determinable.</p></div><div class="sect2" title="18.3.2. The fesetround function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37553632"></a>18.3.2. The fesetround function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+rounding direction is not determinable.</p></div><div class="sect2" title="18.3.2. The fesetround function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37553280"></a>18.3.2. The fesetround function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="kt">int</span> <span class="n">fesetround</span><span class="p">(</span><span class="kt">int</span> <span class="n">round</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">fesetround</code> function establishes the rounding
@@ -242,21 +242,21 @@ and abort if setting the rounding direction fails.</p><pre class="CLexer"><div c
   <span class="cm">/* ... */</span>
 <span class="p">}</span>
 </pre></div>
-</pre></div></div><div class="sect1" title="18.4. Environment"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp37561040"></a>18.4. Environment</h2></div></div></div><p>The functions in this section manage the floating-point environment
-    - status flags and control modes - as one entity.</p><div class="sect2" title="18.4.1. The fegetenv function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37562256"></a>18.4.1. The fegetenv function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+</pre></div></div><div class="sect1" title="18.4. Environment"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp37560688"></a>18.4. Environment</h2></div></div></div><p>The functions in this section manage the floating-point environment
+    - status flags and control modes - as one entity.</p><div class="sect2" title="18.4.1. The fegetenv function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37561904"></a>18.4.1. The fegetenv function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="kt">int</span> <span class="n">fegetenv</span><span class="p">(</span><span class="n">fenv_t</span> <span class="o">*</span><span class="n">envp</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">fegetenv</code> function attempts to store the current
 floating-point environment in the object pointed to by envp.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">fegetenv</code> function returns zero if the environment
-was successfully stored. Otherwise, it returns a nonzero value.</p></div><div class="sect2" title="18.4.2. The feholdexcept function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37568000"></a>18.4.2. The feholdexcept function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+was successfully stored. Otherwise, it returns a nonzero value.</p></div><div class="sect2" title="18.4.2. The feholdexcept function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37567648"></a>18.4.2. The feholdexcept function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="kt">int</span> <span class="n">feholdexcept</span><span class="p">(</span><span class="n">fenv_t</span> <span class="o">*</span><span class="n">envp</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">feholdexcept</code> function saves the current
 floating-point environment in the object pointed to by <code class="code">envp</code>,
 clears the floating-point status flags, and then installs a non-stop (continue
 on floating-point exceptions) mode, if available, for all floating-point
-exceptions.<sup>[<a class="footnote" href="#ftn.idp37572320" name="idp37572320">161</a>]</sup></p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">feholdexcept</code> function returns zero if and only if
-non-stop floating-point exception handling was successfully installed.</p></div><div class="sect2" title="18.4.3. The fesetenv function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37575872"></a>18.4.3. The fesetenv function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+exceptions.<sup>[<a class="footnote" href="#ftn.idp37571968" name="idp37571968">161</a>]</sup></p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">feholdexcept</code> function returns zero if and only if
+non-stop floating-point exception handling was successfully installed.</p></div><div class="sect2" title="18.4.3. The fesetenv function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37575520"></a>18.4.3. The fesetenv function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="kt">int</span> <span class="n">fesetenv</span><span class="p">(</span><span class="k">const</span> <span class="n">fenv_t</span> <span class="o">*</span><span class="n">envp</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">fesetenv</code> function attempts to establish the
@@ -266,7 +266,7 @@ to <code class="code">fegetenv</code> or <code class="code">feholdexcept</code>,
 floating-point environment macro. Note that fesetenv merely installs the state
 of the floating-point status flags represented through its argument, and does
 not raise these floating-point exceptions.</p><p><span class="bold"><strong>Returns</strong></span></p><p>The <code class="code">fesetenv</code> function returns zero if the environment
-was successfully established. Otherwise, it returns a nonzero value.</p></div><div class="sect2" title="18.4.4. The feupdateenv function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37583136"></a>18.4.4. The feupdateenv function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
+was successfully established. Otherwise, it returns a nonzero value.</p></div><div class="sect2" title="18.4.4. The feupdateenv function"><div class="titlepage"><div><div><h3 class="title"><a name="idp37582784"></a>18.4.4. The feupdateenv function</h3></div></div></div><p><span class="bold"><strong>Synopsis</strong></span></p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
 <span class="kt">int</span> <span class="n">feupdateenv</span><span class="p">(</span><span class="k">const</span> <span class="n">fenv_t</span> <span class="o">*</span><span class="n">envp</span><span class="p">);</span>
 </pre></div>
 </pre><p><span class="bold"><strong>Description</strong></span></p><p>The <code class="code">feupdateenv</code> function attempts to save the
@@ -294,40 +294,40 @@ value.</p><p>EXAMPLE Hide spurious underflow floating-point exceptions:</p><pre 
   <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-</pre></div></div><div class="footnotes"><br><hr align="left" width="100"><div class="footnote"><p><sup>[<a class="para" href="#idp33651600" id="ftn.idp33651600">152</a>] </sup>This header is designed to support the
+</pre></div></div><div class="footnotes"><br><hr align="left" width="100"><div class="footnote"><p><sup>[<a class="para" href="#idp35104304" id="ftn.idp35104304">152</a>] </sup>This header is designed to support the
     floating-point exception status flags and directed-rounding control modes
     required by IEC 60559, and other similar floating-point state
     information. Also it is designed to facilitate code portability among all
-    systems.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35102704" id="ftn.idp35102704">153</a>] </sup>With these
+    systems.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35105904" id="ftn.idp35105904">153</a>] </sup>With these
     conventions, a programmer can safely assume default floating-point control
     modes (or be unaware of them). The responsibilities associated with
     accessing the floating-point environment fall on the programmer or program
-    that does so explicitly.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35518432" id="ftn.idp35518432">154</a>] </sup>The implementation supports an exception if there
+    that does so explicitly.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35505424" id="ftn.idp35505424">154</a>] </sup>The implementation supports an exception if there
 are circumstances where a call to at least one of the functions in 13.6.2,
 using the macro as the appropriate argument, will succeed. It is not necessary
-for all the functions to succeed all the time.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35523872" id="ftn.idp35523872">155</a>] </sup>Even though the rounding direction macros may expand
+for all the functions to succeed all the time.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35495168" id="ftn.idp35495168">155</a>] </sup>Even though the rounding direction macros may expand
 to constants corresponding to the values of <code class="code">FLT_ROUNDS</code>, they
-are not required to do so.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35509872" id="ftn.idp35509872">156</a>] </sup>The purpose of the
+are not required to do so.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35506688" id="ftn.idp35506688">156</a>] </sup>The purpose of the
 <code class="code">FENV_ACCESS</code> pragma is to allow certain optimizations that
 could subvert flag tests and mode changes (e.g., global common subexpression
 elimination, code motion, and constant folding). In general, if the state of
 <code class="code">FENV_ACCESS</code> is "off", the translator can assume that default
-modes are in effect and the flags are not tested.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35512976" id="ftn.idp35512976">157</a>] </sup>The side effects impose a temporal ordering
+modes are in effect and the flags are not tested.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35291920" id="ftn.idp35291920">157</a>] </sup>The side effects impose a temporal ordering
 that requires two evaluations of <code class="code">x + 1</code>. On the other hand,
 without the <code class="code">#pragma STDC FENV_ACCESS ON</code> pragma, and assuming
 the default state is "off", just one evaluation of <code class="code">x + 1</code> would
-suffice.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35288880" id="ftn.idp35288880">158</a>] </sup>The functions <code class="code">fetestexcept,
+suffice.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp35286096" id="ftn.idp35286096">158</a>] </sup>The functions <code class="code">fetestexcept,
   feraiseexcept</code> and <code class="code">feclearexcept</code> support the basic
   abstraction of flags that are either set or clear. An implementation may
   endow floating-point status flags with more information - for example, the
   address of the code which first raised the floating-point exception; the
   functions <code class="code">fegetexceptflag</code> and
   <code class="code">fesetexceptflag</code> deal with the full content of
-  flags.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37526896" id="ftn.idp37526896">159</a>] </sup>The effect is intended to be similar to that of
+  flags.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37526544" id="ftn.idp37526544">159</a>] </sup>The effect is intended to be similar to that of
 floating-point exceptions raised by arithmetic operations. Hence, enabled traps
 for floating-point exceptions raised by this function are taken. The
 specification in F.7.6 of specification is in the same
-spirit.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37540832" id="ftn.idp37540832">160</a>] </sup>This mechanism allows testing several
+spirit.</p></div><div class="footnote"><p><sup>[<a class="para" href="#idp37540480" id="ftn.idp37540480">160</a>] </sup>This mechanism allows testing several
 floating-point exceptions with just one function call.</p><p>EXAMPLE
 Call <code class="code">f</code> if "invalid" is set, then <code class="code">g</code> if
 "overflow" is set:</p><pre class="CLexer"><div class="highlight"><pre><span class="cp">#include &lt;fenv.h&gt;</span>
@@ -343,11 +343,11 @@ Call <code class="code">f</code> if "invalid" is set, then <code class="code">g<
   <span class="cm">/* ... */</span>
 <span class="p">}</span>
 </pre></div>
-</pre></div><div class="footnote"><p><sup>[<a class="para" href="#idp37572320" id="ftn.idp37572320">161</a>] </sup>IEC 60559 systems have a default non-stop mode,
+</pre></div><div class="footnote"><p><sup>[<a class="para" href="#idp37571968" id="ftn.idp37571968">161</a>] </sup>IEC 60559 systems have a default non-stop mode,
 and typically at least one other mode for trap handling or aborting; if the
 system provides only the non-stop mode then installing it is trivial. For such
 systems, the <code class="code">feholdexcept</code> function can be used in conjunction
 with the <code class="code">feupdateenv</code> function to write routines that hide
 spurious floating-point exceptions from their
 callers.</p></div></hr></br></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="../errno/index.html">Prev</a> </td><td align="center" width="20%"> </td><td align="right" width="40%"> <a accesskey="n" href="../float/index.html">Next</a></td></tr><tr><td align="left" valign="top" width="40%">Chapter 17. Errors &lt;errno.h> </td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td align="right" valign="top" width="40%"> Chapter 19. Characterictics of floating types &lt;float.h></td></tr></table></hr></div><p style="text-align: center;" xmlns:d="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format">© 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
-   GNU FDL license is applicable where not stated.</p></body></html>
+    GNU FDL license is applicable where not stated.</p></body></html>

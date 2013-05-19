@@ -1,3 +1,3 @@
 all:
-	xsltproc --xinclude html.xsl c.xml
+	xsltproc --xinclude --stringparam html.stylesheet "../css/bootstrap.css ../css/style.css" html.xsl c.xml
 	./domp.py
