@@ -1328,5 +1328,35 @@ strtoul and strtoull functions), conversion state (Extended multibyte/wide
 character conversion utilities), the <d:code>wcrtomb</d:code> function (The
 wcrtomb function).</d:para>
     </d:sect2>
+    <d:sect2>
+      <d:title>The printf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h>
+int printf(const char * restrict format, ...);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>printf</d:code> function is equivalent to
+<d:code>fprintf</d:code> with the argument <d:code>stdout</d:code> interposed
+before the arguments to <d:code>printf</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>printf</d:code> function returns the number of characters
+transmitted, or a negative value if an output or encoding error
+occurred.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The scanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h>
+int scanf(const char * restrict format, ...);</d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>The <d:code>scanf</d:code> function is equivalent to
+<d:code>fscanf</d:code> with the argument <d:code>stdin</d:code> interposed
+before the arguments to <d:code>scanf</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+<d:para>The <d:code>scanf</d:code> function returns the value of the macro EOF
+if an input failure occurs before any conversion. Otherwise, the
+<d:code>scanf</d:code> function returns the number of input items assigned,
+which can be fewer than provided for, or even zero, in the event of an early
+matching failure.</d:para>
+    </d:sect2>
   </d:sect1>
 </d:chapter>
