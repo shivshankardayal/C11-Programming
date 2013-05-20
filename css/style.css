@@ -7,7 +7,7 @@ body {
 	/*border-radius: 10px;
 	box-shadow: 2px 2px 19px #444;*/
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 15px;
+	font-size: 13px;
 	line-height: 20px;
 	color: rgb(51,51,51);
 }
@@ -396,13 +396,17 @@ margin-bottom: -20px;
 .il { color: #40a070 } /* Literal.Number.Integer.Long */
 
     /* Large desktop */
-    @media (min-width: 1200px) { body{width:800px;} }
+    @media (min-width: 1200px) { body{width:800px;padding-top: 60px;
+    padding-bottom: 42px;} }
      
     /* Portrait tablet to landscape and desktop */
-    @media (min-width: 768px) and (max-width: 979px) { body{width:760px;} }
+    @media (min-width: 768px) and (max-width: 979px) { body{width:760px;padding-top: 60px;
+    padding-bottom: 42px;} }
      
     /* Landscape phone to portrait tablet */
-    @media (max-width: 767px) { body{width:760px;} }
+    @media (max-width: 767px) { body{width:760px;padding-top: 60px;
+    padding-bottom: 42px;} }
      
     /* Landscape phones and down */
-    @media (max-width: 480px) { body{width:480px;} }
+    @media (max-width: 480px) { body{width:480px;padding-top: 60px;
+    padding-bottom: 42px;} }
