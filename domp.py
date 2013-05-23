@@ -13,6 +13,7 @@ def findReplace(directory, find, replace, filePattern):
 			with open(filepath) as f:
 				s = f.read()
 				s = s.replace(find, replace)
+				s = s.replace("index.html", "")
 				soup = BeautifulSoup(s)
 				p=''
 				n=''
