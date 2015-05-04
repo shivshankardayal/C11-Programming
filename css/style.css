@@ -3,11 +3,11 @@ body {
 	padding:0;
 /*	width:800px;*/
 	margin:40px auto 80px auto;
-	padding:10px 20px 10px 20px;
+	/*padding:10px 20px 10px 20px;*/
 	/*border-radius: 10px;
 	box-shadow: 2px 2px 19px #444;*/
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 20px;
 	color: rgb(51,51,51);
 }
@@ -59,6 +59,10 @@ pre.CommonLispLexer, pre.CLexer, pre.MakefileLexer {
     border-radius: 5px;
 }
 
+pre {
+    border: none;
+    background-color: #fff;
+}
 pre.screen {
     border: 1px solid #aaa;
     padding: 0px 10px 0px 10px;
@@ -103,7 +107,7 @@ table th {
 }
 
 code.code {
-    font-size: 14px;
+    font-size: 11px;
 }
 
 /*div.informalequation {
@@ -114,10 +118,10 @@ text-align:center;
 	font-family: Arial, Helvetica, sans-serif;
 	text-align:center;
 	/*margin-top: 20px;
-}*/
+}
 div.navheader th {
 visibility: hidden ;
-}
+}*/
 div.titlepage {
 text-align: center;
 }
@@ -273,6 +277,7 @@ div.highlight {
 margin-top: 0px;
 margin-bottom: -20px;
 }
+
 .hll { background-color: #ffffcc }
 .c { color: #408080; font-style: italic } /* Comment */
 .err { border: 1px solid #FF0000 } /* Error */
@@ -400,13 +405,13 @@ margin-bottom: -20px;
     padding-bottom: 42px;} }
      
     /* Portrait tablet to landscape and desktop */
-    @media (min-width: 768px) and (max-width: 979px) { body{width:760px;padding-top: 60px;
-    padding-bottom: 42px;} }
+    @media (min-width: 768px) and (max-width: 979px) { body{width:600px;padding-top: 60px;
+    padding-bottom: 42px;}img{width: 100%} }
      
     /* Landscape phone to portrait tablet */
-    @media (max-width: 767px) { body{width:760px;padding-top: 60px;
-    padding-bottom: 42px;} }
+    @media (max-width: 767px) { body{width:100%;padding-top: 120px;
+    padding-bottom: 42px;}img{width: 100%; max-width:100%} }
      
     /* Landscape phones and down */
-    @media (max-width: 480px) { body{width:480px;padding-top: 60px;
-    padding-bottom: 42px;} }
+    @media (max-width: 480px) { body{width:100%;padding-top: 120px;
+    padding-bottom: 42px;}img{width: 100%; max-width:100%} }

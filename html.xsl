@@ -25,14 +25,11 @@
   <!--<xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/highlighting/common.xsl" />
       <xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/html/highlight.xsl" />-->
   
-  <xsl:param name="html.stylesheet" select="'../css/style.css'" />
   <xsl:template name="user.head.content">
-    <script src="/css/jquery.js" type="text/javascript"></script>
-    <script src="/css/bootstrap.js" type="text/javascript"></script>
-    <script src="/css/analytics.js" type="text/javascript"></script>
+    <xsl:copy-of select="document('analytics.js', /)"/>
   </xsl:template>
   <xsl:template name="user.footer.navigation">
-    <p style="text-align: center;">&#x00A9; 2010, 2013 Shiv S. Dayal. <a href="http://libreprogramming.org">libreprogramming.org</a>.
+    <p style="text-align: center;">&amp;copy; 2010, 2015 Shiv S. Dayal. <a href="http://10hash.com">10hash.com</a>.
     GNU FDL license is applicable where not stated.</p>
   </xsl:template>
 
