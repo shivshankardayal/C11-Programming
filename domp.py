@@ -27,7 +27,7 @@ def findReplace(directory, find, replace, filePattern):
                                 for j in soup.findAll("table", attrs={"summary": "Navigation footer"}):
                                         link = BeautifulSoup("<a href=\"../ix01.html\">Index</a>")
                                         j.contents[0].contents[1].insert(0, link)
-                                p = BeautifulSoup("Please see <a href=\"http://caniuse.com/#feat=mathml\">http://caniuse.com/#feat=mathml</a> if your browser supports MathML because certain sections of this book rely on MathML.")
+                                p = BeautifulSoup("Please see <a href=\"http://caniuse.com/#feat=mathml\">http://caniuse.com/#feat=mathml</a> if your browser supports MathML because certain sections of this book rely on MathML. If your browser does not support MathML please install Firefox from <a href=\"https://www.mozilla.org\">Mozilla</a> because AFAIK Firefox supports MathML.")
                                 soup.body.insert(0, p)
                                 soup = BeautifulSoup(soup.renderContents())
                                 for i in soup.find_all("pre", "CommonLispLexer"):

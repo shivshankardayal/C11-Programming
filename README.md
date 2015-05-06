@@ -1,5 +1,4 @@
-C99-Programming-Docbook
+C11-Programming-Docbook
 =======================
-
-A book on C with emphsis on C99. Being converted to Docbook.
+A book on C with emphsis on C11. Being rewritten
 

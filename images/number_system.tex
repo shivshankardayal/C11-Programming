@@ -1,0 +1,11 @@
+\documentclass[crop,tikz]{standalone}% 'crop' is the default for v1.0, before it was 'preview'
+\begin{document}
+\begin{tikzpicture}\draw (0, 0) -- (6, 0);
+  \draw (0, -.2) -- (0, .2);
+  \draw (6, -.2) -- (6, .2);
+  \draw (3, -.2) -- (3, .2);
+  \draw (0, 0.4) node{$-\infty$};
+  \draw (6, 0.4) node{$+\infty$};
+  \draw (3, 0.4) node{$0$};
+\end{tikzpicture}
+\end{document}

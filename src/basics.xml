@@ -4,33 +4,88 @@
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
     <?dbhtml filename="basics/index.html" ?>
     <d:title>Basics of C</d:title>
-    <d:para>Now is the time for learning basics. There are certain rules in every language, certain
-      grammar which dictates the way language will be spoken and written. It has a script to write
-      using. Similarly, programming languages have BNF (Backus-Naur Form) context-free grammar.
-      There are valid characters in a programming language and a set of keywords. However,
-      programming language ruleset is very small compared to a natural programming language. Also,
-      when using natural programming language like talking to someone or writing something the other
-      person can understand your intent but in programming you cannot violate rules. The grammar is
-      context-free. Compilers or interpreters cannot deduce your intent by reading code. They are
-      not intelligent. You make a mistake and it will refuse to listen to you no matter what you do.
-      Therefore, it is very essential to understand these rules very clearly and correctly.</d:para>
+    <d:para>Now is the time for learning basics. There are certain rules in
+    every language, certain grammar which dictates the way language will be
+    spoken and written. It has a script to write using. Similarly, programming
+    languages have BNF (Backus-Naur Form) context-free grammar. There are valid
+    characters in a programming language and a set of keywords. However,
+    programming language ruleset is very small compared to a natural
+    programming language. Also, when using natural programming language like
+    talking to someone or writing something the other person can understand
+    your intent but in programming you cannot violate rules. The grammar is
+    context-free. Compilers or interpreters cannot deduce your intent by
+    reading code. They are not intelligent. You make a mistake and it will
+    refuse to listen to you no matter what you do. Therefore, it is very
+    essential to understand these rules very clearly and correctly.</d:para>
     <d:sect1>
       <title xmlns="http://docbook.org/ns/docbook">The C Character Set</title>
-      <d:para>The following form the C character set you are allowed to use in it:</d:para>
+      <d:para>The following form the C character set you are allowed to use in
+      it:</d:para>
       <d:screen>[a-z] [A-Z] [0-9] ~ ! # % ^ &amp; * ( ) - = [ ] \ ; ' , . / _ + { } | : " &lt; > ?</d:screen>
-      <d:para>This means along with other symbols you can use all English alphabets (both uppercase
-        and lowercase) and Arabic numerals. However, English is not the only spoken language in the
-        world. Therefore in other non-English speaking counties there are keyboard where certain
-        characters present in above set are not present. The inventors of C were wise enough to
-        envision this and provide the facility in form of trigraph sequences. The table of trigraph
-        sequences is given in chapter 4.</d:para>
+      <d:para>This means along with other symbols you can use all English
+      alphabets (both uppercase and lowercase) and Arabic numerals. However,
+      English is not the only spoken language in the world. Therefore in other
+      non-English speaking counties there are keyboard where certain characters
+      present in above set are not present. The inventors of C were wise enough
+      to envision this and provide the facility in form of trigraph
+      sequences. Given below is the table containing all trigraph
+      sequences. Note that GNU coding standards advice against using trigraph
+      sequences for portability reasons.
+        <table
+            xmlns="http://docbook.org/ns/docbook" frame="border" border="1" class="centered">
+          <caption>Trigraph Sequence</caption>
+	      <colgroup />
+	      <colgroup />
+	      <colgroup />
+	      <colgroup />
+	      <colgroup />
+	      <colgroup />
+          <thead>
+            <tr bgcolor="#aaaaaa">
+              <th>Trigraph</th>
+              <th>Equivalent</th>
+              <th>Trigraph</th>
+              <th>Equivalent</th>
+              <th>Trigraph</th>
+              <th>Equivalent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>??=</td>
+              <td>#</td>
+              <td>??'</td>
+              <td>^</td>
+              <td>??!</td>
+              <td>|</td>
+            </tr>
+            <tr>
+              <td>??(</td>
+              <td>[</td>
+              <td>??)</td>
+              <td>]</td>
+              <td>??&lt;</td>
+              <td>{</td>
+            </tr>
+            <tr>
+              <td>??></td>
+              <td>}</td>
+              <td>??/</td>
+              <td>\</td>
+              <td>??-</td>
+              <td>~</td>
+            </tr>
+          </tbody>
+        </table>
+      </d:para>
     </d:sect1>
     <d:sect1>
       <title xmlns="http://docbook.org/ns/docbook">Keywords</title>
-      <d:para>The following are reserved keywords for C programming language which you are not
-        allows to use other than what they are meant for:<table
+      <d:para>The following are reserved keywords for C programming language by
+      C99 specification which you are not allows to use other than what they
+      are meant for:<table
           xmlns="http://docbook.org/ns/docbook" frame="void" class="dynamic" border="1">
-          <caption>Keywords of C</caption>
+          <caption>Keywords of C99</caption>
 	  <colgroup width="0*"/>
 	  <colgroup width="0*"/>
 	  <colgroup width="0*"/>
@@ -98,22 +153,50 @@
             </tr>
           </tbody>
         </table></d:para>
-      <d:para>These keywords serve specific purpose. You will come to know about all of them as you
-        progress through the book. Next we look at identifiers.</d:para>
+      <d:para>
+        These keywords serve specific purpose. You will come to know
+        about all of them as you progress through the book. Next we look at
+        identifiers. Following keywords were added in C11 specification:
+        <table
+          xmlns="http://docbook.org/ns/docbook" frame="void" class="dynamic"
+          border="1">
+          <caption>Keywords added in C11 specification</caption>
+	      <colgroup width="0*"/>
+	      <colgroup width="0*"/>
+	      <colgroup width="0*"/>
+	      <colgroup width="0*"/>
+	      <colgroup width="0*"/>
+	      <colgroup width="0*"/>
+          <tr>
+            <td>_Alignof</td>
+            <td>_Atomic</td>
+            <td>_Generic</td>
+            <td>_Noreturn</td>
+            <td>_Static_assert</td>
+            <td>_Thread_local</td>
+          </tr>
+        </table>
+      </d:para> 
     </d:sect1>
     <d:sect1>
       <title xmlns="http://docbook.org/ns/docbook">Identifers</title>
-      <d:para>The names which we give to our variables are known as identifiers. Something with
-        which we identify. As you have already seen what is allowed in C’s character set but not all
-        are allowed in an identifiers name. Only alphabets from English language both lowercase and
-        uppercase, Arabic digits from zero to nine and underscore (<d:code>_</d:code>) are allowed
-        in an identifiers name. The rule for constructing names is that among the allowed characters
-        it can only begin with only English alphabets and underscore. Numbers must not be first
-        character. For example, <d:code>x, _myVar, varX, yourId78</d:code> are all valid names.
-        However, take care with names starting from underscore as they are mostly used by different
-        library authors. Invalid identifier examples are <d:code>9x, my$, your age</d:code>. Please
-        read this section carefully and make sure understand the rules for naming identifiers. Later
-        at the end of chapter there are some simple problems to work on.</d:para>
+      <d:para>
+        The names which we give to our variables are known as
+        identifiers. Something with which we identify. As you have already seen
+        what is allowed in C's character set but not all are allowed in an
+        identifiers name. Only alphabets from English language both lowercase
+        and uppercase, Arabic digits from zero to nine and underscore
+        (<d:code>_</d:code>) are allowed in an identifiers name. The rule for
+        constructing names is that among the allowed characters it can only
+        begin with only English alphabets and underscore. Numbers must not be
+        first character. For example, <d:code>x, _myVar, varX,
+        yourId78</d:code> are all valid names. However, take care with names
+        starting from underscore as they are mostly used by different library
+        authors. Invalid identifier examples are <d:code>9x, my$, your
+        age</d:code>. Please read this section carefully and make sure
+        understand the rules for naming identifiers. Later at the end of
+        chapter there are some simple problems to work on.
+      </d:para> 
     </d:sect1>
     <d:sect1>
       <title xmlns="http://docbook.org/ns/docbook">Programming</title>
@@ -129,11 +212,11 @@ int main(int argc, char* argv[])
 {
   return 0;
 }</d:programlisting>
-      <d:para>You can now issue a command as <d:command>$clang nothing.c</d:command> where
+      <d:para>You can now issue a command as <d:command>$gcc nothing.c</d:command> where
           <d:code>nothing.c</d:code> is the filename by which you saved the source code. Note that
           <d:code>$</d:code> is the prompt not part of command itself. Then you can do an
           <d:command>ls</d:command> and you will find that <d:code>a.out</d:code> is a file which
-        has been produced by <d:application>clang</d:application>. Now you can run this program by
+        has been produced by <d:application>gcc</d:application>. Now you can run this program by
         saying <d:command>./a.out</d:command> and nothing will happen. But if you type
           <d:command>echo $?</d:command> then you will find that 0 is printed on screen which is
         nothing but 0 after return of our program.</d:para>
@@ -152,15 +235,13 @@ int main(int argc, char* argv[])
         when the logic is really complex. One should be generous while commenting the code.</d:para>
       <d:para><d:code>#include</d:code> is a pre-processor directive. It will look for whatever is
         contained in angular brackets in the <d:code>INCLUDEPATH</d:code> of compiler. For now you
-        can assume that <d:code>/usr/include</d:code> is in include path of compiler. For the
-        curious I refer you to <link xmlns="http://docbook.org/ns/docbook"
-          xlink:href="http://clang.llvm.org/doxygen/InitHeaderSearch_8cpp_source.html"
-          >http://clang.llvm.org/doxygen/InitHeaderSearch_8cpp_source.html</link>. Basically what it
+        can assume that <d:code>/usr/include</d:code> is in include path of
+        compiler. Basically what it
         does is that it looks for a file names <d:code>stdio.h</d:code> in the
           <d:code>INCLUDEPATH</d:code>. If that is found the content of that file is pasted here in
-        our program.If you really want to see what happens then you can type <d:command>$clang -E
+        our program.If you really want to see what happens then you can type <d:command>$gcc -E
           nothing.c</d:command>. You will see lots of text scrolling on your screen. The
-          <d:option>-E</d:option> switch tells <d:application>clang</d:application> that just
+          <d:option>-E</d:option> switch tells <d:application>gcc</d:application> that just
         preprocess the file, do not compile it, and send the resulting output to standard output (we
         will know about this more later), which happens to be your monitor in this case.</d:para>
       <d:para>Next line is <d:code>int main(int argc, char* argv[])</d:code>. Now this is very
@@ -220,13 +301,13 @@ shiv@shiv:~/book/code$</d:screen>
       <d:para>Note that <d:code>shiv@shiv:~/book/code$</d:code> is the prompt. The Makefile is also
         updated:</d:para>
       <d:programlisting role="MakefileLexer">check-syntax:
-    clang -o nul -Wall -S $ (CHK_SOURCES)
+    gcc -o nul -Wall -S $ (CHK_SOURCES)
 
 nothing:nothing.c
-    clang nothing.c -o nothing
+    gcc nothing.c -o nothing
 
 addition:addition.c
-    clang addition.c -o addition</d:programlisting>
+    gcc addition.c -o addition</d:programlisting>
       <d:para>You can choose <d:code>Tools->Compile</d:code> then enter <d:code>make -k
           addition</d:code> as make commands in the Emacs’s minibuffer and execute like
           <d:code>$./addition</d:code>.</d:para>
@@ -487,7 +568,7 @@ ages are available.  */
 # include &lt;bits/xopen_lim.h>
 #endif</d:programlisting>
       <d:para>Here, I have given <d:application>gcc</d:application>’s <d:code>limits.h</d:code> as
-          <d:application>clang</d:application> includes that. For knowing exact implementation for
+          <d:application>gcc</d:application> includes that. For knowing exact implementation for
         floating-point implementation on your platform I recommend you to read <link
           xmlns="http://docbook.org/ns/docbook"
           xlink:href="http://en.wikipedia.org/wiki/IEEE_754-2008"
@@ -597,7 +678,7 @@ int main()
   MAX;
   return 0;
 }</d:programlisting>
-        <d:para>Just do <d:command>$clang -E define.c</d:command> to see the magic. Note that
+        <d:para>Just do <d:command>$gcc -E define.c</d:command> to see the magic. Note that
             <d:code>#define</d:code> parameters are not type safe. Compiler will just paste the
           contents. Notice how <d:code>MAX</d:code> is replaced by 7.</d:para>
       </d:sect2>
@@ -848,7 +929,7 @@ int main()
         <d:para>and the output is:</d:para>
         <d:programlisting>Absolute value of z is 5.000000
 Imaghinary part of conjugate is now -3.000000</d:programlisting>
-        <d:para>You must note that in Makefile you must compile it like <d:command>$clang complex.c
+        <d:para>You must note that in Makefile you must compile it like <d:command>$gcc complex.c
             -o complex -lm</d:command>. Note the <d:code>-lm</d:code> part. It tells to look for
           definition of these functions in Math library of C. Without it the program won’t compile.
           At this point I encourage you to further explore different functions presented in the
@@ -1000,12 +1081,12 @@ int main()
       <d:para>All escape sequences start with a leading <d:code>\</d:code> . Following table shows
           them:<table xmlns="http://docbook.org/ns/docbook" frame="border" class="centered"
           border="1">
-	  <colgroup width="0*"/>
-	  <colgroup width="0*"/>
-	  <colgroup width="0*"/>
+	  <colgroup />
+	  <colgroup />
+	  <colgroup />
           <caption>Escape Sequences</caption>
           <thead>
-            <tr bgcolor="#aaa">
+            <tr bgcolor="#aaaaaa">
               <th>Character</th>
               <th>Escape Sequences</th>
               <th>ASCII Value</th>
