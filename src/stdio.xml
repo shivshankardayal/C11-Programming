@@ -587,7 +587,7 @@ honored.</d:para>
     specifier.<d:footnote><d:para>The <d:code>fprintf</d:code> functions
     perform writes to memory for the <d:code>%n</d:code>
     specifier.</d:para></d:footnote></d:para>
-    <d:sect2>
+    <d:sect2 id="fprintf">
       <d:title>The fprintf function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
@@ -1014,7 +1014,7 @@ which is denoted here by a and the second by an uppercase letter.</d:para>
 state (Extended multibyte/wide character conversion utilities), the
 <d:code>wcrtomb</d:code> function (The wcrtomb function).</d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="fscanf">
       <d:title>The fscanf function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>

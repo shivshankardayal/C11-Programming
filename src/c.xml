@@ -5,7 +5,7 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
   <d:info>
-    <d:title>C Programming with C99</d:title>
+    <d:title>C Programming with GNU/Linux</d:title>
     <d:author>
       <d:personname>
         <d:firstname>Shiv</d:firstname>
@@ -13,7 +13,8 @@
       </d:personname>
     </d:author>
     <d:copyright>
-      <d:year>2011, 2013</d:year>
+      <d:year>2011</d:year>
+      <d:year>2015</d:year>
       <d:holder>Shiv S. Dayal</d:holder>
     </d:copyright>
   </d:info>

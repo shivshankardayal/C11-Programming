@@ -1,0 +1,16 @@
+\documentclass[crop,tikz]{standalone}% 'crop' is the default for v1.0, before it was 'preview'
+\begin{document}
+\begin{tikzpicture}
+  \foreach \x in {0, ..., 31}
+  \draw (\x*0.4cm, 0) -- +(.4cm, 0) -- +(.4cm, 0.5cm) -- +(0, .5cm) --
+  cycle;
+  \draw (0.2cm, 0.6cm) -- (0.2cm, 1cm);
+  \draw (0.6cm, 0.6cm) -- (0.6cm, 1cm) -- (3.4cm, 1cm) -- (3.4cm, 0.6cm);
+  \draw (3.8cm, 0.6cm) -- (3.8cm, 1cm) -- (12.6cm, 1cm) -- (12.6cm, 0.6cm);
+  \foreach \x in {31, ..., 0}
+  \node at (\x*0.4cm, 0) [xshift=.2cm, yshift=-.3cm, align=center] {\tiny \x};
+  \node at (0.2cm, 1.3cm) [align=center] {sign};
+  \node at (2cm, 1.3cm) [align=center] {exponent(8 bits)};
+  \node at (8.2cm, 1.3cm) [align=center] {fraction(23 bits)};
+\end{tikzpicture}
+\end{document}

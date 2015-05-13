@@ -760,4 +760,80 @@ int main ()
 and the output is:
 <d:screen>1 3 4 4 7 10 9 20 25</d:screen>
     </d:sect1>
+    <d:sect1>
+      <d:title>Type Generic Functions</d:title>
+      <d:para>
+        C11 has introduced a new type of functions called type generic
+        functions. If you read clause 2 of <d:code>&lt;tgmath.h&gt;</d:code>
+        &#xa7;(iso6.25). then you will find following.
+      </d:para>
+      <d:para>
+        Of the <d:code>&lt;math.h&gt;</d:code> and
+        <d:code>&lt;complex.h&gt;</d:code> functions without an <d:code>f
+        (float)</d:code> or <d:code>l (long double)</d:code> suffix, several
+        have one or more parameters whose corresponding real type is
+        double. For each such function, except modf, there is a corresponding
+        type-generic macro.<d:footnote><d:para>Like other function-like macros in
+        Standard libraries, each type-generic macro can be suppressed to make
+        available the corresponding ordinary function.</d:para></d:footnote> The
+        parameters whose corresponding real type is <d:code>double</d:code> in
+        the function synopsis are generic parameters. Use of the macro invokes
+        a function whose corresponding real type and type domain are determined
+        by the arguments for the generic parameters.<d:footnote><d:para>If the type of
+        the argument is not compatible with the type of the parameter for the
+        selected function, the behavior is undefined.</d:para></d:footnote>
+      </d:para>
+      <d:para>
+        Since we have three different floating-point types and three different
+        versions of complex numbers (<d:code>float, double</d:code> and
+        <d:code>long double</d:code>) therefore we have six versions of each
+        function which will be called based on argument type.
+      </d:para>
+      <d:para>
+        This is achieved through keyword <d:code>_Generic</d:code> which is
+        used to create a generic selection expression. For example, consider
+        the following code:
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+
+int main()
+{
+  printf("%d", _Generic((6), char: 1, int: 2, long: 3, default: 0));
+
+  return 0;
+}</d:programlisting>
+<d:para>
+  Note that you need version 4.9 of <d:code>gcc</d:code> or
+  <d:code>clang</d:code> 3.4 to compile this. The output is:
+</d:para>
+<d:screen>2</d:screen>
+<d:para>
+  as you can see we are passing 6 which is an integer and value 2 is associated
+  with the <d:code>int</d:code> therefore the output is 2.
+</d:para>
+<d:para>
+  We can make a macro which will allow us to reuse the functionality. For
+  example:
+</d:para>
+<d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+
+#define type(T) _Generic( (T), char: 1, int: 2, long: 3, default: 0)
+
+int main()
+{
+  printf("%d", type(87364563853));
+
+  return 0;
+}</d:programlisting>
+<d:para>
+  Section &#xa7;(iso.6.5.1.1) of specification describes generic selection in
+  great detail. To summarize following points can be noted:
+  <d:orderedlist>
+    <d:listitem>
+      A generic selection consists of a controlling expression (which is not
+      evaluated) and one or more, comma-separated, generic associations.
+    </d:listitem>
+  </d:orderedlist>
+</d:para>
+    </d:sect1>
 </d:chapter>

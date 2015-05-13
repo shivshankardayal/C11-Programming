@@ -11,7 +11,7 @@ def findReplace(directory, find, replace, filePattern):
                 for filename in fnmatch.filter(files, filePattern):
                         filepath = os.path.join(path, filename)
                         with open(filepath) as f:
-                                print filepath
+                                #print filepath
                                 s = f.read()
                                 s = s.replace(find, replace)
                                 s = s.replace("index.html", "")

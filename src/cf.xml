@@ -16,35 +16,6 @@
       their scope. I could have covered it in second chapter but I did not want
       to scare you with too many things in itself.</d:para>
       <d:sect1>
-	<d:title>Storage Classes</d:title>
-	<d:para>In C99 variables can be declared at any point in class without
-	breaking an expression. This was not possible in older C and you could
-	only declare at start of function. There is <d:code>auto, register,
-	static</d:code> and <d:code>extern</d:code>.</d:para>
-	<d:para><d:code>auto</d:code> is the default storage class for local
-	variables. Local variables are those that are inside any function or
-	any control-flow statement block. You will perhaps never use auto
-	explicitly. For examle, <d:code>auto int i; register</d:code> is the
-	storage class which tell the compiler that this variable will be stored
-	in a CPU register instead of RAM. It is mostly used for loop counters
-	and to store small 32-bit or 64-bit variables in CPU register. For
-	example, <d:code>register int i;</d:code></d:para>
-	<d:para><d:code>static</d:code> is the default storage class for global
-	variables though local variables can also be made static. local static
-	variables persist across function calls that is their values do not
-	change.</d:para>
-	<d:para><d:code>extern</d:code> keyword allows global variables to
-	become visible in other modules than itself.</d:para>
-	<d:para>There are two more modifiers: <d:code>const</d:code> and
-	<d:code>volatile</d:code>. As their names specify const makes a
-	variable constant. That is you cannot change value of a variable
-	declared as <d:code>const</d:code>. <d:code>volatile</d:code> is kind
-	of opposite but not really opposite. What it does is that the programs
-	other than the program itself where it has been declared are allowed to
-	change it. This means that a variable can be a <d:code>const</d:code>
-	as well as <d:code>volatile</d:code> at the same time.</d:para>
-      </d:sect1>
-      <d:sect1>
 	<d:title>if else Statement</d:title>
 	<d:para>An if-else statement may consist of only <d:code>if</d:code> or
 	both <d:code>if</d:code> and <d:code>else</d:code> or
@@ -55,8 +26,7 @@
 	<d:code>else</d:code> and <d:code>else</d:code> must come at
 	end. <d:code>else if</d:code> and <d:code>else</d:code> are optional
 	and may not come. Consider the following program:</d:para>
-	<d:programlisting role="CLexer">//Author: Shiv S. Dayal
-//Description : Demo of if-else statements.
+	<d:programlisting role="CLexer">//Description : Demo of if-else statements.
 
 #include &lt;stdio.h>
 

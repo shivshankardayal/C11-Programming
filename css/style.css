@@ -278,6 +278,11 @@ margin-top: 0px;
 margin-bottom: -20px;
 }
 
+div.footnote {
+    font-size: 12px;
+    color: #444;
+}
+
 .hll { background-color: #ffffcc }
 .c { color: #408080; font-style: italic } /* Comment */
 .err { border: 1px solid #FF0000 } /* Error */

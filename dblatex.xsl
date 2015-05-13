@@ -20,11 +20,11 @@
   <xsl:param name="filename.as.url">1</xsl:param>
 
   <!-- Include page numbers and titles in cross references -->
-  <xsl:param name="insert.xref.page.number">yes</xsl:param>
+  <!--xsl:param name="insert.xref.page.number">yes</xsl:param-->
   <xsl:param name="xref.with.number.and.title" select="1"/>
 
   <!-- Blue - EVERYWHERE! -->
-  <xsl:param name="latex.hyperparam">colorlinks,linkcolor=blue,anchorcolor=blue,urlcolor=blue</xsl:param>
+  <!--xsl:param name="latex.hyperparam">colorlinks,linkcolor=blue,anchorcolor=blue,urlcolor=blue</xsl:param-->
   <!-- Black - Test print version -->
   <!-- <xsl:param name="latex.hyperparam">colorlinks,linkcolor=black,anchorcolor=black,urlcolor=black</xsl:param> -->
 
@@ -38,17 +38,19 @@
   <xsl:param name="term.breakline">1</xsl:param>
 
   <!-- Experimenting with different class styles. I like the way the headers are done in the book class -->
-  <!-- <xsl:param name="latex.class.book">book</xsl:param> -->
+  <!--xsl:param name="latex.class.book">book</xsl:param-->
 
+  <xsl:param name="xref.hypermarkup" select="1"/>
+  <xsl:param name="refentry.numbered">1</xsl:param>
   <!-- Font's available at: -->
   <!-- http://iweb.dl.sourceforge.net/project/sourcesans.adobe/SourceSansPro_FontsOnly-1.050.zip -->
   <!-- http://iweb.dl.sourceforge.net/project/sourcecodepro.adobe/SourceCodePro_FontsOnly-1.017.zip -->
   <xsl:param name="xetex.font">
-    <xsl:text>\setmainfont{Latin Modern Roman}
+    <xsl:text>\setmainfont[Ligatures=TeX,Scale=.95]{Helvetica}
     </xsl:text>
-    <xsl:text>\setsansfont{Latin Modern Sans}
+    <xsl:text>\setsansfont{Helvetica}
     </xsl:text>
-    <xsl:text>\setmonofont{Latin Modern Mono}
+    <xsl:text>\setmonofont{Courier}
     </xsl:text>
   </xsl:param>
 </xsl:stylesheet>

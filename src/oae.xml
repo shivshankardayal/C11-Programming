@@ -4,29 +4,184 @@
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
     <?dbhtml filename="oae/index.html" ?>
       <d:title>Operators and Expressions</d:title>
-      <d:para>Operators and expressions are in the core of every programming
-      language. They form the major part of BNF grammar. They also decide how
-      the syntax will look like. You as a programmer will spend considerable
-      time using C operators. C has sevral type of operators like arithmetic
-      operators, relational operators, bitwise operators, unary operators,
-      logical operators to name some of them. Since C was first of very
-      poopular structured general-pupose lnguages therefore many modern
-      language use almost all the operators and supplement with their own. It
-      is needless to say that to become a good programmar you must know all the
-      operators of C and know where to use which one as it may decide
-      performance, readability, simplicity of your code. Whenever you see array
-      and pointer in following sections just plow through them. All will be
-      clear soon.</d:para>
-      <d:para>Whenever operators and expressions come in picture you may have a
-      set of mixed data then to perform opration data is converted from one
-      type to another. This is known as “Usual Arithmetic Conversion”, which I
-      am going to tell you next.</d:para>
+      <d:para>
+        Operators and expressions are in the core of every programming
+        language. They form the major part of BNF grammar. They also decide how
+        the syntax will look like. You as a programmer will spend considerable
+        time using C operators. C has sevral type of operators like arithmetic
+        operators, relational operators, bitwise operators, unary operators,
+        logical operators to name some of them. Since C was first of very
+        poopular structured general-pupose lnguages therefore many modern
+        language use almost all the operators and supplement with their own. It
+        is needless to say that to become a good programmar you must know all
+        the operators of C and know where to use which one as it may decide
+        performance, readability, simplicity of your code. Whenever you see
+        array and pointer in following sections just plow through them. All
+        will be clear soon.
+      </d:para>
+      <d:para>
+        Before we can proceed to discuss operators and expressions I will
+        explain scope, linkage and storage durations which can be applied to
+        variables. These are given in specification starting at
+        &#xa7;(iso.6.2.1) and ending at &#xa7;(iso.6.2.4).
+      </d:para>
       <d:sect1>
-	<d:title>Basic Operators</d:title>
-	<d:para>There are five here. +, -, *, / and %. Please refer to chapter
-	4 for their behavior. Let us see a simple example:</d:para>
+        <d:title>Scope of an Identifier</d:title>
+        <d:para>
+          Till now we have seen plain variables and their identifiers. However,
+          there are other identifiers as well which will be discussed
+          later. For now we will consider scope of plain variables. In general
+          there are three kinds of scope. Global scope, function scope and
+          block scope. Variables declared outside any function have global
+          scope and they persist throughout the lifetime of the
+          program. Variables declared inside functions at outermost level have
+          function scope and they live as long as function remains active. A
+          block in C is marked by braces { and }. Function bodies are also
+          marked by this. Here I mean blocks inside a function. Starting from
+          C99 you can declare variables anywhere inside a function and this
+          block variables which have less lifetime than functions are
+          possible. We will see more of these when we see more code. Note that
+          identifiers can be reused in different scopes. For example, a loop
+          index integer identifier is repeated many times but every time it is
+          a new variable(We will see loops soon). Two identifiers have same
+          scope if and only if their scope terminates at the same point.
+        </d:para>
+      </d:sect1>
+      <d:sect1>
+        <d:title>Linkages of an Identifier</d:title>
+        <d:para>
+          There are three different kinds of linkages. External, internal and
+          none. Global variables and functions have external linkage as long as
+          they are not static. If they are static then they have internal
+          linkage. By external linkage we mean that for a program which
+          consists of multiple source code files these functions and variable
+          identifiers can be referred in files other than in which they are
+          declared. When functions and global variables are static i.e. they
+          have internal linkage they cannot be accessed in other source code
+          files.
+        </d:para>
+        <d:para>
+          The following identifiers have no linkage: an identifier declared to
+          be anything other than an variable or a function; an identifier
+          declared to be a function parameter; a block scope identifier for an
+          object declared without the storage-class specifier
+          <d:code>extern</d:code>.
+        </d:para>
+      </d:sect1>
+      <d:sect1>
+        <d:title>Storage Duration of Objects</d:title>
+        <d:para>
+          There are four storage durations. Static, thread, automatic and
+          allocated. Here, we will not discuss thread which we will talk about
+          later. A static variable which is local to a function of global
+          variable has static duration and it lives in data segment in memory
+          and has static storage duration. A variable local to a function or
+          block which is not dynamically allocated on heap by using either of
+          <d:code>malloc, calloc</d:code> or <d:code>realloc</d:code> has
+          automatic storage and has function or block has automatic storage and
+          is cleaned up automatically and it lives on stack. Allocated storage
+          duration variables can persist as long as they want after allocation
+          on heap by using one of <d:code>malloc, calloc</d:code> and
+          <d:code>realloc</d:code> as long as the name is kept in scope and a
+          corresponding <d:code>free</d:code> is not called on that name of the
+          variable. Now let us discuss operators and expressions.
+        </d:para>
+        <d:para>
+          Whenever operators and expressions come in picture you may have a set
+          of mixed data then to perform oration data is converted from one type
+          to another. This has an entire section devoted to it in specification
+          at &#xa7;(iso.6.3). There are two types of conversions. Many
+          operators convert their operands silently which is called
+          <d:quote>implicit conversion</d:quote> and then we have cast
+          operators which we can use to explicitly convert values from one type
+          to another which is called <d:quote>explicit conversion</d:quote>. We
+          will first see implicit conversion.
+        </d:para>
+      </d:sect1>
+      <d:sect1>
+        <d:title>Usual Arithmetic Conversions</d:title>
+        <d:para>
+          Many operators that expect operands of arithmetic type cause
+          conversions and yield result types in a similar way. The purpose is
+          to determine a common real type for the operands and result. For the
+          specified operands, each operand is converted, without change of type
+          domain, to a type whose corresponding real type is the common real
+          type. Unless explicitly stated otherwise, the common real type is alo
+          the corresponding real type of the result, whose type domain is the
+          type domian of the operands if they are the same, and complex
+          otherwise. This pattern is called the usual <d:emphasis
+          role="italic">arithmetic conversions</d:emphasis>:
+          <d:itemizedlist>
+            <d:listitem>
+              First, if the corresponding real type of either operand is
+              <d:code>long double</d:code>, the other operand is converted,
+              without change of type domain, to a type whose corresponding real
+              type is <d:code>long double</d:code>.
+            </d:listitem>
+            <d:listitem>
+              Otherwise, if the corresponding real type of either operand is
+              <d:code>double</d:code>, the other operand is converted, without
+              change of type domain, to a type whose coreesponding real type is
+              <d:code>double</d:code>.
+            </d:listitem>
+            <d:listitem>
+              Otherwise, if the corresponding real type of either operand is
+              <d:code>float</d:code>, the other operand is converted, without
+              change of type domain, to a type whose coreesponding real type is
+              <d:code>float</d:code>.
+            </d:listitem>
+            <d:listitem>
+              Otherwise, the integer promotions are performed on both
+              operands. Then the following rules are applied to the promoted
+              operands:
+              <d:itemizedlist>
+                <d:listitem>
+                  If both operands have the same type, then no further
+                  conversion is needed.
+                </d:listitem>
+                <d:listitem>
+                  Otherwise, if both operands have signed integer types or both
+                  have unsigned integer types, the operand with the type of
+                  lesser integer conversion rank is converted to the type of
+                  the operand with greater rank.
+                </d:listitem>
+                <d:listitem>
+                  Otherwise, if the operand that has unsigned integer type has
+                  rank greater or equal to the rank of the type of the other
+                  operand, then the operand with signed integer type is
+                  converted to the type of the operand with unsigned integer
+                  type.
+                </d:listitem>
+                <d:listitem>
+                  Otherwise, if the type of the operand with signed integer
+                  type can represent all of the values of the type of the
+                  operand with unsigned integer type, then the operand with
+                  unsigned integer type is converted to the type of the operand
+                  with signed integer type.
+                </d:listitem>
+                <d:listitem>
+                  Otherwise, both operands are converted to the unsigned
+                  integer type corresponding to the type of the operand with
+                  signed integer type.
+                </d:listitem>
+              </d:itemizedlist>
+            </d:listitem>
+            <d:listitem>
+              The values of floating operands and of the results of floating
+              expressions may be represented in greater precision and range
+              than that required by the type; the types are not changed
+              thereby.
+            </d:listitem>
+          </d:itemizedlist>
+        </d:para>
+      </d:sect1>
+      <d:sect1>
+	<d:title>Arithmetic Operators</d:title>
+	<d:para>
+      There are five here. +, -, *, / and %. Let us see a simple
+      example:
+    </d:para>
 	<d:programlisting role="CLexer">// Arithmetic operators
-// Author: Shiv S. Dayal
 // Description: Demo of arithmetic operators
 
 #include &lt;stdio.h>
@@ -403,7 +558,7 @@ int main()
 	  <d:colgroup width="0*"/>
           <d:caption>Priority and assiciativity table</d:caption>
           <d:thead>
-            <d:tr bgcolor="#aaa">
+            <d:tr bgcolor="#aaaaaa">
               <d:th>Operators</d:th>
               <d:th>Associativity</d:th>
             </d:tr>
@@ -487,7 +642,7 @@ int main()
 }</d:programlisting>
 <d:para>This small program shows you what can go wrong if you rely on
 memory. It allows you do addition first and then multiplcation. Inner
-parentheses are evaluated first then inner ones. This concludes our chapter on
+parentheses are evaluated first then outer ones. This concludes our chapter on
 operators and expressions. Next we focus on control statements and flow
 statements.</d:para> 
       </d:sect1>

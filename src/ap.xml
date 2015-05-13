@@ -90,15 +90,14 @@ array. Here 1 means first element.</d:para>
           </d:imageobject>
         </d:mediaobject>
       </d:figure>
-<d:para>Array elements are always(not always but most commonly. It is so coomon
+<d:para>Array elements are always(not always but most commonly. It is so common
 that I have used always.) accessed using their indices so order of retrieval is
 <mml:math xmlns="http://www.w3.org/1998/Math/MathML">
   <mml:mtext>O(1)</mml:mtext>
 </mml:math>.(This is known as big-O notation. You can find it in any Data
-Structure and Algorithm book. If you wait you can find in my book as well but
-you should not. :-)) The above program will not compile using old compilers
+Structure and Algorithm book. The above program will not compile using old compilers
 which do not support C99 standard like Turbo C++. Also, you may require to pass
-the flag <d:code>-std=c99</d:code> to some versions of gcc. For variable length
+the flag <d:code>-std=c99</d:code> or <d:code>-std=c11</d:code> to some versions of gcc. For variable length
 arrays it is not necessary to declare the size in advance. Even, input to
 program from other sources will do.</d:para>
 <d:programlisting role="CLexer">//Author: Shiv S. Dayal

@@ -200,8 +200,9 @@
     </d:sect1>
     <d:sect1>
       <title xmlns="http://docbook.org/ns/docbook">Programming</title>
-      <d:para>Now is time for some programming. Let us revisit our first program and try to
-        understand what it does. Here I am giving code once again for quick reference:</d:para>
+      <d:para>Now is time for some programming. Let us revisit our first
+      program and try to understand what it does. Here I am giving code once
+      again for quick reference:</d:para> 
       <d:programlisting role="CLexer">//My first program
 /* Author: Shiv Shankar Dayal
    Description: This program does nothing.*/
@@ -212,62 +213,71 @@ int main(int argc, char* argv[])
 {
   return 0;
 }</d:programlisting>
-      <d:para>You can now issue a command as <d:command>$gcc nothing.c</d:command> where
-          <d:code>nothing.c</d:code> is the filename by which you saved the source code. Note that
-          <d:code>$</d:code> is the prompt not part of command itself. Then you can do an
-          <d:command>ls</d:command> and you will find that <d:code>a.out</d:code> is a file which
-        has been produced by <d:application>gcc</d:application>. Now you can run this program by
-        saying <d:command>./a.out</d:command> and nothing will happen. But if you type
-          <d:command>echo $?</d:command> then you will find that 0 is printed on screen which is
-        nothing but 0 after return of our program.</d:para>
-      <d:para>As you can see this program does almost nothing but it is fairly complete program and
-        we can learn a lot from it about C. The first line is a comment. Whenever C compiler parses
-        C programs and it encounters <d:code>//</d:code> it ignores rest of line as code i.e. it
-        does not compile them. This type of single line comment were introduced in C99 standard and
-        if your compiler is really old the compiler may give you error message about it. The second
-        and third lines are also comments. Anything between <d:code>/*</d:code> and
-          <d:code>*/</d:code> is ignored like <d:code>//</d:code>. However, be careful of something
-        like <d:code>/* some comment */ more comment */</d:code>. Such comments will produce error
-        messages and your program will fail to compile.</d:para>
-      <d:para>Comments are very integral part of programming. They are used to describe various
-        things. You can write whatever you want. They may also be used to generate documentation
-        with tools like doxygen. Typically comments tell what the program is doing. Sometimes how,
-        when the logic is really complex. One should be generous while commenting the code.</d:para>
-      <d:para><d:code>#include</d:code> is a pre-processor directive. It will look for whatever is
-        contained in angular brackets in the <d:code>INCLUDEPATH</d:code> of compiler. For now you
-        can assume that <d:code>/usr/include</d:code> is in include path of
-        compiler. Basically what it
-        does is that it looks for a file names <d:code>stdio.h</d:code> in the
-          <d:code>INCLUDEPATH</d:code>. If that is found the content of that file is pasted here in
-        our program.If you really want to see what happens then you can type <d:command>$gcc -E
-          nothing.c</d:command>. You will see lots of text scrolling on your screen. The
-          <d:option>-E</d:option> switch tells <d:application>gcc</d:application> that just
-        preprocess the file, do not compile it, and send the resulting output to standard output (we
-        will know about this more later), which happens to be your monitor in this case.</d:para>
-      <d:para>Next line is <d:code>int main(int argc, char* argv[])</d:code>. Now this is very
-        special function. Every complete executable(shared objects or dlls do not have main even
-        though they are C programs) C program will have one main function unless you do assembly
-        hacking. This function is where the programs start. The first word <d:code>int</d:code> is a
-        keyword which stands for integer. This signifies the return type of function.
-          <d:code>main</d:code> is the name of the function. Inside parenthesis you see <d:code>int
-          argc</d:code> which tells how many arguments were passed to program. While <d:code>char*
-          argv[]</d:code> is a pointer to array which we will see later. For now it holds all the
-        arguments to the program.</d:para>
-      <d:para>Next is a brace. The scope in C is determined by braces. Something outside any brace
-        has global scope (we will see these later), something inside first level of brace has
-        function or local scope. Something inside second or more level of braces have got that
-        particular block scope. Scope here means that when there will be a closing brace that
-        particular variable which is valid in that scope will cease to exist. However, we do not
-        have to worry about that yet as we do not have any variable. Just note that a corresponding
-        closing brace will be the end of main function.</d:para>
-      <d:para>Next line is <d:code>return 0;</d:code> This means whoever has called
-          <d:code>main()</d:code> will get a 0 as return is returning 0. In this case, receiver is
-        the shell or operating system which has invoked the very program. The semicolon is called
-        the terminator and used also on Java or C++ for example. The very requirement of semicolon
-        is to terminate the statement and move on to next statement.</d:para>
-      <d:para>However, the program shown does not do much. Let us write a program which has some
-        more functionality and we can explore more of C. So here is a program which takes two
-        integers as input from users and presents their sum as output. Here is the program:</d:para>
+<d:para>You can now issue a command as <d:command>$gcc nothing.c</d:command>
+where <d:code>nothing.c</d:code> is the filename by which you saved the source
+code. Note that <d:code>$</d:code> is the prompt not part of command
+itself. Then you can do an <d:command>ls</d:command> and you will find that
+<d:code>a.out</d:code> is a file which has been produced by
+<d:application>gcc</d:application>. Now you can run this program by saying
+<d:command>./a.out</d:command> and nothing will happen. But if you type
+<d:command>echo $?</d:command> then you will find that 0 is printed on screen
+which is nothing but 0 after return of our program.</d:para>
+<d:para>As you can see this program does almost nothing but it is fairly
+complete program and we can learn a lot from it about C. The first line is a
+comment. Whenever C compiler parses C programs and it encounters
+<d:code>//</d:code> it ignores rest of line as code i.e. it does not compile
+them. This type of single line comment were introduced in C99 standard and 
+if your compiler is really old the compiler may give you error message about
+it. The second and third lines are also comments. Anything between
+<d:code>/*</d:code> and <d:code>*/</d:code> is ignored like
+<d:code>//</d:code>. However, be careful of something like <d:code>/* some
+comment */ more comment */</d:code>. Such comments will produce error 
+messages and your program will fail to compile.</d:para>
+<d:para>Comments are very integral part of programming. They are used to
+describe various things. You can write whatever you want. They may also be used
+to generate documentation with tools like doxygen. Typically comments tell what
+the program is doing. Sometimes how, when the logic is really complex. One
+should be generous while commenting the code.</d:para>
+<d:para><d:code>#include</d:code> is a pre-processor directive. It will look
+for whatever is contained in angular brackets in the
+<d:code>INCLUDEPATH</d:code> of compiler. For now you can assume that
+<d:code>/usr/include</d:code> is in include path of compiler. Basically what it
+does is that it looks for a file names <d:code>stdio.h</d:code> in the
+<d:code>INCLUDEPATH</d:code>. If that is found the content of that file is
+pasted here in our program.If you really want to see what happens then you can
+type <d:command>$gcc -E nothing.c</d:command>. You will see lots of text
+scrolling on your screen. The <d:option>-E</d:option> switch tells
+<d:application>gcc</d:application> that just preprocess the file, do not
+compile it, and send the resulting output to standard output (we will know
+about this more later), which happens to be your monitor in this case.</d:para>
+<d:para>Next line is <d:code>int main(int argc, char* argv[])</d:code>. Now
+this is a special function. Every complete executable(shared objects or dlls
+do not have main even though they are C programs) C program will have one main
+function unless you do assembly hacking. This function is where the programs
+start. The first word <d:code>int</d:code> is a keyword which stands for
+integer. This signifies the return type of function. <d:code>main</d:code> is
+the name of the function. Inside parenthesis you see <d:code>int argc</d:code>
+which tells how many arguments were passed to program. While <d:code>char*
+argv[]</d:code> is a pointer to array which we will see later. For now it holds
+all the arguments to the program.</d:para>
+<d:para>Next is a brace. The scope in C is determined by braces. Something
+outside any brace has global scope (we will see these later), something inside
+first level of brace has function or local scope. Something inside second or
+more level of braces have got that particular block scope. Scope here means
+that when there will be a closing brace that particular variable which is valid
+in that scope will cease to exist. However, we do not have to worry about that
+yet as we do not have any variable. Just note that a corresponding closing
+brace will be the end of main function.</d:para> 
+<d:para>Next line is <d:code>return 0;</d:code> This means whoever has called
+<d:code>main()</d:code> will get a 0 as return is returning 0. In this case,
+receiver is the shell or operating system which has invoked the very
+program. The semicolon is called the terminator and used also on Java or C++
+for example. The very requirement of semicolon is to terminate the statement
+and move on to next statement.</d:para> 
+<d:para>However, the program shown does not do much. Let us write a program
+which has some more functionality and we can explore more of C. So here is a
+program which takes two integers as input from users and presents their sum as
+output. Here is the program:</d:para>
       <d:programlisting role="CLexer">// My second program
 // Author: Shiv S. Dayal
 // Description: It adds two numbers
@@ -290,8 +300,8 @@ int main()
 
   return 0;
 }</d:programlisting>
-      <d:para>and the output is:</d:para>
-      <d:screen>shiv@shiv:~/book/code$ ./addition
+<d:para>and the output is:</d:para>
+<d:screen>shiv@shiv:~/book/code$ ./addition
 Please enter an integer:
 7
 Please enter another integer:
@@ -308,15 +318,16 @@ nothing:nothing.c
 
 addition:addition.c
     gcc addition.c -o addition</d:programlisting>
-      <d:para>You can choose <d:code>Tools->Compile</d:code> then enter <d:code>make -k
-          addition</d:code> as make commands in the Emacs’s minibuffer and execute like
-          <d:code>$./addition</d:code>.</d:para>
-      <d:para>Let us discuss new lines one by one. The line <d:code>int x=0, y=0, z=0;</d:code> is
-        declaration and definition or initialization of three ints. int keyword in C is used to
-        represent integers. Now we have three integers with there values set to 0. Note that how the
-        variables are separated by commas and terminated by semicolon(as we saw in last program
-        also). We could have also written it like this:</d:para>
-      <d:programlisting role="CLexer">int x;
+    <d:para>You can choose <d:code>Tools->Compile</d:code> then enter
+    <d:code>make -k addition</d:code> as make commands in the Emacs’s
+    minibuffer and execute like <d:code>$./addition</d:code>.</d:para>
+    <d:para>Let us discuss new lines one by one. The line <d:code>int x=0, y=0,
+    z=0;</d:code> is declaration and definition or initialization of three
+    ints. <d:code>int</d:code> keyword in C is used to represent integers. Now
+    we have three integers with there values set to 0. Note that how the
+    variables are separated by commas and terminated by semicolon(as we saw in
+    last program also). We could have also written it like this:</d:para>
+    <d:programlisting role="CLexer">int x;
 int y;
 int z;
 
@@ -327,61 +338,399 @@ z = 0;</d:programlisting>
       <d:programlisting role="CLexer">int x, y, z;
 
 x = y = z = 0;</d:programlisting>
-      <d:para>However, the first method is best and most preferred as it prevents use before
-        definition. int is a data-type in C. <d:code>x, y,</d:code> and <d:code>z</d:code> are
-        variables of type <d:code>int</d:code>. This means that the size of these variables will be
-        same as <d:code>int</d:code>. Note that C is a statically typed language and all types have
-        predefined memory requirements. In cour case, int requires 4 bytes on 32-bit
-        systems.</d:para>
-      <d:para>Now I will talk about <d:code>printf()</d:code> function. This function is declared in
-          <d:code>stdio.h</d:code>. The prototype of <d:code>printf()</d:code> is</d:para>
-      <d:programlisting role="CLexer">int printf(const char *restrict format, ...);</d:programlisting>
-      <d:para>The first argument format is what we have in first two function calls. The second is a
-          <d:code>...</d:code> which means it can take variable number of arguments known as
-        variable-list. We have seen this in the third call.This means it will take a string with
-        optional variable no. of arguments. The string is called the format-string and determines
-        what can be printed with supplied arguments. These <d:code>...</d:code> are used to supply
-        variable no. of arguments. In the first two <d:code>printf()</d:code> statements we just
-        print the format-string so that is simple. However, in the last one, we have format as
-          <d:code>%d</d:code> which signifies a decimal integer. The integers printed are in the
-        same order in which they were supplied.</d:para>
-      <d:para>Time for some input. <d:code>scanf()</d:code> is scan function which scans for
-        keyboard input. As by now you know that <d:code>%d</d:code> is for decimal integer but we
-        have not said <d:code>x</d:code> or <d:code>y</d:code>. The reason is <d:code>x</d:code> and
-          <d:code>y</d:code> are values while <d:code>&amp;x</d:code> and <d:code>&amp;y</d:code>
-        are the addresses of <d:code>x</d:code> and <d:code>y</d:code> in memory.
-          <d:code>scanf()</d:code> needs the memory address to which it can write the contents to.
-        You will see <d:code>&amp;</d:code> operator in action later when we deal with pointers.
-        Just remember for now that to use a simple variable with <d:code>scanf()</d:code> requires
-          <d:code>&amp;</d:code> before its name.</d:para>
-      <d:para>Now I am going to take you on a tour of data types. Till now we have just seen only
-          <d:code>int</d:code>. So onward to data types.</d:para>
-    </d:sect1>
-    <d:sect1>
-      <title xmlns="http://docbook.org/ns/docbook">Data Types</title>
-      <d:para>Why data types? What is the need? When everything is a voltage level why not just deal
-        with 0s and 1s? The answer is simple. You need to abstract and segregate how much is
-        required. For example, say you are given a sequence of 0s and 1s how much can you work with
-        them. We as humans are not very versed with 0s and 1s. Also, say we encode character
-          ‘<d:code>A</d:code>’ for 10101 will it be easy for you to see A or numbers. Also, numbers
-        range from −∞ to ∞. Also, since C is statically typed the sizes of data types have to be
-        known at compile time. There are four types of data types. Integral, floating-point, arrays
-        and pointers. Here, I will deal with the two former types and leave latter two for later.
-        The integral types are <d:code>char, short int, int, long</d:code> and <d:code>long
-          long</d:code> and floating-point types are <d:code>float, double</d:code> and <d:code>long
-          double. signed</d:code> and <d:code>unsigned</d:code> are sign modifiers which also
-        modified the range of data types but do not affect their memory requirements. By default all
-        basic data types are signed in nature and you must qualify you variables with unsigned if
-        you want that behavior. <d:code>short</d:code> and <d:code>long</d:code> are modifiers for
-        size which the data type occupies but I consider them as different types because memory
-        requirements are different. The ranges of integral data types directly reflect their memory
-        requirements and if you know how much memory they are going to occupy you can easily compute
-        their ranges. The range of floating-point comes from IEEE specification. Clang at present
-        does not support C99 floating-point specification at the time of this writing but rest
-        assured they will st some point of time. However, I will present the C99 floating-point
-        specification given by C99.</d:para>
-      <d:para>Let us write a program to find out ranges for integral data types:</d:para>
-      <d:programlisting role="CLexer">// My range program
+<d:para>However, the first method is best and most preferred as it prevents use
+before definition. int is a data-type in C. <d:code>x, y,</d:code> and
+<d:code>z</d:code> are variables of type <d:code>int</d:code>. This means that
+the size of these variables will be same as <d:code>int</d:code>. Note that C
+is a statically typed language and all types have predefined memory
+requirements. In cour case, int requires 4 bytes on 32-bit systems.</d:para>
+<d:para>Now I will talk about <d:code>printf()</d:code> function. This function
+is declared in <d:code>stdio.h</d:code>. The prototype of
+<d:code>printf()</d:code> is</d:para>
+<d:programlisting role="CLexer">int printf(const char *restrict format, ...);</d:programlisting>
+<d:para>The first argument format is what we have in first two function
+calls. The second is a <d:code>...</d:code> which means it can take variable
+number of arguments known as variable-list. We have seen this in the third
+call.This means it will take a string with optional variable no. of
+arguments. The string is called the format-string and determines what can be
+printed with supplied arguments. These <d:code>...</d:code> are used to supply
+variable no. of arguments. In the first two <d:code>printf()</d:code>
+statements we just print the format-string so that is simple. However, in the
+last one, we have format as <d:code>%d</d:code> which signifies a decimal
+integer. The integers printed are in the same order in which they were
+supplied.</d:para> 
+<d:para>Time for some input. <d:code>scanf()</d:code> is scan function which
+scans for keyboard input. As by now you know that <d:code>%d</d:code> is for
+decimal integer but I have not said <d:code>x</d:code> or
+<d:code>y</d:code>. The reason is <d:code>x</d:code> and <d:code>y</d:code> are
+values while <d:code>&amp;x</d:code> and <d:code>&amp;y</d:code> are the
+addresses of <d:code>x</d:code> and <d:code>y</d:code> in
+memory. <d:code>scanf()</d:code> needs the memory address to which it can write
+the contents to. You will see <d:code>&amp;</d:code> operator in action later
+when we deal with pointers. Just remember for now that to use a simple variable
+with <d:code>scanf()</d:code> requires <d:code>&amp;</d:code> before its
+name.</d:para> 
+<d:para>Now I am going to take you on a tour of data types. Till now we have
+just seen only <d:code>int</d:code>. So onward to data types.</d:para>
+</d:sect1>
+<d:sect1>
+  <title xmlns="http://docbook.org/ns/docbook">Data Types</title>
+  <d:para>
+    C is a statically typed language that is every variable has a type
+    associated with it.  Types are discussed in specification in great length in
+    Types(&#167; iso.6.2.5) to (&#167; iso.6.2.8). Since C is statically typed
+    the sizes of types have to be known at compile time. There are four types
+    of data types. Integral, floating-point, arrays and pointers. There are two
+    user-defined data types; structures and unions. Here, I will discuss the 
+    integral and floating-point types and leave the rest for later.
+    The integral types are <d:code>char, short int, int, long</d:code> and
+    <d:code>long long</d:code> and floating-point types are <d:code>float,
+    double</d:code> and <d:code>long double. signed</d:code> and
+    <d:code>unsigned</d:code> are sign modifiers which also modified the range
+    of data types but do not affect their memory requirements. By default all
+    basic data types are signed in nature and you must qualify you variables
+    with <d:code>unsigned</d:code> if you want that behavior.
+    <d:code>short</d:code> and 
+    <d:code>long</d:code> are modifiers for size which the data type
+    occupies. The ranges of integral data types directly reflect their memory
+    requirements and if you know how much memory they are going to occupy you
+    can easily compute their ranges. The range of floating-point comes from
+    IEEE specification IEEE-754.
+  </d:para>
+  <d:para>
+    The range of data types is given in Numerical limits(&#167;
+    iso.5.2.4.2). For example, in the range program given below size of
+    <d:emphasis role="italic">int</d:emphasis> is 4 bytes which is double than
+    what is specified by specification i.e. 2 bytes. Given below is the table
+    for numerical limits for reference from specification. Note that these are
+    in 1's complement form thus you have to adjust for 2's complement. Note
+    that these limits are minimum limits imposed by specification and actual
+    limits of data types may be different on your particular platform. The
+    actual values of these limits can be found in headers
+    <d:code>&lt;limits.h&gt;, &lt;float.h&gt;</d:code> and
+    <d:code>&lt;stdint.h&gt;</d:code>. The values given below are replaced by
+    constant expressions suitable for use in <d:code>#if</d:code> preprocessing
+    directives. Moreover, except for <d:code>CHAR_BIT</d:code> and
+    <d:code>MB_LEN_MAX</d:code>, the following are replaced by expressions that
+    have the same type as an expression that is an object of the corresponding
+    type converted according to the integer promotions. Their
+    implementation-defined values are equal or greater in magnitude (absolute
+    value) to those shown, with the same sign.
+    <d:itemizedlist>
+      <d:listitem>
+        <d:para>number of bits for smallest object that is not a bit-field (byte)</d:para>
+        <d:para><d:code>CHAR_BIT</d:code> 8</d:para>
+      </d:listitem>
+      <d:listitem>
+        <d:para>minimum value for an object of type <d:code>signed char</d:code></d:para>
+        <d:para><d:code>SCHAR_MIN</d:code> -127 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:mo>-</mml:mo>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>7</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+      </d:inlineequation>
+        </d:para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
+        <code>signed char</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>SCHAR_MAX</code> 127 <inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>7</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
+        <code>unsigned char</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>UCHAR_MAX</code> 255 <inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>8</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">minimum value for an object of type
+        <code>char</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>CHAR_MIN</code>
+        <emphasis role="italic">see below</emphasis></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
+        <code>char</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>CHAR_MAX</code>
+        <emphasis role="italic">see below</emphasis></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum number of bytes in a multibyte
+        character, for any supported locale</para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>MB_LEN_MAX 1</code></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">minimum value for an object of type
+        <code>short int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>SHRT_MIN</code> -32767 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:mo>-</mml:mo>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>15</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
+        <code>short int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>SHRT_MAX</code> +32767 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>15</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
+        <code>unsigned short int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>USHRT_MAX</code> 65535 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>16</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">minimum value for an object of type
+        <code>int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>INT_MIN</code> -32767 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:mo>-</mml:mo>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>15</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
+        <code>int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>INT_MAX</code> +32767 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>15</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
+        <code>unsigned int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>UINT_MAX</code> 65535 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>16</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">minimum value for an object of type
+        <code>long int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>LONG_MIN</code> -2147483647 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:mo>-</mml:mo>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>31</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
+        <code>long int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>LONG_MAX</code> +2147483647 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>31</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
+        <code>unsigned long int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>ULONG_MAX</code> 4294967295 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>32</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">minimum value for an object of type
+        <code>long long int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>LLONG_MIN</code> -9223372036854775807 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:mo>-</mml:mo>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>63</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
+        <code>long long int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>LLONG_MAX</code> +9223372036854775807 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>63</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
+        <code>unsigned long long int</code></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>ULLONG_MAX</code> 18446744073709551615 <d:inlineequation>
+        <mml:math>
+          <mml:mrow>
+            <mml:msup>
+              <mml:mn>2</mml:mn>
+              <mml:mn>64</mml:mn>
+            </mml:msup>
+            <mml:mtext> </mml:mtext>
+            <mml:mo>-</mml:mo>
+            <mml:mtext> 1</mml:mtext>
+          </mml:mrow>
+        </mml:math>
+        </d:inlineequation></para>
+      </d:listitem>
+    </d:itemizedlist>
+  </d:para>
+  <d:para>
+    If the value of an object of type char is treated as a signed integer when
+    used in an expression, the value of <d:code>CHAR_MIN</d:code> is the
+    same as that of <d:code>SCHAR_MIN</d:code> and the value of
+    <d:code>CHAR_MAX</d:code> is the same as that of
+    <d:code>SCHAR_MAX</d:code>. Otherwise, the value of
+    <d:code>CHAR_MIN</d:code> is 0 and the value of
+    <d:code>CHAR_MAX</d:code> is the same as that of
+    <d:code>UCHAR_MAX</d:code>. The value <d:code>UCHAR_MAX</d:code> equals
+    <d:inlineequation>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <msup>
+          <mn>2</mn>
+          <mrow>
+            <mi>C</mi>
+            <mi>H</mi>
+            <mi>A</mi>
+            <mi>R</mi>
+            <mo>_</mo>
+            <mi>B</mi>
+            <mi>I</mi>
+            <mi>T</mi>
+          </mrow>
+        </msup>
+        <mo>-</mo>
+        <mn>1</mn>
+      </math>
+    </d:inlineequation>.
+  </d:para>
+  <d:para>Let us write a program to find out ranges for integral data types:</d:para>
+  <d:programlisting role="CLexer">// My range program
 // Author: Shiv S. Dayal
 // Description: It gives ranges of integral data types
 
@@ -395,9 +744,6 @@ int main()
   printf("Size of int is...........%d\n", sizeof(int));
   printf("Size of long is..........%d\n", sizeof(long));
   printf("Size of long long is.....%d\n", sizeof(long long));
-  printf("Size of float is.........%d\n", sizeof(float));
-  printf("Size of double is........%d\n", sizeof(double));
-  printf("Size of long double is...%d\n", sizeof(long double));c
 
   return 0;
 }</d:programlisting>
@@ -406,240 +752,342 @@ int main()
 Size of short int is.....2
 Size of int is...........4
 Size of long is..........4
-Size of long long is.....8
-Size of float is.........4
-Size of double is........8
-Size of long double is...12</d:screen>
-      <d:para>Based on this it is left as an exercise to reader to compute the ranges of these data
-        types. Here I am giving the contents of limits.h for you to see limits of data types and
-        check for yourself.</d:para>
-      <d:programlisting role="CLexer">/* Copyright (C) 1991, 1992, 1996, 1997, 1998, 1999, 2000, 2005
-Free Software Foundation, Inc.
-This file is part of the GNU C Library.
+Size of long long is.....8</d:screen>
+<d:para>
+  Based on this it is left as an exercise to reader to compute the ranges of these data
+  types.
+</d:para>
+<d:sect2>
+  <d:title>Integers</d:title>
+  <d:para>
+    Integers are probably simplest to understand of all data types in C so I am
+    discussing them before any other type. As you have seen the keyword for
+    declaring integer type is <d:code>int</d:code>. An integer can be 2 bytes
+    or 4 bytes. A 16-bit compiler will have integer of 2 bytes while a 32-bit
+    or 64-bit compiler will have a 4 byte integer. The specified minimum size
+    of an integer is 2 bytes. Since most modern computers are either 32-bit
+    with 64-bit becoming more dominant we will assume in this book that
+    integer's size is 4 bytes or 32-bit implicitly because 32-bit
+    <d:code>gcc</d:code> gives a 32-bit integer. As said earlier keyword
+    <d:code>signed</d:code> which when applied to a data type splits the range
+    into two parts. Since integer is 32 bit so it will be split in the range
+    from
+    <d:inlineequation>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mo>&#x2212;<!-- − --></mo>
+        <msup>
+          <mn>2</mn>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>31</mn>
+          </mrow>
+        </msup>
+      </math>
+    </d:inlineequation>
+    to
+    <d:inlineequation>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <msup>
+          <mn>2</mn>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>31</mn>
+          </mrow>
+        </msup>
+        <mo>&#x2212;<!-- − --></mo>
+        <mn>1</mn>
+      </math>
+    </d:inlineequation>.
+    By default integers, characters and long are
+    <d:code>signed</d:code>. Floats and doubles are always
+    <d:code>signed</d:code> and have no unsigned counterpart. When the integer
+    will be <d:code>unsigned</d:code> then the positive range doubles and it
+    becomes 0 to
+    <d:inlineequation>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <msup>
+          <mn>2</mn>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>32</mn>
+          </mrow>
+        </msup>
+        <mo>&#x2212;<!-- − --></mo>
+        <mn>1</mn>
+      </math>
+    </d:inlineequation>.
+    When the value of intger is more than its range then the values rotate in
+    the using modulus with the largest value of the range which is also known
+    as <d:code>INT_MAX</d:code> or <d:code>INT_MIN</d:code>. For
+    <d:code>unsigned</d:code> types it is <d:code>UINT_MAX</d:code>. These are
+    macros and are defined in <d:code>limits.h</d:code> which you can find in
+    <d:code>/usr/include</d:code> or <d:code>/usr/local/include</d:code> by
+    default.
+  </d:para>
+  <d:para>
+    There are four different types of integers based on their storage
+    requirement. <d:code>short int, int, long</d:code> and <d:code>long
+    long</d:code>. <d:code>long</d:code> is short for <d:code>long
+    int</d:code>. Short integers are always two bytes. Signed short integer has
+    a range of -32768 to 32767 while unsigned of that has a range of 0 to
+    65535. Plain integers i.e. <d:code>int</d:code> have already been
+    discussed. <d:code>long</d:code> are having a minimum storage requirement
+    of 4 bytes. Usually it is large enough to represent all memory addresses of
+    the system because <d:code>size_t</d:code> is <d:code>unsigned
+    long</d:code> and <d:code>size_t</d:code> is th type of argument accepted
+    by memory allocation functions.
+  </d:para>
+</d:sect2>
+<d:sect2>
+  <d:title>Characters</d:title>
+  <d:para>
+    A <d:code>char</d:code> is 1 byte i.e. 8 bits or <d:code>CHAR_BIT</d:code>
+    bits. So its signed version i.e. 2's complement where half the range is
+    negative and half is positive will have value from -128 to 127. Well that
+    is not exactly opposite because we have only one zero for positive and
+    negative numbers. If it would have been 1's complement then range would
+    have been from -127 to 127 which the specification clearly mentions but
+    since computers follow 2's complement that range should be from
+    <d:inlineequation>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mo>&#x2212;<!-- − --></mo>
+        <msup>
+          <mn>2</mn>
+          <mn>7</mn>
+        </msup>
+      </math>
+    </d:inlineequation>
+    to
+    <d:inlineequation>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <msup>
+          <mn>2</mn>
+          <mn>7</mn>
+        </msup>
+        <mo>&#x2212;<!-- − --></mo>
+        <mn>1</mn>
+      </math>
+    </d:inlineequation>.
+    Note that chars are fundamentally integral types and ASCII symbols are
+    first 128 numbers or in other words they are 7-bit numbers.
+  </d:para>
+  <d:para>
+    So a character '0' is internally 48 in decimal which is its integral or
+    internally it is handled as a sequence of binary numbers representing
+    <d:code>0x30</d:code> in hexadecimal. These integral values for characters
+    are known as ASCII value. A full table of ASCII values is given in the
+    appendix A.
+  </d:para>
+  <d:para>
+    A simple program which takes input for few characters and then prints them
+    on console along with their ascii values is given below:
+  </d:para>
+  <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
 
-The GNU C Library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
-version 2.1 of the License, or (at your option) any later version.
+int main()
+{
+  char c = 0;
+  char c1 = 0, c2 = 0;
 
-The GNU C Library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Lesser General Public License for more details.
+  printf("Enter a character on your keyboard and then press ENTER:\n");
+  scanf("%c", &amp;c);
+  printf("The character entered is %c and its ASCII value is %d.\n", c, c);
+  // Their remains '\n' in the stdin stream which needs to be cleared.
+  getchar();
+  printf("Enter a pair of characters on your keyboard and then press \
+          ENTER:\n");
+  scanf("%c%c", &amp;c1, &amp;c2);
+  printf("The characters entered are %c and %c and their ASCII \
+          values are %d and %d respectively.\n", c1, c2, c1, c2);
 
-You should have received a copy of the GNU Lesser General Public
-License along with the GNU C Library; if not, write to the Free
-Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
-02111-1307 USA.  */
+  short int si = 0;
 
-/*
-*      ISO C99 Standard: 7.10/5.2.4.2.1 Sizes of integer types &lt;limits.h>
-*/
+  si = c1 + c2;
 
-#ifndef _LIBC_LIMITS_H_
-#define _LIBC_LIMITS_H_ 1
+  printf("The sum of c1 and c2 as integers is %hd.\n", si);
 
-#include &lt;features.h>
+  return 0;
+}</d:programlisting>
+<d:para>
+  A sample run may have following output:
+</d:para>
+<d:screen>Enter a character on your keyboard and then press ENTER:
+1
+The character entered is 1 and its ASCII value is 49.
+Enter a pair of characters on your keyboard and then press ENTER:
+12
+The characters entered are 1 and 2 and their ASCII values are 49 and 50
+respectively.
+The sum of c1 and c2 as integers is 99.</d:screen>
+<d:para>
+  As you can see from the program that characters are internally stored as
+  integers and we can even perform integers which we normally perform on
+  numbers like addition as shown. We can perform other operation as
+  subtraction, multiplication and division, however, most of the time addition
+  or subtraction only makes sense to advance the characters in their
+  class. Multiplication and division of characters with other characters or
+  integers does not make sense.
+</d:para>
+<d:para>
+  One problem of concern is the extra <d:code>\n</d:code> in the input
+  stream. It does not cause trouble with integers but when you want to read
+  characters then the <d:code>Enter</d:code> or <d:code>Return</d:code> keys
+  which may be left over from the last input will cause
+  trouble. <d:code>\n</d:code> is recognized as a character and will be
+  assigned to next variable if it is in <d:code>stdin</d:code>, which is
+  standard input stream. One of the ways to remove it is to make a call to
+  <d:code>getchar</d:code> which reads one character from the
+  <d:code>stdin</d:code> stream and this <d:code>\n</d:code> will be removed.
+</d:para>
+</d:sect2>
+<d:sect2>
+  <d:title>Floating Types</d:title>
+  <d:para>
+    Floating point representation is a lot more complicated in computers than
+    it is for us human beings. C specification takes floating points
+    description and specification from <d:emphasis role="bold">IEC
+    60559:1989</d:emphasis> which is a standard for 
+    floating point arithmetic which is same as IEEE 754. In C there are three
+    types of floating point numbers <d:code>float, double</d:code> and
+    <d:code>long double</d:code>. These are  
+    described in specification in &#xa7;(iso.5.2.4.2.2).
+  </d:para>
+  <d:para>
+    A floating-point number is used to represent real-world fractional value
+    which is a trade-off between range and accuracy because as I said in
+    fractional binary numbers, a decimal fraction cannot represented in binary
+    unless the denominator of that number is an integral power of 2. A number
+    is, in general, represented approximately to a fixed number of significant
+    digits (the <d:emphasis role="italic">significand</d:emphasis>) and scaled
+    using an exponent; numbers are usually
+    binary, octal, decimal or hexadecimal. A number that can be represented
+    exactly is of the following form:
+    <d:inlineequation>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mtext>significand</mtext>
+        <mo>&#215;</mo>
+        <msup><mtext>base</mtext><mtext>exponent</mtext></msup>
+      </math>
+    </d:inlineequation>
+    where
+    <d:inlineequation>
+      <math
+          xmlns="http://www.w3.org/1998/Math/MathML">
+        <mtext>significand</mtext>
+        <mo>&#8712;</mo>
+        <mi mathvariant="normal">&#8484;</mi>
+        <mo>,</mo>
+        <mtext>base</mtext>
+        <mo>&#8712;</mo>
+        <mi mathvariant="normal">&#8469;</mi>
+        <mo>,</mo>
+        <mtext>exponent</mtext>
+        <mo>&#8712;</mo>
+        <mi mathvariant="normal">&#8484;</mi>
+        <mo>.</mo>
+      </math>
+    </d:inlineequation>
+  </d:para>
+  <d:para>
+    The term floating point refers to the fact that a number's radix point
+    (decimal point, or, more commonly in computers, binary point) can <d:quote>float</d:quote>;
+    that is, it can be placed anywhere relative to the significant digits of
+    the number.
+  </d:para>
+  <d:sect3>
+    <d:title>Representation of Floating-Point Numbers</d:title>
+    <d:para>
+      Given below are pictorial representations of 32-bit floating point
+      numbers:
+    </d:para>
+    <para xmlns="http://docbook.org/ns/docbook">
+      <figure>
+        <title>32-bit floating-point numbers.</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="../images/32-bit_floating_point.png" valign="middle"
+                       align="center"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </para>
+    <d:para>
+      Similarly in 64-bit floating point numbers we have 1 bit for sign, 11
+      bits for exponent and 52 bits for fractional part. Clearly zero will be
+      represented by all sign and exponent bits having value 0 for them.
+    </d:para>
+    <d:para>
+      C also has concept of positive and negative infinities. Sign bit is 0 for
+      positive infinity and 1 for negative infinity. Fractional bits are 1
+      while exponent bits are all 1.
+    </d:para>
+    <d:para>
+      Certain operations cause floating point exceptions like division from
+      zero or square rooting a negative number. Such exceptions are represented
+      by NANs which stands for <d:quote>not a number</d:quote>. Sign for NaNs
+      is similar i.e. 0 for positive and 1 for negative. Exponent bits are 1
+      and fractional part is anything but all 0s because that represents
+      positive infinity.
+    </d:para>
+    <d:para>
+      Now let us see a program to see how we can take input and print the
+      floating point numbers.
+    </d:para>
+    <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
 
+int main()
+{
+  float f = 0.0;
+  double d = 0.0;
+  long double ld = 0.0;
 
-/* Maximum length of any multibyte character in any locale.
- We define this value here since the gcc header does not define
- the correct value.  */
- #define MB_LEN_MAX      16
+  printf("Enter a float, double and long double separated by space:\n");
+  scanf("%f %lf %Lf", &amp;f, &amp;d, &amp;ld);
 
+  printf("You entered %f %lf %Lf\n", f, d, ld);
 
-/* If we are not using GNU CC we have to define all the symbols ourself.
-Otherwise use gcc's definitions (see below).  */
-#if !defined __GNUC__ || __GNUC__ &lt; 2
-
-/* We only protect from multiple inclusion here, because all the other
-#include's protect themselves, and in GCC 2 we may #include_next through
-multiple copies of this file before we get to GCC's.  */
-# ifndef _LIMITS_H
-#  define _LIMITS_H     1
-
-#include &lt;bits/wordsize.h>
-
-/* We don't have #include_next.
-Define ANSI &lt;limits.h> for standard 32-bit words.  */
-
-/* These assume 8-bit `char's, 16-bit `short int's,
-and 32-bit `int's and `long int's.  */
-
-/* Number of bits in a `char'.  */
-#  define CHAR_BIT      8
-
-/* Minimum and maximum values a `signed char' can hold.  */
-#  define SCHAR_MIN     (-128)
-#  define SCHAR_MAX     127
-
-/* Maximum value an `unsigned char' can hold.  (Minimum is 0.)  */
-#  define UCHAR_MAX     255
-
-/* Minimum and maximum values a `char' can hold.  */
-#  ifdef __CHAR_UNSIGNED__
-#   define CHAR_MIN     0
-#   define CHAR_MAX     UCHAR_MAX
-#  else
-#   define CHAR_MIN     SCHAR_MIN
-#   define CHAR_MAX     SCHAR_MAX
-#  endif
-
-/* Minimum and maximum values a `signed short int' can hold.  */
-#  define SHRT_MIN      (-32768)
-#  define SHRT_MAX      32767
-
-/* Maximum value an `unsigned short int' can hold.  (Minimum is 0.)  */
-#  define USHRT_MAX     65535
-
-/* Minimum and maximum values a `signed int' can hold.  */
-#  define INT_MIN       (-INT_MAX - 1)
-#  define INT_MAX       2147483647
-
-/* Maximum value an `unsigned int' can hold.  (Minimum is 0.)  */
-#  define UINT_MAX      4294967295U
-
-/* Minimum and maximum values a `signed long int' can hold.  */
-#  if __WORDSIZE == 64
-#   define LONG_MAX     9223372036854775807L
-#  else
-#   define LONG_MAX     2147483647L
-#  endif
-#  define LONG_MIN      (-LONG_MAX - 1L)
-
-/* Maximum value an `unsigned long int' can hold.  (Minimum is 0.)  */
-#  if __WORDSIZE == 64
-#   define ULONG_MAX    18446744073709551615UL
-#  else
-#   define ULONG_MAX    4294967295UL
-#  endif
-
-#  ifdef __USE_ISOC99
-
-/* Minimum and maximum values a `signed long long int' can hold.  */
-#   define LLONG_MAX    9223372036854775807LL
-#   define LLONG_MIN    (-LLONG_MAX - 1LL)
-
-/* Maximum value an `unsigned long long int' can hold.  (Minimum is 0.)  */
-#   define ULLONG_MAX   18446744073709551615ULL
-
-#  endif /* ISO C99 */
-
-# endif /* limits.h  */
-#endif  /* GCC 2.  */
-
-#endif  /* !_LIBC_LIMITS_H_ */
-
-/* Get the compiler's limits.h, which defines almost all the ISO constants.
-
-We put this #include_next outside the double inclusion check because
-it should be possible to include this file more than once and still get
-the definitions from gcc's header.  */
-#if defined __GNUC__ &amp;&amp; !defined _GCC_LIMITS_H_
-/* `_GCC_LIMITS_H_' is what GCC's file defines.  */
-# include_next &lt;limits.h>
-#endif
-
-/* The &lt;limits.h> files in some gcc versions don't define LLONG_MIN,
-LLONG_MAX, and ULLONG_MAX.  Instead only the values gcc defined for
-ages are available.  */
-#if defined __USE_ISOC99 &amp;&amp; defined __GNUC__
-# ifndef LLONG_MIN
-#  define LLONG_MIN     (-LLONG_MAX-1)
-# endif
-# ifndef LLONG_MAX
-#  define LLONG_MAX     __LONG_LONG_MAX__
-# endif
-# ifndef ULLONG_MAX
-#  define ULLONG_MAX    (LLONG_MAX * 2ULL + 1)
-# endif
-#endif
-
-#ifdef  __USE_POSIX
-/* POSIX adds things to &lt;limits.h>.  */
-# include &lt;bits/posix1_lim.h>
-#endif
-
-#ifdef  __USE_POSIX2
-# include &lt;bits/posix2_lim.h>
-#endif
-
-#ifdef  __USE_XOPEN
-# include &lt;bits/xopen_lim.h>
-#endif</d:programlisting>
-      <d:para>Here, I have given <d:application>gcc</d:application>’s <d:code>limits.h</d:code> as
-          <d:application>gcc</d:application> includes that. For knowing exact implementation for
-        floating-point implementation on your platform I recommend you to read <link
-          xmlns="http://docbook.org/ns/docbook"
-          xlink:href="http://en.wikipedia.org/wiki/IEEE_754-2008"
-          >http://en.wikipedia.org/wiki/IEEE_754-2008</link>. It is not possible to present all the
-        information in detail here and I do not want to give you partial information. :-) I
-        recommend you to go through <link xmlns="http://docbook.org/ns/docbook"
-          xlink:href="http://en.wikipedia.org/wiki/Single_precision"
-          >http://en.wikipedia.org/wiki/Single_precision</link> and <link
-          xmlns="http://docbook.org/ns/docbook"
-          xlink:href="http://en.wikipedia.org/wiki/Double_precision"
-          >http://en.wikipedia.org/wiki/Double_precision</link> in particular. The range of log
-        double varies from compiler to compiler.</d:para>
-    </d:sect1>
-    <d:sect1>
-      <title xmlns="http://docbook.org/ns/docbook">New Data Types of C99</title>
-      <d:para>There are some new data types introduced in C99. They are <d:code>_Bool,
-          _Complex</d:code> and <d:code>_Imaginary</d:code>.</d:para>
-      <d:sect2>
-        <title xmlns="http://docbook.org/ns/docbook">Boolean Types</title>
-        <d:para><d:code>_Bool</d:code> counts as an integral type and is used to represent boolean
-          values. Here is <d:code>stdbool.h</d:code> for your quick reference.</d:para>
-        <d:programlisting role="CLexer">/*===---- stdbool.h - Standard header for booleans -------------------------===
- *
- * Copyright (c) 2008 Eli Friedman
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- *===-----------------------------------------------------------------------===
- */
-
-#ifndef __STDBOOL_H
-#define __STDBOOL_H
-
-/* Don't define bool, true, and false in C++, except as a GNU extension. */
-#ifndef __cplusplus
-#define bool _Bool
-#define true 1
-#define false 0
-#elif defined(__GNUC__) &amp;&amp; !defined(__STRICT_ANSI__)
-/* Define _Bool, bool, false, true as a GNU extension. */
-#define _Bool bool
-#define bool  bool
-#define false false
-#define true  true
-#endif
-
-#define __bool_true_false_are_defined 1
-
-#endif /* __STDBOOL_H */</d:programlisting>
-        <d:para>As you can see from the definition <d:code>true</d:code> is 1 and
-            <d:code>false</d:code> is 0. Any non-zero value is considered to be true. Here is a
-          program demonstrating that.</d:para>
-        <d:programlisting role="CLexer">// Boolean Program
+  return 0;
+}      
+    </d:programlisting>
+    <d:para>
+      If you run this you might have following output:
+    </d:para>
+    <d:screen>Enter a float, double and long double separated by space:
+3.4 5.6 7.8
+You entered 3.400000 5.600000 7.800000</d:screen>
+<d:para>
+  By default these print upto six significant digits but doubles have double
+  precision as we have studied.
+</d:para>    
+  </d:sect3>
+</d:sect2>
+</d:sect1>
+<d:sect1>
+  <d:title>New Data Type of C99</d:title>
+  <d:para>
+    There are some new data types introduced in C99. They are <d:code>_Bool,
+    _Complex</d:code> and <d:code>_Imaginary</d:code>.
+  </d:para>
+  <d:sect2>
+    <d:title>Boolean Type</d:title>
+    <d:para>
+      Booleans were not there before C99 specification. It was introduced in
+      ISO C99 specification. The keyword is <d:code>_Bool</d:code> to declare a
+      boolean variable. Booleans have two possible values as you may
+      know from algebra. The two possible values are <d:code>true</d:code> and
+      <d:code>false</d:code> or 1 and 0 respectively. Any non-zero value is
+      treated as <d:code>true</d:code> including negative value while zero is
+      treated as <d:code>false</d:code>. <d:code>bool, true</d:code> and
+      <d:code>false</d:code> are macros which expand to <d:code>_Bool,</d:code>
+      1 and 0 respectively. <d:code>bool</d:code> is used to maintain
+      compatibility with C++. Since <d:code>bool</d:code> keyword was reserved
+      in C++ so C used <d:code>_Bool</d:code> but the macro
+      <d:code>bool</d:code> is used to maintain compatibility between C and C++
+      code.
+    </d:para>
+    <d:para>
+      Let us see a small program to see demo of booleans.
+    </d:para>
+    <d:programlisting role="CLexer">// Boolean demo Program
 // Author: Shiv S. Dayal
-// Description: Demo of boolean data typec
+// Description: Demo of boolean data type
 
 #include &lt;stdio.h>
 #include &lt;stdbool.h>
@@ -659,59 +1107,41 @@ int main()
 
   return 0;
 }</d:programlisting>
-        <d:para>and the output is:</d:para>
-        <d:screen>1 1 1 0 1 1</d:screen>
-        <d:para>Note that <d:code>true</d:code> and <d:code>false</d:code> are keywords while
-            <d:code>True</d:code> and <d:code>False</d:code> are identifiers.</d:para>
-        <d:para>Though I wanted to avoid dealing with this but since I am including header files
-          verbatim I must give an explanation of <d:code>#define</d:code> pre-processor macro at
-          least. I will touch it very little as it will be covered in more detail later.
-            <d:code>#define</d:code> has two parameters though not as function arguments. Whenever
-          the first part is encountered second will be replaced. Consider this example:</d:para>
-        <d:programlisting role="CLexer">// Boolean Program
-// Author: Shiv S. Dayal
-// Description: Demo of boolean data type
-
-#define MAX 7
-int main()
-{
-  MAX;
-  return 0;
-}</d:programlisting>
-        <d:para>Just do <d:command>$gcc -E define.c</d:command> to see the magic. Note that
-            <d:code>#define</d:code> parameters are not type safe. Compiler will just paste the
-          contents. Notice how <d:code>MAX</d:code> is replaced by 7.</d:para>
-      </d:sect2>
-      <d:sect2>
-        <title xmlns="http://docbook.org/ns/docbook">Complex Types</title>
-        <d:para>For complex types, there is a system header <d:code>complex.h</d:code> which
-          internally includes various other headers. However I am giving you the summary here. There
-          are following <d:code>#define</d:code> macros:</d:para>
-        <d:para><d:code>complex</d:code>: Expands to <d:code>_Complex</d:code>
-          <d:code>_Complex_I</d:code>: Expands to a constant expression of type <d:code>const float
-            _Complex</d:code> with the value of the imaginary.</d:para>
-        <d:para><d:code>imaginary</d:code>: Expands to <d:code>_Imaginary</d:code>.
-            <d:code>_Imaginary_I</d:code>: Expands to a constant expression of type <d:code>const
-            float _Imaginary</d:code> with the value of the imaginary value.</d:para>
-        <d:para><d:code>I</d:code>: Expands to either <d:code>_Imaginary_I</d:code> or
-            <d:code>_Complex_I</d:code>. If <d:code>_Imaginary_I</d:code> is not defined,
-            <d:code>I</d:code> expands to <d:code>_Complex_I</d:code>.</d:para>
-        <d:para>Complex types are declared as given below:</d:para>
-        <d:orderedlist>
-          <d:listitem>
-            <para xmlns="http://docbook.org/ns/docbook">
-              <code>float complex fCompZ;</code></para>
-          </d:listitem>
-          <d:listitem>
-            <para xmlns="http://docbook.org/ns/docbook"><code>double complex dCompZ;</code></para>
-          </d:listitem>
-          <d:listitem>
-            <para xmlns="http://docbook.org/ns/docbook"><code>long double ldCompZ;</code></para>
-          </d:listitem>
-        </d:orderedlist>
-        <d:para>Now I will present a summary of library functions provided by
-            <d:code>complex.h</d:code></d:para>
-        <d:programlisting role="CLexer">//cabs, cabsf, cabsl - these compute and return absolute value
+<d:para>and the output is:</d:para>
+<d:screen>1 1 1 0 1 1</d:screen>
+<d:para>Note that <d:code>true</d:code> and <d:code>false</d:code> are keywords while
+<d:code>True</d:code> and <d:code>False</d:code> are identifiers.</d:para>
+  </d:sect2>
+  <d:sect2>
+    <title xmlns="http://docbook.org/ns/docbook">Complex Types</title>
+    <d:para>For complex types, there is a system header <d:code>complex.h</d:code> which
+    internally includes various other headers. However I am giving you the summary here. There
+    are following <d:code>#define</d:code> macros:</d:para>
+    <d:para><d:code>complex</d:code>: Expands to <d:code>_Complex</d:code>
+    <d:code>_Complex_I</d:code>: Expands to a constant expression of type <d:code>const float
+    _Complex</d:code> with the value of the imaginary.</d:para>
+    <d:para><d:code>imaginary</d:code>: Expands to <d:code>_Imaginary</d:code>.
+    <d:code>_Imaginary_I</d:code>: Expands to a constant expression of type <d:code>const
+    float _Imaginary</d:code> with the value of the imaginary value.</d:para>
+    <d:para><d:code>I</d:code>: Expands to either <d:code>_Imaginary_I</d:code> or
+    <d:code>_Complex_I</d:code>. If <d:code>_Imaginary_I</d:code> is not defined,
+    <d:code>I</d:code> expands to <d:code>_Complex_I</d:code>.</d:para>
+    <d:para>Complex types are declared as given below:</d:para>
+    <d:orderedlist>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook">
+        <code>float complex fCompZ;</code></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook"><code>double complex dCompZ;</code></para>
+      </d:listitem>
+      <d:listitem>
+        <para xmlns="http://docbook.org/ns/docbook"><code>long double ldCompZ;</code></para>
+      </d:listitem>
+    </d:orderedlist>
+    <d:para>Now I will present a summary of library functions provided by
+    <d:code>complex.h</d:code></d:para>
+    <d:programlisting role="CLexer">//cabs, cabsf, cabsl - these compute and return absolute value
 //of a complex number z
 
 double cabs(double complex z);
@@ -907,8 +1337,8 @@ long double complex cacoshl(long double complex z);
 double complex catanh(double complex z);
 float complex catanhf(float complex z);
 long double complex catanhl(long double complex z);</d:programlisting>
-        <d:para>Hers is a small demo program which explains three functions:</d:para>
-        <d:programlisting role="CLexer">// Complex Number Program
+<d:para>Hers is a small demo program which explains three functions:</d:para>
+<d:programlisting role="CLexer">// Complex Number Program
 // Author: Shiv S. Dayal
 // Description: Demo of complex data type
 
@@ -926,40 +1356,39 @@ int main()
 
   return 0;
 }</d:programlisting>
-        <d:para>and the output is:</d:para>
-        <d:programlisting>Absolute value of z is 5.000000
+<d:para>and the output is:</d:para>
+<d:programlisting>Absolute value of z is 5.000000
 Imaghinary part of conjugate is now -3.000000</d:programlisting>
-        <d:para>You must note that in Makefile you must compile it like <d:command>$gcc complex.c
-            -o complex -lm</d:command>. Note the <d:code>-lm</d:code> part. It tells to look for
-          definition of these functions in Math library of C. Without it the program won’t compile.
-          At this point I encourage you to further explore different functions presented in the
-          summary. There are even more data types for integral type. I am sorry but I am unwrapping
-          the layers one by one. These types are defined in <d:code>inttypes.h</d:code> and
-            <d:code>stdint.h</d:code>. The types are <d:code>int8_t, int16_t, int32_t, uint8_t,
-            uint16_t</d:code> and <d:code>uint32_t</d:code>. The numbers tell you how many bits each
-          data type will occupy. The types without leading <d:code>u</d:code> are of signed type and
-          the ones with it are of unsigned type. You can use the good old <d:code>%d</d:code> or
-            <d:code>%i</d:code> for decimal integers and <d:code>%o</d:code> and <d:code>%x</d:code>
-          for octals and hexes. Have a look at headers and try to decipher them.</d:para>
-      </d:sect2>
-    </d:sect1>
-    <d:sect1>
-      <title xmlns="http://docbook.org/ns/docbook"><code>void</code> and <code>enum</code>
-        Types</title>
-      <d:para>There are these two types remianing. void type comprises an empty set of values; it is
-        an incomplete type that cannot be completed. You cannot declare an array of
-          <d:code>void</d:code>s. It is a generic type in the sense that any other pointer to any
-        type can be converted to pointer type of void and vice-versa. It is a low level type and
-        should be only used to convert data types from one type to another and sparingly. A type
-        occupies one byte. Typically you never declare a variable of void type. It is used mostly
-        for casting.</d:para>
-      <d:para><d:code>enum</d:code> comprises a set of named integer constant values. Each distinct
-        enumeration constitutes a different enumerated type. In C enums are very much equivalent to
-        integers. You can do all operations of an enum on an enumeration member. An enumeration is
-        is a set of values. It starts from zero by default and increments by one unless specifically
-        specified. Consider the following example:</d:para>
-      <d:programlisting role="CLexer">// Author: Shiv S. Dayal
-// Description: Demo of enum
+<d:para>You must note that in Makefile you must compile it like <d:command>$gcc complex.c
+-o complex -lm</d:command>. Note the <d:code>-lm</d:code> part. It tells to look for
+definition of these functions in Math library of C. Without it the program won’t compile.
+At this point I encourage you to further explore different functions presented in the
+summary. There are even more data types for integral type. I am sorry but I am unwrapping
+the layers one by one. These types are defined in <d:code>inttypes.h</d:code> and
+<d:code>stdint.h</d:code>. The types are <d:code>int8_t, int16_t, int32_t, uint8_t,
+uint16_t</d:code> and <d:code>uint32_t</d:code>. The numbers tell you how many bits each
+data type will occupy. The types without leading <d:code>u</d:code> are of signed type and
+the ones with it are of unsigned type. You can use the good old <d:code>%d</d:code> or
+<d:code>%i</d:code> for decimal integers and <d:code>%o</d:code> and <d:code>%x</d:code>
+for octals and hexes. Have a look at headers and try to decipher them.</d:para>
+</d:sect2>
+</d:sect1>
+<d:sect1>
+  <title xmlns="http://docbook.org/ns/docbook"><code>void</code> and <code>enum</code>
+  Types</title>
+  <d:para>There are these two types remianing. void type comprises an empty set of values; it is
+  an incomplete type that cannot be completed. You cannot declare an array of
+  <d:code>void</d:code>s. It is a generic type in the sense that any other pointer to any
+  type can be converted to pointer type of void and vice-versa. It is a low level type and
+  should be only used to convert data types from one type to another and sparingly. A type
+  occupies one byte. Typically you never declare a variable of void type. It is used mostly
+  for casting.</d:para>
+  <d:para><d:code>enum</d:code> comprises a set of named integer constant values. Each distinct
+  enumeration constitutes a different enumerated type. In C enums are very much equivalent to
+  integers. You can do all operations of an enum on an enumeration member. An enumeration is
+  is a set of values. It starts from zero by default and increments by one unless specifically
+  specified. Consider the following example:</d:para>
+  <d:programlisting role="CLexer">// Description: Demo of enum
 
 #include &lt;stdio.h>
 
@@ -977,18 +1406,17 @@ int main()
       <d:para>and the output is:</d:para>
       <d:screen>zero = 0, one = 1, two=2
 alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</d:screen>
-    </d:sect1>
-    <d:sect1>
-      <title xmlns="http://docbook.org/ns/docbook">Constants</title>
-      <d:para>We have seen some variables now let us see some constants. There are five categories
-        of constants: character, integer, floating-point, string, and enumeration constant. We will
-        see enumeration constants later first we see remaining four types of constants. There are
-        certain rules about constants. Commas and spaces are not allowed except for character and
-        string constants. Their range cannot outgrow the range of there data type. For numeric type
-        of stants they can have a leading (-)minus sign.</d:para>
-      <d:para>Given below is an example:</d:para>
-      <d:programlisting role="CLexer">// Integer constants
-// Author: Shiv S. Dayal
+</d:sect1>
+<d:sect1>
+  <title xmlns="http://docbook.org/ns/docbook">Constants</title>
+  <d:para>We have seen some variables now let us see some constants. There are five categories
+  of constants: character, integer, floating-point, string, and enumeration constant. We will
+  see enumeration constants later first we see remaining four types of constants. There are
+  certain rules about constants. Commas and spaces are not allowed except for character and
+  string constants. Their range cannot outgrow the range of there data type. For numeric type
+  of stants they can have a leading (-)minus sign.</d:para>
+  <d:para>Given below is an example:</d:para>
+  <d:programlisting role="CLexer">// Integer constants
 // Description: Demo of integer constants
 
 #include &lt;stdio.h>
@@ -1003,24 +1431,23 @@ int main()
 
   return 0;
 }</d:programlisting>
-      <d:para>and the output is:</d:para>
-      <d:screen>7 6 b</d:screen>
-      <d:para>As you can see there are three different categories for integer constants: decimal
-        constants (base 10), octal constants (base 8) and hexadecimal constants (base 16). Also, you
-        must have noticed how a zero is prefixed before octal type and a zero and x for hexadecimal
-        type. The <d:code>%d</d:code> format specifier is already known to you for signed decimals.
-        However, now you know two more <d:code>%o</d:code> and <d:code>%x</d:code> for unsigned
-        octal and unsigned hexadecimal respectively. For unsigned integer it is <d:code>%u</d:code>.
-        There is one more format specifier which you may encounter for signed decimal and that is
-          <d:code>%i</d:code>.</d:para>
-      <d:para>Note that there is nothing for binary constants. I leave this as an exercise to you to
-        convert a number in any base shown above to binary and print it. Also vice-versa that is
-        take a input in binary and convert to these three. Later I will show you this
-        program.</d:para>
-      <d:para>Now let us move to floating-point constants. Again, I will explain using an
-        example:</d:para>
-      <d:programlisting role="CLexer">// Floating-point constants
-// Author: Shiv S. Dayal
+<d:para>and the output is:</d:para>
+<d:screen>7 6 b</d:screen>
+<d:para>As you can see there are three different categories for integer constants: decimal
+constants (base 10), octal constants (base 8) and hexadecimal constants (base 16). Also, you
+must have noticed how a zero is prefixed before octal type and a zero and x for hexadecimal
+type. The <d:code>%d</d:code> format specifier is already known to you for signed decimals.
+However, now you know two more <d:code>%o</d:code> and <d:code>%x</d:code> for unsigned
+octal and unsigned hexadecimal respectively. For unsigned integer it is <d:code>%u</d:code>.
+There is one more format specifier which you may encounter for signed decimal and that is
+<d:code>%i</d:code>.</d:para>
+<d:para>Note that there is nothing for binary constants. I leave this as an exercise to you to
+convert a number in any base shown above to binary and print it. Also vice-versa that is
+take a input in binary and convert to these three. Later I will show you this
+program.</d:para>
+<d:para>Now let us move to floating-point constants. Again, I will explain using an
+example:</d:para>
+<d:programlisting role="CLexer">// Floating-point constants
 // Description: Demo of floating-point constants
 
 #include &lt;stdio.h>
@@ -1035,17 +1462,16 @@ int main()
 
   return 0;
 }</d:programlisting>
-      <d:para>and the output is:</d:para>
-      <d:programlisting>7.538459 13.894579, 759.826348</d:programlisting>
-      <d:para>We will learn to change precision later when we deal with format specifiers along with
-        printf and all input/output family. Here also, you learn three format specifiers. Other are
-          <d:code>%e</d:code> or <d:code>%E</d:code> for scientific notation of float family. Then
-        there is <d:code>%g</d:code> or <d:code>%G</d:code> which uses shorter of
-          <d:code>%e</d:code> and <d:code>%f</d:code> types.</d:para>
-      <d:para>Now we move on to character and string type constants and as usual with a small
-        program.</d:para>
-      <d:programlisting role="CLexer">// Character constants
-// Author: Shiv S. Dayal
+<d:para>and the output is:</d:para>
+<d:programlisting>7.538459 13.894579, 759.826348</d:programlisting>
+<d:para>We will learn to change precision later when we deal with format specifiers along with
+printf and all input/output family. Here also, you learn three format specifiers. Other are
+<d:code>%e</d:code> or <d:code>%E</d:code> for scientific notation of float family. Then
+there is <d:code>%g</d:code> or <d:code>%G</d:code> which uses shorter of
+<d:code>%e</d:code> and <d:code>%f</d:code> types.</d:para>
+<d:para>Now we move on to character and string type constants and as usual with a small
+program.</d:para>
+<d:programlisting role="CLexer">// Character constants
 // Description: Demo of character constants
 
 #include &lt;stdio.h>
@@ -1053,120 +1479,119 @@ int main()
 int main()
 {
   char c = 'S';
-  char* str ="Shiv S, Dayal";
+  char* str ="Shiv S. Dayal";
 
   printf("%c %s\n", c, str);
 
   return 0;
 }</d:programlisting>
-      <d:para>and the output is:</d:para>
-      <d:screen>S Shiv S, Dayal</d:screen>
-      <d:para>As I had said that commas and blanks are not allowed in numeric types but you can see
-        both are allowed on character and string types. Also, the string is a character pointer that
-        is it can point to memory location where a character is stored. In this case the string is
-        stored in an area of memory called stack. When memory is allocated the compiler knows how
-        much has been allocated. For string there is something called null character represented by
-          ‘<d:code>\0</d:code>’ which is used to terminate string. By using this mechanism the
-        program knows where the string is terminating. It is treated in next section as well.A very
-        interesting thing to be noted is char is considered to be an integral type. It is allowed to
-        perform addition etc on char type. Till now you have learnt many format specifiers and have
-        seen they all start with <d:code>%</d:code>. Think how will you print <d:code>%</d:code> on
-        stdout. It is printed like <d:code>%%</d:code>. It was simple,wasn’t it? C program have got
-        something called ASCII table which is a 7-bit character table values ranging from0 to 127.
-        There is also something called escape sequences and it is worth to have a look at
-        them.</d:para>
-    </d:sect1>
-    <d:sect1>
-      <title xmlns="http://docbook.org/ns/docbook">Escape Sequences</title>
-      <d:para>All escape sequences start with a leading <d:code>\</d:code> . Following table shows
-          them:<table xmlns="http://docbook.org/ns/docbook" frame="border" class="centered"
-          border="1">
-	  <colgroup />
-	  <colgroup />
-	  <colgroup />
-          <caption>Escape Sequences</caption>
-          <thead>
-            <tr bgcolor="#aaaaaa">
-              <th>Character</th>
-              <th>Escape Sequences</th>
-              <th>ASCII Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>null</td>
-              <td>\0</td>
-              <td>000</td>
-            </tr>
-            <tr>
-              <td>bell (alert)</td>
-              <td>\a</td>
-              <td>007</td>
-            </tr>
-            <tr>
-              <td>backspace</td>
-              <td>\b</td>
-              <td>008</td>
-            </tr>
-            <tr>
-              <td>horizontal tab</td>
-              <td>\t</td>
-              <td>009</td>
-            </tr>
-            <tr>
-              <td>newline(line feed)</td>
-              <td>\n</td>
-              <td>010</td>
-            </tr>
-            <tr>
-              <td>vertical tab</td>
-              <td>\v</td>
-              <td>011</td>
-            </tr>
-            <tr>
-              <td>form feed</td>
-              <td>\f</td>
-              <td>012</td>
-            </tr>
-            <tr>
-              <td>carriage return</td>
-              <td>\r</td>
-              <td>013</td>
-            </tr>
-            <tr>
-              <td>quotation mark (")</td>
-              <td>\"</td>
-              <td>034</td>
-            </tr>
-            <tr>
-              <td>apostophe (')</td>
-              <td>\'</td>
-              <td>039</td>
-            </tr>
-            <tr>
-              <td>question mark</td>
-              <td>\?</td>
-              <td>063</td>
-            </tr>
-            <tr>
-              <td>backslash</td>
-              <td>\\</td>
-              <td>092</td>
-            </tr>
-          </tbody>
-        </table></d:para>
-      <d:para>Note that there is no space between two backslashes. Sphinx does not allow me to write
-        four continuous backslashes. Now we will talk about all these one by one.
-          <d:code>\0</d:code> which is also known as <d:code>NULL</d:code> is the string terminating
-        character, as said previously, and must be present in string for it to terminate. For
-        example, in our character constant program the str string is “<d:code>Shiv S.
-        Dayal</d:code>”. So how many characters are there 13? Wrong 14! The <d:code>NULL</d:code>
-        character is hidden. Even if we say <d:code>str=””;</d:code> then it will contain one
-        character and that is this <d:code>NULL</d:code>. Many standard C functions rely on this
-        presence of <d:code>NULL</d:code> and causes a lot of mess because of this. The bell escape
-        sequence if for a bell from CPU. Let us write a program and see it in effect.</d:para>
-      <d:programlisting role="CLexer">// Bell Program
-// Author: Shiv S. Dayal
+<d:para>and the output is:</d:para>
+<d:screen>S Shiv S. Dayal</d:screen>
+<d:para>As I had said that commas and blanks are not allowed in numeric types but you can see
+both are allowed on character and string types. Also, the string is a character pointer that
+is it can point to memory location where a character is stored. In this case the string is
+stored in an area of memory called stack. When memory is allocated the compiler knows how
+much has been allocated. For string there is something called null character represented by
+‘<d:code>\0</d:code>’ which is used to terminate string. By using this mechanism the
+program knows where the string is terminating. It is treated in next section as well.A very
+interesting thing to be noted is char is considered to be an integral type. It is allowed to
+perform addition etc on char type. Till now you have learnt many format specifiers and have
+seen they all start with <d:code>%</d:code>. Think how will you print <d:code>%</d:code> on
+stdout. It is printed like <d:code>%%</d:code>. It was simple,wasn’t it? C program have got
+something called ASCII table which is a 7-bit character table values ranging from0 to 127.
+There is also something called escape sequences and it is worth to have a look at
+them.</d:para>
+</d:sect1>
+<d:sect1>
+  <title xmlns="http://docbook.org/ns/docbook">Escape Sequences</title>
+  <d:para>All escape sequences start with a leading <d:code>\</d:code> . Following table shows
+  them:<table xmlns="http://docbook.org/ns/docbook" frame="border" class="centered"
+  border="1">
+  <colgroup />
+  <colgroup />
+  <colgroup />
+  <caption>Escape Sequences</caption>
+  <thead>
+    <tr bgcolor="#aaaaaa">
+      <th>Character</th>
+      <th>Escape Sequences</th>
+      <th>ASCII Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>null</td>
+      <td>\0</td>
+      <td>000</td>
+    </tr>
+    <tr>
+      <td>bell (alert)</td>
+      <td>\a</td>
+      <td>007</td>
+    </tr>
+    <tr>
+      <td>backspace</td>
+      <td>\b</td>
+      <td>008</td>
+    </tr>
+    <tr>
+      <td>horizontal tab</td>
+      <td>\t</td>
+      <td>009</td>
+    </tr>
+    <tr>
+      <td>newline(line feed)</td>
+      <td>\n</td>
+      <td>010</td>
+    </tr>
+    <tr>
+      <td>vertical tab</td>
+      <td>\v</td>
+      <td>011</td>
+    </tr>
+    <tr>
+      <td>form feed</td>
+      <td>\f</td>
+      <td>012</td>
+    </tr>
+    <tr>
+      <td>carriage return</td>
+      <td>\r</td>
+      <td>013</td>
+    </tr>
+    <tr>
+      <td>quotation mark (")</td>
+      <td>\"</td>
+      <td>034</td>
+    </tr>
+    <tr>
+      <td>apostophe (')</td>
+      <td>\'</td>
+      <td>039</td>
+    </tr>
+    <tr>
+      <td>question mark</td>
+      <td>\?</td>
+      <td>063</td>
+    </tr>
+    <tr>
+      <td>backslash</td>
+      <td>\\</td>
+      <td>092</td>
+    </tr>
+  </tbody>
+  </table></d:para>
+  <d:para>Note that there is no space between two backslashes. Sphinx does not allow me to write
+  four continuous backslashes. Now we will talk about all these one by one.
+  <d:code>\0</d:code> which is also known as <d:code>NULL</d:code> is the string terminating
+  character, as said previously, and must be present in string for it to terminate. For
+  example, in our character constant program the str string is “<d:code>Shiv S.
+  Dayal</d:code>”. So how many characters are there 13? Wrong 14! The <d:code>NULL</d:code>
+  character is hidden. Even if we say <d:code>str=””;</d:code> then it will contain one
+  character and that is this <d:code>NULL</d:code>. Many standard C functions rely on this
+  presence of <d:code>NULL</d:code> and causes a lot of mess because of this. The bell escape
+  sequence if for a bell from CPU. Let us write a program and see it in effect.</d:para>
+  <d:programlisting role="CLexer">// Bell Program
 // Description: Demo of bell escape sequence
 
 #include &lt;stdio.h>
@@ -1179,12 +1604,11 @@ int main()
 
   return 0;
 }</d:programlisting>
-      <d:para>The output of this program will be <d:code>hello</d:code> on stdout and an audible or
-        visible bell as per settings of your shell. Notice the <d:code>getchar()</d:code> function
-        which waits for input and reads a character from stdin. Next is backspace escape sequence.
-        Let us see a program for its demo as well:</d:para>
-      <d:programlisting role="CLexer">// Backspace Program
-// Author: Shiv S. Dayal
+<d:para>The output of this program will be <d:code>hello</d:code> on stdout and an audible or
+visible bell as per settings of your shell. Notice the <d:code>getchar()</d:code> function
+which waits for input and reads a character from stdin. Next is backspace escape sequence.
+Let us see a program for its demo as well:</d:para>
+<d:programlisting role="CLexer">// Backspace Program
 // Description: Demo of backspace escape sequence
 
 #include &lt;stdio.h>
@@ -1198,20 +1622,19 @@ int main()
 
   return 0;
 }</d:programlisting>
-      <d:para>and the output is:</d:para>
-      <d:screen>*****</d:screen>
-      <d:para>It is hello replaced by <d:code>*</d:code>. A minor modification in this program to
-        replace the character as soon as key is pressed by some other character will turn it into a
-        password program. Backspace escape sequence means when it is encountered the cursor moves to
-        the previous position on the line in context. If active position of cursor is initial
-        position then C99 standard does not specify the behavior of display device. However, the
-        behavior on my system is that cursor remains at initial position. Check out on yours. The
-        second <d:code>printf</d:code> function determines this behavior.</d:para>
-      <d:para>Next we are going to deal with newline and horizontal tab escape sequences together as
-        combined together they are used to format output in a beautiful fashion. The program is
-        listed below:</d:para>
-      <d:programlisting role="CLexer">// Newline and Horizontal tab program Program
-// Author: Shiv S. Dayal
+<d:para>and the output is:</d:para>
+<d:screen>*****</d:screen>
+<d:para>It is hello replaced by <d:code>*</d:code>. A minor modification in this program to
+replace the character as soon as key is pressed by some other character will turn it into a
+password program. Backspace escape sequence means when it is encountered the cursor moves to
+the previous position on the line in context. If active position of cursor is initial
+position then C99 standard does not specify the behavior of display device. However, the
+behavior on my system is that cursor remains at initial position. Check out on yours. The
+second <d:code>printf</d:code> function determines this behavior.</d:para>
+<d:para>Next we are going to deal with newline and horizontal tab escape sequences together as
+combined together they are used to format output in a beautiful fashion. The program is
+listed below:</d:para>
+<d:programlisting role="CLexer">// Newline and Horizontal tab program Program
 // Description: Demo of newline and horizontal tab escape sequence
 
 #include &lt;stdio.h>
@@ -1229,7 +1652,7 @@ int main()
       <d:screen>Before tab      Aftertab
 
 After newline</d:screen>
-      <d:para>Here I leave you to experiment with other escape sequences. Feel free to explore them.
-        Try various combinations; let your creative juices flow.</d:para>
-    </d:sect1>
+<d:para>Here I leave you to experiment with other escape sequences. Feel free to explore them.
+Try various combinations; let your creative juices flow.</d:para>
+</d:sect1>
 </d:chapter>

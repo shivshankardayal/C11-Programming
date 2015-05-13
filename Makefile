@@ -8,4 +8,4 @@ html:
 
 pdf:
 #	perl -pi -e "s/\.png\"/\.pdf\"/g;" src/*.xml
-	dblatex -bxetex -T db2latex -P preface.tocdepth="1" src/c.xml
+	dblatex -bxetex -T db2latex -p dblatex.xsl -P preface.tocdepth="1" src/c.xml
