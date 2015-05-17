@@ -2,8 +2,8 @@
   xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
     <?dbhtml filename="float/index.html" ?>
-    <d:title>Characterictics of floating types &amp;lt;float.h></d:title>
-    <d:para>The header &amp;lt;float.h> defines several macros that expand to
+    <d:title>Characterictics of floating types &lt;float.h&gt;</d:title>
+    <d:para>The header &lt;float.h&gt; defines several macros that expand to
     various limits and parameters of the standard floating-point
     types.</d:para>
     <d:para>The macros, their meanings, and the constraints (or restrictions)

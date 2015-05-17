@@ -1,0 +1,1161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?dbhtml filename="strings/index.html" ?>
+  <d:title>Strings</d:title>
+  <d:para>
+    C has intgral types like <d:code>char, int, long</d:code> and <d:code>long
+    long</d:code>, floating-point types like <d:code>float</d:code> and
+    <d:code>double</d:code>. However, to treat a sequence of characters which
+    is also called string no new data type is needed. An array of characters or
+    a pointer to character can be used to represent strings. A C string is a
+    sequence of characters stored in contiguous memory locations ended by
+    <d:code>0</d:code> or <d:code>\0</d:code>. It is mandatory for strings to
+    have this ending else you will have surprises. A C string typically have
+    one of the following declarations:
+  </d:para>
+  <d:programlisting role="CLexer">const char str1[] = "Some string";
+char str2[16] = "Some string";
+const char* str3 = "Some string";
+char* str3=NULL; // Allocate and fill with characters later
+  </d:programlisting>
+  <d:para>
+    The first three strings will be on stack while the last one will be on heap
+    as we will need to use <d:code>malloc</d:code> to allocate memory for
+    it. Since a C string is either an array or pointer you can use [] operator
+    to get characters by index from string.
+  </d:para>
+  <d:para>
+    You can read a string from the <d:code>stdin</d:code> i.e. keyboard using
+    deprecated and unsecure <d:code>gets</d:code> function or secure
+    <d:code>fgets</d:code> function as we have seen in console I/O chapter. We
+    can use <d:code>realloc</d:code> function to read an infinite string as
+    shown below.
+  </d:para>
+  <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stddef.h&gt;
+
+int main()
+{
+  char *inf_str = (char*)calloc(16, sizeof(char));
+  char c=0;
+  size_t i = 0, j = 1;
+
+  while((c=getchar()) != '\n') {
+    if(i%16 == 0) {
+      j++;
+      inf_str = (char*)realloc(inf_str, sizeof(char)*16*j);
+    }
+    inf_str[i++] = c;
+  }
+
+  inf_str[i++] = 0;
+  puts(inf_str);
+  free(inf_str);
+
+  return 0;
+}
+  </d:programlisting>
+  <d:para>
+    Note that we are allocating 16 bytes to avoid allocation large chunk of
+    memory which may be wasted. Also, if you keep it too small then there will
+    be many calls to <d:code>realloc</d:code>. This value depends on how much
+    data you are going to read and accordingly adjusted. We allocate memory for
+    multiple of 16 characters to start with and we read characters from
+    keyboard one by one till we encounter <d:code>'\n'</d:code>. Once 16
+    characters have been read which is determined by <d:code>i%16</d:code> we
+    allocate 16 more characters. For this we use another counter
+    <d:code>j</d:code>. Finally we put 0 at the end of string to
+    <d:code>NULL</d:code> terminate it, print it and free the allocated
+    memory.
+  </d:para>
+  <d:para>
+    This is a very good program but in one case it will have problem. Suppose
+    you want to read a large string and your memory is fragmented due to which
+    one contiguous sequnce of memory is not available then you cannot read the
+    string in to memory even though total free memory is more than memory
+    required by string. Some languages like Erlang split memory in chunks and
+    create a linked list to store strings. Also, this reallocation may require
+    full scan of string which will cause
+    <d:inlineequation>
+      <math
+          xmlns="http://www.w3.org/1998/Math/MathML">
+        <mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo>
+      </math>
+    </d:inlineequation>
+    time cost. Therefore, there is no one shot solution to read strings into
+    memory if they are too big.
+  </d:para>
+  <d:para>
+    To work with strings you must know functions provided by header
+    <d:code>string.h</d:code> otherwise you will be duplicating the
+    functionality.
+  </d:para>
+  <d:sect1>
+    <d:title>Useful Functions</d:title>
+    <d:sect2>
+      <d:title>strlen and strnlen Functions</d:title>
+      <d:para>
+        One of the most common operations is to know length of the string
+        because it is needed as input in many functions. There are two versions
+        of it. <d:code>strlen</d:code> is slightly unsecure because it depends
+        on the <d:code>\0</d:code> character of string which means if string
+        is not <d:code>NULL</d:code> terminated then <d:code>strlen</d:code>
+        will contnue to read past the length of
+        string. <d:code>strnlen</d:code> takes an extra argument which is the
+        maximum length of string and beyond that it will not read. I am giving
+        signatures and descriptions below.
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;string.h&gt;
+
+size_t strlen(const char *s);
+size_t strnlen(const char *s, size_t maxlen);
+      </d:programlisting>
+      <d:para>
+        The <d:code>strlen()</d:code> function calculates the length of the
+        string <d:code>s</d:code>, excluding the terminating null byte
+        (<d:code>\0</d:code>). The <d:code>strlen()</d:code> function returns
+        the number of bytes in the string <d:code>s</d:code>.
+      </d:para>
+      <d:para>
+        The <d:code>strnlen()</d:code> function returns the number of bytes in
+        the string pointed to by <d:code>s</d:code>, excluding the terminating
+        null byte (<d:code>\0</d:code>), but at most
+        <d:code>maxlen</d:code>. In doing this, <d:code>strnlen()</d:code>
+        looks only at the first <d:code>maxlen</d:code> bytes at
+        <d:code>s</d:code> and never beyond <d:code>s+maxlen</d:code>.
+      </d:para>
+      <d:para>
+        The <d:code>strnlen()</d:code> function returns
+        <d:code>strlen(s)</d:code>, if that is less than
+        <d:code>maxlen</d:code>, or <d:code>maxlen</d:code> if there is no null
+        byte (<d:code>\0</d:code>) among the first <d:code>maxlen</d:code>
+        bytes pointed to by <d:code>s</d:code>.
+      </d:para>
+      <d:para>
+        Let us see examples as to how to use these:
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  const char* str1 = "Hello";
+  const char str2[] = "Universe";
+
+  printf("Length of str1 is %Zd\n", strlen(str1));
+  printf("Length of str2 is %Zd\n", strnlen(str2, 8));
+
+  return 0;
+}
+      </d:programlisting>
+      <d:para>
+        Note the use of conversion specifier <d:code>%Zd</d:code> because
+        return value of these functions is <d:code>size_t</d:code>. The output
+        is:
+      </d:para>
+      <d:screen>Length of str1 is 5
+Length of str2 is 8
+      </d:screen>
+      <d:para>
+        You can also implement <d:code>strlen</d:code> and
+        <d:code>strnlen</d:code> yourself easily. Note that if you are
+        implementing these functions with the same name then do not include the
+        header which has the prototype of the function, in this case
+        <d:code>string.h</d:code>, otherwise you will have error for
+        duplication. For example consider the following program:
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;stddef.h&gt;
+
+size_t strlen(const char* s)
+{
+  size_t i=0;
+
+  while(*s++)
+    ++i;
+
+  return i;
+}
+
+size_t strnlen(const char* s, size_t maxlen)
+{
+  size_t i=0;
+
+  while(*s++ &amp;&amp; (i &lt; maxlen))
+    ++i;
+
+  return i;
+}
+
+int main()
+{
+  const char* str="Hello there!";
+
+  printf("%Zd\n", strlen(str));
+  printf("%Zd\n", strnlen(str, 20));
+  printf("%Zd\n", strnlen(str, 10));
+
+  return 0;
+}
+      </d:programlisting>      
+    </d:sect2>
+    <d:sect2>
+      <d:title>strcpy and strncpy Functions</d:title>
+      <d:para>
+        Another important operation is copying one string to another. For this
+        we have <d:code>strcpy</d:code> and its secure version
+        <d:code>strncpy</d:code>. You should avoid using
+        <d:code>strcpy</d:code> because if destination is smaller than source
+        then <d:code>strcpy</d:code> will write past the end of destination
+        length which is a security flaw. <d:code>strncpy</d:code> puts
+        additional overhead on programmer which is to provide an extra argument
+        specifying how many bytes to be copied at max. Let us see the synopsis
+        and description of these functions.
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;string.h&gt;
+
+char *strcpy(char *dest, const char *src);
+char *strncpy(char *dest, const char *src, size_t n);
+      </d:programlisting>
+      <d:para>
+        The <d:code>strcpy()</d:code> function copies the string pointed to by
+        <d:code>src</d:code>, including the terminating null byte
+        (<d:code>\0</d:code>), to the buffer pointed to by
+        <d:code>dest</d:code>. The strings may not overlap, and the destination
+        string dest must be large enough to receive the copy. Beware of buffer
+        overruns!
+      </d:para>
+      <d:para>
+        The <d:code>strncpy()</d:code> function is similar, except that at most
+        <d:code>n</d:code> bytes of <d:code>src</d:code> are copied. Warning:
+        If there is no null byte among the first <d:code>n</d:code> bytes of
+        src, the string placed in dest will not be null-terminated.
+      </d:para>
+      <d:para>
+        If the length of <d:code>src</d:code> is less than <d:code>n</d:code>,
+        <d:code>strncpy()</d:code> writes additional null bytes to dest to
+        ensure that a total of <d:code>n</d:code> bytes are written.
+      </d:para>
+      <d:para>
+        The <d:code>strcpy()</d:code> and <d:code>strncpy()</d:code> functions
+        return a pointer to the destination string <d:code>dest</d:code>.
+      </d:para>
+      <d:para>
+        Some programmers consider <d:code>strncpy()</d:code> to be inefficient
+        and error prone. If the programmer knows (i.e., includes code to test!)
+        that the size of <d:code>dest</d:code> is greater than the length of
+        <d:code>src</d:code>, then <d:code>strcpy()</d:code> can be used.
+      </d:para>
+      <d:para>
+        One valid (and intended) use of <d:code>strncpy()</d:code> is to copy a
+        C string to a fixed-length buffer while ensuring both that the buffer
+        is not overflowed and that unused bytes in the target buffer are zeroed
+        out (perhaps to prevent information leaks if the buffer is to be
+        written to media or transmitted to another process via an interprocess
+        communication technique).
+      </d:para>
+      <d:para>
+        If there is no terminating null byte in the first <d:code>n</d:code>
+        bytes of <d:code>src</d:code>, <d:code>strncpy()</d:code> produces an
+        unterminated string in <d:code>dest</d:code>. You can force termination
+        using something like the following:
+      </d:para>
+      <d:programlisting role="CLexer">strncpy(buf, str, n);
+if (n &gt; 0)
+  buf[n - 1]= '\0';
+      </d:programlisting>
+      <d:para>
+        If the destination string of a <d:code>strcpy()</d:code> is not large
+        enough, then anything might happen. Overflowing fixed-length string
+        buffers is a favorite cracker technique for taking complete control of
+        the machine. Any time a program reads or copies data into a buffer, the
+        program first needs to check that there's enough space. This may be
+        unnecessary if you can show that overflow is impossible, but be
+        careful: programs can get changed over time, in ways that may make the
+        impossible possible.
+      </d:para>
+      <d:para>
+        The best idea is to have large enough buffer to hold source string and
+        use <d:code>strcpy()</d:code>. Thus the responsibility of ensuring this
+        is upon you, the programmer. Let us see example programs for these two
+        functions:
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+  char *str1 = "Hello";
+  char str2[] = "world";
+  char str3[6] = {0};
+  char *str4 = (char*)calloc(6, 1);
+
+  strcpy(str3, str1);
+  strncpy(str4, str2, 6);
+
+  puts(str3);
+  puts(str4);
+
+  return 0;
+}
+      </d:programlisting>
+      <d:para>
+        and the output is:
+      </d:para>
+      <d:screen>Hello
+world
+      </d:screen>
+      <d:para>
+        Notice that you need to pass space including the <d:code>NULL</d:code>
+        byte in <d:code>strncpy</d:code> call.
+      </d:para>
+      <d:para>
+        You can also implement your own version of <d:code>strcpy</d:code> and
+        <d:code>strncpy</d:code>. For example,
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stddef.h&gt;
+
+char* strncpy(char* dst, const char* src, size_t n)
+{
+  size_t i = 0;
+
+  while((i++ &lt; n) &amp;&amp; (*dst++ = *src++));
+
+  return dst;
+}
+
+char* strcpy(char* dst, const char* src)
+{
+  while(*dst++ = *src++);
+
+  return dst;
+}
+
+int main()
+{
+  char *str1 = "Hello";
+  char str2[] = "world";
+  char str3[6] = {0};
+  char *str4 = (char*)calloc(6, 1);
+
+  strcpy(str3, str1);
+  strncpy(str4, str2, 6);
+
+  puts(str3);
+  puts(str4);
+
+  return 0;
+}
+      </d:programlisting>
+      <d:para>
+        and the output is:
+      </d:para>
+      <d:screen>Hello
+world
+      </d:screen>      
+    </d:sect2>
+    <d:sect2>
+      <d:title>strcat and strncat Functions</d:title>
+      <d:para>
+        Some high level languages like C++, Java, Python use operator
+        overloading (which is typical to object oriented languages) and use +
+        operator to concatenate strings. However, C is not object oriented and
+        hence we do not have facility of operator overloading but C provides
+        two functions <d:code>strcat</d:code> and <d:code>strncat</d:code> to
+        achieve the same goal. Let us see their descriptions in man pages.
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;string.h&gt;
+
+char *strcat(char *dest, const char *src);
+char *strncat(char *dest, const char *src, size_t n);
+      </d:programlisting>
+      <d:para>
+        The <d:code>strcat()</d:code> function appends the <d:code>src</d:code>
+        string to the <d:code>dest</d:code> string, over-writing the
+        terminating null byte (<d:code>\0</d:code>) at the end of
+        <d:code>dest</d:code>, and then adds a terminating null byte. The
+        strings may not overlap, and the <d:code>dest</d:code> string must have
+        enough space for the result. If <d:code>dest</d:code> is not large
+        enough, program behavior is unpredictable; buffer overruns are a
+        favorite avenue for attacking secure programs.
+      </d:para>
+      <d:para>
+        The <d:code>strncat()</d:code> function is similar, except that
+      </d:para>
+      <d:itemizedlist>
+        <d:listitem>
+          it will use at most <d:code>n</d:code> bytes from <d:code>src</d:code>; and
+        </d:listitem>
+        <d:listitem>
+          <d:code>src</d:code> does not need to be null-terminated if it
+          contains <d:code>n</d:code> or more bytes.
+        </d:listitem>
+      </d:itemizedlist>
+      <d:para>
+        As with <d:code>strcat()</d:code>, the resulting string in
+        <d:code>dest</d:code> is always null-terminated.
+      </d:para>
+      <d:para>
+        If <d:code>src</d:code> contains <d:code>n</d:code> or more bytes,
+        <d:code>strncat()</d:code> writes <d:code>n+1</d:code> bytes to
+        <d:code>dest</d:code> (<d:code>n</d:code> from <d:code>src</d:code>
+        plus the terminating null byte). Therefore, the size of
+        <d:code>dest</d:code> must be at least
+        <d:code>strlen(dest)+n+1</d:code>.
+      </d:para>
+      <d:para>
+        Let us see an example as how we use these functions:
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+  char *str1 = "Hello";
+  char str2[] = "world";
+  char str3[12] = {0};
+  char *str4 = (char*)calloc(12, 1);
+
+  strcat(str3, str1);
+  strcat(str3, " ");
+  strcat(str3, str2);
+
+  puts(str3);
+
+  strncat(str4, str1, strlen(str1));
+  strncat(str4, " ", 1);
+  strncat(str4, str2, strlen(str2));
+
+  puts(str4);
+
+  return 0;
+}
+      </d:programlisting>
+      <d:para>
+        We can implement these functions similar to previously implemented
+        functions. For example
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+char* my_strncat(char* dst, const char*src, size_t n)
+{
+  size_t i=0;
+  size_t dst_length;
+
+  dst_length = strlen(dst);
+
+  while((i&lt;n) &amp;&amp; *src) {
+     dst[dst_length + i] = *src;
+     src++;
+     i++;
+  }
+  dst[dst_length+i] = 0;
+
+  return dst;
+}
+
+char* my_strcat(char* dst, const char*src)
+{
+  size_t i=0;
+  size_t dst_length;
+
+  dst_length = strlen(dst);
+
+  while(*src) {
+    dst[dst_length + i] = *src;
+    src++;
+    i++;
+  }
+  dst[dst_length+i] = 0;
+
+  return dst;
+}
+
+int main()
+{
+  char *str1 = "Hello";
+  char str2[] = "world";
+  char str3[12] = {0};
+  char *str4 = (char*)calloc(12, 1);
+
+  my_strcat(str3, str1);
+  puts(str3);
+  my_strcat(str3, " ");
+  puts(str3);
+  my_strcat(str3, str2);
+  puts(str3);
+
+  my_strncat(str4, str1, strlen(str1));
+  puts(str4);
+  my_strncat(str4, " ", 1);
+  puts(str4);
+  my_strncat(str4, str2, strlen(str2));
+  puts(str4);
+
+  return 0;
+}
+      </d:programlisting>
+    </d:sect2>
+    <d:sect2>
+      <d:title>trcmp and strncmp Functions</d:title>
+      <d:para>
+        There are very frequent requirements for comparison of two values when
+        programming. Integers and characters can be compared easily. Floats can
+        be compared with a very high degree of accuracy. However, comparing
+        strings is to be done character by character and like
+        <d:code>strcat</d:code> and <d:code>strncat</d:code> object oriented
+        programming languages use same operators for strings which are used for
+        compare integers or characters like <d:code>==</d:code> for equality,
+        <d:code>&lt;</d:code> for less than and so on. Once again C provides
+        functions not simpler operator comparison to compare two strings. Let
+        us see what man pages say about them:
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;string.h&gt;
+
+int strcmp(const char *s1, const char *s2);
+int strncmp(const char *s1, const char *s2, size_t n);
+      </d:programlisting>
+      <d:para>
+        The <d:code>strcmp()</d:code> function compares the two strings
+        <d:code>s1</d:code> and <d:code>s2</d:code>. It returns an integer less
+        than, equal to, or greater than zero if <d:code>s1</d:code> is found,
+        respectively, to be less than, to match, or be greater than
+        <d:code>s2</d:code>.
+      </d:para>
+      <d:para>
+        The <d:code>strncmp()</d:code> function is similar, except it compares
+        the only first (at most) <d:code>n</d:code> bytes of
+        <d:code>s1</d:code> and <d:code>s2</d:code>.
+      </d:para>
+      <d:para>
+        Let us see an example program for these two functions:
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  char *str1 = "Hello";
+  char *str2 = "world";
+  char *str3 = "Helloo";
+
+  printf("%d\n", strcmp(str1, str1));
+  printf("%d\n", strcmp(str1, str2));
+  printf("%d\n", strcmp(str1, str3));
+
+  printf("%d\n", strncmp(str1, str1, 5));
+  printf("%d\n", strncmp(str2, str1, 5));
+  printf("%d\n", strncmp(str1, str3, 5));
+
+  return 0;
+}
+      </d:programlisting>
+      <d:para>
+        and the output is:
+      </d:para>
+      <d:screen>0
+-47
+-111
+0
+47
+0
+      </d:screen>
+      <d:para>
+        Let us try to implement these functions ourselves:
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+
+int strncmp(const char* s1, const char* s2, size_t n)
+{
+  size_t i = 0;
+
+  while((i &lt; n) &amp;&amp; *s1 &amp;&amp; (*s1==*s2)) {
+    s1++,s2++;
+    i++;
+  }
+
+  return *(const unsigned char*)s1-*(const unsigned char*)s2;
+}
+
+int strcmp(const char* s1, const char* s2)
+{
+  while(*s1 &amp;&amp; (*s1==*s2))
+    s1++,s2++;
+
+  return *(const unsigned char*)s1-*(const unsigned char*)s2;
+}
+
+int main()
+{
+  char *str1 = "Hello";
+  char *str2 = "world";
+  char *str3 = "Helloo";
+
+  printf("%d\n", strcmp(str1, str1));
+  printf("%d\n", strcmp(str1, str2));
+  printf("%d\n", strcmp(str1, str3));
+
+  printf("%d\n", strncmp(str1, str1, 5));
+  printf("%d\n", strncmp(str2, str1, 5));
+  printf("%d\n", strncmp(str1, str3, 5));
+
+  return 0;
+}
+      </d:programlisting>
+      <d:para>
+        and the output is:
+      </d:para>
+      <d:screen>0
+-47
+-111
+0
+47
+0
+      </d:screen>      
+    </d:sect2>
+    <d:sect2>
+      <d:title>strstr, strchr and strrchr Functions</d:title>
+      <d:para>
+        Many times we want to find whether a particular character is in string
+        or not. It is easy to do it in C yourself but we have two functions
+        which help with that. Those are <d:code>strchr</d:code> and
+        <d:code>strrchr</d:code>. Many other times we want to find whether a
+        given string is a substring of another given string. This is simple to
+        do but most of the time those simple solutions will be inefficient. C
+        provides a function <d:code>strstr</d:code> for this and compilers
+        usually provide an implementation of a very good algorithm. I will not
+        go into the algorithm provided by <d:code>gcc</d:code> now but just
+        describe the function and its example. Let us see what man pages say
+        about these functions:
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;string.h&gt;
+
+char *strstr(const char *haystack, const char *needle);
+char *strchr(const char *s, int c);
+char *strrchr(const char *s, int c);
+      </d:programlisting>
+      <d:para>
+        The <d:code>strstr()</d:code> function finds the first occurrence of
+        the substring <d:code>needle</d:code> in the string
+        <d:code>haystack</d:code>. The terminating null bytes
+        (<d:code>\0</d:code>) are not compared. It returns a pointer to the
+        beginning of the substring, or <d:code>NULL</d:code> if the substring
+        is not found.
+      </d:para>
+      <d:para>
+        The <d:code>strchr()</d:code> function returns a pointer to the first
+        occurrence of the character <d:code>c</d:code> in the string
+        <d:code>s</d:code>.
+      </d:para>
+      <d:para>
+        The <d:code>strrchr()</d:code> function returns a pointer to the last
+        occurrence of the character <d:code>c</d:code> in the string
+        <d:code>s</d:code>.
+      </d:para>
+      <d:para>
+        The <d:code>strchr()</d:code> and <d:code>strrchr()</d:code> functions
+        return a pointer to the matched character or <d:code>NULL</d:code> if
+        the character is not found. The terminating null byte is considered
+        part of the string, so that if <d:code>c</d:code> is specified as
+        <d:code>\0</d:code>, these functions return a pointer to the
+        terminator.
+      </d:para>
+      <d:para>
+        Let us see an example:
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  const char *str1 = "Hello";
+  const char *str3 = "Helloo";
+
+  printf("%s\n", strchr(str1, 'e'));
+  printf("%p\n", strchr(str1, 'x'));
+  printf("%s\n", strchr(str1, 'l'));
+  printf("%s\n", strrchr(str1, 'l'));
+  printf("%s\n", strstr(str3, str1));
+  printf("%p\n", strstr(str3, "xyz"));
+
+  return 0;
+}
+      </d:programlisting>
+      <d:para>
+        and the output is:
+      </d:para>
+      <d:screen>ello
+(nil)
+llo
+lo
+Helloo
+(nil)
+      </d:screen>
+      <d:para>
+        Let us try to implement these three routines ourselves. Now strstr is a
+        complex one. There are lots of very good algorithms. These algorithms
+        will be discussed in data structures book. The algorithm which I will
+        present will be a brute force one and should not be used for any good
+        code. I am giving it just to present an example.
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+
+char* strstr(const char *haystack, const char *needle)
+{
+  if (haystack == NULL || needle == NULL) {
+    return NULL;
+  }
+
+  for ( ; *haystack; haystack++) {
+    const char *h, *n;
+    for (h = haystack, n = needle; *h &amp;&amp; *n &amp;&amp; (*h == *n); ++h, ++n) {
+    }
+    if (*n == '\0') {
+      return (char*)haystack;
+    }
+  }
+  return NULL;
+}
+
+char* strchr(const char* str, int c)
+{
+  char *i = NULL;
+
+  while(*str) {
+    if(*str == c) {
+      i = (char*)str;
+      return i;
+    }
+    str++;
+  }
+  return NULL;
+}
+
+char* strrchr(const char* str, int c)
+{
+  char *i = NULL;
+  while(*str) {
+    if(*str == c)
+      i = (char*)str;
+    str++;
+  }
+
+  return i;
+}
+
+int main()
+{
+  const char *str1 = "Hello";
+  const char *str3 = "Helloo";
+
+  printf("%s\n", strchr(str1, 'e'));
+  printf("%p\n", strchr(str1, 'x'));
+  printf("%s\n", strchr(str1, 'l'));
+  printf("%s\n", strrchr(str1, 'l'));
+  printf("%s\n", strstr(str3, str1));
+  printf("%p\n", strstr(str3, "xyz"));
+
+  return 0;
+}
+      </d:programlisting>      
+    </d:sect2>
+    <d:sect2>
+      <d:title>strerror Function</d:title>
+      <d:para>
+        <d:code>strerror</d:code> funciton maps an integer to error
+        message. Typically the value of this integer comes from
+        <d:code>errno</d:code> but it will accept any integer argument. A small
+        sample program shows the messages printed. These messages essentially
+        tell you what each value of <d:code>errno</d:code> means.
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  for(int i=0; i&lt;135; ++i)
+    printf("%d %s\n", i, strerror(i));
+
+  return 0;
+}
+      </d:programlisting>
+      <d:para>
+        and the output is:
+      </d:para>
+      <d:screen>000 Success
+001 Operation not permitted
+002 No such file or directory
+003 No such process
+004 Interrupted system call
+005 Input/output error
+006 No such device or address
+007 Argument list too long
+008 Exec format error
+009 Bad file descriptor
+010 No child processes
+011 Resource temporarily unavailable
+012 Cannot allocate memory
+013 Permission denied
+014 Bad address
+015 Block device required
+016 Device or resource busy
+017 File exists
+018 Invalid cross-device link
+019 No such device
+020 Not a directory
+021 Is a directory
+022 Invalid argument
+023 Too many open files in system
+024 Too many open files
+025 Inappropriate ioctl for device
+026 Text file busy
+027 File too large
+028 No space left on device
+029 Illegal seek
+030 Read-only file system
+031 Too many links
+032 Broken pipe
+033 Numerical argument out of domain
+034 Numerical result out of range
+035 Resource deadlock avoided
+036 File name too long
+037 No locks available
+038 Function not implemented
+039 Directory not empty
+040 Too many levels of symbolic links
+041 Unknown error 41
+042 No message of desired type
+043 Identifier removed
+044 Channel number out of range
+045 Level 2 not synchronized
+046 Level 3 halted
+047 Level 3 reset
+048 Link number out of range
+049 Protocol driver not attached
+050 No CSI structure available
+051 Level 2 halted
+052 Invalid exchange
+053 Invalid request descriptor
+054 Exchange full
+055 No anode
+056 Invalid request code
+057 Invalid slot
+058 Unknown error 58
+059 Bad font file format
+060 Device not a stream
+061 No data available
+062 Timer expired
+063 Out of streams resources
+064 Machine is not on the network
+065 Package not installed
+066 Object is remote
+067 Link has been severed
+068 Advertise error
+069 Srmount error
+070 Communication error on send
+071 Protocol error
+072 Multihop attempted
+073 RFS specific error
+074 Bad message
+075 Value too large for defined data type
+076 Name not unique on network
+077 File descriptor in bad state
+078 Remote address changed
+079 Can not access a needed shared library
+080 Accessing a corrupted shared library
+081 .lib section in a.out corrupted
+082 Attempting to link in too many shared libraries
+083 Cannot exec a shared library directly
+084 Invalid or incomplete multibyte or wide character
+085 Interrupted system call should be restarted
+086 Streams pipe error
+087 Too many users
+088 Socket operation on non-socket
+089 Destination address required
+090 Message too long
+091 Protocol wrong type for socket
+092 Protocol not available
+093 Protocol not supported
+094 Socket type not supported
+095 Operation not supported
+096 Protocol family not supported
+097 Address family not supported by protocol
+098 Address already in use
+099 Cannot assign requested address
+100 Network is down
+101 Network is unreachable
+102 Network dropped connection on reset
+103 Software caused connection abort
+104 Connection reset by peer
+105 No buffer space available
+106 Transport endpoint is already connected
+107 Transport endpoint is not connected
+108 Cannot send after transport endpoint shutdown
+109 Too many references: cannot splice
+110 Connection timed out
+111 Connection refused
+112 Host is down
+113 No route to host
+114 Operation already in progress
+115 Operation now in progress
+116 Stale file handle
+117 Structure needs cleaning
+118 Not a XENIX named type file
+119 No XENIX semaphores available
+120 Is a named type file
+121 Remote I/O error
+122 Disk quota exceeded
+123 No medium found
+124 Wrong medium type
+125 Operation canceled
+126 Required key not available
+127 Key has expired
+128 Key has been revoked
+129 Key was rejected by service
+130 Owner died
+131 State not recoverable
+132 Operation not possible due to RF-kill
+133 Memory page has hardware error
+134 Unknown error 134
+      </d:screen>
+      <d:sect2>
+        <d:title>strtok Function</d:title>
+        <d:para>
+          There are times when we need to split a string for a set of
+          delimiters. C provides a function called
+          <d:code>strtok</d:code>. Note that <d:code>strtok</d:code> is not
+          multi-thread safe so if you need to use <d:code>strtok</d:code> in a
+          multi-threaded program then consider using its reentrant version
+          <d:code>strtok_r</d:code>.
+        </d:para>
+        <d:programlisting role="CLexer">#include &lt;string.h&gt;
+
+char *strtok(char *str, const char *delim);
+char *strtok_r(char *str, const char *delim, char **saveptr);
+        </d:programlisting>
+        <d:para>
+          The <d:code>strtok()</d:code> function breaks a string into a
+          sequence of zero or more nonempty tokens. On the first call to
+          <d:code>strtok()</d:code> the string to be parsed should be specified
+          in <d:code>str</d:code>. In each subsequent call that should parse
+          the same string, <d:code>str</d:code> must be <d:code>NULL</d:code>.
+        </d:para>
+        <d:para>
+          The <d:code>delim</d:code> argument specifies a set of bytes that
+          delimit the tokens in the parsed string. The caller may specify
+          different strings in <d:code>delim</d:code> in successive calls that
+          parse the same string.
+        </d:para>
+        <d:para>
+          Each call to <d:code>strtok()</d:code> returns a pointer to a
+          null-terminated string containing the next token. This string does
+          not include the delimiting byte. If no more tokens are found,
+          <d:code>strtok()</d:code> returns <d:code>NULL</d:code>.
+        </d:para>
+        <d:para>
+          A sequence of calls to <d:code>strtok()</d:code> that operate on the
+          same string maintains a pointer that determines the point from which
+          to start searching for the next token. The first call to
+          <d:code>strtok()</d:code> sets this pointer to point to the first
+          byte of the string. The start of the next token is determined by
+          scanning forward for the next nondelimiter byte in
+          <d:code>str</d:code>. If such a byte is found, it is taken as the
+          start of the next token. If no such byte is found, then there are no
+          more tokens, and <d:code>strtok()</d:code> returns
+          <d:code>NULL</d:code>. (A string that is empty or that contains only
+          delimiters will thus cause <d:code>strtok()</d:code> to return
+          <d:code>NULL</d:code> on the first call.)
+        </d:para>
+        <d:para>
+          The end of each token is found by scanning forward until either the
+          next delimiter byte is found or until the terminating null byte
+          (<d:code>\0</d:code>) is encountered. If a delimiter byte is found,
+          it is overwritten with a null byte to terminate the current token,
+          and <d:code>strtok()</d:code> saves a pointer to the following byte;
+          that pointer will be used as the starting point when searching for
+          the next token. In this case, <d:code>strtok()</d:code> returns a
+          pointer to the start of the found token.
+        </d:para>
+        <d:para>
+          From the above description, it follows that a sequence of two or more
+          contiguous delimiter bytes in the parsed string is considered to be a
+          single delimiter, and that delimiter bytes at the start or end of the
+          string are ignored. Put another way: the tokens returned by
+          <d:code>strtok()</d:code> are always nonempty strings. Thus, for
+          example, given the string <d:quote>aaa;;bbb,</d:quote>, successive
+          calls to <d:code>strtok()</d:code> that specify the delimiter string
+          <d:quote>;,</d:quote> would return the strings <d:quote>aaa</d:quote>
+          and <d:quote>bbb</d:quote>, and then a <d:code>NULL</d:code>
+          pointer.
+        </d:para>
+        <d:para>
+          The <d:code>strtok_r()</d:code> function is a reentrant version
+          <d:code>strtok()</d:code>. The <d:code>saveptr</d:code> argument is a
+          pointer to a <d:code>char *</d:code> variable that is used internally
+          by <d:code>strtok_r()</d:code> in order to maintain context between
+          successive calls that parse the same string.
+        </d:para>
+        <d:para>
+          On the first call to <d:code>strtok_r(), str</d:code> should point to
+          the string to be parsed, and the value of <d:code>saveptr</d:code> is
+          ignored. In subsequent calls, <d:code>str</d:code> should be
+          <d:code>NULL</d:code>, and <d:code>saveptr</d:code> should be
+          unchanged since the previous call.
+        </d:para>
+        <d:para>
+          Different strings may be parsed concurrently using sequences of calls
+          to <d:code>strtok_r()</d:code> that specify different
+          <d:code>saveptr</d:code> arguments.
+        </d:para>
+        <d:para>
+          Let us see the example given in man page:
+        </d:para>
+        <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+char * strtok(char * str, char *comp)
+{
+  static int pos;
+  static char *s;
+  int i =0, start = pos;
+
+  if(str!=NULL)
+    s = str;
+
+  i = 0;
+  int j = 0;
+
+  while(s[pos] != '\0')
+  {
+    j = 0;
+    while(comp[j] != '\0')
+    {
+      if(s[pos] == comp[j])
+      {
+        s[pos] = '\0';
+        pos = pos+1;
+        if(s[start] != '\0')
+          return (&amp;s[start]);
+        else
+        {
+          start = pos;
+          pos--;
+          break;
+        }
+      }
+      j++;
+    }
+    pos++;
+  }
+  s[pos] = '\0';
+  if(s[start] == '\0')
+    return NULL;
+  else
+    return &amp;s[start];
+}
+
+int main(int argc, char *argv[])
+{
+  char *str1, *str2, *token, *subtoken;
+  int j;
+
+  for (j = 1, str1 = argv[1]; ; j++, str1 = NULL) {
+    token = strtok(str1, argv[2]);
+    if (token == NULL)
+      break;
+    printf("%d: %s\n", j, token);
+  }
+
+  exit(EXIT_SUCCESS);
+}
+        </d:programlisting>
+        <d:para>
+          and the output is:
+        </d:para>
+        <d:screen>$ ./a.out 'a/bbb///cc;xxx:yyy:' ':;'
+1: a/bbb///cc
+2: xxx
+3: yyy
+        </d:screen>
+        <d:para>
+          Let us try to implement strtok ourselves:
+        </d:para>
+        <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+char * strtok(char * str, char *delim)
+{
+  static int pos;
+  static char *s;
+  int i =0, start = pos;
+
+  if(str!=NULL)
+    s = str;
+
+  i = 0;
+  int j = 0;
+
+  while(s[pos] != '\0')
+  {
+    j = 0;
+    while(delim[j] != '\0')
+    {
+      if(s[pos] == delim[j])
+      {
+        s[pos] = '\0';
+        pos = pos+1;
+        if(s[start] != '\0')
+          return (&amp;s[start]);
+        else
+        {
+          start = pos;
+          pos--;
+          break;
+        }
+      }
+      j++;
+    }
+    pos++;
+  }
+  s[pos] = '\0';
+  if(s[start] == '\0')
+    return NULL;
+  else
+    return &amp;s[start];
+}
+
+int main(int argc, char *argv[])
+{
+  char *str1, *str2, *token, *subtoken;
+  int j;
+
+  for (j = 1, str1 = argv[1]; ; j++, str1 = NULL) {
+    token = strtok(str1, argv[2]);
+    if (token == NULL)
+      break;
+    printf("%d: %s\n", j, token);
+  }
+
+  exit(EXIT_SUCCESS);
+}
+</d:programlisting>
+      </d:sect2>
+    </d:sect2>
+    <d:para>
+      With this we come to an end of our discussion in strings and more
+      examples will be provided for other functions in the standard library
+      header <d:code>string.h</d:code> for more funcitons which have not been
+      discussed here.
+    </d:para>
+  </d:sect1>
+</d:chapter>

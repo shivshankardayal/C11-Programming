@@ -3,8 +3,8 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
     <?dbhtml filename="fenv/index.html" ?>
-    <d:title>Floating-point environment &amp;lt;fenv.h></d:title>
-    <d:para>The header &amp;lt;fenv.h> declares two types and several macros
+    <d:title>Floating-point environment &lt;fenv.h&gt;</d:title>
+    <d:para>The header &lt;fenv.h&gt; declares two types and several macros
     and functions to provide access to the floating-point environment. The
     floating-point environment refers collectively to any floating-point status
     flags and control modes supported by the

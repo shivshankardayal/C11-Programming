@@ -203,7 +203,7 @@
       <d:para>Now is time for some programming. Let us revisit our first
       program and try to understand what it does. Here I am giving code once
       again for quick reference:</d:para> 
-      <d:programlisting role="CLexer">//My first program
+      <d:programlisting role="CLexer" language="C">//My first program
 /* Author: Shiv Shankar Dayal
    Description: This program does nothing.*/
 

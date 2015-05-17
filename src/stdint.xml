@@ -3,8 +3,8 @@
   xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="stdint/index.html" ?>
-  <d:title>Integer types &amp;lt;stdint.h></d:title>
-  <d:para>The header &amp;lt;stdint.h> declares sets of integer types having
+  <d:title>Integer types &lt;stdint.h&gt;</d:title>
+  <d:para>The header &lt;stdint.h&gt; declares sets of integer types having
   specified widths, and defines corresponding sets of macros. It also defines
   macros that specify limits of integer types corresponding to types defined in
   other standard headers.</d:para>

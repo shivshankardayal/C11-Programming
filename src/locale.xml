@@ -2,8 +2,8 @@
   xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
     <?dbhtml filename="locale/index.html" ?>
-    <d:title>Localization &amp;lt;locale.h></d:title>
-    <d:para>The header &amp;lt;locale.h> declares two functions, one type, and
+    <d:title>Localization &lt;locale.h&gt;</d:title>
+    <d:para>The header &lt;locale.h&gt; declares two functions, one type, and
     defines several macros.</d:para>
     <d:para>The type is</d:para>
     <d:programlisting role="CLexer">struct lconv</d:programlisting>

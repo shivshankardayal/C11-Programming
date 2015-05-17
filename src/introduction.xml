@@ -25,7 +25,7 @@
   was written in C and more and more programs were written in C. It
   might have been the case that Microsoft and Apple would have written
   their OS in C++ had it been there. So, essentially what happened
-  that there is a lot of code base which is there in C. Also, C++’s
+  that there is a lot of code base which is there in C. Also, C++'s
   backward compatibility is one of the reasons why C++ is so
   popular. When C was invented there was no structured programming
   language and code was mostly written in assembly. With C it gave the
@@ -449,7 +449,7 @@
     mention decimal of course. Binary is already mentioned as the native number
     system for computers.</d:para>
     <d:para>A number in a generic number system is given
-    below:<d:inlineequation>
+    below:<d:informalequation>
     <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
       <mtable columnalign="right left" rowspacing="3pt" columnspacing="0em" displaystyle="true">
         <mtr>
@@ -599,7 +599,7 @@
         </mtr>
       </mtable>
     </math>
-    </d:inlineequation></d:para>
+    </d:informalequation></d:para>
     <d:para>All the terms with <d:inlineequation>
     <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>c</mi></math>
     </d:inlineequation> are called digits. The leftmost or leading digit is

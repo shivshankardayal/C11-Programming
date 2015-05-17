@@ -833,7 +833,172 @@ int main()
       A generic selection consists of a controlling expression (which is not
       evaluated) and one or more, comma-separated, generic associations.
     </d:listitem>
+    <d:listitem>
+      Each generic association consists of a type-name (or default) and a
+      result expression separated by a colon.
+    </d:listitem>
+    <d:listitem>
+      The result of the generic selection expression is the result expression
+      of the corresponding compatible type provided in the matching generic
+      association.
+    </d:listitem>
+    <d:listitem>
+      If none of the provided types are compatible with the type of the
+      controlling expression, a default selection is used if provided,
+      otherwise the construct is erroneous.
+    </d:listitem>
+    <d:listitem>
+      The order of the generic associations in the list is inconsequential; no
+      more than one compatible type may be provided in a generic selection so
+      there is never more than one case that could match.
+    </d:listitem>
+    <d:listitem>
+      The type and value of a generic selection are identical to those of its
+      result expression. It is an lvalue, a function designator, or a void
+      expression if its result expression is, respectively, an lvalue, a
+      function designator, or a void expression.
+    </d:listitem>
   </d:orderedlist>
 </d:para>
-    </d:sect1>
+<d:para>
+  A pseudo type-polymorphism is used to provide <d:code>_Generic</d:code>
+  facility. For example, the <d:code>acos</d:code> macro defined in
+  <d:code>tgmath.h</d:code> could be implemented as:
+</d:para>
+<d:programlisting role="CLexer">#define acos(X) _Generic((X), \
+  long double complex: cacosl, \
+  double complex: cacos, \
+  float complex: cacosf, \
+  long double: acosl, \
+  float: acosf, \
+  default: acos \
+)(X)</d:programlisting>
+<d:para>
+  Multiple arguments are far more complex. For example,
+</d:para>
+<d:programlisting role="CLexer">#define pow(x, y) _Generic((x), \
+  long double complex: cpowl, \
+
+  double complex: _Generic((y), \
+  long double complex: cpowl, \
+  default: cpow), \
+
+  float complex: _Generic((y), \
+  long double complex: cpowl, \
+  double complex: cpow, \
+  default: cpowf), \
+
+  long double: _Generic((y), \
+  long double complex: cpowl, \
+  double complex: cpow, \
+  float complex: cpowf, \
+  default: powl), \
+
+  default: _Generic((y), \
+  long double complex: cpowl, \
+  double complex: cpow, \
+  float complex: cpowf, \
+  long double: powl, \
+  default: pow), \
+
+  float: _Generic((y), \
+  long double complex: cpowl, \
+  double complex: cpow, \
+  float complex: cpowf, \
+  long double: powl, \
+  float: powf, \
+  default: pow) \
+)(x, y)</d:programlisting>
+<d:sect2>
+  <d:title>Another Example</d:title>
+  <d:para>
+    Similar to selecting the name of a function to call based on the argument
+    type, we can select, for example, a <d:code>printf</d:code> format
+    specifier based on type. This allows the creation of a macro that can print
+    any type of value that printf supports without having to specify the type
+    explicitly in the call:
+  </d:para>
+  <d:programlisting role="CLexer">#define printf_dec_format(x) _Generic((x), \
+    char: "%c", \
+    signed char: "%hhd", \
+    unsigned char: "%hhu", \
+    signed short: "%hd", \
+    unsigned short: "%hu", \
+    signed int: "%d", \
+    unsigned int: "%u", \
+    long int: "%ld", \
+    unsigned long int: "%lu", \
+    long long int: "%lld", \
+    unsigned long long int: "%llu", \
+    float: "%f", \
+    double: "%f", \
+    long double: "%Lf", \
+    char *: "%s", \
+    void *: "%p")
+
+#define print(x) printf(printf_dec_format(x), x)
+#define printnl(x) printf(printf_dec_format(x), x), printf("\n");
+
+printnl('a');    // prints "97" (on an ASCII system)
+printnl((char)'a');  // prints "a"
+printnl(123);    // prints "123"
+printnl(1.234);      // prints "1.234000"</d:programlisting>
+<d:para>
+  Note that since <d:code>'a'</d:code> is an <d:code>int</d:code> because
+  characters are fundamentally integers we have to cast it to a
+  <d:code>char</d:code> if we want to print out the letter.
+</d:para>
+<d:para>
+  A string literal like <d:code>printnl("abc")</d:code> will produce error. The
+  reason is that the type of this string is <d:code>char [4]</d:code> while we
+  have type as <d:code>char*</d:code> so we can cast to that. However,
+  &#xa7;(iso.6.3.1.2) clause 3 states
+  <d:blockquote>
+    Except when it is the operand of the sizeof operator, the
+    <d:code>_Alignof</d:code> operator, or the unary <d:code>&amp;</d:code>
+    operator, or is a string literal used to initialize an array, an expression
+    that has type <d:quote>array of type</d:quote> is converted to an
+    expression with type <d:quote>pointer to type</d:quote> that points to the
+    initial element of the array object and is not an lvalue. If the array
+    object has register storage class, the behavior is undefined.
+  </d:blockquote>
+</d:para>
+</d:sect2>
+<d:sect2>
+  <d:title>Type Compatibilty in an Expression</d:title>
+  <d:para>
+    A macro can be created that evaluates to <d:code>true</d:code> if an
+    expression is compatible with the provided type: <d:code>#define
+    is_compatible(x, T) _Generic((x), T:1, default: 0)</d:code>
+  </d:para>
+  <d:para>
+    This can be useful for determining the underlying type of a
+    <d:code>typedef</d:code> or <d:code>enum</d:code>:
+    <d:code>is_compatible((size_t){0}, unsigned long);</d:code>
+    will evaluate to true if <d:code>size_t</d:code> is a
+    <d:code>typedef</d:code> for <d:code>unsigned long</d:code>. Note that we
+    can only compare an expression with a type, we cannot directly compare two
+    expressions or two type names. If we want to compare two types, we can use
+    the C99 compound literal to create a literal of a given type as we did
+    above. There is no standard-conforming way to test two variables for type
+    compatibility with this mechanism. On a compiler that supports the common
+    typeof extension, something like this may work: <d:code>is_compatible(x,
+    typeof(y));</d:code>
+  </d:para>
+  <d:para>
+    <d:code>_Generic</d:code> is evaluated at compile-time and can be used with
+    <d:code>_Static_assert</d:code> if the result is an integer constant
+    expression:
+  </d:para>
+  <d:programlisting role="CLexer">enum e { E1; };
+_Static_assert(is_compatible(E1), int);  // always true
+_Static_assert(is_compatible((enum e){E1}, int);  // not necessarily true</d:programlisting>
+<d:para>
+  It is possible to define a macro to ensure that an expression, perhaps a
+  function argument, is of a given type:
+</d:para>
+<d:programlisting role="CLexer">#define ensure_type(p, t) _Static_assert(is_compatible(p, t), \
+"incorrect type for parameter '" #p "', expected " #t)</d:programlisting>
+</d:sect2>
+</d:sect1>
 </d:chapter>

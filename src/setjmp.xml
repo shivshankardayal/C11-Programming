@@ -3,8 +3,8 @@
   xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="setjmp/index.html" ?>
-  <d:title>Nonlocal jumps &amp;lt;setjmp.h></d:title>
-  <d:para>The header <d:code>&amp;lt;setjmp.h></d:code> defines the macro
+  <d:title>Nonlocal jumps &lt;setjmp.h&gt;</d:title>
+  <d:para>The header <d:code>&lt;setjmp.h&gt;</d:code> defines the macro
   <d:code>setjmp</d:code>, and declares one function and one type, for
   bypassing the normal function call and return
   discipline.<d:footnote><d:para>These functions are useful for dealing with

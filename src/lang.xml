@@ -1916,12 +1916,12 @@ void myfunc(void)
           <d:para>The single-quote ‘, the double-quote ”, the question-mark ?, the backslash \, and
             arbitrary integer values are representable according to the following table of escape
             sequences:</d:para>
-          <d:literallayout>    single quote                     '       \\'
+          <d:screen>    single quote                     '       \\'
     double quote                    "      \\"
     question mark                  ?      \\?
     backslash                         \\      \\\\
     octal character                  \\o    octal digits
-    hexadecimal character       \\x    hexadecimal digits</d:literallayout>
+    hexadecimal character       \\x    hexadecimal digits</d:screen>
           <d:para>The double-quote ” and question-mark ? are representable either by themselves or
             by the escape sequences \” and \?, respectively, but the single-quote ‘ and the
             backslash \ shall be represented, respectively, by the escape sequences \’ and

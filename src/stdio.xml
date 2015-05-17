@@ -3,10 +3,10 @@
   xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="stdio/index.html" ?>
-  <d:title>Input/Output &amp;lt;stdio.h></d:title>
+  <d:title>Input/Output &lt;stdio.h&gt;</d:title>
   <d:sect1>
     <d:title>Introduction</d:title>
-    <d:para>The header <d:code>&amp;lt;stdio.h></d:code> declares three types,
+    <d:para>The header <d:code>&lt;stdio.h&gt;</d:code> declares three types,
     several macros, and many functions for performing input and
     output.</d:para>
     <d:para>The types declared are <d:code>size_t</d:code> (described in Common
@@ -409,7 +409,7 @@ the argument as its value.</d:para>
   </d:sect1>
   <d:sect1>
     <d:title>File acces functions</d:title>
-    <d:sect2>
+    <d:sect2 id="fclose">
       <d:title>The fclose functions</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
@@ -448,7 +448,7 @@ zero.</d:para>
 <d:para><d:code>Forward references:</d:code> the <d:code>fopen</d:code>
 function (The fopen function).</d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="fopen">
       <d:title>The fopen function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
@@ -1357,6 +1357,94 @@ if an input failure occurs before any conversion. Otherwise, the
 <d:code>scanf</d:code> function returns the number of input items assigned,
 which can be fewer than provided for, or even zero, in the event of an early
 matching failure.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The snprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int snprintf(char * restrict s, size_t n,
+             const char * restrict format, ...);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>snprintf</d:code> function is equivalent to
+        <d:code>fprintf</d:code>, except that the output is written into an
+        array (specified by argument <d:code>s</d:code>) rather than to a
+        stream. If <d:code>n</d:code> is zero, nothing is written, and
+        <d:code>s</d:code> may be a null pointer. Otherwise, output characters
+        beyond the <d:code>n-1</d:code>st are discarded rather than being
+        written to the array, and a null character is written at the end of the
+        characters actually written into the array. If copying takes place
+        between objects that overlap, the behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>snprintf</d:code> function returns the number of characters
+        that would have been written had <d:code>n</d:code> been sufficiently
+        large, not counting the terminating null character, or a negative value
+        if an encoding error occurred. Thus, the null-terminated output has
+        been completely written if and only if the returned value is
+        nonnegative and less than <d:code>n</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The sprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int sprintf(char * restrict s,
+            const char * restrict format, ...);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>sprintf</d:code> function is equivalent to fprintf, except
+        that the output is written into an array (specified by the argument
+        <d:code>s</d:code>) rather than to a stream. A null character is
+        written at the end of the characters written; it is not counted as part
+        of the returned value. If copying takes place between objects that
+        overlap, the behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>sprintf</d:code> function returns the number of characters
+        written in the array, not counting the terminating null character, or a
+        negative value if an encoding error occurred.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The scanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int sscanf(const char * restrict s,
+           const char * restrict format, ...);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>sscanf</d:code> function is equivalent to
+        <d:code>fscanf</d:code>, except that input is obtained from a string
+        (specified by the argument <d:code>s</d:code>) rather than from a
+        stream. Reaching the end of the string is equivalent to encountering
+        end-of-file for the <d:code>fscanf</d:code> function. If copying takes
+        place between objects that overlap, the behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>sscanf</d:code> function returns the value of the macro
+        <d:code>EOF</d:code> if an input failure occurs before the first
+        conversion (if any) has completed. Otherwise, the
+        <d:code>sscanf</d:code> function returns the number of input items
+        assigned, which can be fewer than provided for, or even zero, in the
+        event of an early matching failure.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vfprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+int vfprintf(FILE * restrict stream,
+             const char * restrict format,
+             va_list arg);
+      </d:programlisting>
     </d:sect2>
   </d:sect1>
 </d:chapter>

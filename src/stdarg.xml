@@ -3,8 +3,8 @@
   xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="stdarg/index.html" ?>
-  <d:title>Variable arguments &amp;lt;stdarg.h></d:title>
-  <d:para>The header <d:code>&amp;lt;stdarg.h></d:code> declares a type and
+  <d:title>Variable arguments &lt;stdarg.h&gt;</d:title>
+  <d:para>The header <d:code>&lt;stdarg.h&gt;</d:code> declares a type and
   defines four macros, for advancing through a list of arguments whose number
   and types are not known to the called function when it is
   translated.</d:para>

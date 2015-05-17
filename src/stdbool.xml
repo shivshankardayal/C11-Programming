@@ -3,8 +3,8 @@
   xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="stdbool/index.html" ?>
-  <d:title>Boolean types and values &amp;lt;stdbool.h></d:title>
-  <d:para>The header <d:code>&amp;lt;stdbool.h></d:code> defines four
+  <d:title>Boolean types and values &lt;stdbool.h&gt;</d:title>
+  <d:para>The header <d:code>&lt;stdbool.h&gt;</d:code> defines four
   macros. The macro</d:para>
   <d:blockquote><d:para><d:code>bool</d:code></d:para></d:blockquote>
   <d:para>expands to <d:code>_Bool</d:code></d:para>

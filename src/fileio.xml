@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?dbhtml filename="fileio/index.html" ?>
+    <d:title>File Input/Output</d:title>
+    <d:para>
+      In this chapter we will study how to perform IO on a file i.e. how we
+      read data from file or how we write data to file. Any significant program
+      operates on files. For example, reading and parsing a configuration file
+      is a very common operation. Understanding the concepts related to file IO
+      is very critical to write large programs. First question is that what is
+      a file. Well on GNU/Linux which I am going to focus on treats everything
+      as a file. A file is a resource which stores information. It can be in
+      memory i.e. RAM or hard disk. A file can be of several types. If you
+      perform <d:code>ls -l</d:code> in a directory then the first character of
+      line for each file tells you about type of file. Given below is a table
+      for this:
+    </d:para>
+    <table
+        xmlns="http://docbook.org/ns/docbook" frame="border" border="1" class="centered">
+      <caption>Types of Files</caption>
+	  <colgroup />
+	  <colgroup />
+      <thead>
+        <tr bgcolor="#aaaaaa">
+          <th>First Character</th>
+          <th>Type of file</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>-</td>
+          <td>Ordinary file</td>
+        </tr>
+        <tr>
+          <td>d</td>
+          <td>Directory</td>
+        </tr>
+        <tr>
+          <td>l</td>
+          <td>Symbolic link</td>
+        </tr>
+        <tr>
+          <td>p</td>
+          <td>Named pipe</td>
+        </tr>
+        <tr>
+          <td>s</td>
+          <td>Socket</td>
+        </tr>
+        <tr>
+          <td>c</td>
+          <td>Character device</td>
+        </tr>
+        <tr>
+          <td>b</td>
+          <td>Block device</td>
+        </tr>
+      </tbody>
+    </table>
+    <d:para>
+      We are going to be concerned with first type only because to operate on
+      other types of devices you need to use library or system calls provided
+      by GNU/Linux. For example, to read a directory you have
+      <d:code>readdir()</d:code> system call, to open a socket you have
+      <d:code>socket()</d:code> system call and so on. These functions are out
+      of scope of this book.
+    </d:para>
+    <d:sect1>
+      <d:title>Text and Binary Files</d:title>
+      <d:para>
+        POSIX specification defines a text file that contains characters zero
+        or more lines. The beauty of a text file is that it has no metadata
+        therefore it can be of zero bytes in length. Usually a text file will
+        contain either all ASCII or UTF-8 characters. However, text files can
+        contain other characters as well. For our discussion we will focus on
+        ASCII text files. On GNU/Linux or other Unix systems lines are
+        separated by <d:code>\n</d:code> while on Windows they are separated by
+        <d:code>\r\n</d:code>. This is a very important difference if you are
+        processing file on the basis of individual characters.
+      </d:para>
+      <d:para>
+        An online copy of POSIX specification draft can be read at
+        <d:ulink url="http://www.opengroup.org/onlinepubs/9699919799/">Open
+        Group Site</d:ulink>.
+      </d:para>
+      <d:para>
+        Binary files are those ordinary files which are not text files. Some
+        binary files contain headers, blocks of metadata used by a computer
+        program to interpret the data in the file. The header often contains a
+        signature or magic number which can identify the format. If a binary
+        file does not contain headers then it is called flat binary file.
+      </d:para>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Functions Related to Files</d:title>
+      <d:sect2>
+        <d:title>fopen and fclose Functions</d:title>
+        <d:para>
+          Before you can do anything with a file(with exceptions of say
+          deleting an renaming) you need to open it which is done by using
+          <d:code>fopen</d:code> function. <d:code>fopen</d:code> returns a
+          <d:code>FILE *</d:code> as a return value. For historical reasons, he
+          type of the C data structure that represents a stream is called
+          <d:code>FILE</d:code> rather than <d:quote>stream</d:quote>. Since C
+          library functions deal with objects of type <d:code>FILE *</d:code>,
+          sometimes the term file pointer is also used to mean
+          <d:quote>stream</d:quote>. This leads to unfortunate confusion over
+          terminology in many books on C.The <d:code>FILE</d:code> type is
+          declared in the header <d:code>stdio.h</d:code>.
+        </d:para>
+	    <d:para>
+          When you open a file internally a file descriptor is used which is
+          associated with the <d:code>FILE</d:code> object. Now the number of
+          files which can be open at the same time is limited. The number of
+          files which can be opened at the same time is governed by
+          <d:code>ulimit</d:code> command. There is a macro
+          <d:code>FOPEN_MAX</d:code> which is the minimum number of files that
+          can be opened and is guaranteed by implementation. Therefore, it is
+          very important that you close a file once you have no further use of
+          its contents. To close a file you use <d:code>fclose</d:code>
+          function. Matching an <d:code>fopen</d:code> with
+          <d:code>fclose</d:code> is same as matching a call to <d:code>malloc,
+          calloc, realloc</d:code> with <d:code>free</d:code>. If you do not
+          close or forget to close files which are opened by your program and
+          if your program is a long running program then eventually system will
+          run out of file descriptors and it will not be possible to open new
+          files which will adversely affect all processes.
+        </d:para>
+        <d:para><d:code>fopen</d:code> function is describe in great detail at
+        <d:xref linkend="fopen"></d:xref> and <d:code>fclose</d:code> is
+        described at <d:xref linkend="fclose" />. You should read the sections
+        to know more about these functions. Let us look at the signatures
+        first:</d:para>
+        <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+
+FILE *fopen(const char * restrict filename, const char * restrict mode);
+int fclose(FILE *stream);
+        </d:programlisting>
+        <d:para>
+          <d:code>mode</d:code> is what is described in <d:xref linkend="fopen"
+          />. <d:code>filename</d:code> is path on your filesystem. It can be
+          absolute or relative. However, you must have correct permission
+          i.e. read and write permissions. These permission are govered by your
+          operating system. For example, you will almost always have permission
+          inside your home directory. Let us try to create a file in this
+          directory. Since we are going to create we will use
+          <d:code>w</d:code> mode. For example:
+        </d:para>
+        <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+  FILE *fp = NULL;
+
+  if(fp=fopen("temp.txt", "w")) {
+    printf("Successfully opened file.\n");
+    int n = fclose(fp);
+    if(n != 0)
+      printf("%s\n", strerror(n));
+
+  }
+
+  return 0;
+}
+        </d:programlisting>
+        <d:para>
+          if you run this program then you should see:
+        </d:para>
+        <d:screen>Successfully opened file.
+        </d:screen>
+        <d:para>
+          and if you check your directory in which program is then you will see
+          an empty file <d:code>temp.txt</d:code> created. It is important to
+          check for errors when you call <d:code>fclose</d:code> to close an
+          output stream, because real, everyday errors can be detected at this
+          time. For example, when <d:code>fclose</d:code> writes the remaining
+          buffered output, it might get an error because the disk is full. Even
+          if you know the buffer is empty, errors can still occur when closing
+          a file if you are using NFS.
+        </d:para>
+      </d:sect2>
+      <d:sect2>
+        <d:title>fputc and fgetc Function</d:title>
+        <d:para>
+          
+        </d:para>
+      </d:sect2>
+    </d:sect1>
+</d:chapter>

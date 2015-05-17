@@ -3,9 +3,9 @@
   xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="stddef/index.html" ?>
-  <d:title>Common definitions &amp;lt;stddef.h></d:title>
+  <d:title>Common definitions &lt;stddef.h&gt;</d:title>
   <d:para>The following types and macros are defined in the standard header
-  <d:code>&amp;lt;stddef.h></d:code>. Some are also defined in other headers,
+  <d:code>&lt;stddef.h&gt;</d:code>. Some are also defined in other headers,
   as noted in their respective subclauses.</d:para>
   <d:para>The tyeps are</d:para>
   <d:blockquote><d:para><d:code>ptrdiff_t</d:code></d:para></d:blockquote>

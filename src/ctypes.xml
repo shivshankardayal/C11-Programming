@@ -3,8 +3,8 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
     <?dbhtml filename="ctypes/index.html" ?>
-    <d:title>Character Handling &amp;lt;ctype.h></d:title>
-    <d:para>The header <d:code>&amp;lt;ctype.h></d:code> declares several functions
+    <d:title>Character Handling &lt;ctype.h&gt;</d:title>
+    <d:para>The header <d:code>&lt;ctype.h&gt;</d:code> declares several functions
     useful for classifying and mapping characters. In all cases the argument is
     an int, the value of which shall be representable as an unsigned char or
     shall equal the value of the macro EOF. If the argument has any other

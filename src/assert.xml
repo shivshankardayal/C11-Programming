@@ -3,8 +3,8 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
     <?dbhtml filename="assert/index.html" ?>
-    <d:title>Diagnostics &amp;lt;assert.h></d:title>
-    <d:para>The header <d:code>&amp;lt;assert.h></d:code> defines the assert
+    <d:title>Diagnostics &lt;assert.h&gt;</d:title>
+    <d:para>The header <d:code>&lt;assert.h&gt;</d:code> defines the assert
     macro and refers to another macro, <d:code>NDEBUG</d:code> which is not
     defined by code <d:code>&amp;lt;assert.h></d:code>. If
     <d:code>NDEBUG</d:code> is defined as a macro name at the point in the

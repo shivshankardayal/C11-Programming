@@ -3,8 +3,8 @@
   xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
     <?dbhtml filename="math/index.html" ?>
-    <d:title>Mathematics &amp;lt;math.h></d:title>
-    <d:para>The header <d:code>&amp;lt;math.h></d:code> declares two types and
+    <d:title>Mathematics &lt;math.h&gt;</d:title>
+    <d:para>The header <d:code>&lt;math.h&gt;</d:code> declares two types and
     many mathematical functions and defines several macros. Most synopses
     specify a family of functions consisting of a principal function with one
     or more double parameters, a <d:code>double</d:code> return value, or both;

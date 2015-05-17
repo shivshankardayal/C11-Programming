@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <d:book version="5.0" xmlns:d="http://docbook.org/ns/docbook"
-  xmlns:xi="http://www.w3.org/2003/XInclude"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
   <d:info>
-    <d:title>C Programming with GNU/Linux</d:title>
+    <d:title>Informal C Programming with GNU/Linux</d:title>
     <d:author>
       <d:personname>
         <d:firstname>Shiv</d:firstname>
@@ -27,6 +27,8 @@
   <xi:include href="ap.xml" />
   <xi:include href="functions.xml"/>
   <xi:include href="su.xml"/>
+  <xi:include href="strings.xml"/>
+  <xi:include href="fileio.xml"/>
   <xi:include href="macros.xml"/>
   <xi:include href="std.xml"/>
   <xi:include href="assert.xml"/>

@@ -2,8 +2,8 @@
   xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
     <?dbhtml filename="inttypes/index.html" ?>
-    <d:title>Format conversion of integer types &amp;lt;inttypes.h></d:title>
-    <d:para>The header &amp;lt;inttypes.h> includes the header
+    <d:title>Format conversion of integer types &lt;inttypes.h&gt;</d:title>
+    <d:para>The header &lt;inttypes.h&gt; includes the header
     &amp;lt;stdint.h> and extends it with additional facilities provided by
     hosted implementations.</d:para>
     <d:para>It declares functions for manipulating greatest-width integers and

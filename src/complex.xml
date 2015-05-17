@@ -3,10 +3,10 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
     <?dbhtml filename="complex/index.html" ?>
-    <d:title>Complex arithmetic &amp;lt;complex.h></d:title>
+    <d:title>Complex arithmetic &lt;complex.h&gt;</d:title>
     <d:sect1>
       <d:title>Introduction</d:title>
-      <d:para>The header <d:code>&amp;lt;complex.h></d:code> defines macros and
+      <d:para>The header <d:code>&lt;complex.h&gt;</d:code> defines macros and
       declares functions that support complex arithmetic. Each synopsis
       specifies a family of functions consisting of a principal function with
       one or more <d:code>double complex</d:code> parameters and a
