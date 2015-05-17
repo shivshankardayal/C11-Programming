@@ -23,7 +23,7 @@
         Before we can proceed to discuss operators and expressions I will
         explain scope, linkage and storage durations which can be applied to
         variables. These are given in specification starting at
-        &#xa7;(iso.6.2.1) and ending at &#xa7;(iso.6.2.4).
+        (&#xa7; iso.6.2.1) and ending at &#xa7;(iso.6.2.4).
       </d:para>
       <d:sect1>
         <d:title>Scope of an Identifier</d:title>
@@ -90,7 +90,7 @@
           Whenever operators and expressions come in picture you may have a set
           of mixed data then to perform oration data is converted from one type
           to another. This has an entire section devoted to it in specification
-          at &#xa7;(iso.6.3). There are two types of conversions. Many
+          at (&#xa7; iso.6.3). There are two types of conversions. Many
           operators convert their operands silently which is called
           <d:quote>implicit conversion</d:quote> and then we have cast
           operators which we can use to explicitly convert values from one type

@@ -8,8 +8,13 @@ html:
 
 
 pdf:
-#	perl -pi -e "s/\.png\"/\.pdf\"/g;" src/*.xml
 	dblatex -bxetex -T db2latex -p dblatex.xsl -P preface.tocdepth="1" src/c.xml
 
 latex:
 	dblatex -bxetex -T db2latex -p dblatex.xsl -P preface.tocdepth="1" -t tex src/c.xml
+	cd src && perl -pi -e "s/\.png/\.pdf/g;" c.tex
+
+fop:
+	xsltproc --xinclude --output src/c.fo --stringparam double.sided 1 --stringparam fop1.extensions 1 --stringparam page.height 9in --stringparam page.width 7.5in --stringparam body.start.indent 0pt --stringparam body.font.size 9  /opt/local/share/xsl/docbook-xsl-ns/fo/docbook.xsl src/c.xml
+	perl -pi -e "s/png/pdf/g;" src/c.fo
+	cd src && fop c.fo c.pdf

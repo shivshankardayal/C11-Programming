@@ -765,7 +765,7 @@ and the output is:
       <d:para>
         C11 has introduced a new type of functions called type generic
         functions. If you read clause 2 of <d:code>&lt;tgmath.h&gt;</d:code>
-        &#xa7;(iso6.25). then you will find following.
+        (&#xa7; iso.6.25). then you will find following.
       </d:para>
       <d:para>
         Of the <d:code>&lt;math.h&gt;</d:code> and
@@ -826,7 +826,7 @@ int main()
   return 0;
 }</d:programlisting>
 <d:para>
-  Section &#xa7;(iso.6.5.1.1) of specification describes generic selection in
+  Section (&#xa7; iso.6.5.1.1) of specification describes generic selection in
   great detail. To summarize following points can be noted:
   <d:orderedlist>
     <d:listitem>
@@ -952,7 +952,7 @@ printnl(1.234);      // prints "1.234000"</d:programlisting>
   A string literal like <d:code>printnl("abc")</d:code> will produce error. The
   reason is that the type of this string is <d:code>char [4]</d:code> while we
   have type as <d:code>char*</d:code> so we can cast to that. However,
-  &#xa7;(iso.6.3.1.2) clause 3 states
+  (&#xa7; iso.6.3.1.2) clause 3 states
   <d:blockquote>
     Except when it is the operand of the sizeof operator, the
     <d:code>_Alignof</d:code> operator, or the unary <d:code>&amp;</d:code>

@@ -947,7 +947,7 @@ The sum of c1 and c2 as integers is 99.</d:screen>
     floating point arithmetic which is same as IEEE 754. In C there are three
     types of floating point numbers <d:code>float, double</d:code> and
     <d:code>long double</d:code>. These are  
-    described in specification in &#xa7;(iso.5.2.4.2.2).
+    described in specification in (&#xa7; iso.5.2.4.2.2).
   </d:para>
   <d:para>
     A floating-point number is used to represent real-world fractional value
@@ -1374,8 +1374,7 @@ for octals and hexes. Have a look at headers and try to decipher them.</d:para>
 </d:sect2>
 </d:sect1>
 <d:sect1>
-  <title xmlns="http://docbook.org/ns/docbook"><code>void</code> and <code>enum</code>
-  Types</title>
+  <title xmlns="http://docbook.org/ns/docbook">void and enum Types</title>
   <d:para>There are these two types remianing. void type comprises an empty set of values; it is
   an incomplete type that cannot be completed. You cannot declare an array of
   <d:code>void</d:code>s. It is a generic type in the sense that any other pointer to any

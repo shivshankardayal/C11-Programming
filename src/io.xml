@@ -101,7 +101,7 @@
         <d:title>C's Memory Model</d:title>
         <d:mediaobject>
           <d:imageobject>
-            <d:imagedata fileref="../images/memmod.png"/>
+            <d:imagedata fileref="../images/memmod.png" align="center" />
           </d:imageobject>
         </d:mediaobject>
       </d:figure>
@@ -298,7 +298,7 @@ int main()
     </d:para>
     <d:para>
       The full detail of conversion specification can be found at <d:xref linkend="fscanf" />
-      (&#167;iso.7.12.6.2) which lists <d:code>fscanf</d:code> function but
+      (&#167; iso.7.12.6.2) which lists <d:code>fscanf</d:code> function but
       conversion specifiers are same for both.
     </d:para>
     <d:para>Time for some code. You have already seen many examples of <d:code>scanf</d:code> so I
