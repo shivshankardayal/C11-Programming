@@ -1445,6 +1445,605 @@ int vfprintf(FILE * restrict stream,
              const char * restrict format,
              va_list arg);
       </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vfprintf</d:code> function is equivalent to
+        <d:code>fprintf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vfprintf</d:code> function
+        does not invoke the <d:code>va_end</d:code>
+        macro.<d:footnote id="vfprintf"><d:para>As the functions <d:code>vfprintf, vfscanf,
+        vprintf, vscanf, vsnprintf, vsprintf</d:code> and
+        <d:code>vsscanf</d:code> invoke the <d:code>va_arg</d:code> macro, the
+        value of <d:code>arg</d:code> after the return is
+        indeterminate.</d:para></d:footnote>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>The <d:code>vfprintf</d:code> function returns the number of
+      characters transmitted, or a negative value if an output or encoding
+      error occurred.</d:para>
+      <d:para>
+        EXAMPLE The following shows the use of the <d:code>vfprintf</d:code>
+        function in a general error-reporting routine.
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+      
+void error(char *function_name, char *format, ...)
+{
+  va_list args;
+  va_start(args, format);
+  // print out name of function causing error
+  fprintf(stderr, "ERROR in %s: ", function_name);
+  // print out remainder of message
+  vfprintf(stderr, format, args);
+  va_end(args);
+}
+      </d:programlisting>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vfscanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+int vfscanf(FILE * restrict stream,
+            const char * restrict format,
+            va_list arg);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>The <d:code>vfscanf</d:code> function is equivalent to
+      <d:code>fscanf</d:code>, with the variable argument list replaced by
+      <d:code>arg</d:code>, which shall have been initialized by the
+      <d:code>va_start</d:code> macro (and possibly subsequent
+      <d:code>va_arg</d:code> calls). The <d:code>vfscanf</d:code> function
+      does not invoke the <d:code>va_end</d:code> macro.<d:footnoteref
+      linkend="vfprintf"></d:footnoteref></d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>The <d:code>vfscanf</d:code> function returns the value of the
+      macro <d:code>EOF</d:code> if an input failure occurs before the first
+      conversion (if any) has completed. Otherwise, the
+      <d:code>vfscanf</d:code> function returns the number of input items
+      assigned, which can be fewer than provided for, or even zero, in the
+      event of an early matching failure.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+int vprintf(const char * restrict format,
+            va_list arg);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vprintf</d:code> function is equivalent to
+        <d:code>printf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vprintf</d:code> function
+        does not invoke the <d:code>va_end</d:code> macro.<d:footnoteref
+        linkend="vfprintf"></d:footnoteref>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vprintf</d:code> function returns the number of characters
+        transmitted, or a negative value if an output or encoding error
+        occurred.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vscanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+int vscanf(const char * restrict format,
+           va_list arg);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vscanf</d:code> function is equivalent to
+        <d:code>scanf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vscanf</d:code> function
+        does not invoke the <d:code>va_end</d:code> macro.<d:footnoteref
+        linkend="vfprintf"></d:footnoteref>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>The <d:code>vscanf</d:code> function returns the value of the
+      macro <d:code>EOF</d:code> if an input failure occurs before the first
+      conversion (if any) has completed. Otherwise, the <d:code>vscanf</d:code>
+      function returns the number of input items assigned, which can be fewer
+      than provided for, or even zero, in the event of an early matching
+      failure.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vsnprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+int vsnprintf(char * restrict s, size_t n,
+              const char * restrict format,
+              va_list arg);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vsnprintf</d:code> function is equivalent to
+        <d:code>snprintf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vsnprintf</d:code> function
+        does not invoke the <d:code>va_end</d:code> macro.<d:footnoteref
+        linkend="vfprintf"></d:footnoteref> If copying takes place between
+        objects that overlap, the behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vsnprintf</d:code> function returns the number of
+        characters that would have been written had n been sufficiently large,
+        not counting the terminating null character, or a negative value if an
+        encoding error occurred. Thus, the null-terminated output has been
+        completely written if and only if the returned value is nonnegative and
+        less than <d:code>n</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vsprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+int vsprintf(char * restrict s,
+             const char * restrict format,
+             va_list arg);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vsprintf</d:code> function is equivalent to
+        <d:code>sprintf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vsprintf</d:code> function
+        does not invoke the <d:code>va_end</d:code> macro.<d:footnoteref
+        linkend="vfprintf"></d:footnoteref> If copying takes place between
+        objects that overlap, the behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vsprintf</d:code> function returns the number of
+        characters that would have been written had n been sufficiently large,
+        not counting the terminating null character, or a negative value if an
+        encoding error occurred. Thus, the null-terminated output has been
+        completely written if and only if the returned value is nonnegative and
+        less than <d:code>n</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vsscanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+int vsscanf(const char * restrict s,
+            const char * restrict format,
+            va_list arg);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vsscanf</d:code> function is equivalent to
+        <d:code>sscanf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vsscanf</d:code> function
+        does not invoke the <d:code>va_end</d:code> macro.<d:footnoteref
+        linkend="vfprintf"></d:footnoteref>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vsscanf</d:code> function returns the value of the macro
+        <d:code>EOF</d:code> if an input failure occurs before the first
+        conversion (if any) has completed. Otherwise, the
+        <d:code>vsscanf</d:code> function returns the number of input items
+        assigned, which can be fewer than provided for, or even zero, in the
+        event of an early matching failure.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Character input/output functions</d:title>
+    <d:sect2>
+      <d:title>The fgetc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int fgetc(FILE *stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        If the end-of-file indicator for the input stream pointed to by
+        <d:code>stream</d:code> is not set and a next character is present, the
+        <d:code>fgetc</d:code> function obtains that character as an unsigned
+        <d:code>char</d:code> converted to an <d:code>int</d:code> and advances
+        the associated file position indicator for the stream (if defined).
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If the end-of-file indicator for the stream is set, or if the stream is
+        at end-of-file, the end- of-file indicator for the stream is set and
+        the <d:code>fgetc</d:code> function returns
+        <d:code>EOF</d:code>. Otherwise, the <d:code>fgetc</d:code> function
+        returns the next character from the input stream pointed to by
+        <d:code>stream</d:code>. If a read error occurs, the error indicator
+        for the stream is set and the <d:code>fgetc</d:code> function returns
+        <d:code>EOF</d:code>.<d:footnote><d:para>An end-of-file and a read
+        error can be distinguished by use of the <d:code>feof</d:code> and
+        <d:code>ferror</d:code> functions.</d:para></d:footnote>
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The fgets function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+char *fgets(char * restrict s, int n,
+           FILE * restrict stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fgets</d:code> function reads at most one less than the
+        number of characters specified by <d:code>n</d:code> from the stream
+        pointed to by <d:code>stream</d:code> into the array pointed to by
+        <d:code>s</d:code>. No additional characters are read after a new-line
+        character (which is retained) or after end-of-file. A null character is
+        written immediately after the last character read into the array.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fgets</d:code> function returns <d:code>s</d:code> if
+        successful. If end-of-file is encountered and no characters have been
+        read into the array, the contents of the array remain unchanged and a
+        null pointer is returned. If a read error occurs during the operation,
+        the array contents are indeterminate and a null pointer is returned.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The fputc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int fputc(int c, FILE *stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fputc</d:code> function writes the character specified by
+        <d:code>c</d:code> (converted to an <d:code>unsigned char</d:code>) to
+        the output stream pointed to by <d:code>stream</d:code>, at the
+        position indicated by the associated file position indicator for the
+        stream (if defined), and advances the indicator appropriately. If the
+        file cannot support positioning requests, or if the stream was opened
+        with append mode, the character is appended to the output stream.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fputc</d:code> function returns the character written. If a
+        write error occurs, the error indicator for the stream is set and
+        <d:code>fputc</d:code> returns <d:code>EOF</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The fputs function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int fputs(const char * restrict s,
+          FILE * restrict stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fputs</d:code> function writes the string pointed to by
+        <d:code>s</d:code> to the stream pointed to by
+        <d:code>stream</d:code>. The terminating null character is not
+        written.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fputs</d:code> function returns <d:code>EOF</d:code> if a
+        write error occurs; otherwise it returns a nonnegative value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The getc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int getc(FILE *stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>getc</d:code> function is equivalent to
+        <d:code>fgetc</d:code>, except that if it is implemented as a macro, it
+        may evaluate <d:code>stream</d:code> more than once, so the argument
+        should never be an expression with side effects.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>getc</d:code> function returns the next character from the
+        input stream pointed to by <d:code>stream</d:code>. If the stream is at
+        end-of-file, the end-of-file indicator for the stream is set and
+        <d:code>getc</d:code> returns <d:code>EOF</d:code>. If a read error
+        occurs, the error indicator for the stream is set and
+        <d:code>getc</d:code> returns <d:code>EOF</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The getchar function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int getchar(void);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>getchar</d:code> function is equivalent to getc with the
+        argument <d:code>stdin</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>getchar</d:code> function returns the next character from
+        the input stream pointed to by <d:code>stdin</d:code>. If the stream is
+        at end-of-file, the end-of-file indicator for the stream is set and
+        <d:code>getchar</d:code> returns <d:code>EOF</d:code>. If a read error
+        occurs, the error indicator for the stream is set and
+        <d:code>getchar</d:code> returns <d:code>EOF</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The putc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int putc(int c, FILE *stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>putc</d:code> function is equivalent to
+        <d:code>fputc</d:code>, except that if it is implemented as a macro, it
+        may evaluate <d:code>stream</d:code> more than once, so that argument
+        should never be an expression with side effects.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>putc</d:code> function returns the character written. If a
+        write error occurs, the error indicator for the stream is set and
+        <d:code>putc</d:code> returns <d:code>EOF</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The putchar function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int putchar(int c);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>putchar</d:code> function is equivalent to
+        <d:code>putc</d:code> with the second argument
+        <d:code>stdout</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>putchar</d:code> function returns the character written. If
+        a write error occurs, the error indicator for the stream is set and
+        <d:code>putchar</d:code> returns <d:code>EOF</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The puts function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int puts(const char *s);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>puts</d:code> function writes the string pointed to by
+        <d:code>s</d:code> to the stream pointed to by <d:code>stdout</d:code>,
+        and appends a new-line character to the output. The terminating null
+        character is not written.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>puts</d:code> function returns <d:code>EOF</d:code> if a
+        write error occurs; otherwise it returns a nonnegative value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The ungetc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int ungetc(int c, FILE *stream);
+      </d:programlisting>
+      <d:para>
+        The <d:code>ungetc</d:code> function pushes the character specified by
+        <d:code>c</d:code> (converted to an <d:code>unsigned char</d:code>)
+        back onto the input stream pointed to by
+        <d:code>stream</d:code>. Pushed-back characters will be returned by
+        subsequent reads on that stream in the reverse order of their
+        pushing. A successful intervening call (with the stream pointed to by
+        <d:code>stream</d:code>) to a file positioning function (<d:code>fseek,
+        fsetpos</d:code> or <d:code>rewind</d:code>) discards any pushed-back
+        characters for the stream. The external storage corresponding to the
+        stream is unchanged.
+      </d:para>
+      <d:para>
+        One character of pushback is guaranteed. If the <d:code>ungetc</d:code>
+        function is called too many times on the same stream without an
+        intervening read or file positioning operation on that stream, the
+        operation may fail.
+      </d:para>
+      <d:para>
+        If the value of <d:code>c</d:code> equals that of the macro
+        <d:code>EOF</d:code>, the operation fails and the input stream is
+        unchanged.
+      </d:para>
+      <d:para>
+        A successful call to the <d:code>ungetc</d:code> function clears the
+        end-of-file indicator for the stream. The value of the file position
+        indicator for the stream after reading or discarding all pushed-back
+        characters shall be the same as it was before the characters were
+        pushed back. For a text stream, the value of its file position
+        indicator after a successful call to the <d:code>ungetc</d:code>
+        function is unspecified until all pushed-back characters are read or
+        discarded. For a binary stream, its file position indicator is
+        decremented by each successful call to the ungetc function; if its
+        value was zero before a call, it is indeterminate after the call.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>ungetc</d:code> function returns the character pushed back
+        after conversion, or <d:code>EOF</d:code> if the operation fails.
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Forward references:</d:emphasis> file
+        positioning functions.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Direct input/output functions</d:title>
+    <d:sect2>
+      <d:title>The fread function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+size_t fread(void * restrict ptr,
+             size_t size, size_t nmemb,
+             FILE * restrict stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fread</d:code> function reads, into the array pointed to by
+        <d:code>ptr</d:code>, up to <d:code>nmemb</d:code> elements whose size
+        is specified by <d:code>size</d:code>, from the stream pointed to by
+        <d:code>stream</d:code>. For each object, <d:code>size</d:code> calls
+        are made to the <d:code>fgetc</d:code> function and the results stored,
+        in the order read, in an array of <d:code>unsigned char</d:code>
+        exactly overlaying the object. The file position indicator for the
+        stream (if defined) is advanced by the number of characters
+        successfully read. If an error occurs, the resulting value of the file
+        position indicator for the stream is indeterminate. If a partial
+        element is read, its value is indeterminate.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fread</d:code> function returns the number of elements
+        successfully read, which may be less than nmemb if a read error or
+        end-of-file is encountered. If <d:code>size</d:code> or
+        <d:code>nmemb</d:code> is zero, <d:code>fread</d:code> returns zero and
+        the contents of the array and the state of the stream remain
+        unchanged.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The fwrite function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+size_t fwrite(const void * restrict ptr,
+              size_t size, size_t nmemb,
+              FILE * restrict stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fwrite</d:code> function writes, from the array pointed to
+        by <d:code>ptr</d:code>, up to <d:code>nmemb</d:code> elements whose
+        size is specified by <d:code>size</d:code>, to the stream pointed to by
+        <d:code>stream</d:code>. For each object, <d:code>size</d:code> calls
+        are made to the <d:code>fputc</d:code> function, taking the values (in
+        order) from an array of <d:code>unsigned char</d:code> exactly
+        overlaying the object. The file position indicator for the stream (if
+        defined) is advanced by the number of characters successfully
+        written. If an error occurs, the resulting value of the file position
+        indicator for the stream is indeterminate.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fwrite</d:code> function returns the number of elements
+        successfully written, which will be less than <d:code>nmemb</d:code>
+        only if a write error is encountered. If <d:code>size</d:code> or
+        <d:code>nmemb</d:code> is zero, fwrite returns zero and the state of
+        the stream remains unchanged.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>File positioning functions</d:title>
+    <d:sect2>
+      <d:title>The fgetpos function</d:title>
+      <d:para><d:emphasis role="bold">Synposis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int fgetpos(FILE * restrict stream,
+            fpos_t * restrict pos);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fgetpos</d:code> function stores the current values of the
+        parse state (if any) and file position indicator for the stream pointed
+        to by <d:code>stream</d:code> in the object pointed to by
+        <d:code>pos</d:code>. The values stored contain unspecified information
+        usable by the <d:code>fsetpos</d:code> function for repositioning the
+        stream to its position at the time of the call to the
+        <d:code>fgetpos</d:code> function.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If successful, the <d:code>fgetpos</d:code> function returns zero; on
+        failure, the <d:code>fgetpos</d:code> function returns nonzero and
+        stores an implementation-defined positive value in
+        <d:code>errno</d:code>.
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>fsetpos</d:code> function (7.21.9.3).
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The fseek function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int fseek(FILE *stream, long int offset, int whence);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fseek</d:code> function sets the file position indicator
+        for the stream pointed to by <d:code>stream</d:code>. If a read or
+        write error occurs, the error indicator for the stream is set and
+        <d:code>fseek</d:code> fails.
+      </d:para>
+      <d:para>
+        For a binary stream, the new position, measured in characters from the
+        beginning of the file, is obtained by adding <d:code>offset</d:code> to
+        the position specified by <d:code>whence</d:code>. The specified
+        position is the beginning of the file if <d:code>whence</d:code> is
+        <d:code>SEEK_SET</d:code>, the current value of the file position
+        indicator if <d:code>SEEK_CUR</d:code>, or end-of-file if
+        <d:code>SEEK_END</d:code>. A binary stream need not meaningfully
+        support <d:code>fseek</d:code> calls with a <d:code>whence</d:code>
+        value of <d:code>SEEK_END</d:code>.
+      </d:para>
+      <d:para>
+        For a text stream, either <d:code>offset</d:code> shall be zero, or
+        <d:code>offset</d:code> shall be a value returned by an earlier
+        successful call to the <d:code>ftell</d:code> function on a stream
+        associated with the same file and <d:code>whence</d:code> shall be
+        <d:code>SEEK_SET</d:code>.
+      </d:para>
+      <d:para>
+        After determining the new position, a successful call to the
+        <d:code>fseek</d:code> function undoes any effects of the
+        <d:code>ungetc</d:code> function on the stream, clears the end-of-file
+        indicator for the stream, and then establishes the new position. After
+        a successful <d:code>fseek</d:code> call, the next operation on an
+        update stream may be either input or output.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fseek</d:code> function returns nonzero only for a request
+        that cannot be satisfied.
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>ftell</d:code> function (7.21.9.4).
+      </d:para>
     </d:sect2>
   </d:sect1>
 </d:chapter>

@@ -15,6 +15,6 @@ latex:
 	cd src && perl -pi -e "s/\.png/\.pdf/g;" c.tex
 
 fop:
-	xsltproc --xinclude --output src/c.fo --stringparam double.sided 1 --stringparam fop1.extensions 1 --stringparam page.height 9in --stringparam page.width 7.5in --stringparam body.start.indent 0pt --stringparam body.font.size 9  /opt/local/share/xsl/docbook-xsl-ns/fo/docbook.xsl src/c.xml
+	xsltproc --xinclude --output src/c.fo fop.xsl src/c.xml
 	perl -pi -e "s/png/pdf/g;" src/c.fo
 	cd src && fop c.fo c.pdf
