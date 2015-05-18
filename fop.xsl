@@ -12,10 +12,10 @@
     </xsl:choose>
   </xsl:param>
   <xsl:attribute-set name="monospace.properties">
-    <xsl:attribute name="font-size">8pt</xsl:attribute>
+    <xsl:attribute name="font-size">9pt</xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="monospace.verbatim.properties" use-attribute-sets="verbatim.properties monospace.properties">
-    <xsl:attribute name="font-size">8pt</xsl:attribute>
+    <xsl:attribute name="font-size">9pt</xsl:attribute>
     <xsl:attribute name="wrap-option">wrap</xsl:attribute>
     <xsl:attribute name="hyphenation-character">&#x25BA;</xsl:attribute>
   </xsl:attribute-set>  
@@ -29,4 +29,6 @@
     <xsl:attribute name="border-color">black</xsl:attribute>
     <xsl:attribute name="padding">3pt</xsl:attribute>
   </xsl:attribute-set>
+  <xsl:param name="highlight.source" select="1"></xsl:param>
+  <xsl:param name="highlight.xslthl.config">/Users/gannu/Downloads/xslthl-2.1.3/highlighters/xslthl-config.xml</xsl:param>
 </xsl:stylesheet>  

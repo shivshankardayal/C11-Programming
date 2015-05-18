@@ -2045,5 +2045,164 @@ int fseek(FILE *stream, long int offset, int whence);
         <d:code>ftell</d:code> function (7.21.9.4).
       </d:para>
     </d:sect2>
+    <d:sect2>
+      <d:title>The fsetpos function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int fsetpos(FILE *stream, const fpos_t *pos);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fsetpos</d:code> function sets the
+        <d:code>mbstate_t</d:code> object (if any) and file position indicator
+        for the stream pointed to by <d:code>stream</d:code> according to the
+        value of the object pointed to by <d:code>pos</d:code>, which shall be
+        a value obtained from an earlier successful call to the
+        <d:code>fgetpos</d:code> function on a stream associated with the same
+        file. If a read or write error occurs, the error indicator for the
+        stream is set and <d:code>fsetpos</d:code> fails.
+      </d:para>
+      <d:para>
+        A successful call to the <d:code>fsetpos</d:code> function undoes any
+        effects of the <d:code>ungetc</d:code> function on the stream, clears
+        the end-of-file indicator for the stream, and then establishes the new
+        parse state and position. After a successful <d:code>fsetpos</d:code>
+        call, the next operation on an update stream may be either input or
+        output.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If successful, the <d:code>fsetpos</d:code> function returns zero; on
+        failure, the <d:code>fsetpos</d:code> function returns nonzero and
+        stores an implementation-defined positive value in
+        <d:code>errno</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The ftell function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+long int ftell(FILE *stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>ftell</d:code> function obtains the current value of the
+        file position indicator for the stream pointed to by
+        <d:code>stream</d:code>. For a binary stream, the value is the number
+        of characters from the beginning of the file. For a text stream, its
+        file position indicator contains unspecified information, usable by the
+        <d:code>fseek</d:code> function for returning the file position
+        indicator for the stream to its position at the time of the
+        <d:code>ftell</d:code> call; the difference between two such return
+        values is not necessarily a meaningful measure of the number of
+        characters written or read.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If successful, the <d:code>ftell</d:code> function returns the current
+        value of the file position indicator for the stream. On failure, the
+        <d:code>ftell</d:code> function returns <d:code>−1L</d:code> and stores
+        an implementation-defined positive value in <d:code>errno</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The rewind function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+void rewind(FILE *stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>rewind</d:code> function sets the file position indicator
+        for the stream pointed to by <d:code>stream</d:code> to the beginning
+        of the file. It is equivalent to
+        <d:programlisting role="CLexer">(void)fseek(stream, 0L, SEEK_SET)</d:programlisting>
+        except that the error indicator for the stream is also cleared.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>rewind</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Error-handling functions</d:title>
+    <d:sect2>
+      <d:title>The clearerr function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+void clearerr(FILE *stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>clearerr</d:code> function clears the end-of-file and error
+        indicators for the stream pointed to by <d:code>stream</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>clearerr</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The feof function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int feof(FILE *stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>feof</d:code> function tests the end-of-file indicator for
+        the stream pointed to by <d:code>stream</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>feof</d:code> function returns nonzero if and only if the
+        end-of-file indicator is set for <d:code>stream</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The ferror function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+int ferror(FILE *stream);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>ferror</d:code> function tests the error indicator for the
+        stream pointed to by <d:code>stream</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>ferror</d:code> function returns nonzero if and only if the
+        error indicator is set for <d:code>stream</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The perror function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+void perror(const char *s);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>perror</d:code> function maps the error number in the
+        integer expression <d:code>errno</d:code> to an error message. It
+        writes a sequence of characters to the standard error stream thus:
+        first (if <d:code>s</d:code> is not a null pointer and the character
+        pointed to by <d:code>s</d:code> is not the null character), the string
+        pointed to by <d:code>s</d:code> followed by a colon
+        (<d:code>:</d:code>) and a space; then an appropriate error message
+        string followed by a new-line character. The contents of the error
+        message strings are the same as those returned by the
+        <d:code>strerror</d:code> function with argument
+        <d:code>errno</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>perror</d:code> function returns no value.
+      </d:para>
+      <d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
+      <d:code>strerror</d:code> function (7.24.6.2).</d:para>
+    </d:sect2>
   </d:sect1>
 </d:chapter>
