@@ -1,0 +1,27 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+  <?dbhtml filename="stdalign/index.html" ?>
+  <d:title>Alignment &lt;stdalign.h&gt;</d:title>
+  <d:para>The header &lt;stdalign.h&gt; defines four macros.</d:para>
+  <d:para>The macro</d:para>
+  <d:blockquote>
+    <d:para><d:code>alignas</d:code></d:para>
+  </d:blockquote>
+  <d:para>expands to <d:code>_Alignas</d:code>; the macro</d:para>
+  <d:blockquote>
+    <d:para><d:code>alignof</d:code></d:para>
+  </d:blockquote>
+  <d:para>expands to <d:code>_Alignof</d:code>.</d:para>
+  <d:para>The remaining macros are suitable for use in <d:code>#if</d:code>
+  preprocessing directives. They are</d:para>
+  <d:blockquote>
+    <d:para><d:code>__alignas_is_defined</d:code></d:para>
+  </d:blockquote>
+  <d:para>and</d:para>
+  <d:blockquote>
+    <d:para><d:code>__alignof_is_defined</d:code></d:para>
+  </d:blockquote>
+  <d:para>which both expand to the integer constant 1.</d:para>
+</d:chapter>

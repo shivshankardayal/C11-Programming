@@ -51,7 +51,9 @@ the section entitled &#8220;GNU Free Documentation License&#8221;.
   <xi:include href="math.xml" />
   <xi:include href="setjmp.xml" />
   <xi:include href="signal.xml" />
+  <xi:include href="stdalign.xml" />
   <xi:include href="stdarg.xml" />
+  <xi:include href="stdatomic.xml" />
   <xi:include href="stdbool.xml" />
   <xi:include href="stddef.xml" />
   <xi:include href="stdint.xml" />

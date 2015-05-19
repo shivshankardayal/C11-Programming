@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">
+<d:title>Atomics &lt;stdatomic.h&gt;</d:title>
+<d:sect1>
+<d:title>Introduction</d:title>
+<d:para>
+      he header <d:code>&lt;stdatomic.h&gt;</d:code> defines several macros and
+      declares several types and functions for performing atomic operations on
+      data shared between threads.
+    </d:para>
+<d:para>
+      Implementations that define the macro
+      <d:code>__STDC_NO_ATOMICS__</d:code> need not provide this header nor
+      support any of its facilities.
+    </d:para>
+<d:para>
+      The macros defined are the <d:emphasis role="italic">atomic lock-free
+      macros</d:emphasis>
+</d:para>
+<d:blockquote>
+<d:para><d:code>ATOMIC_BOOL_LOCK_FREE</d:code></d:para>
+<d:para><d:code>ATOMIC_CHAR_LOCK_FREE</d:code></d:para>
+<d:para><d:code>ATOMIC_CHAR16_T_LOCK_FREE</d:code></d:para>
+<d:para><d:code>ATOMIC_CHAR32_T_LOCK_FREE</d:code></d:para>
+<d:para><d:code>ATOMIC_WCHAR_T_LOCK_FREE</d:code></d:para>
+<d:para><d:code>ATOMIC_SHORT_LOCK_FREE</d:code></d:para>
+<d:para><d:code>ATOMIC_INT_LOCK_FREE</d:code></d:para>
+<d:para><d:code>ATOMIC_LONG_LOCK_FREE</d:code></d:para>
+<d:para><d:code>ATOMIC_LLONG_LOCK_FREE</d:code></d:para>
+<d:para><d:code>ATOMIC_POINTER_LOCK_FREE</d:code></d:para>
+</d:blockquote>
+<d:para>
+      which indicate the lock-free property of the corresponding atomic types
+      (both signed and unsigned); and
+    </d:para>
+<d:blockquote>
+<d:para><d:code>ATOMIC_FLAG_INIT</d:code></d:para>
+</d:blockquote>
+<d:para>
+      which expands to an initializer for an object of type
+      <d:code>atomic_flag</d:code>.
+    </d:para>
+<d:para>The types include</d:para>
+<d:blockquote>
+<d:para><d:code>memory_order</d:code></d:para>
+</d:blockquote>
+<d:para>
+      which is an enumerated type whose enumerators identify memory
+      ordering constraints;
+    </d:para>
+<d:blockquote>
+<d:para><d:code>atomic_flag</d:code></d:para>
+</d:blockquote>
+<d:para>
+      which is a structure type representing a lock-free, primitive
+      atomic flag; and several atomic analogs of integer types.
+    </d:para>
+<d:para>In the following synopses:</d:para>
+<d:itemizedlist>
+<d:listitem>
+        An <d:emphasis role="italic">A</d:emphasis> refers to one of the atomic
+        types.
+      </d:listitem>
+<d:listitem>
+        A <d:emphasis role="italic">C</d:emphasis> refers to its corresponding
+        non-atomic type.
+      </d:listitem>
+<d:listitem>
+        An <d:emphasis role="italic">M</d:emphasis> refers to the type of the
+        other argument for arithmetic operations. For atomic integer types,
+        <d:emphasis role="italic">M</d:emphasis> is <d:emphasis role="italic">C</d:emphasis>. For atomic pointer types, <d:emphasis role="italic">M</d:emphasis> is <d:emphasis role="italic">ptrdiff_t</d:emphasis>.
+      </d:listitem>
+<d:listitem>
+        The functions not ending in <d:code>_explicit</d:code> have the same
+        semantics as the corresponding <d:code>_explicit</d:code> function with
+        <d:code>memory_order_seq_cst</d:code> for the
+        <d:code>memory_order</d:code> argument.
+      </d:listitem>
+</d:itemizedlist>
+<d:para>
+      NOTE Many operations are volatile-qualified. The <d:quote>volatile as
+      device register</d:quote> semantics have not changed in the
+      standard. This qualification means that volatility is preserved when
+      applying these operations to volatile objects. 
+    </d:para>
+</d:sect1>
+<d:sect1>
+<d:title>Initialization</d:title>
+<d:sect2>
+<d:title>The ATOMIC_VAR_INIT macro</d:title>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+<d:programlisting role="CLexer"><![CDATA[<fo:block background-color="#f8f8f8" xmlns:fo="http://www.w3.org/1999/XSL/Format"><fo:inline color="#BC7A00">#include &lt;stdatomic.h&gt;
+#define ATOMIC_VAR_INIT(C value)
+</fo:inline><fo:inline >      
+</fo:inline></fo:block>]]></d:programlisting>
+<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+<d:para>
+        The <d:code>ATOMIC_VAR_INIT</d:code> macro expands to a token sequence
+        suitable for initializing an atomic object of a type that is
+        initialization-compatible with <d:code>value</d:code>. An atomic object
+        with automatic storage duration that is not explicitly initialized
+        using <d:code>ATOMIC_VAR_INIT</d:code> is initially in an indeterminate
+        state; however, the default (zero) initialization for objects with
+        static or thread-local storage duration is guaranteed to produce a
+        valid state.
+      </d:para>
+<d:para>
+        Concurrent access to the variable being initialized, even via an atomic
+        operation, constitutes a data race.
+      </d:para>
+<d:para>EXAMPLE</d:para>
+<d:blockquote><d:para><d:code>atomic_int guide =
+      ATOMIC_VAR_INIT(42);</d:code></d:para>
+</d:blockquote>
+</d:sect2>
+<d:sect2>
+<d:title>The atomic_init generic function</d:title>
+<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+</d:sect2>
+</d:sect1>
+</d:chapter>
