@@ -19,4 +19,344 @@
     which is a structure type that is the type of the value returned by the
     <d:code>div</d:code> function,
   </d:para>
+  <d:blockquote>
+    <d:para><d:code>ldiv_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is a structure type that is the type of the value returned by the
+    <d:code>ldiv</d:code> function, and
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>lldiv_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is a structure type that is the type of the value returned by the
+    <d:code>lldiv</d:code> function.
+  </d:para>
+  <d:para>
+    The macros defined are <d:code>NULL</d:code> (described in &#xa7;
+    iso.7.19);
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>EXIT_FAILURE</d:code></d:para>
+  </d:blockquote>
+  <d:para>and</d:para>
+  <d:blockquote>
+    <d:para><d:code>EXIT_SUCCESS</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which expand to integer constant expressions that can be used as the
+    argument to the <d:code>exit</d:code> function to return unsuccessful or
+    successful termination status, respectively, to the host environment;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>RAND_MAX</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which expands to an integer constant expression that is the maximum
+    value returned by the <d:code>rand</d:code> function; and
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>MB_CUR_MAX</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which expands to a positive integer expression with type
+    <d:code>size_t</d:code> that is the maximum number of bytes in a multibyte
+    character for the extended character set specified by the current locale
+    (category <d:code>LC_CTYPE</d:code>), which is never greater than
+    <d:code>MB_LEN_MAX</d:code>.
+  </d:para>
+  <d:sect1>
+    <d:title>Numeric conversion functions</d:title>
+    <d:para>
+      The functions <d:code>atof, atoi, atol</d:code> and
+      <d:code>atoll</d:code> need not affect the value of the integer
+      expression <d:code>errno</d:code> on an error. If the value of the result
+      cannot be represented, the behavior is undefined.
+    </d:para>
+    <d:sect2>
+      <d:title>The atof function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+double atof(const char *nptr);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atof</d:code> function converts the initial portion
+        of the string pointed to by <d:code>nptr</d:code> to
+        <d:code>double</d:code> representation. Except for the behavior on
+        error, it is equivalent to
+        <d:blockquote>
+          <d:para><d:code>strtod(nptr, (char **)NULL)</d:code></d:para>
+        </d:blockquote>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atof</d:code> function returns the converted value.
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>strtod, strtof</d:code> and <d:code>strtold</d:code> functions
+        (&#xa7; iso.7.22.1.3).
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The atoi, atol and atoll functions</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+int atoi(const char *nptr);
+long int atol(const char *nptr);
+long long int atoll(const char *nptr);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atoi, atol</d:code> and <d:code>atoll</d:code> functions
+        convert the initial portion of the string pointed to by
+        <d:code>nptr</d:code> to <d:code>int, long int</d:code> and
+        <d:code>long long int</d:code> representation, respectively. Except for
+        the behavior on error, they are equivalent to
+        <d:blockquote>
+          <d:para><d:code>atoi:  (int)strtol(nptr, (char **)NULL,
+          10)</d:code></d:para>
+          <d:para><d:code>atol:  strtol(nptr, (char **)NULL,
+          10)</d:code></d:para>
+          <d:para><d:code>atoll: strtoll(nptr, (char **)NULL,
+          10)</d:code></d:para>
+        </d:blockquote>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atoi, atol</d:code> and <d:code>atoll</d:code> functions
+        return the converted value.
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>strtol, strtoll,
+        strtoul</d:code> and <d:code>strtoull</d:code> functions (&#xa7;
+        iso.7.22.1.4).
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strtod, strtof and strtold functions</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+double strtod(const char * restrict nptr,
+              char ** restrict endptr);
+float strtof(const char * restrict nptr,
+             char ** restrict endptr);
+long double strtold(const char * restrict nptr,
+                    char ** restrict endptr);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strtod, strtof</d:code> and <d:code>strtold</d:code>
+        functions convert the initial portion of the string pointed to by
+        <d:code>nptr</d:code> to <d:code>double, float</d:code> and
+        <d:code>long double</d:code> representation, respectively. First, they
+        decompose the input string into three parts: an initial, possibly
+        empty, sequence of white-space characters (as specified by the
+        <d:code>isspace</d:code> function), a subject sequence resembling a
+        floating-point constant or representing an infinity or NaN; and a final
+        string of one or more unrecognized characters, including the
+        terminating null character of the input string. Then, they attempt to
+        convert the subject sequence to a floating-point number, and return the
+        result.
+      </d:para>
+      <d:para>
+        The expected form of the subject sequence is an optional plus or minus sign, then one of
+        the following:
+        <d:itemizedlist>
+          <d:listitem>
+            a nonempty sequence of decimal digits optionally containing a
+            decimal-point character, then an optional exponent part as defined
+            in (&#xa7; iso.6.4.4.2);
+          </d:listitem>
+          <d:listitem>
+            a <d:code>0x</d:code> or <d:code>0X</d:code>, then a nonempty
+            sequence of hexadecimal digits optionally containing a
+            decimal-point character, then an optional binary exponent part as
+            defined in (&#xa7; iso.6.4.4.2);
+          </d:listitem>
+          <d:listitem>
+            <d:code>INF</d:code> or <d:code>INFINITY</d:code>, ignoring case
+          </d:listitem>
+          <d:listitem>
+            <d:code>NAN</d:code> or <d:code>NAN</d:code> (<d:emphasis
+            role="italic">n-char-sequence<d:subscript>opt</d:subscript></d:emphasis>),
+            ignoring case in the <d:code>NAN</d:code> part, where:
+            <d:blockquote>
+              <d:para>
+                <d:emphasis role="italic">n-char-sequence:</d:emphasis>
+                <d:blockquote>
+                  <d:para>
+                    <d:emphasis role="italic">digit</d:emphasis>
+                  </d:para>
+                  <d:para>
+                    <d:emphasis role="italic">nondigit</d:emphasis>
+                  </d:para>
+                  <d:para>
+                    <d:emphasis role="italic">n-char-sequence digit</d:emphasis>
+                  </d:para>
+                  <d:para>
+                    <d:emphasis role="italic">n-char-sequence
+                    nondigit</d:emphasis>
+                  </d:para>
+                </d:blockquote>
+              </d:para>
+            </d:blockquote>
+          </d:listitem>
+        </d:itemizedlist>
+      </d:para>
+      <d:para>
+        The subject sequence is defined as the longest initial subsequence of
+        the input string, starting with the first non-white-space character,
+        that is of the expected form. The subject sequence contains no
+        characters if the input string is not of the expected form.
+      </d:para>
+      <d:para>
+        If the subject sequence has the expected form for a floating-point
+        number, the sequence of characters starting with the first digit or the
+        decimal-point character (whichever occurs first) is interpreted as a
+        floating constant according to the rules of (&#xa7; iso.6.4.4.2),
+        except that the decimal-point character is used in place of a period,
+        and that if neither an exponent part nor a decimal-point character
+        appears in a decimal floating point number, or if a binary exponent
+        part does not appear in a hexadecimal floating point number, an
+        exponent part of the appropriate type with value zero is assumed to
+        follow the last digit in the string. If the subject sequence begins
+        with a minus sign, the sequence is interpreted as
+        negated.<d:footnote><d:para>It is unspecified whether a minus-signed
+        sequence is converted to a negative number directly or by negating the
+        value resulting from converting the corresponding unsigned sequence
+        (see &#xa7; iso.F.5); the two methods may yield different results if
+        rounding is toward positive or negative infinity. In either case, the
+        functions honor the sign of zero if floating-point arithmetic supports
+        signed zeros.</d:para></d:footnote> A character sequence
+        <d:code>INF</d:code> or <d:code>INFINITY</d:code> is interpreted as an
+        infinity, if representable in the return type, else like a floating
+        constant that is too large for the range of the return type. A
+        character sequence <d:code>NAN</d:code> or <d:code>NAN</d:code>
+        (<d:emphasis
+        role="italic">n-char-sequence<d:subscript>opt</d:subscript></d:emphasis>)
+        is interpreted as a quiet NaN, if supported in the return type, else
+        like a subject sequence part that does not have the expected form; the
+        meaning of the n-char sequence is
+        implementation-defined.<d:footnote><d:para>An implementation may use
+        the n-char sequence to determine extra information to be represented in
+        the NaN's significand.</d:para></d:footnote> A pointer to the final
+        string is stored in the object pointed to by <d:code>endptr</d:code>,
+        provided that <d:code>endptr</d:code> is not a null pointer.
+      </d:para>
+      <d:para>
+        If the subject sequence has the hexadecimal form and
+        <d:code>FLT_RADIX</d:code> is a power of 2, the value resulting from
+        the conversion is correctly rounded.
+      </d:para>
+      <d:para>
+        In other than the <d:code>"C"</d:code> locale, additional
+        locale-specific subject sequence forms may be accepted.
+      </d:para>
+      <d:para>
+        If the subject sequence is empty or does not have the expected form, no
+        conversion is performed; the value of <d:code>nptr</d:code> is stored
+        in the object pointed to by <d:code>endptr</d:code>, provided that
+        <d:code>endptr</d:code> is not a null pointer.
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Recommended practice</d:emphasis>
+      </d:para>
+      <d:para>
+        If the subject sequence has the hexadecimal form,
+        <d:code>FLT_RADIX</d:code> is not a power of 2, and the result is not
+        exactly representable, the result should be one of the two numbers in
+        the appropriate internal format that are adjacent to the hexadecimal
+        floating source value, with the extra stipulation that the error should
+        have a correct sign for the current rounding direction.
+      </d:para>
+      <d:para>
+        If the subject sequence has the decimal form and at most
+        <d:code>DECIMAL_DIG</d:code> (defined in
+        <d:code>&lt;float.h&gt;</d:code>) significant digits, the result should
+        be correctly rounded. If the subject sequence <d:emphasis
+        role="italic">D</d:emphasis> has the decimal form and more than
+        <d:code>DECIMAL_DIG</d:code> significant digits, consider the two
+        bounding, adjacent decimal strings <d:emphasis
+        role="italic">L</d:emphasis> and <d:emphasis
+        role="italic">U</d:emphasis>, both having <d:code>DECIMAL_DIG</d:code>
+        significant digits, such that the values of <d:emphasis
+        role="italic">L, D</d:emphasis> and <d:emphasis
+        role="italic">U</d:emphasis> satisfy <d:emphasis
+        role="italic">L</d:emphasis>
+        <d:inlineequation>
+          <math
+              xmlns="http://www.w3.org/1998/Math/MathML"><mo>&#8804;</mo></math>
+          </d:inlineequation> <d:emphasis role="italic">D</d:emphasis>
+          <d:inlineequation>
+          <math
+              xmlns="http://www.w3.org/1998/Math/MathML"><mo>&#8804;</mo></math>
+      </d:inlineequation> <d:emphasis role="italic">U</d:emphasis>. The result
+      should be one of the (equal or adjacent) values that would be obtained by
+      correctly rounding <d:emphasis role="italic">L</d:emphasis> and
+      <d:emphasis role="italic">U</d:emphasis> according to the current
+      rounding direction, with the extra stipulation that the error with
+      respect to <d:emphasis role="italic">D</d:emphasis> should have a correct
+      sign for the current rounding
+      direction.<d:footnote><d:para><d:code>DECIMAL_DIG</d:code>, defined in
+      &lt;float.h&gt;, should be sufficiently large that <d:emphasis
+      role="italic">L</d:emphasis> and <d:emphasis role="italic">U</d:emphasis>
+      will usually round to the same internal floating value, but if not will
+      round to adjacent values.</d:para></d:footnote>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The functions return the converted value, if any. If no conversion
+        could be performed, zero is returned. If the correct value overflows
+        and default rounding is in effect (&#xa7; iso.7.12.1), plus or minus
+        <d:code>HUGE_VAL, HUGE_VALF</d:code> or <d:code>HUGE_VALL</d:code> is
+        returned (according to the return type and sign of the value), and the
+        value of the macro <d:code>ERANGE</d:code> is stored in
+        <d:code>errno</d:code>. If the result underflows (&#xa7; iso.7.12.1),
+        the functions return a value whose magnitude is no greater than the
+        smallest normalized positive number in the return type; whether
+        <d:code>errno</d:code> acquires the value <d:code>ERANGE</d:code> is
+        implementation-defined.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strtol, strtoll, strtoul and strtoull functions</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h> long int strtol(
+    const char * restrict nptr,
+    char ** restrict endptr,
+    int base);
+long long int strtoll(
+    const char * restrict nptr,
+    char ** restrict endptr,
+    int base);
+unsigned long int strtoul(
+    const char * restrict nptr,
+    char ** restrict endptr,
+    int base);
+unsigned long long int strtoull(
+    const char * restrict nptr,
+    char ** restrict endptr,
+    int base);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strtol, strtoll, strtoul</d:code> and
+        <d:code>strtoull</d:code> functions convert the initial portion of the
+        string pointed to by <d:code>nptr</d:code> to <d:code>long int, long
+        long int, unsigned long int</d:code> and <d:code>unsigned long long
+        int</d:code> representation, respectively. First, they decompose the
+        input string into three parts: an initial, possibly empty, sequence of
+        white-space characters (as specified by the <d:code>isspace</d:code>
+        function), a subject sequence resembling an integer represented in some
+        radix determined by the value of <d:code>base</d:code>, and a final
+        string of one or more unrecognized characters, including the
+        terminating null character of the input string. Then, they attempt to
+        convert the subject sequence to an integer, and return the result.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
 </d:chapter>

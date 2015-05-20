@@ -42,6 +42,11 @@ span.italic {
 
 blockquote {
     border: None;
+    font-size: 14px;
+}
+
+.blockquote {
+    line-height: 10px;
 }
 
 div.warning{

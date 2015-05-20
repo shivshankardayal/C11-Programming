@@ -29,7 +29,7 @@
     <xsl:copy-of select="document('analytics.js', /)"/>
   </xsl:template>
   <xsl:template name="user.footer.navigation">
-    <p style="text-align: center;">&amp;copy; 2010, 2015 Shiv S. Dayal. <a href="http://10hash.com">10hash.com</a>.
+    <p style="text-align: center;">&#xa9; 2010, 2015 Shiv S. Dayal. <a href="http://10hash.com">10hash.com</a>.
     GNU FDL license is applicable where not stated.</p>
   </xsl:template>
 
