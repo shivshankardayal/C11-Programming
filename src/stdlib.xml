@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?dbhtml filename="stdlib/index.html" ?>
+  <d:title>General utilities &lt;stdlib.h&gt;</d:title>
+  <d:para>
+    The header <d:code>&lt;stdlib.h&gt;</d:code> declares five types and
+    several functions of general utility, and defines several macros.
+  </d:para>
+  <d:para>
+    The types declared are <d:code>size_t</d:code> and <d:code>wchar_t</d:code>
+    (both described in &#xa7; iso.7.19),
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>div_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is a structure type that is the type of the value returned by the
+    <d:code>div</d:code> function,
+  </d:para>
+</d:chapter>

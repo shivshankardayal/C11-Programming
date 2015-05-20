@@ -1037,12 +1037,12 @@
     save it. The extension of file should be <d:code>*.c</d:code>. For example,
     <d:code>myprogram.c</d:code>. After that you can give this command at
     terminal. Here is the first program for 
-    you.<d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+    you.<programlisting xmlns="http://docbook.org/ns/docbook" role="CLexer">#include &lt;stdio.h&gt;
 
 int main()
 {
   return 0;
-}</d:programlisting>
+}</programlisting>
     Execute the following command on your command prompt:</d:para>
     <d:para><d:code>$</d:code><d:command>gcc nothing.c -o nothing</d:command>
       where <d:code>nothing.c</d:code> is the name of the program.</d:para>

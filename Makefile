@@ -15,6 +15,10 @@ latex:
 	cd src && perl -pi -e "s/\.png/\.pdf/g;" c.tex
 
 fop:
+#	cd src && xmllint --xinclude c.xml>resolvedc.xml
 	xsltproc --xinclude --output src/c.fo fop.xsl src/c.xml
 	perl -pi -e "s/png/pdf/g;" src/c.fo
-	cd src && fop c.fo c.pdf
+#	./fop.py
+#	perl -pi -e "s/<html><body>//g;" src/c.fo
+#	perl -pi -e "s/<\/body><\/html>//g;" src/c.fo
+	cd src && fop c.fo c.pdf 2>/dev/null

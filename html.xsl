@@ -39,6 +39,7 @@
   <xsl:param name="section.autolabel" select="1"/>
   <xsl:param name="use.extensions" select="1"/>
   <xsl:param name="textinsert.extension" select="1"/>
+  <xsl:param name="tablecolumns.extension" select="1"/>
   <xsl:param name="section.label.includes.component.label" select="1"/>
   <xsl:param name="chunk.section.depth" select="0"/>
   <xsl:param name="toc.section.depth" select="4"/>

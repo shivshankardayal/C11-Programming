@@ -58,6 +58,7 @@ the section entitled &#8220;GNU Free Documentation License&#8221;.
   <xi:include href="stddef.xml" />
   <xi:include href="stdint.xml" />
   <xi:include href="stdio.xml" />
+  <xi:include href="stdlib.xml" />
   <xi:include href="fdl.xml" />
   <d:index>
     <d:title>Index</d:title>

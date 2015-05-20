@@ -1,121 +1,1031 @@
 <?xml version="1.0" encoding="utf-8"?>
 <d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">
-<d:title>Atomics &lt;stdatomic.h&gt;</d:title>
-<d:sect1>
-<d:title>Introduction</d:title>
-<d:para>
-      he header <d:code>&lt;stdatomic.h&gt;</d:code> defines several macros and
+  <?dbhtml filename="stdatomics/index.html" ?>
+  <d:title>Atomics &lt;stdatomic.h&gt;</d:title>
+  <d:sect1>
+    <d:title>Introduction</d:title>
+    <d:para>
+      The header <d:code>&lt;stdatomic.h&gt;</d:code> defines several macros and
       declares several types and functions for performing atomic operations on
       data shared between threads.
     </d:para>
-<d:para>
+    <d:para>
       Implementations that define the macro
       <d:code>__STDC_NO_ATOMICS__</d:code> need not provide this header nor
       support any of its facilities.
     </d:para>
-<d:para>
+    <d:para>
       The macros defined are the <d:emphasis role="italic">atomic lock-free
       macros</d:emphasis>
-</d:para>
-<d:blockquote>
-<d:para><d:code>ATOMIC_BOOL_LOCK_FREE</d:code></d:para>
-<d:para><d:code>ATOMIC_CHAR_LOCK_FREE</d:code></d:para>
-<d:para><d:code>ATOMIC_CHAR16_T_LOCK_FREE</d:code></d:para>
-<d:para><d:code>ATOMIC_CHAR32_T_LOCK_FREE</d:code></d:para>
-<d:para><d:code>ATOMIC_WCHAR_T_LOCK_FREE</d:code></d:para>
-<d:para><d:code>ATOMIC_SHORT_LOCK_FREE</d:code></d:para>
-<d:para><d:code>ATOMIC_INT_LOCK_FREE</d:code></d:para>
-<d:para><d:code>ATOMIC_LONG_LOCK_FREE</d:code></d:para>
-<d:para><d:code>ATOMIC_LLONG_LOCK_FREE</d:code></d:para>
-<d:para><d:code>ATOMIC_POINTER_LOCK_FREE</d:code></d:para>
-</d:blockquote>
-<d:para>
+    </d:para>
+    <d:blockquote>
+      <d:para><d:code>ATOMIC_BOOL_LOCK_FREE</d:code></d:para>
+      <d:para><d:code>ATOMIC_CHAR_LOCK_FREE</d:code></d:para>
+      <d:para><d:code>ATOMIC_CHAR16_T_LOCK_FREE</d:code></d:para>
+      <d:para><d:code>ATOMIC_CHAR32_T_LOCK_FREE</d:code></d:para>
+      <d:para><d:code>ATOMIC_WCHAR_T_LOCK_FREE</d:code></d:para>
+      <d:para><d:code>ATOMIC_SHORT_LOCK_FREE</d:code></d:para>
+      <d:para><d:code>ATOMIC_INT_LOCK_FREE</d:code></d:para>
+      <d:para><d:code>ATOMIC_LONG_LOCK_FREE</d:code></d:para>
+      <d:para><d:code>ATOMIC_LLONG_LOCK_FREE</d:code></d:para>
+      <d:para><d:code>ATOMIC_POINTER_LOCK_FREE</d:code></d:para>
+    </d:blockquote>
+    <d:para>
       which indicate the lock-free property of the corresponding atomic types
       (both signed and unsigned); and
     </d:para>
-<d:blockquote>
-<d:para><d:code>ATOMIC_FLAG_INIT</d:code></d:para>
-</d:blockquote>
-<d:para>
+    <d:blockquote>
+      <d:para><d:code>ATOMIC_FLAG_INIT</d:code></d:para>
+    </d:blockquote>
+    <d:para>
       which expands to an initializer for an object of type
       <d:code>atomic_flag</d:code>.
     </d:para>
-<d:para>The types include</d:para>
-<d:blockquote>
-<d:para><d:code>memory_order</d:code></d:para>
-</d:blockquote>
-<d:para>
+    <d:para>The types include</d:para>
+    <d:blockquote>
+      <d:para><d:code>memory_order</d:code></d:para>
+    </d:blockquote>
+    <d:para>
       which is an enumerated type whose enumerators identify memory
       ordering constraints;
     </d:para>
-<d:blockquote>
-<d:para><d:code>atomic_flag</d:code></d:para>
-</d:blockquote>
-<d:para>
+    <d:blockquote>
+      <d:para><d:code>atomic_flag</d:code></d:para>
+    </d:blockquote>
+    <d:para>
       which is a structure type representing a lock-free, primitive
       atomic flag; and several atomic analogs of integer types.
     </d:para>
-<d:para>In the following synopses:</d:para>
-<d:itemizedlist>
-<d:listitem>
+    <d:para>In the following synopses:</d:para>
+    <d:itemizedlist>
+      <d:listitem>
         An <d:emphasis role="italic">A</d:emphasis> refers to one of the atomic
         types.
       </d:listitem>
-<d:listitem>
+      <d:listitem>
         A <d:emphasis role="italic">C</d:emphasis> refers to its corresponding
         non-atomic type.
       </d:listitem>
-<d:listitem>
+      <d:listitem>
         An <d:emphasis role="italic">M</d:emphasis> refers to the type of the
         other argument for arithmetic operations. For atomic integer types,
         <d:emphasis role="italic">M</d:emphasis> is <d:emphasis role="italic">C</d:emphasis>. For atomic pointer types, <d:emphasis role="italic">M</d:emphasis> is <d:emphasis role="italic">ptrdiff_t</d:emphasis>.
       </d:listitem>
-<d:listitem>
+      <d:listitem>
         The functions not ending in <d:code>_explicit</d:code> have the same
         semantics as the corresponding <d:code>_explicit</d:code> function with
         <d:code>memory_order_seq_cst</d:code> for the
         <d:code>memory_order</d:code> argument.
       </d:listitem>
-</d:itemizedlist>
-<d:para>
+    </d:itemizedlist>
+    <d:para>
       NOTE Many operations are volatile-qualified. The <d:quote>volatile as
       device register</d:quote> semantics have not changed in the
       standard. This qualification means that volatility is preserved when
       applying these operations to volatile objects. 
     </d:para>
-</d:sect1>
-<d:sect1>
-<d:title>Initialization</d:title>
-<d:sect2>
-<d:title>The ATOMIC_VAR_INIT macro</d:title>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer"><![CDATA[<fo:block background-color="#f8f8f8" xmlns:fo="http://www.w3.org/1999/XSL/Format"><fo:inline color="#BC7A00">#include &lt;stdatomic.h&gt;
+  </d:sect1>
+  <d:sect1>
+    <d:title>Initialization</d:title>
+    <d:sect2>
+      <d:title>The ATOMIC_VAR_INIT macro</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdatomic.h&gt;
 #define ATOMIC_VAR_INIT(C value)
-</fo:inline><fo:inline >      
-</fo:inline></fo:block>]]></d:programlisting>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>
-        The <d:code>ATOMIC_VAR_INIT</d:code> macro expands to a token sequence
-        suitable for initializing an atomic object of a type that is
-        initialization-compatible with <d:code>value</d:code>. An atomic object
-        with automatic storage duration that is not explicitly initialized
-        using <d:code>ATOMIC_VAR_INIT</d:code> is initially in an indeterminate
-        state; however, the default (zero) initialization for objects with
-        static or thread-local storage duration is guaranteed to produce a
-        valid state.
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+	The <d:code>ATOMIC_VAR_INIT</d:code> macro expands to a token sequence
+	suitable for initializing an atomic object of a type that is
+	initialization-compatible with <d:code>value</d:code>. An atomic object
+	with automatic storage duration that is not explicitly initialized
+	using <d:code>ATOMIC_VAR_INIT</d:code> is initially in an indeterminate
+	state; however, the default (zero) initialization for objects with
+	static or thread-local storage duration is guaranteed to produce a
+	valid state.
       </d:para>
-<d:para>
-        Concurrent access to the variable being initialized, even via an atomic
-        operation, constitutes a data race.
+      <d:para>
+	Concurrent access to the variable being initialized, even via an atomic
+	operation, constitutes a data race.
       </d:para>
-<d:para>EXAMPLE</d:para>
-<d:blockquote><d:para><d:code>atomic_int guide =
+      <d:para>EXAMPLE</d:para>
+      <d:blockquote><d:para><d:code>atomic_int guide =
       ATOMIC_VAR_INIT(42);</d:code></d:para>
-</d:blockquote>
-</d:sect2>
-<d:sect2>
-<d:title>The atomic_init generic function</d:title>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-</d:sect2>
-</d:sect1>
+      </d:blockquote>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The atomic_init generic function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer">#include &lt;stdatomic.h&gt;
+void atomic_init(volatile A *obj, C value);
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atomic_init</d:code> generic function initializes the
+        atomic object pointed to by <d:code>obj</d:code> to the value
+        <d:code>value</d:code>, while also initializing any additional state
+        that the implementation might need to carry for the atomic object.
+      </d:para>
+      <d:para>
+        Although this function initializes an atomic object, it does not avoid
+        data races; concurrent access to the variable being initialized, even
+        via an atomic operation, constitutes a data race.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atomic_init</d:code> generic function returns no value.
+      </d:para>
+      <d:para>EXAMPLE</d:para>
+      <d:blockquote>
+        <d:para><d:code>atomic_int guide;</d:code></d:para>
+        <d:para><d:code>atomic_init(&amp;guide, 42);</d:code></d:para>
+      </d:blockquote>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Order and consistency</d:title>
+    <d:para>
+      The enumerated type <d:code>memory_order specifies</d:code> the detailed
+      regular (non-atomic) memory synchronization operations as defined in
+      (&#xa7; iso5.1.2.4 and may provide for operation ordering. Its
+      enumeration constants are as follows:
+    </d:para>
+    <d:blockquote>
+      <d:para><d:code>memory_order_relaxed</d:code></d:para>
+      <d:para><d:code>memory_order_consume</d:code></d:para>
+      <d:para><d:code>memory_order_acquire</d:code></d:para>
+      <d:para><d:code>memory_order_release</d:code></d:para>
+      <d:para><d:code>memory_order_acq_rel</d:code></d:para>
+      <d:para><d:code>memory_order_seq_cst</d:code></d:para>
+    </d:blockquote>
+    <d:para>
+      For <d:code>memory_order_relaxed</d:code>, no operation orders memory.
+    </d:para>
+    <d:para>
+      For <d:code>memory_order_release, memory_order_acq_rel</d:code> and
+      <d:code>memory_order_seq_cst</d:code>, a store operation performs a
+      release operation on the affected memory location.
+    </d:para>
+    <d:para>
+      For <d:code>memory_order_acquire, memory_order_acq_rel</d:code> and
+      <d:code>memory_order_seq_cst</d:code>, a load operation performs an
+      acquire operation on the affected memory location.
+    </d:para>
+    <d:para>
+      For <d:code>memory_order_consume</d:code>, a load operation performs a
+      consume operation on the affected memory location.
+    </d:para>
+    <d:para>
+      There shall be a single total order <d:emphasis
+      role="italic">S</d:emphasis> on all <d:code>memory_order_seq_cst</d:code>
+      operations, consistent with the <d:quote>happens before</d:quote> order
+      and modification orders for all affected locations, such that each
+      <d:code>memory_order_seq_cst</d:code> operation <d:emphasis
+      role="italic">B</d:emphasis> that loads a value from an atomic object
+      <d:emphasis role="italic">M</d:emphasis> observes one of the following
+      values:
+      <d:itemizedlist>
+        <d:listitem>
+          the result of the last modification <d:emphasis
+          role="italic">A</d:emphasis> of <d:emphasis
+          role="italic">M</d:emphasis> that precedes <d:emphasis
+          role="italic">B</d:emphasis> in <d:emphasis
+          role="italic">S</d:emphasis>, if it exists, or
+        </d:listitem>
+        <d:listitem>
+          if <d:emphasis role="italic">A</d:emphasis> exists, the result of
+          some modification of <d:emphasis role="italic">M</d:emphasis> in the
+          visible sequence of side effects with respect to <d:emphasis
+          role="italic">B</d:emphasis> that is not
+          <d:code>memory_order_seq_cst</d:code> and that does not happen before
+          <d:code>A</d:code>, or
+        </d:listitem>
+        <d:listitem>
+          if A does not exist, the result of some modification of <d:emphasis
+          role="italic">M</d:emphasis> in the visible sequence of side effects
+          with respect to <d:emphasis role="italic">B</d:emphasis> that is not
+          <d:code>memory_order_seq_cst</d:code>.
+        </d:listitem>
+      </d:itemizedlist>
+    </d:para>
+    <d:note>
+      <d:title>NOTE 1</d:title>
+      Although it is not explicitly required that <d:emphasis
+      role="italic">S</d:emphasis> include lock operations, it can always be
+      extended to an order that does include lock and unlock operations, since
+      the ordering between those is already included in the <d:quote>happens
+      before</d:quote> ordering.
+    </d:note>
+    <d:note>
+      <d:title>NOTE 2</d:title>
+      Atomic operations specifying <d:code>memory_order_relaxed</d:code>
+      are relaxed only with respect to memory ordering. Implementations must
+      still guarantee that any given atomic access to a particular atomic
+      object be indivisible with respect to all other atomic accesses to that
+      object.
+    </d:note>
+    <d:para>
+      For an atomic operation <d:emphasis role="italic">B</d:emphasis> that
+      reads the value of an atomic object <d:emphasis
+      role="italic">M</d:emphasis>, if there is a
+      <d:code>memory_order_seq_cst</d:code> fence <d:emphasis
+      role="italic">X</d:emphasis> sequenced before <d:emphasis
+      role="italic">B</d:emphasis>, then <d:emphasis
+      role="italic">B</d:emphasis> observes either the last
+      <d:code>memory_order_seq_cst</d:code> modification of <d:emphasis
+      role="italic">M</d:emphasis> preceding <d:emphasis
+      role="italic">X</d:emphasis> in the total order <d:emphasis
+      role="italic">S</d:emphasis> or a later modification of <d:emphasis
+      role="italic">M</d:emphasis> in its modification order.
+    </d:para>
+    <d:para>
+      For atomic operations <d:emphasis role="italic">A</d:emphasis> and
+      <d:emphasis role="italic">B</d:emphasis> on an atomic object <d:emphasis
+      role="italic">M</d:emphasis>, where <d:emphasis
+      role="italic">A</d:emphasis> modifies <d:emphasis
+      role="italic">M</d:emphasis> and <d:emphasis role="italic">B</d:emphasis>
+      takes its value, if there is a <d:code>memory_order_seq_cst</d:code>
+      fence <d:emphasis role="italic">X</d:emphasis> such that <d:emphasis
+      role="italic">A</d:emphasis> is sequenced before <d:emphasis
+      role="italic">X</d:emphasis> and <d:emphasis role="italic">B</d:emphasis>
+      follows <d:emphasis role="italic">X</d:emphasis> in <d:emphasis
+      role="italic">S</d:emphasis>, then <d:emphasis
+      role="italic">B</d:emphasis> observes either the effects of <d:emphasis
+      role="italic">A</d:emphasis> or a later modification of <d:emphasis
+      role="italic">M</d:emphasis> in its modification order.
+    </d:para>
+    <d:para>
+      For atomic operations <d:emphasis role="italic">A</d:emphasis> and
+      <d:emphasis role="italic">B</d:emphasis> on an atomic object <d:emphasis
+      role="italic">M</d:emphasis>, where <d:emphasis
+      role="italic">A</d:emphasis> modifies <d:emphasis
+      role="italic">M</d:emphasis> and <d:emphasis role="italic">B</d:emphasis>
+      takes its value, if there are <d:emphasis
+      role="italic">memory_order_seq_cst</d:emphasis> fences <d:emphasis
+      role="italic">X</d:emphasis> and <d:emphasis role="italic">Y</d:emphasis>
+      such that <d:emphasis role="italic">A</d:emphasis> is sequenced before
+      <d:emphasis role="italic">X, Y</d:emphasis> is sequenced before
+      <d:emphasis role="italic">B</d:emphasis>, and <d:emphasis
+      role="italic">X</d:emphasis> precedes <d:emphasis
+      role="italic">Y</d:emphasis> in <d:emphasis role="italic">S</d:emphasis>,
+      then <d:emphasis role="italic">B</d:emphasis> observes either the effects
+      of <d:emphasis role="italic">A</d:emphasis> or a later modification of M
+      in its modification order.
+    </d:para>
+    <d:para>
+      Atomic read-modify-write operations shall always read the last value (in
+      the modification order) stored before the write associated with the
+      read-modify-write operation.
+    </d:para>
+    <d:para>
+      An atomic store shall only store a value that has been computed from
+      constants and program input values by a finite sequence of program
+      evaluations, such that each evaluation observes the values of variables
+      as computed by the last prior assignment in the
+      sequence.<d:footnote><d:para>Among other implications, atomic variables
+      shall not decay.</d:para></d:footnote> The ordering of evaluations in
+      this sequence shall be such that
+      <d:itemizedlist>
+        <d:listitem>
+          If an evaluation <d:emphasis role="italic">B</d:emphasis> observes a
+          value computed by <d:emphasis role="italic">A</d:emphasis> in a
+          different thread, then <d:emphasis role="italic">B</d:emphasis> does
+          not happen before <d:emphasis role="italic">A</d:emphasis>.
+        </d:listitem>
+        <d:listitem>
+          If an evaluation <d:emphasis role="italic">A</d:emphasis> is included
+          in the sequence, then all evaluations that assign to the same
+          variable and happen before <d:emphasis role="italic">A</d:emphasis>
+          are also included.
+        </d:listitem>
+      </d:itemizedlist>
+    </d:para>
+    <d:note>
+      <d:title>NOTE 3</d:title>
+      The second requirement disallows
+      <d:quote>out-of-thin-air</d:quote>, or <d:code>speculative</d:code>
+      stores of atomics when relaxed atomics are used. Since unordered
+      operations are involved, evaluations may appear in this sequence out of
+      thread order. For example, with <d:code>x</d:code> and <d:code>y</d:code>
+      initially zero,
+      <d:programlisting role="CLexer"><![CDATA[// Thread 1:
+r1 = atomic_load_explicit(&y, memory_order_relaxed);
+atomic_store_explicit(&x, r1, memory_order_relaxed);
+// Thread 2:
+r2 = atomic_load_explicit(&x, memory_order_relaxed);
+atomic_store_explicit(&y, 42, memory_order_relaxed);]]>
+      </d:programlisting>
+      is allowed to produce <d:code>r1 == 42 &amp;&amp; r2 == 42</d:code>. The
+      sequence of evaluations justifying this consists of:
+      <d:programlisting role="CLexer"><![CDATA[atomic_store_explicit(&y, 42, memory_order_relaxed);
+r1 = atomic_load_explicit(&y, memory_order_relaxed);
+atomic_store_explicit(&x, r1, memory_order_relaxed);
+r2 = atomic_load_explicit(&x, memory_order_relaxed);]]>
+      </d:programlisting>
+      On the other hand,
+      <d:programlisting role="CLexer"><![CDATA[// Thread 1:
+r1 = atomic_load_explicit(&y, memory_order_relaxed);
+atomic_store_explicit(&x, r1, memory_order_relaxed);
+// Thread 2:
+r2 = atomic_load_explicit(&x, memory_order_relaxed);
+atomic_store_explicit(&y, r2, memory_order_relaxed);]]>
+      </d:programlisting>
+      is not allowed to produce <d:code>r1 == 42 &amp;&amp; r2 = 42</d:code>,
+      since there is no sequence of evaluations that results in the computation
+      of 42. In the absence of <d:quote>relaxed</d:quote> operations and
+      read-modify-write operations with weaker than
+      <d:code>memory_order_acq_rel</d:code> ordering, the second requirement
+      has no impact.
+    </d:note>
+    <d:para><d:emphasis role="bold">Recommended Practice</d:emphasis></d:para>
+    <d:para>
+      The requirements do not forbid <d:code>r1 == 42 &amp;&amp; r2 ==
+      42</d:code> in the following example, with <d:code>x</d:code> and
+      <d:code>y</d:code> initially zero:
+      <d:programlisting role="CLexer"><![CDATA[
+// Thread 1:
+r1 = atomic_load_explicit(&x, memory_order_relaxed);
+if (r1 == 42)
+  atomic_store_explicit(&y, r1, memory_order_relaxed);
+// Thread 2:
+r2 = atomic_load_explicit(&y, memory_order_relaxed);
+if (r2 == 42)
+  atomic_store_explicit(&x, 42, memory_order_relaxed);]]>
+      </d:programlisting>
+      However, this is not useful behavior, and implementations should not
+      allow it.
+    </d:para>
+    <d:para>
+      Implementations should make atomic stores visible to atomic loads within
+      a reasonable amount of time.
+    </d:para>
+    <d:sect2>
+      <d:title>The kill_dependency macro</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdatomic.h>
+type kill_dependency(type y);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>kill_dependency</d:code> macro terminates a dependency
+        chain; the argument does not carry a dependency to the return value.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>kill_dependency</d:code> macro returns the value of
+        <d:code>y</d:code>.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Fences</d:title>
+    <d:para>
+      This subclause introduces synchronization primitives called
+      <d:emphasis role="italic">fences</d:emphasis>. Fences can have acquire
+      semantics, release 
+      semantics, or both. A fence with acquire semantics is called an
+      <d:emphasis role="italic">acquire fence</d:emphasis>; a fence with
+      release semantics is called a <d:emphasis role="italic">release
+      fence</d:emphasis>.
+    </d:para>
+    <d:para>
+      A release fence <d:emphasis role="italic">A</d:emphasis> synchronizes
+      with an acquire fence <d:emphasis role="italic">B</d:emphasis> if there
+      exist atomic operations <d:emphasis role="italic">X</d:emphasis> and
+      <d:emphasis role="italic">Y</d:emphasis>, both operating on some atomic
+      object <d:emphasis role="italic">M</d:emphasis>, such that <d:emphasis
+      role="italic">A</d:emphasis> is sequenced before <d:emphasis
+      role="italic">X</d:emphasis>, <d:emphasis role="italic">X</d:emphasis>
+      modifies <d:emphasis role="italic">M, Y</d:emphasis> is sequenced before
+      <d:emphasis role="italic">B</d:emphasis>, and <d:emphasis
+      role="italic">Y</d:emphasis> reads the value written by <d:emphasis
+      role="italic">X</d:emphasis> or a value written by any side effect in the
+      hypothetical release sequence <d:emphasis role="italic">X</d:emphasis>
+      would head if it were a release operation.
+    </d:para>
+    <d:para>
+      A release fence <d:emphasis role="italic">A</d:emphasis> synchronizes
+      with an atomic operation <d:emphasis role="italic">B</d:emphasis> that
+      performs an acquire operation on an atomic object <d:emphasis
+      role="italic">M</d:emphasis> if there exists an atomic operation
+      <d:emphasis role="italic">X</d:emphasis> such that <d:emphasis
+      role="italic">A</d:emphasis> is sequenced before <d:emphasis
+      role="italic">X, X</d:emphasis> modifies <d:emphasis
+      role="italic">M</d:emphasis>, and <d:emphasis
+      role="italic">B</d:emphasis> reads the value written by <d:emphasis
+      role="italic">X</d:emphasis> or a value written by any side effect in the
+      hypothetical release sequence <d:emphasis role="italic">X</d:emphasis>
+      would head if it were a release operation.
+    </d:para>
+    <d:para>
+      An atomic operation <d:emphasis role="italic">A</d:emphasis> that is a
+      release operation on an atomic object <d:emphasis
+      role="italic">M</d:emphasis> synchronizes with an acquire fence
+      <d:emphasis role="italic">B</d:emphasis> if there exists some atomic
+      operation <d:emphasis role="italic">X</d:emphasis> on <d:emphasis
+      role="italic">M</d:emphasis> such that <d:emphasis
+      role="italic">X</d:emphasis> is sequenced before <d:emphasis
+      role="italic">B</d:emphasis> and reads the value written by <d:emphasis
+      role="italic">A</d:emphasis> or a value written by any side effect in the
+      release sequence headed by <d:emphasis role="italic">A</d:emphasis>.
+    </d:para>
+    <d:sect2>
+      <d:title>The atomic_thread_fence function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdatomic.h>
+void atomic_thread_fence(memory_order order);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        Depending on the value of <d:code>order</d:code>, this
+        operation:
+        <d:itemizedlist>
+          <d:listitem>
+            has no effects, <d:code>if order == memory_order_relaxed</d:code>;
+          </d:listitem>
+          <d:listitem>
+            is an acquire fence, if <d:code>order == memory_order_acquire or order ==
+            memory_order_consume</d:code>;
+          </d:listitem>
+          <d:listitem>
+            is a release fence, if <d:code>order ==
+            memory_order_release</d:code>;
+          </d:listitem>
+          <d:listitem>
+            is both an acquire fence and a release fence, if <d:code>order ==
+            memory_order_acq_rel</d:code>;
+          </d:listitem>
+          <d:listitem>
+            is a sequentially consistent acquire and release fence, if
+            <d:code>order == memory_order_seq_cst</d:code>.
+          </d:listitem>
+        </d:itemizedlist>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atomic_thread_fence</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The atomic_signal_fence function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdatomic.h>
+void atomic_signal_fence(memory_order order);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        Equivalent to <d:code>atomic_thread_fence(order)</d:code>, except that
+        the resulting ordering constraints are established only between a
+        thread and a signal handler executed in the same thread.
+        <d:note>
+          <d:title>NOTE 1</d:title>
+          <d:para>
+            The <d:code>atomic_signal_fence</d:code> function can be used to
+            specify the order in which actions performed by the thread become
+            visible to the signal handler.
+          </d:para>
+        </d:note>
+        <d:note>
+          <d:title>NOTE 2</d:title>
+          <d:para>
+            Compiler optimizations and reorderings of loads and stores are
+            inhibited in the same way as with
+            <d:code>atomic_thread_fence</d:code>, but the hardware fence
+            instructions that <d:code>atomic_thread_fence</d:code> would have
+            inserted are not emitted.
+          </d:para>
+        </d:note>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atomic_signal_fence</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Lock-free Property</d:title>
+    <d:para>
+      The atomic lock-free macros indicate the lock-free property of integer
+      and address atomic types. A value of <d:code>0</d:code> indicates that
+      the type is never lock-free; a value of <d:code>1</d:code> indicates
+      that the type is sometimes lock-free; a value of <d:code>2</d:code>
+      indicates that the type is always lock-free.
+      <d:note>
+        <d:title>NOTE</d:title>
+        <d:para>
+          Operations that are lock-free should also be <d:emphasis
+          role="italic">address-free</d:emphasis>. That is, atomic operations
+          on the same memory location via two different addresses will
+          communicate atomically. The implementation should not depend on any
+          per-process state. This restriction enables communication via
+          memory mapped into a process more than once and memory shared
+          between two processes.
+        </d:para>
+      </d:note>
+    </d:para>
+    <d:sect2>
+      <d:title>The atomic_is_lock_free generic function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdatomic.h>
+      _Bool atomic_is_lock_free(const volatile A *obj);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atomic_is_lock_free</d:code> generic function indicates
+        whether or not the object pointed to by <d:code>obj</d:code> is
+        lock-free.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atomic_is_lock_free generic</d:code> function returns
+        nonzero (true) if and only if the object's operations are
+        lock-free. The result of a lock-free query on one object cannot be
+        inferred from the result of a lock-free query on another object.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Atomic integer types</d:title>
+    <d:para>
+      For each line in the following table, the atomic type name is declared
+      as a type that has the same representation and alignment requirements
+      as the corresponding direct type.<d:footnote><d:para>The same
+      representation and alignment requirements are meant to imply
+      interchangeability as arguments to functions, return values from
+      functions, and members of unions.</d:para></d:footnote>
+    </d:para>
+    <informaltable
+        xmlns="http://docbook.org/ns/docbook" frame="border" border="1" class="centered">
+	  <colgroup />
+	  <colgroup />
+      <thead>
+        <tr bgcolor="#aaaaaa">
+          <th>Atomic type name</th>
+          <th>Direct type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>atomic_bool</td>
+          <td>_Atomic _Bool</td>
+        </tr>
+        <tr>
+          <td>atomic_char</td>
+          <td>_Atomic char</td>
+        </tr>
+        <tr>
+          <td>atomic_schar</td>
+          <td>_Atomic signed char</td>
+        </tr>
+        <tr>
+          <td>atomic_uchar</td>
+          <td>_Atomic unsigned char</td>
+        </tr>
+        <tr>
+          <td>atomic_short</td>
+          <td>_Atomic short</td>
+        </tr>
+        <tr>
+          <td>atomic_ushort</td>
+          <td>_Atomic unsigned short</td>
+        </tr>
+        <tr>
+          <td>atomic_int</td>
+          <td>_Atomic int</td>
+        </tr>
+        <tr>
+          <td>atomic_uint</td>
+          <td>_Atomic unsigned int</td>
+        </tr>
+        <tr>
+          <td>atomic_long</td>
+          <td>_Atomic long</td>
+        </tr>
+        <tr>
+          <td>atomic_ulong</td>
+          <td>_Atomic unsigned long</td>
+        </tr>
+        <tr>
+          <td>atomic_llong</td>
+          <td>_Atomic long long</td>
+        </tr>
+        <tr>
+          <td>atomic_ullong</td>
+          <td>_Atomic unsigned long long</td>
+        </tr>
+        <tr>
+          <td>atomic_char16_t</td>
+          <td>_Atomic char16_t</td>
+        </tr>
+        <tr>
+          <td>atomic_char32_t</td>
+          <td>_Atomic char32_t</td>
+        </tr>
+        <tr>
+          <td>atomic_wchar_t</td>
+          <td>_Atomic wchar_t</td>
+        </tr>
+        <tr>
+          <td>atomic_int_least8_t</td>
+          <td>_Atomic int_least8_t</td>
+        </tr>
+        <tr>
+          <td>atomic_uint_least8_t</td>
+          <td>_Atomic uint_least8_t</td>
+        </tr>
+        <tr>
+          <td>atomic_int_least16_t</td>
+          <td>_Atomic int_least16_t</td>
+        </tr>
+        <tr>
+          <td>atomic_uint_least16_t</td>
+          <td>_Atomic uint_least16_t</td>
+        </tr>
+        <tr>
+          <td>atomic_int_least32_t</td>
+          <td>_Atomic int_least32_t</td>
+        </tr>
+        <tr>
+          <td>atomic_uint_least32_t</td>
+          <td>_Atomic uint_least32_t</td>
+        </tr>
+        <tr>
+          <td>atomic_int_least64_t</td>
+          <td>_Atomic int_least64_t</td>
+        </tr>
+        <tr>
+          <td>atomic_uint_least64_t</td>
+          <td>_Atomic uint_least64_t</td>
+        </tr>
+        <tr>
+          <td>atomic_int_fast8_t</td>
+          <td>_Atomic int_fast8_t</td>
+        </tr>
+        <tr>
+          <td>atomic_uint_fast8_t</td>
+          <td>_Atomic uint_fast8_t</td>
+        </tr>
+        <tr>
+          <td>atomic_int_fast16_t</td>
+          <td>_Atomic int_fast16_t</td>
+        </tr>
+        <tr>
+          <td>atomic_uint_fast16_t</td>
+          <td>_Atomic uint_fast16_t</td>
+        </tr>
+        <tr>
+          <td>atomic_int_fast32_t</td>
+          <td>_Atomic int_fast32_t</td>
+        </tr>
+        <tr>
+          <td>atomic_uint_fast32_t</td>
+          <td>_Atomic uint_fast32_t</td>
+        </tr>
+        <tr>
+          <td>atomic_int_fast64_t</td>
+          <td>_Atomic int_fast64_t</td>
+        </tr>
+        <tr>
+          <td>atomic_uint_fast64_t</td>
+          <td>_Atomic uint_fast64_t</td>
+        </tr>
+        <tr>
+          <td>atomic_intptr_t</td>
+          <td>_Atomic intptr_t</td>
+        </tr>
+        <tr>
+          <td>atomic_uintptr_t</td>
+          <td>_Atomic uintptr_t</td>
+        </tr>
+        <tr>
+          <td>atomic_size_t</td>
+          <td>_Atomic size_t</td>
+        </tr>
+        <tr>
+          <td>atomic_ptrdiff_t</td>
+          <td>_Atomic ptrdiff_t</td>
+        </tr>
+        <tr>
+          <td>atomic_intmax_t</td>
+          <td>_Atomic intmax_t</td>
+        </tr>
+        <tr>
+          <td>atomic_uintmax_t</td>
+          <td>_Atomic uintmax_t</td>
+        </tr>
+      </tbody>
+    </informaltable>
+    <d:para>
+      The semantics of the operations on these types are defined in 7.17.7.
+    </d:para>
+    <d:note>
+      <d:title>NOTE</d:title>
+      <d:para>
+        The representation of atomic integer types need not have the same
+        size as their corresponding regular types. They should have the
+        same size whenever possible, as it eases effort required to port
+        existing code.
+      </d:para>
+    </d:note>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Operations on atomic types</d:title>
+    <d:para>
+      There are only a few kinds of operations on atomic types, though there
+      are many instances of those kinds. This subclause specifies each general
+      kind.
+    </d:para>
+    <d:sect2>
+      <d:title>The atomic_store generic functions</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdatomic.h>
+void atomic_store(volatile A *object, C desired);
+void atomic_store_explicit(volatile A *object,
+                           C desired, memory_order order);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>order</d:code> argument shall not be
+        <d:code>memory_order_acquire, memory_order_consume</d:code> nor
+        <d:code>memory_order_acq_rel</d:code>. Atomically replace the value
+        pointed to by <d:code>object</d:code> with the value of
+        <d:code>desired</d:code>. Memory is affected according to the value of
+        <d:code>order</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atomic_store</d:code> generic functions return no value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The atomic_load generic functions</d:title>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdatomic.h>
+C atomic_load(volatile A *object);
+C atomic_load_explicit(volatile A *object, memory_order order);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>order</d:code> argument shall not be
+        <d:code>memory_order_release</d:code> nor
+        <d:code>memory_order_acq_rel</d:code>. Memory is affected according to
+        the value of <d:code>order</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        Atomically returns the value pointed to by <d:code>object</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The atomic_exchange generic functions</d:title>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdatomic.h>
+C atomic_exchange(volatile A *object, C desired);
+C atomic_exchange_explicit(volatile A *object,
+                           C desired, memory_order order);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        Atomically replace the value pointed to by object with
+        <d:code>desired</d:code>. Memory is affected according to the value of
+        <d:code>order</d:code>. These operations are
+        read-modify-write operations (&#xa7; iso.5.1.2.4).
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        Atomically returns the value pointed to by <d:code>object</d:code>
+        immediately before the effects.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The atomic_compare_exchange generic functions</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdatomic.h>
+_Bool atomic_compare_exchange_strong(volatile A *object,
+                                     C *expected, C desired);
+_Bool atomic_compare_exchange_strong_explicit(
+    volatile A *object, C *expected, C desired,
+    memory_order success, memory_order failure);
+_Bool atomic_compare_exchange_weak(volatile A *object,
+                                   C *expected, C desired);
+_Bool atomic_compare_exchange_weak_explicit(
+    volatile A *object, C *expected, C desired, memory_order success, memory_order
+    failure);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>failure</d:code> argument shall not be
+        <d:code>memory_order_release</d:code> nor
+        <d:code>memory_order_acq_rel</d:code>. The <d:code>failure</d:code>
+        argument shall be no stronger than the success argument. Atomically,
+        compares the value pointed to by <d:code>object</d:code> for equality
+        with that in <d:code>expected</d:code>, and if true, replaces the value
+        pointed to by <d:code>object</d:code> with <d:code>desired</d:code>,
+        and if false, updates the value in <d:code>expected</d:code> with the
+        value pointed to by <d:code>object</d:code>. Further, if the comparison
+        is true, memory is affected according to the value of
+        <d:code>success</d:code>, and if the comparison is false, memory is
+        affected according to the value of <d:code>failure</d:code>. These
+        operations are atomic read-modify-write operations (&#xa7;
+        iso.5.1.2.4).
+        <d:note>
+          <d:title>NOTE 1</d:title>
+          <d:para>
+            For example, the effect of
+            <d:code>atomic_compare_exchange_strong</d:code> is
+            <d:programlisting role="CLexer"><![CDATA[if (memcmp(object, expected, sizeof (*object)) == 0)
+  memcpy(object, &desired, sizeof (*object));
+else
+  memcpy(expected, object, sizeof (*object));]]>
+            </d:programlisting>
+          </d:para>
+        </d:note>
+      </d:para>
+      <d:para>
+        A weak compare-and-exchange operation may fail spuriously. That is,
+        even when the contents of memory referred to by
+        <d:code>expected</d:code> and <d:code>object</d:code> are equal, it may
+        return zero and store back to <d:code>expected</d:code> the same memory
+        contents that were originally there.
+      </d:para>
+      <d:note>
+        <d:title>NOTE 2</d:title>
+        <d:para>
+          This spurious failure enables implementation of compare-and-exchange
+          on a broader class of machines, e.g. load-locked store-conditional
+          machines.
+        </d:para>
+      </d:note>
+      <d:para>
+        EXAMPLE A consequence of spurious failure is that nearly all uses of
+        weak compare-and-exchange will be in a loop.
+        <d:programlisting role="CLexer"><![CDATA[exp = atomic_load(&cur);
+do {
+  des = function(exp);
+} while (!atomic_compare_exchange_weak(&cur, &exp, des));]]>
+        </d:programlisting>
+        When a compare-and-exchange is in a loop, the weak version will yield
+        better performance on some platforms. When a weak compare-and-exchange
+        would require a loop and a strong one would not, the strong one is
+        preferable.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>The result of the comparison.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The atomic_fetch and modify generic functions</d:title>
+      <d:para>
+        The following operations perform arithmetic and bitwise
+        computations. All of these operations are applicable to an object of
+        any atomic integer type. None of these <d:code>*</d:code> operations is
+        applicable to <d:code>atomic_bool</d:code>. The key, operator, and
+        computation correspondence is:
+        <informaltable
+            xmlns="http://docbook.org/ns/docbook" frame="none"
+            class="centered">
+            <colgroup/>
+            <colgroup />
+            <colgroup />
+            <tr>
+              <td><d:emphasis role="italic">key</d:emphasis></td>
+              <td><d:emphasis role="italic">op</d:emphasis></td>
+              <td><d:emphasis role="italic">computation</d:emphasis></td>
+            </tr>
+            <tr>
+              <td><d:emphasis role="bold">add</d:emphasis></td>
+              <td>+</td>
+              <td>addition</td>
+            </tr>
+            <tr>
+              <td><d:emphasis role="bold">sub</d:emphasis></td>
+              <td>-</td>
+              <td>subtraction</td>
+            </tr>
+            <tr>
+              <td><d:emphasis role="bold">or</d:emphasis></td>
+              <td>|</td>
+              <td>bitwise inclusive or</td>
+            </tr>
+            <tr>
+              <td><d:emphasis role="bold">xor</d:emphasis></td>
+              <td>^</td>
+              <td>bitwise exclusive or</td>
+            </tr>
+            <tr>
+              <td><d:emphasis role="bold">and</d:emphasis></td>
+              <td>&amp;</td>
+              <td>bitwise and</td>
+            </tr>
+        </informaltable>
+      </d:para>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdatomic.h>
+C atomic_fetch_key(volatile A *object, M operand);
+C atomic_fetch_key_explicit(volatile A *object,
+                            M operand, memory_order order);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        Atomically replaces the value pointed to by <d:code>object</d:code>
+        with the result of the computation applied to the value pointed to by
+        <d:code>object</d:code> and the given operand. Memory is affected
+        according to the value of <d:code>order</d:code>. These operations are
+        atomic read-modify-write operations (&#xa7; iso.5.1.2.4). For signed
+        integer types, arithmetic is defined to use two's complement
+        representation with silent wrap-around on overflow; there are no
+        undefined results. For address types, the result may be an undefined
+        address, but the operations otherwise have no undefined behavior.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        Atomically, the value pointed to by <d:code>object</d:code> immediately
+        before the effects.
+      </d:para>
+      <d:note>
+        <d:title>NOTE</d:title>
+        <d:para>
+          The operation of the <d:code>atomic_fetch</d:code> and modify generic
+          functions are nearly equivalent to the operation of the corresponding
+          <d:emphasis role="italic">op=</d:emphasis> compound assignment
+          operators. The only differences are that the compound assignment
+          operators are not guaranteed to operate atomically, and the value
+          yielded by a compound assignment operator is the updated value of the
+          object, whereas the value returned by the
+          <d:code>atomic_fetch</d:code> and modify generic functions is the
+          previous value of the atomic object.
+        </d:para>
+      </d:note>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Atomic flag type and operations</d:title>
+    <d:para>
+      The <d:code>atomic_flag</d:code> type provides the classic test-and-set
+      functionality. It has two states, set and clear.
+    </d:para>
+    <d:para>
+      Operations on an object of type <d:code>atomic_flag</d:code> shall be
+      lock free.
+    </d:para>
+    <d:note>
+      <d:title>NOTE</d:title>
+      <d:para>
+        Hence the operations should also be address-free. No other type
+        requires lock-free operations, so the <d:code>atomic_flag</d:code> type
+        is the minimum hardware-implemented type needed to conform to this
+        International standard. The remaining types can be emulated with
+        <d:code>atomic_flag</d:code>, though with less than ideal properties.
+      </d:para>
+    </d:note>
+    <d:para>
+      The macro <d:code>ATOMIC_FLAG_INIT</d:code> may be used to initialize an
+      <d:code>atomic_flag</d:code> to the clear state. An
+      <d:code>atomic_flag</d:code> that is not explicitly initialized with
+      <d:code>ATOMIC_FLAG_INIT</d:code> is initially in an indeterminate
+      state.
+    </d:para>
+    <d:blockquote>
+      <d:para><d:code>atomic_flag guard = ATOMIC_FLAG_INIT;</d:code></d:para>
+    </d:blockquote>
+    <d:sect2>
+      <d:title>The atomic_flag_test_and_set functions</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdatomic.h>
+_Bool atomic_flag_test_and_set(
+    volatile atomic_flag *object);
+_Bool atomic_flag_test_and_set_explicit(
+    volatile atomic_flag *object, memory_order order);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        Atomically sets the value pointed to by <d:code>object</d:code> to
+        true. Memory is affected according to the value of
+        <d:code>order</d:code>. These operations are atomic read-modify-write
+        operations (&#xa7; iso.5.1.2.4).
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        Atomically, the value of the object immediately before the
+        effects.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The atomic_flag_clear functions</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdatomic.h>
+void atomic_flag_clear(volatile atomic_flag *object);
+void atomic_flag_clear_explicit(volatile atomic_flag *object, memory_order order);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The order argument shall not be <d:code>memory_order_acquire</d:code>
+        nor <d:code>memory_order_acq_rel</d:code>. Atomically sets the value
+        pointed to by <d:code>object</d:code> to false. Memory is affected
+        according to the value of <d:code>order</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atomic_flag_clear</d:code> functions return no value.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
 </d:chapter>
+

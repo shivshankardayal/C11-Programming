@@ -3,9 +3,9 @@ body {
 	padding:0;
 /*	width:800px;*/
 	margin:40px auto 80px auto;
-	/*padding:10px 20px 10px 20px;*/
-	/*border-radius: 10px;
-	box-shadow: 2px 2px 19px #444;*/
+	padding:10px 20px 10px 20px;
+	border-radius: 10px;
+	box-shadow: 2px 2px 19px #444;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 13px;
 	line-height: 20px;
@@ -38,6 +38,10 @@ h5.title {
 
 span.italic {
     font-style:italic;
+}
+
+blockquote {
+    border: None;
 }
 
 div.warning{
@@ -288,6 +292,15 @@ margin-bottom: -30px;
 div.footnote {
     font-size: 12px;
     color: #444;
+}
+
+.note p {
+    font-size: 11px;
+    font-color: #aaa;
+}
+
+.note h3 {
+    font-size: 16px;
 }
 
 .hll { background-color: #ffffcc }

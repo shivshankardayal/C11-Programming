@@ -1,6 +1,7 @@
 <?xml version='1.0'?> 
 <xsl:stylesheet  
-       xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0"> 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0"
+    xmlns:d="http://docbook.org/ns/docbook"> 
   <xsl:import href="/opt/local/share/xsl/docbook-xsl-ns/fo/docbook.xsl"/> 
   <xsl:param name="paper.type" select="'B5'"/> 
   <xsl:param name="double.sided" select="1"/>
@@ -29,6 +30,19 @@
     <xsl:attribute name="border-color">black</xsl:attribute>
     <xsl:attribute name="padding">3pt</xsl:attribute>
   </xsl:attribute-set>
+  <!--xsl:template match="d:programlisting[@role='CLexer']">
+    <xsl:copy>
+      <xsl:attribute name="language">CLexer</xsl:attribute>
+      <xsl:apply-templates select="node()"/>
+    </xsl:copy>
+  </xsl:template>
+  <xsl:template match="d:programlisting[@role='MakefileLexer']">
+    <xsl:copy>
+      <xsl:attribute name="language">MakefileLexer</xsl:attribute>
+      <xsl:apply-templates select="node()"/>
+    </xsl:copy>
+  </xsl:template-->
+
   <xsl:param name="highlight.source" select="1"></xsl:param>
   <xsl:param name="highlight.xslthl.config">/Users/gannu/Downloads/xslthl-2.1.3/highlighters/xslthl-config.xml</xsl:param>
 </xsl:stylesheet>  
