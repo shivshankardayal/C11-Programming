@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?dbhtml filename="tgmath/index.html" ?>
+  <d:title>Type-genetic math &lt;tgmath.h&gt;</d:title>
+  <d:para>
+    The header <d:code>&lt;tgmath.h&gt;</d:code> includes the headers
+    <d:code>&lt;math.h&gt;</d:code> and 
+    <d:code>&lt;complex.h&gt;</d:code> and defines several type-generic
+    macros.
+  </d:para>
+  <d:para>
+    Of the <d:code>&lt;math.h&gt;</d:code> and
+    <d:code>&lt;complex.h&gt;</d:code> functions without an
+    <d:code>f</d:code> (<d:code>float</d:code>) or <d:code>l</d:code>
+    (<d:code>long double</d:code>) suffix, several have one or more parameters
+    whose corresponding real type is <d:code>double</d:code>. For each such
+    function, except <d:code>modf</d:code>, there is a corresponding
+    <d:emphasis role="italic">type-generic
+    macro</d:emphasis>.<d:footnote><d:para>Like other function-like macros in
+    Standard libraries, each type-generic macro can be suppressed to make
+    available the corresponding ordinary function.</d:para></d:footnote> The
+    parameters whose corresponding real type is <d:code>double</d:code> in the
+    function synopsis are <d:emphasis role="italic">generic
+    parameters</d:emphasis>. Use of the macro invokes a function whose
+    corresponding real type and type domain are determined by the arguments for
+    the generic parameters.<d:footnote><d:para>If the type of the argument is
+    not compatible with the type of the parameter for the selected function,
+    the behavior is undefined.</d:para></d:footnote>
+  </d:para>
+  <d:para>
+    Use of the macro invokes a function whose generic parameters have the
+    corresponding real type determined as follows:
+    <d:itemizedlist>
+      <d:listitem>
+        First, if any argument for generic parameters has type <d:code>long
+        double</d:code>, the type determined is <d:code>long double</d:code>.
+      </d:listitem>
+      <d:listitem>
+        therwise, if any argument for generic parameters has type
+        <d:code>double</d:code> or is of integer type, the type determined is
+        <d:code>double</d:code>.
+      </d:listitem>
+      <d:listitem>
+        For each unsuffixed function in <d:code>&lt;math.h&gt;</d:code> for
+        which there is a function in <d:code>&lt;complex.h&gt;</d:code> with
+        the same name except for a <d:code>c</d:code> prefix, the corresponding
+        type-generic macro (for both functions) has the same name as the
+        function in <d:code>&lt;math.h&gt;</d:code>. The corresponding
+        type-generic macro for <d:code>fabs</d:code> and <d:code>cabs</d:code>
+        is <d:code>fabs</d:code>.
+      </d:listitem>
+    </d:itemizedlist>
+  </d:para>
+  <informaltable
+      xmlns="http://docbook.org/ns/docbook" frame="border" border="1" class="centered">
+	<colgroup />
+	<colgroup />
+	<colgroup />
+    <thead>
+      <tr bgcolor="#aaaaaa">
+        <th><d:code>&lt;math.h&gt; function</d:code></th>
+        <th><d:code>&lt;complex.h&gt; function</d:code></th>
+        <th>type-generic macro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><d:code>acos</d:code></td>
+        <td><d:code>cacos</d:code></td>
+        <td><d:code>acos</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>asin</d:code></td>
+        <td><d:code>casin</d:code></td>
+        <td><d:code>asin</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>atan</d:code></td>
+        <td><d:code>catan</d:code></td>
+        <td><d:code>atan</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>acosh</d:code></td>
+        <td><d:code>cacosh</d:code></td>
+        <td><d:code>acosh</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>cos</d:code></td>
+        <td><d:code>ccos</d:code></td>
+        <td><d:code>cos</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>sin</d:code></td>
+        <td><d:code>csin</d:code></td>
+        <td><d:code>sin</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>tan</d:code></td>
+        <td><d:code>ctan</d:code></td>
+        <td><d:code>tan</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>cosh</d:code></td>
+        <td><d:code>ccosh</d:code></td>
+        <td><d:code>cosh</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>sinh</d:code></td>
+        <td><d:code>csinh</d:code></td>
+        <td><d:code>sinh</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>tanh</d:code></td>
+        <td><d:code>ctanh</d:code></td>
+        <td><d:code>tanh</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>exp</d:code></td>
+        <td><d:code>cexp</d:code></td>
+        <td><d:code>exp</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>log</d:code></td>
+        <td><d:code>clog</d:code></td>
+        <td><d:code>log</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>pow</d:code></td>
+        <td><d:code>cpow</d:code></td>
+        <td><d:code>pow</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>sqrt</d:code></td>
+        <td><d:code>csqrt</d:code></td>
+        <td><d:code>sqrt</d:code></td>
+      </tr>
+      <tr>
+        <td><d:code>fabs</d:code></td>
+        <td><d:code>cabs</d:code></td>
+        <td><d:code>fabs</d:code></td>
+      </tr>
+    </tbody>
+  </informaltable>
+
+</d:chapter>

@@ -302,7 +302,8 @@ long double strtold(const char * restrict nptr,
       respect to <d:emphasis role="italic">D</d:emphasis> should have a correct
       sign for the current rounding
       direction.<d:footnote><d:para><d:code>DECIMAL_DIG</d:code>, defined in
-      &lt;float.h&gt;, should be sufficiently large that <d:emphasis
+      <d:code>&lt;float.h&gt;</d:code>, should be sufficiently large that
+      <d:emphasis 
       role="italic">L</d:emphasis> and <d:emphasis role="italic">U</d:emphasis>
       will usually round to the same internal floating value, but if not will
       round to adjacent values.</d:para></d:footnote>
@@ -356,6 +357,940 @@ unsigned long long int strtoull(
         string of one or more unrecognized characters, including the
         terminating null character of the input string. Then, they attempt to
         convert the subject sequence to an integer, and return the result.
+      </d:para>
+      <d:para>
+        If the value of <d:code>base</d:code> is zero, the expected form of the
+        subject sequence is that of an integer constant as described in (&#xa7;
+        iso.6.4.4.1), optionally preceded by a plus or minus sign, but not
+        including an integer suffix. If the value of <d:code>base</d:code> is
+        between 2 and 36 (inclusive), the expected form of the subject sequence
+        is a sequence of letters and digits representing an integer with the
+        radix specified by <d:code>base</d:code>, optionally preceded by a plus
+        or minus sign, but not including an integer suffix. The letters from
+        <d:code>a</d:code> (or <d:code>A</d:code>) through <d:code>z</d:code>
+        (or <d:code>Z</d:code>) are ascribed the values 10 through 35; only
+        letters and digits whose ascribed values are less than that of
+        <d:code>base</d:code> are 
+        permitted. If the value of <d:code>base</d:code> is 16, the characters
+        <d:code>0x</d:code> or <d:code>0X</d:code> may optionally precede the
+        sequence of letters and digits, following the sign if present.
+      </d:para>
+      <d:para>
+        The subject sequence is defined as the longest initial subsequence of
+        the input string, starting with the first non-white-space character,
+        that is of the expected form. The subject sequence contains no
+        characters if the input string is empty or consists entirely of white
+        space, or if the first non-white-space character is other than a sign
+        or a permissible letter or digit.
+      </d:para>
+      <d:para>
+        If the subject sequence has the expected form and the value of
+        <d:code>base</d:code> is zero, the sequence of characters starting with
+        the first digit is interpreted as an integer constant according to the
+        rules of (&#xa7; iso.6.4.4.1). If the subject sequence has the expected
+        form and the value of <d:code>base</d:code> is between 2 and 36, it is
+        used as the base for conversion, ascribing to each letter its value as
+        given above. If the subject sequence begins with a minus sign, the
+        value resulting from the conversion is negated (in the return type). A
+        pointer to the final string is stored in the object pointed to by
+        <d:code>endptr</d:code>, provided that <d:code>endptr</d:code> is not a
+        null pointer.
+      </d:para>
+      <d:para>
+        In other than the <d:code>"C"</d:code> locale, additional
+        locale-specific subject sequence forms may be accepted.
+      </d:para>
+      <d:para>
+        If the subject sequence is empty or does not have the expected form, no
+        conversion is performed; the value of <d:code>nptr</d:code> is stored
+        in the object pointed to by <d:code>endptr</d:code>, provided that
+        <d:code>endptr</d:code> is not a null pointer.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strtol, strtoll, strtoul</d:code> and
+        <d:code>strtoull</d:code> functions return the converted value, if
+        any. If no conversion could be performed, zero is returned. If the
+        correct value is outside the range of representable values,
+        <d:code>LONG_MIN, LONG_MAX, LLONG_MIN, LLONG_MAX, ULONG_MAX</d:code> or
+        <d:code>ULLONG_MAX</d:code> is returned (according to the return type
+        and sign of the value, if any), and the value of the macro
+        <d:code>ERANGE</d:code> is stored in <d:code>errno</d:code>.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Pseudo-random sequence generation functions</d:title>
+    <d:sect2>
+      <d:title>The rand function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+int rand(void);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>rand</d:code> function computes a sequence of pseudo-random
+        integers in the range 0 to
+        <d:code>RAND_MAX</d:code>.<d:footnote><d:para>There are no guarantees
+        as to the quality of the random sequence produced and some
+        implementations are known to produce sequences with distressingly
+        non-random low-order bits. Applications with particular requirements
+        should use a generator that is known to be sufficient for their
+        needs.</d:para></d:footnote>
+      </d:para>
+      <d:para>
+        The <d:code>rand</d:code> function is not required to avoid data races
+        with other calls to pseudo-random sequence generation functions. The
+        implementation shall behave as if no library function calls the
+        <d:code>rand</d:code> function.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>rand</d:code> function returns a pseudo-random integer.
+      </d:para>
+      <d:para><d:emphasis role="bold">Environmental
+      limits</d:emphasis></d:para>
+      <d:para>The value of the <d:code>RAND_MAX</d:code> macro shall be at
+      least 32767.</d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The srand function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+void srand(unsigned int seed);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>srand</d:code> function uses the argument as a seed for a
+        new sequence of pseudo-random numbers to be returned by subsequent
+        calls to <d:code>rand</d:code>. If <d:code>srand</d:code> is then
+        called with the same seed value, the sequence of pseudo-random numbers
+        shall be repeated. If <d:code>rand</d:code> is called before any calls
+        to srand have been made, the same sequence shall be generated as when
+        <d:code>srand</d:code> is first called with a seed value of 1.
+      </d:para>
+      <d:para>
+        The <d:code>srand</d:code> function is not required to avoid data races
+        with other calls to pseudo- random sequence generation functions. The
+        implementation shall behave as if no library function calls the
+        <d:code>srand</d:code> function.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>srand</d:code> function returns no value.
+      </d:para>
+      <d:para role="example">
+        EXAMPLE The following functions define a portable implementation of
+        <d:code>rand</d:code> and <d:code>srand</d:code>.
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[static unsigned long int next = 1;
+int rand(void) // RAND_MAX assumed to be 32767 {
+  next = next * 1103515245 + 12345;
+  return (unsigned int)(next/65536) % 32768;
+}
+void srand(unsigned int seed)
+{
+  next = seed;
+}]]>
+      </d:programlisting>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Memory management functions</d:title>
+    <d:para>
+      The order and contiguity of storage allocated by successive calls to
+      the<d:code> aligned_alloc, calloc, malloc</d:code> and
+      <d:code>realloc</d:code> functions is unspecified. The pointer returned
+      if the allocation succeeds is suitably aligned so that it may be assigned
+      to a pointer to any type of object with a fundamental alignment
+      requirement and then used to access such an object or an array of such
+      objects in the space allocated (until the space is explicitly
+      deallocated). The lifetime of an allocated object extends from the
+      allocation until the deallocation. Each such allocation shall yield a
+      pointer to an object disjoint from any other object. The pointer returned
+      points to the start (lowest byte address) of the allocated space. If the
+      space cannot be allocated, a null pointer is returned. If the size of the
+      space requested is zero, the behavior is implementation-defined: either a
+      null pointer is returned, or the behavior is as if the size were some
+      nonzero value, except that the returned pointer shall not be used to
+      access an object.
+    </d:para>
+    <d:para>
+      For purposes of determining the existence of a data race, memory
+      allocation functions behave as though they accessed only memory locations
+      accessible through their arguments and not other static duration
+      storage. These functions may, however, visibly modify the storage that
+      they allocate or deallocate. A call to <d:code>free</d:code> or
+      <d:code>realloc</d:code> that deallocates a region p of memory
+      synchronizes with any allocation call that allocates all or part of the
+      region <d:emphasis role="italic">p</d:emphasis>. This synchronization
+      occurs after any access of <d:emphasis role="italic">p</d:emphasis> by
+      the deallocating function, and before any such access by the allocating
+      function.
+    </d:para>
+    <d:sect2>
+      <d:title>The aligned_alloc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+void *aligned_alloc(size_t alignment, size_t size);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>aligned_alloc</d:code> function allocates space for an
+        object whose alignment is specified by <d:code>alignment</d:code>,
+        whose size is specified by <d:code>size</d:code>, and whose value is
+        indeterminate. The value of <d:code>alignment</d:code> shall be a valid
+        alignment supported by the implementation and the value of
+        <d:code>size</d:code> shall be an integral multiple of
+        <d:code>alignment</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>aligned_alloc</d:code> function returns either a null
+        pointer or a pointer to the allocated space.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The calloc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+void *calloc(size_t nmemb, size_t size);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>calloc</d:code> function allocates space for an array of
+        <d:code>nmemb</d:code> objects, each of whose size is
+        <d:code>size</d:code>. The space is initialized to all bits
+        zero.<d:footnote><d:para>Note that this need not be the same as the
+        representation of floating-point zero or a null pointer
+        constant.</d:para></d:footnote>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>calloc</d:code> function returns either a null pointer or a
+        pointer to the allocated space.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The free function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+void free(void *ptr);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>free</d:code> function causes the space pointed to by
+        <d:code>ptr</d:code> to be deallocated, that is, made available for
+        further allocation. If <d:code>ptr</d:code> is a null pointer, no
+        action occurs. Otherwise, if the argument does not match a pointer
+        earlier returned by a memory management function, or if the space has
+        been deallocated by a call to <d:code>free</d:code> or
+        <d:code>realloc</d:code>, the behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>free</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The malloc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+void *malloc(size_t size);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>malloc</d:code> function allocates space for an object
+        whose size is specified by <d:code>size</d:code> and whose value is
+        indeterminate.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>malloc</d:code> function returns either a null pointer or a
+        pointer to the allocated space.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The realloc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+void *realloc(void *ptr, size_t size);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>realloc</d:code> function deallocates the old object
+        pointed to by <d:code>ptr</d:code> and returns a pointer to a new
+        object that has the size specified by <d:code>size</d:code>. The
+        contents of the new object shall be the same as that of the old object
+        prior to deallocation, up to the lesser of the new and old sizes. Any
+        bytes in the new object beyond the size of the old object have
+        indeterminate values.
+      </d:para>
+      <d:para>
+        If <d:code>ptr</d:code> is a null pointer, the <d:code>realloc</d:code>
+        function behaves like the <d:code>malloc</d:code> function for the
+        specified size. Otherwise, if <d:code>ptr</d:code> does not match a
+        pointer earlier returned by a memory management function, or if the
+        space has been deallocated by a call to the <d:code>free</d:code> or
+        <d:code>realloc</d:code> function, the behavior is undefined. If memory
+        for the new object cannot be allocated, the old object is not
+        deallocated and its value is unchanged.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>        
+        The <d:code>realloc</d:code> function returns a pointer to the new
+        object (which may have the same value as a pointer to the old object),
+        or a null pointer if the new object could not be allocated.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Communication with environment</d:title>
+    <d:sect2>
+      <d:title>The abort function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+_Noreturn void abort(void);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>abort</d:code> function causes abnormal program termination
+        to occur, unless the signal <d:code>SIGABRT</d:code> is being caught
+        and the signal handler does not return. Whether open streams with
+        unwritten buffered data are flushed, open streams are closed, or
+        temporary files are removed is implementation-defined. An
+        implementation-defined form of the status <d:emphasis
+        role="italic">unsuccessful termination</d:emphasis> is returned to the
+        host environment by means of the function call
+        <d:code>raise(SIGABRT)</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>abort</d:code> function does not return to its caller.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The atexit function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+int atexit(void (*func)(void));]]>
+      </d:programlisting>
+      <d:para>
+        The <d:code>atexit</d:code> function registers the function pointed to
+        by <d:code>func</d:code>, to be called without arguments at normal
+        program termination.<d:footnote><d:para>The <d:code>atexit</d:code>
+        function registrations are distinct from the
+        <d:code>at_quick_exit</d:code> registrations, so applications may need
+        to call both registration functions with the same
+        argument.</d:para></d:footnote> It is unspecified whether a call to the
+        <d:code>atexit</d:code> function that does not happen before the
+        <d:code>exit</d:code> function is called will succeed.
+      </d:para>
+      <d:para><d:emphasis role="bold">Environmental
+      limits</d:emphasis></d:para>
+      <d:para>
+        The implementation shall support the registration of at least 32
+        functions.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>atexit</d:code> function returns zero if the registration
+        succeeds, nonzero if it fails. 
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>at_quick_exit</d:code> function (7.22.4.3), the
+        <d:code>exit</d:code> function (7.22.4.4).
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The at_quick_exit function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+int at_quick_exit(void (*func)(void));]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>at_quick_exit</d:code> function registers the function
+        pointed to by <d:code>func</d:code>, to be called without arguments
+        should <d:code>quick_exit</d:code> be called.<d:footnote><d:para>The
+        <d:code>at_quick_exit</d:code> function registrations are distinct from
+        the <d:code>atexit</d:code> registrations, so applications may need to
+        call both registration functions with the same
+        argument.</d:para></d:footnote> It is unspecified whether a call to the
+        <d:code>at_quick_exit</d:code> function that does not happen before the
+        <d:code>quick_exit</d:code> function is called will succeed.
+      </d:para>
+      <d:para><d:emphasis role="bold">Environmental
+      limits</d:emphasis></d:para>
+      <d:para>
+        The implementation shall support the registration of at least 32
+        functions.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>at_quick_exit</d:code> function returns zero if the registration
+        succeeds, nonzero if it fails. 
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>quick_exit</d:code> function (7.22.4.7).
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The exit function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+_Noreturn void exit(int status);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>exit</d:code> function causes normal program termination to
+        occur. No functions registered by the <d:code>at_quick_exit</d:code>
+        function are called. If a program calls the <d:code>exit</d:code>
+        function more than once, or calls the <d:code>quick_exit</d:code>
+        function in addition to the <d:code>exit</d:code> function, the
+        behavior is undefined.
+      </d:para>
+      <d:para>
+        First, all functions registered by the <d:code>atexit</d:code> function
+        are called, in the reverse order of their
+        registration,<d:footnote><d:para>Each function is called as many times
+        as it was registered, and in the correct order with respect to other
+        registered functions.</d:para></d:footnote> except that a function is
+        called after any previously registered functions that had already been
+        called at the time it was registered. If, during the call to any such
+        function, a call to the <d:code>longjmp</d:code> function is made that
+        would terminate the call to the registered function, the behavior is
+        undefined.
+      </d:para>
+      <d:para>
+        Next, all open streams with unwritten buffered data are flushed, all
+        open streams are closed, and all files created by the
+        <d:code>tmpfile</d:code> function are removed.
+      </d:para>
+      <d:para>
+        Finally, control is returned to the host environment. If the value of
+        status is zero or <d:code>EXIT_SUCCESS</d:code>, an
+        implementation-defined form of the status <d:emphasis
+        role="italic">successful termination</d:emphasis> is returned. If the
+        value of <d:code>status</d:code> is <d:code>EXIT_FAILURE</d:code>, an
+        implementation-defined form of the status <d:code>unsuccessful
+        termination</d:code> is returned. Otherwise the status returned is
+        implementation-defined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>exit</d:code> function cannot return to its caller.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The _Exit function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+_Noreturn void _Exit(int status);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>_Exit</d:code> function causes normal program termination
+        to occur and control to be returned to the host environment. No
+        functions registered by the <d:code>atexit</d:code> function, the
+        <d:code>at_quick_exit</d:code> function, or signal handlers registered
+        by the <d:code>signal</d:code> function are called. The status returned
+        to the host environment is determined in the same way as for the
+        <d:code>exit</d:code> function (7.22.4.4). Whether open streams with
+        unwritten buffered data are flushed, open streams are closed, or
+        temporary files are removed is implementation- defined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>_Exit</d:code> function cannot return to its caller.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The getenv function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+char *getenv(const char *name);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>getenv</d:code> function searches an <d:emphasis
+        role="italic">environment list</d:emphasis>, provided by the host
+        environment, for a string that matches the string pointed to by
+        <d:code>name</d:code>. The set of environment names and the method for
+        altering the environment list are implementation-defined. The
+        <d:code>getenv</d:code> function need not avoid data races with other
+        threads of execution that modify the environment
+        list.<d:footnote><d:para>Many implementations provide non-standard
+        functions that modify the environment list.</d:para></d:footnote>
+      </d:para>
+      <d:para>
+        The implementation shall behave as if no library function calls the
+        <d:code>getenv</d:code> function.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>getenv</d:code> function returns a pointer to a string
+        associated with the matched list member. The string pointed to shall
+        not be modified by the program, but may be overwritten by a subsequent
+        call to the <d:code>getenv</d:code> function. If the specified
+        <d:code>name</d:code> cannot be found, a null pointer is returned.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The quick_exit function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+_Noreturn void quick_exit(int status);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>quick_exit</d:code> function causes normal program
+        termination to occur. No functions registered by the
+        <d:code>atexit</d:code> function or signal handlers registered by the
+        <d:code>signal</d:code> function are called. If a program calls the
+        <d:code>quick_exit</d:code> function more than once, or calls the
+        <d:code>exit</d:code> function in addition to the
+        <d:code>quick_exit</d:code> function, the behavior is undefined. If a
+        signal is raised while the <d:code>quick_exit</d:code> function is
+        executing, the behavior is undefined.
+      </d:para>
+      <d:para>
+        The <d:code>quick_exit</d:code> function first calls all functions
+        registered by the <d:code>at_quick_exit</d:code> function, in the
+        reverse order of their registration,<d:footnote><d:para>Each function
+        is called as many times as it was registered, and in the correct order
+        with respect to other registered functions.</d:para></d:footnote>
+        except that a function is called after any previously registered
+        functions that had already been called at the time it was
+        registered. If, during the call to any such function, a call to the
+        <d:code>longjmp</d:code> function is made that would terminate the call
+        to the registered function, the behavior is undefined.
+      </d:para>
+      <d:para>
+        Then control is returned to the host environment by means of the
+        function call <d:code>_Exit(status)</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>quick_exit</d:code> function cannot return to its caller.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The system function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+int system(const char *string);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        If <d:code>string</d:code> is a null pointer, the
+        <d:code>system</d:code> function determines whether the host
+        environment has a <d:emphasis role="italic">command
+        processor</d:emphasis>. If <d:code>string</d:code> is not a null
+        pointer, the <d:code>system</d:code> function passes the string pointed
+        to by <d:code>string</d:code> to that command processor to be executed
+        in a manner which the implementation shall document; this might then
+        cause the program calling <d:code>system</d:code> to behave in a
+        non-conforming manner or to terminate.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If the argument is a null pointer, the <d:code>system</d:code> function
+        returns nonzero only if a command processor is available. If the
+        argument is not a null pointer, and the <d:code>system</d:code>
+        function does return, it returns an implementation-defined value.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Searching and sorting utilities</d:title>
+    <d:para>
+      These utilities make use of a comparison function to search or sort
+      arrays of unspecified type. Where an argument declared as <d:code>size_t
+      nmemb</d:code> specifies the length of the array for a function,
+      <d:code>nmemb</d:code> can have the value zero on a call to that
+      function; the comparison function is not called, a search finds no
+      matching element, and sorting performs no rearrangement. Pointer
+      arguments on such a call shall still have valid values, as described in
+      (&#xa7; iso.7.1.4).
+    </d:para>
+    <d:para>
+      The implementation shall ensure that the second argument of the
+      comparison function (when called from <d:code>bsearch</d:code>), or both
+      arguments (when called from <d:code>qsort</d:code>), are pointers to
+      elements of the array.
+      <d:footnote>
+        <d:para>That is, if the value passed is
+        <d:code>p</d:code>, then the following expressions are always
+        nonzero:
+        <d:programlisting role="CLexer"><![CDATA[((char *)p - (char *)base) % size == 0
+(char *)p >= (char *)base
+(char *)p < (char *)base + nmemb * size]]>
+        </d:programlisting>
+        </d:para>
+      </d:footnote> The first argument when called from
+      <d:code>bsearch</d:code> shall equal <d:code>key</d:code>.
+    </d:para>
+    <d:para>
+      The comparison function shall not alter the contents of the array. The
+      implementation may reorder elements of the array between calls to the
+      comparison function, but shall not alter the contents of any individual
+      element.
+    </d:para>
+    <d:para>
+      When the same objects (consisting of <d:code>size</d:code> bytes,
+      irrespective of their current positions in the array) are passed more
+      than once to the comparison function, the results shall be consistent
+      with one another. That is, for <d:code>qsort</d:code> they shall define a
+      total ordering on the array, and for <d:code>bsearch</d:code> the same
+      object shall always compare the same way with the key.
+    </d:para>
+    <d:para>
+      A sequence point occurs immediately before and immediately after each
+      call to the comparison function, and also between any call to the
+      comparison function and any movement of the objects passed as arguments
+      to that call.
+    </d:para>
+    <d:sect2>
+      <d:title>The bsearch function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+void *bsearch(const void *key, const void *base,
+              size_t nmemb, size_t size,
+              int (*compar)(const void *, const void *));]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>bsearch</d:code> function searches an array of
+        <d:code>nmemb</d:code> objects, the initial element of which is pointed
+        to by <d:code>base</d:code>, for an element that matches the object
+        pointed to by <d:code>key</d:code>. The size of each element of the
+        array is specified by size.
+      </d:para>
+      <d:para>
+        The comparison function pointed to by <d:code>compar</d:code> is called
+        with two arguments that point to the <d:code>key</d:code> object and to
+        an array element, in that order. The function shall return an integer
+        less than, equal to, or greater than zero if the <d:code>key</d:code>
+        object is considered, respectively, to be less than, to match, or to be
+        greater than the array element. The array shall consist of: all the
+        elements that compare less than, all the elements that compare equal
+        to, and all the elements that compare greater than the
+        <d:code>key</d:code> object, in that order.<d:footnote><d:para>In
+        practice, the entire array is sorted according to the comparison
+        function.</d:para></d:footnote>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>bsearch</d:code> function returns a pointer to a matching
+        element of the array, or a null pointer if no match is found. If two
+        elements compare as equal, which element is matched is unspecified.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The qsort function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+void qsort(void *base, size_t nmemb, size_t size,
+           int (*compar)(const void *, const void *));]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>qsort</d:code> function sorts an array of
+        <d:code>nmemb</d:code> objects, the initial element of which is pointed
+        to by <d:code>base</d:code>. The size of each object is specified by
+        <d:code>size</d:code>.
+      </d:para>
+      <d:para>        
+        The contents of the array are sorted into ascending order according to
+        a comparison function pointed to by <d:code>compar</d:code>, which is
+        called with two arguments that point to the objects being compared. The
+        function shall return an integer less than, equal to, or greater than
+        zero if the first argument is considered to be respectively less than,
+        equal to, or greater than the second.
+      </d:para>
+      <d:para>
+        If two elements compare as equal, their order in the resulting sorted
+        array is unspecified.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>qsort</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Integer arithmetic functions</d:title>
+    <d:sect2>
+      <d:title>The abs, labs and llabs functions</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+int abs(int j);
+long int labs(long int j);
+long long int llabs(long long int j);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>abs, labs</d:code> and <d:code>llabs</d:code> functions
+        compute the absolute value of an integer <d:code>j</d:code>. If the
+        result cannot be represented, the behavior is
+        undefined.<d:footnote><d:para>The absolute value of the most negative
+        number cannot be represented in two’s complement.</d:para></d:footnote>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>abs, labs</d:code> and <d:code>llabs</d:code>, functions
+        return the absolute value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The div, ldiv and lldiv functions</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+div_t div(int numer, int denom);
+ldiv_t ldiv(long int numer, long int denom);
+lldiv_t lldiv(long long int numer, long long int denom);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>div, ldiv</d:code> and <d:code>lldiv</d:code>, functions
+        compute <d:code>numer / denom</d:code> and <d:code>numer %
+        denom</d:code> in a single operation.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>div, ldiv</d:code> and <d:code>lldiv</d:code> functions
+        return a structure of type <d:code>div_t, ldiv_t</d:code> and
+        <d:code>lldiv_t</d:code>, respectively, comprising both the quotient
+        and the remainder. The structures shall contain (in either order) the
+        members <d:code>quot</d:code> (the quotient) and <d:code>rem</d:code>
+        (the remainder), each of which has the same type as the arguments
+        <d:code>numer</d:code> and <d:code>denom</d:code>. If either part of
+        the result cannot be represented, the behavior is undefined.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Multibyte/wide character conversion functions</d:title>
+    <d:para>
+      The behavior of the multibyte character functions is affected by the
+      <d:code>LC_CTYPE</d:code> category of the current locale. For a
+      state-dependent encoding, each function is placed into its initial
+      conversion state at program startup and can be returned to that state by
+      a call for which its character pointer argument, <d:code>s</d:code>, is a
+      null pointer. Subsequent calls with <d:code>s</d:code> as other than a
+      null pointer cause the internal conversion state of the function to be
+      altered as necessary. A call with s as a null pointer causes these
+      functions to return a nonzero value if encodings have state dependency,
+      and zero otherwise.<d:footnote><d:para>If the locale employs special
+      bytes to change the shift state, these bytes do not produce separate wide
+      character codes, but are grouped with an adjacent multibyte
+      character.</d:para></d:footnote> Changing the <d:code>LC_CTYPE</d:code>
+      category causes the conversion state of these functions to be
+      indeterminate.
+    </d:para>
+    <d:sect2>
+      <d:title>The mblen function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+int mblen(const char *s, size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        If <d:code>s</d:code> is not a null pointer, the <d:code>mblen</d:code>
+        function determines the number of bytes contained in the multibyte
+        character pointed to by <d:code>s</d:code>. Except that the conversion
+        state of the <d:code>mbtowc</d:code> function is not affected, it is
+        equivalent to
+        <d:programlisting role="CLexer"><![CDATA[mbtowc((wchar_t *)0, (const char *)0, 0);
+mbtowc((wchar_t *)0, s, n);]]>
+        </d:programlisting>
+      </d:para>
+      <d:para>
+        The implementation shall behave as if no library function calls the
+        <d:code>mblen</d:code> function.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If <d:code>s</d:code> is a null pointer, the <d:code>mblen</d:code>
+        function returns a nonzero or zero value, if multibyte character
+        encodings, respectively, do or do not have state-dependent
+        encodings. If <d:code>s</d:code> is not a null pointer, the
+        <d:code>mblen</d:code> function either returns 0 (if <d:code>s</d:code>
+        points to the null character), or returns the number of bytes that are
+        contained in the multibyte character (if the next <d:code>n</d:code> or
+        fewer bytes form a valid multibyte character), or returns −1 (if they
+        do not form a valid multibyte character).
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>mbtowc</d:code> function (7.22.7.2).
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The mbtowc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+int mbtowc(wchar_t * restrict pwc,
+           const char * restrict s,
+           size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        If <d:code>s</d:code> is not a null pointer, the
+        <d:code>mbtowc</d:code> function inspects at most <d:code>n</d:code>
+        bytes beginning with the byte pointed to by <d:code>s</d:code> to
+        determine the number of bytes needed to complete the next multibyte
+        character (including any shift sequences). If the function determines
+        that the next multibyte character is complete and valid, it determines
+        the value of the corresponding wide character and then, if
+        <d:code>pwc</d:code> is not a null pointer, stores that value in the
+        object pointed to by <d:code>pwc</d:code>. If the corresponding wide
+        character is the null wide character, the function is 
+        left in the initial conversion state.
+      </d:para>
+      <d:para>
+        The implementation shall behave as if no library function calls the
+        <d:code>mbtowc</d:code> function.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If <d:code>s</d:code> is a null pointer, the <d:code>mbtowc</d:code>
+        function returns a nonzero or zero value, if multibyte character
+        encodings, respectively, do or do not have state-dependent
+        encodings. If <d:code>s</d:code> is not a null pointer, the
+        <d:code>mbtowc</d:code> function either returns 0 (if
+        <d:code>s</d:code> points to the null character), or returns the number
+        of bytes that are contained in the converted multibyte character (if
+        the next <d:code>n</d:code> or fewer bytes form a valid multibyte
+        character), or returns −1 (if they do not form a valid multibyte
+        character).
+      </d:para>
+      <d:para>
+        In no case will the value returned be greater than n or the value of
+        the <d:code>MB_CUR_MAX</d:code> macro.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The wctomb function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+int wctomb(char *s, wchar_t wc);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>wctomb</d:code> function determines the number of bytes
+        needed to represent the multibyte character corresponding to the wide
+        character given by <d:code>wc</d:code> (including any shift sequences),
+        and stores the multibyte character representation in the array whose
+        first element is pointed to by <d:code>s</d:code>(if <d:code>s</d:code>
+        is not a null pointer). At most <d:code>MB_CUR_MAX</d:code> characters
+        are stored. If <d:code>wc</d:code> is a null wide character, a null
+        byte is stored, preceded by any shift sequence needed to restore the
+        initial shift state, and the function is left in the initial conversion
+        state.
+      </d:para>
+      <d:para>
+        The implementation shall behave as if no library function calls the
+        <d:code>wctomb</d:code> function.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If <d:code>s</d:code> is a null pointer, the <d:code>wctomb</d:code>
+        function returns a nonzero or zero value, if multibyte character
+        encodings, respectively, do or do not have state-dependent
+        encodings. If <d:code>s</d:code> is not a null pointer, the
+        <d:code>wctomb</d:code> function returns −1 if the value of
+        <d:code>wc</d:code> does not correspond to a valid multibyte character,
+        or returns the number of bytes that are contained in the multibyte
+        character corresponding to the value of <d:code>wc</d:code>.
+      </d:para>
+      <d:para>
+        In no case will the value returned be greater than the value of the
+        <d:code>MB_CUR_MAX</d:code> macro.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Multibyte/wide string conversion functions</d:title>
+    <d:para>
+      The behavior of the multibyte string functions is affected by the
+      <d:code>LC_CTYPE</d:code> category of the current locale.
+    </d:para>
+    <d:sect2>
+      <d:title>The mbstowcs function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+size_t mbstowcs(wchar_t * restrict pwcs,
+                const char * restrict s,
+                size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mbstowcs</d:code> function converts a sequence of multibyte
+        characters that begins in the initial shift state from the array
+        pointed to by <d:code>s</d:code> into a sequence of corresponding wide
+        characters and stores not more than <d:code>n</d:code> wide characters
+        into the array pointed to by <d:code>pwcs</d:code>. No multibyte
+        characters that follow a null character (which is converted into a null
+        wide character) will be examined or converted. Each multibyte character
+        is converted as if by a call to the <d:code>mbtowc</d:code> function,
+        except that the conversion state of the <d:code>mbtowc</d:code>
+        function is not affected.
+      </d:para>
+      <d:para>
+        No more than <d:code>n</d:code> elements will be modified in the array
+        pointed to by <d:code>pwcs</d:code>. If copying takes place between
+        objects that overlap, the behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If an invalid multibyte character is encountered, the
+        <d:code>mbstowcs</d:code> function returns
+        <d:code>(size_t)(-1)</d:code>. Otherwise, the <d:code>mbstowcs</d:code>
+        function returns the number of array elements modified, not including a
+        terminating null wide character, if any.<d:footnote
+        id="fn_mbtowcs"><d:para>The array 
+        will not be null-terminated if the value returned is
+        <d:code>n</d:code>.</d:para></d:footnote>
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The wcstombs function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+size_t wcstombs(char * restrict s,
+                const wchar_t * restrict pwcs,
+                size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>wcstombs</d:code> function converts a sequence of wide
+        characters from the array pointed to by <d:code>pwcs</d:code> into a
+        sequence of corresponding multibyte characters that begins in the
+        initial shift state, and stores these multibyte characters into the
+        array pointed to by <d:code>s</d:code>, stopping if a multibyte
+        character would exceed the limit of <d:code>n</d:code> total bytes or
+        if a null character is stored. Each wide character is converted as if
+        by a call to the <d:code>wctomb</d:code> function, except that the
+        conversion state of the <d:code>wctomb</d:code> function is not
+        affected.
+      </d:para>
+      <d:para>
+        No more than <d:code>n</d:code> bytes will be modified in the array
+        pointed to by <d:code>s</d:code>. If copying takes place between
+        objects that overlap, the behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If a wide character is encountered that does not correspond to a valid
+        multibyte character, the <d:code>wcstombs</d:code> function returns
+        <d:code>(size_t)(-1)</d:code>. Otherwise, the <d:code>wcstombs</d:code>
+        function returns the number of bytes modified, not including a
+        terminating null character, if any.<d:footnoteref
+        linkend="fn_mbtowcs"></d:footnoteref>
       </d:para>
     </d:sect2>
   </d:sect1>

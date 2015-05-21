@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?dbhtml filename="stdnoreturn/index.html" ?>
+  <d:title>_Noreturn &lt;stdnoreturn.h&gt;</d:title>
+  <d:para>The header &lt;stdnoreturn.h&gt; defines the macro</d:para>
+  <d:blockquote>
+    <d:para>
+      <d:code>noreturn</d:code>
+    </d:para>
+  </d:blockquote>
+  <d:para>which expands to <d:code>_Noreturn</d:code>.</d:para>
+</d:chapter>

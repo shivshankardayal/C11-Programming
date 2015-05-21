@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?dbhtml filename="string/index.html" ?>
+  <d:title>String handling &lt;string.h&gt;</d:title>
+  <d:sect1>
+    <d:title>String function conventions</d:title>
+    <d:para>
+      The header &lt;string.h&gt; declares one type and several functions, and
+      defines one macro useful for manipulating arrays of character type and
+      other objects treated as arrays of character type.The type is
+      <d:code>size_t</d:code> and the macro is <d:code>NULL</d:code> (both
+      described in 7.19). Various methods are used for determining the lengths
+      of the arrays, but in all cases a <d:code>char *</d:code> or <d:code>void
+      *</d:code> argument points to the initial (lowest addressed) character of
+      the array. If an array is accessed beyond the end of an object, the
+      behavior is undefined.
+    </d:para>
+    <d:para>
+      Where an argument declared as <d:code>size_t n</d:code> specifies the
+      length of the array for a function, <d:code>n</d:code> can have the value
+      zero on a call to that function. Unless explicitly stated otherwise in
+      the description of a particular function in this subclause, pointer
+      arguments on such a call shall still have valid values, as described in
+      7.1.4. On such a call, a function that locates a character finds no
+      occurrence, a function that compares two character sequences returns
+      zero, and a function that copies characters copies zero characters.
+    </d:para>
+    <d:para>
+      For all functions in this subclause, each character shall be interpreted
+      as if it had the type <d:code>unsigned char</d:code> (and therefore every
+      possible object representation is valid and has a different value).
+    </d:para>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Copying functions</d:title>
+    <d:sect2>
+      <d:title>The memcpy function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+void *memcpy(void * restrict s1,
+             const void * restrict s2,
+             size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>memcpy</d:code> function copies <d:code>n</d:code>
+        characters from the object pointed to by <d:code>s2</d:code> into the
+        object pointed to by <d:code>s1</d:code>. If copying takes place
+        between objects that overlap, the behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>memcpy</d:code> function returns the value of
+        <d:code>s1</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The memmove function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+void *memmove(void *s1, const void *s2, size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>memmove</d:code> function copies <d:code>n</d:code>
+        characters from the object pointed to by <d:code>s2</d:code> into the
+        object pointed to by <d:code>s1</d:code>. Copying takes place as if the
+        <d:code>n</d:code> characters from the object pointed to by
+        <d:code>s2</d:code> are first copied into a temporary array of
+        <d:code>n</d:code> characters that does not overlap the objects pointed
+        to by <d:code>s1</d:code> and <d:code>s2</d:code>, and then the
+        <d:code>n</d:code> characters from the temporary array are copied into
+        the object pointed to by <d:code>s1</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>memmove</d:code> function returns the value of
+        <d:code>s1</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strcpy function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+char *strcpy(char * restrict s1,
+             const char * restrict s2);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strcpy</d:code> function copies the string pointed to by
+        <d:code>s2</d:code> (including the terminating null character) into the
+        array pointed to by <d:code>s1</d:code>. If copying takes place between
+        objects that overlap, the behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strcpy</d:code> function returns the value of
+        <d:code>s1</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strncpy function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+char *strncpy(char * restrict s1,
+              const char * restrict s2,
+              size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strncpy</d:code> function copies not more than
+        <d:code>n</d:code> characters (characters that follow a null character
+        are not copied) from the array pointed to by <d:code>s2</d:code> to the
+        array pointed to by <d:code>s1</d:code>.<d:footnote><d:para>Thus, if
+        there is no null character in the first <d:code>n</d:code> characters
+        of the array pointed to by <d:code>s2</d:code>, the result will not be
+        null-terminated.</d:para></d:footnote> If copying takes place between
+        objects that overlap, the behavior is undefined.
+      </d:para>
+      <d:para>
+        If the array pointed to by <d:code>s2</d:code> is a string that is
+        shorter than <d:code>n</d:code> characters, null characters are
+        appended to the copy in the array pointed to by <d:code>s1</d:code>,
+        until <d:code>n</d:code> characters in all have been written.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strncpy</d:code> function returns the value of
+        <d:code>s1</d:code>.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Concatenation functions</d:title>
+    <d:sect2>
+      <d:title>The strcat function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+char *strcat(char * restrict s1,
+             const char * restrict s2);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strcat</d:code> function appends a copy of the string pointed
+        to by <d:code>s2</d:code> (including the terminating null character) to
+        the end of the string pointed to by <d:code>s1</d:code>. The initial
+        character of <d:code>s2</d:code> overwrites the null character at the end
+        of <d:code>s1</d:code>. If copying takes place between objects that
+        overlap, the behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strcat</d:code> function returns the value of
+        <d:code>s1</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strncat function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+char *strncat(char * restrict s1,
+              const char * restrict s2,
+              size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strncat</d:code> function appends not more than
+        <d:code>n</d:code> characters (a null character and characters that
+        follow it are not appended) from the array pointed to by
+        <d:code>s2</d:code> to the end of the string pointed to by
+        <d:code>s1</d:code>. The initial character of <d:code>s2</d:code>
+        overwrites the null character at the end of <d:code>s1</d:code>. A
+        terminating null character is always appended to the
+        result.<d:footnote><d:para>Thus, the maximum number of characters that
+        can end up in the array pointed to by <d:code>s1</d:code> is
+        <d:code>strlen(s1)+n+1</d:code>.</d:para></d:footnote> If copying takes
+        place between objects that overlap, the behavior is undefined.
+      </d:para>
+      <d:para>
+        The <d:code>strncat</d:code> function returns the value of
+        <d:code>s1</d:code>.
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>strlen</d:code> function (7.24.6.3).
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Comparison functions</d:title>
+    <d:para>
+      The sign of a nonzero value returned by the comparison functions
+      <d:code>memcmp, strcmp</d:code> and <d:code>strncmp</d:code> is
+      determined by the sign of the difference between the values of the first
+      pair of characters (both interpreted as <d:code>unsigned char</d:code>)
+      that differ in the objects being compared.
+    </d:para>
+    <d:sect2>
+      <d:title>The memcmp function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+int memcmp(const void *s1, const void *s2, size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>memcmp</d:code> function compares the first
+        <d:code>n</d:code> characters of the object pointed to by
+        <d:code>s1</d:code> to the first <d:code>n</d:code> characters of the
+        object pointed to by <d:code>s2</d:code>.<d:footnote><d:para>The
+        contents of <d:quote>holes</d:quote> used as padding for purposes of
+        alignment within structure objects are indeterminate. Strings shorter
+        than their allocated space and unions may also cause problems in
+        comparison.</d:para></d:footnote>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>memcmp</d:code> function returns an integer greater than,
+        equal to, or less than zero, accordingly as the object pointed to by
+        <d:code>s1</d:code> is greater than, equal to, or less than the object
+        pointed to by <d:code>s2</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strcmp function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+int strcmp(const char *s1, const char *s2);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strcmp</d:code> function compares the string pointed to by
+        <d:code>s1</d:code> to the string pointed to by <d:code>s2</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strcmp</d:code> function returns an integer greater than,
+        equal to, or less than zero, accordingly as the string pointed to by
+        <d:code>s1</d:code> is greater than, equal to, or less than the string
+        pointed to by <d:code>s2</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strcoll function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+int strcoll(const char *s1, const char *s2);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strcoll</d:code> function compares the string pointed to by
+        <d:code>s1</d:code> to the string pointed to by <d:code>s2</d:code>,
+        both interpreted as appropriate to the <d:code>LC_COLLATE</d:code>
+        category of the current locale.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strcoll</d:code> function returns an integer greater than,
+        equal to, or less than zero, accordingly as the string pointed to by
+        <d:code>s1</d:code> is greater than, equal to, or less than the string
+        pointed to by <d:code>s2</d:code> when both are interpreted as
+        appropriate to the current locale.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strncmp function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+int strncmp(const char *s1, const char *s2, size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strncmp</d:code> function compares not more than
+        <d:code>n</d:code> characters (characters that follow a null character
+        are not compared) from the array pointed to by <d:code>s1</d:code> to
+        the array pointed to by <d:code>s2</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strncmp</d:code> function returns an integer greater than,
+        equal to, or less than zero, accordingly as the possibly
+        null-terminated array pointed to by <d:code>s1</d:code> is greater
+        than, equal to, or less than the possibly null-terminated array pointed
+        to by <d:code>s2</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strxfrm function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+size_t strxfrm(char * restrict s1,
+               const char * restrict s2,
+               size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+      The <d:code>strxfrm</d:code> function transforms the string pointed to by
+      <d:code>s2</d:code> and places the resulting string into the array
+      pointed to by <d:code>s1</d:code>. The transformation is such that if the
+      <d:code>strcmp</d:code> function is applied to two transformed strings,
+      it returns a value greater than, equal to, or less than zero,
+      corresponding to the result of the <d:code>strcoll</d:code> function
+      applied to the same two original strings. No more than <d:code>n</d:code>
+      characters are placed into the resulting array pointed to by
+      <d:code>s1</d:code>,including the terminating null character. If
+      <d:code>n</d:code> is zero, <d:code>s1</d:code> is permitted to be a null
+      pointer. If copying takes place between objects that overlap, the
+      behavior is undefined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strxfrm</d:code> function returns the length of the
+        transformed string (not including the terminating null character). If
+        the value returned is <d:code>n</d:code> or more, the contents of the
+        array pointed to by <d:code>s1</d:code> are indeterminate.
+      </d:para>
+      <d:para>
+        EXAMPLE The value of the following expression is the size of the array
+        needed to hold the transformation of the string pointed to by
+        <d:code>s</d:code>.
+        <d:programlisting role="CLexer"><![CDATA[1 + strxfrm(NULL, s, 0)]]>
+        </d:programlisting>
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Search functions</d:title>
+    <d:sect2>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+void *memchr(const void *s, int c, size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>memchr</d:code> function locates the first occurrence of
+        <d:code>c</d:code> (converted to an <d:code>unsigned char</d:code>) in
+        the initial <d:code>n</d:code> characters (each interpreted as
+        <d:code>unsigned char</d:code>) of the object pointed to by
+        <d:code>s</d:code>. The implementation shall behave as if it reads the
+        characters sequentially and stops as soon as a matching character is
+        found.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>memchr</d:code> function returns a pointer to the located
+        character, or a null pointer if the character does not occur in the
+        object.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strchr function</d:title>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+char *strchr(const char *s, int c);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code></d:code> function locates the first occurrence of
+        <d:code>c</d:code> (converted to a <d:code>char</d:code>) in the string
+        pointed to by <d:code>s</d:code>. The terminating null character is
+        considered to be part of the string.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strchr</d:code> function returns a pointer to the located
+        character, or a null pointer if the character does not occur in the
+        string.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strcspn function</d:title>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+size_t strcspn(const char *s1, const char *s2);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strcspn</d:code> function computes the length of the
+        maximum initial segment of the string pointed to by <d:code>s1</d:code>
+        which consists entirely of characters not from the string pointed to by
+        <d:code>s2</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strcspn</d:code> function returns the length of the
+        segment.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strpbrk function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+char *strpbrk(const char *s1, const char *s2);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strpbrk</d:code> function locates the first occurrence in
+        the string pointed to by <d:code>s1</d:code> of any character from the
+        string pointed to by <d:code>s2</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strpbrk</d:code> function returns a pointer to the
+        character, or a null pointer if no character from <d:code>s2</d:code>
+        occurs in <d:code>s1</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strchr function</d:title>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+char *strrchr(const char *s, int c);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strrchr</d:code> function locates the last occurrence of
+        <d:code>c</d:code> (converted to a <d:code>char</d:code>) in the string
+        pointed to by <d:code>s</d:code>. The terminating null character is
+        considered to be part of the string.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strrchr</d:code> function returns a pointer to the
+        character, or a null pointer if <d:code>c</d:code> does not occur in
+        the string.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strspn function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+size_t strspn(const char *s1, const char *s2);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strspn</d:code> function computes the length of the maximum
+        initial segment of the string pointed to by <d:code>s1</d:code> which
+        consists entirely of characters from the string pointed to by
+        <d:code>s2</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strspn</d:code> function returns the length of the segment.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strstr function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+char *strstr(const char *s1, const char *s2);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strstr</d:code> function locates the first occurrence in
+        the string pointed to by <d:code>s1</d:code> of the sequence of
+        characters (excluding the terminating null character) in the string
+        pointed to by <d:code>s2</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strstr</d:code> function returns a pointer to the located
+        string, or a null pointer if the string is not found. If
+        <d:code>s2</d:code> points to a string with zero length, the function
+        returns <d:code>s1</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strtok function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+char *strtok(char * restrict s1, const char * restrict s2);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        A sequence of calls to the <d:code>strtok</d:code> function breaks the
+        string pointed to by <d:code>s1</d:code> into a sequence of tokens,
+        each of which is delimited by a character from the string pointed to by
+        <d:code>s2</d:code>. The first call in the sequence has a non-null
+        first argument; subsequent calls in the sequence have a null first
+        argument. The separator string pointed to by <d:code>s2</d:code> may be
+        different from call to call.
+      </d:para>
+      <d:para>
+        The first call in the sequence searches the string pointed to by
+        <d:code>s1</d:code> for the first character that is <d:emphasis
+        role="italic">not</d:emphasis> contained in the current separator
+        string pointed to by <d:code>s2</d:code>. If no such character is
+        found, then there are no tokens in the string pointed to by
+        <d:code>s1</d:code> and the <d:code>strtok</d:code> function returns a
+        null pointer. If such a character is found, it is the start of the
+        first token.
+      </d:para>
+      <d:para>
+        The <d:code>strtok</d:code> function then searches from there for a
+        character that is contained in the current separator string. If no such
+        character is found, the current token extends to the end of the string
+        pointed to by <d:code>s1</d:code>, and subsequent searches for a token
+        will return a null pointer. If such a character is found, it is
+        overwritten by a null character, which terminates the current
+        token. The <d:code>strtok</d:code> function saves a pointer to the
+        following character, from which the next search for a token will
+        start.
+      </d:para>
+      <d:para>
+        Each subsequent call, with a null pointer as the value of the first
+        argument, starts searching from the saved pointer and behaves as
+        described above.
+      </d:para>
+      <d:para>
+        The <d:code>strtok</d:code> function is not required to avoid data
+        races with other calls to the strtok function.<d:footnote><d:para>The
+        <d:code>strtok_s</d:code> function can be used instead to avoid data
+        races.</d:para></d:footnote> The implementation shall behave as if no
+        library function calls the <d:code>strtok</d:code> function.
+      </d:para>
+      <d:para>
+        EXAMPLE
+        <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+static char str[] = "?a???b,,,#c";
+char *t;
+t = strtok(str, "?"); // t points to the token "a"
+t = strtok(NULL, ","); // t points to the token "??b"
+t = strtok(NULL, "#,"); // t points to the token "c"
+t = strtok(NULL, "?"); // t is a null pointer]]>
+        </d:programlisting>
+      </d:para>
+      <d:para><d:emphasis role="bold">Forward references:</d:emphasis> The
+      <d:code>strtok_s</d:code> function (K.3.7.3.1).</d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Miscellaneous functions</d:title>
+    <d:sect2>
+      <d:title>The memset function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+void *memset(void *s, int c, size_t n);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>memset</d:code> function copies the value of
+        <d:code>c</d:code> (converted to an <d:code>unsigned char</d:code>)
+        into each of the first <d:code>n</d:code> characters of the object
+        pointed to by <d:code>s</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code></d:code> function returns the value of
+        <d:code>s</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strerror function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+char *strerror(int errnum);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strerror</d:code> function maps the number in
+        <d:code>errnum</d:code> to a message string. Typically, the values for
+        <d:code>errnum</d:code> come from <d:code>errno</d:code>, but
+        <d:code>strerror</d:code> shall map any value of type
+        <d:code>int</d:code> to a message.
+      </d:para>
+      <d:para>
+        The <d:code>strerror</d:code> function is not required to avoid data
+        races with other calls to the <d:code>strerror</d:code>
+        function.<d:footnote><d:para>The <d:code>strerror_s</d:code> function
+        can be used instead to avoid data races.</d:para></d:footnote> The
+        implementation shall behave as if no library function calls the
+        <d:code>strerror</d:code> function.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strerror</d:code> function returns a pointer to the string,
+        the contents of which are locale- specific. The array pointed to shall
+        not be modified by the program, but may be overwritten by a subsequent
+        call to the <d:code>strerror</d:code> function.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The strlen function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <string.h>
+size_t strlen(const char *s);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strlen</d:code> function computes the length of the string
+        pointed to by <d:code>s</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>strlen</d:code> function returns the number of characters
+        that precede the terminating null character.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+</d:chapter>
