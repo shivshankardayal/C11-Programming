@@ -13,7 +13,7 @@
   <xsl:param name="doc.collab.show">0</xsl:param>
 
   <!-- List *everything* in the table of contents -->
-  <xsl:param name="doc.lot.show"></xsl:param>
+  <xsl:param name="doc.lot.show">figure, table</xsl:param>
 
   <!-- Fix the blank note image -->
   <xsl:param name="figure.note">note</xsl:param>
@@ -48,7 +48,7 @@
   <xsl:param name="xetex.font">
     <xsl:text>\setmainfont[Ligatures=TeX,Scale=1.05]{Times}
     </xsl:text>
-    <xsl:text>\setsansfont{Helvetica}
+    <xsl:text>\setsansfont[Ligatures=TeX,Scale=.95]{Helvetica}
     </xsl:text>
     <xsl:text>\setmonofont{Courier}
     </xsl:text>

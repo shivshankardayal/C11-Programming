@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+           xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+           xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+  <?dbhtml filename="uchar/index.html" ?>
+  <d:title>Unicode utilities &lt;uchar.h&gt;</d:title>
+  <d:para>
+    The header &lt;uchar.h&gt; declares types and functions for manipulating
+    Unicode characters.
+  </d:para>
+  <d:para>
+    The types declared are <d:code>mbstate_t</d:code> (described in &#xa7;
+    iso.7.30.1) and <d:code>size_t</d:code> (described in &#xa7; iso.7.19);
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>char16_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is an unsigned integer type used for 16-bit characters and is the
+    same type as <d:code>uint_least16_t</d:code> (described in &#xa7;
+    iso.7.20.1.2); and
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>char32_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is an unsigned integer type used for 32-bit characters and is the
+    same type as <d:code>uint_least32_t</d:code> (also described in &#xa7;
+    iso.7.20.1.2).
+  </d:para>
+  <d:sect1>
+    <d:title>Restartable multibyte/wide character conversion
+    functions</d:title>
+    <d:para>
+      These functions have a parameter, <d:code>ps</d:code>, of type pointer to
+      <d:code>mbstate_t</d:code> that points to an object that can completely
+      describe the current conversion state of the associated multibyte
+      character sequence, which the functions alter as necessary. If
+      <d:code>ps</d:code> is a null pointer, each function uses its own
+      internal <d:code>mbstate_t</d:code> object instead, which is initialized
+      at program startup to the initial conversion state; the functions are not
+      required to avoid data races with other calls to the same function in
+      this case. The implementation behaves as if no library function calls
+      these functions with a null pointer for <d:code>ps</d:code>.
+    </d:para>
+    <d:sect2>
+      <d:title>The mbrtoc16 function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <uchar.h>
+size_t mbrtoc16(char16_t * restrict pc16,
+                const char * restrict s, size_t n,
+                mbstate_t * restrict ps);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        If <d:code>s</d:code> is a null pointer, the <d:code>mbrtoc16</d:code>
+        function is equivalent to the call:
+        <d:blockquote>
+          <d:para><d:code>mbrtoc16(NULL, "", 1, ps)</d:code></d:para>
+        </d:blockquote>
+        In this case, the values of the parameters <d:code>pc16</d:code> and
+        <d:code>n</d:code> are ignored.
+      </d:para>
+      <d:para>
+        If <d:code>s</d:code> is not a null pointer, the
+        <d:code>mbrtoc16</d:code> function inspects at most <d:code>n</d:code>
+        bytes beginning with the byte pointed to by <d:code>s</d:code> to
+        determine the number of bytes needed to complete the next multibyte
+        character (including any shift sequences). If the function determines
+        that the next multibyte character is complete and valid, it determines
+        the values of the corresponding wide characters and then, if
+        <d:code>pc16</d:code> is not a null pointer, stores the value of the
+        first (or only) such character in the object pointed to by
+        <d:code>pc16</d:code>. Subsequent calls will store successive wide
+        characters without consuming any additional input until all the
+        characters have been stored. If the corresponding wide character is the
+        null wide character, the resulting state described is the initial
+        conversion state.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mbrtoc16</d:code> function returns the first of the
+        following that applies (given the current conversion state):
+      </d:para>
+      <informaltable
+          xmlns="http://docbook.org/ns/docbook" width="100%" class="dynamic" frame="border" border="1">
+        <colgroup width="1*"/>
+	    <colgroup width="5*" align="left"/>
+	    <tbody>
+          <tr>
+            <td>0</td>
+            <td>if the next <d:code>n</d:code> or fewer bytes complete the
+            multibyte character that corresponds to the null wide character
+            (which is the value stored).</td>
+          </tr>
+          <tr>
+            <td><d:emphasis role="italic">between</d:emphasis> 1 and
+            <d:code>n</d:code> <d:emphasis
+            role="italic">inclusive</d:emphasis></td>
+            <td>if the next <d:code>n</d:code> or fewer bytes complete a valid
+            multibyte character (which is the value stored); the value returned
+            is the number of bytes that complete the multibyte character.</td>
+          </tr>
+          <tr>
+            <td><d:code>(size_t)(-3)</d:code></td>
+            <td>if the next character resulting from a previous call has been
+            stored (no bytes from the input have been consumed by this
+            call).</td>
+          </tr>
+          <tr>
+            <td><d:code>(size_t)(-2)</d:code></td>
+            <td>if the next <d:code>n</d:code> bytes contribute to an
+            incomplete (but potentially valid) multibyte character, and all n
+            bytes have been processed (no value is
+            stored).<d:footnote><d:para>When n has at least the value of the
+            <d:code>MB_CUR_MAX</d:code> macro, this case can only occur if
+            <d:code>s</d:code> points at a sequence of redundant shift
+            sequences (for implementations with state-dependent
+            encodings).</d:para></d:footnote></td>
+          </tr>
+          <tr>
+            <td><d:code>(size_t)(-1)</d:code></td>
+            <td>if an encoding error occurs, in which case the next n or fewer
+            bytes do not contribute to a complete and valid multibyte character
+            (no value is stored); the value of the macro
+            <d:code>EILSEQ</d:code> is stored in <d:code>errno</d:code>, and
+            the conversion state is unspecified.</td>
+          </tr>
+        </tbody>
+      </informaltable>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The c16rtomb function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <uchar.h>
+size_t c16rtomb(char * restrict s, char16_t c16,
+                mbstate_t * restrict ps);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        If <d:code>s</d:code> is a null pointer, the <d:code>c16rtomb</d:code>
+        function is equivalent to the call
+        <d:blockquote>
+          <d:para><d:code>c16rtomb(buf, L'\0', ps)</d:code></d:para>
+        </d:blockquote>
+        where <d:code>buf</d:code> is an internal buffer.
+      </d:para>
+      <d:para>
+        If <d:code></d:code> is not a null pointer, the
+        <d:code>c16rtomb</d:code> function determines the number of bytes
+        needed to represent the multibyte character that corresponds to the
+        wide character given by <d:code>c16</d:code> (including any shift
+        sequences), and stores the multibyte character representation in the
+        array whose first element is pointed to by <d:code>s</d:code>. At most
+        <d:code>MB_CUR_MAX</d:code> bytes are stored. If <d:code>c16</d:code>
+        is a null wide character, a null byte is stored, preceded by any shift
+        sequence needed to restore the initial shift state; the resulting state
+        described is the initial conversion state.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>c16rtomb</d:code> function returns the number of bytes
+        stored in the array object (including any shift sequences). When
+        <d:code>c16</d:code> is not a valid wide character, an encoding error
+        occurs: the function stores the value of the macro
+        <d:code>EILSEQ</d:code> in <d:code>errno</d:code> and returns
+        <d:code>(size_t)(-1)</d:code>; the conversion state is unspecified.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The mbrtoc32 function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <uchar.h>
+size_t mbrtoc32(char32_t * restrict pc32,
+                const char * restrict s, size_t n,
+                mbstate_t * restrict ps);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        If <d:code>s</d:code> is a null pointer, the <d:code>mbrtoc32</d:code>
+        function is equivalent to the call:
+        <d:blockquote>
+          <d:para><d:code>mbrtoc32(NULL, "", 1, ps)</d:code></d:para>
+        </d:blockquote>
+        In this case, the values of the parameters <d:code>pc32</d:code> and
+        <d:code>n</d:code> are ignored.
+      </d:para>
+      <d:para>
+        If <d:code>s</d:code> is not a null pointer, the
+        <d:code>mbrtoc32</d:code> function inspects at most <d:code>n</d:code>
+        bytes beginning with the byte pointed to by <d:code>s</d:code> to
+        determine the number of bytes needed to complete the next multibyte
+        character (including any shift sequences). If the function determines
+        that the next multibyte character is complete and valid, it determines
+        the values of the corresponding wide characters and then, if
+        <d:code>pc32</d:code> is not a null pointer, stores the value of the
+        first (or only) such character in the object pointed to by
+        <d:code>pc32</d:code>. Subsequent calls will store successive wide
+        characters without consuming any additional input until all the
+        characters have been stored. If the corresponding wide character is the
+        null wide character, the resulting state described is the initial
+        conversion state.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mbrtoc32</d:code> function returns the first of the
+        following that applies (given the current conversion state):
+      </d:para>
+      <informaltable
+          xmlns="http://docbook.org/ns/docbook" width="100%" class="dynamic" frame="border"
+          border="1">
+        <colgroup width="1*"/>
+	    <colgroup width="5*" align="left"/>
+	    <tbody>
+          <tr>
+            <td>0</td>
+            <td>if the next <d:code>n</d:code> or fewer bytes complete the
+            multibyte character that corresponds to the null wide character
+            (which is the value stored).</td>
+          </tr>
+          <tr>
+            <td><d:emphasis role="italic">between</d:emphasis> 1 and
+            <d:code>n</d:code> <d:emphasis
+            role="italic">inclusive</d:emphasis></td>
+            <td>if the next <d:code>n</d:code> or fewer bytes complete a valid
+            multibyte character (which is the value stored); the value returned
+            is the number of bytes that complete the multibyte character.</td>
+          </tr>
+          <tr>
+            <td><d:code>(size_t)(-3)</d:code></td>
+            <td>if the next character resulting from a previous call has been
+            stored (no bytes from the input have been consumed by this
+            call).</td>
+          </tr>
+          <tr>
+            <td><d:code>(size_t)(-2)</d:code></td>
+            <td>if the next <d:code>n</d:code> bytes contribute to an
+            incomplete (but potentially valid) multibyte character, and all n
+            bytes have been processed (no value is
+            stored).<d:footnote><d:para>When n has at least the value of the
+            <d:code>MB_CUR_MAX</d:code> macro, this case can only occur if
+            <d:code>s</d:code> points at a sequence of redundant shift
+            sequences (for implementations with state-dependent
+            encodings).</d:para></d:footnote></td>
+          </tr>
+          <tr>
+            <td><d:code>(size_t)(-1)</d:code></td>
+            <td>if an encoding error occurs, in which case the next n or fewer
+            bytes do not contribute to a complete and valid multibyte character
+            (no value is stored); the value of the macro
+            <d:code>EILSEQ</d:code> is stored in <d:code>errno</d:code>, and
+            the conversion state is unspecified.</td>
+          </tr>
+        </tbody>
+      </informaltable>
+    </d:sect2>
+  </d:sect1>
+</d:chapter>
