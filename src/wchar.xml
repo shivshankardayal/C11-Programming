@@ -1,0 +1,396 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+           xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+           xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+  <?dbhtml filename="wchar/index.html" ?>
+  <d:title>Extended multibyte and wide character utilities
+  &lt;wchar.h&gt;</d:title>
+  <d:para>
+    The header <d:code>&lt;wchar.h&gt;</d:code> defines four macros, and
+    declares four data types, one tag, and many functions.
+  </d:para>
+  <d:para>
+    The types declared are <d:code>wchar_t</d:code> and <d:code>size_t</d:code>
+    (both described in (&#xa7; iso.7.19));
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>mbstate_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is a complete object type other than an array type that can hold the
+    conversion state information necessary to convert between sequences of
+    multibyte characters and wide characters;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>wint_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is an integer type unchanged by default argument promotions that can
+    hold any value corresponding to members of the extended character set, as
+    well as at least one value that does not correspond to any member of the
+    extended character set (see <d:code>WEOF</d:code>
+    below);<d:footnote><d:para><d:code>wchar_t</d:code> and
+    <d:code>wint_t</d:code> can be the same integer type.</d:para></d:footnote>
+    and
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>struct tm</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is declared as an incomplete structure type (the contents are
+    described in (&#xa7; iso.7.27.1)).
+  </d:para>
+  <d:para>
+    The macros defined are <d:code>NULL</d:code> (described in (&#xa7;
+    iso.7.19)); <d:code>WCHAR_MIN</d:code> and <d:code>WCHAR_MAX</d:code>
+    (described in (&#xa7; iso.7.20.3)); and
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>WEOF</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which expands to a constant expression of type <d:code>wint_t</d:code>
+    whose value does not correspond to any member of the extended character
+    set.<d:footnote><d:para>The value of the macro <d:code>WEOF</d:code> may
+    differ from that of <d:code>EOF</d:code> and need not be
+    negative.</d:para></d:footnote> It is accepted (and returned) by several
+    functions in this subclause to indicate <d:emphasis
+    role="italic">end-of-file</d:emphasis>, that is, no more input from a
+    stream. It is also used as a wide character value that does not correspond
+    to any member of the extended character set.
+  </d:para>
+  <d:para>
+    The functions declared are grouped as follows:
+    <d:itemizedlist>
+      <d:listitem>
+        Functions that perform input and output of wide characters, or
+        multibyte characters, or both;
+      </d:listitem>
+      <d:listitem>
+        Functions that provide wide string numeric conversion;
+      </d:listitem>
+      <d:listitem>
+        Functions that perform general wide string manipulation;
+      </d:listitem>
+      <d:listitem>
+        Functions for wide string date and time conversion; and
+      </d:listitem>
+      <d:listitem>
+        Functions that provide extended capabilities for conversion between
+        multibyte and wide character sequences.
+      </d:listitem>
+    </d:itemizedlist>
+  </d:para>
+  <d:para>
+    Arguments to the functions in this subclause may point to arrays containing
+    <d:code>wchar_t</d:code> values that do not correspond to members of the
+    extended character set. Such values shall be processed according to the
+    specified semantics, except that it is unspecified whether an encoding
+    error occurs if such a value appears in the format string for a function in
+    (&#xa7; iso.7.29.2) or (&#xa7; iso.7.29.5) and the specified semantics do
+    not require that value to be processed by <d:code>wcrtomb</d:code>.
+  </d:para>
+  <d:para>
+    Unless explicitly stated otherwise, if the execution of a function
+    described in this subclause causes copying to take place between objects
+    that overlap, the behavior is undefined.
+  </d:para>
+  <d:sect1>
+    <d:title>Formatted wide character input/output functions</d:title>
+    <d:para>
+      The formatted wide character input/output functions shall behave as if
+      there is a sequence point after the actions associated with each
+      specifier.<d:footnote><d:para>The <d:code>fwprintf</d:code> functions
+      perform writes to memory for the <d:code>%n</d:code>
+      specifier.</d:para></d:footnote>
+    </d:para>
+    <d:sect2>
+      <d:title>The fwprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h> #include <wchar.h>
+int fwprintf(FILE * restrict stream,
+             const wchar_t * restrict format, ...);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fwprintf</d:code> function writes output to the stream
+        pointed to by <d:code>stream</d:code>, under control of the wide string
+        pointed to by <d:code>format</d:code> that specifies how subsequent
+        arguments are converted for output. If there are insufficient arguments
+        for the format, the behavior is undefined. If the format is exhausted
+        while arguments remain, the excess arguments are evaluated (as always)
+        but are otherwise ignored. The <d:code>fwprintf</d:code> function
+        returns when the end of the format string is encountered.
+      </d:para>
+      <d:para>
+        The format is composed of zero or more directives: ordinary wide
+        characters (not <d:code>%</d:code>), which are copied unchanged to the
+        output stream; and conversion specifications, each of which results in
+        fetching zero or more subsequent arguments, converting them, if
+        applicable, according to the corresponding conversion specifier, and
+        then writing the result to the output stream.
+      </d:para>
+      <d:para>
+        Each conversion specification is introduced by the wide character
+        <d:code>%</d:code>. After the <d:code>%</d:code>, the following appear
+        in sequence:
+        <d:itemizedlist>
+          <d:listitem>
+            Zero or more <d:emphasis role="italic">flags</d:emphasis> (in any
+            order) that modify the meaning of the conversion specification.
+          </d:listitem>
+          <d:listitem>
+            An optional minimum <d:emphasis role="italic">field
+            width</d:emphasis>. If the converted value has fewer wide
+            characters than the field width, it is padded with spaces (by
+            default) on the left (or right, if the left adjustment flag,
+            described later, has been given) to the field width. The field
+            width takes the form of an asterisk <d:code>*</d:code> (described
+            later) or a nonnegative decimal integer.<d:footnote><d:para>Note
+            that 0 is taken as a flag, not as the beginning of a field
+            width.</d:para></d:footnote>
+          </d:listitem>
+          <d:listitem>
+            An optional <d:emphasis role="italic">precision</d:emphasis> that
+            gives the minimum number of digits to appear for the <d:code>d, i,
+            o, u, x</d:code> and <d:code>X</d:code> conversions, the number of
+            digits to appear after the decimal-point wide character for
+            <d:code>a, A, e, E, f</d:code> and <d:code>F</d:code> conversions,
+            the maximum number of significant digits for the <d:code>g</d:code>
+            and <d:code>G</d:code> conversions, or the maximum number of wide
+            characters to be written for <d:code>s</d:code> conversions. The
+            precision takes the form of a period (<d:code>.</d:code>) followed
+            either by an asterisk <d:code>*</d:code> (described later) or by an
+            optional decimal integer; if only the period is specified, the
+            precision is taken as zero. If a precision appears with any other
+            conversion specifier, the behavior is undefined.
+          </d:listitem>
+          <d:listitem>
+            An optional <d:emphasis role="italic">length modifier</d:emphasis>
+            that specifies the size of the argument.
+          </d:listitem>
+          <d:listitem>
+            A <d:emphasis role="italic">conversion specifier</d:emphasis> wide
+            character that specifies the type of conversion to be applied.
+          </d:listitem>
+        </d:itemizedlist>
+      </d:para>
+      <d:para>
+        As noted above, a field width, or precision, or both, may be indicated
+        by an asterisk. In this case, an <d:code>int</d:code> argument supplies
+        the field width or precision. The arguments specifying field width, or
+        precision, or both, shall appear (in that order) before the argument
+        (if any) to be converted. A negative field width argument is taken as a
+        <d:code>-</d:code> flag followed by a positive field width. A negative
+        precision argument is taken as if the precision were omitted.
+      </d:para>
+      <d:para>
+        The flag wide characters and their meanings are:
+      </d:para>
+      <d:para>
+        <d:code>-</d:code> The result of the conversion is left-justified within the field. (It is right-justified if this flag is not specified.)
+      </d:para>
+      <d:para>
+        <d:code>+</d:code> The result of a signed conversion always begins with
+        a plus or minus sign. (It begins with a sign only when a negative value
+        is converted if this flag is not specified.)<d:footnote><d:para>he
+        results of all floating conversions of a negative zero, and of negative
+        values that round to zero, include a minus sign.</d:para></d:footnote>
+      </d:para>
+      <d:para>
+        <d:emphasis role="italic">flag</d:emphasis> If the first wide character
+        of a signed conversion is not a sign, or if a signed conversion results
+        in no wide characters, a space is prefixed to the result. If the
+        <d:emphasis role="italic">space</d:emphasis> and <d:code>+</d:code>
+        flags both appear, the <d:emphasis role="italic">space</d:emphasis>
+        flag is ignored.
+      </d:para>
+      <d:para>
+        <d:code>#</d:code> The result is converted to an <d:quote>alternative
+        form</d:quote>. For o conversion, it increases the precision, if and
+        only if necessary, to force the first digit of the result to be a zero
+        (if the value and precision are both 0, a single 0 is printed). For
+        <d:code>x</d:code> (or <d:code>X</d:code>) conversion, a nonzero result
+        has <d:code>0x</d:code> (or <d:code>0X</d:code>)prefixed to it. For
+        <d:code>a, A, e, E, f, F, g</d:code> and G conversions, the result of
+        converting a floating-point number always contains a decimal-point wide
+        character, even if no digits follow it. (Normally, a decimal-point wide
+        character appears in the result of these conversions only if a digit
+        follows it.) For <d:code>g</d:code> and <d:code>G</d:code>
+        conversions,trailing zeros are not removed from the result. For other
+        conversions, the behavior is undefined.
+      </d:para>
+      <d:para>
+        <d:code>0</d:code> For <d:code>d, i, o, u, x, X, a, A, e, E, f, F,
+        g</d:code> and <d:code>G</d:code> conversions, leading zeros (following
+        any indication of sign or base) are used to pad to the field width
+        rather than performing space padding, except when converting an
+        infinity or NaN. If the <d:code>0</d:code> and <d:code>-</d:code> flags
+        both appear, the <d:code>0</d:code> flag is ignored. For <d:code>d, i,
+        o, u, x</d:code> and<d:code>X</d:code> conversions, if a precision is
+        specified, the <d:code>0</d:code> flag is ignored. For other
+        conversions, the behavior is undefined.
+      </d:para>
+      <d:para>
+        The length modifiers and their meanings are:
+      </d:para>
+      <d:para>
+        <d:code>hh</d:code> Specifies that a following <d:code>d, i, o, u,
+        x</d:code> or <d:code>X</d:code> conversion specifier applies to a
+        <d:code>signed char</d:code> or <d:code>unsigned char</d:code> argument
+        (the argument will have been promoted according to the integer
+        promotions, but its value shall be converted to <d:code>signed
+        char</d:code> or <d:code>unsigned char</d:code> before printing); or
+        that a following n conversion specifier applies to a pointer to a
+        <d:code>signed char</d:code> argument.
+      </d:para>
+      <d:para>
+        <d:code>h</d:code> Specifies that a following <d:code>d, i, o, u,
+        x</d:code> or <d:code>X</d:code> conversion specifier applies to a
+        <d:code>short int</d:code> or <d:code>unsigned short int</d:code>
+        argument (the argument will have been promoted according to the integer
+        promotions, but its value shall be converted to <d:code>short
+        int</d:code> or <d:code>unsigned short int</d:code> before printing);
+        or that a following n conversion specifier applies to a pointer to a
+        <d:code>short int</d:code> argument.
+      </d:para>
+      <d:para>
+        <d:code>c</d:code>(ell) Specifies that a following <d:code>d, i, o, u,
+        x</d:code> or <d:code>X</d:code> conversion specifier applies to a
+        <d:code>long int</d:code> or <d:code>unsigned long int</d:code>
+        argument; that a following n conversion specifier applies to a pointer
+        to a <d:code>long int</d:code> argument; that a following
+        <d:code>c</d:code> conversion specifier applies to a
+        <d:code>wint_t</d:code> argument; that a following <d:code>s</d:code>
+        conversion specifier applies to a pointer to a <d:code>wchar_t</d:code>
+        argument; or has no effect on a following <d:code>a, A, e, E, f, F,
+        g</d:code> or <d:code>G</d:code> conversion specifier.
+      </d:para>
+      <d:para>
+        <d:code>ll</d:code>(ell-ell) Specifies that a following <d:code>d, i,
+        o, u, x</d:code> or <d:code>X</d:code> conversion specifier applies to
+        a <d:code>long long int</d:code> or <d:code>unsigned long long
+        int</d:code> argument; or that a following n conversion specifier
+        applies to a pointer to a <d:code>long long int</d:code> argument.
+      </d:para>
+      <d:para>
+        <d:code>j</d:code> Specifies that a following <d:code>d, i, o, u,
+        x</d:code> or <d:code>X</d:code> conversion specifier applies to an
+        <d:code>intmax_t</d:code> or <d:code>uintmax_t</d:code> argument; or
+        that a following <d:code>n</d:code> conversion specifier applies to a
+        pointer to an <d:code>intmax_t</d:code> argument.
+      </d:para>
+      <d:para>
+        <d:code>z</d:code> Specifies that a following <d:code>d, i, o, u,
+        x</d:code> or <d:code>X</d:code> conversion specifier applies to a
+        <d:code>size_t</d:code> or the corresponding signed integer type
+        argument; or that a following <d:code>n</d:code> conversion specifier
+        applies to a pointer to a signed integer type corresponding to
+        <d:code>size_t</d:code> argument.
+      </d:para>
+      <d:para>
+        <d:code>t</d:code> Specifies that a following <d:code>d, i, o, u,
+        x</d:code> or <d:code>X</d:code> conversion specifier applies to a
+        <d:code>ptrdiff_t</d:code> or the corresponding unsigned integer type
+        argument; or that a following <d:code>n</d:code> conversion specifier
+        applies to a pointer to a <d:code>ptrdiff_t</d:code> argument.
+      </d:para>
+      <d:para>
+        <d:code>L</d:code> Specifies that a following <d:code>a, A, e, E, f, F,
+        g</d:code> or <d:code>G</d:code> conversion specifier applies to a
+        <d:code>long double</d:code> argument.
+      </d:para>
+      <d:para>
+        If a length modifier appears with any conversion specifier other than
+        as specified above, the behavior is undefined.
+      </d:para>
+      <d:para>
+        The conversion specifiers and their meanings are:
+      </d:para>
+      <d:para>
+        <d:code>d, i</d:code> The <d:code>int</d:code> argument is converted to
+        signed decimal in the style <d:emphasis
+        role="italic">[−]dddd</d:emphasis>. The precision specifies the minimum
+        number of digits to appear; if the value being converted can be
+        represented in fewer digits, it is expanded with leading zeros. The
+        default precision is 1. The result of converting a zero value with a
+        precision of zero is no wide characters.
+      </d:para>
+      <d:para>
+        <d:code>o, u, x, X</d:code> The <d:code>unsigned int</d:code> argument
+        is converted to unsigned octal (<d:code>o</d:code>), unsigned decimal
+        (<d:code>u</d:code>), or unsigned hexadecimal notation
+        (<d:code>x</d:code> or <d:code>X</d:code>) in the style <d:emphasis
+        role="italic">dddd</d:emphasis>; the letters <d:code>abcdef</d:code>
+        are used for <d:code>x</d:code> conversion and the letters
+        <d:code>ABCDEF</d:code> for <d:code>X</d:code> conversion. The
+        precision specifies the minimum number of digits to appear; if the
+        value being converted can be represented in fewer digits, it is
+        expanded with leading zeros. The default precision is 1. The result of
+        converting a zero value with a precision of zero is no wide
+        characters.
+      </d:para>
+      <d:para>
+        <d:code>f, F</d:code> A <d:code>double</d:code> argument representing a
+        floating-point number is converted to decimal notation in the style
+        <d:emphasis role="italic">[−]ddd.ddd</d:emphasis>, where the number of
+        digits after the decimal-point wide character is equal to the precision
+        specification. If the precision is missing, it is taken as 6; if the
+        precision is zero and the <d:code>#</d:code> flag is not specified, no
+        decimal-point wide character appears. If a decimal-point wide character
+        appears, at least one digit appears before it. The value is rounded to
+        the appropriate number of digits.
+      </d:para>
+      <d:para>
+        A <d:code>double</d:code> argument representing an infinity is
+        converted in one of the styles <d:emphasis
+        role="italic">[-]</d:emphasis><d:code>inf</d:code> or <d:emphasis
+        role="italic">[-]</d:emphasis><d:code>infinity</d:code> &amp;mdash;
+        which style is implementation-defined. A double argument representing a
+        NaN is converted in one of the styles <d:emphasis
+        role="italic">[-]</d:emphasis><d:code>nan</d:code> or <d:emphasis
+        role="italic">[-]</d:emphasis><d:code>nan</d:code>(<d:emphasis
+        role="italic">n-wchar-sequence</d:emphasis>) &amp;mdash; which style,
+        and the meaning of any <d:emphasis
+        role="italic">n-wchar-sequence</d:emphasis>, is
+        implementation-defined. The <d:code>F</d:code> conversion specifier
+        produces <d:code>INF, INFINITY</d:code> or <d:code>NAN</d:code> instead
+        of <d:code>inf, infinity</d:code> or <d:code>nan</d:code>,
+        respectively.<d:footnote><d:para>When applied to infinite and NaN
+        values, the <d:code>-, +</d:code> and <d:emphasis
+        role="italic">space</d:emphasis> flag wide characters have their usual
+        meaning; the <d:code>#</d:code> and <d:code>0</d:code> flag wide
+        characters have no effect.</d:para></d:footnote>
+      </d:para>
+      <d:para>
+        A <d:code>double</d:code> argument representing an infinity or NaN is
+        converted in the style of an <d:code>f</d:code> or <d:code>F</d:code>
+        conversion specifier.
+      </d:para>
+      <d:para>
+        <d:code>g, G</d:code> A <d:code>double</d:code> argument representing a
+        floating-point number is converted in style <d:code>f</d:code> or
+        <d:code>e</d:code> (or in style <d:code>F</d:code> or
+        <d:code>E</d:code> in the case of a <d:code>G</d:code> conversion
+        specifier), depending on the value converted and the precision. Let
+        <d:emphasis role="italic">P</d:emphasis> equal the precision if
+        nonzero, 6 if the precision is omitted, or 1 if the precision is
+        zero. Then, if a conversion with style <d:code>E</d:code> would have an
+        exponent of <d:emphasis role="italic">X</d:emphasis>:
+        <d:itemizedlist>
+          <d:listitem>
+            if <d:inlineequation><math
+            xmlns="http://www.w3.org/1998/Math/MathML"><mi>P</mi><mo>&gt;</mo><mi>X</mi><mo>&#8805;</mo><mo>-</mo><mn>4</mn></math></d:inlineequation>,
+            the conversion is with style <d:code>f</d:code> (or
+            <d:code>F</d:code>) and precision <d:inlineequation><math
+            xmlns="http://www.w3.org/1998/Math/MathML"><mi>P</mi><mo>-</mo><mi>X</mi><mo>+</mo><mn>1</mn></math></d:inlineequation>.
+          </d:listitem>
+          <d:listitem>
+            otherwise, the conversion is with style <d:code>e</d:code> (or
+            <d:code>E</d:code>) and precision <d:inlineequation><math
+            xmlns="http://www.w3.org/1998/Math/MathML"><mi>P</mi><mo>-</mo><mn>1</mn></math></d:inlineequation>
+          </d:listitem>
+        </d:itemizedlist>
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+</d:chapter>
