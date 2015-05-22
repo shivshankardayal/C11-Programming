@@ -54,7 +54,8 @@
     </d:itemizedlist>
   </d:para>
   <informaltable
-      xmlns="http://docbook.org/ns/docbook" frame="border" border="1" class="centered">
+      xmlns="http://docbook.org/ns/docbook" frame="border" border="1"
+      class="centered">
 	<colgroup />
 	<colgroup />
 	<colgroup />
@@ -143,5 +144,230 @@
       </tr>
     </tbody>
   </informaltable>
-
+  <d:para>
+    If at least one argument for a generic parameter is complex, then use of
+    the macro invokes a complex function; otherwise, use of the macro invokes a
+    real function.
+  </d:para>
+  <d:para>
+    For each unsuffixed function in <d:code>&lt;math.h&gt;</d:code> without a
+    <d:code>c</d:code>-prefixed counterpart in
+    <d:code>&lt;complex.h&gt;</d:code> (except <d:code>modf</d:code>), the
+    corresponding type-generic macro has the same name as the function. These
+    type-generic macros are:
+    <informaltable
+      xmlns="http://docbook.org/ns/docbook" frame="border" border="1"
+      class="centered">
+	  <colgroup />
+	  <colgroup />
+	  <colgroup />
+	  <colgroup />
+      <tbody>
+        <tr>
+          <td><d:code>atan2</d:code></td>
+          <td><d:code>fma</d:code></td>
+          <td><d:code>llwound</d:code></td>
+          <td><d:code>remainder</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>cbart</d:code></td>
+          <td><d:code>fmax</d:code></td>
+          <td><d:code>log10</d:code></td>
+          <td><d:code>remquo</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>ceil</d:code></td>
+          <td><d:code>fmin</d:code></td>
+          <td><d:code>log1p</d:code></td>
+          <td><d:code>rint</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>copysing</d:code></td>
+          <td><d:code>fmod</d:code></td>
+          <td><d:code>log2</d:code></td>
+          <td><d:code>round</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>rerf</d:code></td>
+          <td><d:code>frexp</d:code></td>
+          <td><d:code>logb</d:code></td>
+          <td><d:code>scalbn</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>erfc</d:code></td>
+          <td><d:code>hypot</d:code></td>
+          <td><d:code>lrint</d:code></td>
+          <td><d:code>scanlbn</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>exp2</d:code></td>
+          <td><d:code>ilogb</d:code></td>
+          <td><d:code>lround</d:code></td>
+          <td><d:code>tgamma</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>expm1</d:code></td>
+          <td><d:code>ldexp</d:code></td>
+          <td><d:code>nearbyint</d:code></td>
+          <td><d:code>trunc</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>fdim</d:code></td>
+          <td><d:code>lgamma</d:code></td>
+          <td><d:code>nextafter</d:code></td>
+          <td><d:code></d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>floor</d:code></td>
+          <td><d:code>llrint</d:code></td>
+          <td><d:code>nexttoward</d:code></td>
+          <td><d:code></d:code></td>
+        </tr>
+      </tbody>
+    </informaltable>
+  </d:para>
+  <d:para>
+    If all arguments for generic parameters are real, then use of the macro
+    invokes a real function; otherwise, use of the macro results in undefined
+    behavior.
+  </d:para>
+  <d:para>
+    For each unsuffixed function in <d:code>&lt;complex.h&gt;</d:code> that is
+    not a <d:code>c</d:code>-prefixed counterpart to a function in
+    <d:code>&lt;math.h&gt;</d:code>, the corresponding type-generic macro has
+    the same name as the function. These type-generic macros are:
+  </d:para>
+  <informaltable
+      xmlns="http://docbook.org/ns/docbook" frame="border" border="1"
+      class="centered">
+	<colgroup />
+	<colgroup />
+	<colgroup />
+    <tbody>
+      <tr>
+        <td>carg</td>
+        <td>conj</td>
+        <td>creal</td>
+      </tr>
+      <tr>
+        <td>cimag</td>
+        <td>cproj</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </informaltable>
+  <d:para>
+    Use of the macro with any real or complex argument invokes a complex
+    function.
+  </d:para>
+  <d:para>
+    EXAMPLE With the declarations
+    <d:programlisting role="CLexer"><![CDATA[#include <tgmath.h>
+int n;
+float f;
+double d;
+long double ld;
+float complex fc;
+double complex dc;
+long double complex ldc;]]>
+    </d:programlisting>
+    functions invoked by use of type-generic macros are shown in the following
+    table:
+    <informaltable
+        xmlns="http://docbook.org/ns/docbook" frame="border" border="1"
+        class="centered">
+	  <colgroup />
+	  <colgroup />
+      <tbody>
+        <tr>
+          <td>macro use</td>
+          <td>invokes</td>
+        </tr>
+        <tr>
+          <td><d:code>exp(n)</d:code></td>
+          <td><d:code>exp(n)</d:code>, the function</td>
+        </tr>
+        <tr>
+          <td><d:code>acosh(d)</d:code></td>
+          <td><d:code>acosh(d)</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>sin(d)</d:code></td>
+          <td><d:code>sin(d)</d:code>, the function</td>
+        </tr>
+        <tr>
+          <td><d:code>atan(ld)</d:code></td>
+          <td><d:code>atanl(ld)</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>log(fc)</d:code></td>
+          <td><d:code>clogf(fc)</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>sqrt(dc)</d:code></td>
+          <td>csqrt(dc)</td>
+        </tr>
+        <tr>
+          <td><d:code>pow(ldc, f)</d:code></td>
+          <td><d:code>cpowl(ldc, f)</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>remainder(n, n)</d:code></td>
+          <td><d:code>remainder(n, n)</d:code>, the function</td>
+        </tr>
+        <tr>
+          <td><d:code>nextafter(d, f)</d:code></td>
+          <td><d:code>nextafter(d, f)</d:code>, the function</td>
+        </tr>
+        <tr>
+          <td><d:code>nexttoward(f, ld)</d:code></td>
+          <td><d:code>nexttowardf(f, ld)</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>copysign(n, ld)</d:code></td>
+          <td><d:code>copysignl(n, ld)</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>ceil(fc)</d:code></td>
+          <td>undefined behavior</td>
+        </tr>
+        <tr>
+          <td><d:code>rint(fc)</d:code></td>
+          <td>undefined behavior</td>
+        </tr>
+        <tr>
+          <td><d:code>fmax(ldc, ld)</d:code></td>
+          <td>undefined behavior</td>
+        </tr>
+        <tr>
+          <td><d:code>carg(n)</d:code></td>
+          <td><d:code>carg(n)</d:code>, the function</td>
+        </tr>
+        <tr>
+          <td><d:code>cproj(f)</d:code></td>
+          <td><d:code>cprojf(f)</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>creal(d)</d:code></td>
+          <td><d:code>creal(d)</d:code>, the function</td>
+        </tr>
+        <tr>
+          <td><d:code>cimag(ld)</d:code></td>
+          <td><d:code>cimagl(ld)</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>fabs(fc)</d:code></td>
+          <td><d:code>cabsf(fc)</d:code></td>
+        </tr>
+        <tr>
+          <td><d:code>carg(dc)</d:code></td>
+          <td><d:code>carg(dc)</d:code>, the function</td>
+        </tr>
+        <tr>
+          <td><d:code>cproj(ldc)</d:code></td>
+          <td><d:code>cprojl(ldc)</d:code></td>
+        </tr>
+      </tbody>
+    </informaltable>
+  </d:para>
 </d:chapter>

@@ -1,0 +1,265 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+           xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+           xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+  <?dbhtml filename="time/index.html" ?>
+  <d:title>Date and time &lt;time.h&gt;</d:title>
+  <d:sect1>
+    <d:title>Components of time</d:title>
+    <d:para>
+      The header <d:code>&lt;time.h&gt;</d:code> defines two macros, and
+      declares several types and functions for manipulating time. Many
+      functions deal with a <d:emphasis role="italic">calendar
+      time</d:emphasis> that represents the current date (according to the
+      Gregorian calendar) and time. Some functions deal with <d:emphasis
+      role="italic">local time</d:emphasis>, which is the calendar time
+      expressed for some specific time zone, and with <d:emphasis
+      role="italic">Daylight Saving Time</d:emphasis>, which is a temporary
+      change in the algorithm for determining local time. The local time zone
+      and Daylight Saving Time are implementation-defined.
+    </d:para>
+    <d:para>
+      The macros defined are <d:code>NULL</d:code> (described in 7.19);
+    </d:para>
+    <d:blockquote>
+      <d:para><d:code>CLOCKS_PER_SEC</d:code></d:para>
+    </d:blockquote>
+    <d:para>
+      which expands to an expression with type <d:code>clock_t</d:code>
+      (described below) that is the number per second of the value returned by
+      the <d:code>clock</d:code> function; and
+    </d:para>
+    <d:blockquote>
+      <d:para><d:code>TIME_UTC</d:code></d:para>
+    </d:blockquote>
+    <d:para>
+      which expands to an integer constant greater than 0 that designates the
+      UTC time base.<d:footnote><d:para>Implementations may define additional
+      time bases, but are only required to support a real time clock based on
+      UTC.</d:para></d:footnote>
+    </d:para>
+    <d:para>
+      The types declared are <d:code>size_t</d:code> (described in 7.19);
+    </d:para>
+    <d:blockquote>
+      <d:para><d:code>clock_t</d:code></d:para>
+    </d:blockquote>
+    <d:para>and</d:para>
+    <d:blockquote>
+      <d:para><d:code>time_t</d:code></d:para>
+    </d:blockquote>
+    <d:para>
+      which are real types capable of representing times;
+    </d:para>
+    <d:blockquote>
+      <d:para><d:code>struct timespec</d:code></d:para>
+    </d:blockquote>
+    <d:para>
+      which holds an interval specified in seconds and nanoseconds (which may
+      represent a calendar time based on a particular epoch); and 
+    </d:para>
+    <d:blockquote>
+      <d:para><d:code>struct tm</d:code></d:para>
+    </d:blockquote>
+    <d:para>
+      which holds the components of a calendar time, called the <d:emphasis
+      role="italic">broken-down time</d:emphasis>.
+    </d:para>
+    <d:para>
+      The range and precision of times representable in
+      <d:code>clock_t</d:code> and <d:code>time_t</d:code> are
+      implementation-defined. The <d:code>timespec</d:code> structure shall
+      contain at least the following members, in any
+      order.<d:footnote><d:para>The <d:code>tv_sec</d:code> member is a linear
+      count of seconds and may not have the normal semantics of a
+      <d:code>time_t</d:code>. The semantics of the members and their normal
+      ranges are expressed in the comments.</d:para></d:footnote>
+    </d:para>
+    <d:programlisting><![CDATA[time_t tv_sec; // whole seconds — ≥ 0
+long tv_nsec;  // nanoseconds — [0, 999999999]]]>
+    </d:programlisting>
+    <d:para>
+      The <d:code>tm</d:code> structure shall contain at least the following
+      members, in any order. The semantics of the members and their normal
+      ranges are expressed in the comments.<d:footnote><d:para>The range [0,
+      60] for <d:code>tm_sec</d:code> allows for a positive leap
+      second.</d:para></d:footnote>
+    </d:para>
+    <d:programlisting><![CDATA[int tm_sec;   // seconds after the minute — [0, 60]
+int tm_min;   // minutes after the hour — [0, 59]
+int tm_hour;  // hours since midnight — [0, 23]
+int tm_mday;  // day of the month — [1, 31]
+int tm_mon;   // months since January — [0, 11]
+int tm_year;  // years since 1900
+int tm_wday;  // days since Sunday — [0, 6]
+int tm_yday;  // days since January 1 — [0, 365]
+int tm_isdst; // Daylight Saving Time flag]]></d:programlisting>
+    <d:para>
+      The value of <d:code>tm_isdst</d:code> is positive if Daylight Saving
+      Time is in effect, zero if Daylight Saving Time is not in effect, and
+      negative if the information is not available.
+    </d:para>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Time manipulation function</d:title>
+    <d:sect2>
+      <d:title>The clock function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting><![CDATA[
+#include <time.h>
+clock_t clock(void);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>clock</d:code> function determines the processor time used.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>clock</d:code> function returns the implementation's best
+        approximation to the processor time used by the program since the
+        beginning of an implementation-defined era related only to the program
+        invocation. To determine the time in seconds, the value returned by the
+        <d:code>clock</d:code> function should be divided by the value of the
+        macro <d:code>CLOCKS_PER_SEC</d:code>. If the processor time used is
+        not available or its value cannot be represented, the function returns
+        the value <d:code>(clock_t)(-1)</d:code>.<d:footnote><d:para>In order
+        to measure the time spent in a program, the <d:code></d:code> function
+        should be called at the start of the program and its return value
+        subtracted from the value returned by subsequent
+        calls.</d:para></d:footnote>
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The difftime function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting><![CDATA[double difftime(time_t time1, time_t time0);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>difftime</d:code> function computes the difference between
+        two calendar times: <d:code>time1 - time0</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>difftime</d:code> function returns the difference expressed
+        in seconds as a <d:code>double</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The mktime function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting><![CDATA[#include <time.h>
+time_t mktime(struct tm *timeptr);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mktime</d:code> function converts the broken-down time,
+        expressed as local time, in the structure pointed to by
+        <d:code>timeptr</d:code> into a calendar time value with the same
+        encoding as that of the values returned by the <d:code>time</d:code>
+        function. The original values of the <d:code>tm_wday</d:code> and
+        <d:code>tm_yday</d:code> components of the structure are ignored, and
+        the original values of the other components are not restricted to the
+        ranges indicated above.<d:footnote><d:para>Thus, a positive or zero
+        value for <d:code>tm_isdst</d:code> causes the mktime function to
+        presume initially that Daylight Saving Time, respectively, is or is not
+        in effect for the specified time. A negative value causes it to attempt
+        to determine whether Daylight Saving Time is in effect for the
+        specified time.</d:para></d:footnote> On successful completion, the
+        values of the <d:code>tm_wday</d:code> and <d:code>tm_yday</d:code>
+        components of the structure are set appropriately, and the other
+        components are set to represent the specified calendar time, but with
+        their values forced to the ranges indicated above; the final value of
+        <d:code>tm_mday</d:code> is not set until <d:code>tm_mon</d:code> and
+        <d:code>tm_year</d:code> are determined.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mktime</d:code> function returns the specified calendar
+        time encoded as a value of type <d:code>time_t</d:code>. If the
+        calendar time cannot be represented, the function returns the value
+        <d:code>(time_t)(-1)</d:code>.
+      </d:para>
+      <d:para>EXAMPLE What day of the week is July 4, 2001?</d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <time.h>
+static const char *const wday[] = {
+      "Sunday", "Monday", "Tuesday", "Wednesday",
+      "Thursday", "Friday", "Saturday", "-unknown-"
+};
+struct tm time_str;
+/* ... */
+time_str.tm_year    = 2001 - 1900;
+time_str.tm_mon     = 7 - 1;
+time_str.tm_mday    = 4;
+time_str.tm_hour    = 0;
+time_str.tm_min     = 0;
+time_str.tm_sec     = 1;
+time_str.tm_isdst  = -1;
+if (mktime(&time_str) == (time_t)(-1))
+    time_str.tm_wday = 7;
+printf("%s\n", wday[time_str.tm_wday]);]]></d:programlisting>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The time function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[nclude <time.h>
+time_t time(time_t *timer);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>time</d:code> function determines the current calendar
+        time. The encoding of the value is unspecified.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>time</d:code> function returns the implementation's best
+        approximation to the current calendar time. The value
+        <d:code>(time_t)(-1)</d:code> is returned if the calendar time is not
+        available. If <d:code>timer</d:code> is not a null pointer, the return
+        value is also assigned to the object it points to.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The timespec_get function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <time.h>
+int timespec_get(struct timespec *ts, int base);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>timespec_get</d:code> function sets the interval pointed to
+        by <d:code>ts</d:code> to hold the current calendar time based on the
+        specified time base.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If <d:code>base</d:code> is <d:code>TIME_UTC</d:code>, the
+        <d:code>tv_sec</d:code> member is set to the number of seconds since an
+        implementation defined <d:emphasis role="italic">epoch</d:emphasis>,
+        truncated to a whole value and the <d:code>tv_nsec</d:code> member is
+        set to the integral number of nanoseconds, rounded to the resolution of
+        the system clock.<d:footnote><d:para>Although a <d:code>struct
+        timespec</d:code> object describes times with nanosecond resolution,
+        the available resolution is system dependent and may even be greater
+        than 1 second.</d:para></d:footnote>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If the <d:code>timespec_get</d:code> function is successful it returns
+        the nonzero value <d:code>base</d:code>; otherwise, it returns zero.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Time conversion functions</d:title>
+    <d:para>
+      Except for the <d:code>strftime</d:code> function, these functions each
+      return a pointer to one of two types of static objects: a broken-down
+      time structure or an array of <d:code>char</d:code>. Execution of any of
+      the functions that return a pointer to one of these object types may
+      overwrite the information in any object of the same type pointed to by
+      the value returned from any previous call to any of them and the
+      functions are not required to avoid data races with each
+      other.<d:footnote><d:para>Alternative time conversion functions that do
+      avoid data races are specified in (&#xa7;
+      iso.K.3.8.2).</d:para></d:footnote> The implementation shall behave as if
+      no other library functions call these functions.
+    </d:para>
+  </d:sect1>
+</d:chapter>

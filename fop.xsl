@@ -42,6 +42,13 @@
       <xsl:apply-templates select="node()"/>
     </xsl:copy>
   </xsl:template-->
+  <!--xsl:template match="d:para[@role='indent']">
+    <xsl:copy>
+      <xsl:attribute name="text-indent">0.5em</xsl:attribute>
+      <xsl:message>indent para matched</xsl:message>
+      <xsl:apply-templates select="node()"/>
+    </xsl:copy>
+  </xsl:template-->
 
   <xsl:param name="highlight.source" select="1"></xsl:param>
   <xsl:param name="highlight.xslthl.config">/Users/gannu/Downloads/xslthl-2.1.3/highlighters/xslthl-config.xml</xsl:param>

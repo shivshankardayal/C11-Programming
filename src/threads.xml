@@ -1,0 +1,707 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+           xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+           xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+  <?dbhtml filename="threads/index.html" ?>
+  <d:title>Threads &lt;threads.h&gt;</d:title>
+  <d:para>
+    The header <d:code>&lt;threads.h&gt;</d:code> includes the header
+    <d:code>&lt;time.h&gt;</d:code>, defines macros, and declares types,
+    enumeration constants, and functions that support multiple threads of
+    execution.
+  </d:para>
+  <d:para>
+    Implementations that define the macro <d:code>__STDC_NO_THREADS__</d:code>
+    need not provide this header nor support any of its facilities.
+  </d:para>
+  <d:para>The macros are</d:para>
+  <d:blockquote>
+    <d:para><d:code>thread_local</d:code></d:para>
+  </d:blockquote>
+  <d:para>which expands to <d:code>_Thread_local</d:code>;</d:para>
+  <d:blockquote>
+    <d:para><d:code>ONCE_FLAG_INIT</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which expands to a value that can be used to initialize an object of type
+    <d:code>once_flag</d:code>; and
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>TSS_DTOR_ITERATIONS</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which expands to an integer constant expression representing the maximum
+    number of times that destructors will be called when a thread terminates.
+  </d:para>
+  <d:para>
+    The types are
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>cnd_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is a complete object type that holds an identifier for a condition
+    variable;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>thrd_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is a complete object type that holds an identifier for a thread;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>tss_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is a complete object type that holds an identifier for a
+    thread-specific storage pointer;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>mtx_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is a complete object type that holds an identifier for a mutex;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>tss_dtor_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is the function pointer type <d:code>void (*)(void*)</d:code>, used
+    for a destructor for a thread-specific storage pointer;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>thrd_start_t</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is the function pointer type <d:code>int (*)(void*)</d:code> that is
+    passed to <d:code>thrd_create</d:code> to create a new thread; and
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>once_flag</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is a complete object type that holds a flag for use by
+    <d:code>call_once</d:code>.
+  </d:para>
+  <d:para>
+    The enumeration constants are
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>mtx_plain</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is passed to <d:code>mtx_init</d:code> to create a mutex object that
+    supports neither timeout nor test and return;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>mtx_recursive</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is passed to <d:code>mtx_init</d:code> to create a mutex object that
+    supports recursive locking;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>mtx_timed</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is passed to <d:code>mtx_init</d:code> to create a mutex object that
+    supports timeout;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>thrd_timedout</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is returned by a timed wait function to indicate that the time
+    specified in the call was reached without acquiring the requested resource;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>thrd_success</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    hich is returned by a function to indicate that the requested operation
+    succeeded;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>thrd_busy</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is returned by a function to indicate that the requested operation
+    failed because a resource requested by a test and return function is
+    already in use;
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>thrd_error</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is returned by a function to indicate that the requested operation
+    failed; and
+  </d:para>
+  <d:blockquote>
+    <d:para><d:code>thrd_nomem</d:code></d:para>
+  </d:blockquote>
+  <d:para>
+    which is returned by a function to indicate that the requested operation
+    failed because it was unable to allocate memory.
+  </d:para>
+  <d:para>
+    <d:emphasis role="bold">Forward references:</d:emphasis> date and time
+    (7.27).
+  </d:para>
+  <d:sect1>
+    <d:title>Initialization functions</d:title>
+    <d:sect2>
+      <d:title>The call_once function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+void call_once(once_flag *flag, void (*func)(void));]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>call_once</d:code> function uses the
+        <d:code>once_flag</d:code> pointed to by <d:code>flag</d:code> to ensure
+        that <d:code>func</d:code> is called exactly once, the first time the
+        <d:code>call_once</d:code> function is called with that value of
+        <d:code>flag</d:code>. Completion of an effective call to the
+        <d:code>call_once</d:code> function synchronizes with all subsequent
+        calls to the <d:code>call_once</d:code> function with the same value of
+        <d:code>flag</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>call_once</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Condition variable functions</d:title>
+    <d:sect2>
+      <d:title>The cnd_broadcast function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int cnd_broadcast(cnd_t *cond);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_broadcast</d:code> function unblocks all of the threads
+        that are blocked on the condition variable pointed to by
+        <d:code>cond</d:code> at the time of the call. If no threads are
+        blocked on the condition variable pointed to by <d:code>cond</d:code>
+        at the time of the call, the function does nothing.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_broadcast</d:code> function returns
+        <d:code>thrd_success</d:code> on success, or
+        <d:code>thrd_error</d:code> if the request could not be honored.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The cnd_destroy function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+void cnd_destroy(cnd_t *cond);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_destroy</d:code> function releases all resources used
+        by the condition variable pointed to by cond. The
+        <d:code>cnd_destroy</d:code> function requires that no threads be
+        blocked waiting for the condition variable pointed to by
+        <d:code>cond</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_destroy</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The cnd_init function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int cnd_init(cnd_t *cond);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_init</d:code> function creates a condition variable. If
+        it succeeds it sets the variable pointed to by <d:code>cond</d:code> to
+        a value that uniquely identifies the newly created condition
+        variable. A thread that calls <d:code>cnd_wait</d:code> on a newly
+        created condition variable will block.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_init</d:code> function returns
+        <d:code>thrd_success</d:code> on success, or
+        <d:code>thrd_nomem</d:code> if no memory could be allocated for the
+        newly created condition, or <d:code>thrd_error</d:code> if the request
+        could not be honored.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The cnd_signal function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int cnd_signal(cnd_t *cond);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_signal</d:code> function unblocks one of the threads
+        that are blocked on the condition variable pointed to by cond at the
+        time of the call. If no threads are blocked on the condition variable
+        at the time of the call, the function does nothing and return success.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_signal</d:code> function returns
+        <d:code>thrd_success</d:code> on success or <d:code>thrd_error</d:code>
+        if the request could not be honored.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The cnd_timedwait function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int cnd_timedwait(cnd_t *restrict cond,
+                  mtx_t *restrict mtx,
+                  const struct timespec *restrict ts);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_timedwait</d:code> function atomically unlocks the
+        mutex pointed to by <d:code>mtx</d:code> and endeavors to block until
+        the condition variable pointed to by <d:code>cond</d:code> is signaled
+        by a call to <d:code>cnd</d:code>_signal or to
+        <d:code>cnd</d:code>_broadcast, or until after the
+        <d:code>TIME_UTC</d:code>-based calendar time pointed to by
+        <d:code>ts</d:code>. When the calling thread becomes unblocked it locks
+        the variable pointed to by <d:code>mtx</d:code> before it returns. The
+        <d:code>cnd_timedwait</d:code> function requires that the mutex pointed
+        to by <d:code>mtx</d:code> be locked by the calling thread.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_timedwait</d:code> function returns
+        <d:code>thrd_success</d:code> upon success, or
+        <d:code>thrd_timedout</d:code> if the time specified in the call was
+        reached without acquiring the requested resource, or
+        <d:code>thrd_error</d:code> if the request could not be honored.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The cnd_wait function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int cnd_wait(cnd_t *cond, mtx_t *mtx);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_wait</d:code> function atomically unlocks the mutex
+        pointed to by <d:code>mtx</d:code> and endeavors to block until the
+        condition variable pointed to by <d:code>cond</d:code> is signaled by a
+        call to <d:code>cnd_signal</d:code> or to
+        <d:code>cnd_broadcast</d:code>. When the calling thread becomes
+        unblocked it locks the mutex pointed to by <d:code>mtx</d:code> before
+        it returns. The <d:code>cnd_wait</d:code> function requires that the
+        mutex pointed to by <d:code>mtx</d:code> be locked by the calling
+        thread.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>cnd_wait</d:code> function returns
+        <d:code>thrd_success</d:code> on success or <d:code>thrd_error</d:code>
+        if the request could not be honored.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Mutes functions</d:title>
+    <d:sect2>
+      <d:title>The mtx_destroy function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+void mtx_destroy(mtx_t *mtx);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mtx_destroy</d:code> function releases any resources used
+        by the mutex pointed to by <d:code>mtx</d:code>. No threads can be
+        blocked waiting for the mutex pointed to by <d:code>mtx</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mtx_destroy</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The mtx_init function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int mtx_init(mtx_t *mtx, int type);]]>
+      </d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mtx_init</d:code> function creates a mutex object with
+        properties indicated by type, which must have one of the six values:
+      </d:para>
+      <d:para>
+        <d:code>mtx_plain</d:code> for a simple non-recursive mutex,
+      </d:para>
+      <d:para>
+        <d:code>mtx_timed</d:code> for a non-recursive mutex that supports
+        timeout,
+      </d:para>
+      <d:para>
+        <d:code>mtx_plain | mtx_recursive</d:code> for a simple recursive
+        mutex, or 
+      </d:para>
+      <d:para>
+        <d:code>mtx_timed | mtx_recursive</d:code> for a recursive mutex that
+        supports timeout.
+      </d:para>
+      <d:para>
+        If the <d:code>mtx_init</d:code> function succeeds, it sets the mutex
+        pointed to by <d:code>mtx</d:code> to a value that uniquely identifies
+        the newly created mutex.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mtx_init</d:code> function returns
+        <d:code>thrd_success</d:code> on success, or
+        <d:code>thrd_error</d:code> if the request could not be honored.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The mtx_lock function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int mtx_lock(mtx_t *mtx);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mtx_lock</d:code> function blocks until it locks the mutex
+        pointed to by <d:code>mtx</d:code>. If the mutex is non-recursive, it
+        shall not be locked by the calling thread. Prior calls to
+        <d:code>mtx_unlock</d:code> on the same mutex shall synchronize with
+        this operation.
+      </d:para>
+      <d:para>
+        The <d:code>mtx_lock</d:code> function returns
+        <d:code>thrd_success</d:code> on success, or
+        <d:code>thrd_error</d:code> if the request could not be honored.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The mtx_timedlock function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int mtx_timedlock(mtx_t *restrict mtx,
+                  const struct timespec *restrict ts);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mtx_timedlock</d:code> function endeavors to block until it
+        locks the mutex pointed to by <d:code>mtx</d:code> or until after the
+        <d:code>TIME_UTC</d:code>-based calendar time pointed to by
+        <d:code>ts</d:code>. The specified mutex shall support timeout. If the
+        operation succeeds, prior calls to <d:code>mtx_unlock</d:code> on the
+        same mutex shall synchronize with this operation.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mtx_timedlock</d:code> function returns
+        <d:code>thrd_success</d:code> on success, or
+        <d:code>thrd_timedout</d:code> if the time specified was reached
+        without acquiring the requested resource, or
+        <d:code>thrd_error</d:code> if the request could not be honored.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The mtx_trylock function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int mtx_trylock(mtx_t *mtx);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mtx_trylock</d:code> function endeavors to lock the mutex
+        pointed to by <d:code>mtx</d:code>. If the mutex is already locked, the
+        function returns without blocking. If the operation succeeds, prior
+        calls to <d:code>mtx_unlock</d:code> on the same mutex shall
+        synchronize with this operation.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mtx_trylock</d:code> function returns
+        <d:code>thrd_success</d:code> on success, or <d:code>thrd_busy</d:code>
+        if the resource requested is already in use, or
+        <d:code>thrd_error</d:code> if the request could not be honored.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The mtx_unlock function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int mtx_unlock(mtx_t *mtx);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mtx_unlock</d:code> function unlocks the mutex pointed to
+        by <d:code>mtx</d:code>. The mutex pointed to by <d:code>mtx</d:code>
+        shall be locked by the calling thread.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>mtx_unlock</d:code> function returns thrd_success on
+        success or <d:code>thrd_error</d:code> if the request could not be
+        honored.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Thread functions</d:title>
+    <d:sect2>
+      <d:title>The thrd_create function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+      int thrd_create(thrd_t *thr, thrd_start_t func,
+      void *arg);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_create</d:code> function creates a new thread
+        executing <d:code>func(arg)</d:code>. If the
+        <d:code>thrd_create</d:code> function succeeds, it sets the object
+        pointed to by <d:code>thr</d:code> to the identifier of the newly
+        created thread. (A thread's identifier may be reused for a different
+        thread once the original thread has exited and either been detached or
+        joined to another thread.) The completion of the
+        <d:code>thrd_create</d:code> function synchronizes with the beginning
+        of the execution of the new thread.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_create</d:code> function returns
+        <d:code>thrd_success</d:code> on success, or
+        <d:code>thrd_nomem</d:code> if no memory could be allocated for the
+        thread requested, or <d:code>thrd_error</d:code> if the request could
+        not be honored.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The thrd_current function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+thrd_t thrd_current(void);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_current</d:code> function identifies the thread that
+        called it.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_current</d:code> function returns the identifier of
+        the thread that called it.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The thrd_detach function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int thrd_detach(thrd_t thr);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_detach</d:code> function tells the operating system to
+        dispose of any resources allocated to the thread identified by
+        <d:code>thr</d:code> when that thread terminates. The thread identified
+        by thr shall not have been previously detached or joined with another
+        thread.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_detach</d:code> function returns
+        <d:code>thrd_success</d:code> on success or <d:code>thrd_error</d:code>
+        if the request could not be honored.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The thrd_equal function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int thrd_equal(thrd_t thr0, thrd_t thr1);]]></d:programlisting>
+      <d:para>
+        The <d:code>thrd_equal</d:code> function will determine whether the
+        thread identified by <d:code>thr0</d:code> refers to the thread
+        identified by <d:code>thr1</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_equal</d:code> function returns zero if the thread
+        <d:code>thr0</d:code> and the thread <d:code>thr1</d:code> refer to
+        different threads. Otherwise the <d:code>thrd_equal</d:code> function
+        returns a nonzero value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The thrd_exit function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[
+#include <threads.h>
+_Noreturn void thrd_exit(int res);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_exit</d:code> function terminates execution of the
+        calling thread and sets its result code to <d:code>res</d:code>.
+      </d:para>
+      <d:para>
+        The program shall terminate normally after the last thread has been
+        terminated. The behavior shall be as if the program called the
+        <d:code>exit</d:code> function with the status
+        <d:code>EXIT_SUCCESS</d:code> at thread termination time.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_exit</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The thrd_join function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int thrd_join(thrd_t thr, int *res);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_join</d:code> function joins the thread identified by
+        <d:code>thr</d:code> with the current thread by blocking until the
+        other thread has terminated. If the parameter <d:code>res</d:code> is
+        not a null pointer, it stores the thread's result code in the integer
+        pointed to by <d:code>res</d:code>. The termination of the other thread
+        synchronizes with the completion of the <d:code>thrd_join</d:code>
+        function. The thread identified by <d:code>thr</d:code> shall not have
+        been previously detached or joined with another thread.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_join</d:code> function returns
+        <d:code>thrd_success</d:code> on success or <d:code>thrd_error</d:code>
+        if the request could not be honored.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The thrd_sleep function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int thrd_sleep(const struct timespec *duration,
+               struct timespec *remaining);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_sleep</d:code> function suspends execution of the
+        calling thread until either the interval specified by
+        <d:code>duration</d:code> has elapsed or a signal which is not being
+        ignored is received. If interrupted by a signal and the
+        <d:code>remaining</d:code> argument is not null, the amount of time
+        remaining (the requested interval minus the time actually slept) is
+        stored intheintervalitpointsto. The <d:code>duration</d:code> and
+        <d:code>remaining</d:code> arguments may point to the same object.
+      </d:para>
+      <d:para>
+        The suspension time may be longer than requested because the interval
+        is rounded up to an integer multiple of the sleep resolution or because
+        of the scheduling of other activity by the system. But, except for the
+        case of being interrupted by a signal, the suspension time shall not be
+        less than that specified, as measured by the system clock
+        <d:code>TIME_UTC</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_sleep</d:code> function returns zero if the requested
+        time has elapsed, -1 if it has been interrupted by a signal, or a
+        negative value if it fails.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The thrd_yield function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+void thrd_yield(void);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_yield</d:code> function endeavors to permit other
+        threads to run, even if the current thread would ordinarily continue to
+        run.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>thrd_yield</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Thread-specific storage functions</d:title>
+    <d:sect2>
+      <d:title>The tss_create function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int tss_create(tss_t *key, tss_dtor_t dtor);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>tss_create</d:code> function creates a thread-specific
+        storage pointer with destructor <d:code>dtor</d:code>, which may be
+        null.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If the <d:code>tss_create</d:code> function is successful, it sets the
+        thread-specific storage pointed to by <d:code>key</d:code> to a value
+        that uniquely identifies the newly created pointer and returns
+        <d:code>thrd_success</d:code>; otherwise, <d:code>thrd_error</d:code>
+        is returned and the thread-specific storage pointed to by
+        <d:code>key</d:code> is set to an undefined value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The tss_delete function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+void tss_delete(tss_t key);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>tss_delete</d:code> function releases any resources used by
+        the thread-specific storage identified by <d:code>key</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>tss_delete</d:code> function returns no value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The tss_get function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+void *tss_get(tss_t key);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>tss_get</d:code> function returns the value for the current
+        thread held in the thread-specific storage identified by
+        <d:code>key</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>tss_get</d:code> function returns the value for the current
+        thread if successful, or zero if unsuccessful.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The tss_set function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <threads.h>
+int tss_set(tss_t key, void *val);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>tss_set</d:code> function sets the value for the current
+        thread held in the thread-specific storage identified by
+        <d:code>key</d:code> to <d:code>val</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>tss_set</d:code> function returns
+        <d:code>thrd_success</d:code> on success or <d:code>thrd_error</d:code>
+        if the request could not be honored.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+</d:chapter>

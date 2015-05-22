@@ -21,4 +21,4 @@ fop:
 #	./fop.py
 #	perl -pi -e "s/<html><body>//g;" src/c.fo
 #	perl -pi -e "s/<\/body><\/html>//g;" src/c.fo
-	cd src && fop c.fo c.pdf 2>/dev/null
+	cd src && fop c.fo c.pdf 
