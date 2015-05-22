@@ -391,6 +391,299 @@ int fwprintf(FILE * restrict stream,
           </d:listitem>
         </d:itemizedlist>
       </d:para>
+      <d:para>
+        Finally, unless the <d:code>#</d:code> flag is used, any trailing zeros
+        are removed from the fractional portion of the result and the
+        decimal-point wide character is removed if there is no fractional
+        portion remaining.
+      </d:para>
+      <d:para>
+        A <d:code>double</d:code> argument representing an infinity or NaN is
+        converted in the style of an <d:code>f</d:code> or <d:code>F</d:code>
+        conversion specifier.
+      </d:para>
+      <d:para>
+        <d:code>a, A</d:code> A <d:code>double</d:code> argument representing a
+        floating-point number is converted in the style <d:emphasis
+        role="italic">[−]</d:emphasis><d:code>0x</d:code><d:emphasis
+        role="italic">h.hhhh</d:emphasis><d:code>p</d:code><d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><mo>&#177;</mo></math></d:inlineequation><d:emphasis
+        role="italic">d</d:emphasis>, where there is one hexadecimal digit
+        (which is nonzero if the argument is a normalized floating-point number
+        and is otherwise unspecified) before the decimal-point wide
+        character<d:footnote><d:para>Binary implementations can choose the
+        hexadecimal digit to the left of the decimal-point wide character so
+        that subsequent digits align to nibble (4-bit)
+        boundaries.</d:para></d:footnote> and the number of hexadecimal digits
+        after it is equal to the precision; if the precision is missing and
+        <d:code>FLT_RADIX</d:code> is a power of 2, then the precision is
+        sufficient for an exact representation of the value; if the precision
+        is missing and <d:code>FLT_RADIX</d:code> is not a power of 2, then the
+        precision is sufficient to distinguish<d:footnote><d:para>The precision
+        <d:emphasis role="italic">p</d:emphasis> is sufficient to distinguish
+        values of the source type if <d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>16</mn><mrow><mi>p</mi><mo>-</mo><mn>1</mn></mrow></msup><mo>&gt;</mo><msup><mi>b</mi><mi>n</mi></msup></math></d:inlineequation>
+        where <d:emphasis role="italic">b</d:emphasis> is
+        <d:code>FLT_RADIX</d:code> and <d:emphasis role="italic">n</d:emphasis>
+        is the number of base-<d:emphasis role="italic">b</d:emphasis> digits
+        in the significand of the source type. A smaller <d:emphasis
+        role="italic">p</d:emphasis> might suffice depending on the
+        implementation’s scheme for determining the digit to the left of the
+        decimal-point wide character.</d:para></d:footnote> values of type
+        <d:code>double</d:code>, except that trailing zeros may be omitted; if
+        the precision is zero and the <d:code>#</d:code> flag is not specified,
+        no decimal-point wide character appears. The letters
+        <d:code>abcdef</d:code> are used for <d:code>a</d:code> conversion and
+        the letters <d:code>ABCDEF</d:code> for <d:code>A</d:code>
+        conversion. The <d:code>A</d:code> conversion specifier produces a
+        number with <d:code>X</d:code> and <d:code>P</d:code> instead of
+        <d:code>x</d:code> and <d:code>p</d:code>. The exponent always contains
+        at least one digit, and only as many more digits as necessary to
+        represent the decimal exponent of 2. If the value is zero, the exponent
+        is zero.
+      </d:para>
+      <d:para>
+        A <d:code>double</d:code> argument representing an infinity or NaN is
+        converted in the style of an <d:code>f</d:code> or <d:code>F</d:code>
+        conversion specifier.
+      </d:para>
+      <d:para>
+        <d:code>c</d:code> If no <d:code>l</d:code> length modifier is present,
+        the <d:code>int</d:code> argument is converted to a wide character as
+        if by calling <d:code>btowc</d:code> and the resulting wide character
+        is written.
+      </d:para>
+      <d:para>
+        If an <d:code>l</d:code> length modifier is present, the
+        <d:code>wint_t</d:code> argument is converted to
+        <d:code>wchar_t</d:code> and written.
+      </d:para>
+      <d:para>
+        <d:code>s</d:code> If no <d:code>l</d:code> length modifier is present,
+        the argument shall be a pointer to the initial element of a character
+        array containing a multibyte character sequence beginning in the
+        initial shift state. Characters from the array are converted as if by
+        repeated calls to the <d:code>mbrtowc</d:code> function, with the
+        conversion state described by an <d:code>mbstate_t</d:code> object
+        initialized to zero before the first multibyte character is converted,
+        and written up to (but not including) the terminating null wide
+        character. If the precision is specified, no more than that many wide
+        characters are written. If the precision is not specified or is greater
+        than the size of the converted array, the converted array shall contain
+        a null wide character.
+      </d:para>
+      <d:para>
+        If an <d:code>l</d:code> length modifier is present, the argument shall
+        be a pointer to the initial element of an array of
+        <d:code>wchar_t</d:code> type. Wide characters from the array are
+        written up to (but not including) a terminating null wide character. If
+        the precision is specified, no more than that many wide characters are
+        written. If the precision is not specified or is greater than the size
+        of the array, the array shall contain a null wide character.
+      </d:para>
+      <d:para>
+        <d:code>p</d:code> The argument shall be a pointer to
+        <d:code>void</d:code>. The value of the pointer is converted to a
+        sequence of printing wide characters, in an implementation- defined
+        manner.
+      </d:para>
+      <d:para>
+        <d:code>n</d:code> The argument shall be a pointer to signed integer
+        into which is <d:emphasis role="italic">written</d:emphasis> the number
+        of wide characters written to the output stream so far by this call to
+        <d:code>fwprintf</d:code>. No argument is converted, but one is
+        consumed. If the conversion specification includes any flags, a field
+        width, or a precision, the behavior is undefined.
+      </d:para>
+      <d:para>
+        <d:code>%</d:code> A <d:code>%</d:code> wide character is written. No
+        argument is converted. The complete conversion specification shall be
+        <d:code>%%</d:code>.
+      </d:para>
+      <d:para>
+        If a conversion specification is invalid, the behavior is undefined. If
+        any argument is not the correct type for the corresponding conversion
+        specification, the behavior is undefined.
+      </d:para>
+      <d:para>
+        In no case does a nonexistent or small field width cause truncation of
+        a field; if the result of a conversion is wider than the field width,
+        the field is expanded to contain the conversion result.
+      </d:para>
+      <d:para>
+        For <d:code>a</d:code> and <d:code>A</d:code> conversions, if
+        <d:code>FLT_RADIX</d:code> is a power of 2, the value is correctly
+        rounded to a hexadecimal floating number with the given precision.
+      </d:para>
+      <d:para><d:emphasis role="bold">Recommended
+      practice</d:emphasis></d:para>
+      <d:para>
+        For <d:code>a</d:code> and <d:code>A</d:code> conversions, if
+        <d:code>FLT_RADIX</d:code> is not a power of 2 and the result is not
+        exactly representable in the given precision, the result should be one
+        of the two adjacent numbers in hexadecimal floating style with the
+        given precision, with the extra stipulation that the error should have
+        a correct sign for the current rounding direction.
+      </d:para>
+      <d:para>
+        For <d:code>e, E, f, F, g</d:code> and <d:code>G</d:code> conversions,
+        if the number of significant decimal digits is at most
+        <d:code>DECIMAL_DIG</d:code>, then the result should be correctly
+        rounded.<d:footnote><d:para>For binary-to-decimal conversion, the
+        result format’s values are the numbers representable with the given
+        format specifier. The number of significant digits is determined by the
+        format specifier, and in the case of fixed-point conversion by the
+        source value as well.</d:para></d:footnote> If the number of
+        significant decimal digits is more than <d:code>DECIMAL_DIG</d:code>
+        but the source value is exactly representable with
+        <d:code>DECIMAL_DIG</d:code> digits, then the result should be an exact
+        representation with trailing zeros. Otherwise, the source value is
+        bounded by two adjacent decimal strings <d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><mi>L</mi><mo>&lt;</mo><mi>U</mi></math></d:inlineequation>,
+        both having <d:code>DECIMAL_DIG</d:code> significant digits; the value
+        of the resultant decimal string <d:emphasis
+        role="italic">D</d:emphasis> should satisfy <d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><mi>L</mi><mo>&#8804;</mo><mi>D</mi><mo>&#8804;</mo><mi>U</mi></math></d:inlineequation>,
+        with the extra stipulation that the error should have a correct sign
+        for the current rounding direction.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fwprintf</d:code> function returns the number of wide
+        characters transmitted, or a negative value if an output or encoding
+        error occurred.
+      </d:para>
+      <d:para><d:emphasis role="bold">Environmental
+      limits</d:emphasis></d:para>
+      <d:para>
+        The number of wide characters that can be produced by any single
+        conversion shall be at least 4095.
+      </d:para>
+      <d:para>
+        EXAMPLE To print a date and time in the form <d:quote>Sunday, July 3,
+        10:02</d:quote> followed by <d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><mi>&#960;</mi></math></d:inlineequation>
+        to five decimal places:
+        <d:programlisting role="CLexer"><![CDATA[#include <math.h>
+#include <stdio.h>
+#include <wchar.h>
+/* ... */
+wchar_t *weekday, *month; // pointers to wide strings
+int day, hour, min;
+fwprintf(stdout, L"%ls, %ls %d, %.2d:%.2d\n",
+         weekday, month, day, hour, min);
+fwprintf(stdout, L"pi = %.5f\n", 4 * atan(1.0));]]></d:programlisting>
+        <d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>btowc</d:code> function (7.29.6.1.1), the
+        <d:code>mbrtowc</d:code> function (7.29.6.3.2).
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The fwscanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h> #include <wchar.h>
+int fwscanf(FILE * restrict stream,
+            const wchar_t * restrict format, ...);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fwscanf</d:code> function reads input from the stream
+        pointed to by <d:code>stream</d:code>, under control of the wide string
+        pointed to by <d:code>format</d:code> that specifies the admissible
+        input sequences and how they are to be converted for assignment, using
+        subsequent arguments as pointers to the objects to receive the
+        converted input. If there are insufficient arguments for the format,
+        the behavior is undefined. If the format is exhausted while arguments
+        remain, the excess arguments are evaluated (as always) but are
+        otherwise ignored.
+      </d:para>
+      The format is composed of zero or more directives: one or more
+      white-space wide characters, an ordinary wide character (neither
+      <d:code>%</d:code> nor a white-space wide character), or a conversion
+      specification. Each conversion specification is introduced by the wide
+      character <d:code>%</d:code>. After the <d:code>%</d:code>, the following
+      appear in sequence:
+      <d:itemizedlist>
+        <d:listitem>
+          An optional assignment-suppressing wide character
+          <d:code>*</d:code>.
+        </d:listitem>
+        <d:listitem>
+          An optional decimal integer greater than zero that specifies the
+          maximum field width (in wide characters).
+        </d:listitem>
+        <d:listitem>
+          An optional <d:emphasis role="italic">length modifier</d:emphasis>
+          that specifies the size of the receiving object.
+        </d:listitem>
+        <d:listitem>
+          A <d:emphasis role="italic">conversion specifier</d:emphasis> wide
+          character that specifies the type of conversion to be applied.
+        </d:listitem>
+      </d:itemizedlist>
+      <d:para>
+        The <d:code>fwscanf</d:code> function executes each directive of the
+        format in turn. When all directives have been executed, or if a
+        directive fails (as detailed below), the function returns. Failures are
+        described as input failures (due to the occurrence of an encoding error
+        or the unavailability of input characters), or matching failures (due
+        to inappropriate input).
+      </d:para>
+      <d:para>
+        A directive composed of white-space wide character(s) is executed by
+        reading input up to the first non-white-space wide character (which
+        remains unread), or until no more wide characters can be read. The
+        directive never fails.
+      </d:para>
+      <d:para>
+        A directive that is an ordinary wide character is executed by reading
+        the next wide character of the stream. If that wide character differs
+        from the directive, the directive fails and the differing and
+        subsequent wide characters remain unread. Similarly, if end- of-file,
+        an encoding error, or a read error prevents a wide character from being
+        read, the directive fails.
+      </d:para>
+      <d:para>
+        A directive that is a conversion specification defines a set of
+        matching input sequences, as described below for each specifier. A
+        conversion specification is executed in the following steps:
+      </d:para>
+      <d:para>
+        Input white-space wide characters (as specified by the iswspace
+        function) are skipped, unless the specification includes a [, c, or n
+        specifier.<d:footnote><d:para>These white-space wide characters are not
+        counted against a specified field width.</d:para></d:footnote>
+      </d:para>
+      <d:para>
+        An input item is read from the stream, unless the specification
+        includes an n specifier. An input item is defined as the longest
+        sequence of input wide characters which does not exceed any specified
+        field width and which is, or is a prefix of, a matching input
+        sequence.<d:footnote><d:para><d:code>fwscanf</d:code> pushes back at
+        most one input wide character onto the input stream. Therefore, some
+        sequences that are acceptable to <d:code>wcstod, wcstol</d:code> etc.,
+        are unacceptable to <d:code>fwscanf</d:code>.</d:para></d:footnote> The
+        first wide character, if any, after the input item remains unread. If
+        the length of the input item is zero, the execution of the directive
+        fails; this condition is a matching failure unless end-of-file, an
+        encoding error, or a read error prevented input from the stream, in
+        which case it is an input failure.
+      </d:para>
+      <d:para>
+        Except in the case of a <d:code>%</d:code> specifier, the input item
+        (or, in the case of a <d:code>%n</d:code> directive, the count of input
+        wide characters) is converted to a type appropriate to the conversion
+        specifier. If the input item is not a matching sequence, the execution
+        of the directive fails: this condition is a matching failure. Unless
+        assignment suppression was indicated by a <d:code>*</d:code>, the
+        result of the conversion is placed in the object pointed to by the
+        first argument following the <d:code>format</d:code> argument that has
+        not already received a conversion result. If this object does not have
+        an appropriate type, or if the result of the conversion cannot be
+        represented in the object, the behavior is undefined.
+      </d:para>
+      <d:para>
+        The length modifiers and their meanings are:
+      </d:para>
     </d:sect2>
   </d:sect1>
 </d:chapter>
