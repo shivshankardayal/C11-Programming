@@ -684,6 +684,88 @@ int fwscanf(FILE * restrict stream,
       <d:para>
         The length modifiers and their meanings are:
       </d:para>
+      <d:para>
+        <d:code>hh</d:code> Specifies that a following <d:code>d, i, o, u, x,
+        X</d:code> or <d:code>n</d:code> conversion specifier applies to an
+        argument with type pointer to <d:code>signed char</d:code> or
+        <d:code>unsigned char</d:code>.
+      </d:para>
+      <d:para>
+        <d:code>
+          <d:code>h</d:code> Specifies that a following <d:code>d, i, o, u, x,
+          X</d:code> or <d:code>n</d:code> conversion specifier applies to an
+          argument with type pointer to <d:code>short int</d:code> or
+          <d:code>unsigned short int</d:code>.
+        </d:code>
+      </d:para>
+      <d:para>
+        <d:code>l</d:code>(ell) Specifies that a following <d:code>d, i, o, u,
+        x, X</d:code> or <d:code>n</d:code> conversion specifier applies to an
+        argument with type pointer to <d:code>long int</d:code> or
+        <d:code>unsigned long int</d:code>; that a following <d:code>a, A, e,
+        E, f, F, g</d:code> or <d:code>G</d:code> conversion specifier applies
+        to an argument with type pointer to <d:code>double</d:code>; or that a
+        following <d:code>c, s</d:code> or <d:code>[</d:code> conversion
+        specifier applies to an argument with type pointer to
+        <d:code>wchar_t</d:code>.
+      </d:para>
+      <d:para>
+        <d:code>ll</d:code>(ell-ell) Specifies that a following <d:code>d, i,
+        o, u, x, X</d:code> or <d:code>n</d:code> conversion specifier applies
+        to an argument with type pointer to <d:code>long long int</d:code> or
+        <d:code>unsigned long long int</d:code>.
+      </d:para>
+      <d:para>
+        <d:code>j</d:code> Specifies that a following <d:code>d, i, o, u, x,
+        X</d:code> or <d:code>n</d:code> conversion specifier applies to an
+        argument with type pointer to <d:code>intmax_t</d:code> or
+        <d:code>uintmax_t</d:code>.
+      </d:para>
+      <d:para>
+        <d:code>z</d:code> Specifies that a following <d:code>d, i, o, u, x,
+        X</d:code> or <d:code>n</d:code> conversion specifier applies to an
+        argument with type pointer to <d:code>size_t</d:code> or the
+        corresponding signed integer type.
+      </d:para>
+      <d:para>
+        <d:code>t</d:code> Specifies that a following <d:code>d, i, o, u, x,
+        X</d:code> or <d:code>n</d:code> conversion specifier applies to an
+        argument with type pointer to <d:code>ptrdiff_t</d:code> or the
+        corresponding unsigned integer type.
+      </d:para>
+      <d:para>
+        <d:code>L</d:code> Specifies that a following <d:code>a, A, e, E, f, F,
+        g</d:code> or G conversion specifier applies to an argument with type
+        pointer to <d:code>long double</d:code>.
+      </d:para>
+      <d:para>
+        If a length modifier appears with any conversion specifier other than
+        as specified above, the behavior is undefined.
+      </d:para>
+      <d:para>
+        The conversion specifiers and their meanings are:
+      </d:para>
+      <d:para>
+        <d:code>d</d:code> Matches an optionally signed decimal integer, whose
+        format is the same as expected for the subject sequence of the
+        <d:code>wcstol</d:code> function with the value 10 for the
+        <d:code>base</d:code> argument. The corresponding argument shall be a
+        pointer to signed integer.
+      </d:para>
+      <d:para>
+        <d:code>i</d:code> Matches an optionally signed integer, whose format
+        is the same as expected for the subject sequence of the
+        <d:code>wcstol</d:code> function with the value 0 for the
+        <d:code>base</d:code> argument. The corresponding argument shall be a
+        pointer to signed integer.
+      </d:para>
+      <d:para>
+        <d:code>o</d:code> Matches an optionally signed octal integer, whose
+        format is the same as expected for the subject sequence of the
+        <d:code>wcstoul</d:code> function with the value 8 for the
+        <d:code>base</d:code> argument. The corresponding argument shall be a
+        pointer to unsigned integer.
+      </d:para>
     </d:sect2>
   </d:sect1>
 </d:chapter>
