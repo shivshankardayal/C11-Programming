@@ -87,6 +87,12 @@ pre.screen {
     border-radius: 5px;
 }
 
+.center {
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
 table.centered, table.centered th, table.centered td
 {
     border-collapse:collapse;
