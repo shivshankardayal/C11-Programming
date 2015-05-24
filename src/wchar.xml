@@ -1016,5 +1016,1482 @@ int swscanf(const wchar_t * restrict s,
         event of an early matching failure.
       </d:para>
     </d:sect2>
+    <d:sect2>
+      <d:title>The vfwprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdarg.h>
+#include <stdio.h>
+#include <wchar.h>
+int vfwprintf(FILE * restrict stream,
+              const wchar_t * restrict format,
+              va_list arg);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vfwprintf</d:code> function is equivalent to
+        <d:code>fwprintf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vfwprintf</d:code> function
+        does not invoke the <d:code>va_end</d:code> macro.<d:footnote
+        id="fp_vfwprintf"><d:para>As the functions <d:code>vfwprintf,
+        vswprintf, vfwscanf, vwprintf, vwscanf</d:code> and
+        <d:code>vswscanf</d:code> invoke the <d:code>va_arg</d:code> macro, the
+        value of <d:code>arg</d:code> after the return is
+        indeterminate.</d:para></d:footnote>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vfwprintf</d:code> function returns the number of wide
+        characters transmitted, or a negative value if an output or encoding
+        error occurred.
+      </d:para>
+      <d:para>
+        EXAMPLE The following shows the use of the <d:code>vfwprintf</d:code>
+        function in a general error-reporting routine.
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdarg.h>
+#include <stdio.h>
+#include <wchar.h>
+void error(char *function_name, wchar_t *format, ...)
+{
+  va_list args;
+  va_start(args, format);
+  // print out name of function causing error
+  fwprintf(stderr, L"ERROR in %s: ", function_name); // print out remainder of message
+  vfwprintf(stderr, format, args);
+  va_end(args);
+}]]></d:programlisting>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vfwscanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdarg.h>
+#include <stdio.h>
+#include <wchar.h>
+int vfwscanf(FILE * restrict stream,
+             const wchar_t * restrict format,
+             va_list arg);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vfwscanf</d:code> function is equivalent to
+        <d:code>fwscanf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vfwscanf</d:code> function
+        does not invoke the <d:code>va_end</d:code> macro.<d:footnoteref
+        linkend="fp_vfwprintf" />
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vfwscanf</d:code> function returns the value of the macro
+        <d:code>EOF</d:code> if an input failure occurs before the first
+        conversion (if any) has completed. Otherwise, the
+        <d:code>vfwscanf</d:code> function returns the number of input items
+        assigned, which can be fewer than provided for, or even zero, in the
+        event of an early matching failure.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vswprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdarg.h>
+#include <wchar.h>
+int vswprintf(wchar_t * restrict s,
+              size_t n,
+              const wchar_t * restrict format,
+              va_list arg);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vswprintf</d:code> function is equivalent to
+        <d:code>swprintf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vswprintf</d:code> function
+        does not invoke the <d:code>va_end</d:code> macro.<d:footnoteref
+        linkend="fp_vfwprintf" />
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>        
+        The <d:code>vswprintf</d:code> function returns the number of wide
+        characters written in the array, not counting the terminating null wide
+        character, or a negative value if an encoding error occurred or if
+        <d:code>n</d:code> or more wide characters were requested to be
+        generated.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vswscanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdarg.h>
+#include <wchar.h>
+int vswscanf(const wchar_t * restrict s,
+             const wchar_t * restrict format,
+             va_list arg);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vswscanf</d:code> function is equivalent to
+        <d:code>swscanf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vswscanf</d:code> function
+        does not invoke the <d:code>va_end</d:code> macro.<d:footnoteref
+        linkend="fp_vfwprintf"/>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vswscanf</d:code> function returns the value of the macro
+        <d:code>EOF</d:code> if an input failure occurs before the first
+        conversion (if any) has completed. Otherwise, the
+        <d:code>vswscanf</d:code> function returns the number of input items
+        assigned, which can be fewer than provided for, or even zero, in the
+        event of an early matching failure.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vwprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdarg.h>
+#include <wchar.h>
+int vwprintf(const wchar_t * restrict format,
+            va_list arg);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vwprintf</d:code> function is equivalent to
+        <d:code>wprintf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vwprintf</d:code> function
+        does not invoke the <d:code>va_end</d:code> macro.<d:footnoteref
+        linkend="fp_vfwprintf"/>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vwprintf</d:code> function returns the number of wide
+        characters transmitted, or a negative value if an output or encoding
+        error occurred.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The vwscanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdarg.h>
+#include <wchar.h>
+int vwscanf(const wchar_t * restrict format,
+            va_list arg);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vwscanf</d:code> function is equivalent to
+        <d:code>wscanf</d:code>, with the variable argument list replaced by
+        <d:code>arg</d:code>, which shall have been initialized by the
+        <d:code>va_start</d:code> macro (and possibly subsequent
+        <d:code>va_arg</d:code> calls). The <d:code>vwscanf</d:code> function
+        does not invoke the <d:code>va_end</d:code> macro.<d:footnoteref
+        linkend="fp_vfwprintf" />
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>vwscanf</d:code> function returns the value of the macro
+        <d:code>EOF</d:code> if an input failure occurs before the first
+        conversion (if any) has completed. Otherwise, the
+        <d:code>vwscanf</d:code> function returns the number of input items
+        assigned, which can be fewer than provided for, or even zero, in the
+        event of an early matching failure.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The wprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+int wprintf(const wchar_t * restrict format, ...);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>wprintf</d:code> function is equivalent to
+        <d:code>fwprintf</d:code> with the argument <d:code>stdout</d:code>
+        interposed before the arguments to <d:code>wprintf</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>wprintf</d:code> function returns the number of wide
+        characters transmitted, or a negative value if an output or encoding
+        error occurred.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The wscanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+int wscanf(const wchar_t * restrict format, ...);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>wscanf</d:code> function is equivalent to fwscanf with the
+        argument <d:code>stdin</d:code> interposed before the arguments to
+        <d:code>wscanf</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>wscanf</d:code> function returns the value of the macro
+        <d:code>EOF</d:code> if an input failure occurs before the first
+        conversion (if any) has completed. Otherwise, the
+        <d:code>wscanf</d:code> function returns the number of input items
+        assigned, which can be fewer than provided for, or even zero, in the
+        event of an early matching failure.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Wide character input/output functions</d:title>
+    <d:sect2>
+      <d:title>The fgetwc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <wchar.h>
+wint_t fgetwc(FILE *stream);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        If the end-of-file indicator for the input stream pointed to by
+        <d:code>stream</d:code> is not set and a next wide character is
+        present, the <d:code>fgetwc</d:code> function obtains that wide
+        character as a <d:code>wchar_t</d:code> converted to a
+        <d:code>wint_t</d:code> and advances the associated file position
+        indicator for the stream (if defined).
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        If the end-of-file indicator for the stream is set, or if the stream is
+        at end-of-file, the end- of-file indicator for the stream is set and
+        the <d:code>fgetwc</d:code> function returns
+        <d:code>WEOF</d:code>. Otherwise, the <d:code>fgetwc</d:code> function
+        returns the next wide character from the input stream pointed to by
+        <d:code>stream</d:code>. If a read error occurs, the error indicator
+        for the stream is set and the <d:code>fgetwc</d:code> function returns
+        <d:code>WEOF</d:code>. If an encoding error occurs (including too few
+        bytes), the value of the macro <d:code>EILSEQ</d:code> is stored in
+        errno and the <d:code>fgetwc</d:code> function returns
+        <d:code>WEOF</d:code>.<d:footnote><d:para>An end-of-file and a read
+        error can be distinguished by use of the <d:code>feof</d:code> and
+        <d:code>ferror</d:code> functions. Also, <d:code>errno</d:code> will be
+        set to <d:code>EILSEQ</d:code> by input/output functions only if an
+        encoding error occurs.</d:para></d:footnote>
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The fgetws function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <wchar.h>
+wchar_t *fgetws(wchar_t * restrict s,
+                int n, FILE * restrict stream);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fgetws</d:code> function reads at most one less than the
+        number of wide characters specified by <d:code>n</d:code> from the
+        stream pointed to by <d:code>stream</d:code> into the array pointed to
+        by <d:code>s</d:code>. No additional wide characters are read after a
+        new-line wide character (which is retained) or after end-of-file. A
+        null wide character is written immediately after the last wide
+        character read into the array.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fgetws</d:code> function returns <d:code>s</d:code> if
+        successful. If end-of-file is encountered and no characters have been
+        read into the array, the contents of the array remain unchanged and a
+        null pointer is returned. If a read or encoding error occurs during the
+        operation, the array contents are indeterminate and a null pointer is
+        returned.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The fgetwc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <wchar.h>
+wint_t fputwc(wchar_t c, FILE *stream);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fputwc</d:code> function writes the wide character
+        specified by <d:code>c</d:code> to the output stream pointed to by
+        <d:code>stream</d:code>, at the position indicated by the associated
+        file position indicator for the stream (if defined), and advances the
+        indicator appropriately. If the file cannot support positioning
+        requests, or if the stream was opened with append mode, the character
+        is appended to the output stream.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fputwc</d:code> function returns the wide character
+        written. If a write error occurs, the error indicator for the stream is
+        set and <d:code>fputwc</d:code> returns <d:code>WEOF</d:code>. If an
+        encoding error occurs, the value of the macro <d:code>EILSEQ</d:code>
+        is stored in <d:code>errno</d:code> and <d:code>fputwc</d:code> returns
+        <d:code>WEOF</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The fputws function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <wchar.h>
+int fputws(const wchar_t * restrict s,
+           FILE * restrict stream);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fputws</d:code> function writes the wide string pointed to
+        by <d:code>s</d:code> to the stream pointed to by
+        <d:code>stream</d:code>. The terminating null wide character is not
+        written.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fputws</d:code> function returns <d:code>EOF</d:code> if a
+        write or encoding error occurs; otherwise, it returns a nonnegative
+        value.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The fwide function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <wchar.h>
+int fwide(FILE *stream, int mode);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fwide</d:code> function determines the orientation of the
+        stream pointed to by <d:code>stream</d:code>. If <d:code>mode</d:code>
+        is greater than zero, the function first attempts to make the stream
+        wide oriented. If <d:code>mode</d:code> is less than zero, the function
+        first attempts to make the stream byte oriented.<d:footnote><d:para> If
+        the orientation of the stream has already been determined,
+        <d:code>fwide</d:code> does not change it.</d:para></d:footnote>
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fwide</d:code> function returns a value greater than zero
+        if, after the call, the stream has wide orientation, a value less than
+        zero if the stream has byte orientation, or zero if the stream has no
+        orientation.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The getwc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <wchar.h>
+wint_t getwc(FILE *stream);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>getwc</d:code> function is equivalent to
+        <d:code>fgetwc</d:code>, except that if it is implemented as a macro,
+        it may evaluate <d:code>stream</d:code> more than once, so the argument
+        should never be an expression with side effects.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>getwc</d:code> function returns the next wide character
+        from the input stream pointed to by <d:code>stream</d:code> or
+        <d:code>WEOF</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The getwchar function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wint_t getwchar(void);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>getwchar</d:code> function is equivalent to
+        <d:code>getwc</d:code> with the argument <d:code>stdin</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>getwchar</d:code> function returns the next wide character from the input stream pointed to by <d:code>stdin</d:code> or <d:code>WEOF</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The putwc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <wchar.h>
+wint_t putwc(wchar_t c, FILE *stream);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>putwc</d:code> function is equivalent to
+        <d:code>fputwc</d:code>, except that if it is implemented as a macro,
+        it may evaluate <d:code>stream</d:code> more than once, so that
+        argument should never be an expression with side effects.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>putwc</d:code> function returns the wide character written,
+        or <d:code>WEOF</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The putwchar function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wint_t putwchar(wchar_t c);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>putwchar</d:code> function is equivalent to
+        <d:code>putwc</d:code> with the second argument
+        <d:code>stdout</d:code>.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>putwchar</d:code> function returns the character written,
+        or <d:code>WEOF</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The ungetwc function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h> #include <wchar.h>
+wint_t ungetwc(wint_t c, FILE *stream);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>ungetwc</d:code> function pushes the wide character
+        specified by <d:code>c</d:code> back onto the input stream pointed to
+        by <d:code>stream</d:code>. Pushed-back wide characters will be
+        returned by subsequent reads on that stream in the reverse order of
+        their pushing. A successful intervening call (with the stream pointed
+        to by <d:code>stream</d:code>) to a file positioning function
+        (<d:code>fseek, fsetpos</d:code> or <d:code>rewind</d:code>) discards
+        any pushed-back wide characters for the stream. The external storage
+        corresponding to the stream is unchanged.
+      </d:para>
+      <d:para>
+        One wide character of pushback is guaranteed, even if the call to the
+        <d:code>ungetwc</d:code> function follows just after a call to a
+        formatted wide character input function <d:code>fwscanf, vfwscanf,
+        vwscanf</d:code> or <d:code>wscanf</d:code>. If the
+        <d:code>ungetwc</d:code> function is called too many times on the same
+        stream without an intervening read or file positioning operation on
+        that stream, the operation may fail.
+      </d:para>
+      <d:para>
+        If the value of c equals that of the macro <d:code>WEOF</d:code>, the
+        operation fails and the input stream is unchanged.
+      </d:para>
+      <d:para>
+        A successful call to the <d:code>ungetwc</d:code> function clears the
+        end-of-file indicator for the stream. The value of the file position
+        indicator for the stream after reading or discarding all pushed-back
+        wide characters is the same as it was before the wide characters were
+        pushed back. For a text or binary stream, the value of its file
+        position indicator after a successful call to the
+        <d:code>ungetwc</d:code> function is unspecified until all pushed-back
+        wide characters are read or discarded.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>ungetwc</d:code> function returns the wide character pushed
+        back, or <d:code>WEOF</d:code> if the operation fails.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>General wide string utilities</d:title>
+    <d:para>
+      The header <d:code>&lt;wchar.h&gt;</d:code> declares a number of
+      functions useful for wide string manipulation. Various methods are used
+      for determining the lengths of the arrays, but in all cases a
+      <d:code>wchar_t *</d:code> argument points to the initial (lowest
+      addressed) element of the array. If an array is accessed beyond the end
+      of an object, the behavior is undefined.
+    </d:para>
+    <d:para>
+      Where an argument declared as <d:code>size_t n</d:code> determines the
+      length of the array for a function, <d:code>n</d:code> can have the value
+      zero on a call to that function. Unless explicitly stated otherwise in
+      the description of a particular function in this subclause, pointer
+      arguments on such a call shall still have valid values, as described in
+      &#xa7; iso.7.1.4. On such a call, a function that locates a wide character
+      finds no occurrence, a function that compares two wide character
+      sequences returns zero, and a function that copies wide characters copies
+      zero wide characters.
+    </d:para>
+    <d:sect2>
+      <d:title>Wide string numeric conversion functions</d:title>
+      <d:sect3>
+        <d:title>The wcstod, wcstof and wcstold functions</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+double wcstod(const wchar_t * restrict nptr,
+              wchar_t ** restrict endptr);
+float wcstof(const wchar_t * restrict nptr,
+             wchar_t ** restrict endptr);
+long double wcstold(const wchar_t * restrict nptr,
+                    wchar_t ** restrict endptr);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcstod, wcstof</d:code> and <d:code>wcstold</d:code>
+          functions convert the initial portion of the wide string pointed to
+          by <d:code>nptr</d:code> to <d:code>double, float</d:code> and
+          <d:code>long double</d:code> representation, respectively. First,
+          they decompose the input string into three parts: an initial,
+          possibly empty, sequence of white-space wide characters (as specified
+          by the <d:code>iswspace</d:code> function), a subject sequence
+          resembling a floating-point constant or representing an infinity or
+          NaN; and a final wide string of one or more unrecognized wide
+          characters, including the terminating null wide character of the
+          input wide string. Then, they attempt to convert the subject sequence
+          to a floating-point number, and return the result.
+        </d:para>
+        <d:para>
+          The expected form of the subject sequence is an optional plus or
+          minus sign, then one of the following:
+        </d:para>
+        <d:itemizedlist>
+          <d:listitem>
+            a nonempty sequence of decimal digits optionally containing a
+            decimal-point wide character, then an optional exponent part as
+            defined for the corresponding single-byte characters in &#xa7;
+            iso.6.4.4.2;
+          </d:listitem>
+          <d:listitem>
+            a <d:code>0x</d:code> or <d:code>0X</d:code>, then a nonempty
+            sequence of hexadecimal digits optionally containing a
+            decimal-point wide character, then an optional binary exponent part
+            as defined in &#xa7; iso.6.4.4.2;
+          </d:listitem>
+          <d:listitem>
+            <d:code>INF</d:code> or <d:code>INFINITY</d:code>, or any other
+            wide string equivalent except for case
+          </d:listitem>
+          <d:listitem>
+            <d:code>NAN</d:code> or <d:code>NAN</d:code>(<d:emphasis
+            role="italic">n-wchar-sequence<d:subscript>opt</d:subscript></d:emphasis>),
+            or any other wide string equivalent except for case in the NAN
+            part, where:
+            <d:para></d:para>
+            <d:blockquote>
+              <d:para><d:emphasis role="italic">n-wchar-sequence:
+              digit</d:emphasis>
+              <d:blockquote>
+                <d:para>
+                  <d:emphasis role="italic">nondigit</d:emphasis>
+                </d:para>
+                <d:para>
+                  <d:emphasis role="italic">n-wchar-sequence digit
+                  n-wchar-sequence nondigit</d:emphasis>
+                </d:para>
+              </d:blockquote>
+              </d:para>
+            </d:blockquote>
+          </d:listitem>
+        </d:itemizedlist>
+        <d:para>
+          The subject sequence is defined as the longest initial subsequence of
+          the input wide string, starting with the first non-white-space wide
+          character, that is of the expected form. The subject sequence
+          contains no wide characters if the input wide string is not of the
+          expected form.
+        </d:para>
+        <d:para>
+          If the subject sequence has the expected form for a floating-point
+          number, the sequence of wide characters starting with the first digit
+          or the decimal-point wide character (whichever occurs first) is
+          interpreted as a floating constant according to the rules of &#xa7;
+          iso.6.4.4.2, except that the decimal-point wide character is used in
+          place of a period, and that if neither an exponent part nor a
+          decimal-point wide character appears in a decimal floating point
+          number, or if a binary exponent part does not appear in a hexadecimal
+          floating point number, an exponent part of the appropriate type with
+          value zero is assumed to follow the last digit in the string. If the
+          subject sequence begins with a minus sign, the sequence is
+          interpreted as negated.<d:footnote><d:para>It is unspecified whether
+          a minus-signed sequence is converted to a negative number directly or
+          by negating the value resulting from converting the corresponding
+          unsigned sequence (see &#xa7; iso.F.5); the two methods may yield
+          different results if rounding is toward positive or negative
+          infinity. In either case, the functions honor the sign of zero if
+          floating-point arithmetic supports signed
+          zeros.</d:para></d:footnote> A wide character sequence
+          <d:code>INF</d:code> or <d:code>INFINITY</d:code> is interpreted as
+          an infinity, if representable in the return type, else like a
+          floating constant that is too large for the range of the return
+          type. A wide character sequence <d:code>NAN</d:code> or
+          <d:code>NAN</d:code>(<d:emphasis
+          role="italic">n-wchar-sequence<d:subscript>opt</d:subscript></d:emphasis>)
+          is interpreted as a quiet NaN, if supported in the return type, else
+          like a subject sequence part that does not have the expected form;
+          the meaning of the n-wchar sequence is
+          implementation-defined.<d:footnote><d:para>An implementation may use
+          the n-wchar sequence to determine extra information to be represented
+          in the NaN's significand.</d:para></d:footnote> A pointer to the
+          final wide string is stored in the object pointed to by
+          <d:code>endptr</d:code>, provided that <d:code>endptr</d:code> is not
+          a null pointer.
+        </d:para>
+        <d:para>
+          If the subject sequence has the hexadecimal form and
+          <d:code>FLT_RADIX</d:code> is a power of 2, the value resulting from
+          the conversion is correctly rounded.
+        </d:para>
+        <d:para>
+          In other than the <d:code>"C"</d:code> locale, additional
+          locale-specific subject sequence forms may be accepted.
+        </d:para>
+        <d:para>
+          If the subject sequence is empty or does not have the expected form,
+          no conversion is performed; the value of <d:code>nptr</d:code> is
+          stored in the object pointed to by <d:code>endptr</d:code>, provided
+          that <d:code>endptr</d:code> is not a null pointer.
+        </d:para>
+        <d:para><d:emphasis role="bold">Recommended
+        Practice</d:emphasis></d:para>
+        <d:para>
+          If the subject sequence has the hexadecimal form,
+          <d:code>FLT_RADIX</d:code> is not a power of 2, and the result is not
+          exactly representable, the result should be one of the two numbers in
+          the appropriate internal format that are adjacent to the hexadecimal
+          floating source value, with the extra stipulation that the error
+          should have a correct sign for the current rounding direction.
+        </d:para>
+        <d:para>
+          If the subject sequence has the decimal form and at most
+          <d:code>DECIMAL_DIG</d:code> (defined in
+          <d:code>&lt;float.h&gt;</d:code>) significant digits, the result
+          should be correctly rounded. If the subject sequence <d:emphasis
+          role="italic">D</d:emphasis> has the decimal form and more than
+          <d:code>DECIMAL_DIG</d:code> significant digits, consider the two
+          bounding, adjacent decimal strings <d:emphasis
+          role="italic">L</d:emphasis> and <d:emphasis
+          role="italic">U</d:emphasis>, both having
+          <d:code>DECIMAL_DIG</d:code> significant digits, such that the values
+          of <d:emphasis role="italic">L, D</d:emphasis> and <d:emphasis
+          role="italic">U</d:emphasis> satisfy <d:inlineequation><math
+          xmlns="http://www.w3.org/1998/Math/MathML"><mi>L</mi><mo>&#8804;</mo><mi>D</mi><mo>&#8804;</mo><mi>U</mi></math></d:inlineequation>
+          The result should be one of the (equal or adjacent) values that would
+          be obtained by correctly rounding <d:emphasis
+          role="italic">L</d:emphasis> and <d:emphasis
+          role="italic">U</d:emphasis> according to the current rounding
+          direction, with the extra stipulation that the error with respect to
+          <d:emphasis role="italic">D</d:emphasis> should have a correct sign
+          for the current rounding
+          direction.<d:footnote><d:para><d:code>DECIMAL_DIG</d:code>, defined
+          in <d:code>&lt;float.h&gt;</d:code>, should be sufficiently large
+          that <d:emphasis role="italic">L</d:emphasis> and <d:emphasis
+          role="italic">U</d:emphasis> will usually round to the same internal
+          floating value, but if not will round to adjacent
+          values.</d:para></d:footnote>
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The functions return the converted value, if any. If no conversion
+          could be performed, zero is returned. If the correct value overflows
+          and default rounding is in effect (&#xa7; iso.7.12.1), plus or minus
+          <d:code>HUGE_VAL, HUGE_VALF</d:code> or <d:code>HUGE_VALL</d:code> is
+          returned (according to the return type and sign of the value), and
+          the value of the macro <d:code>ERANGE</d:code> is stored in
+          <d:code>errno</d:code>. If the result underflows (&#xa7; iso.7.12.1),
+          the functions return a value whose magnitude is no greater than the
+          smallest normalized positive number in the return type; whether
+          <d:code>errno</d:code> acquires the value <d:code>ERANGE</d:code> is
+          implementation-defined.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcstol, wcstoll, wcstoul and wcstoull functions</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+long int wcstol(
+              const wchar_t * restrict nptr,
+              wchar_t ** restrict endptr,
+              int base);
+long long int wcstoll(
+              const wchar_t * restrict nptr,
+              wchar_t ** restrict endptr,
+              int base);
+unsigned long int wcstoul(
+              const wchar_t * restrict nptr,
+              wchar_t ** restrict endptr,
+              int base);
+unsigned long long int wcstoull(
+              const wchar_t * restrict nptr,
+              wchar_t ** restrict endptr,
+              int base);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcstol, wcstoll, wcstoul</d:code> and
+          <d:code>wcstoull</d:code> functions convert the initial portion of
+          the wide string pointed to by <d:code>nptr</d:code> to <d:code>long
+          int, long long int, unsigned long int</d:code> and <d:code>unsigned
+          long long int</d:code> representation, respectively. First, they
+          decompose the input string into three parts: an initial, possibly
+          empty, sequence of white-space wide characters (as specified by the
+          <d:code>iswspace</d:code> function), a subject sequence resembling an
+          integer represented in some radix determined by the value of
+          <d:code>base</d:code>, and a final wide string of one or more
+          unrecognized wide characters, including the terminating null wide
+          character of the input wide string. Then, they attempt to convert the
+          subject sequence to an integer, and return the result.
+        </d:para>
+        <d:para>
+          If the value of <d:code>base</d:code> is zero, the expected form of
+          the subject sequence is that of an integer constant as described for
+          the corresponding single-byte characters in &#xa7; iso.6.4.4.1,
+          optionally preceded by a plus or minus sign, but not including an
+          integer suffix. If the value of <d:code>base</d:code> is between 2
+          and 36 (inclusive), the expected form of the subject sequence is a
+          sequence of letters and digits representing an integer with the radix
+          specified by <d:code>base</d:code>, optionally preceded by a plus or
+          minus sign, but not including an integer suffix. The letters from
+          <d:code>a</d:code> (or <d:code>A</d:code>) through <d:code>z</d:code>
+          (or <d:code>Z</d:code>) are ascribed the values 10 through 35; only
+          letters and digits whose ascribed values are less than that of
+          <d:code>base</d:code> are permitted. If the value of
+          <d:code>base</d:code> is 16, the wide characters <d:code>0x</d:code>
+          or <d:code>0X</d:code> may optionally precede the sequence of letters
+          and digits, following the sign if present.
+        </d:para>
+        <d:para>
+          The subject sequence is defined as the longest initial subsequence of
+          the input wide string, starting with the first non-white-space wide
+          character, that is of the expected form. The subject sequence
+          contains no wide characters if the input wide string is empty or
+          consists entirely of white space, or if the first non-white-space
+          wide character is other than a sign or a permissible letter or
+          digit.
+        </d:para>
+        <d:para>
+          If the subject sequence has the expected form and the value of
+          <d:code>base</d:code> is zero, the sequence of wide characters
+          starting with the first digit is interpreted as an integer constant
+          according to the rules of &#xa7; iso.6.4.4.1. If the subject sequence
+          has the expected form and the value of <d:code>base</d:code> is
+          between 2 and 36, it is used as the base for conversion, ascribing to
+          each letter its value as given above. If the subject sequence begins
+          with a minus sign, the value resulting from the conversion is negated
+          (in the return type). A pointer to the final wide string is stored in
+          the object pointed to by <d:code>endptr</d:code>, provided that
+          <d:code>endptr</d:code> is not a null pointer.
+        </d:para>
+        <d:para>
+          In other than the <d:code>"C"</d:code> locale, additional
+          locale-specific subject sequence forms may be accepted.
+        </d:para>
+        <d:para>
+          If the subject sequence is empty or does not have the expected form,
+          no conversion is performed; the value of <d:code>nptr</d:code> is
+          stored in the object pointed to by <d:code>endptr</d:code>, provided
+          that <d:code>endptr</d:code> is not a null pointer.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcstol, wcstoll, wcstoul</d:code> and
+          <d:code>wcstoull</d:code> functions return the converted value, if
+          any. If no conversion could be performed, zero is returned. If the
+          correct value is outside the range of representable values,
+          <d:code>LONG_MIN, LONG_MAX, LLONG_MIN, LLONG_MAX, ULONG_MAX</d:code>
+          or <d:code>ULLONG_MAX</d:code> is returned (according to the return
+          type sign of the value, if any), and the value of the macro
+          <d:code>ERANGE</d:code> is stored in <d:code>errno</d:code>.
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Wide string copying function</d:title>
+      <d:sect3>
+        <d:title>The wcspy function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wcscpy(wchar_t * restrict s1,
+                const wchar_t * restrict s2);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcscpy</d:code> function copies the wide string pointed
+          to by <d:code>s2</d:code> (including the terminating null wide
+          character) into the array pointed to by <d:code>s1</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcscpy</d:code> function returns the value of
+          <d:code>s1</d:code>.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcsncpy function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[include <wchar.h>
+wchar_t *wcsncpy(wchar_t * restrict s1,
+                const wchar_t * restrict s2,
+                size_t n);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsncpy</d:code> function copies not more than n wide
+          characters (those that follow a null wide character are not copied)
+          from the array pointed to by <d:code>s2</d:code> to the array pointed
+          to by <d:code>s1</d:code>.<d:footnote><d:para>Thus, if there is no
+          null wide character in the first n wide characters of the array
+          pointed to by <d:code>s2</d:code>, the result will not be
+          null-terminated.</d:para></d:footnote>
+        </d:para>
+        <d:para>
+          If the array pointed to by <d:code>s2</d:code> is a wide string that
+          is shorter than <d:code>n</d:code> wide characters, null wide
+          characters are appended to the copy in the array pointed to by
+          <d:code>s1</d:code>, until <d:code>n</d:code> wide characters in all
+          have been written.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsncpy</d:code> function returns the value of
+          <d:code>s1</d:code>.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wmemcpy function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wmemcpy(wchar_t * restrict s1,
+                 const wchar_t * restrict s2,
+                 size_t n);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wmemcpy</d:code> function copies n wide characters from
+          the object pointed to by <d:code>s2</d:code> to the object pointed to
+          by <d:code>s1</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wmemcpy</d:code> function returns the value of
+          <d:code>s1</d:code>.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wmemmove function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wmemmove(wchar_t *s1, const wchar_t *s2,
+                  size_t n);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wmemmove</d:code> function copies n wide characters from
+          the object pointed to by <d:code>s2</d:code> to the object pointed to
+          by <d:code>s1</d:code>. Copying takes place as if the
+          <d:code>n</d:code> wide characters from the object pointed to by
+          <d:code>s2</d:code> are first copied into a temporary array of
+          <d:code>n</d:code> wide characters that does not overlap the objects
+          pointed to by <d:code>s1</d:code> or <d:code>s2</d:code>, and then
+          the <d:code>n</d:code> wide characters from the temporary array are
+          copied into the object pointed to by <d:code>s1</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wmemmove</d:code> function returns the value of
+          <d:code>s1</d:code>.
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Wide string concatenation function</d:title>
+      <d:sect3>
+        <d:title>The wcscat function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wcscat(wchar_t * restrict s1,
+                const wchar_t * restrict s2);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcscat</d:code> function appends a copy of the wide
+          string pointed to by <d:code>s2</d:code> (including the terminating
+          null wide character) to the end of the wide string pointed to by
+          <d:code>s1</d:code>. The initial wide character of
+          <d:code>s2</d:code> overwrites the null wide character at the end
+          of <d:code>s1</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcscat</d:code> function returns the value of
+          <d:code>s1</d:code>.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcsncat function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wcsncat(wchar_t * restrict s1,
+                 const wchar_t * restrict s2,
+                 size_t n);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsncat</d:code> function appends not more than
+          <d:code>n</d:code> wide characters (a null wide character and those
+          that follow it are not appended) from the array pointed to by
+          <d:code>s2</d:code> to the end of the wide string pointed to by
+          <d:code>s1</d:code>. The initial wide character of
+          <d:code>s2</d:code> overwrites the null wide character at the end
+          of <d:code>s1</d:code>. A terminating null wide character is always
+          appended to the result.<d:footnote><d:para>Thus, the maximum number
+          of wide characters that can end up in the array pointed to by
+          <d:code>s1</d:code> is
+          <d:code>wcslen(s1)+n+1</d:code>.</d:para></d:footnote>
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsncat</d:code> function returns the value of
+          <d:code>s1</d:code>.
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Wide string comparison functions</d:title>
+      <d:para>
+        Unless explicitly stated otherwise, the functions described in this
+        subclause order two wide characters the same way as two integers of
+        the underlying integer type designated by <d:code>wchar_t</d:code>.
+      </d:para>
+      <d:sect3>
+        <d:title>The wcscmp function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+int wcscmp(const wchar_t *s1, const wchar_t *s2);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcscmp</d:code> function compares the wide string
+          pointed to by <d:code>s1</d:code> to the wide string pointed to by
+          <d:code>s2</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcscmp</d:code> function returns an integer greater
+          than, equal to, or less than zero, accordingly as the wide string
+          pointed to by <d:code>s1</d:code> is greater than, equal to, or
+          less than the wide string pointed to by <d:code>s2</d:code>.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcscoll function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[include <wchar.h>
+int wcscoll(const wchar_t *s1, const wchar_t *s2);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcscoll</d:code> function compares the wide string
+          pointed to by <d:code>s1</d:code> to the wide string pointed to by
+          <d:code>s2</d:code>, both interpreted as appropriate to the
+          <d:code>LC_COLLATE</d:code> category of the current locale.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcscoll</d:code> function returns an integer greater
+          than, equal to, or less than zero, accordingly as the wide string
+          pointed to by <d:code>s1</d:code> is greater than, equal to, or
+          less than the wide string pointed to by <d:code>s2</d:code> when
+          both are interpreted as appropriate to the current locale.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcsncmp function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+int wcsncmp(const wchar_t *s1, const wchar_t *s2,
+            size_t n);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsncmp</d:code> function compares not more than n wide
+          characters (those that follow a null wide character are not
+          compared) from the array pointed to by <d:code>s1</d:code> to the
+          array pointed to by <d:code>s2</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsncmp</d:code> function returns an integer greater
+          than, equal to, or less than zero, accordingly as the possibly
+          null-terminated array pointed to by <d:code>s1</d:code> is greater
+          than, equal to, or less than the possibly null-terminated array
+          pointed to by <d:code>s2</d:code>.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcsxfrm function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+size_t wcsxfrm(wchar_t * restrict s1,
+               const wchar_t * restrict s2,
+               size_t n);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsxfrm</d:code> function transforms the wide string
+          pointed to by <d:code>s2</d:code> and places the resulting wide
+          string into the array pointed to by <d:code>s1</d:code>. The
+          transformation is such that if the <d:code>wcscmp</d:code> function
+          is applied to two transformed wide strings, it returns a value
+          greater than, equal to, or less than zero, corresponding to the
+          result of the <d:code>wcscoll</d:code> function applied to the same
+          two original wide strings. No more than n wide characters are
+          placed into the resulting array pointed to by <d:code>s1</d:code>,
+          including the terminating null wide character. If
+          <d:code>n</d:code> is zero, <d:code>s1</d:code> is permitted to be
+          a null pointer.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsxfrm</d:code> function returns the length of the
+          transformed wide string (not including the terminating null wide
+          character). If the value returned is <d:code>n</d:code> or greater,
+          the contents of the array pointed to by <d:code>s1</d:code> are
+          indeterminate.
+        </d:para>
+        <d:para role="example">
+          EXAMPLE The value of the following expression is the length of the
+          array needed to hold the transformation of the wide string pointed
+          to by <d:code>s</d:code>:
+          <d:blockquote>
+            <d:para><d:code>1 + wcsxfrm(NULL, s, 0)</d:code></d:para>
+          </d:blockquote>
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wmemcmp function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+int wmemcmp(const wchar_t *s1, const wchar_t *s2,]]>
+            size_t n</d:programlisting>
+            <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+            <d:para>
+              The <d:code></d:code> function compares the first
+              <d:code>n</d:code> wide characters of the object pointed to by
+              <d:code>s1</d:code> to the first <d:code>n</d:code> wide
+              characters of the object pointed to by <d:code>s2</d:code>.
+            </d:para>
+            <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+            <d:para>
+              The <d:code>wmemcmp</d:code> function returns an integer greater
+              than, equal to, or less than zero, accordingly as the object
+              pointed to by <d:code>s1</d:code> is greater than, equal to, or
+              less than the object pointed to by <d:code>s2</d:code>.
+            </d:para>
+      </d:sect3>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Wide string search function</d:title>
+      <d:sect3>
+        <d:title>The wcschr function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wcschr(const wchar_t *s, wchar_t c);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcschr</d:code> function locates the first occurrence of
+          <d:code>c</d:code> in the wide string pointed to by
+          <d:code>s</d:code>. The terminating null wide character is considered
+          to be part of the wide string.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcsspn function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+size_t wcscspn(const wchar_t *s1, const wchar_t *s2);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcscspn</d:code> function computes the length of the
+          maximum initial segment of the wide string pointed to by
+          <d:code>s1</d:code> which consists entirely of wide characters
+          <d:emphasis role="italic">not</d:emphasis> from the wide string
+          pointed to by <d:code>s2</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcscspn</d:code> function returns the length of the
+          segment.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>
+          The wcspbrk function
+        </d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wcspbrk(const wchar_t *s1, const wchar_t *s2);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcspbrk</d:code> function locates the first occurrence in
+          the wide string pointed to by <d:code>s1</d:code> of any wide
+          character from the wide string pointed to by <d:code>s2</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcspbrk</d:code> function returns a pointer to the wide
+          character in <d:code>s1</d:code>, or a null pointer if no wide
+          character from <d:code>s2</d:code> occurs in <d:code>s1</d:code>.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcsrchr function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wcsrchr(const wchar_t *s, wchar_t c);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsrchr</d:code> function locates the last occurrence of
+          <d:code>c</d:code> in the wide string pointed to by
+          <d:code>s</d:code>. The terminating null wide character is considered
+          to be part of the wide string.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsrchr</d:code> function returns a pointer to the wide
+          character, or a null pointer if <d:code>c</d:code> does not occur in
+          the wide string.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcsspn function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+size_t wcsspn(const wchar_t *s1, const wchar_t *s2);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsspn</d:code> function computes the length of the
+          maximum initial segment of the wide string pointed to by
+          <d:code>s1</d:code> which consists entirely of wide characters from
+          the wide string pointed to by <d:code>s2</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsspn</d:code> function returns the length of the
+          segment.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcsstr function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wcsstr(const wchar_t *s1, const wchar_t *s2);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsstr</d:code> function locates the first occurrence in
+          the wide string pointed to by <d:code>s1</d:code> of the sequence of
+          wide characters (excluding the terminating null wide character) in
+          the wide string pointed to by <d:code>s2</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsstr</d:code> function returns a pointer to the located
+          wide string, or a null pointer if the wide string is not found. If
+          <d:code>s2</d:code> points to a wide string with zero length, the
+          function returns <d:code>s1</d:code>.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcstok function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wcstok(wchar_t * restrict s1,
+                const wchar_t * restrict s2,
+                wchar_t ** restrict ptr);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          A sequence of calls to the <d:code>wcstok</d:code> function breaks
+          the wide string pointed to by <d:code></d:code> into a sequence of
+          tokens, each of which is delimited by a wide character from the wide
+          string pointed to by <d:code>s2</d:code>. The third argument points
+          to a caller-provided <d:code>wchar_t</d:code> pointer into which the
+          <d:code>wcstok</d:code> function stores information necessary for it
+          to continue scanning the same wide string.
+        </d:para>
+        <d:para>
+          The first call in a sequence has a non-null first argument and stores
+          an initial value in the object pointed to by
+          <d:code>ptr</d:code>. Subsequent calls in the sequence have a null
+          first argument and the object pointed to by <d:code>ptr</d:code> is
+          required to have the value stored by the previous call in the
+          sequence, which is then updated. The separator wide string pointed to
+          by <d:code>s2</d:code> may be different from call to call.
+        </d:para>
+        <d:para>
+          The first call in the sequence searches the wide string pointed to by
+          <d:code>s1</d:code> for the first wide character that is <d:emphasis
+          role="italic">not</d:emphasis> contained in the current separator
+          wide string pointed to by <d:code>s2</d:code>. If no such wide
+          character is found, then there are no tokens in the wide string
+          pointed to by <d:code>s1</d:code> and the <d:code>wcstok</d:code>
+          function returns a null pointer. If such a wide character is found,
+          it is the start of the first token.
+        </d:para>
+        <d:para>
+          The <d:code>wcstok</d:code> function then searches from there for a
+          wide character that <d:emphasis role="italic">is</d:emphasis>
+          contained in the current separator wide string. If no such wide
+          character is found, the current token extends to the end of the wide
+          string pointed to by <d:code>s1</d:code>, and subsequent searches in
+          the same wide string for a token return a null pointer. If such a
+          wide character is found, it is overwritten by a null wide character,
+          which terminates the current token.
+        </d:para>
+        <d:para>
+          In all cases, the <d:code>wcstok</d:code> function stores sufficient
+          information in the pointer pointed to by <d:code>ptr</d:code> so that
+          subsequent calls, with a null pointer for <d:code>s1</d:code> and the
+          unmodified pointer value for <d:code>ptr</d:code>, shall start
+          searching just past the element overwritten by a null wide character
+          (if any).
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcstok</d:code> function returns a pointer to the first
+          wide character of a token, or a null pointer if there is no token.
+        </d:para>
+        <d:para role="example">EXAMPLE</d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+          static wchar_t str1[] = L"?a???b,,,#c";
+          static wchar_t str2[] = L"\t \t";
+          wchar_t *t, *ptr1, *ptr2;
+t = wcstok(str1, L"?", &ptr1);   // t points to the token L"a"
+t = wcstok(NULL, L",", &ptr1);   // t points to the token L"??b"
+t = wcstok(str2, L" \t", &ptr2); // t is a null pointer
+t = wcstok(NULL, L"#,", &ptr1);  // t points to the token L"c"
+t = wcstok(NULL, L"?", &ptr1);   // t is a null pointer]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wmemchr function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wmemchr(const wchar_t *s, wchar_t c,
+                 size_t n);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wmemchrw</d:code> function locates the first occurrence
+          of <d:code>c</d:code> in the initial <d:code>n</d:code> wide
+          characters of the object pointed to by <d:code>s</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wmemchr</d:code> function returns a pointer to the
+          located wide character, or a null pointer if the wide character does
+          not occur in the object.
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Miscellaneous function</d:title>
+      <d:sect3>
+        <d:title>The wcslen function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+size_t wcslen(const wchar_t *s);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcslen</d:code> function computes the length of the wide
+          string pointed to by <d:code>s</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcslen</d:code> function returns the number of wide
+          characters that precede the terminating null wide character.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wmemset function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wchar_t *wmemset(wchar_t *s, wchar_t c, size_t n);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wmemset</d:code> function copies the value of
+          <d:code>c</d:code> into each of the first <d:code>c</d:code> wide
+          characters of the object pointed to by <d:code>s</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wmemset</d:code> function returns the value of
+          <d:code>s</d:code>.
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Wide character time conversion functions</d:title>
+      <d:sect3>
+        <d:title>The wcsftime function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <time.h>
+#include <wchar.h>
+size_t wcsftime(wchar_t * restrict s,
+                size_t maxsize,
+                const wchar_t * restrict format,
+                const struct tm * restrict timeptr);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsftime</d:code> function is equivalent to the
+          <d:code>strftime</d:code> function, except that:
+          <d:itemizedlist>
+            <d:listitem>
+              The argument <d:code>s</d:code> points to the initial element of
+              an array of wide characters into which the generated output is to
+              be placed.
+            </d:listitem>
+            <d:listitem>
+              The argument <d:code>maxsize</d:code> indicates the limiting
+              number of wide characters.
+            </d:listitem>
+            <d:listitem>
+              The argument <d:code>format</d:code> is a wide string and the
+              conversion specifiers are replaced by corresponding sequences of
+              wide characters.
+            </d:listitem>
+            <d:listitem>
+              The return value indicates the number of wide characters.
+            </d:listitem>
+          </d:itemizedlist>
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          If the total number of resulting wide characters including the
+          terminating null wide character is not more than
+          <d:code>maxsize</d:code>, the <d:code>wcsftime</d:code> function
+          returns the number of wide characters placed into the array pointed
+          to by <d:code>s</d:code> not including the terminating null wide
+          character. Otherwise, zero is returned and the contents of the array
+          are indeterminate.
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Extended multibyte/wide character conversion utilities</d:title>
+    <d:para>
+      The header <d:code>&lt;wchar.h&gt;</d:code> declares an extended set of
+      functions useful for conversion between multibyte characters and wide
+      characters.
+    </d:para>
+    <d:para>
+      Most of the following functions &amp;dash; those that are listed as
+      <d:quote>restartable</d:quote>, &#xa7; iso.7.29.6.3 and &#xa7;
+      iso.7.29.6.4 &amp;dash; take as a last argument a pointer to an object of
+      type <d:code>mbstate_t</d:code> that is used to describe the current
+      <d:emphasis role="italic">conversion state</d:emphasis> from a particular
+      multibyte character sequence to a wide character sequence (or the
+      reverse) under the rules of a particular setting for the
+      <d:code>LC_CTYPE</d:code> category of the current locale.
+    </d:para>
+    <d:para>
+      The initial conversion state corresponds, for a conversion in either
+      direction, to the beginning of a new multibyte character in the initial
+      shift state. A zero-valued <d:code>mbstate_t</d:code> object is (at
+      least) one way to describe an initial conversion state. A zero-valued
+      <d:code>mbstate_t</d:code> object can be used to initiate conversion
+      involving any multibyte character sequence, in any
+      <d:code>LC_CTYPE</d:code> category setting. If an
+      <d:code>mbstate_t</d:code> object has been altered by any of the
+      functions described in this subclause, and is then used with a different
+      multibyte character sequence, or in the other conversion direction, or
+      with a different <d:code>LC_CTYPE</d:code> category setting than on
+      earlier function calls, the behavior is
+      undefined.<d:footnote><d:para>Thus, a particular
+      <d:code>mbstate_t</d:code> object can be used, for example, with both the
+      <d:code>mbrtowc</d:code> and <d:code>mbsrtowcs</d:code> functions as long
+      as they are used to step sequentially through the same multibyte
+      character string.</d:para></d:footnote>
+    </d:para>
+    <d:para>
+      On entry, each function takes the described conversion state (either
+      internal or pointed to by an argument) as current. The conversion state
+      described by the referenced object is altered as needed to track the
+      shift state, and the position within a multibyte character, for the
+      associated multibyte character sequence.
+    </d:para>
+    <d:sect2>
+      <d:title>Single-byte/wide character conversion function</d:title>
+      <d:sect3>
+        <d:title>The btowc function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+wint_t btowc(int c);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>btowc</d:code> function determines whether
+          <d:code>c</d:code> constitutes a valid single-byte character in the
+          initial shift state.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>btowc</d:code> function returns <d:code>WEOF</d:code> if
+          <d:code>c</d:code> has the value <d:code>EOF</d:code> or if
+          (<d:code>unsigned char</d:code>)<d:code>c</d:code> does not
+          constitute a valid single-byte character in the initial shift
+          state. Otherwise, it returns the wide character representation of
+          that character.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wctob function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+int wctob(wint_t c);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wctob</d:code> function determines whether c corresponds
+          to a member of the extended character set whose multibyte character
+          representation is a single byte when in the initial shift state.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wctob</d:code> function returns <d:code>EOF</d:code> if
+          <d:code>c</d:code> does not correspond to a multibyte character with
+          length one in the initial shift state. Otherwise, it returns the
+          single-byte representation of that character as an <d:code>unsigned
+          char</d:code> converted to an <d:code>int</d:code>.
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Conversion state functions</d:title>
+      <d:sect3>
+        <d:title>The mbsinit function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+int mbsinit(const mbstate_t *ps);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          If <d:code>ps</d:code> is not a null pointer, the
+          <d:code>mbsinit</d:code> function determines whether the referenced
+          <d:code>mbstate_t</d:code> object describes an initial conversion
+          state.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>mbsinit</d:code> function returns nonzero if
+          <d:code>ps</d:code> is a null pointer or if the referenced object
+          describes an initial conversion state; otherwise, it returns zero.
+        </d:para>
+      </d:sect3>
+      <d:sect2>
+        <d:title>Restartable multibyte/wide character conversion
+        functions</d:title>
+        <d:para>
+          These functions differ from the corresponding multibyte character
+          functions of &#xa7; iso.7.22.7 (<d:code>mblen, mbtowc</d:code> and
+          <d:code>wctomb</d:code>) in that they have an extra parameter,
+          <d:code>ps</d:code>, of type pointer to <d:code>mbstate_t</d:code>
+          that points to an object that can completely describe the current
+          conversion state of the associated multibyte character sequence. If
+          <d:code>ps</d:code> is a null pointer, each function uses its own
+          internal <d:code>mbstate_t</d:code> object instead, which is
+          initialized at program startup to the initial conversion state; the
+          functions are not required to avoid data races with other calls to
+          the same function in this case. The implementation behaves as if no
+          library function calls these functions with a null pointer for
+          <d:code>ps</d:code>.
+        </d:para>
+        <d:para>
+          Also unlike their corresponding functions, the return value does not
+          represent whether the encoding is state-dependent.
+        </d:para>
+        <d:sect3>
+          <d:title>The mbrlen function</d:title>
+          <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+          <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+size_t mbrlen(const char * restrict s,
+              size_t n,
+              mbstate_t * restrict ps);]]></d:programlisting>
+          
+        </d:sect3>
+      </d:sect2>
+    </d:sect2>
   </d:sect1>
 </d:chapter>

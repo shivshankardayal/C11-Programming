@@ -50,7 +50,7 @@
   <!-- http://iweb.dl.sourceforge.net/project/sourcesans.adobe/SourceSansPro_FontsOnly-1.050.zip -->
   <!-- http://iweb.dl.sourceforge.net/project/sourcecodepro.adobe/SourceCodePro_FontsOnly-1.017.zip -->
   <xsl:param name="xetex.font">
-    <xsl:text>\setmainfont[Ligatures=TeX,Scale=1.05]{Times}
+    <xsl:text>\setmainfont[Ligatures=TeX,Scale=1]{Palatino}
     </xsl:text>
     <xsl:text>\setsansfont[Ligatures=TeX,Scale=.95]{Helvetica}
     </xsl:text>
