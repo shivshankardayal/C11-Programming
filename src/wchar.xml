@@ -766,6 +766,255 @@ int fwscanf(FILE * restrict stream,
         <d:code>base</d:code> argument. The corresponding argument shall be a
         pointer to unsigned integer.
       </d:para>
+      <d:para>
+        <d:code>u</d:code> Matches an optionally signed decimal integer, whose
+        format is the same as expected for the subject sequence of the
+        <d:code>wcstoul</d:code> function with the value 10 for the
+        <d:code>base</d:code> argument. The corresponding argument shall be a
+        pointer to unsigned integer.
+      </d:para>
+      <d:para>
+        <d:code>x</d:code> Matches an optionally signed hexadecimal integer,
+        whose format is the same as expected for the subject sequence of the
+        <d:code>wcstoul</d:code> function with the value 16 for the
+        <d:code>base</d:code> argument. The corresponding argument shall be a
+        pointer to unsigned integer.
+      </d:para>
+      <d:para>
+        <d:code>a, e, f, g</d:code> Matches an optionally signed floating-point
+        number, infinity, or NaN, whose format is the same as expected for the
+        subject sequence of the <d:code>wcstod</d:code> function. The
+        corresponding argument shall be a pointer to floating.
+      </d:para>
+      <d:para>
+        <d:code>c</d:code> Matches a sequence of wide characters of exactly the
+        number specified by the field width (1 if no field width is present in
+        the directive).
+      </d:para>
+      <d:para>
+        If no <d:code>l</d:code> length modifier is present, characters from
+        the input field are converted as if by repeated calls to the
+        <d:code>wcrtomb</d:code> function, with the conversion state described
+        by an <d:code>mbstate_t</d:code> object initialized to zero before the
+        first wide character is converted. The corresponding argument shall be
+        a pointer to the initial element of a character array large enough to
+        accept the sequence. No null character is added.
+      </d:para>
+      <d:para>
+        If an <d:code>l</d:code> length modifier is present, the corresponding
+        argument shall be a pointer to the initial element of an array of
+        <d:code>wchar_t</d:code> large enough to accept the sequence. No null
+        wide character is added.
+      </d:para>
+      <d:para>
+        <d:code>s</d:code> Matches a sequence of non-white-space wide characters.
+      </d:para>
+      <d:para>
+        If no <d:code>l</d:code> length modifier is present, characters from
+        the input field are converted as if by repeated calls to the
+        <d:code>wcrtomb</d:code> function, with the conversion state described
+        by an <d:code>mbstate_t</d:code> object initialized to zero before the
+        first wide character is converted. The corresponding argument shall be
+        a pointer to the initial element of a character array large enough to
+        accept the sequence and a terminating null character, which will be
+        added automatically.
+      </d:para>
+      <d:para>
+        If an <d:code>l</d:code> length modifier is present, the corresponding
+        argument shall be a pointer to the initial element of an array of
+        <d:code>wchar_t</d:code> large enough to accept the sequence and the
+        terminating null wide character, which will be added automatically.
+      </d:para>
+      <d:para>
+        <d:code>[</d:code> Matches a nonempty sequence of wide characters from
+        a set of expected characters (the <d:emphasis
+        role="italic">scanset</d:emphasis>).
+      </d:para>
+      <d:para>
+        If no <d:code>l</d:code> length modifier is present, characters from
+        the input field are converted as if by repeated calls to the
+        <d:code>wcrtomb</d:code> function, with the conversion state described
+        by an <d:code>mbstate_t</d:code> object initialized to zero before the
+        first wide character is converted. The corresponding argument shall be
+        a pointer to the initial element of a character array large enough to
+        accept the sequence and a terminating null character, which will be
+        added automatically.
+      </d:para>
+      <d:para>
+        If an <d:code>l</d:code> length modifier is present, the corresponding
+        argument shall be a pointer to the initial element of an array of
+        <d:code>wchar_t</d:code> large enough to accept the sequence and the
+        terminating null wide character, which will be added automatically.
+      </d:para>
+      <d:para>
+        The conversion specifier includes all subsequent wide characters in the
+        <d:code>format</d:code> string, up to and including the matching right
+        bracket (<d:code>]</d:code>). The wide characters between the brackets
+        (the <d:emphasis role="italic">scanlist</d:emphasis>) compose the
+        scanset, unless the wide character after the left bracket is a
+        circumflex (<d:code>^</d:code>), in which case the scanset contains all
+        wide characters that do not appear in the scanlist between the
+        circumflex and the right bracket. If the conversion specifier begins
+        with <d:code>[]</d:code> or <d:code>[^]</d:code>, the right bracket
+        wide character is in the scanlist and the next following right bracket
+        wide character is the matching right bracket that ends the
+        specification; otherwise the first following right bracket wide
+        character is the one that ends the specification. If a
+        <d:code>-</d:code> wide character is in the scanlist and is not the
+        first, nor the second where the first wide character is a
+        <d:code>^</d:code>, nor the last character, the behavior is
+        implementation-defined.
+      </d:para>
+      <d:para>
+        <d:code>p</d:code> Matches an implementation-defined set of sequences,
+        which should be the same as the set of sequences that may be produced
+        by the <d:code>%p</d:code> conversion of the <d:code>fwprintf</d:code>
+        function. The corresponding argument shall be a pointer to a pointer to
+        <d:code>void</d:code>. The input item is converted to a pointer value
+        in an implementation-defined manner. If the input item is a value
+        converted earlier during the same program execution, the pointer that
+        results shall compare equal to that value; otherwise the behavior of
+        the <d:code>%p</d:code> conversion is undefined.
+      </d:para>
+      <d:para>
+        <d:code>n</d:code> No input is consumed. The corresponding argument
+        shall be a pointer to signed integer into which is to be written the
+        number of wide characters read from the input stream so far by this
+        call to the <d:code>fwscanf</d:code> function. Execution of a
+        <d:code>%n</d:code> directive does not increment the assignment count
+        returned at the completion of execution of the <d:code>fwscanf</d:code>
+        function. No argument is converted, but one is consumed. If the
+        conversion specification includes an assignment-suppressing wide
+        character or a field width, the behavior is undefined.
+      </d:para>
+      <d:para>
+        <d:code>%</d:code> Matches a single <d:code>%</d:code> wide character;
+        no conversion or assignment occurs. The complete conversion
+        specification shall be <d:code>%%</d:code>.
+      </d:para>
+      <d:para>
+        If a conversion specification is invalid, the behavior is
+        undefined.<d:footnote><d:para>See <d:quote>future library
+        directions</d:quote> (&#xa7; iso.7.31.16).</d:para></d:footnote>
+      </d:para>
+      <d:para>
+        The conversion specifiers <d:code>A, E, F, G</d:code> and
+        <d:code>X</d:code> are also valid and behave the same as, respectively,
+        <d:code>a, e, f, g</d:code> and <d:code>x</d:code>.
+      </d:para>
+      <d:para>
+        Trailing white space (including new-line wide characters) is left
+        unread unless matched by a directive. The success of literal matches
+        and suppressed assignments is not directly determinable other than via
+        the <d:code>%n</d:code> directive.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>fwscanf</d:code> function returns the value of the macro
+        <d:code>EOF</d:code> if an input failure occurs before the first
+        conversion (if any) has completed. Otherwise, the function returns the
+        number of input items assigned, which can be fewer than provided for,
+        or even zero, in the event of an early matching failure.
+      </d:para>
+      <d:para>
+        EXAMPLE 1 The call:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <wchar.h>
+/* ... */
+int n, i; float x; wchar_t name[50];
+n = fwscanf(stdin, L"%d%f%ls", &i, &x, name);]]></d:programlisting>
+      <d:para>
+        with the input line:
+      </d:para>
+      <d:blockquote>
+        <d:para><d:code>25 54.32E-1 thompson</d:code></d:para>
+      </d:blockquote>
+      <d:para>
+        will assign to <d:code>n</d:code> the value <d:code>3</d:code>, to
+        <d:code>i</d:code> the value <d:code>25</d:code>, to <d:code>x</d:code>
+        the value <d:code>5.432</d:code>, and to <d:code>name</d:code> the
+        sequence <d:code>thompson\0</d:code>.
+      </d:para>
+      <d:para>
+        EXAMPLE 2 The call:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <wchar.h>
+/* ... */
+int i; float x; double y;
+fwscanf(stdin, L"%2d%f%*d %lf", &i, &x, &y);]]></d:programlisting>
+      <d:para>
+        with input
+      </d:para>
+      <d:blockquote>
+        <d:para><d:code>56789 0123 56a72</d:code></d:para>
+      </d:blockquote>
+      <d:para>
+        will assign to <d:code>i</d:code> the value <d:code>56</d:code> and to
+        <d:code>x</d:code> the value <d:code>789.0</d:code>, will skip past
+        <d:code>0123</d:code>, and will assign to <d:code>y</d:code> the value
+        <d:code>56.0</d:code>. The next wide character read from the input
+        stream will be <d:code>a</d:code>.
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>wcstod, 
+        wcstof</d:code> and <d:code>wcstold</d:code> functions(&#xa7;
+        7.29.4.1.1),the <d:code>wcstol, wcstoll, wcstoul</d:code> and
+        <d:code>wcstoull</d:code> functions (&#xa7; 7.29.4.1.2), the
+        <d:code>wcrtomb</d:code> function (&#xa7; 7.29.6.3.3).
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The swprintf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+int swprintf(wchar_t * restrict s,
+            size_t n,
+            const wchar_t * restrict format, ...);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>swprintf</d:code> function is equivalent to
+        <d:code>fwprintf</d:code>, except that the argument <d:code>s</d:code>
+        specifies an array of wide characters into which the generated output
+        is to be written, rather than written to a stream. No more than
+        <d:code>n</d:code> wide characters are written, including a terminating
+        null wide character, which is always added (unless <d:code>n</d:code>
+        is zero).
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>swprintf</d:code> function returns the number of wide
+        characters written in the array, not counting the terminating null wide
+        character, or a negative value if an encoding error occurred or if
+        <d:code>n</d:code> or more wide characters were requested to be
+        written.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>The swscanf function</d:title>
+      <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+int swscanf(const wchar_t * restrict s,
+            const wchar_t * restrict format, ...);]]></d:programlisting>
+      <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+      <d:para>
+        The <d:code>swscanf</d:code> function is equivalent to
+        <d:code>fwscanf</d:code>, except that the argument <d:code>s</d:code>
+        specifies a wide string from which the input is to be obtained, rather
+        than from a stream. Reaching the end of the wide string is equivalent
+        to encountering end-of-file for the <d:code>fwscanf</d:code> function.
+      </d:para>
+      <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+      <d:para>
+        The <d:code>swscanf</d:code> function returns the value of the macro
+        <d:code>EOF</d:code> if an input failure occurs before the first
+        conversion (if any) has completed. Otherwise, the
+        <d:code>swscanf</d:code> function returns the number of input items
+        assigned, which can be fewer than provided for, or even zero, in the
+        event of an early matching failure.
+      </d:para>
     </d:sect2>
   </d:sect1>
 </d:chapter>
