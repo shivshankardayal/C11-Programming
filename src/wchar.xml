@@ -691,12 +691,10 @@ int fwscanf(FILE * restrict stream,
         <d:code>unsigned char</d:code>.
       </d:para>
       <d:para>
-        <d:code>
           <d:code>h</d:code> Specifies that a following <d:code>d, i, o, u, x,
           X</d:code> or <d:code>n</d:code> conversion specifier applies to an
           argument with type pointer to <d:code>short int</d:code> or
           <d:code>unsigned short int</d:code>.
-        </d:code>
       </d:para>
       <d:para>
         <d:code>l</d:code>(ell) Specifies that a following <d:code>d, i, o, u,

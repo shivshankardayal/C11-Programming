@@ -4,7 +4,7 @@
        http://fossies.org/linux/privat/dblatex-0.3.4.tar.gz:a/dblatex-0.3.4/docs/xhtml/manual/sec-pagination-params.html
        for more information on how to use the following parameters -->
   <xsl:param name="geometry.options">twoside</xsl:param>
-  <xsl:param name="paper.type">a4paper</xsl:param>
+  <xsl:param name="paper.type">b5paper</xsl:param>
 
   <!-- Include the colophon in the Table of Contents -->
   <xsl:param name="colophon.tocdepth">1</xsl:param>
@@ -43,8 +43,9 @@
   <xsl:param name="xref.hypermarkup" select="1"/>
   <xsl:param name="refentry.numbered">1</xsl:param>
 
-  <xsl:param name="page.margin.top">1in</xsl:param>
-  <xsl:param name="page.margin.bottom">1in</xsl:param>
+  <xsl:param name="page.margin.top">.5in</xsl:param>
+  <xsl:param name="page.margin.bottom">.5in</xsl:param>
+  <xsl:param name="body.master.font">9pt</xsl:param>
   
   <!-- Font's available at: -->
   <!-- http://iweb.dl.sourceforge.net/project/sourcesans.adobe/SourceSansPro_FontsOnly-1.050.zip -->
@@ -56,5 +57,5 @@
     </xsl:text>
     <xsl:text>\setmonofont{Courier}
     </xsl:text>
-  </xsl:param-->
+  </xsl:param>
 </xsl:stylesheet>
