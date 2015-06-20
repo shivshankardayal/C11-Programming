@@ -4,6 +4,12 @@
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
     <?dbhtml filename="su/index.html" ?>
     <d:title>Structures and Unions</d:title>
+    <d:indexterm>
+      <d:primary>structures</d:primary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>unions</d:primary>
+    </d:indexterm>
     <d:para>So far what we have seen are data types defiend by the language
     itself. However, there are times when these simple types are not
     enough. For this C has defined two types which can be defined by the user
@@ -71,6 +77,9 @@ something like <d:code>sizeof(struct mystruct);</d:code> then you will get this
 as error. <d:code>invalid application of sizeof to incomplete type struct
 mystruct.</d:code> However, you can use an object of <d:code>struct
 mystruct</d:code>.</d:para>
+<d:indexterm>
+  <d:primary>typedef</d:primary>
+</d:indexterm>
 <d:para>By using <d:code>typedef</d:code> we let the compiler recognize them as
 complete types. Now let us see the output. Size of structure is simple. It is
 equal to size of an integer plus size of a double. However, size of union is
@@ -138,6 +147,9 @@ int main()
 and the output is:
 <d:screen>34 43 c e</d:screen>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>pointer members of structures</d:primary>
+  </d:indexterm>
   <d:title>Pointer members of a Structure</d:title>
   <d:para>Sometime structures will contain pointer members. Obviously, you will
   have to allocate memory to them or point them to some existing variable’s
@@ -206,6 +218,12 @@ and the output is:
 <d:screen>s1->i=4 s1->j=5</d:screen>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>usage of structures</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>usage of unions</d:primary>
+  </d:indexterm>
   <d:title>Usage of Structures and Unions</d:title>
   <d:para>A structure can be used to represent rather complex entities. For
   example, a car. Consider a car. It has weight, power, cost, mileage etc. All
@@ -250,6 +268,9 @@ and the output is:
 <d:screen>4 5</d:screen>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>structures and arrays</d:primary>
+  </d:indexterm>
   <d:title>Structures and Arrays</d:title>
   <d:para>There are two posiibilities here. Structures containing arrays and
   arrays of structure. Let us see an example which combines both:</d:para>

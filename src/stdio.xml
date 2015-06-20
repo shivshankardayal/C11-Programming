@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
-  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  xmlns:mml="http://www.w3.org/1998/Math/MathML" id="stdio">
   <?dbhtml filename="stdio/index.html" ?>
   <d:title>Input/Output &lt;stdio.h&gt;</d:title>
   <d:sect1>
@@ -21,6 +21,18 @@
     <d:para>which is an object type other than an array type capable of
     recording all the information needed to specify uniquely every position
     within a file.</d:para>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>_IOFBF</d:secondary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>_IOLBF</d:secondary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>_IONBF</d:secondary>
+    </d:indexterm>
     <d:para>The macros are NULL (described in Common definitions
     &amp;lt;stddef.h>);</d:para>
     <d:blockquote>
@@ -34,7 +46,7 @@
     <d:blockquote><d:para><d:code>BUFSIZ</d:code></d:para></d:blockquote>
     <d:para>which expands to an integer constant expression that is the size of
     the buffer used by the <d:code>setbuf</d:code> function;</d:para>
-    <d:blockquote><d:para><d:code>EOF</d:code></d:para></d:blockquote>
+    <d:blockquote><d:para id="EOF"><d:code>EOF</d:code></d:para></d:blockquote>
     <d:para>which expands to an integer constant expression, with type int and
     a negative value, that is returned by several functions to indicate
     end-of-file, that is, no more input from a stream;</d:para>
@@ -106,8 +118,11 @@
 	<d:code>vscanf</d:code>.</d:para>
       </d:listitem>
     </d:itemizedlist>
+    <d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+    linkend="fseek" />, <d:xref linkend="streams" />, <d:xref
+    linkend="tmpnam" />, <d:xref linkend="wchar" /></d:para>
   </d:sect1>
-  <d:sect1>
+  <d:sect1 id="streams">
     <d:title>Streams</d:title>
     <d:para>Input and output, whether to or from physical devices such as
     terminals and tape drives, or whether to or from files supported on
@@ -181,6 +196,10 @@
     <d:para>An implementation shall support text files with lines containing at
     least 254 characters, including the terminating new-line character. The
     value of the macro <d:code>BUFSIZ</d:code> shall be at least 256.</d:para>
+    <d:para><d:emphasis role="bold">Forward reference:</d:emphasis> <d:xref
+    linkend="freopen" />, <d:xref linkend="fwide" />, <d:xref linkend="mbstate_t"
+    endterm="mbstate_t"/>,
+    <d:xref linkend="fgetpos" />, <d:xref linkend="fsetpos" /></d:para>
   </d:sect1>
   <d:sect1>
     <d:title>Files</d:title>
@@ -299,22 +318,16 @@
     <d:para><d:emphasis role="bold">Enviromental limits</d:emphasis></d:para>
     <d:para>The value of <d:code>FOPEN_MAX</d:code> shall be at least eight,
     including the three standard text streams.</d:para>
-    <d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
-    <d:code>exit</d:code> function (The exit function), the
-    <d:code>fgetc</d:code> function (The fgetc function), the
-    <d:code>fopen</d:code> function (The fopen function), the
-    <d:code>fputc</d:code> function (The fputc function), the
-    <d:code>setbuf</d:code> function (The setbuf function), the
-    <d:code>setvbuf</d:code> function (The setvbuf function), the
-    <d:code>fgetwc</d:code> function (The fgetwc function), the
-    <d:code>fputwc</d:code> function (The fputwc function), conversion state
-    (Extended multibyte/wide character conversion utilities), the
-    <d:code>mbrtowc</d:code> function (The mbrtowc function), the
-    <d:code>wcrtomb</d:code> function (The wcrtomb function)</d:para>
+    <d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+    linkend="exit" />, <d:xref linkend="fgetc" />, <d:xref linkend="fopen" />,
+    <d:xref linkend="fputc" />, <d:xref linkend="setbuf" />, <d:xref
+    linkend="setvbuf" />, <d:xref linkend="fgetwc" />, <d:xref linkend="fputwc" />,
+    <d:xref linkend="conversion_state" />, <d:xref linkend="mbrtowc" />, <d:xref
+    linkend="wcrtomb" /></d:para>
   </d:sect1>
   <d:sect1>
     <d:title>Operations on files</d:title>
-    <d:sect2>
+    <d:sect2 id="remove">
       <d:title>The remove function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
@@ -329,7 +342,7 @@ int remove(const char *filename);</d:programlisting>
       <d:para>The <d:code>remove</d:code> function returns zero if the
       operation succeeds, nonzero if it fails.</d:para> 
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="rename">
       <d:title>The rename function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
@@ -349,7 +362,7 @@ the file is open or that it is necessary to copy its contents to effectuate its
 renaming.</d:para></d:footnote> in which case if the file existed previously it
 is still known by its original name.</d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="tmpfile">
       <d:title>The tmpfile function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
@@ -370,10 +383,10 @@ files (<d:code>FOPEN_MAX</d:code>).</d:para>
 <d:para>The <d:code>tmpfile</d:code> function returns a pointer to the stream
 of the file that it created. If the file cannot be created, the
 <d:code>tmpfile</d:code> function returns a null pointer.</d:para>
-<d:para><d:code>Forward references:</d:code> the <d:code>fopen</d:code>
-function (The fopen function).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+linkend="fopen" />.</d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="tmpnam">
       <d:title>The tmpnam function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
@@ -428,7 +441,7 @@ deallocated if it was automatically allocated).</d:para>
 successfully closed, or <d:code>EOF</d:code> if any errors were
 detected.</d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="fflush">
       <d:title>The fflush function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
@@ -445,8 +458,8 @@ action on all streams for which the behavior is defined above.</d:para>
 <d:para>The <d:code>fflush</d:code> function sets the error indicator for the
 stream and returns EOF if a write error occurs, otherwise it returns
 zero.</d:para>
-<d:para><d:code>Forward references:</d:code> the <d:code>fopen</d:code>
-function (The fopen function).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+linkend="fopen" />.</d:para>
     </d:sect2>
     <d:sect2 id="fopen">
       <d:title>The fopen function</d:title>
@@ -504,10 +517,10 @@ indicators for the stream are cleared.</d:para>
 <d:para>The <d:code>fopen</d:code> function returns a pointer to the object
 controlling the stream. If the open operation fails, fopen returns a null
 pointer.</d:para>
-<d:para><d:emphasis role="bold">Forward references:</d:emphasis> file
-positioning functions (File positioning functions).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+linkend="file_pos_funcs" />.</d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="freopen">
       <d:title>The freopen function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
@@ -536,7 +549,7 @@ cleared.</d:para>
 open operation fails. Otherwise, <d:code>freopen</d:code> returns the value of
 stream.</d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="setbuf">
       <d:title>The setbuf function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
@@ -549,10 +562,10 @@ is equivalent to the <d:code>setvbuf</d:code> function invoked with the values
 for mode.</d:para>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>setbuf</d:code> function returns no value.</d:para>
-<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
-<d:code>setvbuf</d:code> function (The setvbuf function).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+linkend="setvbuf" />.</d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="setvbuf">
       <d:title>The setvbuf function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h>
@@ -580,7 +593,7 @@ nonzero if an invalid value is given for mode or if the request cannot be
 honored.</d:para>
     </d:sect2>
   </d:sect1>
-  <d:sect1>
+  <d:sect1 id="f_io_func">
     <d:title>Formatted input/output function</d:title>
     <d:para>The formatted input/output functions shall behave as if there is a
     sequence point after the actions associated with each
@@ -1010,9 +1023,8 @@ fprintf(stdout, "pi = %.5f\n", 4 * atan(1.0));</d:programlisting></d:para>
 state-dependent encoding, and the members of the extended character set that
 consist of more than one byte each consist of exactly two bytes, the first of
 which is denoted here by a and the second by an uppercase letter.</d:para>
-<d:para><d:emphasis role="bold">Forward references:</d:emphasis> conversion
-state (Extended multibyte/wide character conversion utilities), the
-<d:code>wcrtomb</d:code> function (The wcrtomb function).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+linkend="conversion_state" />, <d:xref linkend="wcrtomb" />.</d:para>
     </d:sect2>
     <d:sect2 id="fscanf">
       <d:title>The fscanf function</d:title>
@@ -1320,13 +1332,8 @@ i = sscanf("123", "%d%n%n%d", &amp;d1, &amp;n1, &amp;n2, &amp;d2);</d:programlis
 the value of 3 is also assigned to <d:code>n2</d:code>. The value of
 <d:code>d2</d:code> is not affected. The value 1 is assigned to
 <d:code>i</d:code>.</d:para>
-<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
-<d:code>strtod, strtof</d:code> and <d:code>strtold</d:code> functions (The
-strtod, strtof and strtold functions), the <d:code>strtol, strtoll,
-strtoul</d:code> and <d:code>strtoull</d:code> functions (The strtol, strtoll,
-strtoul and strtoull functions), conversion state (Extended multibyte/wide
-character conversion utilities), the <d:code>wcrtomb</d:code> function (The
-wcrtomb function).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+linkend="conversion_state" />, <d:xref linkend="wcrtomb" />.</d:para>
     </d:sect2>
     <d:sect2>
       <d:title>The printf function</d:title>
@@ -1650,7 +1657,7 @@ int vsscanf(const char * restrict s,
   </d:sect1>
   <d:sect1>
     <d:title>Character input/output functions</d:title>
-    <d:sect2>
+    <d:sect2 id="fgetc">
       <d:title>The fgetc function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
@@ -1703,7 +1710,7 @@ char *fgets(char * restrict s, int n,
         the array contents are indeterminate and a null pointer is returned.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="fputc">
       <d:title>The fputc function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
@@ -1895,8 +1902,8 @@ int ungetc(int c, FILE *stream);
         after conversion, or <d:code>EOF</d:code> if the operation fails.
       </d:para>
       <d:para>
-        <d:emphasis role="bold">Forward references:</d:emphasis> file
-        positioning functions.
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="file_pos_funcs" />.
       </d:para>
     </d:sect2>
   </d:sect1>
@@ -1965,9 +1972,9 @@ size_t fwrite(const void * restrict ptr,
       </d:para>
     </d:sect2>
   </d:sect1>
-  <d:sect1>
+  <d:sect1 id="file_pos_funcs">
     <d:title>File positioning functions</d:title>
-    <d:sect2>
+    <d:sect2 id="fgetpos">
       <d:title>The fgetpos function</d:title>
       <d:para><d:emphasis role="bold">Synposis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
@@ -1992,11 +1999,11 @@ int fgetpos(FILE * restrict stream,
         <d:code>errno</d:code>.
       </d:para>
       <d:para>
-        <d:emphasis role="bold">Forward references:</d:emphasis> the
-        <d:code>fsetpos</d:code> function (7.21.9.3).
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="fsetpos" />.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="fseek">
       <d:title>The fseek function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
@@ -2041,11 +2048,11 @@ int fseek(FILE *stream, long int offset, int whence);
         that cannot be satisfied.
       </d:para>
       <d:para>
-        <d:emphasis role="bold">Forward references:</d:emphasis> the
-        <d:code>ftell</d:code> function (7.21.9.4).
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="ftell" />.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="fsetpos">
       <d:title>The fsetpos function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
@@ -2078,7 +2085,7 @@ int fsetpos(FILE *stream, const fpos_t *pos);
         <d:code>errno</d:code>.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="ftell">
       <d:title>The ftell function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
@@ -2105,7 +2112,7 @@ long int ftell(FILE *stream);
         an implementation-defined positive value in <d:code>errno</d:code>.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="rewind">
       <d:title>The rewind function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
@@ -2201,8 +2208,8 @@ void perror(const char *s);
       <d:para>
         The <d:code>perror</d:code> function returns no value.
       </d:para>
-      <d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
-      <d:code>strerror</d:code> function (7.24.6.2).</d:para>
+      <d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+      linkend="strerror" />.</d:para>
     </d:sect2>
   </d:sect1>
 </d:chapter>

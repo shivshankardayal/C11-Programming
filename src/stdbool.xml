@@ -4,6 +4,9 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="stdbool/index.html" ?>
   <d:title>Boolean types and values &lt;stdbool.h&gt;</d:title>
+  <d:indexterm>
+    <d:primary>__bool_true_flase_are_defined macro</d:primary>
+  </d:indexterm>
   <d:para>The header <d:code>&lt;stdbool.h&gt;</d:code> defines four
   macros. The macro</d:para>
   <d:blockquote><d:para><d:code>bool</d:code></d:para></d:blockquote>

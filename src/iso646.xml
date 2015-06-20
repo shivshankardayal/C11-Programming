@@ -3,7 +3,8 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
     <?dbhtml filename="iso646/index.html" ?>
     <d:title>Alternative spellings &lt;iso646.h&gt;</d:title>
-    <d:para>The header &lt;iso646.h&gt; defines the following eleven macros
+    <d:para>The header <d:code>&lt;iso646.h&gt;</d:code> defines the
+    following eleven macros
     (on the left) that expand to the corresponding tokens (on the
     right):</d:para>
     <d:programlisting role="CLexer">

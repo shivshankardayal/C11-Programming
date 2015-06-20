@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
            xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
-           xmlns:mml="http://www.w3.org/1998/Math/MathML">
+           xmlns:mml="http://www.w3.org/1998/Math/MathML" id="time">
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
   <?dbhtml filename="time/index.html" ?>
   <d:title>Date and time &lt;time.h&gt;</d:title>
@@ -330,8 +330,8 @@ char *ctime(const time_t *timer);]]></d:programlisting>
         argument.
       </d:para>
       <d:para>
-        <d:emphasis role="bold">Forward references:</d:emphasis> the
-        <d:code>localtime</d:code> function (7.27.3.4).
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="localtime" />.
       </d:para>
     </d:sect2>
     <d:sect2>
@@ -352,7 +352,7 @@ struct tm *gmtime(const time_t *timer);]]></d:programlisting>
         converted to UTC.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="localtime">
       <d:title>The localtime function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <time.h>
@@ -370,8 +370,8 @@ struct tm *localtime(const time_t *timer);]]></d:programlisting>
         converted to local time.
       </d:para>
     </d:sect2>
-    <d:sect2>
-      <d:title>The strfttime function</d:title>
+    <d:sect2 id="strftime">
+      <d:title>The strftime function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <time.h>
 size_t strftime(char * restrict s,

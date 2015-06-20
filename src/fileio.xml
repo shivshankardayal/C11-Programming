@@ -3,152 +3,167 @@
   xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="fileio/index.html" ?>
-    <d:title>File Input/Output</d:title>
+  <d:title>File Input/Output</d:title>
+  <d:para>
+    In this chapter we will study how to perform IO on a file i.e. how we
+    read data from file or how we write data to file. Any significant program
+    operates on files. For example, reading and parsing a configuration file
+    is a very common operation. Understanding the concepts related to file IO
+    is very critical to write large programs. First question is that what is
+    a file. Well on GNU/Linux which I am going to focus on treats everything
+    as a file. A file is a resource which stores information. It can be in
+    memory i.e. RAM or hard disk. A file can be of several types. If you
+    perform <d:code>ls -l</d:code> in a directory then the first character of
+    line for each file tells you about type of file. Given below is a table
+    for this:
+  </d:para>
+  <d:indexterm>
+    <d:primary>types of file</d:primary>
+  </d:indexterm>
+  <table
+      xmlns="http://docbook.org/ns/docbook" frame="border" border="1" class="centered">
+    <caption>Types of Files</caption>
+	<colgroup />
+	<colgroup />
+    <thead>
+      <tr bgcolor="#aaaaaa">
+        <th>First Character</th>
+        <th>Type of file</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>-</td>
+        <td>Ordinary file</td>
+      </tr>
+      <tr>
+        <td>d</td>
+        <td>Directory</td>
+      </tr>
+      <tr>
+        <td>l</td>
+        <td>Symbolic link</td>
+      </tr>
+      <tr>
+        <td>p</td>
+        <td>Named pipe</td>
+      </tr>
+      <tr>
+        <td>s</td>
+        <td>Socket</td>
+      </tr>
+      <tr>
+        <td>c</td>
+        <td>Character device</td>
+      </tr>
+      <tr>
+        <td>b</td>
+        <td>Block device</td>
+      </tr>
+    </tbody>
+  </table>
+  <d:para>
+    We are going to be concerned with first type only because to operate on
+    other types of devices you need to use library or system calls provided
+    by GNU/Linux. For example, to read a directory you have
+    <d:code>readdir()</d:code> system call, to open a socket you have
+    <d:code>socket()</d:code> system call and so on. These functions are out
+    of scope of this book.
+  </d:para>
+  <d:sect1>
+    <d:indexterm>
+      <d:primary>text files</d:primary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>binary files</d:primary>
+    </d:indexterm>
+    <d:title>Text and Binary Files</d:title>
     <d:para>
-      In this chapter we will study how to perform IO on a file i.e. how we
-      read data from file or how we write data to file. Any significant program
-      operates on files. For example, reading and parsing a configuration file
-      is a very common operation. Understanding the concepts related to file IO
-      is very critical to write large programs. First question is that what is
-      a file. Well on GNU/Linux which I am going to focus on treats everything
-      as a file. A file is a resource which stores information. It can be in
-      memory i.e. RAM or hard disk. A file can be of several types. If you
-      perform <d:code>ls -l</d:code> in a directory then the first character of
-      line for each file tells you about type of file. Given below is a table
-      for this:
+      POSIX specification defines a text file that contains characters zero
+      or more lines. The beauty of a text file is that it has no metadata
+      therefore it can be of zero bytes in length. Usually a text file will
+      contain either all ASCII or UTF-8 characters. However, text files can
+      contain other characters as well. For our discussion we will focus on
+      ASCII text files. On GNU/Linux or other Unix systems lines are
+      separated by <d:code>\n</d:code> while on Windows they are separated by
+      <d:code>\r\n</d:code>. This is a very important difference if you are
+      processing file on the basis of individual characters.
     </d:para>
-    <table
-        xmlns="http://docbook.org/ns/docbook" frame="border" border="1" class="centered">
-      <caption>Types of Files</caption>
-	  <colgroup />
-	  <colgroup />
-      <thead>
-        <tr bgcolor="#aaaaaa">
-          <th>First Character</th>
-          <th>Type of file</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>-</td>
-          <td>Ordinary file</td>
-        </tr>
-        <tr>
-          <td>d</td>
-          <td>Directory</td>
-        </tr>
-        <tr>
-          <td>l</td>
-          <td>Symbolic link</td>
-        </tr>
-        <tr>
-          <td>p</td>
-          <td>Named pipe</td>
-        </tr>
-        <tr>
-          <td>s</td>
-          <td>Socket</td>
-        </tr>
-        <tr>
-          <td>c</td>
-          <td>Character device</td>
-        </tr>
-        <tr>
-          <td>b</td>
-          <td>Block device</td>
-        </tr>
-      </tbody>
-    </table>
     <d:para>
-      We are going to be concerned with first type only because to operate on
-      other types of devices you need to use library or system calls provided
-      by GNU/Linux. For example, to read a directory you have
-      <d:code>readdir()</d:code> system call, to open a socket you have
-      <d:code>socket()</d:code> system call and so on. These functions are out
-      of scope of this book.
+      An online copy of POSIX specification draft can be read at
+      <d:ulink url="http://www.opengroup.org/onlinepubs/9699919799/">Open
+      Group Site</d:ulink>.
     </d:para>
-    <d:sect1>
-      <d:title>Text and Binary Files</d:title>
+    <d:para>
+      Binary files are those ordinary files which are not text files. Some
+      binary files contain headers, blocks of metadata used by a computer
+      program to interpret the data in the file. The header often contains a
+      signature or magic number which can identify the format. If a binary
+      file does not contain headers then it is called flat binary file.
+    </d:para>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Functions Related to Files</d:title>
+    <d:sect2>
+      <d:indexterm>
+        <d:primary>fopen function</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>fclose function</d:primary>
+      </d:indexterm>
+      <d:title>fopen and fclose Functions</d:title>
       <d:para>
-        POSIX specification defines a text file that contains characters zero
-        or more lines. The beauty of a text file is that it has no metadata
-        therefore it can be of zero bytes in length. Usually a text file will
-        contain either all ASCII or UTF-8 characters. However, text files can
-        contain other characters as well. For our discussion we will focus on
-        ASCII text files. On GNU/Linux or other Unix systems lines are
-        separated by <d:code>\n</d:code> while on Windows they are separated by
-        <d:code>\r\n</d:code>. This is a very important difference if you are
-        processing file on the basis of individual characters.
+        Before you can do anything with a file(with exceptions of say
+        deleting an renaming) you need to open it which is done by using
+        <d:code>fopen</d:code> function. <d:code>fopen</d:code> returns a
+        <d:code>FILE *</d:code> as a return value. For historical reasons, he
+        type of the C data structure that represents a stream is called
+        <d:code>FILE</d:code> rather than <d:quote>stream</d:quote>. Since C
+        library functions deal with objects of type <d:code>FILE *</d:code>,
+        sometimes the term file pointer is also used to mean
+        <d:quote>stream</d:quote>. This leads to unfortunate confusion over
+        terminology in many books on C.The <d:code>FILE</d:code> type is
+        declared in the header <d:code>stdio.h</d:code>.
       </d:para>
-      <d:para>
-        An online copy of POSIX specification draft can be read at
-        <d:ulink url="http://www.opengroup.org/onlinepubs/9699919799/">Open
-        Group Site</d:ulink>.
+	  <d:para>
+        When you open a file internally a file descriptor is used which is
+        associated with the <d:code>FILE</d:code> object. Now the number of
+        files which can be open at the same time is limited. The number of
+        files which can be opened at the same time is governed by
+        <d:code>ulimit</d:code> command. There is a macro
+        <d:code>FOPEN_MAX</d:code> which is the minimum number of files that
+        can be opened and is guaranteed by implementation. Therefore, it is
+        very important that you close a file once you have no further use of
+        its contents. To close a file you use <d:code>fclose</d:code>
+        function. Matching an <d:code>fopen</d:code> with
+        <d:code>fclose</d:code> is same as matching a call to <d:code>malloc,
+        calloc, realloc</d:code> with <d:code>free</d:code>. If you do not
+        close or forget to close files which are opened by your program and
+        if your program is a long running program then eventually system will
+        run out of file descriptors and it will not be possible to open new
+        files which will adversely affect all processes.
       </d:para>
-      <d:para>
-        Binary files are those ordinary files which are not text files. Some
-        binary files contain headers, blocks of metadata used by a computer
-        program to interpret the data in the file. The header often contains a
-        signature or magic number which can identify the format. If a binary
-        file does not contain headers then it is called flat binary file.
-      </d:para>
-    </d:sect1>
-    <d:sect1>
-      <d:title>Functions Related to Files</d:title>
-      <d:sect2>
-        <d:title>fopen and fclose Functions</d:title>
-        <d:para>
-          Before you can do anything with a file(with exceptions of say
-          deleting an renaming) you need to open it which is done by using
-          <d:code>fopen</d:code> function. <d:code>fopen</d:code> returns a
-          <d:code>FILE *</d:code> as a return value. For historical reasons, he
-          type of the C data structure that represents a stream is called
-          <d:code>FILE</d:code> rather than <d:quote>stream</d:quote>. Since C
-          library functions deal with objects of type <d:code>FILE *</d:code>,
-          sometimes the term file pointer is also used to mean
-          <d:quote>stream</d:quote>. This leads to unfortunate confusion over
-          terminology in many books on C.The <d:code>FILE</d:code> type is
-          declared in the header <d:code>stdio.h</d:code>.
-        </d:para>
-	    <d:para>
-          When you open a file internally a file descriptor is used which is
-          associated with the <d:code>FILE</d:code> object. Now the number of
-          files which can be open at the same time is limited. The number of
-          files which can be opened at the same time is governed by
-          <d:code>ulimit</d:code> command. There is a macro
-          <d:code>FOPEN_MAX</d:code> which is the minimum number of files that
-          can be opened and is guaranteed by implementation. Therefore, it is
-          very important that you close a file once you have no further use of
-          its contents. To close a file you use <d:code>fclose</d:code>
-          function. Matching an <d:code>fopen</d:code> with
-          <d:code>fclose</d:code> is same as matching a call to <d:code>malloc,
-          calloc, realloc</d:code> with <d:code>free</d:code>. If you do not
-          close or forget to close files which are opened by your program and
-          if your program is a long running program then eventually system will
-          run out of file descriptors and it will not be possible to open new
-          files which will adversely affect all processes.
-        </d:para>
-        <d:para><d:code>fopen</d:code> function is describe in great detail at
-        <d:xref linkend="fopen"></d:xref> and <d:code>fclose</d:code> is
-        described at <d:xref linkend="fclose" />. You should read the sections
-        to know more about these functions. Let us look at the signatures
-        first:</d:para>
-        <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+      <d:para><d:code>fopen</d:code> function is describe in great detail at
+      <d:xref linkend="fopen"></d:xref> and <d:code>fclose</d:code> is
+      described at <d:xref linkend="fclose" />. You should read the sections
+      to know more about these functions. Let us look at the signatures
+      first:</d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
 
 FILE *fopen(const char * restrict filename, const char * restrict mode);
 int fclose(FILE *stream);
-        </d:programlisting>
-        <d:para>
-          <d:code>mode</d:code> is what is described in <d:xref linkend="fopen"
-          />. <d:code>filename</d:code> is path on your filesystem. It can be
-          absolute or relative. However, you must have correct permission
-          i.e. read and write permissions. These permission are govered by your
-          operating system. For example, you will almost always have permission
-          inside your home directory. Let us try to create a file in this
-          directory. Since we are going to create we will use
-          <d:code>w</d:code> mode. For example:
-        </d:para>
-        <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
+      </d:programlisting>
+      <d:para>
+        <d:code>mode</d:code> is what is described in <d:xref linkend="fopen"
+        />. <d:code>filename</d:code> is path on your filesystem. It can be
+        absolute or relative. However, you must have correct permission
+        i.e. read and write permissions. These permission are govered by your
+        operating system. For example, you will almost always have permission
+        inside your home directory. Let us try to create a file in this
+        directory. Since we are going to create we will use
+        <d:code>w</d:code> mode. For example:
+      </d:para>
+      <d:programlisting role="CLexer">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
 int main()
@@ -165,28 +180,485 @@ int main()
 
   return 0;
 }
-        </d:programlisting>
-        <d:para>
-          if you run this program then you should see:
-        </d:para>
-        <d:screen>Successfully opened file.
-        </d:screen>
-        <d:para>
-          and if you check your directory in which program is then you will see
-          an empty file <d:code>temp.txt</d:code> created. It is important to
-          check for errors when you call <d:code>fclose</d:code> to close an
-          output stream, because real, everyday errors can be detected at this
-          time. For example, when <d:code>fclose</d:code> writes the remaining
-          buffered output, it might get an error because the disk is full. Even
-          if you know the buffer is empty, errors can still occur when closing
-          a file if you are using NFS.
-        </d:para>
-      </d:sect2>
-      <d:sect2>
-        <d:title>fputc and fgetc Function</d:title>
-        <d:para>
-          
-        </d:para>
-      </d:sect2>
-    </d:sect1>
+      </d:programlisting>
+      <d:para>
+        if you run this program then you should see:
+      </d:para>
+      <d:screen>Successfully opened file.
+      </d:screen>
+      <d:para>
+        and if you check your directory in which program is then you will see
+        an empty file <d:code>temp.txt</d:code> created. It is important to
+        check for errors when you call <d:code>fclose</d:code> to close an
+        output stream, because real, everyday errors can be detected at this
+        time. For example, when <d:code>fclose</d:code> writes the remaining
+        buffered output, it might get an error because the disk is full. Even
+        if you know the buffer is empty, errors can still occur when closing
+        a file if you are using NFS.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:indexterm>
+        <d:primary>fgetc function</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>fput function</d:primary>
+      </d:indexterm>
+      <d:title>fputc and fgetc Function</d:title>
+      <d:para>
+        <d:code>fputc</d:code> and <d:code>fgetc</d:code> are described at
+        <d:xref linkend="fputc" /> and <d:xref linkend="fgetc" />
+        respectively. Let us see an example:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+  FILE *fp = NULL;
+
+  if(fp=fopen("temp.txt", "r+")) {
+    if(fputc('a', fp) == EOF)
+      printf("Could not write to file.\n");
+  }
+
+  int n = fclose(fp);
+  if(n != 0)
+    printf("%s\n", strerror(n));
+
+  if(fp=fopen("temp.txt", "r+")) {
+    if((n = fgetc(fp)) == EOF)
+      printf("Could not read from file.\n");
+    else
+      putchar(n);
+  }
+
+  n = fclose(fp);
+  if(n != 0)
+    printf("%s\n", strerror(n));
+
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>
+        and the output is <d:code>a</d:code>. Note that we have to close file
+        stream and then open again because once you write <d:code>a</d:code>
+        to file then file pointer advances to next location. Therefore if we
+        try to read without closing and opening again then
+        <d:code>fgetc</d:code> will return <d:code>EOF</d:code>.
+      </d:para>
+      <d:para>
+        Now this pogram could have been written without closing file and
+        opening again if we could reposition file pointer to beginning. C
+        gives us that facility to reposition the file pointer. We have
+        several functions to do that. <d:code>fgetpos, fseek, fgetpos,
+        ftell</d:code> and <d:code>rewind</d:code> function. These functions
+        are described at <d:xref linkend="fgetpos" />, <d:xref
+        linkend="fseek" />, <d:xref linkend="fsetpos" />, <d:xref
+        linkend="ftell" /> and <d:xref linkend="rewind" /> respectively. All
+        these functions are defined in header file
+        <d:code>stdio.h</d:code>. If you read these sections then you will
+        get a very good idea about what these functions do. Asuuming you have
+        read and encountered three macros <d:code>SEEK_SET, SEEK_CUR</d:code>
+        and <d:code>SEEK_END</d:code>. These give position of beginning of
+        file, current position of file pointer and end of file
+        respectively. Let us see examples of these functions one by one.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:indexterm>
+      <d:primary>fgetpos function</d:primary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>fsetpos function</d:primary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>fseek function</d:primary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>ftell function</d:primary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>rewind function</d:primary>
+    </d:indexterm>
+    <d:title>File Positioning Functions</d:title>
+    <d:sect2>
+      <d:title>fgetpos Function</d:title>
+      <d:para>
+        The signature is:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[int fgetpos(FILE * restrict stream, fpos_t * restrict pos);]]></d:programlisting> 
+      <d:para>
+        <d:code>pos</d:code> is output parameter which is set by
+        <d:code>fgetpos</d:code> which can be used by
+        <d:code>fsetpos</d:code> function.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>fseek Function</d:title>
+      <d:programlisting role="CLexer"><![CDATA[int fseek(FILE *stream, long int offset, int whence);]]></d:programlisting>
+      <d:para>
+        <d:code>whence</d:code> can be an integer or one of the three file
+        positioning macros. <d:code>offset</d:code> is offset from
+        <d:code>whence</d:code>. So <d:code>whence</d:code> and
+        <d:code>offset</d:code> will be added and file pointer will be set to
+        that position.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>fsetpos Function</d:title>
+      <d:programlisting role="CLexer"><![CDATA[int fsetpos(FILE *stream, const fpos_t *pos);]]></d:programlisting>
+      <d:para>
+        <d:code>fsetpos</d:code> sets the file pointer to the position which
+        you can get from <d:code>fgetpos</d:code>.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>ftell Function</d:title>
+      <d:programlisting role="CLexer"><![CDATA[long int ftell(FILE *stream);]]></d:programlisting>
+      <d:para>
+        <d:code>ftell</d:code> gives current value of file position
+        indicator.
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>rewind Function</d:title>
+      <d:programlisting role="CLexer"><![CDATA[void rewind(FILE *stream);]]></d:programlisting>
+      <d:para>
+        The <d:code>rewind</d:code> function sets the file position indicator
+        for the stream pointed to by <d:code>stream</d:code> to the beginning
+        of the file. It is equivalent to
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[(void)fseek(stream, 0L, SEEK_SET)]]></d:programlisting>
+      <d:para>
+        except that the error indicator for the stream is also cleared.
+      </d:para>
+      <d:para>
+        Now let us try to use these functions together.
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  FILE *fp = NULL;
+
+  if((fp=fopen("temp.txt", "r+"))) {
+    int c = 0;
+    fpos_t pos;
+
+    if(fgetpos(fp, &pos))
+      puts("Could not get file position.");
+
+    printf("%ld\n", ftell(fp));
+
+    while((c=fgetc(fp)) != EOF)
+      putchar(c);
+
+    printf("%ld\n", ftell(fp));
+
+    if(fsetpos(fp, &pos))
+      puts("Could not set file position.");
+
+    printf("%ld\n", ftell(fp));
+
+    while((c=fgetc(fp)) != EOF)
+      putchar(c);
+
+    printf("%ld\n", ftell(fp));
+    fseek(fp, 0, SEEK_SET);
+    printf("%ld\n", ftell(fp));
+
+    while((c=fgetc(fp)) != EOF)
+      putchar(c);
+
+    printf("%ld\n", ftell(fp));
+    rewind(fp);
+    printf("%ld\n", ftell(fp));
+  }
+
+  int n = fclose(fp);
+
+  if(n != 0)
+    puts("File could not be closed.");
+
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>
+        The program is very simple and you can guess the output which is
+        given below:
+      </d:para>
+      <d:screen>0
+Hello world!
+13
+0
+Hello world!
+13
+0
+Hello world!
+13
+0
+      </d:screen>
+      <d:para>
+        While <d:code>fgetc</d:code> and <d:code>fputc</d:code> are nice but
+        they are limited to once character each. There are other more
+        efficient functions like <d:code>fprintf, fscanf, fputs, fgets,
+        fwrite</d:code> and <d:code>fread</d:code> all described in <d:xref
+        linkend="stdio" />. The usage is simple and can be figured from their
+        signature. If you need to read or write multiple characters at the
+        same time consider using one of those for efficiency depending on
+        your requirement.
+      </d:para>
+      <d:para>
+        Now there are three special streams <d:code>stdout, stdin</d:code> and
+        <d:code>stderr</d:code> which are for output, input and error
+        respectively. They can be treated as <d:code>FILE</d:code> streams. For
+        example, you can close <d:code>stdout</d:code> stream and then you can
+        redirect it to a file. For example:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  fclose(stdout);
+  stdout = fopen("temp.txt", "w");
+  fprintf(stdout, "Surprise!!!\n");
+  fclose(stdout);
+
+  return 0;
+}]]>
+      </d:programlisting>
+      If you open file <d:code>temp.txt</d:code> after running this program
+      then it will contain the text which we are printing rather than appearing
+      on console because we have attached <d:code>stdout</d:code> to
+      <d:code>temp.txt</d:code>. Note that if you use <d:code>printf</d:code>
+      then the default behavior of <d:code>stdout</d:code> will kick in which
+      is line buffering and also since you are writing to a file it will be
+      fully buffered so even a call to set buffering to <d:code>NULL</d:code>
+      will not help. You can set buffering to <d:code>NULL</d:code> by calling
+      <d:code>setbuf(stdout, NULL);</d:code> and then flushing the
+      <d:code>stdout</d:code> stream using <d:code>fflush(stdout);</d:code>
+      everytime you want to clear the stream. But since file is fully buffered
+      these calls will still not print to file if you use
+      <d:code>printf</d:code>. <d:code>stderr</d:code> is not buffered. We
+      cover buffering next.
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:indexterm>
+      <d:primary>stream buffering</d:primary>
+    </d:indexterm>
+    <d:title>Stream Buffering</d:title>
+    <d:para>
+      When we output or input something in C it is not immediate but is rather
+      delayed. Typically it is stored in a buffer whose size is controlled by a
+      macro <d:code>BUFSIZ</d:code>. The reason for this is it is inefficient
+      to read or write content to streams as soon as they come character by
+      character. Therefore it is very important to understand buffering because
+      you will be always giving some output and most of the time taking some
+      input. If you do not understand buffering then your interactive programs
+      may not behave as you intend them to. There are three separate kinds of
+      buffering.
+    </d:para>
+    <d:itemizedlist>
+      <d:listitem>
+        No buffering. Content is transferred as soon as it comes.
+      </d:listitem>
+      <d:listitem>
+        Line buffering. Content is transferred as soon as new line occurs.
+      </d:listitem>
+      <d:listitem>
+        Full buffering. Content is transferred as soon as
+        <d:code>BUFSIZ</d:code> is achieved by buffer.
+      </d:listitem>
+    </d:itemizedlist>
+    <d:para>
+      Whenever you open a file stream it is fully buffered except when the
+      stream is connected to an interactive device such as a terminal. A stream
+      like <d:code>stdout</d:code> which is connected to terminal is line
+      buffered. Usually the buffering settings are optimized for convenience
+      and performance but there will be times when you would want to override
+      those. There are times when we want output to appear immediattely for
+      <d:code>stdout</d:code>. The simplest way is to use <d:code>\n</d:code>
+      because <d:code>stdout</d:code> is line buffered. But there is another
+      choice and you can use <d:code>fflush</d:code> to flush the buffer.
+    </d:para>
+    <d:para>
+      Flushing output on buffered streams means transmitting all content in
+      buffer to the file. There are many circumstances when this happens
+      automatically:
+    </d:para>
+    <d:itemizedlist>
+      <d:listitem>
+        When you try to do output and the output buffer is full.
+      </d:listitem>
+      <d:listitem>
+        When the stream is closed.
+      </d:listitem>
+      <d:listitem>
+        When the program terminates by calling <d:code>exit</d:code>.
+      </d:listitem>
+      <d:listitem>
+        When a newline is written, if the stream is line buffered.
+      </d:listitem>
+      <d:listitem>
+        Whenever an input operation on any stream actually reads data from its
+        file.
+      </d:listitem>
+    </d:itemizedlist>
+    <d:sect2>
+      <d:title>fflush Function</d:title>
+      <d:para>
+        It is described at <d:xref linkend="fflush" />.
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[int fflush(FILE *stream);]]></d:programlisting>
+      <d:para>
+        Typically you can use it like <d:code>fflush(stdout);</d:code>. The
+        <d:code>fflush</d:code> function can be used to flush all streams
+        currently opened. While this is useful in some situations it does often
+        more than necessary since it might be done in situations when terminal
+        input is required and the program wants to be sure that all output is
+        visible on the terminal. But this means that only line buffered streams
+        have to be flushed.
+      </d:para>
+      <d:para>
+        However, if you want to control buffering to your streams for your
+        special purposed then you have two functions at your disposal which we
+        will study next.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>    
+    <d:indexterm>
+      <d:primary>setbuf function</d:primary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>setvbuf function</d:primary>
+    </d:indexterm>
+    <d:title>Controlling Buffering</d:title>
+    <d:para>
+      <d:code>setbuf</d:code> and <d:code>setvbuf</d:code> are two functions
+      which are used to control buffering and are described at <d:xref
+      linkend="setbuf" /> and <d:xref linkend="setvbuf" /> respectively.
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[void setbuf(FILE * restrict stream, char * restrict buf);
+
+int setvbuf(FILE * restrict stream, char * restrict buf, int mode, size_t size);]]></d:programlisting>
+    <d:para>
+      <d:code>setvbuf</d:code> function is used to specify that the stream
+      stream should have the buffering mode mode, which can be either
+      <d:code>_IOFBF</d:code> (for full buffering), <d:code>_IOLBF</d:code>
+      (for line buffering), or <d:code>_IONBF</d:code> (for unbuffered
+      input/output).
+    </d:para>
+    <d:para>
+      If you specify a null pointer as the <d:code>buf</d:code> argument, then
+      <d:code>setvbuf</d:code> allocates a buffer itself using
+      <d:code>malloc</d:code>. This buffer will be freed when you close the
+      stream.
+    </d:para>
+    <d:para>
+      Otherwise, <d:code>buf</d:code> should be a character array that can hold
+      at least <d:code>size</d:code> characters. You should not free the space
+      for this array as long as the <d:code>stream</d:code> remains open and
+      this array remains its buffer. You should usually either allocate it
+      statically, or <d:code>malloc</d:code> the buffer. Using an automatic
+      array is not a good idea unless you close the file before exiting the
+      block that declares the array.
+    </d:para>
+    <d:para>
+      While the array remains a stream buffer, the stream I/O functions will
+      use the buffer for their internal purposes. You shouldn't try to access
+      the values in the array directly while the stream is using it for
+      buffering.
+    </d:para>
+    <d:para>
+      If <d:code>buf</d:code> is a null pointer, the effect of this function is
+      equivalent to calling <d:code>setvbuf</d:code> with a mode argument of
+      <d:code>_IONBF</d:code>. Otherwise, it is equivalent to calling
+      <d:code>setvbuf</d:code> with <d:code>buf</d:code>, and a mode of
+      <d:code>_IOFBF</d:code> and a size argument of <d:code>BUFSIZ</d:code>.
+    </d:para>
+    <d:para>
+      The <d:code>setbuf</d:code> function is provided for compatibility with
+      old code; use <d:code>setvbuf</d:code> in all new programs.
+    </d:para>
+  </d:sect1>
+  <d:sect1>
+    <d:indexterm>
+      <d:primary>ungetc function</d:primary>
+    </d:indexterm>
+    <d:title>Peeking Ahead ungetc Function</d:title>
+    <d:para>
+      <d:code>ungetc</d:code> function is used to put back a character which
+      has been read from an input stream to input stream back. Consider the
+      following program:
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[int ungetc(int c, FILE *stream);]]></d:programlisting>
+    <d:para>
+      If <d:code>c</d:code> is <d:code>EOF</d:code>, <d:code>ungetc</d:code>
+      does nothing and just returns <d:code>EOF</d:code>. This lets you call
+      <d:code>ungetc</d:code> with the return value of <d:code>getc</d:code>
+      without needing to check for an error from <d:code>getc</d:code>.
+    </d:para>
+    <d:para>
+      The character that you push back doesn't have to be the same as the last
+      character that was actually read from the <d:code>stream</d:code>. In
+      fact, it isn’t necessary to actually read any characters from the
+      <d:code>stream</d:code> before unreading them with
+      <d:code>ungetc</d:code>! But that is a strange way to write a program;
+      usually <d:code>ungetc</d:code> is used only to unread a character that
+      was just read from the same stream. The GNU C Library supports this even
+      on files opened in binary mode, but other systems might not.
+    </d:para>
+    <d:para>
+      The GNU C Library only supports one character of pushback-in other words,
+      it does not work to call <d:code>ungetc</d:code> twice without doing
+      input in between.
+    </d:para>
+    <d:para>
+      Pushing back characters doesn’t alter the file; only the internal
+      buffering for the stream is affected. If a file positioning function
+      (such as <d:code>fseek</d:code> or <d:code>rewind</d:code>) is called,
+      any pending pushed-back characters are discarded.
+    </d:para>
+    <d:para>
+      Unreading a character on a stream that is at end of file clears the
+      end-of-file indicator for the stream, because it makes the character of
+      input available. After you read that character, trying to read again will
+      encounter end of file.
+    </d:para>
+    <d:para>
+      A simple example is give below:
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  int c = putchar(getchar());
+  ungetc(c, stdin);
+  putchar(getchar());
+
+  return 0;
+}]]></d:programlisting>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Operation on Files</d:title>
+    <d:para>
+      We have seen how to create files and do IO on that. For removal and
+      renaming there are two functions <d:code>remove</d:code> and
+      <d:code>rename</d:code> which do what their name suggests. Then there are
+      two functions which generate a temporary file and a temporary unique
+      name. They are <d:code>tmpfile</d:code> and <d:code>tmpnam</d:code>
+      respectively. These funcitons signatures and details can be found at
+      <d:xref linkend="remove" />, <d:xref linkend="rename" />, <d:xref
+      linkend="tmpfile" /> and <d:xref linkend="tmpnam" /> respectively. These
+      are very simple and trivial to use functions.
+    </d:para>
+    <d:para>
+      With this we come to an end of File IO. Functions for which examples are
+      not given will be covered in <d:xref linkend="stdio" />.
+    </d:para>
+  </d:sect1>
 </d:chapter>

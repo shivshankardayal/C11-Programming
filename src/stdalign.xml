@@ -4,7 +4,7 @@
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
   <?dbhtml filename="stdalign/index.html" ?>
   <d:title>Alignment &lt;stdalign.h&gt;</d:title>
-  <d:para>The header &lt;stdalign.h&gt; defines four macros.</d:para>
+  <d:para>The header <d:code>&lt;stdalign.h&gt;</d:code> defines four macros.</d:para>
   <d:para>The macro</d:para>
   <d:blockquote>
     <d:para><d:code>alignas</d:code></d:para>

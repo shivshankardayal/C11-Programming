@@ -2,51 +2,73 @@
   xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
-    <?dbhtml filename="macros/index.html" ?>
-    <d:title>Preprocessing Directives</d:title>
-    <d:para>The following comes from section 6.10 of specification. It will
-    terminate when you see code starting. :-)</d:para>
-    <d:para>A <d:emphasis role="italic">preprocessing directive</d:emphasis>
-    consists of a sequence of preprocessing tokens that begins with a
-    <d:code>#</d:code> preprocessing token that (at the start of translation
-    phase 4) is either the first character in the source file (optionally after
-    white space containing no new-line characters) or that follows white space
-    containing at least one new-line character, and is ended by the next
-    new-line character.<d:footnote><d:para>Thus, preprocessing directives are
-    commonly called “lines”. These “lines” have no other syntactic
-    significance, as all white space is equivalent except in certain situations
-    during preprocessing (see the # character string literal creation operator
-    in 12.3.2, for example).</d:para></d:footnote> A new-line character ends
-    the preprocessing directive even if it occurs within what would otherwise
-    be an invocation of a function-like macro.</d:para>
-    <d:para>A text line shall not begin with a <d:code>#</d:code> preprocessing
-    token. A non-directive shall not begin with any of the directive names
-    appearing in the syntax.</d:para>
-    <d:para>When in a group that is skipped (12.1), the directive syntax is
-    relaxed to allow any sequence of preprocessing tokens to occur between the
-    directive name and the following new-line character.</d:para>
-    <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
-    <d:para>The only white-space characters that shall appear between
-    preprocessing tokens within a preprocessing directive (from just after the
-    introducing # preprocessing token through just before the terminating
-    new-line character) are space and horizontal-tab (including spaces that
-    have replaced comments or possibly other white-space characters in
-    translation phase 3).</d:para>
-    <d:para><d:emphasis role="bold">Semantics</d:emphasis></d:para>
-    <d:para>The implementation can process and skip sections of source files
-    conditionally, include other source files, and replace macros. These
-    capabilities are called preprocessing, because conceptually they occur
-    before translation of the resulting translation unit.</d:para>
-    <d:para>The preprocessing tokens within a preprocessing directive are not
-    subject to macro expansion unless otherwise stated.</d:para>
-    <d:para>EXAMPLE In:</d:para>
-    <d:programlisting role="CLexer">#define EMPTY
+  <?dbhtml filename="macros/index.html" ?>
+  <d:indexterm>
+    <d:primary>preprocessing directives</d:primary>
+  </d:indexterm>
+  <d:title>Preprocessing Directives</d:title>
+  <d:para>The following comes from section &#xa7; iso.6.10 of specification.
+  It will terminate when you see code starting. :-)</d:para>
+  <d:para>A <d:emphasis role="italic">preprocessing directive</d:emphasis>
+  consists of a sequence of preprocessing tokens that begins with a
+  <d:code>#</d:code> preprocessing token that (at the start of translation
+  phase 4) is either the first character in the source file (optionally after
+  white space containing no new-line characters) or that follows white space
+  containing at least one new-line character, and is ended by the next
+  new-line character.<d:footnote><d:para>Thus, preprocessing directives are
+  commonly called “lines”. These “lines” have no other syntactic
+  significance, as all white space is equivalent except in certain situations
+  during preprocessing (see the # character string literal creation operator
+  in 11.3.2, for example).</d:para></d:footnote> A new-line character ends
+  the preprocessing directive even if it occurs within what would otherwise
+  be an invocation of a function-like macro.</d:para>
+  <d:para>A text line shall not begin with a <d:code>#</d:code> preprocessing
+  token. A non-directive shall not begin with any of the directive names
+  appearing in the syntax.</d:para>
+  <d:para>When in a group that is skipped (11.1), the directive syntax is
+  relaxed to allow any sequence of preprocessing tokens to occur between the
+  directive name and the following new-line character.</d:para>
+  <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
+  <d:para>The only white-space characters that shall appear between
+  preprocessing tokens within a preprocessing directive (from just after the
+  introducing # preprocessing token through just before the terminating
+  new-line character) are space and horizontal-tab (including spaces that
+  have replaced comments or possibly other white-space characters in
+  translation phase 3).</d:para>
+  <d:para><d:emphasis role="bold">Semantics</d:emphasis></d:para>
+  <d:para>The implementation can process and skip sections of source files
+  conditionally, include other source files, and replace macros. These
+  capabilities are called preprocessing, because conceptually they occur
+  before translation of the resulting translation unit.</d:para>
+  <d:para>The preprocessing tokens within a preprocessing directive are not
+  subject to macro expansion unless otherwise stated.</d:para>
+  <d:para>EXAMPLE In:</d:para>
+  <d:programlisting role="CLexer">#define EMPTY
 EMPTY # include &lt;file.h></d:programlisting>
 <d:para>the sequence of preprocessing tokens on the second line is not a
 preprocessing directive, because it does not begin with a <d:code>#</d:code> at
 the start of translation phase 4, even though it will do so after the macro
 <d:code>EMPTY</d:code> has been replaced.</d:para>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>conditional inclusion</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>macro</d:primary>
+    <d:secondary>#if</d:secondary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>macro</d:primary>
+    <d:secondary>elif</d:secondary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>macro</d:primary>
+    <d:secondary>#ifdef</d:secondary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>macro</d:primary>
+    <d:secondary>#ifndef</d:secondary>
+  </d:indexterm>
   <d:title>Conditional Inclusion</d:title>
   <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
   <d:para>The expression that controls conditional inclusion shall be an
@@ -124,6 +146,13 @@ may appear anywhere in a source file, including within a preprocessing
 directive.</d:para></d:footnote></d:para>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    source file inclusion
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>macro</d:primary>
+    <d:secondary>#include</d:secondary>
+  </d:indexterm>
   <d:title>Source File Inclusion</d:title>
   <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
   <d:para>A <d:code>#include</d:code> directive shall identify a header or
@@ -167,10 +196,17 @@ significant characters before the period.</d:para>
 <d:para>A <d:code>#include</d:code> preprocessing directive may appear in a
 source file that has been read because of a <d:code>#include</d:code> directive
 in another file, up to an implementation-defined nesting limit.</d:para>
-<d:para><d:emphasis role="bold">Forward References</d:emphasis>: macro
-replacement (12.3).</d:para>
+<d:para><d:emphasis role="bold">Forward References</d:emphasis>: <d:xref
+linkend="macro_replacement" /></d:para>
 </d:sect1>
-<d:sect1>
+<d:sect1 id="macro_replacement">
+  <d:indexterm>
+    <d:primary>macro</d:primary>
+    <d:secondary>#define</d:secondary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>macro replacement</d:primary>
+  </d:indexterm>
   <d:title>Macro Replacement</d:title>
 <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
   <d:para>Two replacement lists are identical if and only if the preprocessing
@@ -248,6 +284,9 @@ arguments combined is such that, following merger, the number of arguments is
 one more than the number of parameters in the macro definition (excluding the
 ...).</d:para>
 <d:sect2>
+  <d:indexterm>
+    <d:primary>argument substitution</d:primary>
+  </d:indexterm>
   <d:title>Argument Substitution</d:title>
   <d:para>After the arguments for the invocation of a function-like macro have
   been identified, argument substitution takes place. A parameter in the
@@ -263,6 +302,10 @@ one more than the number of parameters in the macro definition (excluding the
   arguments shall form the preprocessing tokens used to replace it.</d:para>
 </d:sect2>
 <d:sect2>
+  <d:indexterm>
+    <d:primary>operator</d:primary>
+    <d:secondary>#</d:secondary>
+  </d:indexterm>
   <d:title>The # Operator</d:title>
   <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
   <d:para>Each <d:code>#</d:code> preprocessing token in the replacement list
@@ -289,6 +332,10 @@ one more than the number of parameters in the macro definition (excluding the
   <d:code>#</d:code> and <d:code>##</d:code> operators is unspecified.</d:para>
 </d:sect2>
 <d:sect2>
+  <d:indexterm>
+    <d:primary>operator</d:primary>
+    <d:secondary>##</d:secondary>
+  </d:indexterm>
   <d:title>The ## Operator</d:title>
   <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
   <d:para>A <d:code>##</d:code> preprocessing token shall not occur at the
@@ -335,9 +382,12 @@ one more than the number of parameters in the macro definition (excluding the
   <d:para>The resulting completely macro-replaced preprocessing token sequence
   is not processed as a preprocessing directive even if it resembles one, but
   all pragma unary operator expressions within it are then processed as
-  specified in 12.9 below.</d:para>
+  specified in 11.9 below.</d:para>
 </d:sect2>
 <d:sect2>
+  <d:indexterm>
+    <d:primary>scope of macro definitions</d:primary>
+  </d:indexterm>
   <d:title>Scope of Macro Definitions</d:title>
   <d:para>A macro definition lasts (independent of block structure) until a
   corresponding <d:code>#undef</d:code> directive is encountered or (if none is
@@ -351,6 +401,13 @@ one more than the number of parameters in the macro definition (excluding the
 </d:sect2>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>line control</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>macro</d:primary>
+    <d:secondary>#line</d:secondary>
+  </d:indexterm>
   <d:title>Line Control</d:title>
   <d:para><d:emphasis role="bold">Constraints</d:emphasis></d:para>
   <d:para>The string literal of a <d:code>#line</d:code> directive, if present,
@@ -380,6 +437,13 @@ one more than the number of parameters in the macro definition (excluding the
   processed as appropriate.</d:para>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>error directive</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>macro</d:primary>
+    <d:secondary>#error</d:secondary>
+  </d:indexterm>
   <d:title>Error Directive</d:title>
   <d:para><d:emphasis role="bold">Semantics</d:emphasis></d:para>
   <d:para>A preprocessing directive of the form <d:code># error
@@ -388,6 +452,13 @@ one more than the number of parameters in the macro definition (excluding the
   tokens.</d:para>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>pragma directive</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>macro</d:primary>
+    <d:secondary>#pragma</d:secondary>
+  </d:indexterm>
   <d:title>Pragma Directive</d:title>
   <d:para><d:emphasis role="bold">Semantics</d:emphasis></d:para>
   <d:para>A preprocessing directive of the form:</d:para>
@@ -413,11 +484,14 @@ one more than the number of parameters in the macro definition (excluding the
 #pragma STDC CX_LIMITED_RANGE on-off-switch</d:programlisting>
 <d:para><d:emphasis role="italic">on-off-switch: </d:emphasis> on of</d:para>
 <d:para>ON OFF DEFAULT</d:para>
-<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
-FP_CONTRACT pragma (13.12.2), the FENV_ACCESS pragma (13.6.1), the
-CX_LIMITED_RANGE pragma (13.3.4). 149).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+linkend="fp_contract" />, <d:xref linkend="fenv_access" />, <d:xref
+linkend="cx_limited_range" />.</d:para>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>null directive</d:primary>
+  </d:indexterm>
   <d:title>Null Directive</d:title>
   <d:para><d:emphasis role="bold">Semantics</d:emphasis></d:para>
   <d:para>A preprocessing directive of the form:</d:para>
@@ -425,9 +499,42 @@ CX_LIMITED_RANGE pragma (13.3.4). 149).</d:para>
   <d:para>has no effect.</d:para>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>predefined macros</d:primary>
+  </d:indexterm>
   <d:title>Predefined Macro Names</d:title>
   <d:para>The following macro names shall be defined by the
   implementation:</d:para>
+  <d:indexterm>
+    <d:primary>__DATE__</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>__FILE__</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>__LINE__</d:primary>
+  </d:indexterm>    
+  <d:indexterm>
+    <d:primary>__TIME__</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>__STDC__</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>__STDC_VERSION__</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>__STDC_IEC_559_COMPLEX__</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>__STDC_ISO_10646__</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>__STDC_HOSTED__</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>__STDC_IEC_559__</d:primary>
+  </d:indexterm>
   <d:para><d:code>__DATE__</d:code> The date of translation of the
   preprocessing translation unit: a character string literal of the form "Mmm
   dd yyyy", where the names of the months are the same as those generated by
@@ -482,7 +589,7 @@ CX_LIMITED_RANGE pragma (13.3.4). 149).</d:para>
   <d:code>__cplusplus</d:code>, nor shall it define it in any standard
   header.</d:para>
   <d:para><d:emphasis role="bold">Forward references:</d:emphasis> the asctime
-  function (13.23.3.1), standard headers (13.1.2).</d:para>
+  function, standard headers.</d:para>
 </d:sect1>
 <d:sect1>
   <d:title>Pragma Operator</d:title>
@@ -507,6 +614,10 @@ CX_LIMITED_RANGE pragma (13.3.4). 149).</d:para>
   <d:code>test.c</d:code> and <d:code>test1.c</d:code> and their contents are
   given below respectively.</d:para>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>#include</d:secondary>
+    </d:indexterm>
     <d:title>#include</d:title>
     <d:programlisting role="CLexer">#include "test1.c"
 I am test.</d:programlisting>
@@ -598,6 +709,10 @@ directives. Please see headers of standard library to see the conventions for
     other mechanism of any other language.</d:para>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>#define</d:secondary>
+    </d:indexterm>
     <d:title>#define</d:title>
     <d:para><d:code>#define</d:code> and <d:code>#include</d:code> are probably
     the most encountered macro in all C files. There are many usage of it. We
@@ -648,6 +763,10 @@ directives using <d:code>#if, #elif</d:code> and
 <d:code>#endif</d:code>.</d:para>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>#undef</d:secondary>
+    </d:indexterm>
     <d:title>#undef</d:title>
     <d:para>Anything defined by <d:code>#define</d:code> can be undefined by
     <d:code>#undef</d:code>. For example consider the following code:</d:para>
@@ -683,6 +802,10 @@ char first[] = FIRST;
 char second[] = SECOND;</d:programlisting>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>#error</d:secondary>
+    </d:indexterm>
     <d:title>#error</d:title>
     <d:programlisting role="CLexer">#include &lt;stdio.h>
 
@@ -705,6 +828,10 @@ constructs are better for handling such situations. Only if you want to test a
 preprocessing token then it should be used.</d:para>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>#pragma</d:secondary>
+    </d:indexterm>
     <d:title>#pragma</d:title>
     <d:para><d:code>#pragma</d:code> is dependent on what follows it. You
     should consult compiler documentation as it is mostly
@@ -712,6 +839,18 @@ preprocessing token then it should be used.</d:para>
     not governed by specification.</d:para>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>__DATE__</d:primary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>__FILE__</d:primary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>__LINE__</d:primary>
+    </d:indexterm>    
+    <d:indexterm>
+      <d:primary>__TIME__</d:primary>
+    </d:indexterm>
     <d:title>Miscellaneous</d:title>
     <d:para>Usage of <d:code>__LINE__, __FILE__, __DATE__</d:code> and
     <d:code>__TIME__</d:code> is simple and shown in following

@@ -66,7 +66,7 @@
     (category <d:code>LC_CTYPE</d:code>), which is never greater than
     <d:code>MB_LEN_MAX</d:code>.
   </d:para>
-  <d:sect1>
+  <d:sect1 id="num_conv_func">
     <d:title>Numeric conversion functions</d:title>
     <d:para>
       The functions <d:code>atof, atoi, atol</d:code> and
@@ -95,9 +95,8 @@ double atof(const char *nptr);]]>
         The <d:code>atof</d:code> function returns the converted value.
       </d:para>
       <d:para>
-        <d:emphasis role="bold">Forward references:</d:emphasis> the
-        <d:code>strtod, strtof</d:code> and <d:code>strtold</d:code> functions
-        (&#xa7; iso.7.22.1.3).
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="str_to_decimal" />.
       </d:para>
     </d:sect2>
     <d:sect2>
@@ -130,13 +129,11 @@ long long int atoll(const char *nptr);]]>
         return the converted value.
       </d:para>
       <d:para>
-        <d:emphasis role="bold">Forward references:</d:emphasis> the
-        <d:code>strtol, strtoll,
-        strtoul</d:code> and <d:code>strtoull</d:code> functions (&#xa7;
-        iso.7.22.1.4).
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="str_to_long" />.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="str_to_decimal">
       <d:title>The strtod, strtof and strtold functions</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
@@ -323,7 +320,7 @@ long double strtold(const char * restrict nptr,
         implementation-defined.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="str_to_long">
       <d:title>The strtol, strtoll, strtoul and strtoull functions</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h> long int strtol(
@@ -646,7 +643,7 @@ void *realloc(void *ptr, size_t size);]]>
   </d:sect1>
   <d:sect1>
     <d:title>Communication with environment</d:title>
-    <d:sect2>
+    <d:sect2 id="abort">
       <d:title>The abort function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
@@ -698,12 +695,11 @@ int atexit(void (*func)(void));]]>
         succeeds, nonzero if it fails. 
       </d:para>
       <d:para>
-        <d:emphasis role="bold">Forward references:</d:emphasis> the
-        <d:code>at_quick_exit</d:code> function (7.22.4.3), the
-        <d:code>exit</d:code> function (7.22.4.4).
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="at_quick_exit" />, <d:xref linkend="exit" />.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="at_quick_exit">
       <d:title>The at_quick_exit function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
@@ -733,11 +729,10 @@ int at_quick_exit(void (*func)(void));]]>
         succeeds, nonzero if it fails. 
       </d:para>
       <d:para>
-        <d:emphasis role="bold">Forward references:</d:emphasis> the
-        <d:code>quick_exit</d:code> function (7.22.4.7).
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref linkend="quick_exit" />.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="exit">
       <d:title>The exit function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
@@ -784,7 +779,10 @@ _Noreturn void exit(int status);]]>
         The <d:code>exit</d:code> function cannot return to its caller.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="_Exit">
+      <d:indexterm>
+        <d:primary>_Exit function</d:primary>
+      </d:indexterm>
       <d:title>The _Exit function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
@@ -838,7 +836,7 @@ char *getenv(const char *name);]]>
         <d:code>name</d:code> cannot be found, a null pointer is returned.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="quick_exit">
       <d:title>The quick_exit function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
@@ -1072,7 +1070,7 @@ lldiv_t lldiv(long long int numer, long long int denom);]]>
       </d:para>
     </d:sect2>
   </d:sect1>
-  <d:sect1>
+  <d:sect1 id="mbwc_conv_funv">
     <d:title>Multibyte/wide character conversion functions</d:title>
     <d:para>
       The behavior of the multibyte character functions is affected by the
@@ -1125,8 +1123,8 @@ mbtowc((wchar_t *)0, s, n);]]>
         do not form a valid multibyte character).
       </d:para>
       <d:para>
-        <d:emphasis role="bold">Forward references:</d:emphasis> the
-        <d:code>mbtowc</d:code> function (7.22.7.2).
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="mbrtowc" />.
       </d:para>
     </d:sect2>
     <d:sect2>
@@ -1213,7 +1211,7 @@ int wctomb(char *s, wchar_t wc);]]>
       </d:para>
     </d:sect2>
   </d:sect1>
-  <d:sect1>
+  <d:sect1 id="mbwc_str_conv_func">
     <d:title>Multibyte/wide string conversion functions</d:title>
     <d:para>
       The behavior of the multibyte string functions is affected by the

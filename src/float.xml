@@ -3,9 +3,10 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
     <?dbhtml filename="float/index.html" ?>
     <d:title>Characterictics of floating types &lt;float.h&gt;</d:title>
-    <d:para>The header &lt;float.h&gt; defines several macros that expand to
+    <d:para>The header <d:code>&lt;float.h&gt;</d:code> defines
+    several macros that expand to
     various limits and parameters of the standard floating-point
     types.</d:para>
     <d:para>The macros, their meanings, and the constraints (or restrictions)
-    on their values are listed in Numerical limits.</d:para>
+    on their values are listed in &#xa7; iso.5.2.4.2.2.</d:para>
 </d:chapter>

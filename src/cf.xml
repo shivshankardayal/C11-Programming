@@ -16,6 +16,9 @@
       their scope. I could have covered it in second chapter but I did not want
       to scare you with too many things in itself.</d:para>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>if else statement</d:primary>
+        </d:indexterm>
 	<d:title>if else Statement</d:title>
 	<d:para>An if-else statement may consist of only <d:code>if</d:code> or
 	both <d:code>if</d:code> and <d:code>else</d:code> or
@@ -150,6 +153,9 @@ if. This can be fixed by using curly braces.</d:para>
 </d:sect2>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>switch statement</d:primary>
+        </d:indexterm>
 	<d:title>switch Statement</d:title>
 	<d:para><d:code>switch</d:code> statement is kind of if-else
 	replacement to simplify it. Usage of switch statement is to compare one
@@ -220,6 +226,9 @@ most 2-3 levels are more than enough else you should look at alternative ways
 of writing code.</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>while loop</d:primary>
+        </d:indexterm>
 	<d:title>while Loop</d:title>
 	<d:para>Of three loops I am first going to cover <d:code>while</d:code>
 	loop. It is simplest of three. I will just give an example for you to
@@ -262,6 +271,9 @@ block of loop. If you have only one statement as body of loop then braces are
 optional.</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>do-while loop</d:primary>
+        </d:indexterm>
 	<d:title>do-while Loop</d:title>
 	<d:para>It is very much similar to <d:code>while</d:code> loop but with
 	a very subtle difference. Consider the following code:</d:para>
@@ -310,6 +322,9 @@ and the output is:
 <d:para>Notice how <d:code>do while</d:code> loop executes once even if the loop index is more than the terminating condition in the while part.</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>for loop</d:primary>
+        </d:indexterm>
 	<d:title>for Loop</d:title>
 	<d:para><d:code>for</d:code> loop is the last of loops and most
 	versatile. It has three parts: initialization of loop counters,
@@ -353,6 +368,12 @@ exercise you can try to implement this program using <d:code>while</d:code> and
 first space properly.</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>break statement</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>continue statement</d:primary>
+        </d:indexterm>
 	<d:title>break and continue Statements</d:title>
 	<d:para><d:code>break</d:code> statement breaks out of innermost
 	<d:code>for, do, while</d:code> and <d:code>switch</d:code>
@@ -424,6 +445,12 @@ and the output is:<d:screen>0
 <d:para>Notice how 50 is missing from output.</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>typedef statement</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>return statement</d:primary>
+        </d:indexterm>
 	<d:title>typedef and return Statements</d:title>
 	<d:para><d:code>typedef</d:code> statement is used to define new types
 	from existing types. For example:</d:para>

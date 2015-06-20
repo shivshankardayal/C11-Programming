@@ -5,10 +5,8 @@
     <?dbhtml filename="std/index.html" ?>
     <d:title>The C Standard Library</d:title>
     <d:para>This chapter and rest of book eflects chapter 7 of
-    n1124.pdf. This chapter begins with assert.h. We will see three
-    parts of each function/macro as much as possible. From
-    specification, compiler and example point of view in that
-    order.</d:para>
+    n1570.pdf. This chapter begins with assert.h. We will see three
+    parts of each function/macro as much as possible.</d:para>
     <d:sect1>
       <d:title>Introduction</d:title>
       <d:sect2>
@@ -30,9 +28,9 @@
 	floating-point numbers to or from character sequences to denote the
 	beginning of the fractional part of such character
 	sequences.<d:footnote><d:para>The functions that make use of the
-	decimal-point character are the numeric conversion functions (14.20.1,
-	14.24.4.1) and the formatted input/output functions (14.19.6,
-	14.24.2).</d:para></d:footnote>  It is represented in the text and
+	decimal-point character are the numeric conversion functions (&#xa7; iso.7.22.1,
+	&#xa7; iso.7.29.4.1) and the formatted input/output functions (&#xa7; iso.7.21.6,
+	&#xa7; iso.7.29.2).</d:para></d:footnote>  It is represented in the text and
 	examples by a period, but may be changed by the
 	<d:code>setlocale</d:code> function.</d:para>
 	<d:para>A <d:emphasis role="italic">null wide character</d:emphasis> is
@@ -48,7 +46,8 @@
 	wide characters, in order.</d:para>
 	<d:para>A <d:emphasis role="italic">shift sequence</d:emphasis> is a
 	contiguous sequence of bytes within a multibyte string that
-	(potentially) causes a change in shift state. A shift sequence shall
+	(potentially) causes a change in shift state(see &#xa7; iso.5.2.1.2). A
+    shift sequence shall
 	not have a corresponding wide character; it is instead taken to be an
 	adjunct to an adjacent multibyte character.<d:footnote><d:para>For
 	state-dependent encodings, the values for <d:code>MB_CUR_MAX</d:code>
@@ -57,11 +56,15 @@
 	adjacent shift sequence of maximum length. Whether these counts provide
 	for more than one shift sequence is the implementation’s
 	choice.</d:para></d:footnote></d:para>
+    <d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+    linkend="character_handling" />, <d:xref linkend="setlocale" />.</d:para>
       </d:sect2>
       <d:sect2>
 	<d:title>Standard Headers</d:title>
 	<d:para>Each library function is declared, with a type that includes a
-	prototype, in a header,<d:footnote><d:para>A header is not necessarily
+	prototype, in a <d:emphasis
+    role="italic">header</d:emphasis>,<d:footnote><d:para>A header
+    is not necessarily
 	a source file, nor are the &lt; and > delimited sequences in header
 	names necessarily valid source file names.</d:para></d:footnote>
 	whose contents are made available by the <d:code>#include</d:code>
@@ -70,14 +73,18 @@
 	facilitate their use. Declarations of types described in this clause
 	shall not include type qualifiers, unless explicitly stated
 	otherwise.</d:para>
-	<d:para>The standard headers are:</d:para>
-	<d:screen>&amp;lt;assert.h>  &amp;lt;inttypes.h> &amp;lt;signal.h>  &amp;lt;stdlib.h>
-&amp;lt;complex.h> &amp;lt;iso646.h>   &amp;lt;stdarg.h>  &amp;lt;string.h>
-&amp;lt;ctype.h>   &amp;lt;limits.h>   &amp;lt;stdbool.h> &amp;lt;tgmath.h>
-&amp;lt;errno.h>   &amp;lt;locale.h>   &amp;lt;stddef.h>  &amp;lt;time.h>
-&amp;lt;fenv.h>    &amp;lt;math.h>     &amp;lt;stdint.h>  &amp;lt;wchar.h>
-&amp;lt;float.h>   &amp;lt;setjmp.h>   &amp;lt;stdio.h>   &amp;lt;wctype.h></d:screen>
-<d:para>If a file with the same name as one of the above &amp;lt; and >
+	<d:para>The standard headers are<d:footnote><d:para>The headers
+    <d:code>&lt;complex.h&gt;, &lt;stdatomic.h&gt;</d:code> and
+    <d:code>&lt;threads.h&gt;</d:code> are conditional features that
+    implementations need not support; see &#xa7;
+    iso.6.10.8.3.</d:para></d:footnote></d:para>
+	<d:screen>&lt;assert.h>  &lt;inttypes.h> &lt;signal.h>  &lt;stdlib.h>
+&lt;complex.h> &lt;iso646.h>   &lt;stdarg.h>  &lt;string.h>
+&lt;ctype.h>   &lt;limits.h>   &lt;stdbool.h> &lt;tgmath.h>
+&lt;errno.h>   &lt;locale.h>   &lt;stddef.h>  &lt;time.h>
+&lt;fenv.h>    &lt;math.h>     &lt;stdint.h>  &lt;wchar.h>
+&lt;float.h>   &lt;setjmp.h>   &lt;stdio.h>   &lt;wctype.h></d:screen>
+<d:para>If a file with the same name as one of the above &lt; and >
 delimited sequences, not provided as part of the implementation, is placed in
 any of the standard places that are searched for included source files, the
 behavior is undefined.</d:para>
@@ -85,8 +92,9 @@ behavior is undefined.</d:para>
 <d:para>Standard headers may be included in any order; each may be included
 more thanonce in a giv en scope, with no effect different from being included
 only once, except that the effect of including
-<d:code>&amp;lt;assert.h></d:code> depends on the definition of
-<d:code>NDEBUG</d:code> (see 14.2). If used, a header shall be included outside
+<d:code>&lt;assert.h></d:code> depends on the definition of
+<d:code>NDEBUG</d:code> (see &#xa7; iso.7.2). If used, a header shall be
+included outside 
 of any external declaration or definition, and it shall first be included
 before the first reference to any of the functions or objects it declares, or
 to any of the types or macros it defines. However, if an identifier is declared
@@ -102,7 +110,8 @@ identifier.</d:para>
 linkage.</d:para>
 <d:para>A summary of the contents of the standard headers is given in annex
 B.</d:para>
-<d:para><d:para>Forward references:</d:para> diagnostics (14.2).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref linkend="diagnostics"
+/>.</d:para>
       </d:sect2>
       <d:sect2>
 	<d:title>Reserved Identifiers</d:title>
@@ -126,15 +135,16 @@ B.</d:para>
 	    <d:para>Each macro name in any of the following subclauses
 	    (including the future library directions) is reserved for use as
 	    specified if any of its associated headers is included; unless
-	    explicitly stated otherwise (see 14.1.4).</d:para>
+	    explicitly stated otherwise (see &#xa7; iso.7.1.4).</d:para>
 	  </d:listitem>
 	  <d:listitem>
 	    <d:para>All identifiers with external linkage in any of the
-	    following subclauses (including the future library directions) are
+	    following subclauses (including the future library directions) and
+        <d:code>errno</d:code> are
 	    always reserved for use as identifiers with external
 	    linkage.<d:footnote><d:para>The list of reserved identifiers with
-	    external linkage includes <d:code>errno, ath_errhandling,
-	    setjmp,</d:code> and
+	    external linkage includes <d:code>math_errhandling,
+	    setjmp, va_copy</d:code> and
 	    <d:code>va_end</d:code>.</d:para></d:footnote></d:para>
 	  </d:listitem>
 	  <d:listitem>
@@ -147,7 +157,7 @@ B.</d:para>
 	</d:itemizedlist>
 	<d:para>No other identifiers are reserved. If the program declares or
 	defines an identifier in a context in which it is reserved (other than
-	as allowed by 14.1.4), or defines a reserved identifier as a macro
+	as allowed by &#xa7; iso.7.1.4), or defines a reserved identifier as a macro
 	name, the behavior is undefined.</d:para>
 	<d:para>If the program removes (with <d:code>#undef</d:code>) any macro
 	definition of an identifier in the first group listed above, the
@@ -184,11 +194,42 @@ B.</d:para>
 	function that is implemented as a macro shall expand to code that
 	evaluates each of its arguments exactly once, fully protected by
 	parentheses where necessary, so it is generally safe to use arbitrary
-	expressions as arguments. Likewise, those function-like macros
+	expressions as arguments.<d:footnote><d:para>Such macros might not contain the sequence
+	points that the corresponding function calls do.</d:para></d:footnote>
+    Likewise, those function-like macros
 	described in the following subclauses may be invoked in an expression
 	anywhere a function with a compatible return type could be
-	called.<d:footnote><d:para>Such macros might not contain the sequence
-	points that the corresponding function calls do.</d:para></d:footnote>
+	called.<d:footnote><d:para>Because external identifiers and some macro
+    names beginning with an underscore are reserved, implementations may
+    provide special semantics for such names. For example, the identifier
+    <d:code>_BUILTIN_abs</d:code> could be used to indicate generation of
+    in-line code for the <d:code>abs</d:code> function. Thus, the appropriate
+    header could specify</d:para>
+    <d:blockquote>
+      <d:para>
+        <d:code>#define abs(x) _BUILTIN_abs(x)</d:code>
+      </d:para>
+    </d:blockquote>
+    <d:para>
+      for a compiler whose code generator will accept it.
+    </d:para>
+    <d:para>
+        In this manner, a user desiring to guarantee that a given library
+        function such as <d:code>abs</d:code> will be a genuine function may
+        write
+    </d:para>
+    <d:blockquote>
+      <d:para>
+        <d:code>#undef abs</d:code>
+      </d:para>
+    </d:blockquote>
+    <d:para>
+      whether the implementation's header provides a macro implementation of
+      <d:code>abs</d:code> or a built-in implementation. The prototype for the
+      function, which precedes and is hidden by any macro definition, is
+      thereby revealed also.
+    </d:para>
+    </d:footnote>
 	All object-like macros listed as expanding to integer constant
 	expressions shall additionally be suitable for use in
 	<d:code>#if</d:code> preprocessing directives.</d:para>
@@ -199,9 +240,71 @@ B.</d:para>
 	<d:para>There is a sequence point immediately before a library function
 	returns.</d:para>
 	<d:para>The functions in the standard library are not guaranteed to be
-	reentrant and may modify objects with static storage
+	reentrant and may modify objects with static or thread storage
 	duration.<d:footnote><d:para>Thus, a signal handler cannot, in general,
 	call standard library functions.</d:para></d:footnote></d:para>
+    <d:para>
+      Unless explicitly stated otherwise in the detailed descriptions that
+      follow, library functions shall prevent data races as follows: A library
+      function shall not directly or indirectly access objects accessible by
+      threads other than the current thread unless the objects are accessed
+      directly or indirectly via the function's arguments. A library function
+      shall not directly or indirectly modify objects accessible by threads
+      other than the current thread unless the objects are accessed directly or
+      indirectly via the function's non-const
+      arguments.<d:footnote><d:para>This means, for example, that an
+      implementation is not permitted to use a <d:code>static</d:code> object
+      for internal purposes without synchronization because it could cause a
+      data race even in programs that do not explicitly share objects between
+      threads. Similarly, an implementation of <d:code>memcpy</d:code> is not
+      permitted to copy bytes beyond the specified length of the destination
+      object and then restore the original values because it could cause a data
+      race if the program shared those bytes between
+      threads.</d:para></d:footnote> Implementations may share their own
+      internal objects between threads if the objects are not visible to users
+      and are protected against data races.
+    </d:para>
+    <d:para>
+      Unless otherwise specified, library functions shall perform all
+      operations solely within the current thread if those operations have
+      effects that are visible to users.<d:footnote><d:para>This allows
+      implementations to parallelize operations if there are no visible side
+      effects.</d:para></d:footnote>
+    </d:para>
+    <d:para>
+      EXAMPLE The function atoi may be used in any of several ways:
+      <d:itemizedlist>
+        <d:listitem>
+          by use of its associated header (possibly generating a macro
+          expansion)
+          <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+const char *str;
+/* ... */
+i = atoi(str);]]></d:programlisting>
+        </d:listitem>
+        <d:listitem>
+          by use of its associated header (assuredly generating a true function
+          reference)
+          <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+#undef atoi
+const char *str;
+/* ... */
+i = atoi(str);]]></d:programlisting>
+          <d:para>or</d:para>
+          <d:programlisting role="CLexer"><![CDATA[#include <stdlib.h>
+const char *str;
+/* ... */
+i = (atoi)(str);]]></d:programlisting>
+        </d:listitem>
+        <d:listitem>
+          by explicit declaration
+          <d:programlisting role="CLexer"><![CDATA[extern int atoi(const char *);
+const char *str;
+/* ... */
+i = atoi(str);]]></d:programlisting>
+        </d:listitem>
+      </d:itemizedlist>
+    </d:para>
       </d:sect2>
     </d:sect1>
 </d:chapter>

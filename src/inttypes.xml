@@ -3,22 +3,26 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
     <?dbhtml filename="inttypes/index.html" ?>
     <d:title>Format conversion of integer types &lt;inttypes.h&gt;</d:title>
-    <d:para>The header &lt;inttypes.h&gt; includes the header
-    &amp;lt;stdint.h> and extends it with additional facilities provided by
-    hosted implementations.</d:para>
+    <d:para>The header <d:code>&lt;inttypes.h&gt;</d:code> includes the header
+    <d:code>&lt;stdint.h></d:code> and extends it with additional facilities
+    provided by hosted implementations.</d:para>
     <d:para>It declares functions for manipulating greatest-width integers and
     converting numeric character strings to greatest-width integers, and it
-    declares the type <d:code>imaxdiv_t</d:code> which is a structure type that
+    declares the type
+    <d:blockquote>
+      <d:para><d:code>imaxdiv_t</d:code></d:para>
+    </d:blockquote>
+    which is a structure type that
     is the type of the value returned by the <d:code>imaxdiv</d:code>
     function.</d:para>
-    <d:para>For each type declared in &amp;lt;stdint.h>, it defines
+    <d:para>For each type declared in <d:code>&lt;stdint.h></d:code>, it
+    defines
     corresponding macros for conversion specifiers for use with the formatted
-    input/output functions.</d:para>
-    <d:para><d:emphasis role="bold">Forward references:</d:emphasis> integer
-    types &amp;lt;stdint.h> (Integer types &amp;lt;stdint.h>), formatted
-    input/output functions (Formatted input/output functions), formatted wide
-    character input/output functions (Formatted wide character input/output
-    functions).</d:para>
+    input/output functions.<d:footnote><d:para>See <d:quote>future library
+    directions</d:quote> (&#xa7; iso.7.31.5).</d:para></d:footnote></d:para>
+    <d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+    linkend="stdint" />, <d:xref linkend="f_io_func" />, <d:xref
+    linkend="f_wc_io_func" />.</d:para>
     <d:sect1>
       <d:title>Macros for format specifiers</d:title>
       <d:para>Each of the following object-like macros<d:footnote><d:para>C++
@@ -38,9 +42,9 @@
       in the general case, different format specifiers may be required for
       <d:code>fprintf</d:code> and <d:code>fscanf</d:code>, even when the type
       is the same.</d:para></d:footnote> followed by the conversion specifier,
-      followed by a name corresponding to a similar type name in Integer
-      types. In these names, <d:code>N</d:code> represents the width of the
-      type as described in Integer types. For example,
+      followed by a name corresponding to a similar type name in &#xa7;
+      iso.7.20.1. In these names, <d:code>N</d:code> represents the width of
+      the type as described in &#xa7; iso.7.20.1. For example,
       <d:code>PRIdFAST32</d:code> can be used in a format string to print the
       value of an integer of type <d:code>int_fast32_t</d:code>.</d:para>
       <d:para>The <d:code>fprintf</d:code> macros for signed integers
@@ -143,9 +147,8 @@ is returned. If the correct value is outside the range of representable values,
 returned (according to the return type and sign of the value, if any), and the
 value of the macro <d:code>ERANGE</d:code> is stored in
 <d:code>errno</d:code>.</d:para>
-<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
-<d:code>strtol, strtoll, strtoul</d:code> and <d:code>strtoull</d:code>
-functions (The strtol, strtoll, strtoul and strtoull functions).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis><d:xref
+linkend="str_to_long" />.</d:para>
       </d:sect2>
       <d:sect2>
 	<d:title>The wcstoimax and wcstoumax functions</d:title>
@@ -169,6 +172,8 @@ value is outside the range of representable values, <d:code>INTMAX_MAX,
 INTMAX_MIN</d:code> or <d:code>UINTMAX_MAX</d:code> is returned (according to
 the return type and sign of the value, if any), and the value of the macro
 <d:code>ERANGE</d:code> is stored in <d:code>errno</d:code>.</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis><d:xref
+linkend="wstr_to_long" />.</d:para>
       </d:sect2>
     </d:sect1>
 </d:chapter>

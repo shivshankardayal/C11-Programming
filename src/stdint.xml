@@ -3,9 +3,11 @@
   xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="stdint/index.html" ?>
-  <d:title>Integer types &lt;stdint.h&gt;</d:title>
-  <d:para>The header &lt;stdint.h&gt; declares sets of integer types having
-  specified widths, and defines corresponding sets of macros. It also defines
+  <d:title id="stdint">Integer types &lt;stdint.h&gt;</d:title>
+  <d:para>The header <d:code>&lt;stdint.h&gt;</d:code> declares sets of integer types having
+  specified widths, and defines corresponding sets of
+  macros.<d:footnote><d:para>See <d:quote>future library directions</d:quote>
+  (&#xa7; iso.7.31.10).</d:para></d:footnote> It also defines
   macros that specify limits of integer types corresponding to types defined in
   other standard headers.</d:para>
   <d:para>Types are defined in the following categories:</d:para>
@@ -33,13 +35,14 @@
   <d:para>For each type described herein that the implementation
   provides,<d:footnote><d:para>Some of these types may denote
   implementation-defined extended integer types.</d:para></d:footnote>
-  <d:code>&amp;lt;stdint.h></d:code> shall declare that
+  <d:code>&lt;stdint.h></d:code> shall declare that
   <d:code>typedef</d:code> name and define the associated macros. Conversely,
   for each type described herein that the implementation does not provide,
-  <d:code>&amp;lt;stdint.h></d:code> shall not declare that
+  <d:code>&lt;stdint.h></d:code> shall not declare that
   <d:code>typedef</d:code> name nor shall it define the associated macros. An
-  implementation shall provide those types described as "required", but need
-  not provide any of the others (described as "optional").</d:para>
+  implementation shall provide those types described as
+  <d:quote>required</d:quote>, but need not provide any of the others
+  (described as <d:quote>optional</d:quote>).</d:para> 
   <d:sect1>
     <d:title>Integer types</d:title>
     <d:para>When typedef names differing only in the absence or presence of the
@@ -136,10 +139,7 @@
   </d:sect1>
   <d:sect1>
     <d:title>Limits of specific-width integer types</d:title>
-    <d:para>The following object-like macros<d:footnote><d:para>C++
-    implementations should define these macros only when
-    <d:code>__STDC_LIMIT_MACROS</d:code> is defined before
-    <d:code>&amp;lt;stdint.h></d:code> is included.</d:para></d:footnote>
+    <d:para>The following object-like macros
     specify the minimum and maximum limits of the types declared in
     <d:code>&amp;lt;stdint.h></d:code>. Each macro name corresponds to a
     similar type name in Integer types.</d:para>
@@ -415,10 +415,7 @@
   </d:sect1>
   <d:sect1>
     <d:title>Limits of other integer types</d:title>
-    <d:para>The following object-like macros<d:footnote><d:para>C++
-    implementations should define these macros only when <d:code></d:code> is
-    defined before <d:code>&amp;lt;stdint.h></d:code> is
-    included.</d:para></d:footnote> specify the minimum and maximum limits of
+    <d:para>The following object-like macros specify the minimum and maximum limits of
     integer types corresponding to types defined in other standard
     headers.</d:para>
     <d:para>Each instance of these macros shall be replaced by a constant
@@ -457,8 +454,8 @@
 	<d:para><d:code>WINT_MAX</d:code> see below</d:para>
       </d:listitem>
     </d:itemizedlist>
-    <d:para>If <d:code>sig_atomic_t</d:code> (see Signal handling
-    &amp;lt;signal.h>) is defined as a signed integer type, the value of
+    <d:para>If <d:code>sig_atomic_t</d:code> (see &#xa7; iso.7.14) is defined
+    as a signed integer type, the value of 
     <d:code>SIG_ATOMIC_MIN</d:code> shall be no greater than -127 and the value
     of <d:code>SIG_ATOMIC_MAX</d:code> shall be no less than 127; otherwise,
     <d:code>sig_atomic_t</d:code> is defined as an unsigned integer type, and
@@ -481,11 +478,7 @@
   </d:sect1>
   <d:sect1>
     <d:title>Macros for integer constants</d:title>
-    <d:para>The following function-like macros<d:footnote><d:para>C++
-    implementations should define these macros only when
-    <d:code>__STDC_CONSTANT_MACROS</d:code> is defined before
-    <d:code>&amp;lt;stdint.h></d:code> is
-    included.</d:para></d:footnote> expand to integer constants suitable for
+    <d:para>The following function-like macros expand to integer constants suitable for
     initializing objects that have integer types corresponding to types defined
     in <d:code>&amp;lt;stdint.h></d:code>. Each macro name corresponds to a
     similar type name in Minimum-width integer types or Greatest-width integer

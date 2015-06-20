@@ -12,13 +12,23 @@
   <d:para>which is the signed integer type of the result of subtracting two
   pointers;</d:para>
   <d:blockquote><d:para><d:code>size_t</d:code></d:para></d:blockquote>
-  <d:para>which is the unsigned integer type of the result of the sizeof
+  <d:para>which is the unsigned integer type of the result of the <d:code>sizeof</d:code>
   operator; and</d:para>
+  <d:blockquote><d:para><d:code>max_align_t</d:code></d:para></d:blockquote>
+  <d:para>
+    which is an object type whose alignment is as great as is supported by the
+    implementation in all contexts; and 
+  </d:para>
   <d:blockquote><d:para><d:code>wchar_t</d:code></d:para></d:blockquote>
   <d:para>which is an integer type whose range of values can represent distinct
   codes for all members of the largest extended character set specified among
   the supported locales; the null character shall have the code value
-  zero.</d:para>
+  zero. Each member of the basic character set shall have a code value equal to
+  its value when used as the lone character in an integer character constant if
+  an implementation does not define</d:para>
+  <d:blockquote>
+    <d:para><d:code>__STDC_MB_MIGHT_NEQ_WC__.</d:code></d:para>
+  </d:blockquote>
   <d:para>The macros are</d:para>
   <d:blockquote><d:para><d:code>NULL</d:code></d:para></d:blockquote>
   <d:para>which expands to an implementation-defined null pointer constant;
@@ -31,7 +41,8 @@
   structure (designated by type). The type and member designator shall be such
   that given</d:para>
   <d:blockquote><d:para><d:code>static type t;</d:code></d:para></d:blockquote>
-  <d:para>then the expression &amp; (t.<d:emphasis
+  <d:para>then the expression <d:code>&amp;</d:code>
+  (<d:code>t.</d:code><d:emphasis
   role="italic">member-designator</d:emphasis>) evaluates to an address
   constant. (If the specified member is a bit-field, the behavior is
   undefined.)</d:para>

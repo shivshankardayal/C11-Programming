@@ -5,17 +5,40 @@
     <?dbhtml filename="complex/index.html" ?>
     <d:title>Complex arithmetic &lt;complex.h&gt;</d:title>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>_Complex</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>_Complex_I</d:primary>
+      </d:indexterm>
       <d:title>Introduction</d:title>
       <d:para>The header <d:code>&lt;complex.h&gt;</d:code> defines macros and
-      declares functions that support complex arithmetic. Each synopsis
+      declares functions that support complex
+      arithmetic.<d:footnote><d:para>See <d:quote>future library
+      directions</d:quote> (&#xa7; iso.7.31.1).</d:para></d:footnote>
+      </d:para>
+      <d:para>
+        mplementations that define the macro
+        <d:code>__STDC_NO_COMPLEX__</d:code> need not provide this header nor
+        support any of its facilities.
+      </d:para>
+      <d:para>
+      Each synopsis
       specifies a family of functions consisting of a principal function with
       one or more <d:code>double complex</d:code> parameters and a
       <d:code>double complex</d:code> or <d:code>double</d:code> 
       return value; and other functions with the same name but with f and l
       suffixes which are corresponding functions with <d:code>float</d:code>
       and <d:code>long double</d:code> parameters and return values.</d:para>
-      <d:para>The macro complex expands to <d:code>_Complex</d:code>; the macro
-      <d:code>_Complex_I</d:code> expands to a constant expression of type
+      <d:para>The macro
+      <d:blockquote>
+        <d:para><d:code>complex</d:code></d:para>
+      </d:blockquote>
+      expands to <d:code>_Complex</d:code>; the macro
+      <d:blockquote>
+        <d:para><d:code>_Complex_I</d:code></d:para>
+      </d:blockquote>
+      expands to a constant expression of type
       <d:code>const float _Complex</d:code>, with the value of the imaginary
       unit.<d:footnote><d:para>The imaginary unit is a number
       <d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -28,14 +51,41 @@
   <mml:mo>=</mml:mo>
   <mml:mo>&#x2212;<!-- − --></mml:mo>
   <mml:mn>1</mml:mn>
-</mml:math></d:inlineequation></d:para></d:footnote>.</d:para>
-<d:para>The macro <d:code>I</d:code> expands to
-<d:code>_Complex_I</d:code>.</d:para>
+      </mml:math></d:inlineequation></d:para></d:footnote>.</d:para>
+      <d:para>
+        The macros
+        <d:blockquote>
+          <d:para><d:code>imaginary</d:code></d:para>
+        </d:blockquote>
+        and
+        <d:blockquote>
+          <d:para><d:code>_Imaginary_I</d:code></d:para>
+        </d:blockquote>
+        are defined if and only if the implementation supports imaginary
+        types;<d:footnote><d:para>A specification for imaginary types is in
+        informative &#xa7; iso.annex G.</d:para></d:footnote> f defined, they
+        expand to <d:code>_Imaginary</d:code> and a constant expression of type
+        <d:code>const float _Imaginary</d:code> with the value of the imaginary
+        unit.
+      </d:para>
+      <d:para>
+        The macro
+        <d:blockquote>
+          <d:para><d:code>I</d:code></d:para>
+        </d:blockquote>
+        expands to either <d:code>_Imaginary_I</d:code> or
+        <d:code>_Complex_I</d:code>. If <d:code>_Imaginary_I</d:code> s not
+        defined, <d:code>I</d:code> shall expand to
+        <d:code>_Complex_I</d:code>.
+      </d:para>
 <d:para>Notwithstanding the provisions of reserved identifiers, a program may
-undefine and perhaps then redefine the macros <d:code>complex</d:code> and
+undefine and perhaps then redefine the macros <d:code>complex,
+imaginary</d:code> and
 <d:code>I</d:code>.</d:para>
-<d:para><d:emphasis role="bold">Forward references:</d:emphasis> IEC
-60559-compatible complex arithmetic (annex G).</d:para>
+<d:para>
+  <d:emphasis role="bold">Forward references:</d:emphasis> IEC 60559-compatible
+  complex arithmetic (annex G).
+</d:para>
     </d:sect1>
     <d:sect1>
       <d:title>Conventions</d:title>
@@ -43,6 +93,9 @@ undefine and perhaps then redefine the macros <d:code>complex</d:code> and
       may set errno but is not required to.</d:para>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>branch cuts</d:primary>
+      </d:indexterm>
       <d:title>Branch Cuts</d:title>
       <d:para>Some of the functions below have branch cuts, across which the
       function is discontinuous. For implementations with a signed zero
@@ -64,7 +117,10 @@ undefine and perhaps then redefine the macros <d:code>complex</d:code> and
       negative real axis approaches the cut from above, so the cut maps to the
       positive imaginary axis.</d:para>
     </d:sect1>
-    <d:sect1>
+    <d:sect1 id="cx_limited_range">
+      <d:indexterm>
+        <d:primary>CX_LIMITED_RANGE Pragma</d:primary>
+      </d:indexterm>
       <d:title>The CX_LIMITED_RANGE Pragma</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;complex.h>
@@ -76,7 +132,20 @@ because of undue overflow and underflow. The <d:code>CX_LIMITED_RANGE</d:code>
 pragma can be used to inform the implementation that (where the state is “on”)
 the usual mathematical formulas are acceptable.<d:footnote><d:para>The purpose
 of the pragma is to allow the implementation to use the
-formulas.</d:para></d:footnote> The pragma can occur either outside external
+formulas.</d:para>
+<d:para>
+  <d:inlineequation><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>x</mi><mo>+</mo><mi>i</mi><mi>y</mi><mo>)</mo><mo>&#215;</mo><mo>(</mo><mi>u</mi><mo>+</mo><mi>i</mi><mi>v</mi><mo>)</mo><mo>=</mo><mo>(</mo><mi>x</mi><mi>u</mi><mo>-</mo><mi>y</mi><mi>v</mi><mo>)</mo><mo>+</mo><mi>i</mi><mo>(</mo><mi>x</mi><mi>v</mi><mo>+</mo><mi>y</mi><mi>u</mi><mo>)</mo></math></d:inlineequation>
+</d:para>
+<d:para>
+  <d:inlineequation><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>x</mi><mo>+</mo><mi>i</mi><mi>y</mi><mo>)</mo><mo>/</mo><mo>(</mo><mi>u</mi><mo>+</mo><mi>i</mi><mi>v</mi><mo>)</mo><mo>=</mo><mo>[</mo><mo>(</mo><mi>x</mi><mi>u</mi><mo>+</mo><mi>y</mi><mi>v</mi><mo>)</mo><mo>+</mo><mi>i</mi><mo>(</mo><mi>x</mi><mi>v</mi><mo>-</mo><mi>y</mi><mi>u</mi><mo>)</mo><mo>]</mo><mo>/</mo><mo>(</mo><msup><mi>u</mi><mn>2</mn></msup><mo>+</mo><msup><mi>v</mi><mn>2</mn></msup><mo>)</mo></math></d:inlineequation>
+</d:para>
+<d:para>
+  <d:inlineequation><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>|</mo><mi>x</mi><mo>+</mo><mi>i</mi><mi>y</mi><mo>|</mo><mo>=</mo><msqrt><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></msqrt></math></d:inlineequation>
+</d:para>
+<d:para>
+  where the programmer can determine they are safe.
+</d:para>
+</d:footnote> The pragma can occur either outside external
 declarations or preceding all explicit declarations and statements inside a
 compound statement. When outside external declarations, the pragma takes effect
 from its occurrence until another <d:code>CX_LIMITED_RANGE</d:code> pragma is
@@ -90,9 +159,15 @@ other context, the behavior is undefined. The default state for the pragma is
 “off”.</d:para>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>complex trigonometric functions</d:primary>
+  </d:indexterm>
   <d:title>Trigonometric functions</d:title>
   <d:sect2>
-    <d:title>The cscos functions</d:title>
+    <d:indexterm>
+      <d:primary>cacos function</d:primary>
+    </d:indexterm>
+    <d:title>The cacos functions</d:title>
     <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
     <d:programlisting role="CLexer">#include &lt;complex.h>
 double complex cacos(double complex z);
@@ -109,22 +184,6 @@ interval [0, <d:inlineequation><mml:math
 xmlns="http://www.w3.org/1998/Math/MathML">
   <mml:mi>&#x03C0;<!-- π --></mml:mi>
 </mml:math></d:inlineequation>] along the real axis.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex cacos(double complex z);
-float complex cacosf(float complex z);
-long double complex cacosl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm</d:code>.</d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The <d:code>cacos()</d:code> function calculates the complex arc cosine
-of <d:code>z</d:code>. If <d:code>y = cacos(z)</d:code>, then <d:code>z =
-ccos(y)</d:code>. The real part of <d:code>y</d:code> is chosen in the interval
-[0, <d:inlineequation><mml:math
-xmlns="http://www.w3.org/1998/Math/MathML">
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-</mml:math></d:inlineequation>].</d:para>
-<d:para>One has:</d:para>
-<d:screen>cacos(z) = -i * clog(z + i * csqrt(1 - z * z))</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -142,6 +201,9 @@ following output:</d:para>
 <d:screen>Re[cacos(z)]=0.936812 and Im[cacos(z)]=-2.305509</d:screen>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>casin functions</d:primary>
+    </d:indexterm>
     <d:title>The casin functions</d:title>
     <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
     <d:programlisting role="CLexer">#include &lt;complex.h>
@@ -170,13 +232,6 @@ the interval [<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/Mat
   </mml:mrow>
   <mml:mn>2</mml:mn>
 </mml:math></d:inlineequation>] along the real axis.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex casin(double complex z);
-float complex casinf(float complex z);
-long double complex casinl(long double complex z);</d:programlisting>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:screen>csin(z) = (exp(i * z) - exp(-i * z)) / (2 * i)</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -194,7 +249,10 @@ following output:</d:para>
 <d:screen>Re[cacsin(z)]=0.633984 and Im[cacsin(z)]=2.305509</d:screen>
   </d:sect2>
   <d:sect2>
-    <d:title>The cstan functions</d:title>
+    <d:indexterm>
+      <d:primary>catan functions</d:primary>
+    </d:indexterm>
+    <d:title>The catan functions</d:title>
     <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
     <d:programlisting role="CLexer">#include &lt;complex.h>
 double complex catan(double complex z);
@@ -223,28 +281,6 @@ interval [<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML"
   </mml:mrow>
   <mml:mn>2</mml:mn>
 </mml:math></d:inlineequation>] along the real axis.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex catan(double complex z);
-float complex catanf(float complex z);
-long double complex catanl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm</d:code>.</d:para>
-<d:para>The <d:code>catan()</d:code> function calculates the complex arc tangent of <d:code>z</d:code>. If <d:code>y = catan(z)</d:code>, then <d:code>z = ctan(y)</d:code>. The real part of <d:code>y</d:code> is chosen in the interval [<d:inlineequation><mml:math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mml:mo>&#x2212;<!-- − --></mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-  <mml:mrow class="MJX-TeXAtom-ORD">
-    <mml:mo>/</mml:mo>
-  </mml:mrow>
-  <mml:mn>2</mml:mn>
-  <mml:mo>,</mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-  <mml:mrow class="MJX-TeXAtom-ORD">
-    <mml:mo>/</mml:mo>
-  </mml:mrow>
-  <mml:mn>2</mml:mn>
-</mml:math></d:inlineequation>].</d:para>
-<d:para>One has:</d:para>
-<d:screen>catan(z) = (clog(1 + i * z) - clog(1 - i * z)) / (2 * i)</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -262,6 +298,9 @@ following output:</d:para>
 <d:screen>Re[cactan(z)]=1.448307 and Im[cactan(z)]=0.158997</d:screen>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>ccos functions</d:primary>
+    </d:indexterm>
     <d:title>The ccos functions</d:title>
     <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
     <d:programlisting role="CLexer">#include &lt;complex.h>
@@ -274,15 +313,6 @@ long double complex ccosl(long double complex z);</d:programlisting>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>ccos</d:code> functions return the complex cosine
 value.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex ccos(double complex z);
-float complex ccosf(float complex z);
-long double complex ccosl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm</d:code>.</d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The complex cosine function is defined as:</d:para>
-<d:screen>ccos(z) = (exp(i * z) + exp(-i * z)) / 2</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -299,6 +329,9 @@ and the output is:
 <d:screen>Re[ccos(z)]=-27.034946 and Im[ccos(z)]=-3.851153</d:screen>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>csin functions</d:primary>
+    </d:indexterm>
     <d:title>The csin functions</d:title>
     <d:para>Synopsis</d:para>
     <d:programlisting role="CLexer">#include &lt;complex.h>
@@ -311,15 +344,6 @@ long double complex csinl(long double complex z);</d:programlisting>
 <d:para><d:emphasis role="bold">Desciption</d:emphasis></d:para>
 <d:para>The <d:code>csin</d:code> functions return the complex sine
 value.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex csin(double complex z);
-float complex csinf(float complex z);
-long double complex csinl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm</d:code>.</d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The complex sine function is defined as:</d:para>
-<d:screen>csin(z) = (exp(i * z) - exp(-i * z)) / (2 * i)</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -348,15 +372,6 @@ long double complex ctanl(long double complex z);</d:programlisting>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>ctan</d:code> functions return the complex tangent
 value.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex ctan(double complex z);
-float complex ctanf(float complex z);
-long double complex ctanl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The complex tangent function is defined as:</d:para>
-<d:screen>ctan(z) = csin(z) / ccos(z)</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -374,9 +389,15 @@ and the output is:
   </d:sect2>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>complex hyperbolic functions</d:primary>
+      </d:indexterm>
       <d:title>Hyperbolic functions</d:title>
       <d:sect2>
-	<d:title>The cscosh functions</d:title>
+        <d:indexterm>
+          <d:primary>cacosh functions</d:primary>
+        </d:indexterm>
+	<d:title>The cacosh functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
 double complex cacosh(double complex z);
@@ -399,26 +420,6 @@ xmlns="http://www.w3.org/1998/Math/MathML">
   <mml:mi>i</mml:mi>
   <mml:mi>&#x03C0;<!-- π --></mml:mi>
 </mml:math></d:inlineequation>] along the imaginary axis.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex cacosh(double complex z);
-float complex cacoshf(float complex z);
-long double complex cacoshl(long double complex z);</d:programlisting>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The <d:code>cacosh()</d:code> function calculates the complex arc
-hyperpolic cosine of <d:code>z</d:code>. If <d:code>y = cacosh(z)</d:code>,
-then <d:code>z = ccosh(y)</d:code>. The imaginary part of <d:code>y</d:code> is
-chosen in the interval [<d:inlineequation><mml:math
-xmlns="http://www.w3.org/1998/Math/MathML">
-  <mml:mo>&#x2212;<!-- − --></mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-  <mml:mo>,</mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-</mml:math></d:inlineequation>]. The real part of <d:code>y</d:code> is chosen
-nonnegative.</d:para>
-<d:para>One has:</d:para>
-<d:screen>cacosh(z) = 2 * clog(csqrt((z + 1) / 2) + csqrt((z - 1) /
-2))</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -435,6 +436,9 @@ and the output is:
 <d:screen>Re[cacosh(z)]=2.305509 and Im[cacosh(z)]=0.93681</d:screen>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>casinh functions</d:primary>
+        </d:indexterm>
 	<d:title>The casinh function</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -466,34 +470,6 @@ xmlns="http://www.w3.org/1998/Math/MathML">
   </mml:mrow>
   <mml:mn>2</mml:mn>
 </mml:math></d:inlineequation>] along the imaginary axis.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex casinh(double complex z);
-float complex casinhf(float complex z);
-long double complex casinhl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The <d:code>casinh()</d:code> function calculates the complex arc
-hyperbolic sine of <d:code>z</d:code>. If <d:code></d:code>, then <d:code>z =
-csinh(y)</d:code>. The imaginary part of <d:code>y</d:code> is chosen in the
-interval [<d:inlineequation><mml:math
-xmlns="http://www.w3.org/1998/Math/MathML">
-  <mml:mo>&#x2212;<!-- − --></mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-  <mml:mrow class="MJX-TeXAtom-ORD">
-    <mml:mo>/</mml:mo>
-  </mml:mrow>
-  <mml:mn>2</mml:mn>
-  <mml:mo>,</mml:mo>
-  <mml:mo>+</mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-  <mml:mrow class="MJX-TeXAtom-ORD">
-    <mml:mo>/</mml:mo>
-  </mml:mrow>
-  <mml:mn>2</mml:mn>
-</mml:math></d:inlineequation>].</d:para>
-<d:para>One has:</d:para>
-<d:screen>casinh(z) = clog(z + csqrt(z * z + 1))</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -510,6 +486,9 @@ and the output is:
 <d:screen>Re[casinh(z)]=2.299914 and Im[casinh(z)]=0.917617</d:screen>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>catanh functions</d:primary>
+        </d:indexterm>
 	<d:title>The catanh functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -540,35 +519,7 @@ xmlns="http://www.w3.org/1998/Math/MathML">
     <mml:mo>/</mml:mo>
   </mml:mrow>
   <mml:mn>2</mml:mn>
-</mml:math></d:inlineequation></d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex catanh(double complex z);
-float complex catanhf(float complex z);
-long double complex catanhl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Desacription</d:emphasis></d:para>
-<d:para>The <d:code>catanh()</d:code> function calculates the complex arc
-hyperbolic tangent of <d:code>z</d:code>. If <d:code>y = catanh(z)</d:code>,
-then <d:code>z = ctanh(y)</d:code>. The imaginary part of <d:code>y</d:code> is
-chosen in the interval [<d:inlineequation><mml:math
-xmlns="http://www.w3.org/1998/Math/MathML">
-  <mml:mo>&#x2212;<!-- − --></mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-  <mml:mrow class="MJX-TeXAtom-ORD">
-    <mml:mo>/</mml:mo>
-  </mml:mrow>
-  <mml:mn>2</mml:mn>
-  <mml:mo>,</mml:mo>
-  <mml:mo>+</mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-  <mml:mrow class="MJX-TeXAtom-ORD">
-    <mml:mo>/</mml:mo>
-  </mml:mrow>
-  <mml:mn>2</mml:mn>
-</mml:math></d:inlineequation>].</d:para>
-<d:para>One has:</d:para>
-<d:screen>catanh(z) = 0.5 * (clog(1 + z) - clog(1 - z))</d:screen>
+</mml:math></d:inlineequation>]</d:para>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -585,6 +536,9 @@ and the output is:
 <d:screen>Re[catanh(z)]=0.117501 and Im[catanh(z)]=1.409921</d:screen>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>ccosh functions</d:primary>
+        </d:indexterm>
 	<d:title>The ccosh functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -597,16 +551,6 @@ cosine of <d:code>z</d:code>.</d:para>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>ccosh</d:code> functions return the complex hyperbolic
 cosine value.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex ccosh(double complex z);
-float complex ccoshf(float complex z);
-long double complex ccoshl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>One has:</d:para>
-<d:screen>ccosh(z) = (exp(z)+exp(-z))/2</d:screen>
-<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
 
@@ -622,6 +566,9 @@ and the output is:
 <d:screen>Re[ccosh(z)]=-6.580663 and Im[ccosh(z)]=-7.581553</d:screen>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>csinh functions</d:primary>
+        </d:indexterm>
 	<d:title>The csinh functions</d:title>
 <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;complex.h>
@@ -634,15 +581,6 @@ sine of <d:code>z</d:code>.</d:para>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>csinh</d:code> functions return the complex hyperbolic sine
 value.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex csinh(double complex z);
-float complex csinhf(float complex z);
-long double complex csinhl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The complex hyperbolic sine function is defined as:</d:para>
-<d:screen>csinh(z) = (exp(z)-exp(-z))/2</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -659,6 +597,9 @@ and the output is:
 <d:screen>Re[csinh(z)]=-6.548120 and Im[csinh(z)]=-7.619232</d:screen>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>ctanh functions</d:primary>
+        </d:indexterm>
 	<d:title>The ctanh functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -671,16 +612,6 @@ tangent of <d:code>z</d:code>.</d:para>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>ctanh</d:code> functions return the complex hyperbolic
 tangent value.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex ctanh(double complex z);
-float complex ctanhf(float complex z);
-long double complex ctanhl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The complex hyperbolic tangent function is defined mathematically
-as:</d:para>
-<d:screen>ctanh(z) = csinh(z) / ccosh(z)</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -698,8 +629,17 @@ and the output is:
       </d:sect2>
     </d:sect1>
     <d:sect1>
-      <d:title>Exponential and logrithmic functions</d:title>
+      <d:indexterm>
+        <d:primary>complex exponential functions</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>complex logarithmic functions</d:primary>
+      </d:indexterm>
+      <d:title>Exponential and logarithmic functions</d:title>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>cexp functions</d:primary>
+        </d:indexterm>
 	<d:title>The cexp functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -712,17 +652,6 @@ exponential of <d:code>z</d:code>.</d:para>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>cexp</d:code> functions return the complex base-e
 exponential value.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex cexp(double complex z);
-float complex cexpf(float complex z);
-long double complex cexpl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">The function calculates e (2.71828..., the base
-of natural logarithms) raised to the power of
-<d:code>z</d:code>.</d:emphasis></d:para>
-<d:para>One has:</d:para>
-<d:screen>cexp(I * z) = ccos(z) + I * csin(z)</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -739,6 +668,9 @@ and the output is:
 <d:screen>Re[cexp(z)]=-13.128783 and Im[cexp(z)]=-15.200784</d:screen>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>clog functions</d:primary>
+        </d:indexterm>
 	<d:title>The clog functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -762,26 +694,7 @@ xmlns="http://www.w3.org/1998/Math/MathML">
   <mml:mi>i</mml:mi>
   <mml:mi>&#x03C0;<!-- π --></mml:mi>
 </mml:math></d:inlineequation> ] along the imaginary axis.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex clog(double complex z);
-float complex clogf(float complex z);
-long double complex clogl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The logarithm <d:code>code</d:code> is the inverse function of the
-exponential <d:code>cesp()</d:code>. Thus, if <d:code>y = clog(z)</d:code>,
-then <d:code>z = cexp(y)</d:code>. The imaginary part of <d:code>y</d:code> is
-chosen in the interval [<d:inlineequation><mml:math
-xmlns="http://www.w3.org/1998/Math/MathML">
-  <mml:mo>&#x2212;<!-- − --></mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-  <mml:mo>,</mml:mo>
-  <mml:mo>+</mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-</mml:math></d:inlineequation>].</d:para>
-<d:para>One has:</d:para>
-<d:screen>clog(z) = log(cabs(z)) + I * carg(z)</d:screen>
+<d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:para><d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
 
@@ -798,8 +711,17 @@ and the output is:
       </d:sect2>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>complex power functions</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>complex absolute-value functions</d:primary>
+      </d:indexterm>
       <d:title>Power and absolute-value functions</d:title>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>cabs functions</d:primary>
+        </d:indexterm>
 	<d:title>The cabs functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -811,15 +733,6 @@ long double cabsl(long double complex z);</d:programlisting>
 (also called norm, modulus, or magnitude) of <d:code>z</d:code>.</d:para>
 <d:para><d:emphasis role="bold">The <d:code>cabs</d:code> functions return the
 complex absolute value.</d:emphasis></d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double cabs(double complex z);
-float cabsf(float complex z);
-long double cabsl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The <d:code>cabs()</d:code> function returns the absolute value of the
-complex number <d:code>z</d:code>. The result is a real number.</d:para>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -836,6 +749,9 @@ and the output is:
 <d:screen>Re[cabs(z)]=5.000000 and Im[cabs(z)]=0.000000</d:screen>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>cpow functions</d:primary>
+        </d:indexterm>
 	<d:title>The cpow functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -854,15 +770,6 @@ the negative real axis.</d:para>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>cpow</d:code> functions return the complex power function
 value.</d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex cpow(double complex x, double complex y);
-float complex cpowf(float complex x, float complex y);
-long double complex cpowl(long double complex x, long double complex y);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The function calculates <d:code>x</d:code> raised to the power
-<d:code>z</d:code>. (With a branch cut for <d:code>x</d:code> along the
-negative real axis.)</d:para>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -879,6 +786,9 @@ and the output is:
 <d:screen>Re[cpow(z, z)]=-2.997991 and Im[cpow(z, z)]=0.623785</d:screen>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>csqrt functions</d:primary>
+        </d:indexterm>
 	<d:title>The csqrt functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -891,18 +801,6 @@ long double complex csqrtl(long double complex z);</d:programlisting>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code></d:code> functions return the complex square root value,
 in the range of the right halfplane (including the imaginary axis).</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex csqrt(double complex z);
-float complex csqrtf(float complex z);
-long double complex csqrtl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>Calculate the square root of a given complex number, with nonnegative
-real part, and with a branch cut along the negative real axis. (That means that
-<d:code>csqrt(-1+eps*I)</d:code> will be close to <d:code>I</d:code> while
-<d:code>csqrt(-1-eps*I)</d:code> will be close to <d:code>-I</d:code>, if
-<d:code>eps</d:code> is a small positive real number.)</d:para>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -920,8 +818,14 @@ and the output is:
       </d:sect2>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>complex manipulation functions</d:primary>
+      </d:indexterm>
       <d:title>Manipulation functions</d:title>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>carg functions</d:primary>
+        </d:indexterm>
 	<d:title>The carg functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -940,34 +844,6 @@ axis.</d:para>
   <mml:mo>+</mml:mo>
   <mml:mi>&#x03C0;<!-- π --></mml:mi>
 </mml:math></d:inlineequation></d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double carg(double complex z);
-float cargf(float complex z);
-long double cargl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>A complex number can be described by two real coordinates. One may use
-rectangular coordinates and gets</d:para>
-<d:screen>z = x + I * y</d:screen>
-<d:para>where <d:code>x = creal(z)</d:code> and <d:code>y =
-cimag(z)</d:code>.</d:para>
-<d:para>Or one may use polar coordinates and gets:</d:para>
-<d:screen>z = r * cexp(I * a)</d:screen>
-<d:para>where <d:code>r = cabs(z)</d:code> is the "radius", the "modulus", the
-absolute value of <d:code>z</d:code>, and <d:code>a = carg(z)</d:code> is the
-"phase angle", the argument of <d:code>z</d:code>.</d:para>
-<d:para>One has:</d:para>
-<d:screen>tan(carg(z)) = cimag(z) / creal(z)</d:screen>
-<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
-<d:para>The return value is the range of [<d:inlineequation><mml:math
-xmlns="http://www.w3.org/1998/Math/MathML">
-  <mml:mo>&#x2212;<!-- − --></mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-  <mml:mo>,</mml:mo>
-  <mml:mo>+</mml:mo>
-  <mml:mi>&#x03C0;<!-- π --></mml:mi>
-</mml:math></d:inlineequation>].</d:para>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -984,6 +860,9 @@ and the output is:
 <d:screen>Re[carg(z)]=0.927295 and Im[carg(z)]=0.000000</d:screen>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>cimag functions</d:primary>
+        </d:indexterm>
 	<d:title>The cimag functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -992,21 +871,12 @@ float cimagf(float complex z);
 long double cimagl(long double complex z);</d:programlisting>
 <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
 <d:para>The <d:code>cimag</d:code> functions compute the imaginary part of
-<d:code>z</d:code>.</d:para>
+<d:code>z</d:code>.<d:footnote><d:para>For a variable <d:code>z</d:code> of
+complex type, <d:code>z == creal(z) +
+cimag(z)*I</d:code>.</d:para></d:footnote></d:para>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>cimag</d:code> functions return the imaginary part value
 (as a real).</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double cimag(double complex z);
-float cimagf(float complex z);
-long double cimagl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The <d:code>cimag()</d:code> function returns the imaginary part of the
-complex number <d:code>z</d:code>.</d:para>
-<d:para>One has:</d:para>
-<d:screen>z = creal(z) + I * cimag(z)</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -1021,8 +891,43 @@ int main()
 }</d:programlisting>
 and the output is:
 <d:screen>Re[cimag(z)]=4.000000 and Im[cimag(z)]=0.000000</d:screen>
+<d:sect2>
+  <d:title>The CMPLX macros</d:title>
+  <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+  <d:programlisting role="CLexer"><![CDATA[#include <complex.h>
+double complex CMPLX(double x, double y);
+float complex CMPLXF(float x, float y);
+long double complex CMPLXL(long double x, long double y);]]></d:programlisting>
+  <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+  <d:para>
+    The <d:code>CMPLX</d:code> macros expand to an expression of the specified
+    complex type, with the real part having the (converted) value of
+    <d:code>x</d:code> and the imaginary part having the (converted) value of
+    <d:code>y</d:code>. The resulting expression shall be suitable for use as
+    an initializer for an object with static or thread storage duration,
+    provided both arguments are likewise suitable.
+  </d:para>
+  <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+  <d:para>
+    The <d:code>CMPLX</d:code> macros return the complex value <d:code>x +
+    iy</d:code>.
+  </d:para>
+  <d:para>
+    NOTE These macros act as if the implementation supported imaginary types
+    and the definitions were:
+  </d:para>
+  <d:programlisting role="CLexer"><![CDATA[#define CMPLX(x, y)  ((double complex)((double)(x) + \
+                             _Imaginary_I * (double)(y)))
+#define CMPLXF(x, y) ((float complex)((float)(x) + \
+                             _Imaginary_I * (float)(y)))
+#define CMPLXL(x, y) ((long double complex)((long double)(x) + \
+                            _Imaginary_I * (long double)(y)))]]></d:programlisting>
+</d:sect2>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>conj functions</d:primary>
+        </d:indexterm>
 	<d:title>The conj functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -1035,18 +940,6 @@ long double complex conjl(long double complex z);</d:programlisting>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>conj</d:code> functions return the complex conjugate
 value.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex conj(double complex z);
-float complex conjf(float complex z);
-long double complex conjl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>The <d:code>conj()</d:code> function returns the complex conjugate
-value of <d:code>z</d:code>. That is the value obtained by changing the sign of
-the imaginary part.</d:para>
-<d:para>One has:</d:para>
-<d:screen>cabs(z) = csqrt(z * conj(z))</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -1063,6 +956,9 @@ and the output is:
 <d:screen>Re[conj(z)]=3.000000 and Im[conj(z)]=-4.000000</d:screen>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>cproj function</d:primary>
+        </d:indexterm>
 	<d:title>The cproj functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -1080,18 +976,6 @@ axis. If <d:code>z</d:code> has an infinite part, then
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>cproj</d:code> functions return the value of the projection
 onto the Riemann sphere.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double complex cproj(double complex z);
-float complex cprojf(float complex z);
-long double complex cprojl(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>This function projects a point in the plane onto the surface of a
-Riemann Sphere, the one-point compactification of the complex plane. Each
-finite point <d:code>z</d:code> projects to <d:code>z</d:code> itself. Every
-complex infinite value is projected to a single infinite value, namely to
-positive infinity on the real axis.</d:para>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>
@@ -1109,6 +993,9 @@ and the output is:
 <d:para>Since our complex number was finite, it projected itself.</d:para>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>creal functions</d:primary>
+        </d:indexterm>
 	<d:title>The creal function</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;complex.h>
@@ -1121,17 +1008,6 @@ long double creall(long double complex z);</d:programlisting>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>creal</d:code> functions return the real part
 value.</d:para>
-<d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;complex.h>
-double creal(double complex z);
-float crealf(float complex z);
-long double creall(long double complex z);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para><d:emphasis role="bold">Desciption</d:emphasis></d:para>
-<d:para>The <d:code>creal()</d:code> function returns the real part of the
-complex number <d:code>z</d:code>.</d:para>
-<d:para>One has:</d:para>
-<d:screen>z = creal(z) + I * cimag(z)</d:screen>
 <d:para><d:emphasis role="bold">Example</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;stdio.h>
 #include &lt;complex.h>

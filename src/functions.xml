@@ -4,6 +4,9 @@
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
     <?dbhtml filename="func/index.html" ?>
     <d:title>Functions</d:title>
+    <d:indexterm>
+      <d:primary>functions</d:primary>
+    </d:indexterm>
     <d:para>I know that you will readily agree with me if I say that
     humans get bored if they have to do same things again and again. I
     know you get bored too and I too get bored. We all. We as humans have
@@ -28,6 +31,9 @@
     <d:para>We have already seen the special <d:code>main()</d:code>
     function.</d:para>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>pass by value</d:primary>
+      </d:indexterm>
       <d:title>Pass by Value</d:title>
       <d:para>Here I am going to present skeleton of a function
       prototype and body. Consider:</d:para>
@@ -129,6 +135,9 @@ and the output is:
 After swap a=5 and b=7</d:screen>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>pass by address</d:primary>
+      </d:indexterm>
       <d:title>Pass by Address</d:title>
       <d:para>Not exactly what we wanted. The solution is to
       pass-by-address. When you the address to a called function, it
@@ -164,6 +173,9 @@ and the output is:
 After swap a=7 and b=5</d:screen>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>recursion</d:primary>
+      </d:indexterm>
       <d:title>Recursion</d:title>
       <d:para>In C recusion is the concept of a function calling
       itself. When a repeated operation has to be preformed over a
@@ -456,6 +468,9 @@ and the output is:
 2178309</d:screen>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>function like macros</d:primary>
+      </d:indexterm>
       <d:title>Function like Macros</d:title>
       <d:para>Functions are costly if they are very small. For
       example, let us say we want to add two integers only then it
@@ -498,6 +513,9 @@ called inline functions. New C99 programmers have no excuse for
 writing macros like shown above.</d:para>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>inline functions</d:primary>
+      </d:indexterm>
       <d:title>Inline Functions</d:title>
       <d:para><d:code>inline</d:code> functions are somewhat a mix of
       macros and functions. It is a request to compiler to expand the
@@ -522,6 +540,9 @@ writing macros like shown above.</d:para>
       compiler.</d:para>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>function pointers</d:primary>
+      </d:indexterm>
       <d:title>Function Pointers</d:title>
       <d:para>These are very powerful but have got somewhat complex
       syntax. Due to their complex syntax programmers typically shun
@@ -681,6 +702,12 @@ given below:</d:para>
 portable across different compilers and environments.</d:para>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>passing function pointers</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>receiving function pointers</d:primary>
+      </d:indexterm>
       <d:title>Passing and Receiving Function Pointers</d:title>
       <d:para>You have already seen how to pass a function pointer as
       an argument to a second function in the above
@@ -761,6 +788,9 @@ and the output is:
 <d:screen>1 3 4 4 7 10 9 20 25</d:screen>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>type generic functions</d:primary>
+      </d:indexterm>
       <d:title>Type Generic Functions</d:title>
       <d:para>
         C11 has introduced a new type of functions called type generic

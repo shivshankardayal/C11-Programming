@@ -17,6 +17,9 @@
 	array then multi-dimensional.
       </d:para>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>arrays</d:primary>
+        </d:indexterm>
 	<d:title>Single-Dimensional Array</d:title>
 	<d:para>Let us first create a basic array and then see how to access it
 	elements:</d:para>
@@ -222,6 +225,21 @@ but an array of array. How we can read this is array a has two arrays each of
 which have two integers.</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>pointers</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>malloc function</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>calloc function</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>realloc function</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>free function</d:primary>
+        </d:indexterm>
 	<d:title>Pointers</d:title>
 	<d:para>A pointer can store an address. A pointer of some type can
 	store address of that type and a pointer to void can store address of
@@ -397,6 +415,14 @@ Content at 6th location is 6.
 Content at 7th location is 7.</d:screen>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>address</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>indirection</d:secondary>
+        </d:indexterm>
 	<d:title>Address and Indirection Operators</d:title>
 	<d:para>As is the case with subscript operator and pointer arithmetic
 	in the fourth chapter that I have delayed these two as well for I
@@ -482,6 +508,9 @@ more than pointers to pointers. Now we will see array of
 pointers.</d:para></d:caution> 
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>array of pointers</d:primary>
+        </d:indexterm>
 	<d:title>Arrays of Pointers</d:title>
 	<d:para>Pointers are just like ordinary variables so we can as well create
 	array of pointers. Consider following for example:</d:para>
@@ -552,6 +581,9 @@ dynamic size of same type.</d:para>
 is that you can dynamically modify the number of elements.</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>pointer of pointers</d:primary>
+        </d:indexterm>
 	<d:title>Pointers of Pointers</d:title>
 	<d:para>Consider the following example:</d:para>
 	<d:programlisting role="CLexer">//Author: Shiv S. Dayal
@@ -665,6 +697,9 @@ New 4th element=11</d:screen>
 	<d:para>You must free all memory you allocate.</d:para></d:warning>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>const keyword</d:primary>
+        </d:indexterm>
 	<d:title>Constness</d:title>
 	<d:para>To make anything constant you need to associate const keyword
 	with it. For example, <d:code>const int i; const float

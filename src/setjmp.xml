@@ -11,7 +11,7 @@
   unusual conditions encountered in a low-level function of a
   program.</d:para></d:footnote></d:para>
   <d:para>The type declared is</d:para>
-  <d:blockquote><d:para>jmp_buf</d:para></d:blockquote>
+  <d:blockquote><d:para><d:code>jmp_buf</d:code></d:para></d:blockquote>
   <d:para>which is an array type suitable for holding the information needed
   to restore a calling environment. The environment of a call to the setjmp
   macro consists of information sufficient for a call to the longjmp function

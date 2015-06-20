@@ -144,8 +144,8 @@
     failed because it was unable to allocate memory.
   </d:para>
   <d:para>
-    <d:emphasis role="bold">Forward references:</d:emphasis> date and time
-    (7.27).
+    <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+    linkend="time" />.
   </d:para>
   <d:sect1>
     <d:title>Initialization functions</d:title>

@@ -1,10 +1,10 @@
 <d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
-  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  xmlns:mml="http://www.w3.org/1998/Math/MathML" id="localization">
     <?dbhtml filename="locale/index.html" ?>
     <d:title>Localization &lt;locale.h&gt;</d:title>
-    <d:para>The header &lt;locale.h&gt; declares two functions, one type, and
-    defines several macros.</d:para>
+    <d:para>The header <d:code>&lt;locale.h&gt;</d:code> declares two
+    functions, one type, and defines several macros.</d:para>
     <d:para>The type is</d:para>
     <d:programlisting role="CLexer">struct lconv</d:programlisting>
     <d:para>which contains members related to the formatting of numeric
@@ -37,24 +37,27 @@ char int_n_sep_by_space; // CHAR_MAX
 char int_p_sign_posn;    // CHAR_MAX
 char int_n_sign_posn;    // CHAR_MAX</d:programlisting>
 <d:para>The macros defined are NULL (described in Common definitions
-&amp;lt;stddef.h>); and</d:para>
+<d:code>&lt;stddef.h></d:code>); and</d:para>
 <d:blockquote>
-  <d:para>LC_ALL</d:para>
-  <d:para>LC_COLLATE</d:para>
-  <d:para>LC_CTYPE</d:para>
-  <d:para>LC_MONETARY</d:para>
-  <d:para>LC_NUMERIC</d:para>
-  <d:para>LC_TIME</d:para>
+  <d:para><d:code>LC_ALL</d:code></d:para>
+  <d:para><d:code>LC_COLLATE</d:code></d:para>
+  <d:para><d:code>LC_CTYPE</d:code></d:para>
+  <d:para><d:code>LC_MONETARY</d:code></d:para>
+  <d:para><d:code>LC_NUMERIC</d:code></d:para>
+  <d:para><d:code>LC_TIME</d:code></d:para>
 </d:blockquote>
 <d:para>which expand to integer constant expressions with distinct values,
 suitable for use as the first argument to the setlocale
 function.<d:footnote><d:para>ISO/IEC 9945-2 specifies locale and charmap
 formats that may be used to specify locales for C.</d:para></d:footnote>
 Additional macro definitions, beginning with the characters
-<d:code>LC_</d:code> and an uppercase letter.</d:para>
+<d:code>LC_</d:code> and an uppercase letter,<d:footnote><d:para>See
+<d:quote>future library directions</d:quote> (&#xa7;
+iso.7.31.6).</d:para></d:footnote> may also be specified by the
+implementation.</d:para>
 <d:sect1>
   <d:title>Locale Control</d:title>
-  <d:sect2>
+  <d:sect2 id="setlocale">
     <d:title>The setlocale function</d:title>
     <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
     <d:programlisting role="CLexer">#include &lt;locale.h>
@@ -69,7 +72,7 @@ name only a portion of the program's locale. <d:code>LC_COLLATE</d:code>
 affects the behavior of the <d:code>strcoll</d:code> and
 <d:code>strxfrm</d:code> functions. <d:code>eLC_CTYPE</d:code> affects the
 behavior of the character handling functions<d:footnote><d:para>The only
-functions in Character Handling &amp;lt;ctype.h> whose behavior is not affected
+functions in Character Handling &lt;ctype.h> whose behavior is not affected
 by the current locale are <d:code>isdigit</d:code> and
 <d:code>isxdigit</d:code>.</d:para></d:footnote> and the multibyte and wide
 character functions. <d:code>LC_MONETARY</d:code> affects the monetary
@@ -87,8 +90,13 @@ argument to <d:code>setlocale</d:code>.</d:para>
 <d:para>At program startup, the equivalent of</d:para>
 <d:programlisting role="CLexer">setlocale(LC_ALL, "C");</d:programlisting>
 <d:para>is executed.</d:para>
-<d:para>The implementation shall behave as if no library function calls the
-<d:code>setlocale</d:code> function.</d:para>
+<d:para>
+  A call to the <d:code>setlocale</d:code> function may introduce a data race
+  with other calls to the <d:code>setlocale</d:code> function or with calls to
+  functions that are affected by the current locale. The implementation shall
+  behave as if no library function calls the <d:code>setlocale</d:code>
+  function.
+</d:para>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>If a pointer to a string is given for <d:code>locale</d:code> and the
 selection can be honored, the <d:code>setlocale</d:code> function returns a
@@ -99,13 +107,21 @@ pointer to the string associated with the specified category for the new
 <d:para>A null pointer for <d:code>locale</d:code> causes the
 <d:code>setlocale</d:code> function to return a pointer to the string
 associated with the category for the program's current <d:code>locale</d:code>;
-the program's <d:code>locale</d:code> is not changed.</d:para>
+the program's <d:code>locale</d:code> is not changed.<d:footnote><d:para>The
+implementation shall arrange to encode in a string the various categories due
+to a heterogeneous locale when <d:code>category</d:code> has the value
+<d:code>LC_ALL</d:code>.</d:para></d:footnote></d:para>
 <d:para>The pointer to string returned by the <d:code>setlocale</d:code>
 function is such that a subsequent call with that string value and its
 associated category will restore that part of the program's
 <d:code>locale</d:code>. The string pointed to shall not be modified by the
 program, but may be overwritten by a subsequent call to the
 <d:code>setlocale</d:code> function.</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis><d:xref
+linkend="f_io_func" />, <d:xref linkend="mbwc_conv_funv" />, <d:xref
+linkend="mbwc_conv_funv" />, <d:xref linkend="num_conv_func" />, <d:xref
+linkend="strcoll" />, <d:xref linkend="strftime" />, <d:xref
+linkend="strxfrm" />.</d:para>
   </d:sect2>
 </d:sect1>
 <d:sect1>
@@ -121,9 +137,11 @@ object with type <d:code>struct lconv</d:code> with values appropriate for the
 formatting of numeric quantities (monetary and otherwise) according to the
 rules of the current <d:code>locale</d:code>.</d:para>
 <d:para>The members of the structure with type <d:code>char *</d:code> are
-pointers to strings, any of which (except decimal_point) can point to "", to
+pointers to strings, any of which (except <d:code>decimal_point</d:code>) can
+point to <d:code>""</d:code>, to 
 indicate that the value is not available in the current <d:code>locale</d:code>
-or is of zero length. Apart from grouping and mon_grouping, the strings shall
+or is of zero length. Apart from <d:code>grouping</d:code> and
+<d:code>mon_grouping</d:code>, the strings shall 
 start and end in the initial shift state. The members with type char are
 nonnegative numbers, any of which can be <d:code>CHAR_MAX</d:code> to indicate
 that the value is not available in the current <d:code>locale</d:code>. The
@@ -213,7 +231,8 @@ monetary quantity.</d:para>
 <d:para>Set to a value indicating the positioning of the
 <d:code>negative_sign</d:code> for a negative internationally formatted
 monetary quantity.</d:para>
-<d:para>The elements of grouping and mon_grouping are interpreted according to
+<d:para>The elements of <d:code>grouping</d:code> and
+<d:code>mon_grouping</d:code> are interpreted according to 
 the following:</d:para>
 <d:blockquote>
 <d:para><d:code>CHAR_MAX</d:code> No further grouping is to be

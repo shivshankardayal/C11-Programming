@@ -49,7 +49,7 @@
   certain decisions which specification does not make but rather
   leaves for compiler authors' decision.
   </d:para>
-  <d:section>
+  <d:sect1>
     <d:title>Why C?</d:title>
     <d:para>Because it is the most common denominator. Any language be
     it C++, Java, Perl, Python etc have got bindings in C. Whenever
@@ -95,16 +95,15 @@
     lot of people know C thus if you are writing free(as in freedom)
     software then you have a much higher  chance of getting support if
     you write your code in C.</d:para>
-  </d:section>
-  <d:section>
+  </d:sect1>
+  <d:sect1>
     <d:title>History</d:title>
     <d:para><d:indexterm>
       <d:primary>history</d:primary>
     </d:indexterm>
     <d:indexterm>
-      <d:primary>Dennis</d:primary>
-      <d:secondary>Ritchie</d:secondary>
-      </d:indexterm>
+      <d:primary>Dennis Ritchie</d:primary>
+    </d:indexterm>
       C was formally delivered to this world in 1972
       and started by Dennis MacAlistair Ritchie in 1968. In 1972 C was
       formally announced. C took its features from BCPL a language by
@@ -120,8 +119,8 @@
       a reference of C. Later it was standardized by ANSI and then by
       ISO standards.
     </d:para> 
-    </d:section>
-    <d:section>
+    </d:sect1>
+    <d:sect1>
       <title xmlns="http://docbook.org/ns/docbook">Comparison with
       other Languages</title>
       <d:para>C is a structured, statically typed, somewhat low-level,
@@ -143,8 +142,8 @@
       written correctly as it does not have reunite penalties of
       virtual functions of OOP (object-oriented programming)
       languages.</d:para> 
-    </d:section>
-    <d:section>
+    </d:sect1>
+    <d:sect1>
       <title xmlns="http://docbook.org/ns/docbook">How to Learn
       Programming?</title> 
       <d:para>Programming is exactly like Mathematics. As in
@@ -163,8 +162,8 @@
       xlink:href="http://www.stackoverflow.com/">http://www.stackoverflow.com/</link>
       is also a very good forum to ask questions about programming in
       general.</d:para> 
-    </d:section>
-    <d:section>
+    </d:sect1>
+    <d:sect1>
       <title xmlns="http://docbook.org/ns/docbook">What is a Computer
       Program?</title>
       <d:para>As you may know a computer consists of many components
@@ -186,8 +185,8 @@
       operating system and in turn the operating system or kernel
       provides services to your program.
       </d:para>
-    </d:section>
-    <d:section>
+    </d:sect1>
+    <d:sect1>
       <title xmlns="http://docbook.org/ns/docbook">Attributes of a
       Program</title>
       <d:para>You may be wondering so that is very easy. You just
@@ -266,8 +265,8 @@
         do conditional compilation.</para>
       </listitem>
     </orderedlist></d:para>
-  </d:section>
-  <d:section>
+  </d:sect1>
+  <d:sect1>
     <title xmlns="http://docbook.org/ns/docbook">Tools of Trade</title>
     <d:para>At the very least you need a compiler, an editor and a
     linker. Almost all GNU/Linux systems install GCC by default which is the
@@ -303,8 +302,8 @@
     browse web and many other things. It is so powerful that some people set it
     to run when they login and they never get out of it.
     </d:para>
-  </d:section>
-  <d:section>
+  </d:sect1>
+  <d:sect1>
     <d:title>Bits and Bytes</d:title>
     <d:para>The smallest unit a computer can understand is called a bit. The
     values for a bit is either 0 or 1. Consider a voltage. It can be 0V or 1.5V
@@ -398,8 +397,11 @@
     of one 8-bit byte as -127 to 127 because it also takes in to
     consideration of 1’s complement computers in which positive and
     negative zeroes are different.</d:para>
-  </d:section>
-  <d:section>
+  </d:sect1>
+  <d:sect1>
+    <d:indexterm>
+      <d:primary>number system</d:primary>
+    </d:indexterm>
     <d:title>Notes on Number System</d:title>
     <d:para>A number system is a system which determines the rules and symbols
     for numbers on how we are going to use them. A number system consists of
@@ -458,6 +460,7 @@
     xmlns="http://www.w3.org/1998/Math/MathML"><mi>b</mi></math></d:inlineequation>
     is 10 therefore we have digits from 0 to 9. In binary number system it is 2
     therefore digits permitted are 0 and 1.</d:para>
+  </d:sect1>
     <d:sect1>
       <d:title>Binary Number System</d:title>
       <d:para>As the name suggests binary number system has base of
@@ -1030,8 +1033,7 @@
         </d:para>
       </d:sect2>
     </d:sect1>
-  </d:section>
-  <d:section>
+  <d:sect1>
     <d:title>Compiling and Executing</d:title>
     <d:para>To compile and execute a program create a new file, edit it and
     save it. The extension of file should be <d:code>*.c</d:code>. For example,
@@ -1083,5 +1085,5 @@ nothing:nothing.c
       <d:application>CMake</d:application> or
       <d:application>Scons</d:application> but I think that should be part of a
       book covering build systems.</d:para>
-    </d:section>
+    </d:sect1>
   </d:chapter>

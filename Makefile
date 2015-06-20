@@ -4,7 +4,7 @@ html:
 	find . -name "*.html" | xargs perl -pi -e "s/<html>/<!DOCTYPE html>/g;"
 	cp -r images build/
 	./domp.py
-	cp -r build/* /var/www/cd/
+	cp -r build/* /opt/local/share/nginx/html/cd/
 
 
 pdf:

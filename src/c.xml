@@ -68,6 +68,7 @@ the section entitled &#8220;GNU Free Documentation License&#8221;.
   <xi:include href="time.xml" />
   <xi:include href="uchar.xml" />
   <xi:include href="wchar.xml" />
+  <xi:include href="wctype.xml" />
   <xi:include href="fdl.xml" />
   <d:index>
     <d:title>Index</d:title>

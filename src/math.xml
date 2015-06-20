@@ -7,7 +7,8 @@
     <d:para>The header <d:code>&lt;math.h&gt;</d:code> declares two types and
     many mathematical functions and defines several macros. Most synopses
     specify a family of functions consisting of a principal function with one
-    or more double parameters, a <d:code>double</d:code> return value, or both;
+    or more <d:code>double</d:code> parameters, a <d:code>double</d:code>
+    return value, or both; 
     and other functions with the same name but with <d:code>f</d:code> and
     <d:code>l</d:code> suffixes, which are corresponding functions with
     <d:code>float</d:code> and <d:code>long double</d:code> parameters, return
@@ -39,7 +40,7 @@
     <d:code>float_t</d:code> is the narrowest type used by the implementation
     to evaluate floating expressions.</d:para></d:footnote></d:para>
     <d:para>The macro</d:para>
-    <d:blockquote><d:para>HUGE_VAL</d:para></d:blockquote>
+    <d:blockquote><d:para><d:code>HUGE_VAL</d:code></d:para></d:blockquote>
     <d:para>expands to a positive <d:code>double</d:code> constant expression,
     not necessarily representable as a <d:code>float</d:code>. The
     macros</d:para>
@@ -81,7 +82,7 @@
     with macro definitions beginning with <d:code>FP_1</d:code> and an
     uppercase letter, may also be specified by the implementation.</d:para>
     <d:para>The macro</d:para>
-    <d:blockquote><d:para>FP_FAST_FMA</d:para></d:blockquote>
+    <d:blockquote><d:para><d:code>FP_FAST_FMA</d:code></d:para></d:blockquote>
     <d:para>is optionally defined. If defined, it indicates that the fma
     function generally executes about as fast as, or faster than, a multiply
     and an add of double operands.<d:footnote><d:para>Typically, the
@@ -123,15 +124,19 @@
     <d:code>math_errhandling</d:code>, the behavior is undefined. If the
     expression math_errhandling &amp; <d:code>MATH_ERREXCEPT</d:code> can be
     nonzero, the implementation shall define the macros <d:code>FE_DIVBYZERO,
-    FE_INVALID</d:code> and <d:code></d:code> in &amp;lt;fenv.h>.</d:para>
+    FE_INVALID</d:code> and <d:code></d:code> in
+    <d:code>&lt;fenv.h></d:code>.</d:para>
     <d:sect1>
       <d:title>Treatment of error conditions</d:title>
-      <d:para>The behavior of each of the functions in &amp;lt;math.h> is
+      <d:para>The behavior of each of the functions in <d:code>&lt;math.h></d:code> is
       specified for all representable values of its input arguments, except
       where stated otherwise. Each function shall execute as if it were a
-      single operation without generating any externally visible exceptional
-      conditions.</d:para>
-      <d:para>For all functions, a domain error occurs if an input argument is
+      single operation without raising SIGFPE and without generating any of the
+      floating-point exceptions <d:quote>invalid</d:quote>,
+      <d:quote>divide-by-zero</d:quote>, or <d:quote>overflow</d:quote> except
+      to reflect the result of the function.</d:para>
+      <d:para>For all functions, a <d:emphasis role="italic">domain
+      error</d:emphasis> occurs if an input argument is 
       outside the domain over which the mathematical function is defined. The
       description of each function lists any required domain errors; an
       implementation may define additional domain errors, provided that such
@@ -144,25 +149,41 @@
       <d:code>math_errhandling &amp; MATH_ERRNO</d:code> is nonzero, the
       integer expression errno acquires the value <d:code>EDOM</d:code>; if the
       integer expression <d:code>math_errhandling &amp; MATH_ERREXCEPT</d:code>
-      is nonzero, the "invalid" floating-point exception is raised.</d:para>
-      <d:para>Similarly, a range error occurs if the mathematical result of the
+      is nonzero, the <d:quote>invalid</d:quote> floating-point exception is raised.</d:para>
+      <d:para>
+        Similarly, a <d:emphasis role="italic">pole error</d:emphasis> (also
+        known as a singularity or infinitary) occurs if the mathematical
+        function has an exact infinite result as the finite input argument(s)
+        are approached in the limit (for example,
+        <d:code>log(0.0)</d:code>). The description of each function lists any
+        required pole errors; an implementation may define additional pole
+        errors, provided that such errors are consistent with the mathematical
+        definition of the function. On a pole error, the function returns an
+        implementation-defined value; if the integer expression
+        <d:code>math_errhandling &amp; MATH_ERRNO</d:code> is nonzero, the
+        integer expression errno acquires the value <d:code>ERANGE</d:code>; if
+        the integer expression <d:code>math_errhandling &amp;
+        MATH_ERREXCEPT</d:code> is nonzero, the
+        <d:quote>divide-by-zero</d:quote> floating-point exception is raised.
+      </d:para>
+      <d:para>Similarly, a <d:emphasis role="italic">range error</d:emphasis>
+      occurs if the mathematical result of the 
       function cannot be represented in an object of the specified type, due to
       extreme magnitude.</d:para>
-      <d:para>A floating result overflows if the magnitude of the mathematical
-      result is finite but so large that the mathematical result cannot be
-      represented without extraordinary roundoff error in an object of the
-      specified type. If a floating result overflows and default rounding is in
-      effect, or if the mathematical result is an exact infinity (for example
-      <d:code>log(0.0)</d:code>), then the function returns the value of the
-      macro <d:code>HUGE_VAL, HUGE_VALF</d:code> or <d:code>HUGE_VALL</d:code>
-      according to the return type, with the same sign as the correct value of
-      the function; if the integer expression <d:code>math_errhandling &amp;
-      MATH_ERRNO</d:code> is nonzero, the integer expression errno acquires the
-      value <d:code>ERANGE</d:code>; if the integer expression
-      <d:code>math_errhandling &amp; MATH_ERREXCEPT</d:code> is nonzero, the
-      "divide-by-zero" floating-point exception is raised if the mathematical
-      result is an exact infinity and the "overflow" floating-point exception
-      is raised otherwise.</d:para>
+      <d:para>
+        A floating result overflows if the magnitude of the mathematical result
+        is finite but so large that the mathematical result cannot be
+        represented without extraordinary roundoff error in an object of the
+        specified type. If a floating result overflows and default rounding is
+        in effect, then the function returns the value of the macro
+        <d:code>HUGE_VAL, HUGE_VALF</d:code> or <d:code>HUGE_VALL</d:code>
+        according to the return type, with the same sign as the correct value
+        of the function; if the integer expression <d:code>math_errhandling
+        &amp; MATH_ERRNO</d:code> is nonzero, the integer expression errno
+        acquires the value <d:code>ERANGE</d:code>; if the integer expression
+        <d:code>math_errhandling &amp; MATH_ERREXCEPT</d:code> is nonzero, the
+        <d:quote>overflow</d:quote> floating- point exception is raised.
+      </d:para>
       <d:para>The result underflows if the magnitude of the mathematical result
       is so small that the mathematical result cannot be represented, without
       extraordinary roundoff error, in an object of the specified
@@ -177,16 +198,28 @@
       <d:code>math_errhandling &amp; MATH_ERREXCEPT</d:code> is nonzero,
       whether the "underflow" floating-point exception is raised is
       implementation-defined.</d:para>
+      <d:para>
+        If a domain, pole, or range error occurs and the integer expression
+        <d:code>math_errhandling &amp; MATH_ERRNO</d:code> is
+        zero,<d:footnote><d:para>Math errors are being indicated by the
+        floating-point exception flags rather than by
+        <d:code>errno</d:code>.</d:para></d:footnote> then
+        <d:code>errno</d:code> shall either be set to the value corresponding
+        to the error or left unmodified. If no such error occurs,
+        <d:code>errno</d:code> shall be left unmodified regardless of the
+        setting of <d:code>math_errhandling</d:code>.
+      </d:para>
     </d:sect1>
-    <d:sect1>
+    <d:sect1 id="fp_contract">
       <d:title>The FP_CONTRACT pragma</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;math.h>
 #pragma STDC FP_CONTRACT on-off-switch</d:programlisting>
 <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
 <d:para>The <d:code>FP_CONTRACT</d:code> pragma can be used to allow (if the
-state is "on") or disallow (if the state is "off") the implementation to
-contract expressions (Expressions). Each pragma can occur either outside
+state is <d:quote>on</d:quote>) or disallow (if the state is
+<d:quote>off</d:quote>) the implementation to 
+contract expressions (&#xa7; iso.6.5). Each pragma can occur either outside
 external declarations or preceding all explicit declarations and statements
 inside a compound statement. When outside external declarations, the pragma
 takes effect from its occurrence until another <d:code>FP_CONTRACT</d:code>
@@ -196,12 +229,14 @@ compound statement, the pragma takes effect from its occurrence until another
 compound statement), or until the end of the compound statement; at the end of
 a compound statement the state for the pragma is restored to its condition just
 before the compound statement. If this pragma is used in any other context, the
-behavior is undefined. The default state ("on" or "off") for the pragma is
+behavior is undefined. The default state (<d:quote>on</d:quote> or
+<d:quote>off</d:quote>) for the pragma is
 implementation-defined.</d:para>
     </d:sect1>
     <d:sect1>
       <d:title>Classification macros</d:title>
-      <d:para>In the synopses in this subclause, real-floating indicates that
+      <d:para>In the synopses in this subclause, <d:emphasis
+      role="italic">real-floating</d:emphasis> indicates that 
       the argument shall be an expression of real floating type.</d:para>
       <d:sect2>
 	<d:title>The fpclassify macro</d:title>
@@ -663,8 +698,8 @@ unspecified.</d:para>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>ilogb</d:code> functions return the exponent of
 <d:code>x</d:code> as a signed int value.</d:para>
-<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
-<d:code>logb</d:code> functions (The logb functions).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+linkend="logb" />.</d:para>
       </d:sect2>
       <d:sect2>
 	<d:title>The ldexp functions</d:title>
@@ -790,7 +825,7 @@ xmlns="http://www.w3.org/1998/Math/MathML">
   <mml:mi>x</mml:mi>
 </mml:math></d:inlineequation></d:para>
       </d:sect2>
-      <d:sect2>
+      <d:sect2 id="logb">
 	<d:title>The logb functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;math.h>
@@ -1520,9 +1555,8 @@ or an empty string, the call is equivalent to <d:code>strtod</d:code>("NAN",
 <d:para>The <d:code>nan</d:code> functions return a quiet NaN, if available,
 with content indicated through <d:code>tagp</d:code>. If the implementation
 does not support quiet NaNs, the functions return zero.</d:para>
-<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
-<d:code>strtod, strtof</d:code> and <d:code>strtold</d:code> functions (The
-strtod, strtof and strtold functions).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+linkend="str_to_decimal" />.</d:para>
       </d:sect2>
       <d:sect2>
 	<d:title>The nextafter functions</d:title>

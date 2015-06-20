@@ -26,6 +26,9 @@
         (&#xa7; iso.6.2.1) and ending at &#xa7;(iso.6.2.4).
       </d:para>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>scope of identifiers</d:primary>
+        </d:indexterm>
         <d:title>Scope of an Identifier</d:title>
         <d:para>
           Till now we have seen plain variables and their identifiers. However,
@@ -48,6 +51,9 @@
         </d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>linkage of identifiers</d:primary>
+        </d:indexterm>
         <d:title>Linkages of an Identifier</d:title>
         <d:para>
           There are three different kinds of linkages. External, internal and
@@ -69,6 +75,9 @@
         </d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>storage duration of objects</d:primary>
+        </d:indexterm>
         <d:title>Storage Duration of Objects</d:title>
         <d:para>
           There are four storage durations. Static, thread, automatic and
@@ -99,6 +108,9 @@
         </d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>usual arithmetic conversions</d:primary>
+        </d:indexterm>
         <d:title>Usual Arithmetic Conversions</d:title>
         <d:para>
           Many operators that expect operands of arithmetic type cause
@@ -176,7 +188,30 @@
         </d:para>
       </d:sect1>
       <d:sect1>
-	<d:title>Arithmetic Operators</d:title>
+        <d:indexterm>
+          <d:primary>arithmetic operators</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>+</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>-</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>*</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>/</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>%</d:secondary>
+        </d:indexterm>
+	    <d:title>Arithmetic Operators</d:title>
 	<d:para>
       There are five here. +, -, *, / and %. Let us see a simple
       example:
@@ -231,30 +266,79 @@ fesult = 13.674000
 fesult = -3.550000
 fesult = 5.758928
 fesult = 1.000000</d:screen>
-<d:para>First <d:code>cResult</d:code> is sum of <d:code>'A' + i</d:code> which
-is <d:code>'K'</d:code> as <d:code>'K'</d:code> comes ten positions after A in
-ASCII table. Then we subtract five and go back to F.</d:para>
-<d:para>First <d:code>iReasult</d:code> is 10 - <d:code>i</d:code> where value
-of <d:code>i</d:code> is 10 hence result is 0. Next we multiply it with
-<d:code>i</d:code> which contains <d:code>'A'</d:code> who has got ASCII value
-of 65 and result becomes 650. Then We take sum of <d:code>'A'</d:code> and
-<d:code>i</d:code> and divide by 3 so the result is 25 as it is a division of
-75 by 3. Next we use modulus operator and remainder is 1. Note that in case of
-/ and % if denominator is zero the behavior is undefined.</d:para>
-<d:para>Same way you can udnerstand floating-point operations. Note that you
-cannot use modulus operator if either of the operands are floating-point
-numbers as it will make no sense because of data type promotion rules. Here
-data type promotion rule says smaller data types will be converted to bigger
-data types. Also, if there is a data type on left side of assignment the result
-of applying the operator to operands will be converted to the type of
-that. chars are promoted to ints, ints are promoted to floats anf floats to
-double. The point is that conversion will try to keep as much data as
-possible.</d:para>
+<d:para>
+  First <d:code>cResult</d:code> is sum of <d:code>'A' + i</d:code> which
+  is <d:code>'K'</d:code> as <d:code>'K'</d:code> comes ten positions after A in
+  ASCII table. Then we subtract five and go back to F.
+</d:para>
+<d:para>
+  First <d:code>iReasult</d:code> is 10 - <d:code>i</d:code> where value
+  of <d:code>i</d:code> is 10 hence result is 0. Next we multiply it with
+  <d:code>i</d:code> which contains <d:code>'A'</d:code> who has got ASCII value
+  of 65 and result becomes 650. Then We take sum of <d:code>'A'</d:code> and
+  <d:code>i</d:code> and divide by 3 so the result is 25 as it is a division of
+  75 by 3. Next we use modulus operator and remainder is 1. Note that in case of
+  / and % if denominator is zero the behavior is undefined.
+</d:para>
+<d:para>
+  You should be careful when using * or / with + or - because * and / have
+  higher priority than + or -. For example, 2+3*4 will evaluate for 14 while
+  you may have intended it for 20. In such cases it is mandatory to override
+  the precedence using parentheses like (2+3)*4. / with two integral operands
+  cause integer devision and remainder is lost. To
+  obtain remainder you can use % operator which is also known as modulus or mod
+  operator.
+</d:para>
+<d:para>
+  Same way you can udnerstand floating-point operations. Note that you
+  cannot use modulus operator if either of the operands are floating-point
+  numbers as it will make no sense because of data type promotion rules. Here
+  data type promotion rule says smaller data types will be converted to bigger
+  data types. Also, if there is a data type on left side of assignment the result
+  of applying the operator to operands will be converted to the type of
+  that. chars are promoted to ints, ints are promoted to floats anf floats to
+  double. The point is that conversion will try to keep as much data as
+  possible.
+</d:para>
+<d:para>
+  You should be also careful while choosing your data types. For example, if
+  you take two short integers and add them then the sum may overflow the range
+  of short integers. For example, <d:code>short int si1= 100; short int
+  si2=100;</d:code> will fit nicely in short integer range because sum is 200
+  but then if it goes beyond 32,767 then it will overflow and will become
+  either a zero or a negative number. In such cases you can cast short integers
+  to a larger data type like <d:code>int</d:code> and put sum their. You can
+  see it as a disadvantage as you have to be very careful about what your data
+  type has to be. In previous example if you know that the two short int
+  operands' sum is going to fit in a short int then you can use a short int for
+  sum for sure. But since you may not know who will be using your program most
+  of the time and user input can never be trusted it is always better to
+  program defensively.
+</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>relational operators</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>&lt;</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>&gt;</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>&lt;=</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>&gt;=</d:secondary>
+        </d:indexterm>
 	<d:title>Relational Operators</d:title>
 	<d:para>There are four relational operators: &lt;, >, &lt;= and
-	>=. Once again these are described in chapter 4. Let us see an
+	>=. Let us see an
 	example:</d:para>
 <d:programlisting role="CLexer">// Author : Shiv S. Dayal
 // Description : Demo of relational operator
@@ -286,11 +370,88 @@ int main()
 0
 1
 0</d:screen>
-<d:para>Note that you should not apply these to floating-point data types as
-they may not be represented correctly and two different entities have the same
-internal representation.</d:para>
+<d:para>
+  The result of a relational operator is a boolean value which can be either
+  <d:code>true</d:code> or <d:code>false</d:code> depending upon the operator
+  and its operands.
+</d:para>
+<d:para>
+  Note that you should not apply these to close floating-point data types
+  as they may not be represented correctly and two different entities have the
+  same internal representation.
+</d:para>
+<d:para>For example, consider the following program:</d:para>
+<d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  float f1=1.00000199999;
+  float f2=1.000002;
+
+  printf("%.20f %.20f\n", f1, f2);
+  printf("%d\n", f1<f2);
+  printf("%d\n", f1>f2);
+  printf("%d\n", f1==f2);
+
+  return 0;
+}]]>
+</d:programlisting>
+<d:para>
+  and the output is:
+</d:para>
+<d:screen>1.00000202655792236328 1.00000202655792236328
+0
+0
+1
+</d:screen>
+<d:para>
+  As you can clearly see the comparison output is definitely wrong and with
+  good reason. Since floating point numbers are valid till sixth digit of
+  precision the two floating point numbers compare equal when tested using the
+  equality operator <d:code>==</d:code> which you will see soon. However, two
+  floating point numbers can be compared with great degree of accuracy and more
+  so with <d:code>double</d:code> data type. Consider the program with same
+  data as above but with <d:code>double</d:code> as data type.
+</d:para>
+<d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  double d1=1.00000199999;
+  double d2=1.000002;
+
+  printf("%.20f %.20f\n", d1, d2);
+  printf("%d\n", d1<d2);
+  printf("%d\n", d1>d2);
+  printf("%d\n", d1==d2);
+
+  return 0;
+}]]>
+</d:programlisting>
+<d:para>and the output is:</d:para>
+<d:screen>1.00000199999000005668 1.00000200000000005751
+1
+0
+0
+</d:screen>
+<d:para>
+  As you can see our result is correct. However, if the two doubles would have
+  been very-very close it would suffer the same fate as previous program and
+  give wrong output.
+</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>equality operators</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>==</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>!=</d:secondary>
+        </d:indexterm>
 	<d:title>Equality Operators</d:title>
 	<d:para>There are two equlity operators == and !=. </d:para>
 	<d:programlisting role="CLexer">// Author : Shiv S. Dayal
@@ -314,15 +475,46 @@ int main()
 <d:para>and the output is:</d:para>
 <d:screen>0
 1</d:screen>
+<d:para>
+  The equality operator <d:code>==</d:code> test for equality for its two
+  operands and <d:code>!=</d:code> tests for the operands not being equal. The
+  result of comparison is boolean value. For <d:code>==</d:code> if the
+  operands are equal then result is <d:code>true</d:code> else
+  <d:code>false</d:code>. For <d:code>!=</d:code> the result is
+  <d:code>true</d:code> if the operands do not compare equal and
+  <d:code>false</d:code> if they compare unequal.
+</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>increment operator</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>decrement operator</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>prefix increment</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>postfix increment</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>prefix decrement</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>postfix decrement</d:primary>
+        </d:indexterm>
 	<d:title>Increment and Decrement Operators</d:title>
-	<d:para>There is one increment and one decrement operator. ++ and
-	--. Both come in two forms prefix and postfix. First we will see prefix
-	versions then postfix ones. There is only one constraint on prefix
-	operators of these and that is the operand of the prefix increment or
-	decrement operator will have qualified or unqualified real or pointer
-	type and will be a modifiable lvalue.</d:para>
+	<d:para>
+      There is one increment and one decrement operator. ++ and
+	  --. Both come in two forms prefix and postfix. First we will see prefix
+	  versions then postfix ones. There is only one constraint on prefix
+	  operators of these and that is the operand of the prefix increment or
+	  decrement operator will have qualified or unqualified real or pointer
+	  type and will be a modifiable lvalue. The prefix operator is usually more
+      efficient as compared to postfix operators but that may not be true
+      always.
+    </d:para>
 	<d:programlisting role="CLexer">// Author : Shiv S. Dayal
 // Description : Demo of increment decrement operators
 
@@ -348,6 +540,17 @@ int main()
 7.123000</d:screen>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>logical operators</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>&amp;&amp;</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>||</d:secondary>
+        </d:indexterm>
 	<d:title>Logical Operators</d:title>
 	<d:para>There are two such operators. &amp;&amp; logical AND and ||
 	locical OR. Both the operators have the same constraints and it is that
@@ -398,12 +601,31 @@ int main()
 <d:code>_Bool</d:code>.</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>bitwise operators</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>&amp;</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>|</d:secondary>
+        </d:indexterm>        
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>^</d:secondary>
+        </d:indexterm>
 	<d:title>Bitwise Operators</d:title>
-	<d:para>There are three bitwise operators. &amp;, |, and ^. AND, OR and
-	EX-OR respectively. OR is also called inclusive OR. These have the same
-	contsraints and it is that operands should be integer types. The usual
-	arithmetic conversions are performed on the operands.</d:para>
-<d:programlisting role="CLexer">// Author : Shiv S. Dayal
+	<d:para>
+      There are three bitwise operators. &amp;, |, and ^. AND, OR and
+	  EX-OR respectively. OR is also called inclusive OR. These have the same
+	  constraints and it is that operands should be integer types. The usual
+	  arithmetic conversions are performed on the operands. It is not hard to
+      understand why it cannot be applied to floating-point if you remember the
+      floating point number representation.
+    </d:para>
+    <d:programlisting role="CLexer">// Author : Shiv S. Dayal
 // Description : Demo of bitwise operators
 
 #include &amp;stdio.h>
@@ -431,6 +653,17 @@ int main()
 1</d:screen>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>bitwise shift operators</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>&lt;&lt;</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>&gt;&gt;</d:secondary>
+        </d:indexterm>
 	<d:title>Bitwise Shift Operators</d:title>
 	<d:para>The constraint is same as other bitwise operators that operands
 	should be integers. The integer promotions are performed on each of the
@@ -459,6 +692,53 @@ int main()
 }</d:programlisting>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>assignment operators</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>=</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>*=</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>/=</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>%=</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>+=</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>-=</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>&lt;&lt;=</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>&gt;&gt;=</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>&amp;=</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>^=</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>|=</d:secondary>
+        </d:indexterm>
 	<d:title>Assignment Operators</d:title>
 	<d:para>These are = *= /= %= += -= &lt;&lt;= >>= &amp;= ^= and |= The only
 	constraint is that left operand should be modifiable lvalue. An
@@ -471,6 +751,12 @@ int main()
 	the left operand is sequenced after the value computations of the left
 	and right operands. The evaluations of the operands are
 	unsequenced.</d:para>
+    <d:para>
+      These are shortcuts for more elaborate expressions. For example,
+      <d:code>a += b;</d:code> simply means <d:code>a = a +
+      b;</d:code>. Similar analogy can be drawn to other compound assignment
+      operators.
+    </d:para>
 <d:programlisting role="CLexer">// Author: Shiv S. Dayal
 // Description: Demo of compound assignments.
 
@@ -517,6 +803,10 @@ int main()
 <d:para>output is 7 as 4 is less than 5 which is true.</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>,</d:secondary>
+        </d:indexterm>
 	<d:title>Comma Operator</d:title>
 	<d:para>It is a very simple operator. The left operand of a comma
 	operator is evaluated as a void expression; there is a sequence point
@@ -525,6 +815,10 @@ int main()
 	operator does not give an lvalue.</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>operator</d:primary>
+          <d:secondary>sizeof</d:secondary>
+        </d:indexterm>
 	<d:title>sizeof Operator</d:title>
 	<d:para>You have already see sizeof operator in second chapter when we
 	saw sizes of data types. However here is the constraint: the sizeof
@@ -545,6 +839,9 @@ int main()
 	such an object, including internal and trailing padding.</d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>unary arithmetic operators</d:primary>
+        </d:indexterm>
 	<d:title>Unary Arithmetic Operators</d:title>
 	<d:para>We will see casting, array subscripting, function parenthes,
 	address and indirection operators later at appropriate time. For now I
@@ -556,7 +853,7 @@ int main()
           border="1">
 	  <d:colgroup width="0*"/>
 	  <d:colgroup width="0*"/>
-          <d:caption>Priority and assiciativity table</d:caption>
+          <d:caption>Priority and associativity table</d:caption>
           <d:thead>
             <d:tr bgcolor="#aaaaaa">
               <d:th>Operators</d:th>
@@ -620,8 +917,16 @@ int main()
 	    <d:td>left-to-right</d:td>
 	  </d:tr>
 	</d:table>
+    <d:para>
+      We have already seen unary prefix and postfix versions of increment and
+      decrement operators earlier. There are some more unary operators like
+      <d:code>+, -, ~</d:code> and <d:code>!</d:code>.
+    </d:para>
       </d:sect1>
       <d:sect1>
+        <d:indexterm>
+          <d:primary>grouping parentheses</d:primary>
+        </d:indexterm>
 	<d:title>Grouping parentheses</d:title>
 	<d:para>Grouping parentheses are used to override operator precedence
 	and group expressions. NEVER EVER try to memorize and rely on

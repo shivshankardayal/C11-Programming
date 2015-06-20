@@ -1,0 +1,476 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+           xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+           xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+  <?dbhtml filename="wctype/index.html" ?>
+  <d:title>Wide character classification and mapping utilities
+  &lt;wctype.h&gt;</d:title>
+  <d:sect1>
+    <d:title>Introduction</d:title>
+    <d:para>
+      The header <d:code>&lt;wctype.h&gt;</d:code> defines one macro, and
+      declares three data types and many functions.<d:footnote><d:para>See
+      <d:quote>future library directions</d:quote> (&#xa7;
+      iso.7.31.17).</d:para></d:footnote>
+    </d:para>
+    <d:para>
+      The types declared are
+      <d:blockquote>
+        <d:para><d:code>wint_t</d:code></d:para>
+      </d:blockquote>
+    </d:para>
+    <d:para>
+      described in &#xa7; iso.7.29.1;
+    </d:para>
+    <d:blockquote>
+      <d:para><d:code>wctrans_t</d:code></d:para>
+    </d:blockquote>
+    <d:para>
+      which is a scalar type that can hold values which represent
+      locale-specific character mappings; and
+    </d:para>
+    <d:blockquote>
+      <d:para><d:code>wctype_t</d:code></d:para>
+    </d:blockquote>
+    <d:para>
+      which is a scalar type that can hold values which represent
+      locale-specific character classifications.
+    </d:para>
+    <d:para>
+      The macro defined is <d:code>WEOF</d:code> (described in &#xa7;
+      iso.7.29.1).
+    </d:para>
+    <d:para>
+      The functions declared are grouped as follows:
+    </d:para>
+    <d:itemizedlist>
+      <d:listitem>
+        Functions that provide wide character classification;
+      </d:listitem>
+      <d:listitem>
+        Extensible functions that provide wide character classification;
+      </d:listitem>
+      <d:listitem>
+        Functions that provide wide character case mapping;
+      </d:listitem>
+      <d:listitem>
+        Extensible functions that provide wide character mapping.
+      </d:listitem>
+    </d:itemizedlist>
+    <d:para>
+      For all functions described in this subclause that accept an argument of
+      type <d:code>wint_t</d:code>, the value shall be representable as a
+      <d:code>wchar_t</d:code> or shall equal the value of the macro
+      <d:code>WEOF</d:code>. If this argument has any other value, the behavior
+      is undefined.
+    </d:para>
+    <d:para>
+      The behavior of these functions is affected by the
+      <d:code>LC_CTYPE</d:code> category of the current locale.
+    </d:para>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Wide character classification utilities</d:title>
+    <d:para>
+      The header <d:code>&lt;wctype.h&gt;</d:code> declares several functions
+      useful for classifying wide characters.
+    </d:para>
+    <d:para>
+      The term <d:emphasis role="italic">printing wide character</d:emphasis>
+      refers to a member of a locale-specific set of wide characters, each of
+      which occupies at least one printing position on a display device. The
+      term <d:emphasis role="italic">control wide character</d:emphasis> refers
+      to a member of a locale-specific set of wide characters that are not
+      printing wide characters.
+    </d:para>
+    <d:sect2>
+      <d:title>Wide character classification functions</d:title>
+      <d:para>
+        The functions in this subclause return nonzero (true) if and only if
+        the value of the argument <d:code>wc</d:code> conforms to that in the
+        description of the function.
+      </d:para>
+      <d:para>
+        Each of the following functions returns true for each wide character
+        that corresponds (as if by a call to the <d:code>wctob</d:code>
+        function) to a single-byte character for which the corresponding
+        character classification function from &#xa7; iso.7.4.1 returns true,
+        except that the <d:code>iswgraph</d:code> and <d:code>iswpunct</d:code>
+        functions may differ with respect to wide characters other than
+        <d:code>L' '</d:code> that are both printing and white-space wide
+        characters.<d:footnote><d:para>For example, if the expression
+        <d:code>isalpha(wctob(wc))</d:code> evaluates to true, then the call
+        <d:code>iswalpha(wc)</d:code> also returns true. But, if the expression
+        <d:code>isgraph(wctob(wc))</d:code> evaluates to true (which cannot
+        occur for <d:code>wc == L' '</d:code> of course), then either
+        <d:code>iswgraph(wc)</d:code> or <d:code>iswprint(wc) &amp;&amp;
+        iswspace(wc)</d:code> is true, but not both.</d:para></d:footnote>
+      </d:para>
+      <d:para>
+        <d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>wctob</d:code> function (&#xa7; iso.7.29.6.1.2).
+      </d:para>
+      <d:sect3>
+        <d:title>The iswalnum function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswalnum(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswalnum</d:code> function tests for any wide character
+          for which <d:code>iswalpha</d:code> or <d:code>iswdigit</d:code> is
+          true.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The iswalpha function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswalpha(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswalpha</d:code> function tests for any wide character
+          for which <d:code>iswupper</d:code> or <d:code>iswlower</d:code> is
+          true, or any wide character that is one of a locale-specific set of
+          alphabetic wide characters for which none of <d:code>iswcntrl,
+          iswdigit, iswpunct</d:code> or <d:code>iswspace</d:code> is
+          true.<d:footnote><d:para>The functions <d:code>iswlower</d:code> and
+          <d:code>iswupper</d:code> test true or false separately for each of
+          these additional wide characters; all four combinations are
+          possible.</d:para></d:footnote>
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The iswblank function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswblank(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswblank</d:code> function tests for any wide character
+          that is a standard blank wide character or is one of a
+          locale-specific set of wide characters for which
+          <d:code>iswspace</d:code> is true and that is used to separate words
+          within a line of text. The standard blank wide characters are the
+          following: space (<d:code>L' '</d:code>), and horizontal tab
+          (<d:code>L'\t'</d:code>). In the <d:code>"C"</d:code> locale,
+          iswblank returns true only for the standard blank characters.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The iswcntrl function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswcntrl(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswcntrl</d:code> function tests for any control wide
+          character.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The iswdigit function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswdigit(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswdigit</d:code> function tests for any wide character
+          that corresponds to a decimal-digit character (as defined in &#xa7;
+          iso.5.2.1).
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The iswgraph function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswgraph(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswgraph</d:code> function tests for any wide character
+          for which <d:code>iswprint</d:code> is true and
+          <d:code>iswspace</d:code> is false.<d:footnote
+          id="iswgraph"><d:para>Note that the 
+          behavior of the <d:code>iswgraph</d:code> and
+          <d:code>iswpunct</d:code> functions may differ from their
+          corresponding functions in &#xa7; iso.7.4.1 with respect to printing,
+          white-space, single-byte execution characters other than <d:code>'
+          '</d:code>.</d:para></d:footnote>
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The iswlower function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswlower(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswlower</d:code> function tests for any wide character
+          that corresponds to a lowercase letter or is one of a locale-specific
+          set of wide characters for which none of <d:code>iswcntrl, iswdigit,
+          iswpunct</d:code> or <d:code>iswspace</d:code> is true.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The iswprint function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswprint(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswprint</d:code> function tests for any printing wide
+          character.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The iswpunct function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswpunct(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswpunct</d:code> function tests for any printing wide
+          character that is one of a locale-specific set of punctuation wide
+          characters for which neither <d:code>iswspace</d:code> nor
+          <d:code>iswalnum</d:code> is true.<d:footnoteref linkend="iswgraph"/>
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The iswspace function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswspace(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswspace</d:code> function tests for any wide character
+          that corresponds to a locale-specific set of white-space wide
+          characters for which none of <d:code>iswalnum, iswgraph</d:code> or
+          <d:code>iswpunct</d:code> is true.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The iswupper function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswupper(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswupper</d:code> function tests for any wide character
+          that corresponds to an uppercase letter or is one of a
+          locale-specific set of wide characters for which none of
+          <d:code>iswcntrl, iswdigit, iswpunct</d:code> or
+          <d:code>iswspace</d:code> is true.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The iswxdigit function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswxdigit(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswxdigit</d:code> function tests for any wide character
+          that corresponds to a hexadecimal-digit character (as defined in
+          &#xa7; iso.6.4.4.1).
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Extensible wide character classification functions</d:title>
+      <d:para>
+        The functions <d:code>wctype</d:code> and <d:code>iswctype</d:code>
+        provide extensible wide character classification as well as testing
+        equivalent to that performed by the functions described in the previous
+        subclause (&#xa7; iso.7.30.2.1).
+      </d:para>
+      <d:sect3>
+        <d:title>The iswctype function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+int iswctype(wint_t wc, wctype_t desc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswctype</d:code> function determines whether the wide
+          character wc has the property described by <d:code>desc</d:code>. The
+          current setting of the <d:code>LC_CTYPE</d:code> category shall be
+          the same as during the call to <d:code>wctype</d:code> that returned
+          the value <d:code>desc</d:code>.
+        </d:para>
+        <d:para>
+          Each of the following expressions has a truth-value equivalent to the
+          call to the wide character classification function (&#xa7;
+          iso.7.30.2.1) in the comment that follows the expression:
+        </d:para>
+        <d:programlisting role="CLexer"><![CDATA[iswctype(wc, wctype("alnum"))      // iswalnum(wc)
+iswctype(wc, wctype("alpha"))      // iswalpha(wc)
+iswctype(wc, wctype("blank"))      // iswblank(wc)
+iswctype(wc, wctype("cntrl"))      // iswcntrl(wc)
+iswctype(wc, wctype("digit"))      // iswdigit(wc)
+iswctype(wc, wctype("graph"))      // iswgraph(wc)
+iswctype(wc, wctype("lower"))      // iswlower(wc)
+iswctype(wc, wctype("print"))      // iswprint(wc)
+iswctype(wc, wctype("punct"))      // iswpunct(wc)
+iswctype(wc, wctype("space"))      // iswspace(wc)
+iswctype(wc, wctype("upper"))      // iswupper(wc)
+iswctype(wc, wctype("xdigit"))     // iswxdigit(wc)]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>iswctype</d:code> function returns nonzero (true) if and
+          only if the value of the wide character <d:code>wc</d:code> has the
+          property described by <d:code>desc</d:code>. If <d:code>desc</d:code>
+          is zero, the iswctype function returns zero (false).
+        </d:para>
+        <d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
+        <d:code>wctype</d:code> function (&#xa7; iso.7.30.2.2.2).</d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wctype function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+wctype_t wctype(const char *property);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wctype</d:code> function constructs a value with type
+          <d:code>wctype_t</d:code> that describes a class of wide characters
+          identified by the string argument <d:code>property</d:code>.
+        </d:para>
+        <d:para>
+          The strings listed in the description of the
+          <d:code>iswctype</d:code> function shall be valid in all locales as
+          property arguments to the <d:code>wctype</d:code> function.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          If property identifies a valid class of wide characters according to
+          the <d:code>LC_CTYPE</d:code> category of the current locale, the
+          <d:code>wctype</d:code> function returns a nonzero value that is
+          valid as the second argument to the <d:code>iswctype</d:code>
+          function; otherwise, it returns zero.
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Wide character case mapping utilities</d:title>
+    <d:para>
+      The header <d:code>&lt;wctype.h&gt;</d:code> declares several functions
+      useful for mapping wide characters.
+    </d:para>
+    <d:sect2>
+      <d:title>Wide character case mapping functions</d:title>
+      <d:sect3>
+        <d:title>The towlower function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+wint_t towlower(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>towlower</d:code> function converts an uppercase letter
+          to a corresponding lowercase letter.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          If the argument is a wide character for which
+          <d:code>iswupper</d:code> is true and there are one or more
+          corresponding wide characters, as specified by the current locale,
+          for which <d:code>iswlower</d:code> is true, the
+          <d:code>towlower</d:code> function returns one of the corresponding
+          wide characters (always the same one for any given locale);
+          otherwise, the argument is returned unchanged.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The towupper function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+wint_t towupper(wint_t wc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>towupper</d:code> function converts a lowercase letter to
+          a corresponding uppercase letter.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          If the argument is a wide character for which
+          <d:code>iswlower</d:code> is true and there are one or more
+          corresponding wide characters, as specified by the current locale,
+          for which <d:code>iswupper</d:code> is true, the
+          <d:code>towupper</d:code> function returns one of the corresponding
+          wide characters (always the same one for any given locale);
+          otherwise, the argument is returned unchanged.
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Extensible wide character case mapping functions</d:title>
+      <d:para>
+        The functions <d:code>wctrans</d:code> and <d:code>towctrans</d:code>
+        provide extensible wide character mapping as well as case mapping
+        equivalent to that performed by the functions described in the previous
+        subclause (&#xa7; iso.7.30.3.1).
+      </d:para>
+      <d:sect3>
+        <d:title>The towctrans function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+wint_t towctrans(wint_t wc, wctrans_t desc);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>towctrans</d:code> function maps the wide character
+          <d:code>wc</d:code> using the mapping described by
+          <d:code>desc</d:code>. The current setting of the
+          <d:code>LC_CTYPE</d:code> category shall be the same as during the
+          call to <d:code>wctrans</d:code> that returned the value
+          <d:code>desc</d:code>.
+        </d:para>
+        <d:para>
+          Each of the following expressions behaves the same as the call to the
+          wide character case mapping function (&#xa7; iso.7.30.3.1) in the
+          comment that follows the expression:
+        </d:para>
+        <d:blockquote>
+          <d:para>
+            <d:code>towctrans(wc, wctrans("tolower"))    //
+            towlower(wc)</d:code>
+            <d:code>towctrans(wc, wctrans("toupper"))    //
+            towupper(wc)</d:code>
+          </d:para>
+        </d:blockquote>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>towctrans</d:code> function returns the mapped value of
+          <d:code>wc</d:code> using the mapping described by
+          <d:code>desc</d:code>. If <d:code>desc</d:code> is zero, the
+          <d:code>towctrans</d:code> function returns the value of
+          <d:code>wc</d:code>.
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wctrans function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wctype.h>
+wctrans_t wctrans(const char *property);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wctrans</d:code> function constructs a value with type
+          <d:code>wctrans_t</d:code> that describes a mapping between wide
+          characters identified by the string argument
+          <d:code>property</d:code>.
+        </d:para>
+        <d:para>
+          The strings listed in the description of the
+          <d:code>towctrans</d:code> function shall be valid in all locales as
+          property arguments to the <d:code>wctrans</d:code> function.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          If <d:code>property</d:code> identifies a valid mapping of wide
+          characters according to the <d:code>LC_CTYPE</d:code> category of the
+          current locale, the <d:code>wctrans</d:code> function returns a
+          nonzero value that is valid as the second argument to the
+          <d:code>towctrans</d:code> function; otherwise, it returns zero.
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+  </d:sect1>
+</d:chapter>

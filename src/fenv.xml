@@ -6,19 +6,32 @@
     <d:title>Floating-point environment &lt;fenv.h&gt;</d:title>
     <d:para>The header &lt;fenv.h&gt; declares two types and several macros
     and functions to provide access to the floating-point environment. The
-    floating-point environment refers collectively to any floating-point status
+    <d:emphasis role="italic">floating-point environment</d:emphasis> refers
+    collectively to any floating-point status 
     flags and control modes supported by the
     implementation.<d:footnote><d:para>This header is designed to support the
     floating-point exception status flags and directed-rounding control modes
     required by IEC 60559, and other similar floating-point state
     information. Also it is designed to facilitate code portability among all
-    systems.</d:para></d:footnote> A floating-point status flag is a system
-    variable whose value is set (but never cleared) when a floating-point
-    exception is raised, which occurs as a side effect of exceptional
-    floating-point arithmetic to provide auxiliary information. A
-    floating-point control mode is a system variable whose value may be set by
+    systems.</d:para></d:footnote> A <d:emphasis role="italic">floating-point
+    status flag</d:emphasis> is a system 
+    variable whose value is set (but never cleared) when a <d:emphasis
+    role="italic">floating-point exception</d:emphasis> is raised, which occurs
+    as a side effect of exceptional 
+    floating-point arithmetic to provide auxiliary
+    information.<d:footnote><d:para>A floating-point status flag is not an
+    object and can be set more than once within an
+    expression.</d:para></d:footnote> A
+    <d:emphasis role="italic">floating-point control mode</d:emphasis> is a
+    system variable whose value may be set by
     the user to affect the subsequent behavior of floating-point
     arithmetic.</d:para>
+    <d:para>
+      The floating-point environment has thread storage duration. The initial
+      state for a thread’s floating-point environment is the current state of
+      the floating-point environment of the thread that creates it at the time
+      of creation.
+    </d:para>
     <d:para>Certain programming conventions support the intended model of use
     for the floating-point environment:<d:footnote><d:para>With these
     conventions, a programmer can safely assume default floating-point control
@@ -42,52 +55,94 @@
 	otherwise.</d:para>
       </d:listitem>
     </d:itemizedlist>
-    <d:para>The type <d:code>fenv_t</d:code> represents the entire
+    <d:para>The type
+    <d:blockquote>
+      <d:para><d:code>fenv_t</d:code></d:para>
+    </d:blockquote>
+    represents the entire
     floating-point environment.</d:para>
-    <d:para>The type <d:code>fexcept_t</d:code> represents the floating-point
+    <d:para>The type
+    <d:blockquote>
+      <d:para><d:code>fexcept_t</d:code></d:para>
+    </d:blockquote>
+    represents the floating-point
     status flags collectively, including any status the implementation
     associates with the flags.</d:para>
     <d:para>Each of the macros:</d:para>
-    <d:blockquote><d:para>FE_DIVBYZERO FE_INEXACT FE_INVALID FE_OVERFLOW FE_UNDERFLOW</d:para></d:blockquote>
+    <d:blockquote>
+      <d:para><d:code>FE_DIVBYZERO</d:code></d:para>
+    </d:blockquote>
+    <d:blockquote>
+      <d:para><d:code>FE_INEXACT</d:code></d:para>
+    </d:blockquote>
+    <d:blockquote>
+      <d:para><d:code>FE_INVALID</d:code></d:para>
+    </d:blockquote>
+    <d:blockquote>
+      <d:para><d:code>FE_OVERFLOW</d:code></d:para>
+    </d:blockquote>
+    <d:blockquote>
+      <d:para>
+        <d:code>FE_UNDERFLOW</d:code>
+      </d:para>
+    </d:blockquote>
 <d:para>is defined if and only if the implementation supports the
 floating-point exception by means of the functions in
-13.6.2.<d:footnote><d:para>The implementation supports an exception if there
-are circumstances where a call to at least one of the functions in 13.6.2,
+&#xa7; iso.7.6.2.<d:footnote><d:para>The implementation supports an exception if there
+are circumstances where a call to at least one of the functions in &#xa7; iso.7.6.2,
 using the macro as the appropriate argument, will succeed. It is not necessary
 for all the functions to succeed all the time.</d:para></d:footnote> Additional
 implementation-defined floating-point exceptions, with macro definitions
-beginning with <d:code>FE_</d:code> and an uppercase letter, may also be
+beginning with <d:code>FE_</d:code> and an uppercase
+letter,<d:footnote><d:para>See <d:quote>future library directions</d:quote>
+(&#xa7; iso.7.31.4).</d:para></d:footnote> may also be 
 specified by the implementation. The defined macros expand to integer constant
 expressions with values such that bitwise <d:code>OR</d:code>s of all
 combinations of the macros result in distinct values.</d:para>
-<d:para>The macro <d:code>FE_ALL_EXCEPT</d:code> is simply the bitwise
+<d:para>The macro
+<d:blockquote>
+  <d:para><d:code>FE_ALL_EXCEPT</d:code></d:para>
+</d:blockquote>
+is simply the bitwise
 <d:code>OR</d:code> of all floating-point exception macros defined by the
 implementation. If no such macros are defined, <d:code>FE_ALL_EXCEPT</d:code>
 shall be defined as 0.</d:para>
 <d:para>Each of the macros:</d:para>
-<d:screen>FE_DOWNWARD
-FE_TONEAREST
-FE_TOWARDZERO
-FE_UPWARD</d:screen>
+<d:blockquote>
+  <d:para><d:code>FE_DOWNWARD</d:code></d:para>
+  <d:para><d:code>FE_TONEAREST</d:code></d:para>
+  <d:para><d:code>FE_TOWARDZERO</d:code></d:para>
+  <d:para><d:code>FE_UPWARD</d:code></d:para>
+</d:blockquote>
 <d:para>is defined if and only if the implementation supports getting and
 setting the represented rounding direction by means of the fegetround and
 fesetround functions. Additional implementation-defined rounding directions,
-with macro definitions beginning with FE_ and an uppercase letter, may also be
+with macro definitions beginning with FE_ and an uppercase
+letter,<d:footnote><d:para>See <d:blockquote>future library
+directions</d:blockquote> (&#xa7; iso.7.31.4).</d:para></d:footnote> may also
+be
 specified by the implementation. The defined macros expand to integer constant
 expressions whose values are distinct nonnegative
 values.<d:footnote><d:para>Even though the rounding direction macros may expand
 to constants corresponding to the values of <d:code>FLT_ROUNDS</d:code>, they
 are not required to do so.</d:para></d:footnote></d:para>
-<d:para>The macro <d:code>FE_DFL_ENV</d:code> represents the default
+<d:para>The macro
+<d:blockquote>
+  <d:para><d:code>FE_DFL_ENV</d:code></d:para>
+</d:blockquote>
+represents the default
 floating-point environment - the one installed at program startup - and has
-type "pointer to const-qualified <d:code>fenv_t</d:code>”. It can be used as an
-argument to &amp;lt;fenv.h> functions that manage the floating-point
+type <d:quote>pointer to const-qualified <d:code>fenv_t</d:code></d:quote>. It
+can be used as an 
+argument to <d:code>&amp;lt;fenv.h&gt;</d:code> functions that manage the
+floating-point
 environment.</d:para>
 <d:para>Additional implementation-defined environments, with macro definitions
 beginning with <d:code>FE_</d:code> and an uppercase letter, and having type
-"pointer to const-qualified <d:code>fenv_t</d:code>", may also be specified by
+<d:quote>pointer to const-qualified <d:code>fenv_t</d:code></d:quote>, may also
+be specified by
 the implementation.</d:para>
-<d:sect1>
+<d:sect1 id="fenv_access">
   <d:title>The FENV_ACCESS pragma</d:title>
 <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -100,12 +155,13 @@ control modes.<d:footnote><d:para>The purpose of the
 <d:code>FENV_ACCESS</d:code> pragma is to allow certain optimizations that
 could subvert flag tests and mode changes (e.g., global common subexpression
 elimination, code motion, and constant folding). In general, if the state of
-<d:code>FENV_ACCESS</d:code> is "off", the translator can assume that default
+<d:code>FENV_ACCESS</d:code> is <d:quote>off</d:quote>, the translator can
+assume that default 
 modes are in effect and the flags are not tested.</d:para></d:footnote> The
 pragma shall occur either outside external declarations or preceding all
 explicit declarations and statements inside a compound statement. When outside
 external declarations, the pragma takes effect from its occurrence until
-another <d:code>FENV_ACCESS</d:code>pragma is encountered, or until the end of
+another <d:code>FENV_ACCESS</d:code> pragma is encountered, or until the end of
 the translation unit. When inside a compound statement, the pragma takes effect
 from its occurrence until another <d:code>FENV_ACCESS</d:code> pragma is
 encountered (including within a nested compound statement), or until the end of
@@ -114,11 +170,12 @@ pragma is restored to its condition just before the compound statement. If this
 pragma is used in any other context, the behavior is undefined. If part of a
 program tests floating-point status flags, sets floating-point control modes,
 or runs under non-default mode settings, but was translated with the state for
-the <d:code>FENV_ACCESS</d:code> pragma "off", the behavior is undefined. The
-default state ("on" or "off") for the pragma is implementation-defined. (When
+the <d:code>FENV_ACCESS</d:code> pragma <d:quote>off</d:quote>, the behavior is undefined. The
+default state (<d:quote>on</d:quote> or <d:quote>off</d:quote>) for the pragma
+is implementation-defined. (When 
 execution passes from a part of the program translated with
-<d:code>FENV_ACCESS</d:code> "off" to a part translated with
-<d:code>FENV_ACCESS</d:code> "on", the state of the floating-point status flags
+<d:code>FENV_ACCESS</d:code> <d:quote>off</d:quote> to a part translated with
+<d:code>FENV_ACCESS</d:code> <d:quote>on</d:quote>, the state of the floating-point status flags
 is unspecified and the floating-point control modes have their default
 settings.)</d:para>
 <d:para>EXAMPLE</d:para>
@@ -169,121 +226,8 @@ int feclearexcept(int excepts);</d:programlisting>
 supported floating-point exceptions represented by its argument.</d:para>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>feclearexcept</d:code> function returns zero if the excepts
-argument is zero or if all the specified exceptions were successfully
-cleared. Otherwise, it returns a nonzero value.</d:para>
-<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-<d:programlisting role="CLexer">#include &lt;fenv.h>
-int feclearexcept(int excepts);</d:programlisting>
-<d:para>Link with <d:code>-lm.</d:code></d:para>
-<d:para>Following description, exceptions, rounding mode, floating-point
-environment and return values are applicable to all functions of this
-header</d:para>
-<d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
-<d:para>This function was defined in C99, and describe the handling of
-floating-point rounding and exceptions (overflow, zero-divide, etc.).</d:para>
-<d:para><d:emphasis role="bold">Exceptions</d:emphasis></d:para>
-<d:para>The <d:emphasis role="italic">divide-by-zero</d:emphasis> exception
-occurs when an operation on finite numbers produces infinity as exact
-answer.</d:para>
-<d:para>The <d:emphasis role="italic">overflow</d:emphasis> exception occurs
-when a result has to be represented as a floating-point number, but has (much)
-larger absolute value than the largest (finite) floating-point number that is
-representable.</d:para>
-<d:para>The <d:emphasis role="italic">underflow</d:emphasis> exception occurs
-when a result has to be represented as a floating-point number, but has smaller
-absolute value than the smallest positive normalized floating-point number (and
-would lose much accuracy when represented as a denormalized number).</d:para>
-<d:para>The <d:emphasis role="italic">inexact</d:emphasis> exception occurs
-when the rounded result of an operation is not equal to the infinite precision
-result. It may occur whenever <d:emphasis role="italic">overflow</d:emphasis>
-or <d:emphasis role="italic">underflow</d:emphasis> occurs.</d:para>
-<d:para>The <d:emphasis role="italic">invalid</d:emphasis> exception occurs
-when there is no well-defined result for an operation, as for 0/0 or infinity -
-infinity or sqrt(-1).</d:para>
-<d:para><d:emphasis role="bold">Exception Handling</d:emphasis></d:para>
-<d:para>Exceptions are represented in two ways: as a single bit (exception
-present/absent), and these bits correspond in some implementation- defined way
-with bit positions in an integer, and also as an opaque structure that may
-contain more information about the exception (perhaps the code address where it
-occurred).</d:para>
-<d:para>Each of the macros <d:code>FE_DIVBYZERO, FE_INEXACT,  FE_INVALID,
-FE_OVERFLOW, FE_UNDERFLOW</d:code> is defined when the implementation supports
-handling of the corresponding exception, and if so then defines the
-corresponding bit(s), so that one can call exception handling functions, for
-example, using the integer argument
-<d:code>FE_OVERFLOW|FE_UNDERFLOW</d:code>. Other exceptions may be
-supported. The macro <d:code>FE_ALL_EXCEPT</d:code> is the bitwise OR of all
-bits corresponding to supported exceptions.</d:para>
-<d:para>The <d:code>feclearexcept()</d:code> function clears the supported
-exceptions represented by the bits in its argument.</d:para>
-<d:para>The <d:code>fegetexceptflag()</d:code> function stores a representation
-of the state of the exception flags represented by the argument excepts in the
-opaque object <d:code>*flagp</d:code>.</d:para>
-<d:para>The <d:code>feraiseexcept()</d:code> function raises the supported
-exceptions represented by the bits in excepts.</d:para>
-<d:para>The <d:code>fesetexceptflag()</d:code> function sets the complete
-status for the exceptions represented by excepts to the value
-<d:code>*flagp</d:code>. This value must have been obtained by an earlier call
-of <d:code>fegetexceptflag()</d:code> with a last argument that contained all
-bits in excepts.</d:para>
-<d:para>The <d:code>fetestexcept()</d:code> function returns a word in which
-the bits are set that were set in the argument excepts and for which the
-corresponding exception is currently set.</d:para>
-<d:para><d:emphasis role="bold">Rounding Mode</d:emphasis></d:para>
-<d:para>The rounding mode determines how the result of floating-point
-operations is treated when the result cannot be exactly represented in the
-significand. Various rounding modes may be provided: round to nearest (the
-default), round up (toward positive infinity), round down (toward negative
-infinity), and round toward zero.</d:para>
-<d:para>Each of the macros <d:code>FE_TONEAREST, FE_UPWARD,
-FE_DOWNWARD</d:code> and <d:code>FE_TOWARDZERO</d:code> is defined when the
-implementation supports getting and setting the corresponding rounding
-direction.</d:para>
-<d:para>The <d:code>fegetround()</d:code> function returns the macro
-corresponding to the current rounding mode.</d:para>
-<d:para>The <d:code>fesetround()</d:code> function sets the rounding mode as
-specified by its argument and returns zero when it was successful.</d:para>
-<d:para>C99 and POSIX.1-2008 specify an identifier,
-<d:code>FLT_ROUNDS</d:code>, defined in &amp;lt;float.h>, which indicates the
-implementation-defined rounding behavior for floating-point addition. This
+argument is zero or if all the specified exceptions were addition. This
 identifier has one of the following values:</d:para>
-<d:blockquote><d:para>-1 The rounding mode is not determinable.</d:para>
-<d:para>1 Rounding is toward nearest number.</d:para>
-<d:para>2 Rounding is toward positive infinity.</d:para>
-<d:para>3 Rounding is toward negative infinity.</d:para>
-</d:blockquote>
-<d:para>Other values represent machine-dependent, nonstandard rounding
-modes.</d:para>
-<d:para>The value of <d:code>FLT_ROUNDS</d:code> should reflect the current
-rounding mode as set by <d:code>fesetround()</d:code>.</d:para>
-<d:para><d:emphasis role="bold">Floating-point
-environment</d:emphasis></d:para>
-<d:para>The entire floating-point environment, including control modes and
-status flags, can be handled as one opaque object, of type
-<d:code>fenv_t</d:code>. The default environment is denoted by
-<d:code>FE_DFL_ENV</d:code> (of type <d:code>const fenv_t *</d:code>). This is
-the environment setup at program start and it is defined by ISO C to have round
-to nearest, all exceptions cleared and a nonstop (continue on exceptions)
-mode.</d:para>
-<d:para>The <d:code>fegetenv()</d:code> function saves the current
-floating-point environment in the object <d:code>*envp</d:code>.</d:para>
-<d:para>The <d:code>feholdexcept()</d:code> function does the same, then clears
-all exception flags, and sets a nonstop (continue on exceptions) mode, if
-available. It returns zero when successful.</d:para>
-<d:para>The <d:code>fesetenv()</d:code> function restores the floating-point
-environment from the object <d:code>*envp</d:code>. This object must be known
-to be valid, for example, the result of a call to <d:code>fegetenv()</d:code>
-or <d:code>feholdexcept()</d:code> or equal to
-<d:code>FE_DFL_ENV</d:code>. This call does not raise exceptions.</d:para>
-<d:para>The <d:code>feupdateenv()</d:code> function installs the floating-point
-environment represented by the object <d:code>*envp</d:code>, except that
-currently raised exceptions are not cleared. After calling this function, the
-raised exceptions will be a bitwise OR of those previously set with those in
-<d:code>*envp</d:code>. As before, the object <d:code>*envp</d:code> must be
-known to be valid.</d:para>
-<d:para><d:emphasis role="bold">RETURN VALUE</d:emphasis></d:para>
-<d:para>These functions return zero on success and nonzero if an error
-occurred.</d:para>
   </d:sect2>
   <d:sect2>
     <d:title>The fegetexceptflag function</d:title>
@@ -294,7 +238,7 @@ int fegetexceptflag(fexcept_t *flagp, int excepts);</d:programlisting>
 <d:para>The <d:code>fegetexceptflag</d:code> function attempts to store an
 implementation-defined representation of the states of the floating-point
 status flags indicated by the argument excepts in the object pointed to by the
-argument flagp.</d:para>
+argument <d:code>flagp</d:code>.</d:para>
 <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
 <d:para>The <d:code>fegetexceptflag</d:code> function returns zero if the
 representation was successfully stored. Otherwise, it returns a nonzero
@@ -315,8 +259,9 @@ specification in F.7.6 of specification is in the same
 spirit.</d:para></d:footnote> The order in which these floating-point
 exceptions are raised is unspecified, except as stated in F.7.6 of
 specification. Whether the feraiseexcept function additionally raises the
-"inexact" floating-point exception whenever it raises the "overflow" or
-"underflow" floating-point exception is implementation-defined.</d:para>
+<d:quote>inexact</d:quote> floating-point exception whenever it raises the
+<d:quote>overflow</d:quote> or 
+<d:quote>underflow</d:quote> floating-point exception is implementation-defined.</d:para>
 <d:para><d:emphasis role="bold">Return</d:emphasis></d:para>
 <d:para>The <d:code>feraiseexcept</d:code> function returns zero if the excepts
 argument is zero or if all the specified exceptions were successfully

@@ -183,8 +183,8 @@ char *strncat(char * restrict s1,
         <d:code>s1</d:code>.
       </d:para>
       <d:para>
-        <d:emphasis role="bold">Forward references:</d:emphasis> the
-        <d:code>strlen</d:code> function (7.24.6.3).
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="strlen" />.
       </d:para>
     </d:sect2>
   </d:sect1>
@@ -241,7 +241,7 @@ int strcmp(const char *s1, const char *s2);]]>
         pointed to by <d:code>s2</d:code>.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="strcoll">
       <d:title>The strcoll function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <string.h>
@@ -285,7 +285,7 @@ int strncmp(const char *s1, const char *s2, size_t n);]]>
         to by <d:code>s2</d:code>.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="strxfrm">
       <d:title>The strxfrm function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <string.h>
@@ -524,7 +524,7 @@ t = strtok(NULL, "?"); // t is a null pointer]]>
         </d:programlisting>
       </d:para>
       <d:para><d:emphasis role="bold">Forward references:</d:emphasis> The
-      <d:code>strtok_s</d:code> function (K.3.7.3.1).</d:para>
+      <d:code>strtok_s</d:code> function (&#xa7; iso.K.3.7.3.1).</d:para>
     </d:sect2>
   </d:sect1>
   <d:sect1>
@@ -548,7 +548,7 @@ void *memset(void *s, int c, size_t n);]]>
         <d:code>s</d:code>.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="strerror">
       <d:title>The strerror function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <string.h>
@@ -578,7 +578,7 @@ char *strerror(int errnum);]]>
         call to the <d:code>strerror</d:code> function.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="strlen">
       <d:title>The strlen function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <string.h>

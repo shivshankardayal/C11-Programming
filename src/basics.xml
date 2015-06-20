@@ -18,6 +18,9 @@
     refuse to listen to you no matter what you do. Therefore, it is very
     essential to understand these rules very clearly and correctly.</d:para>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>C character set</d:primary>
+      </d:indexterm>
       <title xmlns="http://docbook.org/ns/docbook">The C Character Set</title>
       <d:para>The following form the C character set you are allowed to use in
       it:</d:para>
@@ -31,6 +34,9 @@
       sequences. Given below is the table containing all trigraph
       sequences. Note that GNU coding standards advice against using trigraph
       sequences for portability reasons.
+      <d:indexterm>
+        <d:primary>trigraph sequences</d:primary>
+      </d:indexterm>
         <table
             xmlns="http://docbook.org/ns/docbook" frame="border" border="1" class="centered">
           <caption>Trigraph Sequence</caption>
@@ -80,6 +86,9 @@
       </d:para>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>C keywords</d:primary>
+      </d:indexterm>
       <title xmlns="http://docbook.org/ns/docbook">Keywords</title>
       <d:para>The following are reserved keywords for C programming language by
       C99 specification which you are not allows to use other than what they
@@ -157,6 +166,9 @@
         These keywords serve specific purpose. You will come to know
         about all of them as you progress through the book. Next we look at
         identifiers. Following keywords were added in C11 specification:
+        <d:indexterm>
+          <d:primary>C11 keywords</d:primary>
+        </d:indexterm>
         <table
           xmlns="http://docbook.org/ns/docbook" frame="void" class="dynamic"
           border="1">
@@ -179,6 +191,9 @@
       </d:para> 
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>identifiers</d:primary>
+      </d:indexterm>
       <title xmlns="http://docbook.org/ns/docbook">Identifers</title>
       <d:para>
         The names which we give to our variables are known as
@@ -203,7 +218,7 @@
       <d:para>Now is time for some programming. Let us revisit our first
       program and try to understand what it does. Here I am giving code once
       again for quick reference:</d:para> 
-      <d:programlisting role="CLexer" language="c">//My first program
+      <d:programlisting role="CLexer">//My first program
 /* Author: Shiv Shankar Dayal
    Description: This program does nothing.*/
 
@@ -374,6 +389,9 @@ name.</d:para>
 just seen only <d:code>int</d:code>. So onward to data types.</d:para>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>data types</d:primary>
+  </d:indexterm>
   <title xmlns="http://docbook.org/ns/docbook">Data Types</title>
   <d:para>
     C is a statically typed language that is every variable has a type
@@ -758,6 +776,9 @@ Size of long long is.....8</d:screen>
   types.
 </d:para>
 <d:sect2>
+  <d:indexterm>
+    <d:primary>integers</d:primary>
+  </d:indexterm>
   <d:title>Integers</d:title>
   <d:para>
     Integers are probably simplest to understand of all data types in C so I am
@@ -836,6 +857,9 @@ Size of long long is.....8</d:screen>
   </d:para>
 </d:sect2>
 <d:sect2>
+  <d:indexterm>
+    <d:primary>characters</d:primary>
+  </d:indexterm>
   <d:title>Characters</d:title>
   <d:para>
     A <d:code>char</d:code> is 1 byte i.e. 8 bits or <d:code>CHAR_BIT</d:code>
@@ -938,6 +962,9 @@ The sum of c1 and c2 as integers is 99.</d:screen>
 </d:para>
 </d:sect2>
 <d:sect2>
+  <d:indexterm>
+    <d:primary>floating types</d:primary>
+  </d:indexterm>
   <d:title>Floating Types</d:title>
   <d:para>
     Floating point representation is a lot more complicated in computers than
@@ -950,6 +977,10 @@ The sum of c1 and c2 as integers is 99.</d:screen>
     described in specification in (&#xa7; iso.5.2.4.2.2).
   </d:para>
   <d:para>
+    <d:indexterm>
+      <d:primary>representation</d:primary>
+      <d:secondary>of floating-point numbers</d:secondary>
+    </d:indexterm>
     A floating-point number is used to represent real-world fractional value
     which is a trade-off between range and accuracy because as I said in
     fractional binary numbers, a decimal fraction cannot represented in binary
@@ -1066,6 +1097,9 @@ You entered 3.400000 5.600000 7.800000</d:screen>
     _Complex</d:code> and <d:code>_Imaginary</d:code>.
   </d:para>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>boolean type</d:primary>
+    </d:indexterm>
     <d:title>Boolean Type</d:title>
     <d:para>
       Booleans were not there before C99 specification. It was introduced in
@@ -1113,6 +1147,9 @@ int main()
 <d:code>True</d:code> and <d:code>False</d:code> are identifiers.</d:para>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>complex type</d:primary>
+    </d:indexterm>
     <title xmlns="http://docbook.org/ns/docbook">Complex Types</title>
     <d:para>For complex types, there is a system header <d:code>complex.h</d:code> which
     internally includes various other headers. However I am giving you the summary here. There
@@ -1374,6 +1411,12 @@ for octals and hexes. Have a look at headers and try to decipher them.</d:para>
 </d:sect2>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>void type</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>enum types</d:primary>
+  </d:indexterm>
   <title xmlns="http://docbook.org/ns/docbook">void and enum Types</title>
   <d:para>There are these two types remianing. void type comprises an empty set of values; it is
   an incomplete type that cannot be completed. You cannot declare an array of
@@ -1407,6 +1450,12 @@ int main()
 alpha = -5, beta = -4, gamma=-3, tehta=4, delta=5, omega=6</d:screen>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>constants</d:primary>
+  </d:indexterm>
+  <d:indexterm>
+    <d:primary>literal</d:primary>
+  </d:indexterm>
   <title xmlns="http://docbook.org/ns/docbook">Constants</title>
   <d:para>We have seen some variables now let us see some constants. There are five categories
   of constants: character, integer, floating-point, string, and enumeration constant. We will
@@ -1502,6 +1551,9 @@ There is also something called escape sequences and it is worth to have a look a
 them.</d:para>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>escape sequences</d:primary>
+  </d:indexterm>
   <title xmlns="http://docbook.org/ns/docbook">Escape Sequences</title>
   <d:para>All escape sequences start with a leading <d:code>\</d:code> . Following table shows
   them:<table xmlns="http://docbook.org/ns/docbook" frame="border" class="centered"

@@ -7,11 +7,25 @@
     <d:para>The header &lt;errno.h&gt; defines several macros, all relating to
     the reporting of error conditions.</d:para>
     <d:para>The macros are:</d:para>
-    <d:blockquote><d:para>EDOM EILSEQ ERANGE</d:para></d:blockquote>
+    <d:indexterm>
+      <d:primary>EDOM</d:primary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>EILSEQ</d:primary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>ERANGE</d:primary>
+    </d:indexterm>
+    <d:blockquote><d:para><d:code>EDOM</d:code></d:para></d:blockquote>
+    <d:blockquote><d:para><d:code>EILSEQ</d:code></d:para></d:blockquote>
+    <d:blockquote><d:para><d:code>ERANGE</d:code></d:para></d:blockquote>
     <d:para>which expand to integer constant expressions with type
     <d:code>int</d:code>, distinct positive values, and which are suitable for
     use in <d:code>#if</d:code> preprocessing directives; and
-    <d:code>errno</d:code> which expands to a modifiable
+    <d:blockquote>
+      <d:para><d:code>errno</d:code></d:para>
+    </d:blockquote>
+     which expands to a modifiable
     lvalue<d:footnote><d:para>The macro errno need not be the identifier of an
     object. It might expand to a modifiable lvalue resulting from a function
     call (for example, <d:code>*errno()</d:code>).</d:para></d:footnote>
@@ -34,6 +48,8 @@
     <d:code>errno</d:code> is not documented in the description of the function
     in this International Standard.</d:para>
     <d:para>Additional macro definitions, beginning with <d:code>E</d:code> and
-    a digit or <d:code>E</d:code> and an uppercase letter, may also be
+    a digit or <d:code>E</d:code> and an uppercase
+    letter,<d:footnote><d:para>See <d:quote>future library directions</d:quote>
+    (&#xa7; iso.7.31.3).</d:para></d:footnote> may also be
     specified by the implementation.</d:para>
 </d:chapter>

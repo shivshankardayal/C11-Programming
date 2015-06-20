@@ -7,7 +7,8 @@
     <d:para>
       The header <d:code>&lt;stdatomic.h&gt;</d:code> defines several macros and
       declares several types and functions for performing atomic operations on
-      data shared between threads.
+      data shared between threads.<d:footnote><d:para>See <d:quote>future library
+      direction</d:quote> (&#xa7; iso.7.31.8).</d:para></d:footnote>
     </d:para>
     <d:para>
       Implementations that define the macro
@@ -147,8 +148,9 @@ void atomic_init(volatile A *obj, C value);
     <d:para>
       The enumerated type <d:code>memory_order specifies</d:code> the detailed
       regular (non-atomic) memory synchronization operations as defined in
-      (&#xa7; iso5.1.2.4 and may provide for operation ordering. Its
-      enumeration constants are as follows:
+      (&#xa7; iso.5.1.2.4 and may provide for operation ordering. Its
+      enumeration constants are as follows:<d:footnote><d:para>See <d:quote>future
+      library directions</d:quote> (&#xa7; iso.7.31.8).</d:para></d:footnote>
     </d:para>
     <d:blockquote>
       <d:para><d:code>memory_order_relaxed</d:code></d:para>

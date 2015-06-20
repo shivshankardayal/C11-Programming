@@ -18,8 +18,8 @@
   -->
 
   <!-- Use the official stylesheet distro -->
-  <xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/html/chunk.xsl" />
-  <!--xsl:import href="/opt/local//share/xsl/docbook-xsl-ns/html/chunk.xsl" /-->
+  <!--<xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/html/chunk.xsl" /-->
+  <xsl:import href="/opt/local//share/xsl/docbook-xsl-ns/html/chunk.xsl" />
 
   <!-- The location of the highlighting configuration -->
   <!--<xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/highlighting/common.xsl" />
@@ -29,6 +29,7 @@
     <xsl:copy-of select="document('analytics.js', /)"/>
   </xsl:template>
   <xsl:template name="user.footer.navigation">
+    <br/>
     <p style="text-align: center;">&#xa9; 2010, 2015 Shiv S. Dayal. <a href="http://10hash.com">10hash.com</a>.
     GNU FDL license is applicable where not stated.</p>
   </xsl:template>

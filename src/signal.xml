@@ -60,7 +60,8 @@ that signal will occur. If the value of func is <d:code>SIG_IGN</d:code>, the
 signal will be ignored. Otherwise, func shall point to a function to be called
 when that signal occurs. An invocation of such a function because of a signal,
 or (recursively) of any further functions called by that invocation (other than
-functions in the standard library), is called a signal handler.</d:para>
+functions in the standard library), is called a <d:emphasis role="italic">signal
+handler</d:emphasis>.</d:para>
 <d:para>When a signal occurs and <d:code>func</d:code> points to a function, it
 is implementation-defined whether the equivalent of <d:code>signal(sig,
 SIG_DFL);</d:code> is executed or the implementation prevents some
@@ -104,10 +105,10 @@ returns the value of <d:code>func</d:code> for the most recent successful call
 to <d:code>signal</d:code> for the specified signal
 <d:code>sig</d:code>. Otherwise, a value of <d:code>SIG_ERR</d:code> is
 returned and a positive value is stored in <d:code>errno</d:code>.</d:para>
-<d:para><d:emphasis role="bold">Forward references:</d:emphasis> the
-<d:code>abort</d:code> function (The abort function), the <d:code>exit</d:code>
-function (The exit function), the <d:code>_Exit</d:code> function (The _Exit
-function).</d:para>
+<d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+linkend="abort" />, <d:xref linkend="exit" />, <d:xref linkend="_Exit" />,
+<d:xref linkend="at_quick_exit" />.
+</d:para>
     </d:sect2>
   </d:sect1>
   <d:sect1>

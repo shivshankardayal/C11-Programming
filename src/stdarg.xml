@@ -9,7 +9,7 @@
   and types are not known to the called function when it is
   translated.</d:para>
   <d:para>A function may be called with a variable number of arguments of
-  varying types. As described in Function definitions, its parameter list
+  varying types. As described in &#xa7; iso.6.9.1, its parameter list
   contains one or more parameters. The rightmost parameter plays a special role
   in the access mechanism, and will be designated <d:code>parmN</d:code> in
   this description.</d:para>

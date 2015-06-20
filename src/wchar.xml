@@ -1,6 +1,6 @@
 <d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
            xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
-           xmlns:mml="http://www.w3.org/1998/Math/MathML">
+           xmlns:mml="http://www.w3.org/1998/Math/MathML" id="wchar">
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
   <?dbhtml filename="wchar/index.html" ?>
   <d:title>Extended multibyte and wide character utilities
@@ -14,7 +14,7 @@
     (both described in (&#xa7; iso.7.19));
   </d:para>
   <d:blockquote>
-    <d:para><d:code>mbstate_t</d:code></d:para>
+    <d:para id="mbstate_t"><d:code>mbstate_t</d:code></d:para>
   </d:blockquote>
   <d:para>
     which is a complete object type other than an array type that can hold the
@@ -95,7 +95,7 @@
     described in this subclause causes copying to take place between objects
     that overlap, the behavior is undefined.
   </d:para>
-  <d:sect1>
+  <d:sect1 id="f_wc_io_func">
     <d:title>Formatted wide character input/output functions</d:title>
     <d:para>
       The formatted wide character input/output functions shall behave as if
@@ -573,9 +573,8 @@ int day, hour, min;
 fwprintf(stdout, L"%ls, %ls %d, %.2d:%.2d\n",
          weekday, month, day, hour, min);
 fwprintf(stdout, L"pi = %.5f\n", 4 * atan(1.0));]]></d:programlisting>
-        <d:emphasis role="bold">Forward references:</d:emphasis> the
-        <d:code>btowc</d:code> function (7.29.6.1.1), the
-        <d:code>mbrtowc</d:code> function (7.29.6.3.2).
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="btowc" />, <d:xref linkend="mbrtowc" />.
       </d:para>
     </d:sect2>
     <d:sect2>
@@ -956,12 +955,9 @@ fwscanf(stdin, L"%2d%f%*d %lf", &i, &x, &y);]]></d:programlisting>
         stream will be <d:code>a</d:code>.
       </d:para>
       <d:para>
-        <d:emphasis role="bold">Forward references:</d:emphasis> the
-        <d:code>wcstod, 
-        wcstof</d:code> and <d:code>wcstold</d:code> functions(&#xa7;
-        7.29.4.1.1),the <d:code>wcstol, wcstoll, wcstoul</d:code> and
-        <d:code>wcstoull</d:code> functions (&#xa7; 7.29.4.1.2), the
-        <d:code>wcrtomb</d:code> function (&#xa7; 7.29.6.3.3).
+        <d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="wstr_to_decimal" />, <d:xref linkend="wstr_to_long" />,
+        <d:xref linkend="wcrtomb" />.
       </d:para>
     </d:sect2>
     <d:sect2>
@@ -1238,7 +1234,7 @@ int wscanf(const wchar_t * restrict format, ...);]]></d:programlisting>
   </d:sect1>
   <d:sect1>
     <d:title>Wide character input/output functions</d:title>
-    <d:sect2>
+    <d:sect2 id="fgetwc">
       <d:title>The fgetwc function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
@@ -1299,8 +1295,8 @@ wchar_t *fgetws(wchar_t * restrict s,
         returned.
       </d:para>
     </d:sect2>
-    <d:sect2>
-      <d:title>The fgetwc function</d:title>
+    <d:sect2 id="fputwc">
+      <d:title>The fputwc function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
 #include <wchar.h>
@@ -1346,7 +1342,7 @@ int fputws(const wchar_t * restrict s,
         value.
       </d:para>
     </d:sect2>
-    <d:sect2>
+    <d:sect2 id="fwide">
       <d:title>The fwide function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
@@ -1511,7 +1507,7 @@ wint_t ungetwc(wint_t c, FILE *stream);]]></d:programlisting>
     </d:para>
     <d:sect2>
       <d:title>Wide string numeric conversion functions</d:title>
-      <d:sect3>
+      <d:sect3 id="wstr_to_decimal">
         <d:title>The wcstod, wcstof and wcstold functions</d:title>
         <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
         <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
@@ -1690,7 +1686,7 @@ long double wcstold(const wchar_t * restrict nptr,
           implementation-defined.
         </d:para>
       </d:sect3>
-      <d:sect3>
+      <d:sect3 id="wstr_to_long">
         <d:title>The wcstol, wcstoll, wcstoul and wcstoull functions</d:title>
         <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
         <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
@@ -2357,12 +2353,13 @@ size_t wcsftime(wchar_t * restrict s,
       functions useful for conversion between multibyte characters and wide
       characters.
     </d:para>
-    <d:para>
+    <d:para id="conversion_state">
       Most of the following functions &amp;dash; those that are listed as
       <d:quote>restartable</d:quote>, &#xa7; iso.7.29.6.3 and &#xa7;
       iso.7.29.6.4 &amp;dash; take as a last argument a pointer to an object of
       type <d:code>mbstate_t</d:code> that is used to describe the current
-      <d:emphasis role="italic">conversion state</d:emphasis> from a particular
+      <d:emphasis role="italic">conversion
+      state</d:emphasis> from a particular
       multibyte character sequence to a wide character sequence (or the
       reverse) under the rules of a particular setting for the
       <d:code>LC_CTYPE</d:code> category of the current locale.
@@ -2395,7 +2392,7 @@ size_t wcsftime(wchar_t * restrict s,
     </d:para>
     <d:sect2>
       <d:title>Single-byte/wide character conversion function</d:title>
-      <d:sect3>
+      <d:sect3 id="btowc">
         <d:title>The btowc function</d:title>
         <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
         <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
@@ -2458,38 +2455,306 @@ int mbsinit(const mbstate_t *ps);]]></d:programlisting>
           describes an initial conversion state; otherwise, it returns zero.
         </d:para>
       </d:sect3>
-      <d:sect2>
-        <d:title>Restartable multibyte/wide character conversion
-        functions</d:title>
-        <d:para>
-          These functions differ from the corresponding multibyte character
-          functions of &#xa7; iso.7.22.7 (<d:code>mblen, mbtowc</d:code> and
-          <d:code>wctomb</d:code>) in that they have an extra parameter,
-          <d:code>ps</d:code>, of type pointer to <d:code>mbstate_t</d:code>
-          that points to an object that can completely describe the current
-          conversion state of the associated multibyte character sequence. If
-          <d:code>ps</d:code> is a null pointer, each function uses its own
-          internal <d:code>mbstate_t</d:code> object instead, which is
-          initialized at program startup to the initial conversion state; the
-          functions are not required to avoid data races with other calls to
-          the same function in this case. The implementation behaves as if no
-          library function calls these functions with a null pointer for
-          <d:code>ps</d:code>.
-        </d:para>
-        <d:para>
-          Also unlike their corresponding functions, the return value does not
-          represent whether the encoding is state-dependent.
-        </d:para>
-        <d:sect3>
-          <d:title>The mbrlen function</d:title>
-          <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
-          <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Restartable multibyte/wide character conversion
+      functions</d:title>
+      <d:para>
+        These functions differ from the corresponding multibyte character
+        functions of &#xa7; iso.7.22.7 (<d:code>mblen, mbtowc</d:code> and
+        <d:code>wctomb</d:code>) in that they have an extra parameter,
+        <d:code>ps</d:code>, of type pointer to <d:code>mbstate_t</d:code>
+        that points to an object that can completely describe the current
+        conversion state of the associated multibyte character sequence. If
+        <d:code>ps</d:code> is a null pointer, each function uses its own
+        internal <d:code>mbstate_t</d:code> object instead, which is
+        initialized at program startup to the initial conversion state; the
+        functions are not required to avoid data races with other calls to
+        the same function in this case. The implementation behaves as if no
+        library function calls these functions with a null pointer for
+        <d:code>ps</d:code>.
+      </d:para>
+      <d:para>
+        Also unlike their corresponding functions, the return value does not
+        represent whether the encoding is state-dependent.
+      </d:para>
+      <d:sect3>
+        <d:title>The mbrlen function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
 size_t mbrlen(const char * restrict s,
               size_t n,
               mbstate_t * restrict ps);]]></d:programlisting>
-          
-        </d:sect3>
-      </d:sect2>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>mbrlen</d:code> function is equivalent to the call:
+          <d:blockquote>
+            <d:para><d:code>mbrtowc(NULL, s, n, ps != NULL ? ps :
+            &amp;internal)</d:code></d:para>
+          </d:blockquote>
+        </d:para>
+        <d:para>
+          where <d:code>internal</d:code> is the <d:code>mbstate_t</d:code>
+          object for the <d:code>mbrlen</d:code> function, except that the
+          expression designated by <d:code>ps</d:code> is evaluated only
+          once.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>mbrlen</d:code> function returns a value between zero
+          and <d:code>n</d:code>, inclusive, <d:code>(size_t)(-2)</d:code>,
+          or <d:code>(size_t)(-1)</d:code>.
+        </d:para>
+        <d:para><d:emphasis role="bold">Forward references:</d:emphasis> <d:xref
+        linkend="mbrtowc" />.</d:para>
+      </d:sect3>
+      <d:sect3 id="mbrtowc">
+        <d:title>The mbrtowc function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+size_t mbrtowc(wchar_t * restrict pwc,
+               const char * restrict s,
+               size_t n,
+               mbstate_t * restrict ps);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          If <d:code>s</d:code> is a null pointer, the
+          <d:code>mbrtowc</d:code> function is equivalent to the call:
+        </d:para>
+        <d:blockquote>
+          <d:para><d:code>mbrtowc(NULL, "", 1, ps)</d:code></d:para>
+        </d:blockquote>
+        <d:para>
+          In this case, the values of the parameters <d:code>pwc</d:code> and
+          <d:code>n</d:code> are ignored.
+        </d:para>
+        <d:para>
+          If <d:code>s</d:code> is not a null pointer, the
+          <d:code>mbrtowc</d:code> function inspects at most
+          <d:code>n</d:code> bytes beginning with the byte pointed to by
+          <d:code>s</d:code> to determine the number of bytes needed to
+          complete the next multibyte character (including any shift
+          sequences). If the function determines that the next multibyte
+          character is complete and valid, it determines the value of the
+          corresponding wide character and then, if <d:code>pwc</d:code> is
+          not a null pointer, stores that value in the object pointed to by
+          <d:code>pwc</d:code>. If the corresponding wide character is the
+          null wide character, the resulting state described is the initial
+          conversion state.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>mbrtowc</d:code> function returns the first of the
+          following that applies (given the current conversion state):
+        </d:para>
+        <informaltable
+            xmlns="http://docbook.org/ns/docbook" width="100%"
+            class="dynamic" frame="border" border="1">
+          <colgroup width="1*"/>
+	      <colgroup width="5*" align="left"/>
+	      <tbody>
+            <tr>
+              <td>0</td>
+              <td>if the next <d:code>n</d:code> or fewer bytes complete the
+              multibyte character that corresponds to the null wide character
+              (which is the value stored).</td>
+            </tr>
+            <tr>
+              <td><d:emphasis role="italic">between</d:emphasis> 1
+              <d:emphasis role="italic">and</d:emphasis> <d:code>n</d:code>
+              <d:emphasis role="italic">inclusive</d:emphasis></td>
+              <td>if the next <d:code>n</d:code> or fewer bytes complete a
+              valid multibyte character (which is the value stored); the
+              value returned is the number of bytes that complete the
+              multibyte character.</td>
+            </tr>
+            <tr>
+              <td><d:code>(size_t)(-2)</d:code></td>
+              <td>if the next <d:code>n</d:code> bytes contribute to an
+              incomplete (but potentially valid) multibyte character, and all
+              n bytes have been processed (no value is
+              stored).<d:footnote><d:para>When <d:code>n</d:code> has at
+              least the value of the <d:code>MB_CUR_MAX</d:code> macro, this
+              case can only occur if <d:code>s</d:code> points at a sequence
+              of redundant shift sequences (for implementations with
+              state-dependent encodings).</d:para></d:footnote></td>
+            </tr>
+            <tr>
+              <td><d:code>(size_t)(-1)</d:code></td>
+              <td>if an encoding error occurs, in which case the next n or
+              fewer bytes do not contribute to a complete and valid multibyte
+              character (no value is stored); the value of the macro
+              <d:code>EILSEQ</d:code> is stored in <d:code>errno</d:code>,
+              and the conversion state is unspecified.</td>
+            </tr>
+          </tbody>
+        </informaltable>
+      </d:sect3>
+      <d:sect3 id="wcrtomb">
+        <d:title>The wcrtomb function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+size_t wcrtomb(char * restrict s,
+               wchar_t wc,
+               mbstate_t * restrict ps);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          If <d:code>s</d:code> is a null pointer, the
+          <d:code>wcrtomb</d:code> function is equivalent to the call
+        </d:para>
+        <d:blockquote>
+          <d:para><d:code>wcrtomb(buf, L'\0', ps)</d:code></d:para>
+        </d:blockquote>
+        <d:para>where <d:code>buf</d:code> is an internal buffer.</d:para>
+        <d:para>
+          If <d:code>s</d:code> is not a null pointer, the
+          <d:code>wcrtomb</d:code> function determines the number of bytes
+          needed to represent the multibyte character that corresponds to the
+          wide character given by <d:code>wc</d:code> (including any shift
+          sequences), and stores the multibyte character representation in
+          the array whose first element is pointed to by
+          <d:code>s</d:code>. At most <d:code>MB_CUR_MAX</d:code> bytes are
+          stored. If <d:code>wc</d:code> is a null wide character, a null
+          byte is stored, preceded by any shift sequence needed to restore
+          the initial shift state; the resulting state described is the
+          initial conversion state.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcrtomb</d:code> function returns the number of bytes
+          stored in the array object (including any shift sequences). When
+          <d:code>wc</d:code> is not a valid wide character, an encoding
+          error occurs: the function stores the value of the macro
+          <d:code>EILSEQ</d:code> in <d:code>errno</d:code> and returns
+          <d:code>(size_t)(-1)</d:code>; the conversion state is
+          unspecified.
+        </d:para>
+      </d:sect3>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Restartable multibyte/wide string conversion functions</d:title>
+      <d:para>
+        These functions differ from the corresponding multibyte string
+        functions of &#xa7; iso.7.22.8 (<d:code>mbstowcs</d:code> and
+        <d:code>wcstombs</d:code>) in that they have an extra parameter,
+        <d:code>ps</d:code>, of type pointer to <d:code>mbstate_t</d:code> that
+        points to an object that can completely describe the current conversion
+        state of the associated multibyte character sequence. If
+        <d:code>ps</d:code> is a null pointer, each function uses its own
+        internal <d:code>mbstate_t</d:code> object instead, which is
+        initialized at program startup to the initial conversion state; the
+        functions are not required to avoid data races with other calls to the
+        same function in this case. The implementation behaves as if no library
+        function calls these functions with a null pointer for
+        <d:code>ps</d:code>.
+      </d:para>
+      <d:para>
+        Also unlike their corresponding functions, the conversion source
+        parameter, <d:code>src</d:code>, has a pointer-to-pointer type. When
+        the function is storing the results of conversions (that is, when
+        <d:code>dst</d:code> is not a null pointer), the pointer object pointed
+        to by this parameter is updated to reflect the amount of the source
+        processed by that invocation.
+      </d:para>
+      <d:sect3>
+        <d:title>The mbsrtowcs function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+size_t mbsrtowcs(wchar_t * restrict dst,
+                 const char ** restrict src,
+                 size_t len,
+                 mbstate_t * restrict ps);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>mbsrtowcs</d:code> function converts a sequence of
+          multibyte characters that begins in the conversion state described by
+          the object pointed to by <d:code>ps</d:code>, from the array
+          indirectly pointed to by <d:code>src</d:code> into a sequence of
+          corresponding wide characters. If <d:code>dst</d:code> is not a null
+          pointer, the converted characters are stored into the array pointed
+          to by <d:code>dst</d:code>. Conversion continues up to and including
+          a terminating null character, which is also stored. Conversion stops
+          earlier in two cases: when a sequence of bytes is encountered that
+          does not form a valid multibyte character, or (if
+          <d:code>dst</d:code> is not a null pointer) when <d:code>len</d:code>
+          wide characters have been stored into the array pointed to by
+          <d:code>dst</d:code>.<d:footnote><d:para>Thus, the value of
+          <d:code>len</d:code> is ignored if <d:code>dst</d:code> is a null
+          pointer.</d:para></d:footnote> Each conversion takes place as if by a
+          call to the <d:code>mbrtowc</d:code> function.
+        </d:para>
+        <d:para>
+          If <d:code>dst</d:code> is not a null pointer, the pointer object
+          pointed to by <d:code>src</d:code> is assigned either a null pointer
+          (if conversion stopped due to reaching a terminating null character)
+          or the address just past the last multibyte character converted (if
+          any). If conversion stopped due to reaching a terminating null
+          character and if <d:code>dst</d:code> is not a null pointer, the
+          resulting state described is the initial conversion state.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          If the input conversion encounters a sequence of bytes that do not
+          form a valid multibyte character, an encoding error occurs: the
+          <d:code>mbsrtowcs</d:code> function stores the value of the macro
+          <d:code>EILSEQ</d:code> in <d:code>errno</d:code> and returns
+          <d:code>(size_t)(-1)</d:code>; the conversion state is
+          unspecified. Otherwise, it returns the number of multibyte characters
+          successfully converted, not including the terminating null character
+          (if any).
+        </d:para>
+      </d:sect3>
+      <d:sect3>
+        <d:title>The wcsrtombs function</d:title>
+        <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <wchar.h>
+size_t wcsrtombs(char * restrict dst,
+                 const wchar_t ** restrict src,
+                 size_t len,
+                 mbstate_t * restrict ps);]]></d:programlisting>
+        <d:para><d:emphasis role="bold">Description</d:emphasis></d:para>
+        <d:para>
+          The <d:code>wcsrtombs</d:code> function converts a sequence of wide
+          characters from the array indirectly pointed to by
+          <d:code>src</d:code> into a sequence of corresponding multibyte
+          characters that begins in the conversion state described by the
+          object pointed to by <d:code>ps</d:code>. If <d:code>dst</d:code> is
+          not a null pointer, the converted characters are then stored into the
+          array pointed to by <d:code>dst</d:code>. Conversion continues up to
+          and including a terminating null wide character, which is also
+          stored. Conversion stops earlier in two cases: when a wide character
+          is reached that does not correspond to a valid multibyte character,
+          or (if <d:code>dst</d:code> is not a null pointer) when the next
+          multibyte character would exceed the limit of <d:code>len</d:code>
+          total bytes to be stored into the array pointed to by
+          <d:code>dst</d:code>. Each conversion takes place as if by a call to
+          the <d:code>wcrtomb</d:code> function.<d:footnote><d:para>If
+          conversion stops because a terminating null wide character has been
+          reached, the bytes stored include those necessary to reach the
+          initial shift state immediately before the null
+          byte.</d:para></d:footnote>
+        </d:para>
+        <d:para>
+          If <d:code>dst</d:code> is not a null pointer, the pointer object
+          pointed to by <d:code>src</d:code> is assigned either a null pointer
+          (if conversion stopped due to reaching a terminating null wide
+          character) or the address just past the last wide character converted
+          (if any). If conversion stopped due to reaching a terminating null
+          wide character, the resulting state described is the initial
+          conversion state.
+        </d:para>
+        <d:para><d:emphasis role="bold">Returns</d:emphasis></d:para>
+        <d:para>
+          If conversion stops because a wide character is reached that does not
+          correspond to a valid multibyte character, an encoding error occurs:
+          the <d:code>wcsrtombs</d:code> function stores the value of the macro
+          <d:code>EILSEQ</d:code> in <d:code>errno</d:code> and returns
+          <d:code>(size_t)(-1)</d:code>; the conversion state is
+          unspecified. Otherwise, it returns the number of bytes in the
+          resulting multibyte character sequence, not including the terminating
+          null character (if any).
+        </d:para>
+      </d:sect3>
     </d:sect2>
   </d:sect1>
 </d:chapter>

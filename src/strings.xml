@@ -4,6 +4,9 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="strings/index.html" ?>
   <d:title>Strings</d:title>
+  <d:indexterm>
+    <d:primary>strings</d:primary>
+  </d:indexterm>
   <d:para>
     C has intgral types like <d:code>char, int, long</d:code> and <d:code>long
     long</d:code>, floating-point types like <d:code>float</d:code> and
@@ -97,6 +100,12 @@ int main()
   <d:sect1>
     <d:title>Useful Functions</d:title>
     <d:sect2>
+      <d:indexterm>
+        <d:primary>strlen function</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>strnlen function</d:primary>
+      </d:indexterm>
       <d:title>strlen and strnlen Functions</d:title>
       <d:para>
         One of the most common operations is to know length of the string
@@ -204,6 +213,12 @@ int main()
       </d:programlisting>      
     </d:sect2>
     <d:sect2>
+      <d:indexterm>
+        <d:primary>strcpy function</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>strncpy function</d:primary>
+      </d:indexterm>
       <d:title>strcpy and strncpy Functions</d:title>
       <d:para>
         Another important operation is copying one string to another. For this
@@ -362,6 +377,12 @@ world
       </d:screen>      
     </d:sect2>
     <d:sect2>
+      <d:indexterm>
+        <d:primary>strcat function</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>strncat function</d:primary>
+      </d:indexterm>
       <d:title>strcat and strncat Functions</d:title>
       <d:para>
         Some high level languages like C++, Java, Python use operator
@@ -507,7 +528,13 @@ int main()
       </d:programlisting>
     </d:sect2>
     <d:sect2>
-      <d:title>trcmp and strncmp Functions</d:title>
+      <d:indexterm>
+        <d:primary>strcmp function</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>strncmp function</d:primary>
+      </d:indexterm>
+      <d:title>strcmp and strncmp Functions</d:title>
       <d:para>
         There are very frequent requirements for comparison of two values when
         programming. Integers and characters can be compared easily. Floats can
@@ -624,6 +651,15 @@ int main()
       </d:screen>      
     </d:sect2>
     <d:sect2>
+      <d:indexterm>
+        <d:primary>strstr function</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>strchr function</d:primary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>strrchr function</d:primary>
+      </d:indexterm>
       <d:title>strstr, strchr and strrchr Functions</d:title>
       <d:para>
         Many times we want to find whether a particular character is in string
@@ -770,6 +806,9 @@ int main()
       </d:programlisting>      
     </d:sect2>
     <d:sect2>
+      <d:indexterm>
+        <d:primary>strerror function</d:primary>
+      </d:indexterm>
       <d:title>strerror Function</d:title>
       <d:para>
         <d:code>strerror</d:code> funciton maps an integer to error
@@ -929,6 +968,9 @@ int main()
 134 Unknown error 134
       </d:screen>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>strtok function</d:primary>
+        </d:indexterm>
         <d:title>strtok Function</d:title>
         <d:para>
           There are times when we need to split a string for a set of
