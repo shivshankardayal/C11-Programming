@@ -463,4 +463,189 @@ unions heavily.</d:para>
 <d:para><d:code>return</d:code> statement is used to return from
 function. Optionally you can return a value.</d:para>
       </d:sect1>
-    </d:chapter>
+  <d:sect1>
+    <d:title>goto statement</d:title>
+    <d:para>
+      <d:code>goto</d:code> statement allows you to jump to a label within a
+      function unconditionally. This leads to arbitrary control flow and in a
+      big function you
+      can loose track where the code is leading you to. In fact many coding
+      standards forbid the usage of <d:code>goto</d:code> statement. Sometimes
+      you can use to break out of several level of nested loops but you can use
+      certain techniques to come out of nested loops to break out of
+      them. Consider the following program:
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  int i = 0;
+  
+  goto EXIT;
+
+  printf("Will not be printed\n");
+  
+EXIT:
+  printf("This is where goto will lead you to.\n");
+
+  return 0;
+}]]>
+      </d:programlisting>
+      and the output is:
+    </d:para>
+    <d:screen>This is where goto will lead you to.
+    </d:screen>
+    <d:para>
+      One of the usage of <d:code>goto</d:code> is to simulate the
+      functionality of loops. That is easy to understand because a CPU does not
+      have any instructions for looping. Rather, loop statements are translated
+      to comparison and jump instructions.
+    </d:para>
+    <d:para>
+      Consider we have two nested <d:code>for</d:code> loops which run from 0
+      to 9 and we want to break out when outer loop's counter is 5 and inner
+      loop's counter is 7 the we can use <d:code>goto</d:code> as given below:
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  for(int i=0; i<10; ++i)
+  {
+    for(int j=0; j<10; ++j)
+    {
+      if((i == 5) && (j == 7))
+      {
+        printf("i = %d and j = %d\n", i, j);
+        goto EXIT;
+      }
+    }
+  }
+
+EXIT:
+
+  return 0;
+}]]>
+    </d:programlisting>
+    <d:para>
+      and the output is:
+    </d:para>
+    <d:screen>i = 5 and j = 7
+    </d:screen>
+    <d:para>
+      However, it is possible to break out of such nested loops using a flag
+      variable as shown below:
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <stdbool.h>
+
+int main()
+{
+  bool flag = false;
+
+  for(int i=0; i<10; ++i)
+  {
+    for(int j=0; j<10; ++j)
+    {
+      printf("i = %d and j = %d\n", i, j);
+      if((i == 5) && (j == 7))
+      {
+        printf("i = %d and j = %d\n", i, j);
+        flag = true;
+        break;
+      }
+    }
+    if(flag)
+      break;
+  }
+
+  return 0;
+}]]>
+    </d:programlisting>
+    <d:para>
+      and the output is:
+    </d:para>
+    <d:screen>i = 0 and j = 0
+i = 0 and j = 1
+i = 0 and j = 2
+i = 0 and j = 3
+i = 0 and j = 4
+i = 0 and j = 5
+i = 0 and j = 6
+i = 0 and j = 7
+i = 0 and j = 8
+i = 0 and j = 9
+i = 1 and j = 0
+i = 1 and j = 1
+i = 1 and j = 2
+...
+i = 5 and j = 1
+i = 5 and j = 2
+i = 5 and j = 3
+i = 5 and j = 4
+i = 5 and j = 5
+i = 5 and j = 6
+i = 5 and j = 7
+i = 5 and j = 7
+    </d:screen>
+    <d:para>
+      This simple technique can be used to break out of several levels of
+      nested loops.
+    </d:para>
+  </d:sect1>
+  <d:sect2>
+    <d:title>Examples</d:title>
+    <d:sect2>
+      <d:title>Implementing a loop using goto statement</d:title>
+      <d:para>
+        As said above a CPU typically does not have loop instructions but a
+        loop is translated into comparison, increment/decrement and jump
+        instructions. Thus, a loop can be implemented using <d:code>goto,
+        if</d:code> and increment/decrement statements and operators. Consider
+        the following program which prints 1 to 10.
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  for(int i=1; i<11; ++i)
+    printf("%d\n", i);
+
+  return 0;
+}]]>
+        </d:programlisting>
+      </d:para>
+      <d:para>and the output is easy to guess:</d:para>
+      <d:screen>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+      </d:screen>
+      <d:para>
+        Now let us see the converted program:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  int i = 1;
+
+LOOP:
+  printf("%d\n", i);
+  ++i;
+  if(i!= 11)
+    goto LOOP;
+
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>
+        and the output is same as above which you can easily verify.
+      </d:para>
+    </d:sect2>
+  </d:sect2>
+</d:chapter>

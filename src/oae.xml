@@ -740,7 +740,8 @@ int main()
           <d:secondary>|=</d:secondary>
         </d:indexterm>
 	<d:title>Assignment Operators</d:title>
-	<d:para>These are = *= /= %= += -= &lt;&lt;= >>= &amp;= ^= and |= The only
+	<d:para>These are <d:code>=, *=, /=, %=, +=, -=, &lt;&lt;=, >>=, &amp;=,
+  ^=</d:code> and <d:code>|=</d:code> The only
 	constraint is that left operand should be modifiable lvalue. An
 	assignment operator stores a value in the object designated by the left
 	operand. An assignment expression has the value of the left operand
@@ -812,7 +813,29 @@ int main()
 	operator is evaluated as a void expression; there is a sequence point
 	between its evaluation and that of the right operand. Then the right
 	operand is evaluated; the result has its type and value. A comma
-	operator does not give an lvalue.</d:para>
+	operator does not give an lvalue. Consider the following program:</d:para>
+<d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  int i;
+
+  i = 1, 2;
+  printf("%d\n", i);
+
+  i = (1, 2);
+  printf("%d\n", i);
+  return 0;
+}]]></d:programlisting>
+<d:para>
+  and the output is:
+<d:screen>1
+2</d:screen>
+as you can see since command operator has least priority(refer to table given
+below) for first assignment the output has value 1 but then we can override the
+priority and the value of comma operator i.e. right-most operand gets assigned
+to <d:code>i</d:code>.
+</d:para>
       </d:sect1>
       <d:sect1>
         <d:indexterm>
@@ -921,6 +944,46 @@ int main()
       We have already seen unary prefix and postfix versions of increment and
       decrement operators earlier. There are some more unary operators like
       <d:code>+, -, ~</d:code> and <d:code>!</d:code>.
+    </d:para>
+    <d:para>
+      <d:code>+</d:code> and <d:code>-</d:code> are applied to arithmetic
+      types. <d:code>+</d:code> does not change the value of operand but
+      promotions are applied to the type if required. For example, an integer
+      can be promoted to long integer. <d:code>-</d:code> on the other hand
+      negates the value of operand and again promotions are applicable.
+    </d:para>
+    <d:para>
+      Operator <d:code>~</d:code> results in bitwise complement of the
+      operand. For example, consider following program:
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  int i = 0;
+
+  printf("%d\n", ~i);
+  printf("%d\n", ~1);
+
+  return 0;
+}]]>
+    </d:programlisting>
+    <d:para>
+      and the output is:
+      <d:screen>-1
+-2
+      </d:screen>
+      Since <d:code>i</d:code> is 0 i.e. all bits are 0 thus when we negate it
+      all bits become 1 and result is -1.
+    </d:para>
+    <d:para>
+      Operator <d:code>!</d:code> tests whether a value is
+      <d:code>false</d:code> or <d:code>true</d:code>. If it is
+      <d:code>true</d:code> and <d:code>!</d:code> is applied then result is
+      <d:code>false</d:code> and reverse is also applicable. Since all values
+      in C other than 0 and <d:code>NULL</d:code> pointer is considered
+      <d:code>true</d:code> thus applying <d:code>!</d:code> for other than
+      these two results in <d:code>false</d:code> boolean value.
     </d:para>
       </d:sect1>
       <d:sect1>

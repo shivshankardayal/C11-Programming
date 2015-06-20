@@ -184,7 +184,9 @@ After swap a=7 and b=5</d:screen>
       solutions are available but there are certain cases where
       recursion is always better than iteration. For example,
       traversal of trees where iteration is not so effective as
-      compared to recursion. The first example I am going to give is
+      compared to recursion. For beginners it is hard to understand recursion
+      but once you understand it then it is not that hard to understand.
+      The first example I am going to give is
       that of factorials. The formula for factorial is given
       by <d:inlineequation>
 <mml:math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -466,6 +468,39 @@ and the output is:
 <d:screen>Which Fibonacci number you want?
 32
 2178309</d:screen>
+   <d:para>
+     Many functional language like Erlang, Haskell, OCaml do not have
+     loops. The question is how do you implement loops because certainly you
+     need loop for iterating over a set or sequence of values. Well, it is easy
+     to guess that recursion can be used because this is the topic of
+     recursion. Given below is one such example to implement using recursion:
+   </d:para>
+   <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+void loop(int i)
+{
+  if(i == 11)
+    return;
+  else
+  {
+    printf("%d\n", i);
+    ++i;
+  }
+  loop(i);
+}
+
+int main()
+{
+  int i = 1;
+
+  loop(i);
+
+  return 0;
+}]]>
+   </d:programlisting>
+   <d:para>
+     The program prints 1 to 10 on console.
+   </d:para>
     </d:sect1>
     <d:sect1>
       <d:indexterm>
@@ -537,7 +572,29 @@ writing macros like shown above.</d:para>
       embedded systems. Typically inline functoins are declared in
       headers so that all source files can benefit from it. However,
       this may cause problems if functions are not inlined by
-      compiler.</d:para>
+      compiler. An example is given below:</d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int add(int, int);
+
+inline int add(int a, int b)
+{
+  return a + b;
+}
+
+int main()
+{
+  int a = 1, b = 2;
+
+  printf("%d\n", add(a, b));
+  
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>
+        Note that you must declare the prototype of the function else you will
+        get a linker error of undefined reference.
+      </d:para>
     </d:sect1>
     <d:sect1>
       <d:indexterm>
