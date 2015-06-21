@@ -59,7 +59,7 @@ the start of translation phase 4, even though it will do so after the macro
   </d:indexterm>
   <d:indexterm>
     <d:primary>macro</d:primary>
-    <d:secondary>elif</d:secondary>
+    <d:secondary>#elif</d:secondary>
   </d:indexterm>
   <d:indexterm>
     <d:primary>macro</d:primary>

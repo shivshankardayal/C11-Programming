@@ -378,8 +378,14 @@ and the output is:
       </d:sect2>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>character case mapping functions</d:primary>
+      </d:indexterm>
       <d:title>Character case mapping functions</d:title>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>tolower functions</d:primary>
+        </d:indexterm>
         <d:title>The tolower function</d:title>
         <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
         <d:programlisting role="CLexer"><![CDATA[#include <ctype.h>
@@ -400,6 +406,9 @@ int tolower(int c);]]></d:programlisting>
         </d:para>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>toupper functions</d:primary>
+        </d:indexterm>
         <d:title>The toupper function</d:title>
         <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
         <d:programlisting role="CLexer"><![CDATA[#include <ctype.h>

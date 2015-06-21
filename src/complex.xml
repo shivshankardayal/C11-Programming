@@ -18,7 +18,11 @@
       directions</d:quote> (&#xa7; iso.7.31.1).</d:para></d:footnote>
       </d:para>
       <d:para>
-        mplementations that define the macro
+        implementations that define the macro
+        <d:indexterm>
+          <d:primary>macro</d:primary>
+          <d:secondary>__STDC_NO_COMPLEX__</d:secondary>
+        </d:indexterm>
         <d:code>__STDC_NO_COMPLEX__</d:code> need not provide this header nor
         support any of its facilities.
       </d:para>
@@ -31,6 +35,18 @@
       suffixes which are corresponding functions with <d:code>float</d:code>
       and <d:code>long double</d:code> parameters and return values.</d:para>
       <d:para>The macro
+      <d:indexterm>
+        <d:primary>macro</d:primary>
+        <d:secondary>complex</d:secondary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>macro</d:primary>
+        <d:secondary>_Complex</d:secondary>
+      </d:indexterm>
+      <d:indexterm>
+        <d:primary>macro</d:primary>
+        <d:secondary>_Complex_I</d:secondary>
+      </d:indexterm>
       <d:blockquote>
         <d:para><d:code>complex</d:code></d:para>
       </d:blockquote>
@@ -54,6 +70,14 @@
       </mml:math></d:inlineequation></d:para></d:footnote>.</d:para>
       <d:para>
         The macros
+        <d:indexterm>
+          <d:primary>macro</d:primary>
+          <d:secondary>imagianry</d:secondary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>macro</d:primary>
+          <d:secondary>_Imaginary_I</d:secondary>
+        </d:indexterm>
         <d:blockquote>
           <d:para><d:code>imaginary</d:code></d:para>
         </d:blockquote>

@@ -9,6 +9,10 @@
     <d:para>It declares functions for manipulating greatest-width integers and
     converting numeric character strings to greatest-width integers, and it
     declares the type
+    <d:indexterm>
+      <d:primary>type</d:primary>
+      <d:secondary>imaxdiv_t</d:secondary>
+    </d:indexterm>
     <d:blockquote>
       <d:para><d:code>imaxdiv_t</d:code></d:para>
     </d:blockquote>
@@ -93,8 +97,14 @@ int main(void)
 }</d:programlisting>
     </d:sect1>
     <d:sect1>
+      <d:indexterm>
+        <d:primary>greatest-width integer types</d:primary>
+      </d:indexterm>
       <d:title>Functions for greatest-width integer types</d:title>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>imaxtabs function</d:primary>
+        </d:indexterm>
 	<d:title>The imaxabs function</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;inttypes.h>
@@ -109,6 +119,9 @@ cannot be represented in two's complement.</d:para></d:footnote></d:para>
 value.</d:para>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>imaxdiv function</d:primary>
+        </d:indexterm>
 	<d:title>The imaxdiv function</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;inttypes.h>

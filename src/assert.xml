@@ -8,6 +8,9 @@
     The header <d:code>&lt;assert.h&gt;</d:code> defines the
     <d:code>assert</d:code> and <d:code>static_assert</d:code> macros and
     refers to another macro,
+    <d:indexterm>
+      <d:primary>NDEBUG macro</d:primary>
+    </d:indexterm>
     <d:blockquote>
       <d:para>
         <d:code>NDEBUG</d:code>

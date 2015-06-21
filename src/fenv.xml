@@ -56,12 +56,20 @@
       </d:listitem>
     </d:itemizedlist>
     <d:para>The type
+    <d:indexterm>
+      <d:primary>type</d:primary>
+      <d:secondary>fenv_t</d:secondary>
+    </d:indexterm>
     <d:blockquote>
       <d:para><d:code>fenv_t</d:code></d:para>
     </d:blockquote>
     represents the entire
     floating-point environment.</d:para>
     <d:para>The type
+    <d:indexterm>
+      <d:primary>type</d:primary>
+      <d:secondary>fexcept_t</d:secondary>
+    </d:indexterm>
     <d:blockquote>
       <d:para><d:code>fexcept_t</d:code></d:para>
     </d:blockquote>
@@ -69,6 +77,26 @@
     status flags collectively, including any status the implementation
     associates with the flags.</d:para>
     <d:para>Each of the macros:</d:para>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>FE_DIVBYZERO</d:secondary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>FE_INEXACT</d:secondary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>FE_INVALID</d:secondary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>FE_OVERFLOW</d:secondary>
+    </d:indexterm>
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>FE_UNDERFLOW</d:secondary>
+    </d:indexterm>
     <d:blockquote>
       <d:para><d:code>FE_DIVBYZERO</d:code></d:para>
     </d:blockquote>
@@ -100,6 +128,10 @@ specified by the implementation. The defined macros expand to integer constant
 expressions with values such that bitwise <d:code>OR</d:code>s of all
 combinations of the macros result in distinct values.</d:para>
 <d:para>The macro
+<d:indexterm>
+  <d:primary>macro</d:primary>
+  <d:secondary>FE_ALL_EXCEPT</d:secondary>
+</d:indexterm>
 <d:blockquote>
   <d:para><d:code>FE_ALL_EXCEPT</d:code></d:para>
 </d:blockquote>
@@ -108,6 +140,22 @@ is simply the bitwise
 implementation. If no such macros are defined, <d:code>FE_ALL_EXCEPT</d:code>
 shall be defined as 0.</d:para>
 <d:para>Each of the macros:</d:para>
+<d:indexterm>
+  <d:primary>macro</d:primary>
+  <d:secondary>FE_DOWNWARD</d:secondary>
+</d:indexterm>
+<d:indexterm>
+  <d:primary>macro</d:primary>
+  <d:secondary>FE_TONEAREST</d:secondary>
+</d:indexterm>
+<d:indexterm>
+  <d:primary>macro</d:primary>
+  <d:secondary>FE_TOWARDZERO</d:secondary>
+</d:indexterm>
+<d:indexterm>
+  <d:primary>macro</d:primary>
+  <d:secondary>FE_UPWARD</d:secondary>
+</d:indexterm>
 <d:blockquote>
   <d:para><d:code>FE_DOWNWARD</d:code></d:para>
   <d:para><d:code>FE_TONEAREST</d:code></d:para>
@@ -127,6 +175,10 @@ values.<d:footnote><d:para>Even though the rounding direction macros may expand
 to constants corresponding to the values of <d:code>FLT_ROUNDS</d:code>, they
 are not required to do so.</d:para></d:footnote></d:para>
 <d:para>The macro
+<d:indexterm>
+  <d:primary>macro</d:primary>
+  <d:secondary>FE_DFL_ENV</d:secondary>
+</d:indexterm>
 <d:blockquote>
   <d:para><d:code>FE_DFL_ENV</d:code></d:para>
 </d:blockquote>
@@ -143,6 +195,10 @@ beginning with <d:code>FE_</d:code> and an uppercase letter, and having type
 be specified by
 the implementation.</d:para>
 <d:sect1 id="fenv_access">
+  <d:indexterm>
+    <d:primary>pragma</d:primary>
+    <d:secondary>FENV_ACCESS</d:secondary>
+  </d:indexterm>
   <d:title>The FENV_ACCESS pragma</d:title>
 <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -217,6 +273,9 @@ suffice.</d:para></d:footnote></d:para>
   <d:code>FE_OVERFLOW | FE_INEXACT</d:code>. For other argument values the
   behavior of these functions is undefined.</d:para>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>feclearexcept function</d:primary>
+    </d:indexterm>
     <d:title>The feclearexcept function</d:title>
 <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -230,6 +289,9 @@ argument is zero or if all the specified exceptions were addition. This
 identifier has one of the following values:</d:para>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>fegetexceptflag function</d:primary>
+    </d:indexterm>
     <d:title>The fegetexceptflag function</d:title>
     <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
     <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -245,6 +307,9 @@ representation was successfully stored. Otherwise, it returns a nonzero
 value.</d:para>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>feraiseexcept function</d:primary>
+    </d:indexterm>
     <d:title>The feraiseexcept function</d:title>
     <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
     <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -268,6 +333,9 @@ argument is zero or if all the specified exceptions were successfully
 raised. Otherwise, it returns a nonzero value.</d:para>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>fesetexceptflag function</d:primary>
+    </d:indexterm>
     <d:title>The fesetexceptflag function</d:title>
     <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
     <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -287,6 +355,9 @@ excepts argument is zero or if all the specified flags were successfully set to
 the appropriate state. Otherwise, it returns a nonzero value.</d:para>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>fetestexcept function</d:primary>
+    </d:indexterm>
     <d:title>The fetestexcept function</d:title>
     <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
     <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -318,10 +389,16 @@ currently set floating-point exceptions included in
   </d:sect2>
 </d:sect1>
 <d:sect1>
+  <d:indexterm>
+    <d:primary>rounding floating-point numbers</d:primary>
+  </d:indexterm>
   <d:title>Rounding</d:title>
   <d:para>The <d:code>fegetround</d:code> and <d:code>fesetround</d:code>
   functions provide control of rounding direction modes.</d:para>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>fegetround function</d:primary>
+    </d:indexterm>
     <d:title>The fegetround function</d:title>
     <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
     <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -336,6 +413,9 @@ negative value if there is no such rounding direction macro or the current
 rounding direction is not determinable.</d:para>
   </d:sect2>
   <d:sect2>
+    <d:indexterm>
+      <d:primary>fesetround function</d:primary>
+    </d:indexterm>
     <d:title>The fesetround function</d:title>
     <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
     <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -367,10 +447,16 @@ void f(int round_dir)
   </d:sect2>
   </d:sect1>
   <d:sect1>
+    <d:indexterm>
+      <d:primary>floating-point environment</d:primary>
+    </d:indexterm>
     <d:title>Environment</d:title>
     <d:para>The functions in this section manage the floating-point environment
     - status flags and control modes - as one entity.</d:para>
     <d:sect2>
+      <d:indexterm>
+        <d:primary>fegetenv function</d:primary>
+      </d:indexterm>
       <d:title>The fegetenv function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -383,6 +469,9 @@ floating-point environment in the object pointed to by envp.</d:para>
 was successfully stored. Otherwise, it returns a nonzero value.</d:para>
     </d:sect2>
     <d:sect2>
+      <d:indexterm>
+        <d:primary>feholdexcept function</d:primary>
+      </d:indexterm>
       <d:title>The feholdexcept function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -404,6 +493,9 @@ callers.</d:para></d:footnote></d:para>
 non-stop floating-point exception handling was successfully installed.</d:para>
     </d:sect2>
     <d:sect2>
+      <d:indexterm>
+        <d:primary>fesetenv function</d:primary>
+      </d:indexterm>
       <d:title>The fesetenv function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;fenv.h>
@@ -421,6 +513,9 @@ not raise these floating-point exceptions.</d:para>
 was successfully established. Otherwise, it returns a nonzero value.</d:para>
     </d:sect2>
     <d:sect2>
+      <d:indexterm>
+        <d:primary>feupdateenv function</d:primary>
+      </d:indexterm>
       <d:title>The feupdateenv function</d:title>
       <d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
       <d:programlisting role="CLexer">#include &lt;fenv.h>

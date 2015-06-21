@@ -8,13 +8,16 @@
     the reporting of error conditions.</d:para>
     <d:para>The macros are:</d:para>
     <d:indexterm>
-      <d:primary>EDOM</d:primary>
+      <d:primary>macro</d:primary>
+      <d:secondary>EDOM</d:secondary>
     </d:indexterm>
     <d:indexterm>
-      <d:primary>EILSEQ</d:primary>
+      <d:primary>macro</d:primary>
+      <d:secondary>EILSEQ</d:secondary>
     </d:indexterm>
     <d:indexterm>
-      <d:primary>ERANGE</d:primary>
+      <d:primary>macro</d:primary>
+      <d:secondary>ERANGE</d:secondary>
     </d:indexterm>
     <d:blockquote><d:para><d:code>EDOM</d:code></d:para></d:blockquote>
     <d:blockquote><d:para><d:code>EILSEQ</d:code></d:para></d:blockquote>
@@ -22,6 +25,10 @@
     <d:para>which expand to integer constant expressions with type
     <d:code>int</d:code>, distinct positive values, and which are suitable for
     use in <d:code>#if</d:code> preprocessing directives; and
+    <d:indexterm>
+      <d:primary>macro</d:primary>
+      <d:secondary>errno</d:secondary>
+    </d:indexterm>
     <d:blockquote>
       <d:para><d:code>errno</d:code></d:para>
     </d:blockquote>

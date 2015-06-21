@@ -647,5 +647,120 @@ LOOP:
         and the output is same as above which you can easily verify.
       </d:para>
     </d:sect2>
+    <d:sect2>
+      <d:title>Printing Various Patterns</d:title>
+      <d:para>
+        Consider we want to print following pattern:
+        <d:screen>    *
+   ***
+  *****
+ *******
+*********
+        </d:screen>
+        then how would you print it. It is a very easy program and I will just
+        give you the solution. First try to do it yourself and use the solution
+        if you cannot do it to learn from it.
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+ 
+int main()
+{
+  unsigned int c = 0, n = 0, temp = 0;
+ 
+  printf("Enter the number of rows in the pattern: ");
+  scanf("%u",&n);
+ 
+  temp = n;
+ 
+  for (int row = 1; row <= n; row++)
+  {
+    for (c = 1; c < temp; c++)
+      printf(" ");
+ 
+    temp--;
+ 
+    for ( c = 1 ; c <= 2*row - 1 ; c++ )
+      printf("*");
+ 
+    printf("\n");
+  }
+ 
+   return 0;
+}]]>
+      </d:programlisting>
+      <d:para>
+        and one of the outputs is:
+      </d:para>
+      <d:screen>Enter the number of rows in the pattern: 10
+         *
+        ***
+       *****
+      *******
+     *********
+    ***********
+   *************
+  ***************
+ *****************
+*******************
+      </d:screen>
+      <d:para>
+        Another simple pattern may look like:
+      </d:para>
+      <d:screen>*
+**
+***
+****
+*****
+******
+      </d:screen>
+      <d:para>
+        This is even easier than previous one. Try to do it on your own before
+        seeing the solution given below:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+ 
+int main()
+{
+  int n=0;
+ 
+  printf("Enter number of rows\n");
+  scanf("%d",&n);
+ 
+  for(int c=1 ; c<=n; c++)
+  {
+    for(int k=1 ; k<=c ; k++ )
+      printf("*");
+ 
+    printf("\n");
+  }
+  
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>
+        and the output may look like:
+      </d:para>
+      <d:screen>Enter number of rows
+10
+*
+**
+***
+****
+*****
+******
+*******
+********
+*********
+**********
+      </d:screen>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Printing Pascal's triangle</d:title>
+      <d:para>
+        Pascal's triangle is discussed in great detail at <d:link
+        xlink:href="https://en.wikipedia.org/?title=Pascal%27s_triangle">Pascal's
+        Triangle</d:link>. To start with let us look at a small Pascal number.
+      </d:para>
+    </d:sect2>
   </d:sect2>
 </d:chapter>
