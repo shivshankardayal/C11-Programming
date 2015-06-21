@@ -139,6 +139,12 @@ either part of the result cannot be represented, the behavior is
 undefined.</d:para>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>strtoimax function</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>strtoumax function</d:primary>
+        </d:indexterm>
 	<d:title>The strtoimax and strtoumax functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;inttypes.h>
@@ -164,6 +170,12 @@ value of the macro <d:code>ERANGE</d:code> is stored in
 linkend="str_to_long" />.</d:para>
       </d:sect2>
       <d:sect2>
+        <d:indexterm>
+          <d:primary>wcstoimax function</d:primary>
+        </d:indexterm>
+        <d:indexterm>
+          <d:primary>wcstoumax function</d:primary>
+        </d:indexterm>
 	<d:title>The wcstoimax and wcstoumax functions</d:title>
 	<d:para><d:emphasis role="bold">Synopsis</d:emphasis></d:para>
 	<d:programlisting role="CLexer">#include &lt;stddef.h> // for wchar_t

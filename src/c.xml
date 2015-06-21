@@ -27,6 +27,11 @@ the section entitled &#8220;GNU Free Documentation License&#8221;.
       </d:para>
     </d:legalnotice>
   </d:info>
+  <d:dedication>
+    <d:para>
+      Dedicated to my family and free software community
+    </d:para>
+  </d:dedication>
   <xi:include href="preface.xml"/>
   <xi:include href="introduction.xml"/>
   <xi:include href="basics.xml" />

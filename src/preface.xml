@@ -15,7 +15,21 @@
       programming though not limited to it. It is also very fundamental to many languages as you
       will discover along your programming endeavours. I highly recommend that all programmers must
       learn C programmer in order to become a better programmer. You do not have many choices in the
-      category of compiled languages anyway. </d:para>
+      category of compiled languages anyway.
+    </d:para>
+    <d:para>
+      For topics not covered in the book have a look at compiler support for
+      gcc <d:link xlink:href="https://gcc.gnu.org/wiki/C11Status">gcc's c11
+      status page</d:link>. As soon as features will be available in gcc I will
+      update the book. This is one of the reasons I am not giving pdf because
+      the book is subject to change and I keep adding material. However, the
+      docbook source can be downloaded from <d:link
+      xlink:href="https://github.com/shivshankardayal/C99-Programming-Docbook">github
+      repository</d:link> and a pdf copy can be produced using
+      <d:code>dblatex</d:code>. Do not try to Apache FOP because it messes up
+      tables and some potion will need to be changed for tables before you can
+      process it with Apache FOP.
+    </d:para>
     <d:section>
       <d:title>Acknowledgements</d:title>
       <d:para>I do not have much to write in preface as I have covered most of it in Chapter 1.

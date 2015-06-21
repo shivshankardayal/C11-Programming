@@ -7,6 +7,10 @@
     following eleven macros
     (on the left) that expand to the corresponding tokens (on the
     right):</d:para>
+    <d:indexterm>
+      <d:primary>operator</d:primary>
+      <d:secondary>alternative spellings</d:secondary>
+    </d:indexterm>
     <d:programlisting role="CLexer">
     and &amp;&amp;
     and_eq &amp;=
