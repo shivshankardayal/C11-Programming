@@ -2,7 +2,7 @@
 <xsl:stylesheet  
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0"
     xmlns:d="http://docbook.org/ns/docbook"> 
-  <xsl:import href="/opt/local/share/xsl/docbook-xsl-ns/fo/docbook.xsl"/> 
+  <xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/fo/docbook.xsl"/> 
   <xsl:param name="paper.type" select="'B5'"/> 
   <xsl:param name="double.sided" select="1"/>
   <xsl:param name="fop1.extensions" select="1"/>

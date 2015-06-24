@@ -1,0 +1,14 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+           xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+           xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+  <?dbhtml filename="multithreading/index.html" ?>
+  <d:title>Multi-threaded Programming</d:title>
+  <d:para>
+    Even though it has been some time since C11 specification has been
+    published and multi-threaded programming is now supported by language
+    specification <d:code>gcc</d:code> does not support it yet because of
+    dependency problems with <d:code>glib</d:code>. I do not think it will come
+    soon but eventually it will be implemented. Till then we have to wait.
+  </d:para>
+</d:chapter>

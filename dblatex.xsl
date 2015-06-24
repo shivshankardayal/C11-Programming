@@ -26,7 +26,7 @@
   <!-- Blue - EVERYWHERE! -->
   <!--xsl:param name="latex.hyperparam">colorlinks,linkcolor=blue,anchorcolor=blue,urlcolor=blue</xsl:param-->
   <!-- Black - Test print version -->
-  <!-- <xsl:param name="latex.hyperparam">colorlinks,linkcolor=black,anchorcolor=black,urlcolor=black</xsl:param> -->
+  <xsl:param name="latex.hyperparam">colorlinks,linkcolor=black,anchorcolor=black,urlcolor=black</xsl:param>
 
   <!-- Don't include the revision history block -->
   <xsl:param name="latex.output.revhistory">0</xsl:param>
@@ -51,11 +51,11 @@
   <!-- http://iweb.dl.sourceforge.net/project/sourcesans.adobe/SourceSansPro_FontsOnly-1.050.zip -->
   <!-- http://iweb.dl.sourceforge.net/project/sourcecodepro.adobe/SourceCodePro_FontsOnly-1.017.zip -->
   <xsl:param name="xetex.font">
-    <xsl:text>\setmainfont[Ligatures=TeX,Scale=1.05]{Times}
+    <xsl:text>\setmainfont[Ligatures=TeX,Scale=1]{Latin Modern Roman}
     </xsl:text>
-    <xsl:text>\setsansfont[Ligatures=TeX,Scale=.95]{Helvetica}
+    <xsl:text>\setsansfont[Ligatures=TeX,Scale=.95]{Latin Modern Sans}
     </xsl:text>
-    <xsl:text>\setmonofont{Courier}
+    <xsl:text>\setmonofont{Latin Modern Mono}
     </xsl:text>
   </xsl:param>
 </xsl:stylesheet>

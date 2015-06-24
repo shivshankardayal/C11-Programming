@@ -592,7 +592,7 @@ i = 5 and j = 7
       nested loops.
     </d:para>
   </d:sect1>
-  <d:sect2>
+  <d:sect1>
     <d:title>Examples</d:title>
     <d:sect2>
       <d:title>Implementing a loop using goto statement</d:title>
@@ -762,5 +762,5 @@ int main()
         Triangle</d:link>. To start with let us look at a small Pascal number.
       </d:para>
     </d:sect2>
-  </d:sect2>
+  </d:sect1>
 </d:chapter>
