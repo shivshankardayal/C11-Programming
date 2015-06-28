@@ -461,7 +461,7 @@
     is 10 therefore we have digits from 0 to 9. In binary number system it is 2
     therefore digits permitted are 0 and 1.</d:para>
   </d:sect1>
-    <d:sect1>
+    <d:sect1 id="bns">
       <d:title>Binary Number System</d:title>
       <d:para>As the name suggests binary number system has base of
       2. Therefore it has only two symbols. 0 and 1. This is the most popular

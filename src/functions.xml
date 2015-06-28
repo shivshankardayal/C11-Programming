@@ -134,7 +134,7 @@ and the output is:
 <d:screen>Before swap a=5 and b=7
 After swap a=5 and b=7</d:screen>
     </d:sect1>
-    <d:sect1>
+    <d:sect1 id="pass_by_address">
       <d:indexterm>
         <d:primary>pass by address</d:primary>
       </d:indexterm>
@@ -175,14 +175,19 @@ After swap a=7 and b=5</d:screen>
     <d:sect1>
       <d:title>Passing arrays</d:title>
       <d:para>
-        Passing arrays around various functions is easy but requires extra
+        Arrays are always passed by address because if they are passed by value
+        then they will eat upprevious real-estate of little stack
+        memory. Now since they are passed by address by default base address of
+        the array is passed. This also implied that changes made to the array
+        by the called function will be reflected in caller after the call is
+        complete. Passing arrays around various functions is easy but requires
+        extra
         piece of information to be sent to the called function from column
         because the when an array is passed it is always passed as a
         pointer. Thus you need to pass the length of array if you want the
         called function to iterate or traverse over the array. Given below is a
         simple example demonstrating this:
         <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
-#include <stdio.h>
 
 void f(int *a, int n)
 {
@@ -194,7 +199,7 @@ int main()
 {
   int a[10]={0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
  
-	f(a, 10);
+  f(a, 10);
   
   return 0;
 }]]>
@@ -204,12 +209,11 @@ int main()
       </d:para>
       <d:para>
         However, this is not the only way to send an array to function. The
-        other solution could be to send start end element as pointer. Since we
-        are already sending first element as pointer if we have end element's
-        address we can iterate over the array with ease. This is demonstrated
-        in the next program:
+        other solution could be to send start and end element as pointer. Since
+        we are already sending first element as pointer if we have end
+        element's address we can iterate over the array with ease. This is
+        demonstrated in the next program:
         <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
-#include <stdio.h>
 
 void f(int *a, int *end )
 {
@@ -222,7 +226,7 @@ int main()
 {
   int a[10]={0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
  
-	f(a, &a[9]);
+  f(a, &a[9]);
   
   return 0;
 }]]>
@@ -230,6 +234,122 @@ int main()
         Note that we need to print last element separately because loop will
         not execute its code for the last element. This is cumbersome but does
         equivalent work as the previous program.
+      </d:para>
+      <d:para>
+        However, passing two dimensional array is different. If you want to
+        pass an array of the form <d:code>a[m][n]</d:code> then it would be
+        passed as <d:code>int (*)[n]</d:code>. Thus passing is not that you
+        will pass <d:code>int **</d:code>. Following code shows how to pass and
+        print a two dimensional array:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <stdio.h>
+
+void f(int a[][2], unsigned int fd, unsigned int sd)
+{
+  for(unsigned int i=0; i<fd; ++i)
+  {
+    for(unsigned int j=0; j<sd; ++j)
+    {
+      printf("%d ", a[i][j]);
+    }
+    printf("\n");
+  }
+}
+
+int main()
+{
+  int a[5][2]={{0, 1}, {2, 3}, {4, 5}, {6, 7}, {8, 9}};
+ 
+  f(a, 5, 2);
+  
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>and the output is:</d:para>
+      <d:screen>0 1 
+2 3 
+4 5 
+6 7 
+8 9
+      </d:screen>
+      <d:para>
+        Note that array type changes to <d:code>int (*)[2]</d:code>, similarly
+        an array of form <d:code>a [l][m][n]</d:code> will change its type to
+        <d:code>int (*)[m][n]</d:code>. Even though we are passing other
+        columns except first one it is not being passed as a variable.Thus if
+        the the column length values are not variables available in called
+        function then we need to pass it explicitly.
+      </d:para>
+    </d:sect1>
+    <d:sect1>
+      <d:title>Passing pointers</d:title>
+      <d:para>
+        We have already seen pass by address but what if we want to pass to
+        pointers and change the pointer itself. In the example shown in the
+        <d:xref linkend="pass_by_address" /> we have two variables on stack whose
+        addresses were passed and the values were swapped which was contained
+        on those addresses. Can we extrapolate this to change addresses
+        themselves. Let us see an example:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+void f(int *p, int *q)
+{
+  int *temp = p;
+
+  p = q;
+  q = temp;
+}
+
+int main()
+{
+  int i=5, j=10;
+  int *p=&i, *q=&j;
+
+  f(p, q);
+
+  printf("%d %d\n", *p, *q);
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>and the output is:</d:para>
+      <d:screen>5 10
+      </d:screen>
+      <d:para>
+        Now as we say the pointers are still pointing to original values. The
+        reason is because when we call function <d:code>f</d:code> and pass
+        addresses of <d:code>i</d:code> and <d:code>j</d:code> then a copy of
+        those addresses are sent. If we want to swap the values by swapping
+        pointers then we have to send addresses of pointers. The program is
+        shown below:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+void f(int **p, int **q)
+{
+  int *temp = *p;
+
+  *p = *q;
+  *q = temp;
+}
+
+int main()
+{
+  int i=5, j=10;
+  int *p=&i, *q=&j;
+
+  f(&p, &q);
+
+  printf("%d %d\n", *p, *q);
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>
+        Now since the pointers themselves are swapped it is easy to guess the
+        output and it is <d:code>10 5</d:code>. Notice since we are sending
+        addresses of pointers we have to receive them using pointer to pointer
+        syntax.
       </d:para>
     </d:sect1>
     <d:sect1>

@@ -7,8 +7,10 @@ html:
 	cp -r build/* /var/www/cd/
 
 
-pdf:
-	dblatex -bxetex -T db2latex -p dblatex.xsl -P preface.tocdepth="1" src/c.xml
+pdf: src/*.xml
+	cp -r src pdf	
+	perl -pi -e "s/\.png\"/\.pdf\"/g;" pdf/*.xml	
+	dblatex -bxetex -T db2latex -p dblatex.xsl -P preface.tocdepth="1" pdf/c.xml
 
 latex:
 	dblatex -bxetex -T db2latex -p dblatex.xsl -P preface.tocdepth="1" -t tex src/c.xml

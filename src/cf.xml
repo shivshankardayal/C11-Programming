@@ -894,5 +894,113 @@ int main()
           arrays and pointers and come back when you know them.
         </d:para>
     </d:sect2>
+    <d:sect2>
+      <d:title>Converting decimal numbers to binary numbers</d:title>
+      <d:para>
+        Since we deal mostly with binary at least at a lower level if not in
+        applications thus it is essential that we understand how to convert
+        decimal to binary. We have already seen how to convert decimal to
+        binary in <d:xref linkend="bns" /> so let us see how to convert a
+        number to binary. Since C does not have a data type for binaries
+        neither you can use a conversion-specifier to print numbers in binary I
+        have used C style strings discussed later in the book to convert source
+        number which is accepted as string in program. Since the input number
+        is a string it is slightly complicated to convert but then it allows
+        you to deal with much larger number than supported by <d:code>unsigned
+        long long</d:code> data type. This program uses arrays and functions
+        discussed elsewhere in book so if you do not understand then skip it
+        and come back later. Here is the program:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <string.h>
+
+const unsigned short int MAX = 128;
+
+int main()
+{
+  char input[MAX];
+  char temp[MAX];
+  char output[4*MAX]; // A single digit 9 is 4 bits while 99 is 7 bits so 
+                      // 4*MAX should fit the converted decimal in bits
+
+  memset(input, 0, MAX);
+  memset(temp, 0, MAX);
+  memset(output, 0, MAX);
+
+  // read input as string
+  printf("Enter a decimal number to be converted to integer:\n");
+  fgets(input, 128, stdin);
+
+  // substitute last '\n' from keyboard input with '\0'
+  unsigned short int length = strlen(input) - 1;
+  input[length] = 0;
+  
+  // input validation. in ASCII '0' to '9' occur in sequence.
+  for(unsigned short int i=0, j=0; i<length; ++i, ++j)
+  {
+    temp[j] = 0;
+
+    if((input[i]<'0') || (input[i]>'9'))
+    {
+      printf("Invalid input.\n");
+      return -1;
+    }
+  }
+
+  unsigned short int rem = 0;
+  unsigned short int quo = 0;  
+  unsigned short int j = 0;
+
+  while(strcmp(input, "1") != 0)
+  {
+    for(unsigned short int i=0, k=0; i<length; ++i, ++k)
+    {
+      // 48 is decimal value of '0' so we subtract 48
+      // from characters to get numbers
+      unsigned short int si = input[i] - 48;
+    
+      if(rem != 0)
+        si += 10*rem;
+    
+      if(si == 1) {
+        si = 10;
+        si += input[i + 1] - 48;
+        i = i + 1;
+      }
+
+      rem = si%2;
+      quo = si/2;
+
+      temp[k] = quo + 48;
+    }
+    strcpy(input, temp);
+    memset(temp, 0, MAX);
+
+    length = strlen(input);
+    output[j++] = rem + 48;
+    rem = 0;
+  }
+
+  output[j] = quo + 48;
+  length = strlen(output);
+
+  // reverse output
+  for(unsigned short int i=0; i<(length/2); ++i)
+  {
+    output[i] ^= output[length - i - 1];
+    output[length - i - 1] ^= output[i];
+    output[i] ^= output[length - i -1];
+  }
+  
+  puts(output);
+
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>
+        The program is commented so as to simplify the understanding. Try to
+        run it and see the output.
+      </d:para>
+    </d:sect2>
   </d:sect1>
 </d:chapter>
