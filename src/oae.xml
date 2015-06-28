@@ -1007,11 +1007,45 @@ int main()
   printf("%d\n", ((4&lt;5)||(7^5)));
 
   return 0;
-}</d:programlisting>
-<d:para>This small program shows you what can go wrong if you rely on
-memory. It allows you do addition first and then multiplcation. Inner
-parentheses are evaluated first then outer ones. This concludes our chapter on
-operators and expressions. Next we focus on control statements and flow
-statements.</d:para> 
+}
+  </d:programlisting>
+  <d:para>
+    This small program shows you what can go wrong if you rely on
+    memory. It allows you do addition first and then multiplcation. Inner
+    parentheses are evaluated first then outer ones. This concludes our chapter
+    on operators and expressions. Next we focus on control statements and flow
+    statements.
+  </d:para>
+  <d:para>
+    Another simple example which I did not give for comma operator deliberately
+    to explain comma operator and parentheses in conjunction is given below:
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+	int i;
+
+	i = 1, 2;
+	printf("%d\n", i);
+
+	i = (1, 2);
+	printf("%d\n", i);
+
+	return 0;
+}]]>
+    </d:programlisting>
+    and the output is quite simple:
+    <d:screen>1
+2
+    </d:screen>
+  </d:para>
+  <d:para>
+    Now as we know from precedence table given above that comma operator has
+    least priority thus for <d:code>i = 1, 2;</d:code> even though it evaluates
+    to 2 the assignment will happen first and 1 is stored in
+    <d:code>i</d:code>. However, when we use parentheses to override the
+    precedence the comma operator gets higher precedence and we get 2 as value
+    of <d:code>i</d:code>.
+  </d:para>
       </d:sect1>
     </d:chapter>

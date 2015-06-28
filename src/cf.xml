@@ -594,6 +594,11 @@ i = 5 and j = 7
   </d:sect1>
   <d:sect1>
     <d:title>Examples</d:title>
+    <d:para>
+      Now that we have studied control flow and operators and expressions we
+      can write simple but very interesting programs. Given below are few
+      examples.
+    </d:para>
     <d:sect2>
       <d:title>Implementing a loop using goto statement</d:title>
       <d:para>
@@ -759,8 +764,130 @@ int main()
       <d:para>
         Pascal's triangle is discussed in great detail at <d:link
         xlink:href="https://en.wikipedia.org/?title=Pascal%27s_triangle">Pascal's
-        Triangle</d:link>. To start with let us look at a small Pascal number.
+        Triangle</d:link>. To start with let us look at a small Pascal triangle.
       </d:para>
+      <d:screen>   1
+  1 1
+ 1 2 1
+1 3 3 1
+      </d:screen>
+      <d:para>
+        The rows in Pascal's triangle start at 0(say we use <d:emphasis
+        role="italic">n</d:emphasis> to denote it) and 
+        columns start at 0 as well. We can pick either left end or right end
+        that does not matter because it is symmetric at the center. Since we
+        are used to writing left-to-right in English let us pick the first
+        column is at left most end is say <d:emphasis
+        role="italic">k</d:emphasis> starting from 0. Now the number at any
+        position is <d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi></mi><mi>n</mi></msup><msub><mi>C</mi><mi>k</mi></msub></mrow></math></d:inlineequation>
+        in Pascal's triangle. However, it is not necessary to compute each and
+        every element. As we know <d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi></mi><mi>n</mi></msup><msub><mi>C</mi><mi>0</mi></msub></mrow></math></d:inlineequation>
+        and <d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi></mi><mi>n</mi></msup><msub><mi>C</mi><mi>n</mi></msub></mrow></math></d:inlineequation>
+        are 1 each thus both the edges will always be 1. So for 0th row <d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi></mi><mi>0</mi></msup><msub><mi>C</mi><mi>0</mi></msub></mrow></math></d:inlineequation>
+        is the only element while for the first row it is <d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi></mi><mi>1</mi></msup><msub><mi>C</mi><mi>0</mi></msub></mrow></math></d:inlineequation>
+        and <d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi></mi><mi>1</mi></msup><msub><mi>C</mi><mi>1</mi></msub></mrow></math></d:inlineequation>
+        which both evaluates to 1 thus 1st row is 1 1. Now from basics of
+        permutation and combination it follows that <d:inlineequation><math
+        xmlns="http://www.w3.org/1998/Math/MathML"><mmultiscripts><mi>C</mi><mi>k</mi><none/><mprescripts/><none/><mi>n</mi></mmultiscripts><mo>=</mo><mmultiscripts><mi>C</mi><mrow><mi>k</mi><mo>-</mo><mn>1</mn></mrow><none/><mprescripts/><none/><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></mmultiscripts><mo>+</mo><mmultiscripts><mi>C</mi><mi>k</mi><none/><mprescripts/><none/><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></mmultiscripts></math></d:inlineequation>.
+        Thus, new elements of a new line except for the edges can be figured
+        from the previous line. For example, 2nd row will contain 3 elements
+        with two edge-elements being 1. Now the middle element is
+        <d:inlineequation>
+          <math
+              xmlns="http://www.w3.org/1998/Math/MathML"><mmultiscripts><mi>C</mi><mn>1</mn><none/><mprescripts/><none/><mn>2</mn></mmultiscripts></math>
+        </d:inlineequation>
+        which can be simply presented as sum of
+        <d:inlineequation>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><mmultiscripts><mi>C</mi><mn>0</mn><none/><mprescripts/><none/><mn>1</mn></mmultiscripts><mo>+</mo><mmultiscripts><mi>C</mi><mn>1</mn><none/><mprescripts/><none/><mn>1</mn></mmultiscripts></math>
+        </d:inlineequation>
+        which are two elements of 1st row. Now to computer 3rd row elements we
+        can follow the same process. The edge elements will be 1 each while the
+        other two elements are
+        <d:inlineequation>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><mmultiscripts><mi>C</mi><mn>1</mn><none/><mprescripts/><none/><mn>3</mn></mmultiscripts></math>
+        </d:inlineequation>
+        and
+        <d:inlineequation>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><mmultiscripts><mi>C</mi><mn>2</mn><none/><mprescripts/><none/><mn>3</mn></mmultiscripts></math>
+          </d:inlineequation>. Now,
+          <d:inlineequation>
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><mmultiscripts><mi>C</mi><mn>1</mn><none/><mprescripts/><none/><mn>3</mn></mmultiscripts></math>
+          </d:inlineequation>
+          can be obtained by adding
+          <d:inlineequation>
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><mmultiscripts><mi>C</mi><mn>0</mn><none/><mprescripts/><none/><mn>2</mn></mmultiscripts></math>
+          </d:inlineequation>
+          and
+          <d:inlineequation>
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><mmultiscripts><mi>C</mi><mn>1</mn><none/><mprescripts/><none/><mn>2</mn></mmultiscripts></math>
+          </d:inlineequation>
+          i.e. 1 and 2 respectively which results in 3. Similarly, the next
+          element will also result in 3. Thus 3rd row is 1 3 3 1. Similarly, we
+          can computer the next row with ease which will be 1 4 6 4 1 and next
+          row to that will be 1 5 10 10 5 1. Let us write a simple program to
+          print Pascal's triangle based on these observations:
+        </d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+ 
+int main()
+{
+  unsigned int n = 0;
+ 
+  printf("Enter the number of rows in the Pascal's triangle: ");
+  scanf("%u",&n);
+ 
+  unsigned long a[n], b[n];
+  
+  a[0] = b[0] = b[1] = 1;
+
+  printf("%lu\n", a[0]);
+  printf("%lu %lu\n", b[0], b[1]);
+
+  unsigned long *x = a, *y = b;
+  unsigned long *temp;
+  
+  for(unsigned long i = 2; i<n; ++i) {
+    // set edge values
+    x[0] = 1;
+    x[i] = 1;
+    printf("%lu ", x[0]);
+    for(unsigned long j = 1; j<i; ++j) {
+      x[j] = y[j - 1] + y[j];
+      printf("%lu ", x[j]);
+    }
+    printf("%lu\n", x[i]);
+
+    // swap pointers for arrays
+    temp = x;
+    x = y;
+    y = temp;
+  }
+  return 0;
+}]]>
+        </d:programlisting>
+        <d:para>
+          I have not tried to make the output beautiful because with changing
+          input the output has to adjusted. Thus the formatting changes will
+          destroy the beauty of this simple program. The output may look like
+          below:
+        </d:para>
+        <d:screen>1
+1 1
+1 2 1
+1 3 3 1
+1 4 6 4 1
+1 5 10 10 5 1
+1 6 15 20 15 6 1
+1 7 21 35 35 21 7 1
+1 8 28 56 70 56 28 8 1
+1 9 36 84 126 126 84 36 9 1
+        </d:screen>
     </d:sect2>
   </d:sect1>
 </d:chapter>
