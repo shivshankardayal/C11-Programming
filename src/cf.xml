@@ -888,6 +888,11 @@ int main()
 1 8 28 56 70 56 28 8 1
 1 9 36 84 126 126 84 36 9 1
         </d:screen>
+        <d:para>
+          Note that the solution uses arrays and pointer which are described
+          later in the book so feel free to skip the program if you do not know
+          arrays and pointers and come back when you know them.
+        </d:para>
     </d:sect2>
   </d:sect1>
 </d:chapter>

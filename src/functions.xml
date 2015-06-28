@@ -173,6 +173,66 @@ and the output is:
 After swap a=7 and b=5</d:screen>
     </d:sect1>
     <d:sect1>
+      <d:title>Passing arrays</d:title>
+      <d:para>
+        Passing arrays around various functions is easy but requires extra
+        piece of information to be sent to the called function from column
+        because the when an array is passed it is always passed as a
+        pointer. Thus you need to pass the length of array if you want the
+        called function to iterate or traverse over the array. Given below is a
+        simple example demonstrating this:
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <stdio.h>
+
+void f(int *a, int n)
+{
+  for(size_t i=0; i<n; ++i)
+    printf("%d\n", a[i]);
+}
+
+int main()
+{
+  int a[10]={0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+ 
+	f(a, 10);
+  
+  return 0;
+}]]>
+        </d:programlisting>
+        and the output is easy to guess. The program prints 0 through 9, each
+        on a separate line.
+      </d:para>
+      <d:para>
+        However, this is not the only way to send an array to function. The
+        other solution could be to send start end element as pointer. Since we
+        are already sending first element as pointer if we have end element's
+        address we can iterate over the array with ease. This is demonstrated
+        in the next program:
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <stdio.h>
+
+void f(int *a, int *end )
+{
+  for(int *p=a; p!=end; ++p)
+    printf("%d\n", *p);
+  printf("%d\n", *end);
+}
+
+int main()
+{
+  int a[10]={0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+ 
+	f(a, &a[9]);
+  
+  return 0;
+}]]>
+        </d:programlisting>
+        Note that we need to print last element separately because loop will
+        not execute its code for the last element. This is cumbersome but does
+        equivalent work as the previous program.
+      </d:para>
+    </d:sect1>
+    <d:sect1>
       <d:indexterm>
         <d:primary>recursion</d:primary>
       </d:indexterm>
