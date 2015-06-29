@@ -368,5 +368,14 @@ int main()
   </d:sect1>
   <d:sect1>
     <d:title>Bit Fields</d:title>
+    <d:para>
+      We typically address bytes in day-today programming but there are cases
+      when we need to address individual bits. Though we cannot take address
+      of individual bits we can still access them. Also, in embedded systems
+      where memory is low structures and unions allow compact packing of bits
+      using bit fields. Although booleans can give us true/false but booleans
+      end up using one byte while bit fields occupy in bits. Consider following
+      example:
+    </d:para>
   </d:sect1>
 </d:chapter>
