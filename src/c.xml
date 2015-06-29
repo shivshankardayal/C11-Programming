@@ -44,6 +44,7 @@ the section entitled &#8220;GNU Free Documentation License&#8221;.
   <xi:include href="strings.xml"/>
   <xi:include href="fileio.xml"/>
   <xi:include href="macros.xml"/>
+  <xi:include href="bits.xml"/>
   <xi:include href="multithreading.xml"/>
   <xi:include href="std.xml"/>
   <xi:include href="assert.xml"/>
