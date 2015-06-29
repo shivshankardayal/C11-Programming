@@ -8,6 +8,7 @@ html:
 
 
 pdf: src/*.xml
+	rm -rf pdf
 	cp -r src pdf	
 	perl -pi -e "s/\.png\"/\.pdf\"/g;" pdf/*.xml	
 	dblatex -bxetex -T db2latex -p dblatex.xsl -P preface.tocdepth="1" pdf/c.xml

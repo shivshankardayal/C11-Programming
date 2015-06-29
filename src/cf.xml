@@ -951,6 +951,12 @@ int main()
   unsigned short int quo = 0;  
   unsigned short int j = 0;
 
+  if((strcmp(input, "0") == 0) || strcmp(input, "1") == 0)
+  {
+    puts(input);
+    return 0;
+  }
+
   while(strcmp(input, "1") != 0)
   {
     for(unsigned short int i=0, k=0; i<length; ++i, ++k)
