@@ -317,6 +317,46 @@ return 0;
   </d:programlisting>
   and the output is:
   <d:screen>4 5</d:screen>
+  <d:para>
+    Structures and unions can be used to transfer data over network where the
+    exact data being carried can be indicated by an extra variable. Consider
+    following example:
+  </d:para>
+  <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <stdlib.h>
+ 
+int main()
+{
+  typedef struct{
+    char type;
+    union u{
+      char c;
+      int i;
+      float f;
+      double d;
+    }u;
+  }s;
+
+  s s1;
+
+  s1.type = 'i';
+  s1.u.i = 10;
+
+  printf("%c %d\n", s1.type, s1.u.i);
+  
+  return 0;
+}]]>
+  </d:programlisting>
+  <d:para>and the output is:</d:para>
+  <d:screen>i 10</d:screen>
+  <d:para>
+    Now if the use case is that only one of elements has to be transferred over
+    network for example then union can be used to store the value while the
+    type variable can be used to store the type of value stored in union. One
+    more use of such a structure is to create heterogeneous data structures
+    where various different type of data types can be stored. For example, a
+    linked list can be created which can store different numerical data types.
+  </d:para>
   </d:sect1>
   <d:sect1>
     <d:indexterm>
@@ -354,7 +394,7 @@ int main()
     <d:screen>1 2 3 4</d:screen>
   </d:sect1>
   <d:sect1>
-    <d:title>Passing structures to functions</d:title>
+    <d:title>Passing Structures to Functions</d:title>
     <d:para>
       Since structures typically represent complex objects thus they are bigger
       than numerical or string data types. And it is a no-brainer that since
@@ -376,6 +416,182 @@ int main()
       using bit fields. Although booleans can give us true/false but booleans
       end up using one byte while bit fields occupy in bits. Consider following
       example:
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <stdlib.h>
+ 
+int main()
+{
+  typedef struct {
+    unsigned int i1:1;
+    unsigned int i2:2;
+  }s;
+
+  s s1;
+
+  printf("%zu\n", sizeof(s));
+
+  s1.i1 = 1;
+  s1.i2 = 3;
+
+  printf("%u %u\n", s1.i1, s1.i2);
+  
+  typedef struct {
+    int i1:1;
+    int i2:2;
+  }t;
+
+  t t1;
+
+  t1.i1 = 1;
+  t1.i2 = 3;
+
+  printf("%d %d\n", t1.i1, t1.i2);
+  
+  return 0;
+}]]>
+    </d:programlisting>
+    <d:para>and the output is:</d:para>
+    <d:screen>4
+1 3
+-1 -1
+    </d:screen>
+    <d:para>
+      Both structures <d:code>s</d:code> and <d:code>t</d:code> will occupy
+      only 3 bits in memory. Look carefully as the syntax of bit-fields
+      <d:code>i1</d:code> and <d:code>i2</d:code> which occupy 1 and 2 bits
+      respectively. Because of alignment size of each of the structures is
+      reported as 4 bytes. What this means is that you can stuff 29 more bits
+      worth of bit-fields more without incrementing the size of
+      structures. However, once you will put more than 32-bits the size of
+      structure will again increase by 4 bytes.
+    </d:para>
+    <d:para>
+      The second point is easy to understand that why output is -1 for both the
+      members of structure <d:code>s</d:code> and <d:code>t</d:code>. Since the
+      bit-fields are signed integer having width 1 and 2 the ranges will be
+      from <d:inlineequation><math
+      xmlns="http://www.w3.org/1998/Math/MathML"><mo>-</mo><msup><mn>2</mn><mrow><mn>1</mn><mo>-</mo><mn>1</mn></mrow></msup></math></d:inlineequation>
+      to <d:inlineequation><math
+      xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mrow><mn>1</mn><mo>-</mo><mn>1</mn></mrow></msup><mo>-</mo><mn>1</mn></math></d:inlineequation>
+      which is -1 to 0 and <d:inlineequation><math
+      xmlns="http://www.w3.org/1998/Math/MathML"><mo>-</mo><msup><mn>2</mn><mrow><mn>2</mn><mo>-</mo><mn>1</mn></mrow></msup></math></d:inlineequation>
+      to <d:inlineequation><math
+      xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mrow><mn>2</mn><mo>-</mo><mn>1</mn></mrow></msup><mo>-</mo><mn>1</mn></math></d:inlineequation>
+      which is -2 to 1. Thus in 2's complement form 1 and 3 will get converted
+      to -1 in both the cases.
+    </d:para>
+    <d:para>
+      Even more fun is bit-fields in unions because of possible overlap in
+      memory. Since memory for different variables overlap in unions one byte
+      can be used to represent different bits and 8 possible different values
+      can be represented. Such a union is typically used a bit-mask in several
+      function calls. For example, mode in <d:code>open</d:code> system call is
+      a bit-mask. Given below is example of one such bit mask:
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <stdlib.h>
+ 
+int main()
+{
+  typedef union {
+    unsigned int i1:1;
+    unsigned int i2:2;
+    unsigned int i3:3;
+    unsigned int i4:4;
+    unsigned int i5:5;
+    unsigned int i6:6;
+    unsigned int i7:7;
+    unsigned int i8:8;
+  }bit_mask;
+
+  bit_mask b;
+
+  b.i1 = 1;
+  b.i2 = 1|2;
+  b.i3 = 1|2|4;
+  b.i4 = 1|2|4|8;
+  b.i5 = 1|2|4|8|16;
+  b.i6 = 1|2|4|8|16|32;
+  b.i7 = 1|2|4|8|16|32|64;
+  b.i8 = 1|2|4|8|16|32|64|128;
+
+  printf("%zu\n", sizeof(bit_mask));
+  printf("%u %u %u %u %u %u %u %u\n", b.i1, b.i2, b.i3, b.i4, b.i5, b.i6, b.i7, b.i8);
+
+  if(b.i1 && 1)
+    puts("Bit 1 is set.");
+  if(b.i2 && 2)
+    puts("Bit 2 is set.");
+  if(b.i3 && 4)
+    puts("Bit 3 is set.");
+  if(b.i4 && 8)
+    puts("Bit 4 is set.");
+  if(b.i5 && 16)
+    puts("Bit 5 is set.");
+  if(b.i6 && 32)
+    puts("Bit 6 is set.");
+  if(b.i7 && 64)
+    puts("Bit 7 is set.");
+  if(b.i8 && 128)
+    puts("Bit 8 is set.");
+  
+  return 0;
+}]]>
+    </d:programlisting>
+    <d:para>and the output is:</d:para>
+    <d:screen>4
+1 3 7 15 31 63 127 255
+Bit 1 is set.
+Bit 2 is set.
+Bit 3 is set.
+Bit 4 is set.
+Bit 5 is set.
+Bit 6 is set.
+Bit 7 is set.
+Bit 8 is set.
+    </d:screen>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Offset of Elements</d:title>
+    <d:para>
+      As we have studied earlier that alignment is putting elements on
+      addresses which are multiple of their storages. Thus it can be confusing
+      where each element is actually located inside a structure. This
+      information is needed when you actually want to examine memory. To find
+      out the offset of these elements there is a macro
+      <d:code>offsetof</d:code> defined in <d:xref linkend="stddef"
+      />. Consider following example:
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <stddef.h>
+ 
+int main()
+{
+  typedef struct{
+    char c;
+    int i;
+    char d;
+    char a[31];
+    long double ld;
+  }s;
+
+  printf("%zu %zu %zu %zu %zu\n", offsetof(s, c), offsetof(s, i), offsetof(s, d), offsetof(s, a), offsetof(s, ld));
+  
+  return 0;
+}]]>
+    </d:programlisting>
+    <d:para>and the output is:</d:para>
+    <d:screen>0 4 8 9 48</d:screen>
+    <d:para>
+      What this means is <d:code>char c</d:code> is located at position 0 and
+      <d:code>int i</d:code> at position 4 that means 3 bytes are for padding.
+      <d:code>char d</d:code> is located immediately after <d:code>int
+      i</d:code>. Array <d:code>char a[31]</d:code> is located immediately
+      after <d:code>char d</d:code>. Now from position 9 i.e. byte 9, 31
+      continuous bytes. Thus occupying till 40th byte. Now <d:code>long double
+      ld</d:code> cannot be put on 41st so positions 41 to 47 are padded and it
+      is stored at position 48.
     </d:para>
   </d:sect1>
 </d:chapter>

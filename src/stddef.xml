@@ -3,7 +3,7 @@
   xmlns:xi="http://www.w3.org/2003/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="stddef/index.html" ?>
-  <d:title>Common definitions &lt;stddef.h&gt;</d:title>
+  <d:title id="stddef">Common definitions &lt;stddef.h&gt;</d:title>
   <d:para>The following types and macros are defined in the standard header
   <d:code>&lt;stddef.h&gt;</d:code>. Some are also defined in other headers,
   as noted in their respective subclauses.</d:para>
