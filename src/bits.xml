@@ -4,4 +4,213 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?dbhtml filename="bits/index.html" ?>
   <d:title id="bits">Bit manipulation</d:title>
+  <d:para>
+    By now you have seen all constructs of C programming language. In this
+    chapter we will study bit-manipulation using operators provided by C. Bit
+    manipulation is considered low-level programming can result in hard to read
+    code but can improve performance significantly if done right. Most of the
+    bit manipulation involve numbers and in few cases you can apply it to
+    characters because characters are internally integers. The key to
+    bit-manipulation is bitwise operators <d:code>&amp;, ^, |, !, ~
+    &lt;&lt;</d:code> and <d:code>&gt;&gt;</d:code> operators which stand for
+    AND, XOR, OR, NOT, bit-flipping, left-shift and right-shift
+    operators. Given below is truth table for AND, XOR, and OR gate for quick
+    reference.
+  </d:para>
+  <table
+      xmlns="http://docbook.org/ns/docbook" width="40%" frame="border" border="1"
+      class="centered">
+    <caption>AND gate's truth table</caption>
+	  <colgroup width="1*" align="center"/>
+	  <colgroup width="1*" align="center"/>
+	  <colgroup width="3*" align="center"/>
+    <tbody>
+      <tr>
+        <th>p</th>
+        <th>q</th>
+        <th>p &amp; q</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+      xmlns="http://docbook.org/ns/docbook" width="40%" frame="border" border="1"
+      class="centered">
+    <caption>OR gate's truth table</caption>
+	  <colgroup width="1*" align="center"/>
+	  <colgroup width="1*" align="center"/>
+	  <colgroup width="3*" align="center"/>
+    <tbody>
+      <tr>
+        <th>p</th>
+        <th>q</th>
+        <th>p | q</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+      xmlns="http://docbook.org/ns/docbook" width="40%" frame="border" border="1"
+      class="centered">
+    <caption>XOR gate's truth table</caption>
+	  <colgroup width="1*" align="center"/>
+	  <colgroup width="1*" align="center"/>
+	  <colgroup width="3*" align="center"/>
+    <tbody>
+      <tr>
+        <th>p</th>
+        <th>q</th>
+        <th>p ^ q</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+    </tbody>
+  </table>
+  <d:para>
+    As you may know there are two gates NAND and NOR which are universal gates
+    i.e. all other gates can be constructed by using only NAND or only NOR
+    gates. C does not have any operators but that can be easily constructed
+    using NOT operator(!) with AND and OR operator. NOT gate which is
+    implemented by NOT operator makes true to false and false to true. Given
+    below are their truth tables:
+  </d:para>
+  <table
+      xmlns="http://docbook.org/ns/docbook" width="40%" frame="border" border="1"
+      class="centered">
+    <caption>NAND gate's truth table</caption>
+	  <colgroup width="1*" align="center"/>
+	  <colgroup width="1*" align="center"/>
+	  <colgroup width="3*" align="center"/>
+    <tbody>
+      <tr>
+        <th>p</th>
+        <th>q</th>
+        <th>!(p &amp; q)</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+      xmlns="http://docbook.org/ns/docbook" width="40%" frame="border" border="1"
+      class="centered">
+    <caption>NOR gate's truth table</caption>
+	  <colgroup width="1*" align="center"/>
+	  <colgroup width="1*" align="center"/>
+	  <colgroup width="3*" align="center"/>
+    <tbody>
+      <tr>
+        <th>p</th>
+        <th>q</th>
+        <th>!(p | q)</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+    </tbody>
+  </table>
+  <d:para>
+    The shift operators shift bits to left or right. For example, 1&lt;&lt;2
+    means <d:inlineequation><math
+    xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>1</mn><mn>2</mn></msup></math></d:inlineequation>. Similarly,
+    23&gt;&gt;3 means <d:inlineequation><math
+    xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>23</mn><msup><mn>2</mn><mn>3</mn></msup></mfrac></math></d:inlineequation>.
+    How this works is that say we have a number 1 represented by 8 bits then it
+    would be 00000001 and when we say 1&lt;&lt; then bits are shifted to left
+    and right side is filled with 0 thus it becomes 00000010 or 2 which is as
+    good as multiplying by 2. If we say 1&lt;&lt;2 then bits are shifted to
+    left by 2 position which means the sequence will become 00000100 i.e. which
+    is multiplication with 4.
+  </d:para>
 </d:chapter>
