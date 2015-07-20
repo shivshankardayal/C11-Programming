@@ -213,4 +213,141 @@
     left by 2 position which means the sequence will become 00000100 i.e. which
     is multiplication with 4.
   </d:para>
+  <d:sect1>
+    <d:title>Basics</d:title>
+    <d:para>
+      We have discussed this briefly in chapter of <d:quote>Structures and
+      Unions</d:quote>. I would like to present that here as well. If the bytes
+      for any data type occupy multiple bytes and bytes start with least
+      significant byte on lower address then it is a <d:emphasis
+      role="italic">little endian</d:emphasis> machine and reverse ordering
+      means it is a <d:emphasis role="italic">big endian</d:emphasis>
+      machine. Consider the 32-bit number <d:code>0x04030201</d:code> whose
+      address is <d:code>0xX</d:code> then it would look like following in
+      memory.
+    </d:para>
+    <d:screen>
+adr: 0xX 0xX+1 0xX+2 0xX+3
+mem: 0x4 0x3   0x2   0x1    // big endian
+mem: 0x1 0x2   0x3   0x4    // little endian
+    </d:screen>
+    <d:para>
+      The difference becomes evident if you want to cast it to some lower
+      type. Let us say above value is V and we cast it to a
+      <d:code>char c</d:code> as <d:code>char c = *(char*)&amp;V;</d:code> then
+      for big endian machines it will be 0x1 and for little endian machine it
+      will be 0x4. Note that nowadays popular architecture like x86 are little
+      endian but network bytes are big endian thus to write portable code
+      people generally transfer bytes from host to network by calling functions
+      <d:code>hton</d:code>. Discussion of such functions is out of scope of
+      this book but this should give you a hint.
+    </d:para>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Shifts and Division</d:title>
+    <d:para>
+      We have studied that right shift and division are same but that is not
+      entirely true. Consider the following code:
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  int i = 0xffffffff; // all bit one
+  unsigned int ui = 0xffffffff; // again all bits one
+
+  printf("%d %u\n", i>>1, ui>> 1);
+
+	return 0;
+}]]>
+    </d:programlisting>
+    <d:para>
+      we compile it to object code using the command <d:code>$gcc -c
+      test.c</d:code> where <d:code>test.c</d:code> is the filename to which we
+      saved the source. Now we see assembly source using the command
+      <d:code>objdump -d -M gas -S test.o</d:code> and we have the following:
+    </d:para>
+    <d:screen>test.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 &lt;;main&gt;:
+   0:	55                   	push   %rbp
+   1:	48 89 e5             	mov    %rsp,%rbp
+   4:	48 83 ec 10          	sub    $0x10,%rsp
+   8:	c7 45 f8 ff ff ff ff 	movl   $0xffffffff,-0x8(%rbp)
+   f:	c7 45 fc ff ff ff ff 	movl   $0xffffffff,-0x4(%rbp)
+  16:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  19:	d1 e8                	shr    %eax
+  1b:	89 c2                	mov    %eax,%edx
+  1d:	8b 45 f8             	mov    -0x8(%rbp),%eax
+  20:	d1 f8                	sar    %eax
+  22:	89 c6                	mov    %eax,%esi
+  24:	bf 00 00 00 00       	mov    $0x0,%edi
+  29:	b8 00 00 00 00       	mov    $0x0,%eax
+  2e:	e8 00 00 00 00       	callq  33 &lt;main+0x33&gt;
+  33:	b8 00 00 00 00       	mov    $0x0,%eax
+  38:	c9                   	leaveq 
+  39:	c3                   	retq
+    </d:screen>
+    <d:para>
+      As you can clearly see signed integer is getting an <d:code>shr</d:code>
+      instruction while unsigned integer is getting an <d:code>sar</d:code>
+      instruction which causes -1 to remain -1 while unsigned number is divided
+      by 2. These two are known as <d:emphasis
+      role="italic">logical</d:emphasis> and <d:emphasis
+      role="italic">arithmetic</d:emphasis> shifts. The difference can cause
+      you to debug your program for several hours. In other words, division
+      with signed types rounds toward zero, as one would expect, but right
+      shift is a division (by a power of 2) that rounds to
+      <d:inlineequation><math
+                            xmlns="http://www.w3.org/1998/Math/MathML"><mo>-</mo><mo>&#8734;</mo></math></d:inlineequation>. The arithmetical shift (sar in the above fragment) fills in ones or
+      zeros, according to the most significant bit of the original number.
+    </d:para>
+    <d:para>
+      Note that the C standard leaves the behavior of a right shift of a signed
+      integer as <d:quote>implementation-defined</d:quote>. The behavior shown
+      (that a negative value remains negative after right shift for signed
+      integers) is the default behavior of gcc. This is clearly stated in
+      subclause 5 of &#xa7; iso.6.5.7.
+    </d:para>
+  </d:sect1>
+  <d:sect1>
+    <d:title>2's Complement</d:title>
+    <d:para>
+      Consider the following program:
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <limits.h>
+
+int main()
+{
+  int i = INT_MIN; // all bit one
+
+  printf("%d\n", i);
+  if(i < 0)
+    i = -i;
+
+  printf("%d\n", i);
+
+	return 0;
+}]]>
+    </d:programlisting>
+    <d:para>
+      and the output is not trivial to guess. The output is:
+    </d:para>
+    <d:screen>-2147483648
+-2147483648
+      </d:screen>
+      <d:para>
+        As I had told in earlier chapters that 0 and -0 have same
+        representation in 2's complement in our first chapter. But even
+        <d:code>INT_MIN</d:code> or for that matter 
+        <d:code>LONG_MIN</d:code> or <d:code>LLONG_MIN</d:code> will have same
+        representation as their negative of <d:code>INT_MIN</d:code> or
+        <d:code>LONG_MIN</d:code> <d:code>LLONG_MIN</d:code>. This is the
+        reason why the above code does not work as expected.
+      </d:para>
+  </d:sect1>
 </d:chapter>

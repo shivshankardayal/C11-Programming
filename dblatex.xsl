@@ -55,7 +55,7 @@
     </xsl:text>
     <xsl:text>\setsansfont[Ligatures=TeX,Scale=.95]{Latin Modern Sans}
     </xsl:text>
-    <xsl:text>\setmonofont{Inconsolata}
+    <xsl:text>\setmonofont{Latin Modern Mono}
     </xsl:text>
   </xsl:param>
 </xsl:stylesheet>

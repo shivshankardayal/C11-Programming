@@ -4,10 +4,10 @@ html:
 	find . -name "*.html" | xargs perl -pi -e "s/<html>/<!DOCTYPE html>/g;"
 	cp -r images build/
 	./domp.py
-	cp -r build/* /var/www/cd/
+	cp -r build/* /var/www/c/
 
 
-pdf: src/*.xml
+pdf: src/*.xml dblatex.xsl Makefile
 	rm -rf pdf
 	cp -r src pdf	
 	perl -pi -e "s/\.png\"/\.pdf\"/g;" pdf/*.xml	
