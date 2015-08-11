@@ -433,7 +433,9 @@ just seen only <d:code>int</d:code>. So onward to data types.</d:para>
     have the same type as an expression that is an object of the corresponding
     type converted according to the integer promotions. Their
     implementation-defined values are equal or greater in magnitude (absolute
-    value) to those shown, with the same sign.
+    value) to those shown, with the same sign. Note that these ranges are for
+    1's complement. While most probably your computer uses 2's complement so
+    you should add -1 to the negative range. Thus MINs are greater than MAXes.
     <d:itemizedlist>
       <d:listitem>
         <d:para>number of bits for smallest object that is not a bit-field (byte)</d:para>
