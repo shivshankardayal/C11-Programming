@@ -323,7 +323,7 @@ Disassembly of section .text:
 
 int main()
 {
-  int i = INT_MIN; // all bit one
+  int i = INT_MIN; // 0xa0000000
 
   printf("%d\n", i);
   if(i < 0)
@@ -341,13 +341,95 @@ int main()
 -2147483648
       </d:screen>
       <d:para>
-        As I had told in earlier chapters that 0 and -0 have same
+        As I had told that 0 and -0 have same
         representation in 2's complement in our first chapter. But even
         <d:code>INT_MIN</d:code> or for that matter 
         <d:code>LONG_MIN</d:code> or <d:code>LLONG_MIN</d:code> will have same
         representation as their negative of <d:code>INT_MIN</d:code> or
         <d:code>LONG_MIN</d:code> <d:code>LLONG_MIN</d:code>. This is the
-        reason why the above code does not work as expected.
+        reason why the above code does not work as expected. For this reason
+        alone following program prints negative number where family of
+        absolute-value funcitons fail.
       </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+int main()
+{
+  int n;
+
+  printf("In this program we will try to computer absolute value for integers entered.\n");
+  scanf("%d", &n);
+  printf("%d\n", abs(n));
+  
+  printf("Now is the time for surprise.\n");
+  printf("%d %ld %Ld\n", abs(INT_MIN), labs(LONG_MIN), llabs(LLONG_MIN));
+
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>
+        This entire chaos erupts because since the numbers are split into two
+        ranges and 0 unbalances it thus <d:code>INT_MIN</d:code> has an
+        absolute value larger than <d:code>INT_MAX</d:code>. The same applies
+        for other integral data types as well.
+      </d:para>
+      <d:para>
+        Another issue with shifts is that you cannot shift for entire width of
+        the data type. For example, consider the following program on a 64-bit
+        computer
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned int i = 0;
+  unsigned long l = 0;
+
+  printf("%u %lu\n", i>>32, l>>64);
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>
+        and gcc will immediately give you following warnings:
+      </d:para>
+      <d:screen><![CDATA[test.c: In function ‘main’:
+test.c:5:3: warning: right shift count >= width of type [enabled by default]
+   printf("%d \n", ~0 >> 32);
+   ^
+test.c:6:3: warning: right shift count >= width of type [enabled by default]
+   printf("%ld \n", ~0UL >> 64);
+   ^]]>
+      </d:screen>
+      <d:para>
+        However, we are lucky that output is consistent in both the cases and
+        is 0 at least on my Intel CPU. This may not be the case on other CPUs
+        thus be careful when you want to shift a number which is equal or
+        greater than the width of that type.
+      </d:para>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Average of two numbers</d:title>
+    <d:para>
+      Let us consider calculation of average of two unsigned integers. A naive
+      approach is given below:
+      <d:programlisting role="CLexer" language="c"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned int i =100;
+  unsigned int j = 100;
+
+  printf("%u\n", (i+j)/2);
+  return 0;
+}]]>
+      </d:programlisting>
+      Now as you can easily guess output would be 100 but if the sum is greater
+      than <d:code>UINT_MAX</d:code> then it will cause integer overflow which
+      is not a desirable case. Another better but still naive argument would be
+      to cast these to higher data type such as <d:code>unsigned long</d:code>.
+      
+    </d:para>
   </d:sect1>
 </d:chapter>
