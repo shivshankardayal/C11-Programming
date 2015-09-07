@@ -27,8 +27,14 @@
       xlink:href="https://github.com/shivshankardayal/C99-Programming-Docbook">github
       repository</d:link> and a pdf copy can be produced using
       <d:code>dblatex</d:code>. Do not try to Apache FOP because it messes up
-      tables and some potion will need to be changed for tables before you can
+      tables and some poition will need changes for tables before you can
       process it with Apache FOP.
+    </d:para>
+    <d:para>
+      This book does not contain a lot of problems and examples. For practice
+      please checkout my book on data structure and algorithms which will have
+      those. Also, please read specification because certain sections I have
+      avoided to keep things simple.
     </d:para>
     <d:section>
       <d:title>Acknowledgements</d:title>

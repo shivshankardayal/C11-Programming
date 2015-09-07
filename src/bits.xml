@@ -698,6 +698,9 @@ int main()
   return 0;
 }]]>
       </d:programlisting>
+      More of such problems which are specific to bits will be provided in data
+      structures and algorithm book. For now basics have been explain as how to
+      use basic bitwise operations which I believe is sufficient.
     </d:para>
   </d:sect1>
 </d:chapter>

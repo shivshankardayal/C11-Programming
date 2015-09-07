@@ -33,7 +33,7 @@ the section entitled &#8220;GNU Free Documentation License&#8221;.
     </d:para>
   </d:dedication>
   <xi:include href="preface.xml"/>
-  <!--xi:include href="introduction.xml"/>
+  <xi:include href="introduction.xml"/>
   <xi:include href="basics.xml" />
   <xi:include href="io.xml" />
   <xi:include href="oae.xml" />
@@ -43,9 +43,9 @@ the section entitled &#8220;GNU Free Documentation License&#8221;.
   <xi:include href="su.xml"/>
   <xi:include href="strings.xml"/>
   <xi:include href="fileio.xml"/>
-  <xi:include href="macros.xml"/-->
+  <xi:include href="macros.xml"/>
   <xi:include href="bits.xml"/>
-  <!--xi:include href="multithreading.xml"/>
+  <xi:include href="multithreading.xml"/>
   <xi:include href="std.xml"/>
   <xi:include href="assert.xml"/>
   <xi:include href="complex.xml" />
@@ -79,5 +79,5 @@ the section entitled &#8220;GNU Free Documentation License&#8221;.
   <xi:include href="fdl.xml" />
   <d:index>
     <d:title>Index</d:title>
-  </d:index-->
+  </d:index>
 </d:book>
