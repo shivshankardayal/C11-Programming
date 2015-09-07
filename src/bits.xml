@@ -654,8 +654,50 @@ int main()
         6th bit of 100 is 1 while 4th is 0. Copying 6th bit to 4th position
         increases value by 16, which is nothing but <math
         xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mn>4</mn></msup></math>
-        and this our answer is 116.
+        and thus our answer is 116.
       </d:para>
     </d:sect2>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Swapping even and odd bits of a number</d:title>
+    <d:para>
+      Consider the following problem. In a given number(unsigned in nature)
+      we want to move bits at position 0, 2, 4, 6, ... to position 1, 3, 5,
+      7, ... and bits at position 1, 3, 5, 7, ... to position 0, 2, 4, 6
+      ... then how would we achieve that.
+    </d:para>
+    <d:para>
+      The solution lies in the observation that bits can be extracted using
+      bitwise AND operation. Thus to extract bits at even position we need a
+      number which is all 1s at even position while 0s at at odd
+      positions. Same analogy can be applied for odd positions. Once we have
+      extracted the numbers we can shift number with even bits to left and
+      second one to right. Thus now bits are at proper position and ORing the
+      two will give us desired result. Following code does it for an
+      <d:code>unsigned char</d:code>. This type has been chosen for
+      simplicity.
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned char uc =107; // bit sequence is 01101011 thus our
+  // desired sequence is 10010111 i.e. output as 151
+  unsigned char ue = 170; // bit sequence is 10101010
+  unsigned char uo = 85; // bit sequence is 01010101 note that sum
+  // of ue and uo is 255 which is UCHAR_MAX or maximum value for
+  // unsigned char
+
+  ue &= uc;
+  ue = ue >> 1;
+  uo &= uc;
+  uo = uo << 1;
+
+  uc = ue | uo;
+
+  printf("%u %u %u\n", uc, ue, uo); 
+  return 0;
+}]]>
+      </d:programlisting>
+    </d:para>
   </d:sect1>
 </d:chapter>
