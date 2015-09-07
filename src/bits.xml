@@ -569,5 +569,93 @@ int main()
         </d:programlisting>
       </d:para>
     </d:sect2>
+    <d:sect2>
+      <d:title>Setting a bit</d:title>
+      <d:para>
+        Once again it is trivial and you can draw analogy from previous program:
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned long i =100;
+
+  // 4th bit is set
+  printf("%d\n", (i | (1UL << 4)) != 0);
+  // 6th bit is set
+  printf("%d\n", (i | (1UL << 6)) != 0);
+
+  return 0;
+}]]>
+        </d:programlisting>
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Clearing a bit</d:title>
+      <d:para>
+        Only code is enough again:
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned long i =100;
+
+  // 4th bit is cleared
+  printf("%lu\n", (i & ~(1UL << 4)));
+  // 6th bit is cleared
+  printf("%lu\n", (i & ~(1UL << 6)));
+
+  return 0;
+}]]>
+        </d:programlisting>
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Toggling a bit</d:title>
+      <d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned long i =100;
+
+  // 4th bit is toggled
+  printf("%lu\n", (i ^ (1UL << 4)));
+  // 6th bit is toggled
+  printf("%lu\n", (i ^ (1UL << 6)));
+
+  return 0;
+}]]>
+        </d:programlisting>
+        and the output is:
+        <d:screen>116
+36
+        </d:screen>
+      </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Copying bits</d:title>
+      <d:para>
+        Say we have two positions in a number and we want to copy bits then
+        following code will do that:
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned long i =100;
+
+  unsigned long x = ((i >> 6) ^ (i >> 4)) & 1; // one if bits are different
+  i ^= (x << 4); // change if bits are different
+
+  printf("%lu\n", i);
+
+  return 0;
+}]]>
+        </d:programlisting>
+        6th bit of 100 is 1 while 4th is 0. Copying 6th bit to 4th position
+        increases value by 16, which is nothing but <math
+        xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mn>4</mn></msup></math>
+        and this our answer is 116.
+      </d:para>
+    </d:sect2>
   </d:sect1>
 </d:chapter>
