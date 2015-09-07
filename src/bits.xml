@@ -244,7 +244,7 @@ mem: 0x1 0x2   0x3   0x4    // little endian
     </d:para>
   </d:sect1>
   <d:sect1>
-    <d:title>Shifts and Division</d:title>
+    <d:title>Shifts and division</d:title>
     <d:para>
       We have studied that right shift and division are same but that is not
       entirely true. Consider the following code:
@@ -414,7 +414,7 @@ test.c:6:3: warning: right shift count >= width of type [enabled by default]
     <d:para>
       Let us consider calculation of average of two unsigned integers. A naive
       approach is given below:
-      <d:programlisting role="CLexer" language="c"><![CDATA[#include <stdio.h>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
 
 int main()
 {
@@ -429,7 +429,145 @@ int main()
       than <d:code>UINT_MAX</d:code> then it will cause integer overflow which
       is not a desirable case. Another better but still naive argument would be
       to cast these to higher data type such as <d:code>unsigned long</d:code>.
+      The problem is that you cannot cast <d:code>unsigned long long</d:code>
+      to a higher data type as it is already highest. The previous program can
+      be modified to compute it without overflowas given below:
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+#include <stdlib.h>
       
+int main()
+{
+  unsigned int i =100;
+  unsigned int j = 100;
+
+  printf("%u\n", (i & j) + ((i ^ j)>>1));
+
+  return 0;
+}]]>
+      </d:programlisting>
+      Another way to compute this is given below:
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned int i =100;
+  unsigned int j = 110;
+
+  printf("%u\n", i + abs((i - j))/2);
+
+  return 0;
+}]]>
+      </d:programlisting>
+      However, this solution is not in sync with the theme of this chapter
+      i.e. by bits manipulation.
     </d:para>
+    <d:para>
+      If it is known that <math
+      xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi><mo>&#8805;</mo><mi>j</mi></math>
+      then another solution is possible which is given below:
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned int i =100;
+  unsigned int j = 110;
+
+  printf("%u\n", (i | j) - ((i ^ j)>>1));
+
+  return 0;
+}]]>
+      </d:programlisting>
+    </d:para>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Swapping two numbers without using a temporary</d:title>
+    <d:para>
+      The solution of swapping two numbers without a temporary is well known
+      using XOR operation. Given below is code:
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned int i =100;
+  unsigned int j = 110;
+
+  i = i ^ j;
+  j = i ^ j;
+  i = i ^ j;
+
+  printf("%u %u\n", i , j);
+  
+  return 0;
+}]]>
+      </d:programlisting>
+      and the output is not hard to guess, which, is
+      <d:screen>110 100</d:screen>
+      One more usage of this XOR gate can be toggling a number between two
+      values as given below:
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned int i =100;
+  unsigned int j = 110;
+  unsigned int t = i ^ j;
+  unsigned int x = i;
+
+  x ^= t;
+  
+  printf("%u %u\n", i , j);
+  
+  return 0;
+}]]>
+      </d:programlisting>
+      Here, output is not important but <d:code>x</d:code> can toggle between
+      <d:code>i</d:code> and <d:code>j</d:code> by XORing with
+      <d:code>t</d:code>, which is pre-calculated.
+    </d:para>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Finding next even or odd number</d:title>
+    <d:para>
+      It is trivial to computer next even or odd number using bitwise
+      operations. A program to do that is given below:
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned int i =100;
+  
+  printf("%u\n", (i | 1) + 1 );
+  printf("%u\n", (i - 1) & ~1 );
+  printf("%u\n", (i + 1) | 1);
+  printf("%u\n", (i & ~1) - 1);
+  
+  return 0;
+}]]>
+      </d:programlisting>
+      The output is self explanatory and you can deduce it yourself.
+    </d:para>
+  </d:sect1>
+  <d:sect1>
+    <d:title>Operations on bits</d:title>
+    <d:sect2>
+      <d:title>Testing a bit</d:title>
+      <d:para>
+        It is trivial to test a bit of a program. For example:
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  unsigned long i =100;
+
+  // 4th bit is tested
+  printf("%d\n", (i & (1UL << 4)) != 0);
+  // 6th bit is tested
+  printf("%d\n", (i & (1UL << 6)) != 0);
+
+  return 0;
+}]]>
+        </d:programlisting>
+      </d:para>
+    </d:sect2>
   </d:sect1>
 </d:chapter>
