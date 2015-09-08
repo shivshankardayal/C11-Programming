@@ -1,0 +1,201 @@
+<d:chapter version="5.0" xmlns:d="http://docbook.org/ns/docbook"
+           xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+           xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <?xml-stylesheet href="../css/style.css" type="text/css"?>
+  <?dbhtml filename="introduction/index.html" ?>
+  <d:title>Tools for C Programming(gdb and gcc)</d:title>
+  <d:para>
+    In this chapter we will focus on how to use gcc and gdb. I do not care
+    about compilers and debuggers which do not share the idea of freedom in
+    software. Even <d:code>clang</d:code> and <d:code>lldb</d:code> will not be
+    discussed because they are even bigger threat to software freedom than
+    commercial compilers and debuggers. gdb is a very high-quality debugger and
+    it has very good manual which can be found at <d:link
+      xmlns="http://docbook.org/ns/docbook"
+      xlink:href="http://www.gnu.org/software/gdb/documentation/">http://www.gnu.org/software/gdb/documentation/</d:link>
+    and if you feeling upto it then you can go ahead and read the sources of
+    gdb and gcc as well.
+  </d:para>
+  <d:para>
+    Debugging is the process of removing bugs. This warrants another
+    question that what is a bug. A bug is a mistake in a program which
+    compiler cannot catch. Broadly bugs can be categorized in two groups. One
+    which compiler can catch and second which compiler cannot. First category
+    includes syntactical errors, which causes compilation errors and linker
+    errors where linker will throw the error. Second category is called
+    logical errors which can be due to typing mistakes or wrong logic of the
+    program being implemented. While using a debugger like gdb we almost
+    always want to find logical errors although gdb can be used for some
+    other purposes. I will give an example as to what is a logical error.
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  int i = 0;
+
+  printf("Enter an integer not equal to zero:\n");
+  scanf("%d", &i);
+
+  if(i = 0)
+  {
+    printf("Your input is wrong.\n");
+  }
+
+  return 0;
+}]]>
+    </d:programlisting>
+    Now as you can see that inside <d:code>if</d:code> we are assigning 0 to
+    <d:code>i</d:code> while we should have used <d:code>==</d:code>
+    operator. Most probable reason for this is a typing mistake. The worst
+    part is code seems for work for all positive inputs. What that
+    essentially means that code works correctly i.e. it gives correct output
+    for positive value but not for 0. Now it is very easy to miss 0 as input
+    if you are just starting programming. Experienced programmers will
+    definitely check 0 as input since it constitutes boundary test case. Many
+    times in industry 90% of test cases passing is good enough. As you can
+    see this program will probably pass 99.99%+ test cases but still it is
+    wrong. A program is not guaranteed to work unless that has been
+    mathematically proven i.e. formal verification of the code has been
+    done. But that discussion is for another time.
+  </d:para>
+  <d:para>
+    Even gcc is not clear about this and a compilation command <d:code>gcc -
+    Wall -Wextra filename.c</d:code> fails to exactly point the problem because
+    assignment in <d:code>if</d:code> is not illegal in C but yes you get a
+    hint as given below:
+    <d:screen>test.c: In function ‘main’:
+test.c:10:3: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+    if(i = 0)
+    ^
+    </d:screen>
+    Another such example is given below:
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  int i;
+
+  printf("Enter an integer not equal to zero:\n");
+  scanf("%d", &i);
+
+  i=+5;
+
+  printf("Increased value of i is %d\n", i);
+  return 0;
+}]]>
+    </d:programlisting>
+    Now what possibly has happened here is that programmer intended to use
+    <d:code>+=</d:code> but his typing sequence went wrong and he types
+    <d:code>=+</d:code>. This is <d:emphasis role="italic">even
+    worse</d:emphasis> that previous case because compiler
+    cannot provide any help here and output will be 5. Once again it is easy to
+    locate because code is small but for programs of size in tens of thousands
+    to more it would be pain to locate such a mistake. When such a mistake is
+    made it is easy to locate at that point of time but say the test case did
+    not cover this and program worked for some time and then it is
+    mis-behaving. Then it would be very hard for a new programmer to locate it.
+  </d:para>
+  <d:para>
+    Now the programs presented here are simple enough not to warrant a
+    debugger. However, for complex algorithms it is not so easy to read the
+    code and apply logic and deduce the mistake. Many times we use numbers
+    after performing certain calculation by hand. If that calculation is wrong
+    it is hard to debug it just by reading code.
+  </d:para>
+  <d:para>
+    In these situations we need to use debuggers like gdb. But before
+    we can really use a debugger we need to prepare our programs for
+    debugging. To do that we need to tell compiler i.e. gcc in our case that
+    we intend to debug a program bu passing option "-g" while
+    compiling. Since now we have touched compilers I think it is appropriate
+    to discuss some common compiler options.
+  </d:para>
+  <d:sect1>
+    <d:title>Most used gcc options</d:title>
+    <d:para>
+      gcc's man page is quite extensive and you should spend some time reading
+      it. Other than that gcc has a a lot of documentation which can be found at
+      <d:link
+          xlink:href="https://gcc.gnu.org/onlinedocs/">https://gcc.gnu.org/onlinedocs/</d:link>.
+      I strongly recommend that you read those.
+      Here I will present some most common options and when to use 
+      those. This section is by no means is a replacement of man page. These
+      options are most used options and by now you know few of them.
+      <d:itemizedlist>
+        <d:listitem>
+          <d:emphasis role="bold">-E</d:emphasis> options just preprocesses
+          file. That is <d:code>#include, #define, #ifdef, #endif</d:code> etc
+          are processed. This causes preprocessor to run. This part is handled
+          by <d:code>cpp</d:code> which is <d:quote>The C
+          Preprocessor</d:quote>. You can
+          do this by running <d:code>cpp filename.c</d:code>. The output will
+          be preprocessed code which is fed to the compiler for compilation.
+          In case of a problem for example recursive header inclusion the
+          diagnostics is printed and preprocessing terminates.
+        </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-c</d:emphasis> does preprocessing and
+          compilation together. The ourput of previous step i.e. preprocessing
+          is fed to the compiler. Syntactical checks are performed and object
+          code is produced which has the extension <d:code>.o</d:code>. In case
+          of a problem compilation is aborted and diagnostics(errors and
+          warnings) is printed. If this switch is used then linker is not
+          invoked and thus final binary is not generated.
+        </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-o filename</d:emphasis> designates the
+          filename to which output has to be written. You should be careful
+          that output name is not same as your source file else your source
+          file will be oevrwritten.
+        </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-ansi</d:emphasis> can be used to make your
+          code compliant to ANSI or C89 standards. Practically this will make
+          your code highly portable to all the systems where ANSI C compilers
+          are supported.
+        </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-pedantic</d:emphasis> is like
+          <d:code>-ansi</d:code> but this will ensure that your code is
+          compliant to ISO C standards where the specific version can be
+          supplied like <d:code>-std=c99</d:code>.
+        </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-Wall</d:emphasis> enables all
+          warnings. Ideally you should have this all the time in your
+          compilation command in whatever build tool you use.
+        </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-Wextra</d:emphasis> enables warnings not
+          enabled by <d:code>-Wall</d:code> and thus <d:code>-Wall</d:code>
+          becomes a misnomer. :)
+        </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-Werror</d:emphasis> makes compiler treat
+          warnings as errors. You can enable this if you are targeting zero
+          warnings. Ideally this should be enabled.
+        </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-v</d:emphasis> prints (on standard error
+          output) the commands executed to run the stages of compilation and
+          compiler information.
+        </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-O1, -O2, O3</d:emphasis> enable optimization
+          for code generation with 1 being lowest and 3 being higehst. Not that
+          this will alter the generated assembly instructions. Thus you should
+          also use next switch.
+        </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-fopt-info</d:emphasis> gives optimization
+          information.
+        </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-static</d:emphasis> prevents linking with
+          the shared libraries if system supports them.  On other systems, this
+          option has no effect
+        </d:listitem>
+      </d:itemizedlist>
+    </d:para>
+  </d:sect1>
+</d:chapter>

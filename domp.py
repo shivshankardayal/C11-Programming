@@ -21,57 +21,57 @@ def findReplace(directory, find, replace, filePattern):
                                 s = f.read()
                                 s = s.replace(find, replace)
                                 s = s.replace("index.html", "")
-                                soup = BeautifulSoup(s)
+                                soup = BeautifulSoup(s, "lxml")
 
                                 for i in soup.find_all("table", attrs={"summary": "Navigation header"}):
                                         i.contents[0].contents[0].clear()
                                         if name == "index.html":
-                                                link = BeautifulSoup("<a href=\"ix01.html\">Index</a>")
+                                                link = BeautifulSoup("<a href=\"ix01.html\">Index</a>", "lxml")
                                         elif name =="ix01.html":
-                                                link = BeautifulSoup("")
+                                                link = BeautifulSoup("", "lxml")
                                         else:
-                                                link = BeautifulSoup("<a href=\"../ix01.html\">Index</a>")
+                                                link = BeautifulSoup("<a href=\"../ix01.html\">Index</a>", "lxml")
                                         i.contents[0].contents[0].insert(0, link)
                                         if name == "index.html":
-                                                link = BeautifulSoup("")
+                                                link = BeautifulSoup("", "lxml")
                                         elif name == "ix01.html":
-                                                link = BeautifulSoup("<a href=\"index.html\">Home</a>")
+                                                link = BeautifulSoup("<a href=\"index.html\">Home</a>", "lxml")
                                         else:
-                                                link = BeautifulSoup("<a href=\"../\">Home</a>")
+                                                link = BeautifulSoup("<a href=\"../\">Home</a>", "lxml")
                                         i.contents[1].contents[1].insert(0, link)
-                                soup = BeautifulSoup(soup.renderContents())
+                                soup = BeautifulSoup(soup.renderContents(), "lxml")
                                 for j in soup.findAll("table", attrs={"summary": "Navigation footer"}):
                                         if name == "index.html":
-                                                link = BeautifulSoup("<a href=\"ix01.html\">Index</a>")
+                                                link = BeautifulSoup("<a href=\"ix01.html\">Index</a>", "lxml")
                                         elif name == "ix01.html":
-                                                link = BeautifulSoup("")
+                                                link = BeautifulSoup("", "lxml")
                                         else:
-                                                link = BeautifulSoup("<a href=\"../ix01.html\">Index</a>")
+                                                link = BeautifulSoup("<a href=\"../ix01.html\">Index</a>", "lxml")
                                         j.contents[0].contents[1].insert(0, link)
                                         if name == "ix01.html":
-                                                link = BeautifulSoup("<a href=\"index.html\">Home</a>")
+                                                link = BeautifulSoup("<a href=\"index.html\">Home</a>", "lxml")
                                         if name == "index.html":
-                                                link = BeautifulSoup("")
+                                                link = BeautifulSoup("", "lxml")
                                         elif name == "ix01.html":
-                                                link = BeautifulSoup("<a href=\"index.html\">Home</a>")
+                                                link = BeautifulSoup("<a href=\"index.html\">Home</a>", "lxml")
                                         else:
-                                                link = BeautifulSoup("<a href=\"../\">Home</a>")
+                                                link = BeautifulSoup("<a href=\"../\">Home</a>", "lxml")
                                         j.contents[0].contents[1].insert(0, link)
                                         j.contents[1].contents[1].clear()
                                         j.contents[1].contents[1].insert(0, link)
-                                p = BeautifulSoup("<h2><a href='/'>Site Home</a></h2><p class='alert alert-info'>Please see <a href=\"http://caniuse.com/#feat=mathml\">http://caniuse.com/#feat=mathml</a> if your browser supports MathML because certain sections of this book rely on MathML. If your browser does not support MathML please install Firefox from <a href=\"https://www.mozilla.org\">Mozilla</a> because AFAIK Firefox supports MathML.</p>")
+                                p = BeautifulSoup("<h2><a href='/'>Site Home</a></h2><p class='alert alert-info'>Please see <a href=\"http://caniuse.com/#feat=mathml\">http://caniuse.com/#feat=mathml</a> if your browser supports MathML because certain sections of this book rely on MathML. If your browser does not support MathML please install Firefox from <a href=\"https://www.mozilla.org\">Mozilla</a> because AFAIK Firefox supports MathML.</p>", "lxml")
                                 soup.body.insert(0, p)
-                                soup = BeautifulSoup(soup.renderContents())
+                                soup = BeautifulSoup(soup.renderContents(), "lxml")
 #                                for i in soup.find_all("pre", "CommonLispLexer"):
 #                                        code = BeautifulSoup(highlight(i.string, CommonLispLexer(), HtmlFormatter()))
 #                                        i.string.replace_with(code)
-                                soup = BeautifulSoup(soup.renderContents())
+                                soup = BeautifulSoup(soup.renderContents(), "lxml")
                                 for i in soup.find_all("pre", "CLexer"):
-                                        code = BeautifulSoup(highlight(i.string, CLexer(), HtmlFormatter()))
+                                        code = BeautifulSoup(highlight(i.string, CLexer(), HtmlFormatter()), "lxml")
                                         i.string.replace_with(code)
-                                soup = BeautifulSoup(soup.renderContents())
+                                soup = BeautifulSoup(soup.renderContents(), "lxml")
                                 for i in soup.find_all("pre", "MakefileLexer"):
-                                        code = BeautifulSoup(highlight(i.string, MakefileLexer(), HtmlFormatter()))
+                                        code = BeautifulSoup(highlight(i.string, MakefileLexer(), HtmlFormatter()), "lxml")
                                         i.string.replace_with(code)
                         with open(filepath, "w") as f:
                                 f.write(soup.encode(formatter='html'))
