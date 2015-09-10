@@ -3,7 +3,7 @@
            xmlns:mml="http://www.w3.org/1998/Math/MathML">
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
   <?dbhtml filename="tools/index.html" ?>
-  <d:title>Tools for C Programming(gdb and gcc)</d:title>
+  <d:title>Tools for C Programming(gdb and gcc and others)</d:title>
   <d:para>
     In this chapter we will focus on how to use gcc and gdb. I do not care
     about compilers and debuggers which do not share the idea of freedom in
@@ -14,7 +14,10 @@
       xmlns="http://docbook.org/ns/docbook"
       xlink:href="http://www.gnu.org/software/gdb/documentation/">http://www.gnu.org/software/gdb/documentation/</d:link>
     and if you feeling upto it then you can go ahead and read the sources of
-    gdb and gcc as well.
+    gdb and gcc as well. This chapter is not attempt to replace that manual in
+    any way but rather I will try to present most useful and common operations
+    while debugging. In fact a lot of information in this chapter will come
+    from the documentation of the tools.
   </d:para>
   <d:para>
     Debugging is the process of removing bugs. This warrants another
@@ -197,6 +200,14 @@ int main()
           option has no effect
         </d:listitem>
         <d:listitem>
+          <d:emphasis role="bold">-shared</d:emphasis> produces a shared object
+          which can then be linked with other objects to form an executable.
+          Not all systems support this option.  For predictable results, you 
+          must also specify the same set of options used for compilation
+          (<d:code>-fpic, -fPIC</d:code> or model suboptions) when you specify
+          this linker option..
+        </d:listitem>
+        <d:listitem>
           <d:emphasis role="bold">-Wl,</d:emphasis><d:emphasis
           role="italic">option</d:emphasis> passes <d:code>option</d:code> to
           linker. If option contains commas, it is split into multiple options
@@ -311,6 +322,13 @@ int main()
           role="italic">name</d:emphasis> cancels any previous definition of
           name, either built in or provided with a <d:code>-D</d:code> option.
         </d:listitem>
+        <d:listitem>
+          <d:emphasis role="bold">-fPIC</d:emphasis> emits position-independent
+          code, suitable for dynamic linking and avoiding any limit on the size
+          of the global offset table if supported for the target machine.
+          This option makes a difference on the m68k, PowerPC and SPARC. This
+          is very important for building shared libraries.
+        </d:listitem>
       </d:itemizedlist>
       There are zillions of other useful options, which <d:code>gcc</d:code>
       gives to us. Those options are used to achieve various results. This is a
@@ -319,6 +337,569 @@ int main()
     </d:para>
   </d:sect1>
   <d:sect1>
+    <d:title>Multi-file programs, static and dynamic libraries</d:title>
+    <d:para>
+      In real-world programs none of the programs are really one file program
+      but it typically involves really much larger no. of files than
+      that. Similarly, a program is not only executable but part of it is kept
+      as library. Whether the library is static or dynamic that is a different
+      matter. Consider the following famous <d:quote>Hello, world!</d:quote>
+      program:
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  printf("Hello, world!");
+
+  return 0;
+}]]>
+      </d:programlisting>
+      Now let us compile this program in two different ways as shown below:
+      <d:screen><![CDATA[$ gcc test.c 
+shiv@machine ~ $ ls -l a.out
+-rwxr-xr-x 1 shiv shiv 8550 Sep  8 22:08 a.out
+shiv@machine ~ $ gcc -static test.c 
+shiv@machine ~ $ ls -l a.out
+-rwxr-xr-x 1 shiv shiv 877186 Sep  8 22:08 a.out]]>
+      </d:screen>
+      Now to understand what has happened here which caused the size of file to
+      blow by approximately 869k I will use a tool called <d:code>nm</d:code>.
+      If you just invoke <d:code>M-x man</d:code> followed by
+      <d:code>nm</d:code> then you can read man page of <d:code>nm</d:code> in
+      <d:code>Emacs</d:code> else you can read it in you shell by <d:code>man
+      nm</d:code>. It is a beautiful small piece of program which lists symbols
+      in an object file. If the argument is not an object file then it assumes
+      argument is <d:code>a.out</d:code>. Let us invoke <d:code>nm</d:code> on
+      the first <d:code>a.out</d:code> and see what we have.      
+    </d:para>
+    <d:screen><![CDATA[0000000000601048 B __bss_start
+0000000000601048 b completed.6973
+0000000000601038 D __data_start
+0000000000601038 W data_start
+00000000004004c0 t deregister_tm_clones
+0000000000400530 t __do_global_dtors_aux
+0000000000600e18 t __do_global_dtors_aux_fini_array_entry
+0000000000601040 D __dso_handle
+0000000000600e28 d _DYNAMIC
+0000000000601048 D _edata
+0000000000601050 B _end
+0000000000400634 T _fini
+0000000000400550 t frame_dummy
+0000000000600e10 t __frame_dummy_init_array_entry
+0000000000400780 r __FRAME_END__
+0000000000601000 d _GLOBAL_OFFSET_TABLE_
+                 w __gmon_start__
+0000000000400418 T _init
+0000000000600e18 t __init_array_end
+0000000000600e10 t __init_array_start
+0000000000400640 R _IO_stdin_used
+                 w _ITM_deregisterTMCloneTable
+                 w _ITM_registerTMCloneTable
+0000000000600e20 d __JCR_END__
+0000000000600e20 d __JCR_LIST__
+                 w _Jv_RegisterClasses
+0000000000400630 T __libc_csu_fini
+00000000004005c0 T __libc_csu_init
+                 U __libc_start_main@@GLIBC_2.2.5
+000000000040057d T main
+                 U printf@@GLIBC_2.2.5
+                 U puts@@GLIBC_2.2.5
+00000000004004f0 t register_tm_clones
+0000000000400490 T _start
+0000000000601048 D __TMC_END__]]>
+    </d:screen>
+    <d:para>
+      That is just 35 lines. The important line for us is towards bottom where
+      <d:code>main</d:code> and <d:code>printf</d:code> are located. You can
+      also notice little <d:code>puts</d:code> hiding there as well. What this
+      means is our code has these functions and they(not main) are referring to
+      <d:code>glibc_2.2.5</d:code> shared library. You can dig more information
+      about what are dependencies in terms of shared libraries by using another
+      beautiful program <d:code>ldd</d:code>. Again, you should refer to man
+      page of <d:code>ldd</d:code>. It is described in a manner which shows
+      brevity as "ldd - print shared library
+      dependencies". <d:code>ldd</d:code> can be invoked on binaries or shared
+      libraries. But it cannot be invoked on binaries which have static
+      linking. For now let us go back and visit our second
+      <d:code>a.out</d:code> binary which was produced with
+      <d:code>-static</d:code> switch to <d:code>gcc</d:code>.
+    </d:para>
+    <d:para>
+      We again invoke <d:code>nm</d:code> on it. And voila!!! Catch your
+      breath. It has following output which is truncated in between.
+    </d:para>
+    <d:screen><![CDATA[0000000000406a00 T abort
+00000000006c2240 B __abort_msg
+000000000045ebc0 W access
+000000000045ebc0 T __access
+0000000000490310 t add_fdes
+000000000043a960 t add_module.isra.1
+000000000045f300 t add_name_to_object.isra.3
+00000000006c1c28 d adds.9001
+0000000000445b40 T __add_to_environ
+00000000004682b0 t add_to_global
+0000000000408f40 t adjust_wide_data
+00000000006c2740 V __after_morecore_hook
+0000000000404980 t alias_compare
+0000000000415080 W aligned_alloc
+00000000006c27b0 b aligned_heap_area
+000000000045e2b0 T __alloc_dir
+0000000000499c40 r archfname
+00000000006c3300 b archive_stat
+00000000006c32e0 b archloaded
+00000000006c33b0 b archmapped
+0000000000410260 t arena_get2.isra.3
+... omitted
+... omitted
+0000000000433280 W wmempcpy
+0000000000433280 T __wmempcpy
+000000000045a5c0 T wmemset
+0000000000422550 T _wordcopy_bwd_aligned
+00000000004226d0 T _wordcopy_bwd_dest_aligned
+00000000004222f0 T _wordcopy_fwd_aligned
+0000000000422420 T _wordcopy_fwd_dest_aligned
+00000000004585b0 T __woverflow
+0000000000434130 W write
+0000000000434130 W __write
+0000000000434139 T __write_nocancel
+000000000045ed10 W writev
+000000000045ed10 T __writev
+00000000004585f0 T __wuflow
+00000000004587f0 T __wunderflow
+00000000006c1160 D __x86_data_cache_size
+00000000006c1170 D __x86_data_cache_size_half
+00000000006c3ed8 B __x86_prefetchw
+00000000006c1140 D __x86_raw_data_cache_size
+00000000006c1150 D __x86_raw_data_cache_size_half
+00000000006c1100 D __x86_raw_shared_cache_size
+00000000006c1110 D __x86_raw_shared_cache_size_half
+00000000006c1120 D __x86_shared_cache_size
+00000000006c1130 D __x86_shared_cache_size_half
+0000000000433fd0 W _xstat
+0000000000433fd0 T __xstat
+0000000000433fd0 T __xstat64
+0000000000493e60 r yycheck
+0000000000493f00 r yydefact
+0000000000493efb r yydefgoto
+0000000000493ee0 r yypact
+0000000000493ed7 r yypgoto
+0000000000493f29 r yyr1
+0000000000493f1b r yyr2
+0000000000493ea0 r yytable
+0000000000493f40 r yytranslate
+00000000004a8400 r zeroes
+00000000004a8560 r zeroes
+00000000006c3540 b zone_names]]>
+    </d:screen>
+    <d:para>
+      If you are beginner then I doubt your shell is even configured enough to
+      scroll up and see all the output. Thus for simplicity we you can invoke
+      it as <d:code>nm a.out|less</d:code> which will redirect the output to
+      the pager <d:code>less</d:code>. If you look carefully toward bottom you
+      can notice <d:code>wmemcpy</d:code> although not exactly. Now what is it
+      doing in our code. What has happened is that to satisfy the
+      <d:code>printf</d:code> call the required code has been stuffed in the
+      binary which is causing binary size to bloat up.
+    </d:para>
+    <d:para>
+      Now let us turn our focus for now on <d:code>ldd</d:code>. If you invoke
+      <d:code>ldd</d:code> then you will have kind of following output:
+    </d:para>
+    <d:screen><![CDATA[$ ldd a.out
+	linux-vdso.so.1 =>  (0x00007fffd8b9f000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f4bb4c18000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f4bb4ffe000)]]>
+    </d:screen>
+    <d:para>
+      The critical information for us is <d:code>libc.so.6</d:code>, which
+      is further a symbolic link(think shortcut of Windows) to
+      <d:code>lrwxrwxrwx 1 root 
+      root 12 Sep  7 20:54 /lib/x86_64-linux-gnu/libc.so.6 ->
+      libc-2.19.so</d:code>. Now let us try <d:code>ldd</d:code> on
+      <d:code>-static</d:code> version of output and we have following:
+    </d:para>
+    <d:screen><![CDATA[$ ldd a.out
+	not a dynamic executable]]>
+    </d:screen>
+    <d:para>
+      If it surprises you then do not be so. This essentially means once we
+      link to library statically then it is no longer dependent on a shared
+      library. Thus you have no output in term of dependency.
+    </d:para>
+    <d:para>
+      Now the time is for judgement call. Should you use shared libraries or
+      should we use static libraries? Usually, shared libraries are better but
+      in case you are not sure if the user of your code will have those
+      libraries on their system then you can give static binaries as
+      well. However, in free software community since we always share code we
+      have the shared libraries available to us(almost always). We will come
+      back to libraries in a bit.
+    </d:para>
+    <d:para>
+      Coming back to multi-file compilation consider two source files and one
+      header file given below:
+    </d:para>
+    <d:programlisting role="CLexer"><![CDATA[#ifndef MY_HEADER_H
+#define MY_HEADER_H
+
+void f();
+
+#endif]]>
+    </d:programlisting>
+    <d:programlisting role="CLexer"><![CDATA[#include "my_header.h"
+
+int main()
+{
+  f();
+
+  return 0;
+}]]>
+    </d:programlisting>
+    <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+void f()
+{
+  printf("In function f\n");
+}]]>
+    </d:programlisting>
+    <d:para>
+      Now assuming these are named <d:code>my_header.h, test.c</d:code> and
+      <d:code>test1.c</d:code> and all are in same directory then you can
+      compile these like <d:code>gcc test1.c test.c -o
+      whatever_name_you_want</d:code> then your output will be in that
+      file. However, this is a bad bad bad way of compiling code. Why because
+      say you change <d:code>test1.c</d:code> where you have written your
+      function <d:code>f()</d:code> then why should you compile
+      <d:code>test.c</d:code> which has not changed. Thus, the proper way to
+      compile it would be <d:code>gcc -c test.c</d:code> then <d:code>gcc -c
+      test1.c</d:code> which will produce <d:code>test.o</d:code> and
+      <d:code>test1.o</d:code>. Then you can link them together using
+      <d:code>gcc test.o test1.o -o filename</d:code>. Now if you make changes
+      to <d:code>test1.c</d:code>  the you need to just compile
+      <d:code>test1.c</d:code> and link again. This may sound cumbersome for
+      this small set of files but usually you do not do this manually but
+      rather put it in a makefile. You should read about the build tool
+      <d:code>make</d:code>. Describing make in this book is not good because
+      it is a build system. You can find GNU make's documentation at <d:link
+      xlink:href="https://www.gnu.org/software/make/manual/">https://www.gnu.org/software/make/manual/</d:link>.
+      When you will compile hundreds of files then you will see why latter
+      method is superior. In fact, makefiles are not written by hand as I have
+      said at the end of first chapter but rather a build tool is used like
+      autotools(autoconf, automake, libtool etc) or cmake or scons.
+    </d:para>
+    <d:sect2>
+      <d:title>Creating static and dynamic libraries</d:title>
+      <d:para>
+        Now that we have learned how to compile multiple files let us turn our
+        focus towards how to create libraries. First let us create static
+        libraries. Again, I will create two files for example and since we are
+        creating libraries we will not have main function. Consider following C
+        files:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+void f()
+{
+  printf("In function f\n");
+}]]>
+      </d:programlisting>
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+void f()
+{
+  printf("In function f\n");
+}]]>
+      </d:programlisting>
+      <d:para>
+        First we create two object files form these two files by executing
+        commands <d:code>gcc -c test.c</d:code> and <d:code>gcc -c
+        test1.c</d:code> which will create <d:code>test.o</d:code> and
+        <d:code>test1.o</d:code>. You are free to choose any other name as well
+        using <d:code>-o</d:code> option of <d:code>gcc</d:code>. Now we can
+        create three different libraries. <d:code>libtest.a</d:code> or
+        <d:code>libtest1.a</d:code> which will have individual object code. The
+        tool which we need to use is <d:code>ar</d:code>. Once again I would
+        request you to see its man page. <d:code>ar</d:code> is used to create,
+        modify and extract from archives. Now to create you can use a command
+        like <d:code>ar rcs libtest.a test.o</d:code> and <d:code>ar rcs
+        libtest1.a test1.o</d:code> or we can even combine both like <d:code>ar
+        rcs libtest.a test.o test1.o</d:code>. Please note that how
+        <d:code>lib</d:code> is prepended to the library name.
+      </d:para>
+      <d:para>
+        Once these libraries are created you need to create header which will
+        have prototype of these functions so that compilation phase of our
+        driver program containing main succeeds. The header may look like:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#ifndef MY_HEADER_H
+#define MY_HEADER_H
+
+void f();
+void g();
+
+#endif]]>
+      </d:programlisting>
+      <d:para>
+        and then we can write our driver program like:
+      </d:para>
+      <d:programlisting role="CLexer"><![CDATA[#include "my_header.h"
+
+int main()
+{
+  f();
+  g();
+  return 0;
+}]]>
+      </d:programlisting>
+      <d:para>
+        and then compile it like <d:code>gcc test.c -ltest -L.</d:code> since
+        our home directory is not part of environment variable
+        <d:code>LIBRARY_PATH</d:code> we need to tell
+        linker where to find the library in this case <d:code>.</d:code>
+        represents the current directory. However, if you want to add your
+        working directory to <d:code>ld</d:code> which is our linker then you
+        can export your directory where your file is by <d:code>export
+        LIBRARY_PATH=/home/shiv:$LIBRARY_PATH</d:code> where
+        <d:code>/home/shiv</d:code> is the directory containing
+        <d:code>libtest.a</d:code>. Once it is done you can compile without
+        <d:code>-L</d:code> switch.
+      </d:para>
+      <d:para>
+        Building shared library is slightly more involved. Your compilation
+        command should include <d:code>-fPIC</d:code> even on x86 CPUs like
+        <d:code>gcc -c -fPIC test.c</d:code> and <d:code>gcc -c -fPIC
+        test1.c</d:code>. Then you can create shared library like <d:code>gcc
+        -shared -Wl,-soname,libtest.so.1 -o libtest.so.1.0.1 test.o
+        test1.o</d:code> This will produce a shared library
+        <d:code>libtest.so.1.0.1</d:code>. However, if you do not use
+        <d:code>-fPIC</d:code> option and try to build a shared library then
+        you will get following error:
+      </d:para>
+      <d:screen><![CDATA[/usr/bin/ld: test1.o: relocation R_X86_64_32 against `.rodata' can not be used when making a shared object; recompile with -fPIC
+test1.o: error adding symbols: Bad value
+collect2: error: ld returned 1 exit status]]>
+      </d:screen>
+      <d:para>
+        Usually shared libraries have a version in their name in actual files
+        and symbolic links are created with library names with
+        <d:code>so</d:code> extension which stands for <d:quote>shared
+        object</d:quote> in case you have not figure that yet. So we can create
+        a symbolic link by using the command <d:code>ln -s
+        /home/shiv/libtest.so.1.0.1 /home/shiv/libtest.so</d:code>. Then you
+        can link to it and execute a program like we did for static one. If you
+        run <d:code>ldd</d:code> over this new binary then you will see its
+        dependencies in terms of shared object. Note that you can even run
+        <d:code>ldd</d:code> on shared objects as well.
+      </d:para>
+    </d:sect2>
+  </d:sect1>
+  <d:sect1>
     <d:title>Introduction to gdb</d:title>
+    <d:para>
+      First thing first. A typical output from invocation of
+      <d:code>ulimit</d:code> command on 64-bit is given below:
+      <d:screen>$ ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 19721
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 8192
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 19721
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+      </d:screen>
+      Now if you see carefully these describe upper limits on various
+      parameters. What is unlimited there by default we need not worry
+      about it. Let us see what is not unlimited and is of importance to
+      me. The very first line of output is of main concern for me. Core file
+      size of 0 will mean that core file will not be generated. Another
+      important one is maximum no. of open files. Note that this may not be a
+      problem for a typical beginner but for advanced programmers this may be a
+      problem when you are working with a sofware which can keep lots of files
+      open, for example, Hypertable, which strongly recommends higher value for
+      this. Another problem is stack size. Usually I like to keep it 32M
+      because 8M is too low. It will allow you as to how deep your recursion is
+      or how much can you allocate on stack. But it can be easily made
+      more. Now to increase core file size you can invoke a
+      <d:code>ulimit</d:code> option like  <d:code>ulimit -c unlimited</d:code>
+      or you can choose a value if you want.
+    </d:para>
+    <d:para>
+      Consider the following program:
+      <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  int *i = (int*)5;
+
+  printf("%d\n", *i);
+  return 0;
+}]]>
+      </d:programlisting>
+      It is almost guaranteed that this program will cause a SIGSEGV which
+      should dump core but core will not be dumped with default settings of
+      <d:code>ulimit</d:code> but it needs a bigger value. If you have changed
+      your core file size upper limit to some reasonable value then you will
+      see that running this program dumps core. Core files are <d:emphasis
+      role="italic">very</d:emphasis> important for debugging an application as
+      it contains entire contents of memory occupied at the instance it
+      crashes.
+    </d:para>
+    <d:para>
+      To debug a program you should use <d:code>-g</d:code> or
+      <d:code>-ggdb</d:code> while compiling your program to debug it with
+      <d:code>gdb</d:code>.
+    </d:para>
+    <d:sect2>
+      <d:title>Invoking gdb</d:title>
+      <d:para>
+        There are several ways you can invoke <d:code>gdb</d:code>. The
+        simplest is that just use <d:code>gdb</d:code> command. If you do that
+        you will see something like given below:
+      </d:para>
+      <d:screen><![CDATA[$ gdb
+GNU gdb (Ubuntu 7.7.1-0ubuntu5~14.04.2) 7.7.1
+Copyright (C) 2014 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word".]]>
+      </d:screen>
+      <d:para>
+        Thus what you see is license information, bug reporting link and
+        documentation link. But the most important for you, my reader, as a
+        beginner is last two lines. <d:code>gdb</d:code> has help built-in for
+        its commands. I would come back to this in a bit let us just finish
+        different ways of invocation first.
+      </d:para>
+      <d:para>
+        However, even before <d:code>gdb</d:code> can start we can get help
+        about what options <d:code>gdb</d:code> accepts. The typical way to get
+        help on a program on GNU/Linux is <d:code>-h</d:code> or
+        <d:code>--help</d:code>. Please note that <d:code>-h</d:code> does not
+        work always for all commands but <d:code>--help</d:code> is almost
+        guaranteed to work. Few examples, are <d:code>df</d:code> and
+        <d:code>ls</d:code> commands where <d:code>-h</d:code> makes output
+        human-readable. If you invoke <d:code>gdb -h</d:code> then you will
+        have follwing output:        
+      </d:para>
+        <d:screen><![CDATA[$ gdb -h
+This is the GNU debugger.  Usage:
+
+    gdb [options] [executable-file [core-file or process-id]]
+    gdb [options] --args executable-file [inferior-arguments ...]
+
+Selection of debuggee and its files:
+
+  --args             Arguments after executable-file are passed to inferior
+  --core=COREFILE    Analyze the core dump COREFILE.
+  --exec=EXECFILE    Use EXECFILE as the executable.
+  --pid=PID          Attach to running process PID.
+  --directory=DIR    Search for source files in DIR.
+  --se=FILE          Use FILE as symbol file and executable file.
+  --symbols=SYMFILE  Read symbols from SYMFILE.
+  --readnow          Fully read symbol files on first access.
+  --write            Set writing into executable and core files.
+
+Initial commands and command files:
+
+  --command=FILE, -x Execute GDB commands from FILE.
+  --init-command=FILE, -ix
+                     Like -x but execute commands before loading inferior.
+  --eval-command=COMMAND, -ex
+                     Execute a single GDB command.
+                     May be used multiple times and in conjunction
+                     with --command.
+  --init-eval-command=COMMAND, -iex
+                     Like -ex but before loading inferior.
+  --nh               Do not read ~/.gdbinit.
+  --nx               Do not read any .gdbinit files in any directory.
+
+Output and user interface control:
+
+  --fullname         Output information used by emacs-GDB interface.
+  --interpreter=INTERP
+                     Select a specific interpreter / user interface
+  --tty=TTY          Use TTY for input/output by the program being debugged.
+  -w                 Use the GUI interface.
+  --nw               Do not use the GUI interface.
+  --tui              Use a terminal user interface.
+  --dbx              DBX compatibility mode.
+  --xdb              XDB compatibility mode.
+  --quiet            Do not print version number on startup.
+
+Operating modes:
+
+  --batch            Exit after processing options.
+  --batch-silent     Like --batch, but suppress all gdb stdout output.
+  --return-child-result
+                     GDB exit code will be the child's exit code.
+  --configuration    Print details about GDB configuration and then exit.
+  --help             Print this message and then exit.
+  --version          Print version information and then exit.
+
+Remote debugging options:
+
+  -b BAUDRATE        Set serial port baud rate used for remote debugging.
+  -l TIMEOUT         Set timeout in seconds for remote debugging.
+
+Other options:
+
+  --cd=DIR           Change current directory to DIR.
+
+At startup, GDB reads the following init files and executes their commands:
+   * system-wide init file: /etc/gdb/gdbinit
+
+For more information, type "help" from within GDB, or consult the
+GDB manual (available as on-line info or a printed manual).
+Report bugs to "<http://www.gnu.org/software/gdb/bugs/>".]]>
+        </d:screen>
+        <d:para>
+          This is self-explanatory and I will not attempt to describe it and it
+          is covered very well in documentation. One more point I would like to
+          give is that you do not necessarily go to gnu.org for
+          documentation. Rather you should install <d:code>gdb-doc</d:code>
+          package on your GNU/Linux system. This has an advantage that your
+          documentation will be in sync with the version of
+          <d:code>gdb</d:code> installed on your system unless you manually
+          install it by source. The help files can be found in
+          <d:code>/usr/share/doc/gdb/</d:code> by default. Then either you can
+          read the <d:code>pdf</d:code> version or <d:code>info</d:code>
+          manual(you can read this in Emacs).
+        </d:para>
+        <d:para>
+          One of the most common ways to invoke <d:code>gdb</d:code> with
+          program name as argument i.e. <d:code>gdb prog_name</d:code>. You
+          can also specify core file with program name i.e. <d:code>gdb
+          prog_name core</d:code> and the <d:code></d:code> for program
+          <d:code>prog_name</d:code> will be loaded for debugging. You can also
+          supply PID(process ID, which you get in second column when you
+          execute <d:code>ps -eaf</d:code>) with <d:code>prog_name</d:code> and
+          if that program with that PID is running then <d:code></d:code> will
+          allow you to debug that.
+        </d:para>
+        <d:para>
+          There is another way to invoke <d:code>gdb</d:code> and that is
+          <d:code>gdb --args prog_name args</d:code> which will invoke
+          <d:code>gdb</d:code> on <d:code>prog_name</d:code> with arguments
+          <d:code>args</d:code>.
+        </d:para>
+    </d:sect2>
   </d:sect1>
 </d:chapter>
