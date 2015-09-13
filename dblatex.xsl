@@ -50,12 +50,12 @@
   <!-- Font's available at: -->
   <!-- http://iweb.dl.sourceforge.net/project/sourcesans.adobe/SourceSansPro_FontsOnly-1.050.zip -->
   <!-- http://iweb.dl.sourceforge.net/project/sourcecodepro.adobe/SourceCodePro_FontsOnly-1.017.zip -->
-  <xsl:param name="xetex.font">
-    <xsl:text>\setmainfont[Ligatures=TeX,Scale=1]{Latin Modern Roman}
+  <!--xsl:param name="xetex.font">
+    <xsl:text>\setmainfont[Ligatures=TeX,Scale=1]{Times}
     </xsl:text>
     <xsl:text>\setsansfont[Ligatures=TeX,Scale=.95]{Latin Modern Sans}
     </xsl:text>
-    <xsl:text>\setmonofont{Latin Modern Mono}
+    <xsl:text>\setmonofont{Courier 10 Pitch}
     </xsl:text>
-  </xsl:param>
+  </xsl:param-->
 </xsl:stylesheet>

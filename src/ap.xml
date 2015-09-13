@@ -4,26 +4,29 @@
   <?xml-stylesheet href="../css/style.css" type="text/css"?>
     <?dbhtml filename="ap/index.html" ?>
       <d:title>Arrays and Pointers</d:title>
-      <d:para>In this chapter I am going to tell you about two very powerful
-	constructs of C programming; arrays and pointers. Arrays are what they
-	are; array of some data type. There can be an array of any complete
-	type. You cannot create an array of any incomplete type, therefore, an
-	array of type void is not allowed. There are fixed arrays and also
-	variable length arrays. C99 inroduced variable length arrays before
-	that arrays were only of fixed length. However, you can increase the
-	capacity of a fixed sized array using <d:code>realloc()</d:code>
-	function. There is single-dimensional array and then there is
-	multi-dimensional array. We will first go through single-dimensional
-	array then multi-dimensional.
+      <d:para>
+        In this chapter I am going to tell you about two very powerful
+	      constructs of C programming; arrays and pointers. Arrays are what they
+	      are; array of some data type. There can be an array of any complete
+	      type. You cannot create an array of any incomplete type, therefore, an
+	      array of type void is not allowed. There are fixed arrays and also
+	      variable length arrays. C99 inroduced variable length arrays before
+	      that arrays were only of fixed length. However, you can increase the
+	      capacity of a fixed sized array using <d:code>realloc()</d:code>
+	      function. There is single-dimensional array and then there is
+	      multi-dimensional array. We will first go through single-dimensional
+	      array then multi-dimensional.
       </d:para>
       <d:sect1>
         <d:indexterm>
           <d:primary>arrays</d:primary>
         </d:indexterm>
-	<d:title>Single-Dimensional Array</d:title>
-	<d:para>Let us first create a basic array and then see how to access it
-	elements:</d:para>
-	<d:programlisting role="CLexer">//Author: Shiv S. Dayal
+	      <d:title>Single-Dimensional Array</d:title>
+	      <d:para>
+          Let us first create a basic array and then see how to access it
+	      elements:
+        </d:para>
+	      <d:programlisting role="CLexer">//Author: Shiv S. Dayal
 //Description : Demo of array.
 
 #include &lt;stdio.h>
@@ -48,9 +51,10 @@ int main()
   }
 
   return 0;
-}</d:programlisting>
-and the output is:
-<d:screen>b[0]=0
+}
+        </d:programlisting>
+        and the output is:
+        <d:screen>b[0]=0
 b[1]=1
 b[2]=2
 b[3]=3
@@ -65,26 +69,35 @@ a[3]=0
 a[4]=0
 a[5]=0
 a[6]=0
-a[7]=0</d:screen>
-<d:para>Here you see array subscripting operator in action. I have not covered
-this particular operator in fourth chapter so it becomes my duty to explain it
-here. There are two parts here one outside subscript and another outside. The
-expression which is outside will have type “const pointer to object type”. This
-means that array’s base address is fixed and cannot be changes. The expression
-which is inside will have integer type. The result of these two has type
-“type”. We will see pointer arithmetic with binary + operator in the pointers
-section which is equivalent to subscript expression.</d:para>
-<d:para>As you can see array a is fixed length array while array b is a
-variable length array. You are not allowed to initialize variable length arrays
-at the time of declaration. Notice that array indices do not start from 1 but
-0. Never ever make the mistake of thinking that array indices start from 1. You
-can also initialize an array as <d:code>a[]={1, 2, 3}; or a[3]={1, 2,
-3};</d:code>. The array elements would be <d:code>a[0], a[1]</d:code> and
-<d:code>a[2]</d:code> in both the cases. Notice how assignment is done to
-elements of second array inside for loop one by one using the bracket operator
-or subscripting operator. The array elements are always in sequence in
-memory. A conceptual diagram is given below for first three elements of above
-array. Here 1 means first element.</d:para>
+a[7]=0
+        </d:screen>
+        <d:para>
+          Here you see array subscripting operator in action. I have not
+          covered this particular operator in fourth chapter so it becomes my
+          duty to explain it here. There are two parts here one outside
+          subscript and another outside. The expression which is outside will
+          have type <d:quote>const pointer to object type</d:quote>. This means
+          that array's base address is fixed and cannot be changes. The
+          expression which is inside will have integer type. The result of
+          these two has type <d:quote>type</d:quote>. We will see pointer
+          arithmetic with binary + operator in the pointers section which is
+          equivalent to subscript expression.
+        </d:para>
+        <d:para>
+          As you can see array <d:code>a</d:code> is fixed length array while
+          array <d:code>b</d:code> is a variable length array. You are not
+          allowed to initialize variable length arrays at the time of
+          declaration. Notice that array indices do not start from 1 but
+          0. Never ever make the mistake of thinking that array indices start
+          from 1. You can also initialize an array as <d:code>a[]={1, 2, 3}; or
+          a[3]={1, 2, 3};</d:code>. The array elements would be <d:code>a[0],
+          a[1]</d:code> and <d:code>a[2]</d:code> in both the cases. Notice how
+          assignment is done to elements of second array inside for loop one by
+          one using the bracket operator or subscripting operator. The array
+          elements are always in sequence in memory. A conceptual diagram is
+          given below for first three elements of above array. Here 1 means
+          first element.
+        </d:para>
       <d:figure>
         <d:title>An Array's Memory Diagram</d:title>
         <d:mediaobject>
@@ -93,16 +106,87 @@ array. Here 1 means first element.</d:para>
           </d:imageobject>
         </d:mediaobject>
       </d:figure>
-<d:para>Array elements are always(not always but most commonly. It is so common
-that I have used always.) accessed using their indices so order of retrieval is
-<mml:math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mml:mtext>O(1)</mml:mtext>
-</mml:math>.(This is known as big-O notation. You can find it in any Data
-Structure and Algorithm book. The above program will not compile using old compilers
-which do not support C99 standard like Turbo C++. Also, you may require to pass
-the flag <d:code>-std=c99</d:code> or <d:code>-std=c11</d:code> to some versions of gcc. For variable length
-arrays it is not necessary to declare the size in advance. Even, input to
-program from other sources will do.</d:para>
+      <d:sect2>
+        <d:title>Notes on allocation of array</d:title>
+        <d:para>
+          An array typically goes on stack if it is a local variable or heap if
+          used as a pointer. However, when it is <d:code>static</d:code> then
+          it will go to data segment. However, consider the following program:
+        </d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  static long long a[3000000];
+  return 0;
+}]]>
+        </d:programlisting>
+        <d:para>
+          and if I check the binary size then it is:
+        </d:para>
+        <d:screen><![CDATA[$ ls -al a.out 
+-rwxr-xr-x 1 shiv shiv 8531 Sep 11 07:03 a.out]]>
+        </d:screen>
+        <d:para>
+          so nothing surprising here. But hold your breath for you are in for a
+          massive surprise. Suppose I change the program to:
+        </d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  static long long a[3000000] = {0, 1, 2};
+  return 0;
+}]]>
+        </d:programlisting>
+        <d:para>
+          if I check the size now then, well, we have following:
+        </d:para>
+        <d:screen><![CDATA[$ ls -al a.out 
+-rwxr-xr-x 1 shiv shiv 24008571 Sep 11 07:06 a.out]]>
+        </d:screen>
+        <d:para>
+          So you can see that size of binary has inflated to approximately 23MB
+          because we partially initialized the array. Thus you should never
+          partially initialize such an array. The reason for this is the way
+          code is generated by compiler. If you do not initialize then it will
+          be all marked as 0s but if you partially initialize then compiler
+          will generate 0s for each of those because qualifier is static. You
+          can examine the binary and see that data segment is full of
+          these. Now another curious fact you can observe from following code
+          is:
+        </d:para>
+        <d:programlisting role="CLexer"><![CDATA[#include <stdio.h>
+
+int main()
+{
+  long long a[3000000] = {0, 1, 2};
+  for (int i=0; i<10; i++)
+  {
+    printf("%Ld\n", a[i]);
+  }
+  return 0;
+}]]>
+        </d:programlisting>
+        <d:para>
+          Now this code will cause a SIGSEGV because you have overflown the
+          stack. But previous code will work fine even though array is
+          statically initialized.
+        </d:para>
+      </d:sect2>
+      <d:para>
+        Array elements are always(not always but most commonly. It is so common
+        that I have used always.) accessed using their indices so order of
+        retrieval is <mml:math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mml:mtext>O(1)</mml:mtext>
+        </mml:math>.(This is known as big-O notation. You can find it in any Data
+        Structure and Algorithm book. The above program will not compile using
+        old compilers which do not support C99 standard like Turbo C++. Also,
+        you may require to pass the flag <d:code>-std=c99</d:code> or
+        <d:code>-std=c11</d:code> to some versions of gcc. For variable length
+        arrays it is not necessary to declare the size in advance. Even, input
+        to program from other sources will do.
+      </d:para>
 <d:programlisting role="CLexer">//Author: Shiv S. Dayal
 //Description : Demo of array.
 
@@ -223,6 +307,8 @@ year for example. With the current information given to you, you should be able
 to do all these easily. As shown for array a it is not really a single array
 but an array of array. How we can read this is array a has two arrays each of
 which have two integers.</d:para>
+<d:sect1>
+</d:sect1>
       </d:sect1>
       <d:sect1>
         <d:indexterm>
@@ -712,7 +798,7 @@ int* const i;  //constant data pointer is not
 const int* const i; //both are const</d:programlisting>
 <d:para>The way to read it is you draw a vertical line where asterisk(*) is
 there and the value associated with const is constant. Whenever you need use a
-constant freely. Try to use constants more and more. Also, prefre them to
+constant freely. Try to use constants more and more. Also, prefer them to
 following:</d:para>
 <d:programlisting role="CLexer">#define MAX 10</d:programlisting>
 <d:para>As told and shown to you it will replace <d:code>MAX</d:code> with 10

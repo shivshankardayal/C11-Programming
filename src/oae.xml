@@ -74,7 +74,7 @@
           <d:code>extern</d:code>.
         </d:para>
       </d:sect1>
-      <d:sect1>
+      <d:sect1 id="storage">
         <d:indexterm>
           <d:primary>storage duration of objects</d:primary>
         </d:indexterm>

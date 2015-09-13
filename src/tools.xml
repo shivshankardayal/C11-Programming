@@ -797,9 +797,10 @@ Type "apropos word" to search for commands related to "word".]]>
         guaranteed to work. Few examples, are <d:code>df</d:code> and
         <d:code>ls</d:code> commands where <d:code>-h</d:code> makes output
         human-readable. If you invoke <d:code>gdb -h</d:code> then you will
-        have follwing output:        
+        have following output(will vary with your version of
+        <d:code>gdb</d:code>):
       </d:para>
-        <d:screen><![CDATA[$ gdb -h
+      <d:screen><![CDATA[$ gdb -h
 This is the GNU debugger.  Usage:
 
     gdb [options] [executable-file [core-file or process-id]]
@@ -900,6 +901,42 @@ Report bugs to "<http://www.gnu.org/software/gdb/bugs/>".]]>
           <d:code>gdb</d:code> on <d:code>prog_name</d:code> with arguments
           <d:code>args</d:code>.
         </d:para>
+    </d:sect2>
+    <d:sect2>
+      <d:title>Getting help</d:title>
+      <d:para>
+        Once you are on <d:code>gdb</d:code> prompt after <d:code>gdb</d:code>
+        has initialized you have a lot of help from <d:code>gdb</d:code>
+        available at your disposal. To see help topics you can type help on
+        <d:code>gdb</d:code> prompt and you will see something like below:
+      </d:para>
+      <d:screen><![CDATA[(gdb) help
+List of classes of commands:
+
+aliases -- Aliases of other commands
+breakpoints -- Making program stop at certain points
+data -- Examining data
+files -- Specifying and examining files
+internals -- Maintenance commands
+obscure -- Obscure features
+running -- Running the program
+stack -- Examining the stack
+status -- Status inquiries
+support -- Support facilities
+tracepoints -- Tracing of program execution without stopping the program
+user-defined -- User-defined commands
+
+Type "help" followed by a class name for a list of commands in that class.
+Type "help all" for the list of all commands.
+Type "help" followed by command name for full documentation.
+Type "apropos word" to search for commands related to "word".
+Command name abbreviations are allowed if unambiguous.]]>
+      </d:screen>
+      <d:para>
+        Thus it is not hard to find if you want to know how to put a breakpoint
+        in a program using <d:code>gdb</d:code>. <d:code>help
+        breakpoints</d:code> will show you everything related to breakpoints.
+      </d:para>
     </d:sect2>
   </d:sect1>
 </d:chapter>
