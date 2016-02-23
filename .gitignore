@@ -5,3 +5,7 @@ build/
 *.pdf
 *.png
 pdf/
+META-INF/
+OEBPS/
+*.epub
+mimetype

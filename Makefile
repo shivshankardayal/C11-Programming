@@ -25,3 +25,9 @@ fop:
 #	perl -pi -e "s/<html><body>//g;" src/c.fo
 #	perl -pi -e "s/<\/body><\/html>//g;" src/c.fo
 	cd src && fop c.fo c.pdf 
+
+epub: src/*.xml epub.xsl Makefile
+	xsltproc --xinclude --stringparam html.stylesheet "../css/bootstrap.min.css ../css/bootstrap-responsive.min.css ../css/styled.min.css" --path "src css" epub.xsl c.xml
+	cp -r images OEBPS
+	./epub.py
+	zip -r c.epub mimetype css META-INF/ OEBPS/

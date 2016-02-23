@@ -307,8 +307,6 @@ year for example. With the current information given to you, you should be able
 to do all these easily. As shown for array a it is not really a single array
 but an array of array. How we can read this is array a has two arrays each of
 which have two integers.</d:para>
-<d:sect1>
-</d:sect1>
       </d:sect1>
       <d:sect1>
         <d:indexterm>
