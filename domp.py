@@ -28,10 +28,10 @@ def setup(files):
         p.start()
 
 def process(filepath):
-    print "in process"
-    #print filepath
+    #print "in process"
+    print filepath
     with open(filepath) as f:
-            print "opened " + filepath
+            #print "opened " + filepath
             l = filepath.split('/')
             name = ''
             if(l[len(l) -2]) == 'build':
@@ -98,7 +98,7 @@ def process(filepath):
                    code = BeautifulSoup(highlight(i.string, MakefileLexer(), HtmlFormatter()), "lxml")
                    i.string.replace_with(code)
             with open(filepath, "w") as f:
-                   print "Hello"
+                   #print "Hello"
                    f.write(soup.encode(formatter='html'))
 
 findReplace("build/", "mml:", "", "index.html")
