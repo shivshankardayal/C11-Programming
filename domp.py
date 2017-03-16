@@ -86,18 +86,18 @@ def process(filepath):
 #                                        i.string.replace_with(code)
             soup = BeautifulSoup(soup.renderContents(), "lxml")
 #syntax highlighting is not needed for algebra
-#            for i in soup.find_all("pre", "CLexer"):
-#                   #print i.string
-#                   code = BeautifulSoup(highlight(i.string, CLexer(), HtmlFormatter()), "lxml")
-#                   i.string.replace_with(code)
-#            soup = BeautifulSoup(soup.renderContents(), "lxml")
-#            for i in soup.find_all("pre", "ALexer"):
-#                   code = BeautifulSoup(highlight(i.string, CObjdumpLexer(), HtmlFormatter()), "lxml")
-#                   i.string.replace_with(code)
-#            soup = BeautifulSoup(soup.renderContents(), "lxml")
-#            for i in soup.find_all("pre", "MakefileLexer"):
-#                   code = BeautifulSoup(highlight(i.string, MakefileLexer(), HtmlFormatter()), "lxml")
-#                   i.string.replace_with(code)
+            for i in soup.find_all("pre", "CLexer"):
+                   #print i.string
+                   code = BeautifulSoup(highlight(i.string, CLexer(), HtmlFormatter()), "lxml")
+                   i.string.replace_with(code)
+            soup = BeautifulSoup(soup.renderContents(), "lxml")
+            for i in soup.find_all("pre", "ALexer"):
+                   code = BeautifulSoup(highlight(i.string, CObjdumpLexer(), HtmlFormatter()), "lxml")
+                   i.string.replace_with(code)
+            soup = BeautifulSoup(soup.renderContents(), "lxml")
+            for i in soup.find_all("pre", "MakefileLexer"):
+                   code = BeautifulSoup(highlight(i.string, MakefileLexer(), HtmlFormatter()), "lxml")
+                   i.string.replace_with(code)
             with open(filepath, "w") as f:
                    #print "Hello"
                    f.write(soup.encode(formatter='html'))
