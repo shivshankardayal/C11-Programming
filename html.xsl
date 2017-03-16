@@ -27,12 +27,14 @@
   
   <xsl:template name="user.head.content">
     <xsl:copy-of select="document('analytics.js', /)"/>
-    <xsl:copy-of select="document('mathjax.js', /)"/>
+    <!--xsl:copy-of select="document('mathjax_config.js', /)"/-->
+    <!--xsl:copy-of select="document('mathjax.js', /)"/-->
+
   </xsl:template>
   <xsl:template name="user.footer.navigation">
     <br/>
-    <p style="text-align: center;">&#xa9; 2010, 2015 Shiv S. Dayal. <a href="http://10hash.com">10hash.com</a>.
-    GNU FDL license is applicable where not stated.</p>
+    <p style="text-align: center;">&#xa9; 2010, 2016 Shiv S. Dayal. <a href="http://10hash.com">10hash.com</a>.
+    GNU FDL license v1.3 or later is applicable where not stated.</p>
   </xsl:template>
 
   <!-- Set Highlighting to 1 to activate -->
@@ -273,6 +275,18 @@
     </div>
   </xsl:if>
 </xsl:template>
-
+<xsl:param name="generate.toc">
+ appendix  nop
+ article   toc,title
+ book      toc,title
+ chapter   toc
+ part      nop
+ preface   nop
+ qandadiv  nop
+ qandaset  nop
+ reference toc,title
+ section   nop
+ set       toc
+</xsl:param>
 </xsl:stylesheet>
 

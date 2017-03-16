@@ -39,7 +39,6 @@ def process(filepath):
             s = f.read()
             #s = s.replace(find, replace)
             s = s.replace("index.html", "")
-            s = s.replace("mml:", "")
             soup = BeautifulSoup(s, "lxml")
 
             for i in soup.find_all("table", attrs={"summary": "Navigation header"}):
@@ -78,27 +77,27 @@ def process(filepath):
                    j.contents[0].contents[1].insert(0, link)
                    j.contents[1].contents[1].clear()
                    j.contents[1].contents[1].insert(0, link)
-                # Now mathjax is part of html
-            p = BeautifulSoup("<h3><a href='/'>Site Home</a></h3>", "lxml")#<p class='alert alert-info'>Please see <a href=\"http://caniuse.com/#feat=mathml\">http://caniuse.com/#feat=mathml</a> if your browser supports MathML because certain sections of this book rely on MathML. If your browser does not support MathML please install Firefox from <a href=\"https://www.mozilla.org\">Mozilla</a> because AFAIK Firefox supports MathML.</p>", "lxml")
+                # Now mathjax removed
+            p = BeautifulSoup("<h3><a href='/'>Site Home</a></h3><p class='alert alert-danger'>Please see <a href=\"http://caniuse.com/#feat=mathml\">http://caniuse.com/#feat=mathml</a> if your browser supports MathML because certain sections of this book rely on MathML. If your browser does not support MathML please install Firefox from <a href=\"https://www.mozilla.org\">Mozilla</a> because AFAIK Firefox supports MathML.</p>", "lxml")
             soup.body.insert(0, p)
             soup = BeautifulSoup(soup.renderContents(), "lxml")
-            for i in soup.find_all("pre", "CommonLispLexer"):
-                   code = BeautifulSoup(highlight(i.string, CommonLispLexer(), HtmlFormatter()))
-                   i.string.replace_with(code)
+#                                for i in soup.find_all("pre", "CommonLispLexer"):
+#                                        code = BeautifulSoup(highlight(i.string, CommonLispLexer(), HtmlFormatter()))
+#                                        i.string.replace_with(code)
             soup = BeautifulSoup(soup.renderContents(), "lxml")
 #syntax highlighting is not needed for algebra
-            for i in soup.find_all("pre", "CLexer"):
-                   #print i.string
-                   code = BeautifulSoup(highlight(i.string, CLexer(), HtmlFormatter()), "lxml")
-                   i.string.replace_with(code)
-            soup = BeautifulSoup(soup.renderContents(), "lxml")
-            for i in soup.find_all("pre", "ALexer"):
-                   code = BeautifulSoup(highlight(i.string, CObjdumpLexer(), HtmlFormatter()), "lxml")
-                   i.string.replace_with(code)
-            soup = BeautifulSoup(soup.renderContents(), "lxml")
-            for i in soup.find_all("pre", "MakefileLexer"):
-                   code = BeautifulSoup(highlight(i.string, MakefileLexer(), HtmlFormatter()), "lxml")
-                   i.string.replace_with(code)
+#            for i in soup.find_all("pre", "CLexer"):
+#                   #print i.string
+#                   code = BeautifulSoup(highlight(i.string, CLexer(), HtmlFormatter()), "lxml")
+#                   i.string.replace_with(code)
+#            soup = BeautifulSoup(soup.renderContents(), "lxml")
+#            for i in soup.find_all("pre", "ALexer"):
+#                   code = BeautifulSoup(highlight(i.string, CObjdumpLexer(), HtmlFormatter()), "lxml")
+#                   i.string.replace_with(code)
+#            soup = BeautifulSoup(soup.renderContents(), "lxml")
+#            for i in soup.find_all("pre", "MakefileLexer"):
+#                   code = BeautifulSoup(highlight(i.string, MakefileLexer(), HtmlFormatter()), "lxml")
+#                   i.string.replace_with(code)
             with open(filepath, "w") as f:
                    #print "Hello"
                    f.write(soup.encode(formatter='html'))
