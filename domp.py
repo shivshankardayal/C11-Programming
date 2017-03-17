@@ -39,6 +39,8 @@ def process(filepath):
             s = f.read()
             #s = s.replace(find, replace)
             s = s.replace("index.html", "")
+            s = s.replace("<html>", "<!DOCTYPE html>")
+            s = s.replace('<meta', "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta")
             soup = BeautifulSoup(s, "lxml")
 
             for i in soup.find_all("table", attrs={"summary": "Navigation header"}):
