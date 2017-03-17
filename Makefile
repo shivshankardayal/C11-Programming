@@ -9,11 +9,15 @@ html: src/*.xml html.xsl Makefile
 	cp -r build/* /var/www/c-programming/
 
 
-pdf: src/*.xml dblatex.xsl Makefile
-	rm -rf pdf
+pdf: src/*.xml dblatex.xsl Makefile 
+	#rm -rf pdf
 	cp -r src pdf	
-	perl -pi -e "s/\.png\"/\.pdf\"/g;" pdf/*.xml	
-	dblatex -bxetex -T db2latex -p dblatex.xsl -P preface.tocdepth="1" pdf/c.xml
+	dblatex -bxetex -T db2latex -p dblatex.xsl -P preface.tocdepth="1" -t tex src/c.xml -o pdf/c.tex
+	perl -pi -e "s/\.png/\.pdf/g;" pdf/c.tex
+	./lstlisting_to_minted.sh
+	cd pdf && xelatex -shell-escape c.tex #&& xelatex -shell-escape c.tex
+	cd pdf && makeindex c.tex
+	cd pdf && xelatex -shell-escape c.tex #&& xelatex -shell-escape c.tex
 
 latex:
 	dblatex -bxetex -T db2latex -p dblatex.xsl -P preface.tocdepth="1" -t tex src/c.xml
@@ -29,7 +33,7 @@ fop:
 	cd src && fop c.fo c.pdf 
 
 epub: src/*.xml epub.xsl Makefile
-	xsltproc --xinclude --stringparam html.stylesheet "../css/bootstrap.min.css ../css/bootstrap-responsive.min.css ../css/styled.min.css" --path "src css" epub.xsl c.xml
-	cp -r images OEBPS
+	xsltproc --xinclude --stringparam html.stylesheet "../css/one.min.css" --path "src css" epub.xsl c.xml
+	cp -r images/*.png OEBPS
 	./epub.py
 	zip -r c.epub mimetype css META-INF/ OEBPS/
