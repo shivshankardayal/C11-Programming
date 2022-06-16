@@ -188,7 +188,7 @@
             <td>_Thread_local</td>
           </tr>
         </table>
-      </d:para> 
+      </d:para>
     </d:sect1>
     <d:sect1>
       <d:indexterm>
@@ -211,13 +211,13 @@
         age</d:code>. Please read this section carefully and make sure
         understand the rules for naming identifiers. Later at the end of
         chapter there are some simple problems to work on.
-      </d:para> 
+      </d:para>
     </d:sect1>
     <d:sect1>
       <title xmlns="http://docbook.org/ns/docbook">Programming</title>
       <d:para>Now is time for some programming. Let us revisit our first
       program and try to understand what it does. Here I am giving code once
-      again for quick reference:</d:para> 
+      again for quick reference:</d:para>
       <d:programlisting role="CLexer">//My first program
 /* Author: Shiv Shankar Dayal
    Description: This program does nothing.*/
@@ -241,12 +241,12 @@ which is nothing but 0 after return of our program.</d:para>
 complete program and we can learn a lot from it about C. The first line is a
 comment. Whenever C compiler parses C programs and it encounters
 <d:code>//</d:code> it ignores rest of line as code i.e. it does not compile
-them. This type of single line comment were introduced in C99 standard and 
+them. This type of single line comment were introduced in C99 standard and
 if your compiler is really old the compiler may give you error message about
 it. The second and third lines are also comments. Anything between
 <d:code>/*</d:code> and <d:code>*/</d:code> is ignored like
 <d:code>//</d:code>. However, be careful of something like <d:code>/* some
-comment */ more comment */</d:code>. Such comments will produce error 
+comment */ more comment */</d:code>. Such comments will produce error
 messages and your program will fail to compile.</d:para>
 <d:para>Comments are very integral part of programming. They are used to
 describe various things. You can write whatever you want. They may also be used
@@ -282,13 +282,13 @@ more level of braces have got that particular block scope. Scope here means
 that when there will be a closing brace that particular variable which is valid
 in that scope will cease to exist. However, we do not have to worry about that
 yet as we do not have any variable. Just note that a corresponding closing
-brace will be the end of main function.</d:para> 
+brace will be the end of main function.</d:para>
 <d:para>Next line is <d:code>return 0;</d:code> This means whoever has called
 <d:code>main()</d:code> will get a 0 as return is returning 0. In this case,
 receiver is the shell or operating system which has invoked the very
 program. The semicolon is called the terminator and used also on Java or C++
 for example. The very requirement of semicolon is to terminate the statement
-and move on to next statement.</d:para> 
+and move on to next statement.</d:para>
 <d:para>However, the program shown does not do much. Let us write a program
 which has some more functionality and we can explore more of C. So here is a
 program which takes two integers as input from users and presents their sum as
@@ -373,7 +373,7 @@ variable no. of arguments. In the first two <d:code>printf()</d:code>
 statements we just print the format-string so that is simple. However, in the
 last one, we have format as <d:code>%d</d:code> which signifies a decimal
 integer. The integers printed are in the same order in which they were
-supplied.</d:para> 
+supplied.</d:para>
 <d:para>Time for some input. <d:code>scanf()</d:code> is scan function which
 scans for keyboard input. As by now you know that <d:code>%d</d:code> is for
 decimal integer but I have not said <d:code>x</d:code> or
@@ -384,7 +384,7 @@ memory. <d:code>scanf()</d:code> needs the memory address to which it can write
 the contents to. You will see <d:code>&amp;</d:code> operator in action later
 when we deal with pointers. Just remember for now that to use a simple variable
 with <d:code>scanf()</d:code> requires <d:code>&amp;</d:code> before its
-name.</d:para> 
+name.</d:para>
 <d:para>Now I am going to take you on a tour of data types. Till now we have
 just seen only <d:code>int</d:code>. So onward to data types.</d:para>
 </d:sect1>
@@ -399,7 +399,7 @@ just seen only <d:code>int</d:code>. So onward to data types.</d:para>
     Types(&#167; iso.6.2.5) to (&#167; iso.6.2.8). Since C is statically typed
     the sizes of types have to be known at compile time. There are four types
     of data types. Integral, floating-point, arrays and pointers. There are two
-    user-defined data types; structures and unions. Here, I will discuss the 
+    user-defined data types; structures and unions. Here, I will discuss the
     integral and floating-point types and leave the rest for later.
     The integral types are <d:code>char, short int, int, long</d:code> and
     <d:code>long long</d:code> and floating-point types are <d:code>float,
@@ -408,7 +408,7 @@ just seen only <d:code>int</d:code>. So onward to data types.</d:para>
     of data types but do not affect their memory requirements. By default all
     basic data types are signed in nature and you must qualify you variables
     with <d:code>unsigned</d:code> if you want that behavior.
-    <d:code>short</d:code> and 
+    <d:code>short</d:code> and
     <d:code>long</d:code> are modifiers for size which the data type
     occupies. The ranges of integral data types directly reflect their memory
     requirements and if you know how much memory they are going to occupy you
@@ -443,38 +443,15 @@ just seen only <d:code>int</d:code>. So onward to data types.</d:para>
       </d:listitem>
       <d:listitem>
         <d:para>minimum value for an object of type <d:code>signed char</d:code></d:para>
-        <d:para><d:code>SCHAR_MIN</d:code> -127 <d:inlineequation>
-        <mml:math>
-          <mml:mrow>
-            <mml:mo>-</mml:mo>
-            <mml:msup>
-              <mml:mn>2</mml:mn>
-              <mml:mn>7</mml:mn>
-            </mml:msup>
-            <mml:mtext> </mml:mtext>
-            <mml:mo>-</mml:mo>
-            <mml:mtext> 1</mml:mtext>
-          </mml:mrow>
-        </mml:math>
-      </d:inlineequation>
+        <d:para><d:code>SCHAR_MIN</d:code> -127 <d:inlineequation><d:mathphrase>-(2^7 - 1)</d:mathphrase></d:inlineequation>
         </d:para>
       </d:listitem>
       <d:listitem>
         <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
         <code>signed char</code></para>
-        <para xmlns="http://docbook.org/ns/docbook"><code>SCHAR_MAX</code> 127 <inlineequation>
-        <mml:math>
-          <mml:mrow>
-            <mml:msup>
-              <mml:mn>2</mml:mn>
-              <mml:mn>7</mml:mn>
-            </mml:msup>
-            <mml:mtext> </mml:mtext>
-            <mml:mo>-</mml:mo>
-            <mml:mtext> 1</mml:mtext>
-          </mml:mrow>
-        </mml:math>
-        </inlineequation></para>
+        <para xmlns="http://docbook.org/ns/docbook"><code>SCHAR_MAX</code> 127
+        <d:inlineequation><d:mathphrase>2^7 - 1</d:mathphrase></d:inlineequation>
+        </para>
       </d:listitem>
       <d:listitem>
         <para xmlns="http://docbook.org/ns/docbook">maximum value for an object of type
@@ -972,10 +949,10 @@ The sum of c1 and c2 as integers is 99.</d:screen>
     Floating point representation is a lot more complicated in computers than
     it is for us human beings. C specification takes floating points
     description and specification from <d:emphasis role="bold">IEC
-    60559:1989</d:emphasis> which is a standard for 
+    60559:1989</d:emphasis> which is a standard for
     floating point arithmetic which is same as IEEE 754. In C there are three
     types of floating point numbers <d:code>float, double</d:code> and
-    <d:code>long double</d:code>. These are  
+    <d:code>long double</d:code>. These are
     described in specification in (&#xa7; iso.5.2.4.2.2).
   </d:para>
   <d:para>
@@ -1077,7 +1054,7 @@ int main()
   printf("You entered %f %lf %Lf\n", f, d, ld);
 
   return 0;
-}      
+}
     </d:programlisting>
     <d:para>
       If you run this you might have following output:
@@ -1088,7 +1065,7 @@ You entered 3.400000 5.600000 7.800000</d:screen>
 <d:para>
   By default these print upto six significant digits but doubles have double
   precision as we have studied.
-</d:para>    
+</d:para>
   </d:sect3>
 </d:sect2>
 </d:sect1>

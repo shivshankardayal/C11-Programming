@@ -2,10 +2,39 @@
 <xsl:stylesheet  
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0"
     xmlns:d="http://docbook.org/ns/docbook"> 
-  <xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/fo/docbook.xsl"/> 
-  <xsl:param name="paper.type" select="'B5'"/> 
+  <!--xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/fo/docbook.xsl"/-->
+  <xsl:import href="/opt/local/share/xsl/docbook-xsl-ns/fo/docbook.xsl" /> 
+  <xsl:param name="paper.type" select="'A4'"/> 
   <xsl:param name="double.sided" select="1"/>
+  <xsl:param name="page.margin.bottom">2in</xsl:param>
+  <xsl:param name="page.margin.inner">1.25in</xsl:param>
+  <xsl:param name="page.margin.outer">1.25in</xsl:param>
+  <xsl:param name="page.margin.top">1in</xsl:param>
   <xsl:param name="fop1.extensions" select="1"/>
+  <xsl:attribute-set name="section.title.level4.properties">
+    <xsl:attribute name="font-size">
+      <xsl:value-of select="$body.font.master * 1.1"></xsl:value-of>
+      <xsl:text>pt</xsl:text>
+    </xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="section.title.level3.properties">
+    <xsl:attribute name="font-size">
+      <xsl:value-of select="$body.font.master * 1.21"></xsl:value-of>
+      <xsl:text>pt</xsl:text>
+    </xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="section.title.level2.properties">
+    <xsl:attribute name="font-size">
+      <xsl:value-of select="$body.font.master * 1.33"></xsl:value-of>
+      <xsl:text>pt</xsl:text>
+    </xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="section.title.level1.properties">
+    <xsl:attribute name="font-size">
+      <xsl:value-of select="$body.font.master * 1.5"></xsl:value-of>
+      <xsl:text>pt</xsl:text>
+    </xsl:attribute>
+  </xsl:attribute-set>
   <xsl:param name="body.start.indent">
     <xsl:choose>
       <xsl:when test="$fop1.extensions != 0">0pt</xsl:when>

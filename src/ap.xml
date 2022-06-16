@@ -124,7 +124,7 @@ int main()
         <d:para>
           and if I check the binary size then it is:
         </d:para>
-        <d:screen><![CDATA[$ ls -al a.out 
+        <d:screen><![CDATA[$ ls -al a.out
 -rwxr-xr-x 1 shiv shiv 8531 Sep 11 07:03 a.out]]>
         </d:screen>
         <d:para>
@@ -142,7 +142,7 @@ int main()
         <d:para>
           if I check the size now then, well, we have following:
         </d:para>
-        <d:screen><![CDATA[$ ls -al a.out 
+        <d:screen><![CDATA[$ ls -al a.out
 -rwxr-xr-x 1 shiv shiv 24008571 Sep 11 07:06 a.out]]>
         </d:screen>
         <d:para>
@@ -177,9 +177,8 @@ int main()
       <d:para>
         Array elements are always(not always but most commonly. It is so common
         that I have used always.) accessed using their indices so order of
-        retrieval is <mml:math xmlns="http://www.w3.org/1998/Math/MathML">
-        <mml:mtext>O(1)</mml:mtext>
-        </mml:math>.(This is known as big-O notation. You can find it in any Data
+        retrieval is <d:inlineequation><d:mathphrase>O(1)</d:mathphrase></d:inlineequation>.
+        (This is known as big-O notation. You can find it in any Data
         Structure and Algorithm book. The above program will not compile using
         old compilers which do not support C99 standard like Turbo C++. Also,
         you may require to pass the flag <d:code>-std=c99</d:code> or
@@ -589,7 +588,7 @@ pointer alll you need is an address.</d:para>
 thoughtful that if you really really need it. Use loops to iterate
 arrays. Multiple levels of indirection is also bad. Typically I have not seen
 more than pointers to pointers. Now we will see array of
-pointers.</d:para></d:caution> 
+pointers.</d:para></d:caution>
       </d:sect1>
       <d:sect1>
         <d:indexterm>
@@ -772,7 +771,7 @@ New 4th element=11</d:screen>
 	running processes this may eat up all the physical RAM and virtual
 	memory and eventually freeze the system. To guard against such events
 	you must macth all allocation calls with deallocation calls so that
-	operating system can reclaim the freed memmory.</d:para> 
+	operating system can reclaim the freed memmory.</d:para>
 	<d:para>You must heed this warning given here with all of your
 	focus. You got to handle heap that is dynamically allocated memory
 	yourself. You allocate and you free it. If you miss you have a memory

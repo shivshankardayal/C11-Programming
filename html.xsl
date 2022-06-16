@@ -18,22 +18,22 @@
   -->
 
   <!-- Use the official stylesheet distro -->
-  <xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/html/chunk.xsl" />
+  <!--xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/html/chunk.xsl" /-->
+  <xsl:import href="/usr/share/xml/docbook/xsl-ns-stylesheets-1.79.2/html/chunk.xsl" />
   <!--xsl:import href="/opt/local//share/xsl/docbook-xsl-ns/html/chunk.xsl" /-->
 
-  <!-- The location of the highlighting configuration -->
-  <!--<xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/highlighting/common.xsl" />
-      <xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl-ns/html/highlight.xsl" />-->
-  
   <xsl:template name="user.head.content">
+    <xsl:copy-of select="document('analytics1.js', /)"/>
     <xsl:copy-of select="document('analytics.js', /)"/>
-    <!--xsl:copy-of select="document('mathjax_config.js', /)"/-->
-    <!--xsl:copy-of select="document('mathjax.js', /)"/-->
+    <xsl:copy-of select="document('ads1.js', /)"/>
+    <xsl:copy-of select="document('ads.js', /)"/>
+    <!--xsl:copy-of select="document('mathjax_config.js', /)"/>
+    <xsl:copy-of select="document('mathjax.js', /)" /-->
 
   </xsl:template>
   <xsl:template name="user.footer.navigation">
     <br/>
-    <p style="text-align: center;">&#xa9; 2010, 2016 Shiv S. Dayal. <a href="http://10hash.com">10hash.com</a>.
+    <p style="text-align: center;">&#xa9; 2022 Shiv S. Dayal. <a href="https://www.ashtavakra.org">www.ashtavakra.org</a>.
     GNU FDL license v1.3 or later is applicable where not stated.</p>
   </xsl:template>
 
@@ -46,7 +46,7 @@
   <xsl:param name="tablecolumns.extension" select="1"/>
   <xsl:param name="section.label.includes.component.label" select="1"/>
   <xsl:param name="chunk.section.depth" select="0"/>
-  <xsl:param name="toc.section.depth" select="4"/>
+  <xsl:param name="toc.section.depth" select="1"/>
   <xsl:template name="section.titlepage.before.recto">
     <xsl:variable name="level">
       <xsl:call-template name="section.level"/>
@@ -206,7 +206,7 @@
 
   <xsl:variable name="row1" select="$navig.showtitles != 0"/>
   <xsl:variable name="row2" select="count($prev) &gt; 0
-                                    or (count($up) &gt; 0 
+                                    or (count($up) &gt; 0
                                         and generate-id($up) != generate-id($home)
                                         and $navig.showtitles != 0)
                                     or count($next) &gt; 0"/>
@@ -289,4 +289,3 @@
  set       toc
 </xsl:param>
 </xsl:stylesheet>
-
