@@ -77,16 +77,16 @@ def findReplace(directory, find, replace, filePattern):
             files_list.append(filepath)
 
 
-def setup(files):
+def setup(files, find, replace):
     jobs = []
     for i in range(len(files)):
-        p = multiprocessing.Process(target=process, args=(files[i],))
+        p = multiprocessing.Process(target=process, args=(files[i], find, replace))
         jobs.append(p)
 
         p.start()
 
 
-def process(filepath):
+def process(filepath, find, replace):
     # print "in process"
     print(filepath)
     with open(filepath, 'rb') as f:
@@ -96,7 +96,7 @@ def process(filepath):
         if(l[len(l) - 2]) == 'build':
             name = l[len(l) - 1]
         s = f.read()
-        #s = s.replace(find, replace)
+        s = s.replace(find, replace)
         s = s.replace(b"index.html", b"")
         s = s.replace(b"<html>", b"<!DOCTYPE html lang=\"en\">")
         s = s.replace(
@@ -402,4 +402,4 @@ def render_latex(latex, options=None):
 findReplace("build/", "mml:", "", "index.html")
 findReplace("build/", "mml:", "", "ix01.html")
 # print files_list
-setup(files_list)
+setup(files_list, b"mml:", b"")
